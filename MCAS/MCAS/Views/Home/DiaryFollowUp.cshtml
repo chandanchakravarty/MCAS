@@ -1,0 +1,227 @@
+﻿@model MCAS.Web.Objects.MastersHelper.DiarySetupModel
+@{
+    ViewBag.Title = "DiaryFollowUp";
+    Layout = "~/Views/Shared/_SystemAdminLayout.cshtml";
+}
+
+<script src='@Url.Content("~/Scripts/jquery-2.1.0.min.js")' type="text/javascript"></script>
+<script src='@Url.Content("~/Scripts/jquery.validate.min.js")' type="text/javascript"></script>
+<script src='@Url.Content("~/Scripts/jquery.validate.unobtrusive.min.js")' type="text/javascript"></script>
+<script charset="utf8" src='@Url.Content("~/Scripts/jquery.dataTables.min.js")' type="text/javascript"></script>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#tableDiarySrc').dataTable({
+            columnDefs: [{
+                targets: [0],
+                orderData: [0, 1]
+            }, {
+                targets: [1],
+                orderData: [1, 0]
+            }, {
+                targets: [4],
+                orderData: [4, 0]
+            }],
+            "oLanguage": {
+                "sSearch": '@MCAS.Web.Objects.Resources.Common.Common.Search',
+                "sInfo": "@MCAS.Web.Objects.Resources.Common.Common.Showing _START_ @MCAS.Web.Objects.Resources.Common.Common.to _END_ @MCAS.Web.Objects.Resources.Common.Common.of _TOTAL_ @MCAS.Web.Objects.Resources.Common.Common.entries",
+                "sLengthMenu": "@MCAS.Web.Objects.Resources.Common.Common.Show  _MENU_ @MCAS.Web.Objects.Resources.Common.Common.entries",
+                "sEmptyTable": "@MCAS.Web.Objects.Resources.Common.Common.sEmptyTable",
+                "sInfoEmpty": "@MCAS.Web.Objects.Resources.Common.Common.sInfoEmpty",
+                "sProcessing": "@MCAS.Web.Objects.Resources.Common.Common.sProcessing",
+                "oPaginate": {
+                    "sNext": '@MCAS.Web.Objects.Resources.Common.Common.Next',
+                    "sLast": '@MCAS.Web.Objects.Resources.Common.Common.Last',
+                    "sFirst": '@MCAS.Web.Objects.Resources.Common.Common.First',
+                    "sPrevious": '@MCAS.Web.Objects.Resources.Common.Common.Previous'
+                }
+            },
+            "pagingType": "full_numbers",
+            "iDisplayLength": 5,
+            "aLengthMenu": [[5, 10, 25, 50, 100, -1], [5, 10, 25, 50, 100, "All"]]
+
+        });
+    });
+</script>
+
+<div class="dashboard-wrapper">
+<div class="container">
+<div class="row page-title">
+            <div class="col-lg-12">
+                <h2>
+                    System Admin</h2>
+                    <ul class="breadcrumb">
+                    <li>Diary SetUp</li>
+                </ul>
+                
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <div class="panel panel-info">
+                <div class="panel-heading clearfix">
+                        <i class="icon-check-sign"></i>
+                        <h3 class="panel-title">
+                            Diary SetUp</h3>
+                    </div>
+                    <div style="color: Red; font-weight: bold;" class="has-error" id="error">
+            <p align="center">
+                @if (TempData["notice"] != null)
+                {
+                    @TempData["notice"]
+                }
+            </p>
+        </div>
+        <div style="color:Red; font-weight:bold;" class="has-error" id="divSuccess1">
+<p align="center"> 
+   
+@if (TempData["claimclose"] != null)
+{
+   @TempData["claimclose"]
+}
+
+
+</p>
+</div>
+                   
+
+  <div class="panel-body">
+  <ul class="nav nav-tabs" id="myTab">
+  <li class="active"><a href="#Diary">Diary</a></li>
+  </ul>
+
+  
+  
+@using (Html.BeginForm("DiaryFollowUp", "Home", FormMethod.Post, new { role = "form", @class = "form-horizontal", id = "DiarysetUp", name = "DiarysetUp" }))
+{
+    
+    
+    <div class="row">
+                    <div class="col-lg-6">
+                        <div class="form-group">
+                            <label class="col-sm-6 control-label" for="ddlModule">
+                                Module Name</label>
+                            <div class="col-sm-6">
+                               @*<select name="ddlModule" id="ddlModule" class="col-lg-12 form-control">
+                                </select>*@
+                                <select>
+                                <option value="5" selected="selected">Claim</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                   
+                
+    
+                    <div class="col-lg-6">
+                        <div class="form-group">
+                            <label class="col-sm-6 control-label" for="ddlDiaryList">
+                                Diary List Type</label>
+                            <div class="col-sm-6">
+                               @*<select name="ddlDiaryList" id="ddlDiaryList" class="col-lg-12 form-control">*@
+                               <select>
+  <option value="" style="display:none">Select All Diary Type</option>
+  <option value="34">Adjuster Limit Notifications </option>
+  <option selected="selected" value="11">Claim Review</option>
+  <option value="18">payment Limit Exceeded</option>
+  <option value="4">Reserve Limit Exceeded</option>
+  
+</select>
+                                
+                            </div>
+                        </div>
+                    </div>
+                   
+        </div>        
+      
+      
+    
+    <div class="col-lg-12">
+                                <div class="table-responsive">
+                                  
+                                    <div class="row-fluid">
+                                        <div class="dataTables_wrapper" id="Diary_wrapper" role="grid">
+                                   <table width="100%" class="display" id="tableDiarySrc" cellspacing="0">
+                                      <thead>
+                                        <tr>
+                                            <th style="width: 10%;">Products</th>
+                                            <th style="width: 20%;">Subjects</th>
+                                            <th style="width: 10%;">Followup</th>
+                                            <th style="width: 15%;">Priority</th>
+                                            <th style="width: 25%;">User Group List</th>
+                                            <th style="width: 25%;">User List</th>
+                                            
+                                        </tr>
+                                     </thead>
+                                     <tbody>
+                                     <tr><td><input type="checkbox" class="chk" name="ChkModule" />Motor </td>
+                                     <td>@Html.TextAreaFor(m => m.SubjectLine, new { @class = "col-lg-12 form-control" })</td>
+                                     <td>@Html.TextBoxFor(m => m.FollowUp, new { @class = "col-lg-12 form-control" })</td>
+                                     <td>@Html.DropDownListFor(m => m.priority, new SelectList(Model.Prioritylist, "Lookup_value", "Lookup_desc"), new { @class = "col-lg-12 form-control" })</td>
+                                     <td>@Html.ListBoxFor(m => m.UserGroupList, new MultiSelectList(Model.GroupList, "GroupCode", "GroupName"), new { @class = "col-lg-12 form-control" })</td>
+                                     <td>@Html.ListBoxFor(m => m.UserList, new MultiSelectList(Model.userList, "SNO", "UserDispName"), new { @class = "col-lg-12 form-control" })</td>
+                                     </tr>
+                                </tbody>
+                                </table>
+
+                                </div>
+                                </div>
+                                    <div class="row">
+                                        <div class="col-lg-12 txtlft">
+                                            @Html.ActionLink("Save ", "DiaryEditor", "Home", new { @class = "btn btn-info" })
+                                           
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+          
+    
+}
+
+    
+
+      
+                    </div>
+</div>
+            </div>
+
+        </div>
+</div>
+</div>
+
+<script type="text/javascript">
+    $('#myTab a').click(function (e) {
+        e.preventDefault()
+        $(this).tab('show')
+    })
+
+</script>
+    
+<script type="text/javascript">
+    $(document).ready(function () {
+      //  loadModule();
+    });
+
+
+    function loadModule() {
+        $.ajax({
+            url: '@(Url.Action("FillModule"))',
+            cache: false,
+            success: function (data) {
+                $("#ddlModule").empty();
+                $.each(data, function (index, optiondata) {
+                    $("#ddlModule").append("<option value='" + optiondata.ModuleId + "'>" + optiondata.ModuleName + "</option>");
+                });
+            },
+            error: function (reponse) {
+                alert("error : " + reponse);
+            }
+        });
+    }
+    
+</script>    
+
+
+
+
+

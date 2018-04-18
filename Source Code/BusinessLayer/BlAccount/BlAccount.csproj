@@ -1,0 +1,119 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{B69C8E73-4B43-4FA6-8F9F-1E7173C169C8}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>BlAccount</RootNamespace>
+    <AssemblyName>BlAccount</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="AdvRuleParser">
+      <HintPath>..\..\Cms\bin\AdvRuleParser.dll</HintPath>
+    </Reference>
+    <Reference Include="Payflow_dotNET">
+      <HintPath>..\..\Cms\bin\Payflow_dotNET.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="ClsAcceptedCOILoadDetails.cs" />
+    <Compile Include="ClsAccount.cs" />
+    <Compile Include="ClsAgencyStatement.cs" />
+    <Compile Include="ClsBankRconciliation.cs" />
+    <Compile Include="ClsBudgetPlan.cs" />
+    <Compile Include="ClsChecks.cs" />
+    <Compile Include="ClsCreditCard.cs" />
+    <Compile Include="ClsCustAgencyPayments.cs" />
+    <Compile Include="ClsDeposit.cs" />
+    <Compile Include="ClsDepositDetails.cs" />
+    <Compile Include="ClsDistributeCashReceipt.cs" />
+    <Compile Include="ClsEFT.cs" />
+    <Compile Include="ClsFeeReversal.cs" />
+    <Compile Include="ClsFundType.cs" />
+    <Compile Include="ClsJournalEntryDetail.cs" />
+    <Compile Include="ClsJournalEntryMaster.cs" />
+    <Compile Include="ClsNACHARecord.cs" />
+    <Compile Include="ClsOpenCheckImage.cs" />
+    <Compile Include="ClsPolicyPremium.cs" />
+    <Compile Include="ClsProcess.cs" />
+    <Compile Include="ClsReconDetail.cs" />
+    <Compile Include="ClsReconGroup.cs" />
+    <Compile Include="ClsVendorInvoices.cs" />
+    <Compile Include="PayPalInterface.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\DataLayer\DataLayer.csproj">
+      <Project>{A7B69366-3DA6-4CB3-84F3-25C88559EF12}</Project>
+      <Name>DataLayer</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\EbixDataLayer\EbixDataLayer.csproj">
+      <Project>{363C4AAB-8591-4F9D-BC45-4ED497991C43}</Project>
+      <Name>EbixDataLayer</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\EbixDataTypes\EbixDataTypes.csproj">
+      <Project>{7826B9D8-F728-465D-9226-D6E86430D6C3}</Project>
+      <Name>EbixDataTypes</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\exceptionpublisher\exceptionpublisher.csproj">
+      <Project>{276362EA-FE60-484F-A729-19248E75D239}</Project>
+      <Name>exceptionpublisher</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Model\Model.csproj">
+      <Project>{8BED9EF7-4F80-4195-87FC-62CE73BC3672}</Project>
+      <Name>Model</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\BlClient\BlClient.csproj">
+      <Project>{96CD5C36-ED0F-406E-8A1D-5AD1EFAA6B20}</Project>
+      <Name>BlClient</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\BlCommon\BlCommon.csproj">
+      <Project>{9C17273B-F9AA-4DCE-B344-4BFD098134AA}</Project>
+      <Name>BlCommon</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

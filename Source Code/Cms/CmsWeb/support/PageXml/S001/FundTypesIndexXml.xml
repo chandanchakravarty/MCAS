@@ -1,0 +1,132 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Root>
+
+  <PageCalledFor TypeID="">
+
+      <HeaderString>
+        <value Culture="en-US">Fund Types</value>
+        <value Culture="zh-SG">Fund Types</value>
+        <value Culture="pt-BR">Tipos de fundos</value>
+      </HeaderString>
+
+      <SearchColumnHeadings>
+        <value Culture="en-US">Fund Type Code^Fund Type Name</value>
+        <value Culture="zh-SG">Fund Type Code^Fund Type Name</value>
+        <value Culture="pt-BR">Fundo de Código Tipo^Nome do tipo de fundo</value>
+      </SearchColumnHeadings>
+
+      <DisplayColumnHeadings>
+        <value Culture="en-US">Fund Type Code^Fund Type Name</value>
+        <value Culture="zh-SG">Fund Type Code^Fund Type Name</value>
+        <value Culture="pt-BR">Fundo de Código Tipo^Nome do tipo de fundo</value>
+      </DisplayColumnHeadings>
+
+      <SearchMessage>
+        <value Culture="en-US">Please select the Search Option,enter Search Criteria,and click on the Search button^Please select the Search Option, enter Search Criteria, and click on the Search button</value>
+        <value Culture="zh-SG">Please select the Search Option,enter Search Criteria,and click on the Search button^Please select the Search Option, enter Search Criteria, and click on the Search button</value>
+        <value Culture="pt-BR">Por favor, selecione a opção de pesquisa, introduzir critérios de pesquisa, e clique no botão Pesquisar ^ Por favor, selecione a opção de pesquisa, introduzir critérios de pesquisa, e clique no botão Pesquisar</value>
+      </SearchMessage>
+
+      <FilterLabel>
+        <value Culture="en-US">Include Inactive</value>
+        <value Culture="zh-SG">Include Inactive</value>
+        <value Culture="pt-BR">Include Inactive</value>
+      </FilterLabel>
+
+      <SearchColumnNames>
+        <value>FUND_TYPE_CODE^FUND_TYPE_NAME</value>
+      </SearchColumnNames>
+
+      <SearchColumnType>
+        <value>T^T</value>
+      </SearchColumnType>
+
+      <DisplayColumnNumbers>
+        <value>1^2</value>
+      </DisplayColumnNumbers>
+
+      <DisplayColumnNames>
+        <value>FUND_TYPE_CODE^FUND_TYPE_NAME</value>
+      </DisplayColumnNames>
+
+      <DisplayTextLength>
+        <value>30^70</value>
+      </DisplayTextLength>
+
+      <DisplayColumnPercent>
+        <value>30^70</value>
+      </DisplayColumnPercent>
+
+      <FetchColumns>
+        <value>1^2^3^4^5^6^7^8</value>
+      </FetchColumns>
+
+      <ColumnTypes>
+        <value>B^B</value>
+      </ColumnTypes>
+
+      <FilterColumnName>
+        <value>IS_ACTIVE</value>
+      </FilterColumnName>
+	 <!-- Modified by Abhishek Goel on 23/12/2011 for TFS 1154-->
+      <SelectClause>
+        <value>FUND_TYPE_ID,FUND_TYPE_CODE,FUND_TYPE_NAME,IS_ACTIVE</value>
+      </SelectClause>
+
+      <FromClause>
+        <value>MNT_FUND_TYPES</value>
+      </FromClause>
+	  <!-- Modified by Abhishek Goel on 23/12/2011 for TFS 1154-->
+      <!--<WhereClause>
+        <value>IS_ACTIVE = 'Y'</value>
+      </WhereClause>-->
+
+      <PrimaryColumns>
+        <value>1</value>
+      </PrimaryColumns>
+
+      <PrimaryColumnsName>
+        <value>FUND_TYPE_ID</value>
+      </PrimaryColumnsName>
+
+      <OrderByClause>
+        <value>FUND_TYPE_ID asc</value>
+      </OrderByClause>
+
+      <AllowDBLClick>
+        <value>true</value>
+      </AllowDBLClick>
+
+      <ExtraButtons>
+        <value>1^Add New^0^addRecord</value>
+      </ExtraButtons>
+
+      <RequireQuery>
+        <value>Y</value>
+      </RequireQuery>
+
+      <QueryStringColumns>
+        <value>FUND_TYPE_ID</value>
+      </QueryStringColumns>
+
+      <DefaultSearch>
+        <value>Y</value>
+      </DefaultSearch>
+
+      <FilterValue>
+        <value>Y</value>
+      </FilterValue>
+
+  </PageCalledFor>
+
+  <!--<PageCalledFor TypeID="1">
+    
+    <HeaderString>
+      <value Culture="en-US">Insurance Funds</value>
+      <value Culture="zh-SG">Insurance Funds</value>
+      <value Culture="pt-BR">Insurance Funds</value>
+    </HeaderString>
+    
+  </PageCalledFor>-->
+
+</Root>

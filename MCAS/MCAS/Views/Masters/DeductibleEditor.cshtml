@@ -1,0 +1,480 @@
+﻿@model MCAS.Web.Objects.MastersHelper.DeductibleModel
+@using MCAS.Web.Objects.CommonHelper
+@using MCAS.Globalisation
+@{
+    ViewBag.Title = "DeductibleEditor";
+    Layout = "~/Views/Shared/_SystemAdminLayout.cshtml";
+    var mMCASQueryString = Html.MCASQueryString(Request.QueryString);
+    var DeductibleId = mMCASQueryString["DeductibleId"] == null ? "" : Convert.ToString(mMCASQueryString["DeductibleId"]);
+    var pageMode = mMCASQueryString["pageMode"] == null ? "" : Convert.ToString(mMCASQueryString["pageMode"]);
+    var btndisplay = pageMode == "View" ? "none" : "inline";
+    SecurityPermissions myPemissions = (SecurityPermissions)ViewData["UserPermissions"];
+    var category1 = TempData["orgCategory"] == null ? "" : Convert.ToString(TempData["orgCategory"]);
+    var categoryName = TempData["orgCategoryname"] == null ? "" : Convert.ToString(TempData["orgCategoryname"]);
+    var deductId = Model.DeductibleId == null ? 0 : Model.DeductibleId;
+    var EffectiveTo = Model.EffectiveTo == null ? "1" : Convert.ToString(Model.EffectiveTo);
+    var Hselect1 = Model.Hselect == null ? "1" : Model.Hselect;
+    var HgetCatName1 = Model.HgetCatName == null ? "1" : Model.HgetCatName;
+    var orgID = @Model.OrgCategory;
+    System.Resources.ResourceManager PageResource = (new MCAS.Web.Objects.MastersHelper.TransactionModel()).GetResourceManager(Model.Resource);
+    string isEncryptedParams = System.Configuration.ConfigurationManager.AppSettings["EncryptQueryParams"].ToUpper();
+}
+<link href="@Url.Content("~/Content/themes/base/jquery.ui.all.css")" rel="stylesheet" type="text/css" />
+<script src="@Url.Content("~/Scripts/jquery-2.1.0.min.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/Scripts/jquery.validate.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/Scripts/jquery.unobtrusive-ajax.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.min.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/Scripts/globalize/globalize.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/Scripts/moment.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/Scripts/globalize/cultures/globalize.culture.en-GB.js")" type="text/javascript"></script>
+<div class="dashboard-wrapper">
+    <div class="container">
+        <div class="row page-title">
+            <div class="col-lg-12">
+                <h2>@MCAS.Web.Objects.Resources.Common.Common.SystemAdmin</h2>
+                <ul class="breadcrumb">
+                    <li>@PageResource.GetString("DeductibleDetails")</li></ul>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <div class="panel panel-info">
+                    <div class="panel-heading clearfix">
+                        <i class="icon-check-sign"></i>
+                        <h3 class="panel-title">
+                            @PageResource.GetString("DeductibleDetails")
+                        </h3>
+                    </div>
+                    <div style="color: Red; font-weight: bold;" class="has-error" id="error">
+                        <p align="center">
+                            @if (TempData["result"] != null)
+                            {
+                                @TempData["result"]
+                            }
+                        </p>
+                    </div>
+                    @{
+                        object routes = new { pageMode = @pageMode };
+                        if (isEncryptedParams.ToUpper() == "YES")
+                        {
+                            string res = RouteEncryptDecrypt.getRouteString(routes);
+                            res = RouteEncryptDecrypt.Encrypt(res);
+                            routes = new { Q = res };
+                        }
+                    }
+                    <div class="panel-body" id="mainfieldset">
+                        @using (Html.BeginForm("DeductibleEditor", "Masters", routes, FormMethod.Post, new { role = "form", id = "DeductibleEditor", name = "DeductibleEditor", @class = "form-horizontal" }))
+                        {
+                            @Html.HiddenFor(m => m.Hgetval)
+                            @Html.HiddenFor(m => m.Hselect)
+                            @Html.HiddenFor(m => m.HgetCatName)
+                            @Html.HiddenFor(m => m.DeductibleId)
+                            @Html.HiddenFor(m => m.HLatestDeducatbleid)
+                            @Html.HiddenFor(m => m.Prop1)
+                            @Html.HiddenFor(m => m.Prop2)
+                            @Html.ValidationSummary(true)
+                        
+                            <div class="row top-buffer">
+                                <div class="clearfix igr col-md-12">
+                                    <div style="padding-right: 0px;" class="col-md-2">
+                                        <label>@PageResource.GetString("OrgCategory")<span class="text-danger">*</span></label>
+                                    </div>
+                                    <div class="col-md-3">
+                                        @Html.DropDownListFor(m => m.OrgCategory, new SelectList(Model.Categorylist, "Lookup_value", "Lookup_desc", "0"), new { id = "ddlCategory", @class = "col-lg-12 form-control" })
+                                        @Html.ValidationMessageFor(m => m.OrgCategory)
+                                    </div>
+                                    <div class="col-md-2">
+                                        <label>@PageResource.GetString("OrgCategoryName")<span class="text-danger">*</span></label>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div style="display: none;" id="DivMulti">
+                                            <select class="form-control" id="listOrgName">
+                                            </select>
+                                            @*@Html.DropDownListFor(m => m.OrgCategoryName, new SelectList(Model.Categorylist, "Lookup_value", "Lookup_desc"), new { id = "ddlCategory", @class = "col-lg-12 form-control" })*@
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="maindiv">
+                            </div>
+                            <div class="row top-buffer">
+                                <div class="clearfix igr col-md-12">
+                                    <div class="col-md-2">
+                                        <label>@PageResource.GetString("EffectiveFrom")<span class="text-danger">*</span></label>
+                                    </div>
+                                    <div class="col-md-3">
+                                        @Html.TextBoxFor(m => m.EffectiveFrom, "{0:d}", new { id = "datepickerFrom1", @class = "form-control" })
+                                        @Html.ValidationMessageFor(m => m.EffectiveFrom)
+                                    </div>
+                                    <div class="col-md-2">
+                                        <label>@PageResource.GetString("EffectiveTo")<span id="efftoid" class="text-danger">*</span>
+                                        </label>
+                                    </div>
+                                    <div class="col-md-3 ">
+                                        @Html.TextBoxFor(m => m.EffectiveTo, "{0:d}", new { id = "datepickerTo1", @class = "form-control datepicker" })
+                                        @Html.ValidationMessageFor(m => m.EffectiveTo)
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row top-buffer">
+                                <div class="clearfix igr col-md-12">
+                                    <div class="col-md-2">
+                                        <label>@PageResource.GetString("DeductibleAmt")<span class="text-danger">*</span></label>
+                                    </div>
+                                    <div class="col-md-3">
+                                        @Html.TextBoxFor(m => m.DeductibleAmt, new { @numlen = "11", @class = "col-lg-12 form-control format" })<br />
+                                        @Html.ValidationMessageFor(m => m.DeductibleAmt)
+                                    </div>
+                                </div>
+                            </div>
+                            <br />
+                           
+                            
+                            <div class="row top-buffer">
+                            </div>
+                            <div class="row top-buffer">
+                            </div>
+                       
+                            
+                            
+                            <div class="row">
+                                <div class="col-lg-12 text-center">
+                                    @if (@myPemissions.Write)
+                                    {
+                                        <a id="OpenEditDeductable" class="btn btn-info" href="#">@PageResource.GetString("AddNewDeductible")</a>
+
+                                    }
+                                    &nbsp;&nbsp;
+                                    @if (@myPemissions.Write)
+                                    { 
+                                        <input id="btnSave" style="display:@btndisplay" class="btn btn-info" type="button" value=@PageResource.GetString("Save") />
+                                    }
+                                    &nbsp;&nbsp; @Html.ActionLink(@PageResource.GetString("Back"), "DeductibleIndex", null, new { @class = "btn btn-info" })
+                                </div>
+                            </div>
+                            <hr />
+                            <div style="display: none;" id="ctype">
+                                @Html.Action("DeductibleNewEditor", "Masters", new { DeductibleId = @DeductibleId })
+                            </div> 
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="panel">
+            @Html.Partial("~/Views/Shared/_TimeStamp.cshtml", Model)
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    var do_on_load = function () {
+        $(document).on("focus", ":input", function () {
+            $(this).attr("autocomplete", "off")
+        });
+
+        $.validator.unobtrusive.adapters.add("notequalto", ["other"], function (b) {
+            b.rules.notEqualTo = "#" + b.params.other;
+            b.message && (b.messages.notEqualTo = b.message)
+        });
+        $.validator.addMethod("notEqualTo", function (b, e, g) {
+            return this.optional(e) || b != $(g).val()
+        }, "");
+
+        var cdate = new Date();
+        var effdate = $("#datepickerTo1").val();
+        var arr = effdate.split('/');
+        var accdate = arr[1] + "/" + arr[0] + "/" + arr[2]
+        var efftodate = new Date(accdate);
+        var timeDiff = Math.abs(cdate.getTime() - efftodate.getTime());
+        var diffDays = Math.ceil(timeDiff / (1000 * 3600 * 24));
+        if (diffDays > 30) { $("#OpenEditDeductable").attr('disabled', 'disabled'); }
+
+        $.culture = Globalize.culture("en-GB");
+        $.validator.methods.date = function (value, element) {
+            return this.optional(element)
+                    || Globalize.parseDate(value, "dd/MM/yyyy", "en-GB")
+                    || Globalize.parseDate(value, "yyyy-mm-dd");
+        };
+        $("input[type=text]").each(function () {
+            if (void 0 !== $(this).attr("data-val-date") && "The field " == $(this).attr("data-val-date").substring(0, 10)) {
+                var a = $(this).attr("data-val-date").substring(10, $(this).attr("data-val-date").length).replace("must be a date.", "must be in 'dd/mm/yyyy' format.");
+                $(this).removeAttr("data-val-date");
+                $(this).attr("data-val-date", a)
+            }
+        });
+
+
+        $("#listOrgName").change(function () {
+            var CategoryName = ($(this).val());
+            $("#Hgetval").val(CategoryName);
+        });
+
+        $("#datepickerFrom1,#datepickerTo1,#datepickerFrom11,#datepickerTo11").datepicker({
+            dateFormat: "dd/mm/yy",
+            showStatus: !0,
+            showWeeks: !0,
+            currentText: "Now",
+            autoSize: !0,
+            gotoCurrent: !0,
+            showAnim: "blind",
+            highlightWeek: !0,
+            yearRange: "1951:2050",
+            changeMonth: !0,
+            changeYear: !0,
+            onSelect: function (b) {
+                $(this).valid();
+            }
+        });
+
+        if ('@Model.DeductibleId' != "") {
+            $("#ddlCategory option[value!='@orgID']").remove();
+            $("#ddlCategory").css({ "pointer-events": "none", "cursor": "default" }).css('background-color', '#eee');
+            $("#listOrgName").attr("disabled", true);
+            $("#OpenEditDeductable").show();
+            $("#HgetCatName").val("Y");
+            $('#EffectiveTo').text() == "" && $("#efftoid").show();
+            $("#datepickerFrom1").attr("disabled", true);
+        }
+        else {
+            $("#OpenEditDeductable").hide();
+        }
+
+        //        if (getQueryVariable("pageMode") == "Edit" || "@HgetCatName1" == "Y") {
+        //            $("#ddlCategory option[value!='@orgID']").remove();
+        //            $("#ddlCategory").css({ "pointer-events": "none", "cursor": "default" }).css('background-color', '#eee');
+        //            $("#listOrgName").attr("disabled", true);
+        //            $("#OpenEditDeductable").show();
+        //            $("#HgetCatName").val("Y");
+        //            $('#EffectiveTo').text() == "" && $("#efftoid").show();
+        //        }
+        //        else {
+        //            $("#OpenEditDeductable").hide();
+        //        }
+
+
+        if ('@Model.OrgCategory' !== "" && '@Hselect1' == '1') {
+            $("#listOrgName").empty();
+            $("#listOrgName").append(new Option("[Select...]", ""));
+            var CategoryType = '@Model.OrgCategory';
+            if (CategoryType != null) {
+                $.ajax({
+                    type: "POST",
+                    url: '@Url.Action("GetCategoryList", "Masters")',
+                    data: {
+                        cat: CategoryType,
+                        pageMode: "@pageMode",
+                        UniqueId: guid()
+                    },
+                    success: function (a) {
+                        $("#listOrgName").empty();
+                        $.each(a, function (index, item) {
+                            if (item.orgCode == '@ViewBag.OrgCategoryName')
+                                $("#listOrgName").append("<option value='" + item.orgCode + "' selected=selected>" + item.orgName + "</option>");
+                            else
+                                $("#listOrgName").append("<option value='" + item.orgCode + "'>" + item.orgName + "</option>");
+                        });
+                    }
+                });
+            };
+            $("#DivMulti").show();
+        };
+
+        $("#btnSave").click(function () {
+            if (IsPageChanged()) {
+                if (("" == $("#listOrgName").val() || null == $("#listOrgName").val()) && $("#listOrgName").is(":visible")) return alert("Organization Name is required.", "listOrgName"), !1;
+                //if ("0.00" == $("#DeductibleAmt").val() || "" == $("#DeductibleAmt").val()) return alert("Deductible Amount is required.", "DeductibleAmt"), !1;
+                $("#Hgetval").val(null != $("#listOrgName").val() && "" != $("#listOrgName").val() && $("#listOrgName").val());
+                if ($("#DeductibleEditor").valid() && "" != $("#datepickerFrom1").val() && "" != $("#datepickerTo1").val() && $("#datepickerFrom1").datepicker("getDate") > $("#datepickerTo1").datepicker("getDate")) return alert("Effective to cannot be less than Effective from."), !1;
+                retaindrop();
+                $("#datepickerFrom1").removeAttr("disabled");
+                var d = new Date();
+                var mydate = $("#datepickerTo1").val();
+                var todate = mydate.split('/');
+                var formattedDate = [todate[1], todate[0], todate[2]].join("/");
+                var dateMin = new Date(Date.parse(formattedDate));
+                var strDate = d.getDate() + "/" + (d.getMonth() + 1) + "/" + d.getFullYear();
+                if ("@pageMode" == "Edit") {
+                    if (dateMin < new Date(Date.parse(new Date().withoutTime()))) {
+                        CreateNewDialog("Deductible Period has expired! Please add new Deductible.", "Ok", OnConfirmTrue);
+                    }
+                    else {
+                        FormatValue();
+                        $("#DeductibleEditor").submit()
+                    }
+                }
+                else {
+                    if (dateMin < new Date(Date.parse(new Date().withoutTime()))) {
+                        return alert("Effective to cannot be less than from current date."), !1;
+                    }
+                    else {
+                        FormatValue();
+                        $("#DeductibleEditor").submit()
+                    }
+                }
+            }
+        });
+
+        function CreateNewDialog(TexttoDisplay, okText, okCallback) {
+            $("<div id='CreateDialog_id'></div>").text(TexttoDisplay).dialog({
+                modal: true,
+                title: 'CRIS+',
+                draggable: false,
+                buttons: [{
+                    id: 'btnDialogeOK',
+                    text: okText,
+                    click: function () {
+                        $(this).dialog("close");
+                        typeof (okCallback) == "function" && okCallback();
+                    }
+                }]
+            }).height('auto').attr('id', 'dialogId');
+            $("#btnDialogeOK").closest("div").css({
+                "display": "block",
+                "text-align": "center",
+                "float": "none !important"
+            });
+        };
+
+        function OnConfirmTrue() {
+            $("#ctype").show();
+            $("#datepickerTo1").attr("disabled", "disabled");
+            $("#DeductibleAmt").attr("disabled", "disabled");
+            $("#btnSave").attr("disabled", "disabled");
+            $("#datepickerFrom1").attr("disabled", "disabled");
+        }
+
+
+        $.ajax({
+            type: "POST",
+            url: '@Url.Action("GetDeductableAmountTopId", "Masters")',
+            data: {
+                uid: guid()
+            },
+            success: function (a) {
+                $("#tableDiarySrc > tbody > tr > td > a.btn.btn-xs.btn-warning").each(function () {
+                    var id = $(this).attr("href").getstringinbetween("DeductibleId");
+                    "T" == a && $("a." + f).hide()
+                });
+            }
+        })
+        $("#OpenEditDeductable").click(function (event) {
+            $("#datepickerFrom1").attr("disabled", "disabled");
+            var dt = "@EffectiveTo";
+            if (dt == "1" && $("#DeductibleId").val() != "") {
+                alert("Effective to is required and need to be saved.");
+                event.preventDefault();
+                return false;
+            }
+            else {
+                $("#ctype").show();
+                $("#datepickerTo1").attr("disabled", "disabled");
+                $("#DeductibleAmt").attr("disabled", "disabled");
+                $("#btnSave").attr("disabled", "disabled");
+                SetDatedatepickerFrom11();
+            }
+        });
+
+
+        $("#ddlCategory").change(function () {
+            var items = "<option value=\"\">[Select...]<\/option>";
+            var CategoryType = ($(this).val());
+            CategoryType == "" ? $("#DivMulti").hide() : $("#DivMulti").show();
+            if (CategoryType != null) {
+                $.ajax({
+                    type: "POST",
+                    url: '@Url.Action("GetCategoryList", "Masters")',
+                    data: {
+                        cat: CategoryType,
+                        pageMode: "@pageMode",
+                        UniqueId: guid()
+                    },
+                    success: function (a) {
+                        $("#listOrgName").empty();
+                        $.each(a, function (index, item) {
+                            if (item.orgCode == '@ViewBag.OrgCategoryName')
+                                $("#listOrgName").append("<option value='" + item.orgCode + "' selected=selected>" + item.orgName + "</option>");
+                            else
+                                $("#listOrgName").append("<option value='" + item.orgCode + "'>" + item.orgName + "</option>");
+                        });
+                    }
+                });
+            };
+        });
+    };
+    $(document).ready(do_on_load);
+    $(window).bind('page:change', do_on_load);
+
+
+    if ('@Hselect1' != '1') {
+        for (var arr = [], arr = $("#Hselect").val().split("~"), k = 0, curr; curr = arr[k]; k++) {
+            var a1 = curr.split("***")[0], a2 = curr.split("***")[1], a3 = curr.split("***")[2];
+            $("#" + a1).empty();
+            for (var i = 0; i < a2.split("**").length; i += 2) {
+                $("#" + a1).append(new Option(a2.split("**")[i + 1], a2.split("**")[i]));
+            }
+            $("#" + a1).val(a3);
+            $("#DivMulti").show();
+        };
+    };
+
+    function SetDatedatepickerFrom11() {
+        var date1 = $('#datepickerTo1').datepicker('getDate');
+        var date = new Date(Date.parse(date1));
+        date.setDate(date.getDate() + 1);
+        var newDate = date.toDateString();
+        newDate = new Date(Date.parse(newDate));
+        $('#datepickerFrom11').datepicker('setDate', newDate);
+    }
+    function retaindrop() {
+        var status = "";
+        $("#mainfieldset select").each(function () {
+            status = $(this).context.id + "***" + dropval($(this).context.id) + "***" + $(this).val() + "~" + status
+        });
+        $("#Hselect").val("");
+        $("#Hselect").val(status.substring(0, status.length - 1));
+    };
+    function dropval(a) {
+        var sasa = "";
+        var len = $("#" + a).children('option').length;
+        for (var i = 0; i < len; i++) {
+            sasa = sasa + "**" + $("#" + a)[0].options[i].value + "**" + $("#" + a)[0].options[i].text;
+        }
+        return sasa.substring(2, sasa.length);
+    };
+    function FormatValue() {
+        $("input[type=text]").each(function () {
+            if ($(this).hasClass("format") && "" != $(this).val()) {
+                var a = $(this).context.id, b = $(this).val().replace(/,/g, "");
+                $("#" + a).val(b.replace("NaN", "0"))
+            }
+        });
+    };
+    function getQueryVariable(a) {
+        for (var e = "@MenuListItem.ClaimTabs.GetQueryStringVal()".replace(/amp;/ig, "").split("&"), d = 0; d < e.length; d++) {
+            var b = e[d].split("=");
+            if (b[0] == a) return b[1]
+        }
+    };
+    var guid = (function () {
+        function s4() {
+            return Math.floor((1 + Math.random()) * 0x10000).toString(16).substring(1);
+        }
+        return function () {
+            return s4() + s4() + '-' + s4() + '-' + s4() + '-' + s4() + '-' + s4() + s4() + s4();
+        };
+    })();
+    String.prototype.getstringinbetween = function (a) {
+        for (var e = this.split("&"), d = 0; d < e.length; d++) {
+            var b = e[d].split("=");
+            if (b[0] == a) return b[1]
+        };
+    };
+    String.prototype.contains = function (a) {
+        return -1 != this.indexOf(a)
+    };
+    Date.prototype.withoutTime = function () {
+        var d = new Date(this);
+        d.setHours(0, 0, 0, 0, 0);
+        return d
+    };
+</script>

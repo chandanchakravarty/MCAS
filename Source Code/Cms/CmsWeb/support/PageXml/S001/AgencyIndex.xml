@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Root>
+  <PageCalledFor TypeID="">
+
+    <HeaderString>
+      <value Culture="en-US">Agency Information</value>
+      <value Culture="zh-SG">Intermediary Information</value>
+      <value Culture="pt-BR">Informações do Corretor</value>
+    </HeaderString>
+
+    <SearchColumnHeadings>
+      <value Culture="en-US">Agency Code^Numeric Agency Code^Combined Agency Code^Agency Name^DBA Name^Address^City^Phone^SUSEP Number</value>
+      <value Culture="zh-SG">Intermediary Code^Numeric Intermediary Code^Combined Intermediary Code^Intermediary Name^DBA Name^Address^City^Phone^SUSEP Number</value>
+      <value Culture="pt-BR">Cód.Corretor/Angariador^Cód. Sucursal^Cód. Combinado^Nome do Corretor/Angariador^Nome do DBA^Endereço^Cidade^Telefone^Cód. SUSEP</value>
+    </SearchColumnHeadings>
+
+    <DisplayColumnHeadings>
+      <value Culture="en-US">Agency Code^Agency Name^Address^Phone^City^SUSEP Number</value>
+      <value Culture="zh-SG">Intermediary Code^Intermediary Name^Address^Phone^City^SUSEP Number</value>
+      <value Culture="pt-BR">Cód.Corretor/Angariador^Nome do Corretor/Angariador^Endereço^Telefone^Cidade^Cód.SUSEP</value>
+    </DisplayColumnHeadings>
+
+    <SearchMessage>
+      <value Culture="en-US">Please select the Search Option,enter Search Criteria,and click on the Search button^Please select the Search Option, enter Search Criteria, and click on the Search button</value>
+      <value Culture="zh-SG">Please select the Search Option,enter Search Criteria,and click on the Search button^Please select the Search Option, enter Search Criteria, and click on the Search button</value>
+      <value Culture="pt-BR">Por favor, selecione a Opção de Busca informe os Critérios de Busca e clique no botão Pesquisar^Por favor, selecione a Opção de Busca informe os Critérios de Busca e clique no botão Pesquisar</value>
+    </SearchMessage>
+
+    <FilterLabel>
+      <value Culture="en-US">Include Inactive</value>
+      <value Culture="zh-SG">Include Inactive</value>
+      <value Culture="pt-BR">Include Inactive</value>
+    </FilterLabel>
+
+    <SearchColumnNames>
+      <value>AGENCY_CODE^NUM_AGENCY_CODE^AGENCY_COMBINED_CODE^AGENCY_DISPLAY_NAME^AGENCY_DBA^ISNULL(AGENCY.AGENCY_ADD1,'') ! ISNULL(AGENCY.AGENCY_ADD2,'')^AGENCY_CITY^AGENCY_PHONE^ISNULL(SUSEP_NUMBER,'')</value>
+    </SearchColumnNames>
+
+    <SearchColumnType>
+      <value>T^T^T^T^T^T^T^P^T</value>
+    </SearchColumnType>
+
+    <DisplayColumnNumbers>
+      <value>3^2^4^9^5^6</value>
+    </DisplayColumnNumbers>
+
+    <DisplayColumnNames>
+      <value>AGENCY_CODE^AGENCY_DISPLAY_NAME^ADDRESS^AGENCY_PHONE^AGENCY_CITY^SUSEP_NUMBER</value>
+    </DisplayColumnNames>
+
+    <DisplayTextLength>
+      <value>150^150^350^75^100^100</value>
+    </DisplayTextLength>
+
+    <DisplayColumnPercent>
+      <value>10^20^20^15^20^15</value>
+    </DisplayColumnPercent>
+
+    <FetchColumns>
+      <value>1^2^3^5^6^7^8^9^10^11^12^13^14^15^16^17^18^19^20^21^22^23</value>
+    </FetchColumns>
+
+    <ColumnTypes>
+      <value>B^B^B^B^B^B</value>
+    </ColumnTypes>
+
+    <FilterColumnName>
+      <value>IS_ACTIVE</value>
+    </FilterColumnName>
+
+    <SelectClause>
+      <value>ISNULL(AGENCY.AGENCY_ID,0) AGENCY_ID,ISNULL(AGENCY.AGENCY_CODE,'') AGENCY_CODE,ISNULL(NUM_AGENCY_CODE,'') NUM_AGENCY_CODE,ISNULL(AGENCY_COMBINED_CODE,'') AGENCY_COMBINED_CODE,ISNULL(AGENCY.AGENCY_DISPLAY_NAME,'') AGENCY_DISPLAY_NAME,ISNULL(AGENCY_DBA,'') AGENCY_DBA,ISNULL(AGENCY.AGENCY_ADD1,'')+' '+ISNULL(AGENCY.AGENCY_ADD2,'') AS ADDRESS,ISNULL(AGENCY.AGENCY_CITY,'') AGENCY_CITY,ISNULL(AGENCY.AGENCY_STATE,0) AGENCY_STATE,ISNULL(AGENCY.AGENCY_ZIP,0) AGENCY_ZIP,ISNULL(AGENCY.AGENCY_COUNTRY,0) AGENCY_COUNTRY,ISNULL(AGENCY.AGENCY_PHONE,'') AGENCY_PHONE,ISNULL(AGENCY.AGENCY_EXT,0) AGENCY_EXT,ISNULL(AGENCY.AGENCY_FAX,0) AGENCY_FAX,ISNULL(AGENCY.AGENCY_EMAIL,'') AGENCY_EMAIL,ISNULL(AGENCY.AGENCY_WEBSITE,'') AGENCY_WEBSITE,ISNULL(AGENCY.AGENCY_PAYMENT_METHOD,0) AGENCY_PAYMENT_METHOD,ISNULL(AGENCY.AGENCY_COMMISSION,0.0) AGENCY_COMMISSION,ISNULL(AGENCY.AGENCY_BILL_TYPE,0) AGENCY_BILL_TYPE,ISNULL(AGENCY.AGENCY_SIGNATURES,0) AGENCY_SIGNATURES,AGENCY.IS_ACTIVE,AGENCY.LAST_UPDATED_DATETIME,ISNULL(AGENCY.AGENCY_ADD1,'') AGENCY_ADD1,ISNULL(AGENCY.AGENCY_ADD2,'') AGENCY_ADD2,AGENCY.AGENCY_LIC_NUM AGENCY_LIC_NUM,ISNULL(AGENCY.SUSEP_NUMBER,'') SUSEP_NUMBER</value>
+    </SelectClause>
+
+    <FromClause>
+      <value>mnt_agency_list agency</value>
+    </FromClause>
+
+
+
+    <PrimaryColumns>
+      <value>1</value>
+    </PrimaryColumns>
+
+    <PrimaryColumnsName>
+      <value>AGENCY_ID</value>
+    </PrimaryColumnsName>
+
+    <OrderByClause>
+      <value>AGENCY_CODE asc</value>
+    </OrderByClause>
+
+    <AllowDBLClick>
+      <value>true</value>
+    </AllowDBLClick>
+
+    <ExtraButtons>
+      <value>1^Add New^0^addRecord</value>
+    </ExtraButtons>
+
+    <RequireQuery>
+      <value>Y</value>
+    </RequireQuery>
+
+    <QueryStringColumns>
+      <value>AGENCY_ID</value>
+    </QueryStringColumns>
+
+    <DefaultSearch>
+      <value>Y</value>
+    </DefaultSearch>
+
+    <FilterValue>
+      <value>Y</value>
+    </FilterValue>
+
+  </PageCalledFor>
+  <PageCalledFor TypeID="27">
+
+    <!--<WhereClause>
+      <value>AGENCY.AGENCY_CODE!='27'</value>
+    </WhereClause>-->
+  </PageCalledFor>
+</Root>

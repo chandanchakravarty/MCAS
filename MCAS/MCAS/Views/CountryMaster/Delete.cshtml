@@ -1,0 +1,46 @@
+﻿@model MCAS.Web.Objects.MastersHelper.CountryModel
+
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/_SystemAdminLayout.cshtml";
+}
+<div class="dashboard-wrapper"> 
+<h2>Delete</h2>
+
+<div class="container">
+    <form class="form-horizontal" action='@Url.Action("Delete", "CountryMaster")' role="form" id="losstypeform" method="post">
+      <div class="row">
+        <div class="clearfix igr col-md-12">
+            <div class="col-md-2">
+            @Html.HiddenFor(m=> m.Countryid)
+                <label for="inputLossTypeCode">Country Code</label>
+            </div>
+            <div class="col-md-3">
+                @Html.TextBoxFor(m => m.CountryCode, new { @maxlength = "7" })<br />
+                 @Html.ValidationMessageFor(m => m.CountryCode)<br />
+                @*<input type="text" id="inputLossTypeCode" placeholder="" name="txtCode"/>*@
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="clearfix igr col-md-12">
+            <div class="col-md-2">
+                <label for="inputLossTypeName">Country Name</label>
+            </div>
+            <div class="col-md-3">
+                @Html.TextBoxFor(m => m.CountryName)<br />
+                @Html.ValidationMessageFor(m => m.CountryName)<br />
+                @*<input type="text" id="inputLossTypeName" placeholder="" name="txtName"/>*@
+            </div>
+        </div>
+    </div>
+    
+    <div class="row">
+        <div class="clearfix igr col-md-12">
+           <button type="submit" class="btn btn-primary btn-large">Delete</button>
+           @Html.ActionLink("Cancel", "Index", null, new { @class = "btn btn-primary btn-large" })
+        </div>
+    </div>
+    </form>
+</div>
+</div>

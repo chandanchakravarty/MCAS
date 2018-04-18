@@ -1,0 +1,130 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Root>
+
+  <PageCalledFor TypeID="">
+
+      <HeaderString>
+        <value Culture="en-US">Search </value>
+        <value Culture="zh-SG">Search </value>
+        <value Culture="pt-BR">Search </value>
+      </HeaderString>
+
+      <SearchColumnHeadings>
+        <value Culture="en-US">Policy #^Name^Application #^Product^Co-Applicant^Effective Date^Expiration Date^Coinsurance Transaction ID^Leader Policy #^Application Status^Policy Status^Policy Version</value>
+        <value Culture="zh-SG">Policy #^Name^Application #^Product^Co-Applicant^Effective Date^Expiration Date^Coinsurance Transaction ID^Leader Policy #^Application Status^Policy Status^Policy Version</value>
+        <value Culture="pt-BR">Policy #^Name^Application #^Product^Co-Applicant^Effective Date^Expiration Date^Coinsurance Transaction ID^Leader Policy #^Application Status^Policy Status^Policy Version</value>
+      </SearchColumnHeadings>
+
+      <DisplayColumnHeadings>
+        <value Culture="en-US">Customer Name^Application #^Policy #^Product^Co-Applicant^Effective Date^Expiration Date^Coinsurance Transaction ID^Leader Policy #</value>
+        <value Culture="zh-SG">Customer Name^Application #^Policy #^Product^Co-Applicant^Effective Date^Expiration Date^Coinsurance Transaction ID^Leader Policy #</value>
+        <value Culture="pt-BR">Customer Name^Application #^Policy #^Product^Co-Applicant^Effective Date^Expiration Date^Coinsurance Transaction ID^Leader Policy #</value>
+      </DisplayColumnHeadings>
+
+      <SearchMessage>
+        <value Culture="en-US">Please select the Search Option,enter Search Criteria,and click on the Search button^Please select the Search Option, enter Search Criteria, and click on the Search button</value>
+        <value Culture="zh-SG">Please select the Search Option,enter Search Criteria,and click on the Search button^Please select the Search Option, enter Search Criteria, and click on the Search button</value>
+        <value Culture="pt-BR">Por favor, selecione a opção de pesquisa, introduzir critérios de pesquisa, e clique no botão Pesquisar ^ Por favor, selecione a opção de pesquisa, introduzir critérios de pesquisa, e clique no botão Pesquisar</value>
+      </SearchMessage>
+
+      <FilterLabel>
+        <value Culture="en-US">Include Inactive</value>
+        <value Culture="zh-SG">Include Inactive</value>
+        <value Culture="pt-BR">Include Inactive</value>
+      </FilterLabel>
+
+      <SearchColumnNames>
+        <value>Policy_Number^CUSTOMER_NAME^APP_NUMBER^lob_id^CO_APPLICANT_NAME^APP_EFFECTIVE_DATE^APP_EXPIRATION_DATE^TRANSACTION_ID^LEADER_POLICY_NUMBER^APP_STATUS^POLICY_STATUS^POLICY_DISP_VERSION</value>
+      </SearchColumnNames>
+
+      <SearchColumnType>
+        <value>T^T^T^L^T^D^D^T^T^L^L^T</value>
+      </SearchColumnType>
+
+      <DisplayColumnNumbers>
+        <value>1^2^3^4^5^6^7</value>
+      </DisplayColumnNumbers>
+
+      <DisplayColumnNames>
+        <value>CUSTOMER_NAME^APP_NUMBER^DISPLAY_POLICY_NUMBER^LOB_DESC^CO_APPLICANT_NAME^APP_EFFECTIVE_DATE^APP_EXPIRATION_DATE^TRANSACTION_ID^LEADER_POLICY_NUMBER</value>   
+   </DisplayColumnNames>
+
+      <DisplayTextLength>
+        <value>160^60^100^60^230^100^100^100^100</value>
+      </DisplayTextLength>
+
+      <DisplayColumnPercent>
+        <value>15^10^15^10^15^15^15^15^15</value>
+      </DisplayColumnPercent>
+
+      <FetchColumns>
+        <value>1^2^3^5^6^7</value>
+      </FetchColumns>
+
+      <ColumnTypes>
+        <value>T^T^T^B^B^B^B^B^B</value>
+      </ColumnTypes>
+
+
+      <FilterColumnName>
+        <value>CCL.IS_ACTIVE</value>
+      </FilterColumnName>
+
+      <SelectClause>
+        <value>CUSTOMER_NAME,APP_NUMBER,POLICY_NUMBER,DISPLAY_POLICY_NUMBER,CUSTOMER_FIRST_NAME,CUSTOMER_MIDDLE_NAME,CUSTOMER_LAST_NAME,AL_APP_NUMBER,APP_VERSION_ID,CUSTOMER_ID,app_id,POLICY_ID,POLICY_version_id,LOB_ID,LOB_DESC,STATE_NAME,IS_ACTIVE,STATE_CODE,STATE_NAME1,app_version_id,QQ_NUMBER,CONVERT (NVARCHAR(10),APP_EFFECTIVE_DATE,103) APP_EFFECTIVE_DATE,CONVERT (NVARCHAR(10),APP_EXPIRATION_DATE,103) APP_EXPIRATION_DATE,TRANSACTION_ID,LEADER_POLICY_NUMBER,CO_APPLICANT_NAME ,APP_STATUS ,POLICY_STATUS,POLICY_DISP_VERSION</value>  
+      </SelectClause>
+      <FromClause>
+        <value>VIW_CUSTOMER_APPLICATIONS_LIST CCL WITH(NOLOCK) </value>
+      </FromClause>
+
+
+      <PrimaryColumns>
+        <value>8^9^7^3^14^15</value>
+      </PrimaryColumns>
+
+      <PrimaryColumnsName>
+        <value>CUSTOMER_ID^app_id^APP_VERSION^POLICY_ID</value>
+      </PrimaryColumnsName>
+
+      <OrderByClause>
+        <value>DISPLAY_POLICY_NUMBER desc</value>
+      </OrderByClause>
+
+      <AllowDBLClick>
+        <value>true</value>
+      </AllowDBLClick>
+
+
+      <ExtraButtons>
+        <value>1^Add New^0^addCustomer</value>
+      </ExtraButtons>
+
+      <RequireQuery>
+        <value>Y</value>
+      </RequireQuery>
+
+      <QueryStringColumns>
+        <value>CCL.CUSTOMER_ID</value>
+      </QueryStringColumns>
+
+      <DefaultSearch>
+        <value>N</value>
+      </DefaultSearch>
+
+      <FilterValue>
+        <value>Y</value>
+      </FilterValue>
+
+  </PageCalledFor>
+
+  <!--<PageCalledFor TypeID="1">
+    
+    <HeaderString>
+      <value Culture="en-US">Insurance Funds</value>
+      <value Culture="zh-SG">Insurance Funds</value>
+      <value Culture="pt-BR">Insurance Funds</value>
+    </HeaderString>
+    
+  </PageCalledFor>-->
+
+</Root>

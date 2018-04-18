@@ -1,0 +1,151 @@
+﻿@model MCAS.Web.Objects.MastersHelper.DiarySetupModel
+@{
+    ViewBag.Title = "DiarySetUp";
+    Layout = "~/Views/Shared/_SystemAdminLayout.cshtml";
+}
+
+
+<script src='@Url.Content("~/Scripts/jquery-2.1.0.min.js")' type="text/javascript"></script>
+<script src='@Url.Content("~/Scripts/jquery.validate.min.js")' type="text/javascript"></script>
+<script src='@Url.Content("~/Scripts/jquery.validate.unobtrusive.min.js")' type="text/javascript"></script>
+
+
+
+
+
+<div class="dashboard-wrapper">
+
+<div class="container" ng-app="MCASWeb">
+<div class="row page-title"  ng-controller="ClaimRegitrationController">
+            <div class="col-lg-12">
+                <h2>
+                    System Admin</h2>
+                {{message}}
+                {{LossDate}}
+                {{model.LossDate}}
+                {{model.PolicyNo}}
+                {{PolicyNo}}
+                {{orderByField}}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <div class="panel panel-info">
+                <div class="panel-heading clearfix">
+                        <i class="icon-check-sign"></i>
+                        <h3 class="panel-title">
+                            Diary Setup  </h3>
+                    </div>
+                    <div style="color:Red; font-weight:bold;" class="has-error" id="error">
+<p align="center">
+@if (TempData["notice"] != null)
+{
+  @TempData["notice"]
+}
+
+</p>
+</div>
+                    <div class="panel-body">
+                     @using (Html.BeginForm("DiarySetUp", "Home", FormMethod.Post, new { role = "form", @class = "form-horizontal" }))
+                    {
+                         @Html.HiddenFor(m=>m.ID)
+                         @Html.HiddenFor(m=>m.DiaryTypeId)
+                         @Html.ValidationSummary(true)
+                       <div class="Row">  
+                         <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label class="col-sm-6 control-label" for="ddlModule">
+                                            Module Name</label>
+                                        <div class="col-sm-6">
+                                            @*<select name="ddlModule" id="ddlModule" class="col-lg-12 form-control">
+                                </select>*@
+                                            <select>
+                                                <option value="5" selected="selected">Claim</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label class="col-sm-6 control-label" for="ddlDiaryList">
+                                            Diary List Type</label>
+                                        <div class="col-sm-6">
+                                            @*<select name="ddlDiaryList" id="ddlDiaryList" class="col-lg-12 form-control">*@
+                                            <select id="ddlDiaryType">
+                                                <option  value="0">Select All Diary Type</option>
+                                                <option  value="34">Adjuster Limit Notifications </option>
+                                                <option  value="11">Claim Review</option>
+                                                <option  value="18">payment Limit Exceeded</option>
+                                                <option  value="17">Reserve Limit Exceeded</option>
+                                            </select>
+                                           
+                                        </div>
+                                    </div>
+                                </div>
+                           </div> 
+                         
+                        <div class="col-lg-12">
+                                <div class="table-responsive">
+                                    <table width="100%" id="tableDiarySrc" cellspacing="0">
+                                        <thead>
+                                            <tr>
+                                                <th align="center" style="width: 10%;">
+                                                    Products
+                                                </th>
+                                                <th align="center" style="width: 20%;">
+                                                    Subjects
+                                                </th>
+                                                <th align="center" style="width: 5%;">
+                                                    Followup
+                                                </th>
+                                                <th align="center" style="width: 15%;">
+                                                    Priority
+                                                </th>
+                                                <th align="center" style="width: 25%;">
+                                                    User Group List
+                                                </th>
+                                                <th align="center" style="width: 25%;">
+                                                    User List
+                                                </th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>
+                                                    <input type="checkbox" class="chk" name="ChkModule" />&nbsp;Motor
+                                                </td>
+                                                                                                
+                                                <td>@Html.TextBoxFor(m => m.SubjectLine)</td>
+                                                <td>@Html.TextBoxFor(m => m.FollowUp)</td>
+                                                <td>@Html.DropDownListFor(m => m.priority, new SelectList(Model.Prioritylist, "Lookup_value", "Lookup_desc"))</td>
+                                               @* <td>@Html.ListBoxFor(m => m.SelectedUsers, Model.users, new { size=6})</td>*@
+                                              
+                                                
+                                                
+                                                
+                                                
+                                            </tr>
+                                           
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+
+                        
+                        <div class="row">
+                            <div class="clearfix igr col-md-12 text-center">
+                                @Html.ActionLink("Back", "DiarySetUp", null, new { @class = "btn btn-info" })&nbsp;&nbsp;&nbsp;&nbsp;
+                                <button class="btn btn-info">Save</button>&nbsp;&nbsp;&nbsp;&nbsp;
+                                
+                            </div>
+                        </div>
+                    }
+                    </div>
+</div>
+            </div>
+
+        </div>
+</div>
+</div>
+
+

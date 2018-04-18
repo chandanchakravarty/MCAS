@@ -1,0 +1,1 @@
+sp_RENAME 'mnt_attachmentlist.AttachGenFileName','ClaimantName','COLUMN'

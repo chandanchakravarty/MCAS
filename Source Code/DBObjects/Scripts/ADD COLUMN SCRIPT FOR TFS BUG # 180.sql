@@ -1,0 +1,8 @@
+IF NOT EXISTS(SELECT COLUMN_NAME FROM INFORMATION_SCHEMA.COLUMNS 
+                  WHERE TABLE_NAME = 'POL_CUSTOMER_POLICY_LIST' 
+                        AND COLUMN_NAME ='DISREGARD_RI_CONTRACT') 
+                  BEGIN
+                        ALTER TABLE POL_CUSTOMER_POLICY_LIST
+                        ADD DISREGARD_RI_CONTRACT INT
+                   END
+

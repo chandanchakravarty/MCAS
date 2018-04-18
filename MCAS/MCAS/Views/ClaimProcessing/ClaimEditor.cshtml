@@ -1,0 +1,1799 @@
+﻿@using MCAS.Web.Objects.CommonHelper
+@using MCAS.Globalisation
+@using MCAS.Web.Objects.Resources.ClaimProcessing;
+@using MCAS.Web.Objects.Resources.Common;
+@model MCAS.Web.Objects.ClaimObjectHelper.ClaimInfoModel
+@{
+    var mMCASQueryString = Html.MCASQueryString(Request.QueryString);
+    ViewBag.Title = MCAS.Web.Objects.Resources.ClaimProcessing.ClaimEditor.ClaimEdit;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    Model.ClaimantStatus = null == Model.ClaimantStatus ? "1" : Model.ClaimantStatus;
+    var caller = mMCASQueryString["claimMode"] == null ? "" : Convert.ToString(mMCASQueryString["claimMode"]);
+    var pagemode = mMCASQueryString["mode"] == null ? "" : Convert.ToString(mMCASQueryString["mode"]);
+    var policyid = mMCASQueryString["PolicyId"] == null ? "" : Convert.ToString(mMCASQueryString["PolicyId"]);
+    var claimId = Model.ClaimID == null ? "0" : Convert.ToString(Model.ClaimID);
+    var claimMode = mMCASQueryString["claimMode"] == null ? "" : Convert.ToString(mMCASQueryString["claimMode"]);
+    var accidentClaimIdNew = mMCASQueryString["AccidentClaimId"] == null ? "" : Convert.ToString(mMCASQueryString["AccidentClaimId"]);
+    var Hheader1 = Model.Hheader == null ? "1" : Model.Hheader;
+    var Hdrop1 = Model.Hdrop == null ? "0" : Model.Hdrop;
+    var HOpenText1 = Model.HOpenText == null ? "1" : Model.HOpenText;
+    var Hmlegend1 = Model.Hmlegend == null ? "1" : Model.Hmlegend;
+    var ingen = Model.Isclaimantaninfant == "1" ? "block;" : "none;";
+    var HReferredToInsurersB = Model.ReferredToInsurersB == false ? "1" : "2we";
+    Model.ClaimType = (null == Model.ClaimType || 0 == Model.ClaimType) ? (null == mMCASQueryString["ClaimType"]) ? 0 : Convert.ToInt32(mMCASQueryString["ClaimType"]) : Model.ClaimType;
+    var submenuid = HttpContext.Current.Session["ScreenNameDash"] == null ? "" : Convert.ToString(HttpContext.Current.Session["ScreenNameDash"]);
+    var SubMenu = !string.IsNullOrEmpty(submenuid) ? MenuListItem.ClaimTabs.GetClaimLabel(submenuid) : ClaimInfo.ResourceManager.GetString(MenuListItem.ClaimTabs.SubMenuString(@caller, @accidentClaimIdNew, @pagemode, "ClaimEditor"));
+    var submenuval = string.IsNullOrEmpty(Convert.ToString(HttpContext.Current.Session["ScreenNameDash"])) ? "" : Convert.ToString(HttpContext.Current.Session["ScreenNameDash"]);
+    var dis = (TempData["hidedrop"] != null || TempData["DisplayDiv"] != null) ? "block;" : "none;";
+    var mhead = TempData["headerval"] == null ? "" : Convert.ToString(TempData["headerval"]);
+    var Createddate1 = Model.Createddate != null ? Model.Createddate.Value.ToString(System.Configuration.ConfigurationManager.AppSettings["DateFormat"]) : DateTime.Now.ToString(System.Configuration.ConfigurationManager.AppSettings["DateFormat"]);
+    var Createdby1 = Model.CreatedBy != null ? Model.CreatedBy : Convert.ToString(HttpContext.Current.Session["LoggedInUserName"]);
+    var claimStatus = Model.ClaimantStatus == "2" ? "block" : "none";
+    string GetClaimType = Model.GetClaimType(Model.ClaimType);
+    SecurityPermissions myPemissions = (SecurityPermissions)ViewData["UserPermissions"];
+    var accidentDate = Model.Hdate;
+    var tbdate = Model.TimeBarDate;
+    var isreadonly = Model.ReadOnly;
+    var createby = Convert.ToString(HttpContext.Current.Session["LoggedInUserName"]);
+    var createddate = DateTime.Now.ToString(System.Configuration.ConfigurationManager.AppSettings["DateFormat"]);
+    var viewmode = mMCASQueryString["Viewmode"] == null ? "none" : "block";
+    var TPBI = Model.ClaimType == 3 ? "block" : "none";
+    string GetClaimNo = Model.GetClaimNo(Model.ClaimType, accidentClaimIdNew);
+    string GetApprovedPaymentonClaimantCheck = Convert.ToString(Model.GetApprovedPaymentonClaimant(Convert.ToInt32(accidentClaimIdNew), Convert.ToInt32(claimId == "" ? "0" : claimId)));
+    string isEncryptedParams = System.Configuration.ConfigurationManager.AppSettings["EncryptQueryParams"].ToUpper();
+}
+<style type="text/css">
+    #t1 label, #Togglediv label
+    {
+        font: normal 12px 'Open Sans' , arial, sans-serif;
+        line-height: 18px;
+        color: #666666;
+        font-weight: bold;
+        text-align: right;
+    }
+    .capitalize
+    {
+        text-transform: capitalize;
+    }
+    .ui-front
+    {
+        z-index: 10000 !important;
+    }
+</style>
+<script src="@Url.Content("~/Scripts/jquery-2.1.0.min.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/Scripts/jquery.validate.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.min.js")" type="text/javascript"></script>
+<div class="dashboard-wrapper">
+    <div class="container">
+        <div class="page-title" id="reg">
+            <div class="col-lg-12" id="reg2" style="background-color: white; position: fixed;
+                z-index: 1033;">
+                <h2>@ClaimInfo.ResourceManager.GetString(MenuListItem.ClaimTabs.PreBreadCrumbString(@pagemode))</h2>
+                <ul class="breadcrumb">
+                    <li>@SubMenu</li>
+                    <li>@ClaimEditor.Claim</li>
+                </ul>
+            </div>
+        </div>
+        <div style="position: relative!important">
+            @Html.Action("_ClaimDetails", "ClaimProcessing", new { PolicyId = @policyid, AccidentClaimId = @accidentClaimIdNew, ClaimId = @claimId })
+        </div>
+        <hr />
+        @{
+            object routes = new { ClaimId = claimId, PolicyId = policyid, AccidentClaimId = accidentClaimIdNew, claimMode = caller, mode = pagemode, ClaimType = Model.ClaimType };
+            if (isEncryptedParams.ToUpper() =="YES")
+            {
+                string res = RouteEncryptDecrypt.getRouteString(routes);
+                res = RouteEncryptDecrypt.Encrypt(res);
+                routes = new { Q = res };
+            }
+        }
+        @using (Html.BeginForm("ClaimEditor", "ClaimProcessing", routes, FormMethod.Post, new { role = "form", @class = "form-horizontal", id = "claimentryform", name = "claimentryform" }))
+        {
+            <div class="row" id="toprow">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <div class="panel panel-info">
+                        <div class="panel-heading clearfix">
+                            <i class="icon-check-sign"></i>
+                            <h3 class="panel-title">
+                                @ClaimEditor.NewClaimEntry</h3>
+                        </div>
+                        <div class="panel-body">
+                            @Html.Partial("ClaimEditorList", Model.ClaimsCollection)
+                            <div>
+                                <br />
+                            </div>
+                            <div class="row">
+                                <div class="clearfix igr col-md-1 text-center">
+                                    <a class="btn btn-info" id="Previous">@Common.Previous</a>
+                                </div>
+                                <div class="clearfix igr col-md-10 text-center">
+                                </div>
+                                <div class="clearfix igr col-md-1 text-center">
+                                    <a class="btn btn-info" id="Next">@Common.Next</a>
+                                </div>
+                            </div>
+                            <br />
+                            <div class="row">
+                                <div class="col-lg-12 text-left">
+                                    @Html.EncodedActionLink(ClaimEditor.AddNewClaim, "ClaimEditor", "ClaimProcessing", new { PolicyId = policyid, AccidentClaimId = accidentClaimIdNew, claimMode = caller, Viewmode = "AddNewClaim", mode = pagemode }, new { @id = "NewClaim", @class = "btn btn-info" })
+                                </div>
+                            </div>
+                            <br />
+                            <div id="DivNewClaimType" class="row" style="display:@viewmode">
+                                <div class="form-group">
+                                    <div class="col-lg-6">
+                                        <div class="form-group">
+                                            <label class="col-sm-4 control-label">
+                                                @ClaimEditor.NewClaimType&nbsp;<span class="text-danger">*</span>
+                                            </label>
+                                            <div class="col-sm-8">
+                                                @Html.DropDownListFor(m => m.ClaimType, new SelectList(Model.ClaimTypeList, "Id", "Text", "0"), new { @class = "form-control ignoreAlert" })
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel panel-info" id="mainfieldset" style="display:@dis">
+                        <div class="panel-heading clearfix">
+                            <i class="icon-check-sign"></i>
+                            <h3 class="panel-title" id="header">
+                                @ClaimEditor.NewClaimEntry</h3>
+                        </div>
+                        <div class="panel-body">
+                            @Html.ValidationSummary(true)
+                            @Html.HiddenFor(m => m.ClaimID)
+                            @Html.HiddenFor(m => m.Hheader)
+                            @Html.HiddenFor(m => m.Hmlegend)
+                            @Html.HiddenFor(m => m.Hdrop)
+                            @Html.HiddenFor(m => m.HOpenText)
+                            @Html.HiddenFor(m => m.Prop1)
+                            @Html.HiddenFor(m => m.RequiredVal)
+                            @Html.HiddenFor(m => m.Hdate)
+                            @Html.HiddenFor(m => m.Htbdate)
+                            @Html.HiddenFor(m => m.Hshowgrid)
+                            @Html.HiddenFor(m => m.HChkApprovedPayment)
+                            @Html.HiddenFor(m => m.ViewMode)
+                            @Html.HiddenFor(m => m.HChildGrid)
+                            <div style="color: Red; font-weight: bold;" class="has-error" id="error">
+                                <p style="text-align: center;">
+                                    @if (@ViewData["SuccessMsg"] != null)
+                                    {
+                                        @ViewData["SuccessMsg"]
+                                    }
+                                </p>
+                            </div>
+                            <fieldset id="fieldsetmlegend">
+                                <legend id="mlegend">@ClaimEditor.OwnDamage</legend>
+                                <div id="t2">
+                                    <fieldset>
+                                        <legend>@ClaimEditor.ThirdPartyClaimant</legend>
+                                        <div class="form-group">
+                                            <div class="col-lg-6">
+                                                <div class="form-group">
+                                                    <label class="col-sm-4 control-label">
+                                                        @ClaimEditor.ClaimantName:&nbsp;<span class="text-danger">*</span>
+                                                    </label>
+                                                    <div class="col-sm-8">
+                                                        @Html.TextBoxFor(m => m.ClaimantName, new { @maxlength = "250", @class = "form-control alphanumeric" })
+                                                        @Html.ValidationMessageFor(m => m.ClaimantName)
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-6">
+                                                <div class="form-group">
+                                                    <label class="col-sm-4 control-label">
+                                                        @ClaimEditor.ClaimantNRICPPNO:
+                                                    </label>
+                                                    <div class="col-sm-8">
+                                                        @Html.TextBoxFor(m => m.ClaimantNRICPPNO, new { @maxlength = "100", @class = "form-control" })
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="col-lg-6">
+                                                <div class="form-group">
+                                                    <label class="col-sm-4 control-label">
+                                                        @ClaimEditor.ClaimantDOB:
+                                                    </label>
+                                                    <div class="col-sm-8">
+                                                        @Html.TextBoxFor(m => m.ClaimantDOB, "{0:d}", new { @class = "form-control datepicker validateDateFormare" })
+                                                        @Html.ValidationMessageFor(m => m.ClaimantDOB)
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-6">
+                                                <div class="form-group">
+                                                    <label class="col-sm-4 control-label">
+                                                        @ClaimEditor.ClaimantGender:
+                                                    </label>
+                                                    <div class="col-sm-8">
+                                                        @Html.RadioButtonForSelectList(m => m.ClaimantGender, Model.ClaimantGenderList)
+                                                    </div>
+                                                    <label class="col-sm-4  control-label">
+                                                    </label>
+                                                    <div class="col-sm-8">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="col-lg-6">
+                                                <div class="form-group">
+                                                    <label class="col-sm-4 control-label">
+                                                        @ClaimEditor.ClaimantType:&nbsp;<span class="text-danger">*</span>
+                                                    </label>
+                                                    <div class="col-sm-8">
+                                                        @Html.DropDownListFor(m => m.ClaimantType, new SelectList(Model.ClaimantTypeList, "Id", "Text", "1"),
+                                new { @class = "form-control" })
+                                                        @Html.ValidationMessageFor(m => m.ClaimantType)
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-6">
+                                                <div class="form-group">
+                                                    <label class="col-sm-4 control-label">
+                                                        @ClaimEditor.ClaimantAddress1:@*&nbsp;<span class="text-danger">*</span>*@
+                                                    </label>
+                                                    <div class="col-sm-8">
+                                                        @Html.TextAreaFor(m => m.ClaimantAddress1, new { @maxlength = "100", @class = "form-control" })
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="col-lg-6">
+                                                <div class="form-group">
+                                                    <label class="col-sm-4 control-label">
+                                                        @ClaimEditor.ClaimantAddress2:@*&nbsp;<span class="text-danger">*</span>*@
+                                                    </label>
+                                                    <div class="col-sm-8">
+                                                        @Html.TextAreaFor(m => m.ClaimantAddress2, new { @maxlength = "100", @class = "form-control" })
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-6">
+                                                <div class="form-group">
+                                                    <label class="col-sm-4 control-label">
+                                                        @ClaimEditor.ClaimantAddress3:</label>
+                                                    <div class="col-sm-8">
+                                                        @Html.TextAreaFor(m => m.ClaimantAddress3, new { @maxlength = "100", @class = "form-control" })
+                                                        @Html.ValidationMessageFor(m => m.ClaimantAddress3)
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="col-lg-6">
+                                                <div class="form-group">
+                                                    <label class="col-sm-4 control-label">
+                                                        @ClaimEditor.Country:
+                                                    </label>
+                                                    <div class="col-sm-8">
+                                                        @Html.DropDownListFor(m => m.Country, new SelectList(Model.usercountrylist, "CountryShortCode", "CountryName", "SG"), new { @class = "col-lg-12 form-control" })
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-6">
+                                                <div class="form-group">
+                                                    <label class="col-sm-4 control-label">
+                                                        @ClaimEditor.City:
+                                                    </label>
+                                                    <div class="col-sm-8">
+                                                        @Html.TextBoxFor(m => m.City, new { @maxlength = "250", @class = "col-lg-12 form-control alphanumeric" })
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="col-lg-6">
+                                                <div class="form-group">
+                                                    <label class="col-sm-4 control-label">
+                                                        @ClaimEditor.State:
+                                                    </label>
+                                                    <div class="col-sm-8">
+                                                        @Html.TextBoxFor(m => m.State, new { @maxlength = "250", @class = "col-lg-12 form-control alphanumeric" })
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-6">
+                                                <div class="form-group">
+                                                    <label class="col-sm-4 control-label">
+                                                        @ClaimEditor.PostalCode:
+                                                    </label>
+                                                    <div class="col-sm-8">
+                                                        @Html.TextBoxFor(m => m.PostalCode, new { @maxlength = "10", @class = "form-control Number" })
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="col-lg-6">
+                                                <div class="form-group">
+                                                    <label class="col-sm-4 control-label">
+                                                        @ClaimEditor.ClaimantContactNo:
+                                                    </label>
+                                                    <div class="col-sm-8">
+                                                        @Html.TextBoxFor(m => m.ClaimantContactNo, new { @maxlength = "15", @class = "form-control Number" })
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-6">
+                                                <div class="form-group">
+                                                    <label class="col-sm-4 control-label">
+                                                        @ClaimEditor.ClaimantEmail:</label>
+                                                    <div class="col-sm-8">
+                                                        @Html.TextBoxFor(m => m.ClaimantEmail, new { @maxlength = "100", @class = "form-control" })
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="col-lg-6">
+                                                <div class="form-group">
+                                                    <label class="col-sm-4 control-label">
+                                                        @ClaimEditor.VehicleRegnNo:
+                                                    </label>
+                                                    <div class="col-sm-8">
+                                                        @Html.TextBoxFor(m => m.VehicleRegnNo, new { @maxlength = "8", @class = "form-control" })
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-6">
+                                                <div class="form-group">
+                                                    <label class="col-sm-4 control-label">
+                                                        @ClaimEditor.VehicleMake:</label>
+                                                    <div class="col-sm-8">
+                                                        @Html.TextBoxFor(m => m.VehicleMake, new { @maxlength = "150", @class = "form-control" })
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="col-lg-6">
+                                                <div class="form-group">
+                                                    <label class="col-sm-4 control-label">
+                                                        @ClaimEditor.VehicleModel:</label>
+                                                    <div class="col-sm-8">
+                                                        @Html.TextBoxFor(m => m.VehicleModel, new { @maxlength = "150", @class = "form-control" })
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-6">
+                                                <div class="form-group">
+                                                    <label class="col-sm-4 control-label">
+                                                        @ClaimEditor.Isclaimantaninfant</label>
+                                                    <div class="col-sm-8">
+                                                        @Html.RadioButtonForSelectList(m => m.Isclaimantaninfant, Model.IsclaimantaninfantList)
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group DivHide" id="iftant2" style="display: @ingen">
+                                            <div class="col-lg-6">
+                                                <div class="form-group DivHide" id="iftant1" style="display: @ingen">
+                                                    <label class="col-sm-4 control-label">
+                                                        @ClaimEditor.InfantName:
+                                                    </label>
+                                                    <div class="col-sm-8">
+                                                        @Html.TextBoxFor(m => m.InfantName, new { @maxlength = "250", @class = "form-control" })
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-6">
+                                                <div class="form-group">
+                                                    <label class="col-sm-4 control-label">
+                                                        @ClaimEditor.InfantDOB:
+                                                    </label>
+                                                    <div class="col-sm-8">
+                                                        @Html.TextBoxFor(m => m.InfantDOB, "{0:d}", new { @class = "form-control datepicker" })
+                                                        @Html.ValidationMessageFor(m => m.InfantDOB)
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-6">
+                                                <div class="form-group">
+                                                    <label class="col-sm-4 control-label">
+                                                        @ClaimEditor.InfantGender:
+                                                    </label>
+                                                    <div class="col-sm-8">
+                                                        @Html.RadioButtonForSelectList(m => m.InfantGender, Model.ClaimantGenderList)
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </fieldset>
+                                    <fieldset id="FieldsetNewClaimEntry">
+                                        <legend>@ClaimEditor.NewClaimEntry</legend>
+                                        <div class="form-group">
+                                            <div class="col-lg-6">
+                                                <div class="form-group">
+                                                    <label class="col-sm-4 control-label">
+                                                        @ClaimEditor.ClaimType
+                                                    </label>
+                                                    <div class="col-sm-8">
+                                                        @Html.TextBoxFor(m => m.ClaimType1, new { @class = "form-control" })
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-6">
+                                                <div class="form-group">
+                                                    <label class="col-sm-4 control-label">
+                                                        @ClaimEditor.ClaimRecordNo:&nbsp;<span class="text-danger">*</span>
+                                                    </label>
+                                                    <div class="col-sm-8">
+                                                        @Html.TextBoxFor(m => m.ClaimRecordNo, new { @maxlength = "50", @class = "form-control" })
+                                                        @Html.ValidationMessageFor(m => m.ClaimRecordNo)
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="col-lg-6">
+                                                <div class="form-group">
+                                                    <label class="col-sm-4 control-label">
+                                                        @ClaimEditor.ConfirmedAmount
+                                                    </label>
+                                                    <div class="col-sm-8">
+                                                        @Html.TextBoxFor(m => m.ConfirmedAmount, new { @maxlength = "14", @class = "form-control format Number" })
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-6">
+                                                <div class="form-group">
+                                                    <label class="col-sm-4 control-label">
+                                                        @ClaimEditor.TimeBarDate&nbsp;<span class="text-danger">*</span>
+                                                    </label>
+                                                    <div class="col-sm-8">
+                                                        @Html.TextBoxFor(m => m.TimeBarDate, "{0:d}", new { @class = "form-control datepicker chkdate ignoreAlert", maxlength = 10 })
+                                                        @Html.ValidationMessageFor(m => m.TimeBarDate)
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="col-lg-6">
+                                                <div class="form-group">
+                                                    <label class="col-sm-4 control-label">
+                                                        @ClaimEditor.ClaimDate&nbsp;<span class="text-danger">*</span>
+                                                    </label>
+                                                    <div class="col-sm-8">
+                                                        @Html.TextBoxFor(m => m.ClaimDate, "{0:d}", new { @class = "form-control datepicker chkdate", maxlength = 10 })
+                                                        @Html.ValidationMessageFor(m => m.ClaimDate)
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-6">
+                                                <div class="form-group">
+                                                    <label class="col-sm-4 control-label">
+                                                        @ClaimEditor.ClaimsOfficer&nbsp;<span class="text-danger">*</span>
+                                                    </label>
+                                                    <div class="col-sm-8">
+                                                        @Html.DropDownListFor(m => m.ClaimsOfficer, new SelectList(Model.ClaimOfficerList, "TranId", "ClaimOfficerName", "Select"), new { @class = "form-control" })
+                                                        @Html.ValidationMessageFor(m => m.ClaimsOfficer)
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="col-lg-6">
+                                                <div class="form-group">
+                                                    <label class="col-sm-4 control-label">
+                                                        @ClaimEditor.DriverLiablity
+                                                    </label>
+                                                    <div class="col-sm-8">
+                                                        @Html.TextBoxFor(m => m.DriverLiablity, new { @maxlength = "3", @class = "form-control Number" })
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-6">
+                                                <div class="form-group">
+                                                    <label class="col-sm-4 control-label">
+                                                        @ClaimEditor.CaseCategory&nbsp;<span class="text-danger">*</span>
+                                                    </label>
+                                                    <div class="col-sm-8">
+                                                        @Html.DropDownListFor(m => m.CaseCategory, new SelectList(Model.CaseCategoryList, "Id", "Text"),
+new { @class = "form-control" })
+                                                        @Html.ValidationMessageFor(m => m.CaseCategory)
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="col-lg-6">
+                                                <div class="form-group">
+                                                    <label class="col-sm-4 control-label">
+                                                        @ClaimEditor.CaseStatus&nbsp;<span class="text-danger">*</span>
+                                                    </label>
+                                                    <div class="col-sm-8">
+                                                        @Html.DropDownListFor(m => m.CaseStatus, new SelectList(Model.CaseStatusList, "Id", "Text", "0"),
+new { @class = "form-control" })
+                                                        @Html.ValidationMessageFor(m => m.CaseStatus)
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-6">
+                                                <div class="form-group">
+                                                    <label class="col-sm-4 control-label">
+                                                        @ClaimEditor.ClaimantStatus&nbsp;<span class="text-danger">*</span>
+                                                    </label>
+                                                    <div class="col-sm-8" id="DivClaimantStatus">
+                                                        @Html.DropDownListFor(m => m.ClaimantStatus, new SelectList(Model.ClaimantStatusList, "Id", "Text", "1"), new { @class = "form-control DonotDiableControl" })
+                                                        @Html.ValidationMessageFor(m => m.ClaimantStatus)
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group" id="StatusDiv">
+                                            <div class="col-lg-6" style="display:@claimStatus" id="divFinalSettleDate">
+                                                <div class="form-group">
+                                                    <label class="col-sm-4 control-label" for="FinalSettleDate">
+                                                        @ClaimEditor.FinalSettleDate&nbsp;<span class="text-danger">*</span>
+                                                    </label>
+                                                    <div class="col-sm-8">
+                                                        @Html.TextBoxFor(m => m.FinalSettleDate, "{0:d}", new { id = "FinalSettleDate", @class = "form-control datepicker" })
+                                                        @Html.ValidationMessageFor(m => m.FinalSettleDate)
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group" style="display: none;">
+                                            <div class="col-lg-4">
+                                                <div class="form-group">
+                                                    <label class="col-sm-6 control-label" for="OurSurveyorApp">
+                                                        @ClaimEditor.OurSurveyorAppointed
+                                                    </label>
+                                                    <div class="col-sm-6">
+                                                        @Html.DropDownListFor(m => m.OurSurveyorApp, new SelectList(Model.list, "AdjusterCode", "AdjusterName", "Select"),
+                 new { @class = "form-control" })
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-4">
+                                                <div class="form-group">
+                                                    <label class="col-sm-5 control-label" for="SappointedDate">
+                                                        @ClaimEditor.AppointedDate
+                                                    </label>
+                                                    <div class="col-sm-7">
+                                                        @Html.TextBoxFor(m => m.SappointedDate, "{0:d}", new { @class = "form-control datepicker" })
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-4">
+                                                <div class="form-group">
+                                                    <label class="col-sm-5 control-label" for="SrefNo">
+                                                        @ClaimEditor.SeverityReferenceNo
+                                                    </label>
+                                                    <div class="col-sm-7">
+                                                        @Html.TextBoxFor(m => m.SrefNo, new { @class = "form-control" })
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group" style="display: none;">
+                                            <div class="col-lg-4">
+                                                <div class="form-group">
+                                                    <label class="col-sm-6 control-label">
+                                                        @ClaimEditor.OurLawyerAppointed
+                                                    </label>
+                                                    <div class="col-sm-6">
+                                                        @Html.DropDownListFor(m => m.OurLawyerApp, new SelectList(Model.Sollist, "AdjusterCode", "AdjusterName", "Select"),
+                 new { @class = "form-control" })
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-4">
+                                                <div class="form-group">
+                                                    <label class="col-sm-5 control-label">
+                                                        @ClaimEditor.AppointedDate
+                                                    </label>
+                                                    <div class="col-sm-7">
+                                                        @Html.TextBoxFor(m => m.LappointedDate, "{0:d}", new { @class = "form-control datepicker" })
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-4">
+                                                <div class="form-group">
+                                                    <label class="col-sm-5 control-label">
+                                                        @ClaimEditor.SeverityReferenceNo
+                                                    </label>
+                                                    <div class="col-sm-7">
+                                                        @Html.TextBoxFor(m => m.Lrefno, new { @class = "form-control" })
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group" style="display: none;">
+                                            <div class="col-lg-4">
+                                                <div class="form-group">
+                                                    <label class="col-sm-6 control-label">
+                                                        @ClaimEditor.OurAdjustorAppointed
+                                                    </label>
+                                                    <div class="col-sm-6">
+                                                        @Html.DropDownListFor(m => m.OurLawyerApp, new SelectList(Model.Adjlist, "AdjusterCode", "AdjusterName", "Select"),
+                 new { @class = "form-control" })
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-4">
+                                                <div class="form-group">
+                                                    <label class="col-sm-5 control-label">
+                                                        @ClaimEditor.AppointedDate
+                                                    </label>
+                                                    <div class="col-sm-7">
+                                                        @Html.TextBoxFor(m => m.AappDate, "{0:d}", new { @class = "form-control datepicker" })
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-4">
+                                                <div class="form-group">
+                                                    <label class="col-sm-5 control-label">
+                                                        @ClaimEditor.SeverityReferenceNo
+                                                    </label>
+                                                    <div class="col-sm-7">
+                                                        @Html.TextBoxFor(m => m.Arefno, new { @class = "form-control" })
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group" style="display: none;">
+                                            <div class="col-lg-4">
+                                                <div class="form-group">
+                                                    <label class="col-sm-6 control-label">
+                                                        @ClaimEditor.OurWorkshopDepot
+                                                    </label>
+                                                    <div class="col-sm-6">
+                                                        @Html.DropDownListFor(m => m.OurLawyerApp, new SelectList(Model.DOPlist, "AdjusterCode", "AdjusterName", "Select"),
+                 new { @class = "form-control" })
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-4">
+                                                <div class="form-group">
+                                                    <label class="col-sm-5 control-label">
+                                                        @ClaimEditor.AppointedDate
+                                                    </label>
+                                                    <div class="col-sm-7">
+                                                        @Html.TextBoxFor(m => m.OWAppDate, "{0:d}", new { @class = "form-control datepicker" })
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-4">
+                                                <div class="form-group">
+                                                    <label class="col-sm-5 control-label">
+                                                        @ClaimEditor.SeverityReferenceNo.
+                                                    </label>
+                                                    <div class="col-sm-7">
+                                                        @Html.TextBoxFor(m => m.Owrefno, new { @class = "form-control" })
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="col-lg-6">
+                                                <div class="form-group">
+                                                    <label class="col-sm-4 control-label">
+                                                        @ClaimEditor.LODSentDate
+                                                    </label>
+                                                    <div class="col-sm-8">
+                                                        @Html.TextBoxFor(m => m.LODSentdate, "{0:d}", new { @class = "form-control datepicker chkdate", maxlength = 10 })
+                                                        @Html.ValidationMessageFor(m => m.LODSentdate)
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-6">
+                                                <div class="form-group">
+                                                    <label class="col-sm-4 control-label">
+                                                        @ClaimEditor.EZLinkCardNo&nbsp;<span class="text-danger">*</span>
+                                                    </label>
+                                                    <div class="col-sm-8">
+                                                        @Html.DropDownListFor(m => m.EZLinkCardNo, new SelectList(Model.EZLinkCardNoList, "Lookup_value", "Lookup_desc", ""), new { @class = "form-control" })
+                                                        @Html.ValidationMessageFor(m => m.EZLinkCardNo)
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="col-lg-6">
+                                                <div class="form-group">
+                                                    <label class="col-sm-4 control-label">
+                                                        @ClaimEditor.RecoveredtoDate
+                                                    </label>
+                                                    <div class="col-sm-8">
+                                                        @Html.TextBoxFor(m => m.RecoveredtoDate, new { @maxlength = "14", @class = "form-control format Number" })
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </fieldset>
+                                    <fieldset id="fieldPDBI1 PDBI">
+                                        <legend class="ExpCol ui-minusicon">@ClaimEditor.InsurerMatters</legend>
+                                        <div id="l1div" class="form-group">
+                                            <div class="row" style="margin-left: 0px">
+                                                <div class="col-lg-6">
+                                                    <div class="form-group">
+                                                        <label class="col-sm-4 control-label">
+                                                            @ClaimEditor.ReportSentToInsurer
+                                                        </label>
+                                                        <div class="col-sm-8">
+                                                            @Html.TextBoxFor(m => m.ReportSentToInsurer, "{0:d}", new { @class = "form-control datepicker chkdate validateDateFormare " })
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-6">
+                                                    <div class="form-group">
+                                                        <label class="col-sm-4 control-label">
+                                                            @ClaimEditor.ReferredToInsurersB
+                                                        </label>
+                                                        <div class="col-sm-8">
+                                                            @Html.CheckBoxFor(m => m.ReferredToInsurersB)
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div id="DateReferredToInsurersBDiv" class="col-lg-6">
+                                                <div class="form-group">
+                                                    <label class="col-sm-4 control-label">
+                                                        @ClaimEditor.DateReferredToInsurersB&nbsp;<span class="text-danger">*</span>
+                                                    </label>
+                                                    <div class="col-sm-8">
+                                                        @Html.TextBoxFor(m => m.DateReferredToInsurersB, "{0:d}", new { @class = "form-control datepicker chkdate" })
+                                                        @Html.ValidationMessageFor(m => m.DateReferredToInsurersB)
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-6">
+                                                <div class="form-group">
+                                                    <label class="col-sm-4 control-label">
+                                                        @ClaimEditor.InformedInsurerOfSettlement
+                                                    </label>
+                                                    <div class="col-sm-8">
+                                                        @Html.TextBoxFor(m => m.InformedInsurerOfSettlement, "{0:d}", new { @class = "form-control datepicker chkdate validateDateFormare " })
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-6">
+                                                <div class="form-group">
+                                                    <label class="col-sm-4 control-label">
+                                                        @ClaimEditor.ExcessRecoveredDate
+                                                    </label>
+                                                    <div class="col-sm-8">
+                                                        @Html.TextBoxFor(m => m.ExcessRecoveredDate, "{0:d}", new { @class = "form-control datepicker chkdate validateDateFormare " })
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-6">
+                                                <div class="form-group">
+                                                    <label class="col-sm-4 control-label">
+                                                        @ClaimEditor.InformedInsurer&nbsp;<span id="InformedInsurerspan" class="text-danger">*</span>
+                                                    </label>
+                                                    <div class="col-sm-8">
+                                                        @Html.TextBoxFor(m => m.InformedInsurer, "{0:d}", new { @class = "form-control datepicker" })
+                                                        @Html.ValidationMessageFor(m => m.InformedInsurer)
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </fieldset>
+                                    <fieldset>
+                                        <legend class="ExpCol ui-minusicon">@ClaimEditor.Severity</legend>
+                                        <div id="l2div" class="form-group">
+                                            <div class="col-lg-6">
+                                                <div class="form-group">
+                                                    <label class="col-sm-4 control-label">
+                                                        @ClaimEditor.WritIssuedDate
+                                                    </label>
+                                                    <div class="col-sm-8">
+                                                        @Html.TextBoxFor(m => m.WritIssuedDate, "{0:d}", new { @class = "form-control datepicker chkdate validateDateFormare " })
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-6">
+                                                <div class="form-group">
+                                                    <label class="col-sm-4 control-label">
+                                                        @ClaimEditor.WritNo.
+                                                    </label>
+                                                    <div class="col-sm-8">
+                                                        @Html.TextBoxFor(m => m.WritNo, new { @maxlength = "50", @class = "form-control" })
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-6">
+                                                <div class="form-group">
+                                                    <label class="col-sm-4 control-label">
+                                                        @ClaimEditor.SensitiveCase
+                                                    </label>
+                                                    <div class="col-sm-8">
+                                                        @Html.TextBoxFor(m => m.SensitiveCase, "{0:d}", new { @class = "form-control datepicker validateDateFormare " })
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-6">
+                                                <div class="form-group" id="DivPDBI1 PDBI">
+                                                    <label class="col-sm-4 control-label">
+                                                        @ClaimEditor.MP
+                                                    </label>
+                                                    <div class="col-sm-8">
+                                                        @Html.DropDownListFor(m => m.MP, new SelectList(Model.MPList, "Id", "Text", "[Select...]"),
+new { @class = "form-control" })
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-6">
+                                                <div class="form-group" id="DivPDBI2 PDBI">
+                                                    <label class="col-sm-4 control-label">
+                                                        @ClaimEditor.Constituency
+                                                    </label>
+                                                    <div class="col-sm-8">
+                                                        @Html.DropDownListFor(m => m.Constituency, new SelectList(Model.ConstituencyList, "Id", "Text", "[Select...]"),
+new { @class = "form-control" })
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-6">
+                                                <div class="form-group" id="DivPDBI3 PDBI">
+                                                    <label class="col-sm-4 control-label">
+                                                        @ClaimEditor.DateOfMpLetter
+                                                    </label>
+                                                    <div class="col-sm-8">
+                                                        @Html.TextBoxFor(m => m.DateOfMpLetter, "{0:d}", new { @class = "form-control datepicker chkdate validateDateFormare " })
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-6">
+                                                <div class="form-group" id="DivPDBI4 PDBI">
+                                                    <label class="col-sm-4 control-label">
+                                                        @ClaimEditor.SeverityReferenceNo.
+                                                    </label>
+                                                    <div class="col-sm-8">
+                                                        @Html.TextBoxFor(m => m.SeverityReferenceNo, new { @maxlength = "50", @class = "form-control" })
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-6">
+                                                <div class="form-group">
+                                                    <label class="col-sm-4 control-label">
+                                                        @ClaimEditor.NODNOS&nbsp;<span id="NODNOSSpan" style="display: none;" class="text-danger">*</span>
+                                                    </label>
+                                                    <div class="col-sm-8">
+                                                        @Html.DropDownListFor(m => m.NODNOS, new SelectList(Model.EZLinkCardNoList, "Lookup_value", "Lookup_desc", ""),
+new { @class = "form-control DonotDiableControl" })
+                                                        @Html.ValidationMessageFor(m => m.NODNOS)
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </fieldset>
+                                    <fieldset id="FieldSetRecordCreation">
+                                        <legend class="ExpCol ui-minusicon">@ClaimEditor.RecordCreation</legend>
+                                        <div id="l3div" class="form-group">
+                                            <div class="col-lg-6">
+                                                <div class="form-group">
+                                                    <label class="col-sm-4 control-label">
+                                                        @ClaimEditor.CreatedBy
+                                                    </label>
+                                                    <div class="col-sm-8">
+                                                        @Html.TextBoxFor(m => m.CreatedBy, new { @class = "form-control", @Value = @Createdby1 })
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-6">
+                                                <div class="form-group">
+                                                    <label class="col-sm-4 control-label">
+                                                        @ClaimEditor.Createddate
+                                                    </label>
+                                                    <div class="col-sm-8">
+                                                        @Html.TextBoxFor(m => m.Createddate, new { name = "Createddate", @class = "form-control", @Value = @Createddate1 })
+                                                        @Html.ValidationMessageFor(m => m.Createddate)
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div id="ReopenDiv">
+                                                <div class="col-lg-6">
+                                                    <div class="form-group">
+                                                        <label class="col-sm-4 control-label" id="ReDate">
+                                                            @ClaimEditor.ReopenedDate
+                                                        </label>
+                                                        <div class="col-sm-8">
+                                                            @Html.TextBoxFor(m => m.ReopenedDate, "{0:d}", new { @class = "form-control datepicker chkdate validateDateFormare" })
+                                                            @Html.ValidationMessageFor(m => m.ReopenedDate)
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-6">
+                                                    <div class="form-group">
+                                                        <label class="col-sm-4 control-label" id="ReReason">
+                                                            @ClaimEditor.RecordReopenedReason
+                                                        </label>
+                                                        <div class="col-sm-8">
+                                                            @Html.TextBoxFor(m => m.RecordReopenedReason, new { @maxlength = "150", @class = "form-control" })
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </fieldset>
+                                    <fieldset id="FieldSetRecordCanCreation">
+                                        <legend class="ExpCol ui-minusicon">@ClaimEditor.CancellationOfRecord</legend>
+                                        <div id="l4div" class="form-group">
+                                            <div class="col-lg-6">
+                                                <div class="form-group">
+                                                    <label class="col-sm-4 control-label" id="ReCanDate">
+                                                        @ClaimEditor.RecordCancellationDate
+                                                    </label>
+                                                    <div class="col-sm-8">
+                                                        @Html.TextBoxFor(m => m.RecordCancellationDate, "{0:d}", new { @class = "form-control datepicker validateDateFormare" })
+                                                        @Html.ValidationMessageFor(m => m.RecordCancellationDate)
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-6">
+                                                <div class="form-group">
+                                                    <label class="col-sm-4 control-label" id="ReCanReason">
+                                                        @ClaimEditor.RecordCancellationReason
+                                                    </label>
+                                                    <div class="col-sm-8">
+                                                        @Html.TextAreaFor(m => m.RecordCancellationReason, new { @maxlength = "150", @class = "form-control", @rows = "2" })
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </fieldset>
+                                </div>
+                            </fieldset>
+                            <div class="row">
+                                <div class="col-lg-1">
+                                    <div class="form-group" style="padding-left: 20px;">
+                                        <a class="btn btn-info" id="Previous">@Common.Previous</a>
+                                    </div>
+                                </div>
+                                <div class="col-lg-10 text-center">
+                                    <div class="form-group" id="DivSave1">
+                                        @if (@myPemissions.Write)
+                                        {
+                                            if ((pagemode != "Payment" && pagemode != "Enq") || Model.ClaimantStatus == "2")
+                                            {
+                                            <input id="btnSave" class="btn btn-info" type="button" value=@Common.Save />
+                                                if (@claimId == "0" || @claimId == null)
+                                                {
+                                            <a type="button" class="btn btn-info" id="btnReset" href="#" tabindex="13">@Common.Reset</a>
+                                                }
+                                                 else
+                                                {
+                                                 <a name="btnReset1" id="btnReset1" class="btn btn-info" href="#">@Common.Reset</a> 
+                                                }
+                                            }
+                                        }
+                                    </div>
+                                </div>
+                                <div class="col-lg-1">
+                                    <div class="form-group">
+                                        <a class="btn btn-info" id="Next">@Common.Next</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <fieldset>
+                                    <div class="form-group">
+                                        <div class="col-lg-12">
+                                            @Html.Partial("~/Views/Shared/_TimeStamp.cshtml", Model)
+                                        </div>
+                                    </div>
+                                </fieldset>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+<script type="text/javascript">
+    setTabActive('ClaimTab1');
+    var lname = { 1: function () { return "Own Damage" }, 2: function () { return "TPPD" }, 3: function () { return "TPBI" } };
+
+    var do_on_load = function () {
+        var pattern1 = /^(?:(?:31(\/|-|\.)(?:0?[13578]|1[02]))\1|(?:(?:29|30)(\/|-|\.)(?:0?[1,3-9]|1[0-2])\2))(?:(?:1[6-9]|[2-9]\d)?\d{2})$|^(?:29(\/|-|\.)0?2\3(?:(?:(?:1[6-9]|[2-9]\d)?(?:0[48]|[2468][048]|[13579][26])|(?:(?:16|[2468][048]|[3579][26])00))))$|^(?:0?[1-9]|1\d|2[0-8])(\/|-|\.)(?:(?:0?[1-9])|(?:1[0-2]))\4(?:(?:1[6-9]|[2-9]\d)?\d{2})$/;
+
+        $("a.Print").each(function () { $(this).attr("url", $(this).attr("href")).attr("href", "#"); })
+        $("a.Print").on('click', function () {
+            $("div.PreviewDocumentClass").length && $("div.PreviewDocumentClass").remove();
+            var a = guid(), b = "#" + a;
+            $('<div class="PreviewDocumentClass" id="' + a + '" title="Print" style="overflow: hidden;"><div class="Printloading"><p>Please wait...<br><img src="@Url.Content("~/Images/ajax-loader.gif")" alt="Loading.."></p></div></div>').appendTo(".PrintDialogue");
+            InitializeDialog($(b), $(this).attr("url").getstringinbetween("ClaimID"));
+            $(b).dialog("open");
+            return !1
+        });
+
+
+        $("input[type=text]").removeAttr("data-val-date");
+        $(".datepicker").blur(function (event) {
+            if ($(this).val() != "" && $(this).val() != 'DD/MM/YYYY') {
+                var errMessage = "";
+                var dob = $(this).val();
+                var pattern = /^(?:(?:31(\/|-|\.)(?:0?[13578]|1[02]))\1|(?:(?:29|30)(\/|-|\.)(?:0?[1,3-9]|1[0-2])\2))(?:(?:1[6-9]|[2-9]\d)?\d{2})$|^(?:29(\/|-|\.)0?2\3(?:(?:(?:1[6-9]|[2-9]\d)?(?:0[48]|[2468][048]|[13579][26])|(?:(?:16|[2468][048]|[3579][26])00))))$|^(?:0?[1-9]|1\d|2[0-8])(\/|-|\.)(?:(?:0?[1-9])|(?:1[0-2]))\4(?:(?:1[6-9]|[2-9]\d)?\d{2})$/;
+                if (!pattern.test(dob)) {
+                    errMessage += "Date must be in 'dd/mm/yyyy' format.\n";
+                    alert(errMessage);
+                    var Id = ($(this).context.id || $(this).id);
+                    if (Id == 'TimeBarDate') {
+                        var date = '@tbdate' == null || '@tbdate' == '' ? $("#Htbdate").val() : '@tbdate';
+                        var datesplit = date.split(' ');
+                        $('#TimeBarDate').val(datesplit[0]);
+
+                    }
+                    else {
+                        $(this).val("");
+                    }
+                    event.preventDefault();
+                    return false;
+                }
+            }
+        });
+        SetHiddenSpan();
+        ExpandGridAfterPost($("#Hshowgrid").val());
+        $('label[for="InfantGender_1"]').html("@Common.Male");
+        $('label[for="ClaimantGender_1"]').html("@Common.Male");
+
+
+        $.validator.addMethod("greaterThan", function (a, b, c) {
+            return "DD/MM/YYYY" == a || !pattern1.test(a) || /Invalid|NaN/.test(new Date(a.split("/")["1"] + "/" + a.split("/")["0"] + "/" + a.split("/")["2"])) ? isNaN(a.split("/")["1"] + "/" + a.split("/")["0"] + "/" + a.split("/")["2"]) || parseFloat(a.split("/")["1"] + "/" + a.split("/")["0"] + "/" + a.split("/")["2"]) < parseFloat() : new Date(a.split("/")["1"] + "/" + a.split("/")["0"] + "/" + a.split("/")["2"]) < new Date
+        }, "");
+        $.validator.unobtrusive.adapters.add("futuredate", {}, function (a) {
+            a.rules.greaterThan = !0;
+            a.messages.greaterThan = a.message
+        });
+
+        "@Model.WritNo" && "" != "@Model.WritNo" && $("#NODNOSSpan").show();
+
+        $("#WritNo").blur(function () {
+            "" != $("#WritNo").val() ? $("#NODNOSSpan").show() : $("#NODNOSSpan").hide();
+            "" == $("#WritNo").val() && $('span[data-valmsg-for="NODNOS"]').addClass("field-validation-valid");
+        });
+
+        $.validator.addMethod("nodNosCheck", function (a, b, c) {
+            return !($("#WritNo").val() != "" && $("#NODNOS").val() == "")
+        }, "");
+        $.validator.unobtrusive.adapters.add("nodnos", {}, function (a) {
+            a.rules.nodNosCheck = !0;
+            a.messages.nodNosCheck = a.message
+        });
+
+        $.validator.unobtrusive.adapters.add("isinformedinsurer", ["other"], function (a) { a.rules.informedinsurer = !0; a.messages.informedinsurer = a.message });
+        $.validator.addMethod("informedinsurer", function (a, b, c) { return ("3" != "@Model.ClaimType" || ("" != a && "DD/MM/YYYY" != a)); }, "");
+
+
+        $(document).on("focus", ":input", function () {
+            $(this).attr("autocomplete", "off")
+        });
+        DatepickerLen();
+        "@GetApprovedPaymentonClaimantCheck" != "0" && $("#ClaimantStatus option[value='3']").prop('disabled', 'disabled');
+        "@pagemode" != "Enq" && $("#ClaimantStatus option[value='4']").prop('disabled', 'disabled');
+        "@isreadonly" == "True" && $("#ClaimantStatus").removeClass('DonotDiableControl');
+
+        $("#ClaimType1,#Createddate,#CreatedBy,#ClaimRecordNo").prop("readonly", !0);
+        $("#RecordReopenedReason,#RecordCancellationReason").attr('readonly', 'readonly');
+        $("#ReopenedDate,#RecordCancellationDate").attr('readonly', 'readonly').datepicker("destroy");
+
+
+        for (var arr = ["l1", "l2", "l3", "l4"], i = 0, curr; curr = arr[i]; i++) $("#" + curr + "div").is(":visible") && $("#" + curr + "img").attr("src", '@Url.Content("~/Images/icon_minus.png")');
+        $("#ClaimantEmail").blur(function (b) {
+            var e = $.trim($(this).val());
+            $.ajax({
+                type: "POST",
+                url: '@Url.ActionEncoded("ValidEmail", "ClaimProcessing")',
+                data: {
+                    EmailAdd1: e
+                },
+                success: function (e) {
+                    1 == e && (alert("Please enter Email in proper format."), $("#ClaimantEmail").val(""), b.preventDefault())
+                }
+            });
+        });
+        $.culture = Globalize.culture("en-GB");
+        $.validator.methods.date = function (b, e) {
+            return this.optional(e) || Globalize.parseDate(b, "dd/MM/yyyy", "en-GB") || Globalize.parseDate(b, "yyyy-mm-dd")
+        };
+        $.validator.unobtrusive.adapters.add("notequalto", ["other"], function (b) {
+            b.rules.notEqualTo = "#" + b.params.other;
+            b.message && (b.messages.notEqualTo = b.message)
+        });
+        $.validator.addMethod("notEqualTo", function (b, e, g) {
+            return this.optional(e) || b != $(g).val()
+        }, "");
+
+        $("#Isclaimantaninfant_1").change(function () {
+            ClearForm("iftant1");
+            ClearForm("iftant2");
+            $("#Isclaimantaninfant_1").is(":checked") ? ($("#iftant1").show("slow"), $("#iftant2").show("slow"), $("#Isclaimantaninfant_2").prop("checked", !1)) : ($("#iftant1").hide("slow"), $("#iftant2").hide("slow"))
+        });
+        $("#Isclaimantaninfant_2").change(function () {
+            ClearForm("iftant1");
+            ClearForm("iftant2");
+            $("#Isclaimantaninfant_2").is(":checked") ? ($("#iftant1").hide("slow"), $("#iftant2").hide("slow"), $("#Isclaimantaninfant_1").prop("checked", !1)) : ($("#iftant1").show("slow"), $("#iftant2").show("slow"))
+        });
+        $("div.RadioButton").removeAttr("style");
+
+        $("table.ui-ebixgrid-btable span").click(function () {
+            var a = $(this).context.id;
+            $("#NewReserveEditor,#ODRequestEditor,#LOGRequestEditor,#divsave").css("display", "none");
+            $("#btnLog").text("Add New Log request");
+            $("table.ui-ebixgrid-btable span").each(function () {
+                $(this).hasClass("ui-icon-minus") && $(this).context.id != a && ($(this).addClass("ui-icon-plus").removeClass("ui-icon-minus"), $("#" + $(this).closest("tr").next("tr").attr("id")).hide())
+            });
+            $("#mainfieldset,#ctype,#DivNewClaimType").hide("slow");
+            $("#ClaimID").val("0");
+        });
+
+
+        $("#VehicleRegnNo").blur(function () {
+            "" != $("#VehicleRegnNo").val() && 8 < $("#VehicleRegnNo").val().length && (alert("Maximum lenmgth of Vehicle Number is 8"), $("#VehicleRegnNo").val(""), $("#VehicleRegnNo").focus())
+        });
+
+        $("#VehicleMake").blur(function () {
+            "" != $("#VehicleMake").val() && 150 < $("#VehicleMake").val().length && (alert("Maximum lenmgth of Vehicle Make is 150"), $("#VehicleMake").val(""), $("#VehicleMake").focus())
+        });
+
+        $("#VehicleModel").blur(function () {
+            "" != $("#VehicleModel").val() && 150 < $("#VehicleModel").val().length && (alert("Maximum lenmgth of Vehicle Model is 150"), $("#VehicleModel").val(""), $("#VehicleModel").focus())
+        });
+
+        $(".datepicker").datepicker({
+            dateFormat: "dd/mm/yy",
+            showStatus: true,
+            showWeeks: true,
+            currentText: 'Now',
+            autoSize: true,
+            gotoCurrent: true,
+            showAnim: 'blind',
+            highlightWeek: true,
+            changeMonth: !0,
+            changeYear: !0,
+            yearRange: "1951:2050",
+            onSelect: function () {
+                if ($(this).hasClass("chkdate")) {
+                    var myDate = '@accidentDate' == null || '@accidentDate' == '' ? $("#Hdate").val() : '@accidentDate';
+                    var chunks = myDate.split('/');
+                    var formattedDate = [chunks[1], chunks[0], chunks[2]].join("/");
+                    var dateMin = new Date(formattedDate);
+                    if ($(this).datepicker("getDate") != null) {
+                        if ($(this).datepicker("getDate") < dateMin) {
+                            alert("Cannot be earlier than Date of Accident!");
+                            var date = '@tbdate' == null || '@tbdate' == '' ? $("#Htbdate").val() : '@tbdate';
+                            var datesplit = date.split(' ');
+                            $('#TimeBarDate').val(datesplit[0]);
+
+                            $(this).context.id == "ClaimDate" ? $("#ClaimDate").val("") : $(this).context.id == "ReportSentToInsurer" ? $("#ReportSentToInsurer").val("") : $(this).context.id == "InformedInsurerOfSettlement" ? $("#InformedInsurerOfSettlement").val("") : $(this).context.id == "ExcessRecoveredDate" ? $("#ExcessRecoveredDate").val("") : $(this).context.id == "WritIssuedDate" ? $("#WritIssuedDate").val("") : $(this).context.id == "DateOfMpLetter" ? $("#DateOfMpLetter").val("") : $(this).context.id == "ReopenedDate" ? $("#ReopenedDate").val("") : $(this).context.id == "DateReferredToInsurersB" ? $("#DateReferredToInsurersB").val("") : $('#TimeBarDate').val(datesplit[0]);
+
+                        }
+                    }
+                }
+                $(this).valid()
+            }
+        });
+
+        $('#TimeBarDate,#ClaimDate,#ReportSentToInsurer,#InformedInsurerOfSettlement,#ExcessRecoveredDate,#WritIssuedDate,#DateOfMpLetter,#ReopenedDate,#DateReferredToInsurersB').focusout(function () {
+            if ($(this).hasClass("chkdate")) {
+                var myDate = '@accidentDate' == null || '@accidentDate' == '' ? $("#Hdate").val() : '@accidentDate';
+                var chunks = myDate.split('/');
+                var formattedDate = [chunks[1], chunks[0], chunks[2]].join("/");
+                var dateMin = new Date(formattedDate);
+                if ($(this).datepicker("getDate") != null) {
+                    if ($(this).datepicker("getDate") < dateMin) {
+                        alert("Cannot be earlier than Date of Accident!");
+                        var date = '@tbdate' == null || '@tbdate' == '' ? $("#Htbdate").val() : '@tbdate';
+                        var datesplit = date.split(' ');
+                        $('#TimeBarDate').val(datesplit[0]);
+
+                        $(this).context.id == "ClaimDate" ? $("#ClaimDate").val("") : $(this).context.id == "ReportSentToInsurer" ? $("#ReportSentToInsurer").val("") : $(this).context.id == "InformedInsurerOfSettlement" ? $("#InformedInsurerOfSettlement").val("") : $(this).context.id == "ExcessRecoveredDate" ? $("#ExcessRecoveredDate").val("") : $(this).context.id == "WritIssuedDate" ? $("#WritIssuedDate").val("") : $(this).context.id == "DateOfMpLetter" ? $("#DateOfMpLetter").val("") : $(this).context.id == "ReopenedDate" ? $("#ReopenedDate").val("") : $(this).context.id == "DateReferredToInsurersB" ? $("#DateReferredToInsurersB").val("") : $("#TimeBarDate").val(datesplit[0]);
+                    }
+                }
+            }
+        });
+
+
+        $("div.PDBI,fieldset.PDBI").hide("slow");
+
+        $("#ClaimantContactNo").blur(function (a) {
+            "" != $.trim($(this).val()) && MobileNumberLengthCheck("ClaimantContactNo", "Claimant’s Contact No should be in proper format.");
+        });
+
+        if (("@Model.ClaimType" != "0") && '@mMCASQueryString["Viewmode"]' == "AddNewClaim") {
+            $("h3#header").text("@Html.Raw(ClaimEditor.NewClaimEntry)");
+            $('#fieldsetmlegend,#t2').removeAttr("disabled");
+            $("#btnSave,#btnReset").removeAttr("disabled");
+            $("#btnSave,#btnReset").removeAttr("readonly");
+            var b = $("#ClaimType option:selected").val();
+            $("#ClaimRecordNo").val("@GetClaimNo");
+            $("#ClaimType1").val($("#ClaimType option:selected").text());
+            $("#mlegend").text(lname[b]());
+            0 == b ? $("#mainfieldset").hide("slow") : 1 == b ? ($("#mainfieldset").show("slow"), $("div,fieldset").each(function () {
+                $(this).hasClass("PDBI") && $(this).hide("slow")
+            })) : ($("#mainfieldset ").show("slow"), $("div,fieldset").each(function () {
+                $(this).hasClass("PDBI") && $(this).show("slow")
+            }));
+            var setdate;
+            if ("@Model.ClaimType" == "1" || "@Model.ClaimType" == "2") {
+                if ('@claimId' == '0') {
+                    var myDate = '@accidentDate';
+                    var chunks = myDate.split('/');
+                    var formattedDate = [chunks[1], chunks[0], chunks[2]].join("/");
+                    var dateMin = new Date(formattedDate);
+                    var rMax = new Date(dateMin.getFullYear() + parseInt(6), dateMin.getMonth(), dateMin.getDate());
+                    $('#TimeBarDate').val($.datepicker.formatDate('dd/mm/yy', new Date(rMax)));
+                    setdate = $('#TimeBarDate').val();
+                    $('#Htbdate').val(setdate);
+                }
+                else {
+                    $('#TimeBarDate').val('@tbdate');
+                    setdate = $('#TimeBarDate').val();
+                    $('#Htbdate').val(setdate);
+                }
+            }
+            else {
+                if ('@claimId' == '0') {
+                var myDate = '@accidentDate';
+                var chunks = myDate.split('/');
+                var formattedDate = [chunks[1], chunks[0], chunks[2]].join("/");
+                var dateMin = new Date(formattedDate);
+                var rMax = new Date(dateMin.getFullYear() + parseInt(3), dateMin.getMonth(), dateMin.getDate());
+                $('#TimeBarDate').val($.datepicker.formatDate('dd/mm/yy', new Date(rMax)));
+                setdate = $('#TimeBarDate').val();
+                $('#Htbdate').val(setdate);
+                }
+                else {
+                    $('#TimeBarDate').val('@tbdate');
+                    setdate = $('#TimeBarDate').val();
+                    $('#Htbdate').val(setdate);
+                }
+            }
+            $("#ClaimantStatus").val("@Model.ClaimantStatus");
+            $("#CreatedBy").val('@createby');
+            $("#Createddate").val('@createddate');
+
+        };
+
+        $("#ClaimType").change(function () {
+            claimTypeParam = $("#ClaimType").val();
+            if (claimTypeParam == "1") {
+                window.location.href = '@Url.ActionEncoded("ClaimEditor", "ClaimProcessing", new { PolicyId = mMCASQueryString["PolicyId"], AccidentClaimId = mMCASQueryString["AccidentClaimId"], claimMode = mMCASQueryString["claimMode"], mode = mMCASQueryString["mode"], Viewmode = mMCASQueryString["Viewmode"], ClaimType = "1" })';
+            }
+            else if (claimTypeParam == "2") {
+                window.location.href = '@Url.ActionEncoded("ClaimEditor", "ClaimProcessing", new { PolicyId = mMCASQueryString["PolicyId"], AccidentClaimId = mMCASQueryString["AccidentClaimId"], claimMode = mMCASQueryString["claimMode"], mode = mMCASQueryString["mode"], Viewmode = mMCASQueryString["Viewmode"], ClaimType = "2" })';
+            }
+            else {
+                window.location.href = '@Url.ActionEncoded("ClaimEditor", "ClaimProcessing", new { PolicyId = mMCASQueryString["PolicyId"], AccidentClaimId = mMCASQueryString["AccidentClaimId"], claimMode = mMCASQueryString["claimMode"], mode = mMCASQueryString["mode"], Viewmode = mMCASQueryString["Viewmode"], ClaimType = "3" })';
+            }
+
+        });
+
+        //Added by shikha for claimflow
+        (('@submenuval' != "209") && ("@Model.ClaimantStatus" == "2" || '@Model.ClaimantStatus' == '3')) && $ && !$('form').hasClass("DonotDiableControl") && $("form").find(":input:not([id=Next]):not([id=Previous]):not([id=btnDialogeOK]):not([id=btnSave]):not(.DonotDiableControl)").each(function () {
+            switch (this.type) {
+                case "text":
+                    $(this).attr('disabled', 'disabled')
+                case "textarea":
+                    $(this).attr('disabled', 'disabled')
+                case "checkbox":
+                    $(this).attr('disabled', 'disabled')
+                case "radio":
+                    $(this).attr('disabled', 'disabled')
+                case "button":
+                    $(this).attr('disabled', 'disabled')
+                case "file":
+                    $(this).attr('disabled', 'disabled')
+
+            }
+        }) && $('select:not(.DonotDiableControl)').attr('disabled', 'disabled') && $('button:not([id=btnDialogeOK]):not(.DonotDiableControl)').attr('disabled', 'disabled') && $('#btnReset').attr('disabled', 'disabled') && $("#DivClaimantStatus").attr('disabled', 'disabled') && $("#ClaimantStatus").css({ "pointer-events": "none", "cursor": "default" }).css('background-color', '#eee') && $("#RequiredVal").val("1");
+
+        $("#btnSave").click(function () {
+            if (IsPageChanged()) {
+                var c = $("#claimentryform").valid();
+                if (1 != c) return !1;
+                if ($("#ReferredToInsurersB").is(":checked") && "" == $("#DateReferredToInsurersB").val()) return alert("Date Referred To Insurers is Required!", "DateReferredToInsurersB"), !1;
+                if (2 == $("#ClaimantStatus").val() && !$("#DivClaimantStatus").attr("disabled")) {
+                    if ("" == $("#FinalSettleDate").val()) return alert("Final Settle Date is required!", "FinalSettleDate"), !1;
+                    CreateDialog("Do you wish to finalize this claim?", "Yes", "Cancel", OnConfirmTrue)
+                } else if (3 == $("#ClaimantStatus").val()) {
+                    if ("" == $("#RecordCancellationDate").val()) return alert("Record Cancellation Date is required!", "RecordCancellationDate"), !1;
+                    if ("" == $("#RecordCancellationReason").val()) return alert("Record Cancellation Reason is required!", "RecordCancellationReason"), !1;
+                    CreateDialog("Do you wish to cancel this claim?", "Yes", "Cancel", OnConfirmCancel)
+                } else if (4 == $("#ClaimantStatus").val()) {
+                    if ("" == $("#ReopenedDate").val()) return alert("Reopened Date is required!", "ReopenedDate"), !1;
+                    if ("" == $("#RecordReopenedReason").val()) return alert("Record Reopened Reason is required!", "RecordReopenedReason"), !1;
+                    CreateDialog("Do you wish to reopen this claim?", "Yes", "Cancel", OnConfirmReopen)
+                } else {
+                    FormatValue();
+                    GetDisabledValue();
+                    $("#ClaimType").val("@Model.ClaimType");
+                    $("#Hheader").val($("h3#header").text().toString().trim());
+                    $("#Hmlegend").val($("#mlegend").text().toString().trim());
+                    $("#ctype").is(":visible") ? $("#Hdrop").val("1") : $("#Hdrop").val("2");
+                    var b = $("#divAccdatetime").text().trim().substring(0, 10),
+                a = $("#FinalSettleDate").val(),
+                b = b.split("/"),
+                b = b[1] + "/" + b[0] + "/" + b[2],
+                a = a.split("/"),
+                a = a[1] + "/" + a[0] + "/" + a[2];
+                    if ("" != a && new Date(Date.parse(b)) > new Date(Date.parse(a)) && c) return alert("Final date must be bigger then accident date", this.id), !1;
+                    IsPageChanged() && c && $("#claimentryform").submit()
+                }
+            }
+        });
+
+        $("#ClaimantStatus").change(function () {
+            var id = this.value;
+            $("#RecordReopenedReason,#RecordCancellationReason").attr('readonly', 'readonly');
+            $("#ReopenedDate,#RecordCancellationDate").datepicker("destroy").attr('readonly', 'readonly').attr('disabled', 'disabled');
+            id == 2 ? $('#divFinalSettleDate').attr('style', 'Display:block') : ($("#FinalSettleDate").val(''), $('#divFinalSettleDate').attr('style', 'Display:none'));
+            if (id == 3) {
+                $('#l4div *').each(function () {
+                    $(this).removeAttr("disabled").removeAttr("readonly");
+                });
+                $("#l4div,#FieldSetRecordCanCreation").removeAttr("disabled").removeAttr("readonly");
+
+                0 == $('#spanReCanReason').length && $("#ReCanReason").append('<span id="spanReCanReason" class="text-danger">*</span>');
+                0 == $('#spanReCanDate').length && $("#ReCanDate").append('<span id="spanReCanDate" class="text-danger">*</span>');
+                $("#RecordCancellationDate").datepicker({
+                    dateFormat: "dd/mm/yy",
+                    showStatus: true,
+                    showWeeks: true,
+                    currentText: 'Now',
+                    autoSize: true,
+                    gotoCurrent: true,
+                    showAnim: 'blind',
+                    highlightWeek: true,
+                    changeMonth: !0,
+                    changeYear: !0,
+                    yearRange: "1951:2050",
+                    onSelect: function () {
+                        $(this).valid()
+                    }
+                });
+            }
+            if (id == 4) {
+                if ('@pagemode' == 'Enq') {
+                    $('#ReopenDiv *').each(function () {
+                        $(this).removeAttr("disabled").removeAttr("readonly");
+                    });
+                    $("#ReopenDiv,#FieldSetRecordCreation").removeAttr("disabled").removeAttr("readonly");
+                    $('#DivSave1 *').each(function () {
+                        $(this).removeAttr("disabled").removeAttr("readonly");
+                    });
+                    $("#DivSave1").removeAttr("disabled").removeAttr("readonly");
+                    0 == $('#spanReReason').length && $("#ReReason").append('<span id="spanReReason" class="text-danger">*</span>');
+                    0 == $('#spanReDate').length && $("#ReDate").append('<span id="spanReDate" class="text-danger">*</span>');
+
+                    $("#ReopenedDate").datepicker({
+                        dateFormat: "dd/mm/yy",
+                        showStatus: true,
+                        showWeeks: true,
+                        currentText: 'Now',
+                        autoSize: true,
+                        gotoCurrent: true,
+                        showAnim: 'blind',
+                        highlightWeek: true,
+                        changeMonth: !0,
+                        changeYear: !0,
+                        yearRange: "1951:2050",
+                        onSelect: function () {
+                            $(this).valid()
+                        }
+                    });
+                }
+                else {
+                    $("#RecordReopenedReason").attr('readonly', 'readonly');
+                    $("#ReopenedDate").datepicker("destroy").attr('readonly', 'readonly').attr('disabled', 'disabled');
+                    0 != $('#spanReReason').length && $("#spanReReason").remove();
+                    0 != $('#spanReDate').length && $("#spanReDate").remove();
+                }
+            }
+
+        });
+        $("body").delegate("#t2 legend", "click", function () {
+            $(this).hasClass("ExpCol") && ($(this).hasClass("ui-minusicon") ? $(this).addClass("ui-plusicon").removeClass("ui-minusicon") : $(this).addClass("ui-minusicon").removeClass("ui-plusicon"), $(this).next("div").toggle("slow"));
+
+        });
+
+        $("#ReferredToInsurersB").change(function () {
+            $(this).is(":checked") ? $("#DateReferredToInsurersBDiv").show() : $("#DateReferredToInsurersBDiv").hide()
+            $('#DateReferredToInsurersB').val("")
+        });
+
+        //updated by shikha for claimflow
+        $("#btnReset").click(function () { $('#ClaimantStatus').val() != 4 ? ClearForm("t2") : $('#ReopenedDate,#RecordReopenedReason').val("") });
+
+        '@Hheader1' != "1" && $("h3#header").text('@Hheader1');
+
+        '@Hmlegend1' != "1" && $("#mlegend").text('@Hmlegend1');
+
+
+        '@Hdrop1' == "2" && $("#ctype").hide();
+
+        if ("0" != "@Model.ClaimType") {
+            "3" != "@Model.ClaimType" && $("#InformedInsurerspan").css("display", "none");
+            $("#mainfieldset").show("slow");
+            "1" == "@Model.ClaimType" ? $("#mainfieldset div.PDBI,#mainfieldset fieldset.PDBI").hide("slow") : $("#mainfieldset div.PDBI,#mainfieldset fieldset.PDBI").show("slow");
+
+
+            var d = "@GetClaimType";
+            var b = '@mMCASQueryString["ClaimType"]' == null ? '0' : '@mMCASQueryString["ClaimType"]'
+            0 == b ? $("#mainfieldset").hide("slow") : 1 == b ? ($("#mainfieldset").show("slow"), $("div,fieldset").each(function () {
+                $(this).hasClass("PDBI") && $(this).hide("slow")
+            })) : ($("#mainfieldset ").show("slow"), $("div,fieldset").each(function () {
+                $(this).hasClass("PDBI") && $(this).show("slow")
+            }));
+
+            var setdate;
+            if ($("#ClaimType option:selected").text() == "Own Damage (OD)" || $("#ClaimType option:selected").text() == "Property Damage (TPPD)") {
+                if ('@claimId' == '0') {
+                    var myDate = '@accidentDate';
+                    var chunks = myDate.split('/');
+                    var formattedDate = [chunks[1], chunks[0], chunks[2]].join("/");
+                    var dateMin = new Date(formattedDate);
+                    var rMax = new Date(dateMin.getFullYear() + parseInt(6), dateMin.getMonth(), dateMin.getDate());
+                    $('#TimeBarDate').val($.datepicker.formatDate('dd/mm/yy', new Date(rMax)));
+                    setdate = $('#TimeBarDate').val();
+                    $('#Htbdate').val(setdate);
+                }
+                else {
+                    $('#TimeBarDate').val('@tbdate');
+                    setdate = $('#TimeBarDate').val();
+                    $('#Htbdate').val(setdate);
+                }
+            }
+            else {
+                if ('@claimId' == '0') {
+                    var myDate = '@accidentDate';
+                    var chunks = myDate.split('/');
+                    var formattedDate = [chunks[1], chunks[0], chunks[2]].join("/");
+                    var dateMin = new Date(formattedDate);
+                    var rMax = new Date(dateMin.getFullYear() + parseInt(3), dateMin.getMonth(), dateMin.getDate());
+                    $('#TimeBarDate').val($.datepicker.formatDate('dd/mm/yy', new Date(rMax)));
+                    setdate = $('#TimeBarDate').val();
+                    $('#Htbdate').val(setdate);
+                }
+                else {
+                    $('#TimeBarDate').val('@tbdate');
+                    setdate = $('#TimeBarDate').val();
+                    $('#Htbdate').val(setdate);
+                }
+            }
+            $("#ClaimantStatus").val("@Model.ClaimantStatus");
+            $("#CreatedBy").val('@createby');
+            $("#Createddate").val('@createddate');
+
+
+        };
+
+        "@HReferredToInsurersB" != "1" ? $("#DateReferredToInsurersBDiv").show() : $("#DateReferredToInsurersBDiv").hide();
+
+        if ('@mhead' != "") {
+            $("#mlegend").text('@mhead');
+            $("h3#header").text("@Html.Raw(ClaimEditor.ClaimEntry)");
+            $("#ctype").hide();
+        };
+        //Added by shikha for claimflow
+        if ("@pagemode" == "Enq" && "@Model.ClaimantStatus" == "2") {
+            $("#ClaimantStatus option[value='1']").prop('disabled', 'disabled');
+            $("#ClaimantStatus option[value='2']").prop('disabled', 'disabled');
+            $("#ClaimantStatus option[value='3']").prop('disabled', 'disabled');
+            $("#ClaimantStatus").prop('disabled', false);
+            $("#ClaimantStatus,#FinalSettleDate").removeAttr("readonly");
+        }
+        if ("@Model.ClaimantStatus" == "" || '@Model.ClaimantStatus' == null) {
+            $("#RecordReopenedReason").attr('readonly', 'readonly');
+            $("#ReopenedDate").attr('readonly', 'readonly').attr('disabled', 'disabled').datepicker("destroy");
+            $("#RecordCancellationReason").attr('readonly', 'readonly');
+            $("#RecordCancellationDate").datepicker("destroy").attr('readonly', 'readonly').attr('disabled', 'disabled');
+        }
+        if ('@Model.ClaimantStatus' == '1') {
+            $("#RecordReopenedReason").attr('readonly', 'readonly');
+            $("#ReopenedDate").attr('readonly', 'readonly').attr('disabled', 'disabled').datepicker("destroy");
+            $("#RecordCancellationReason").attr('readonly', 'readonly');
+            $("#RecordCancellationDate").datepicker("destroy").attr('readonly', 'readonly').attr('disabled', 'disabled');
+        }
+        if ("@Model.ClaimantStatus" == "3") {
+            $("#RecordCancellationReason").attr('readonly', 'readonly');
+            $("#RecordCancellationDate").datepicker("destroy").attr('readonly', 'readonly').attr('disabled', 'disabled');
+        }
+        else if ("@Model.ClaimantStatus" == "4") {
+            $("#RecordReopenedReason").attr('readonly', 'readonly');
+            $("#ReopenedDate").datepicker("destroy").attr('readonly', 'readonly').attr('disabled', 'disabled');
+
+        }
+
+        $.validator.unobtrusive.adapters.add("iscurrentdate", ["other"], function (a) { a.rules.hasCurrentDate = !0; a.messages.hasCurrentDate = a.message });
+
+        $.validator.addMethod("hasCurrentDate", function (value, element) {
+            //If false, the validation fails and the message below is displayed
+            var dateEntered = value;
+            var date = dateEntered.substring(0, 2);
+            var month = dateEntered.substring(3, 5);
+            var year = dateEntered.substring(6, 10);
+            var inputDate = new Date(year, month - 1, date);
+            var todaysDate = new Date();
+            return "1" == $("#RequiredVal").val() || null == value || "DD/MM/YYYY" == value || "" == value || !/^(?:(?:31(\/|-|\.)(?:0?[13578]|1[02]))\1|(?:(?:29|30)(\/|-|\.)(?:0?[1,3-9]|1[0-2])\2))(?:(?:1[6-9]|[2-9]\d)?\d{2})$|^(?:29(\/|-|\.)0?2\3(?:(?:(?:1[6-9]|[2-9]\d)?(?:0[48]|[2468][048]|[13579][26])|(?:(?:16|[2468][048]|[3579][26])00))))$|^(?:0?[1-9]|1\d|2[0-8])(\/|-|\.)(?:(?:0?[1-9])|(?:1[0-2]))\4(?:(?:1[6-9]|[2-9]\d)?\d{2})$/.test(value) ? true : inputDate.setHours(0, 0, 0, 0) == todaysDate.setHours(0, 0, 0, 0);
+        }, "");
+
+
+
+
+        $.validator.unobtrusive.adapters.add("onlycurrentdate", ["other"], function (a) { a.rules.hasonlyCurrentDate = !0; a.messages.hasonlyCurrentDate = a.message });
+
+        $.validator.addMethod("hasonlyCurrentDate", function (value, element) {
+            //If false, the validation fails and the message below is displayed
+            var dateEntered = value;
+            var date = dateEntered.substring(0, 2);
+            var month = dateEntered.substring(3, 5);
+            var year = dateEntered.substring(6, 10);
+            var inputDate = new Date(year, month - 1, date);
+            var todaysDate = new Date();
+            return null == value || "DD/MM/YYYY" == value || "" == value || !/^(?:(?:31(\/|-|\.)(?:0?[13578]|1[02]))\1|(?:(?:29|30)(\/|-|\.)(?:0?[1,3-9]|1[0-2])\2))(?:(?:1[6-9]|[2-9]\d)?\d{2})$|^(?:29(\/|-|\.)0?2\3(?:(?:(?:1[6-9]|[2-9]\d)?(?:0[48]|[2468][048]|[13579][26])|(?:(?:16|[2468][048]|[3579][26])00))))$|^(?:0?[1-9]|1\d|2[0-8])(\/|-|\.)(?:(?:0?[1-9])|(?:1[0-2]))\4(?:(?:1[6-9]|[2-9]\d)?\d{2})$/.test(value) ? true : inputDate.setHours(0, 0, 0, 0) == todaysDate.setHours(0, 0, 0, 0);
+        }, "");
+
+
+
+
+        if ('@ViewData["SuccessMsg"]' != "" && ('@ViewData["SuccessMsg"]').indexOf("successfully") > -1 && ("@Model.RequiredVal" != "1")) {
+            if ('@Model.ClaimantStatus' != '1') {
+                alert("Claim has been " + $("#ClaimantStatus option[value='@Model.ClaimantStatus']").text() + ".");
+            }
+            $("#btnDialogeOK").removeAttr("disabled");
+        }
+
+        if ('@pagemode' == 'Enq' && '@Model.ClaimantStatus' == '2') {
+            $("#ClaimantStatus option[value='1']").prop('disabled', 'disabled');
+            $("#ClaimantStatus option[value='2']").prop('disabled', 'disabled');
+            $("#ClaimantStatus option[value='3']").prop('disabled', 'disabled');
+            $("#ClaimantStatus").prop('disabled', false);
+            $("#ClaimantStatus,#FinalSettleDate").removeAttr("readonly");
+        }
+
+        // updated by shikha for claimflow
+        'Enq' == '@pagemode' && '2' != $("#ClaimantStatus").val() && $("#ClaimantStatus").attr('disabled', 'disabled');
+
+        var mp = "";
+        $('#MP  option:selected').each(function () {
+            if ($(this).attr("selected", "selected")) {
+                mp = "1";
+                return false;
+            }
+        });
+        ("1" != mp) && $("#MP  option[value='']").attr('selected', true);
+        var constituency = "";
+        $('#Constituency  option:selected').each(function () {
+            if ($(this).attr("selected", "selected")) {
+                constituency = "1";
+                return false;
+            }
+        });
+
+        ("1" != constituency) && $("#Constituency  option[value='']").attr('selected', true);
+
+        $("#btnReset1").click(function () {
+            var ClaimId = '@Model.ClaimID';
+            var accidentclaimId = '@Model.AccidentClaimId';
+            var policyId = '@Model.PolicyId';
+            var ClaimType = '@Model.ClaimType';
+            var a = parseInt(ClaimId);
+            var b = parseInt(accidentclaimId);
+            var c = parseInt(policyId);
+            var d = parseInt(ClaimType);
+            window.location.href = '@Url.Action("ClaimEditor", "ClaimProcessing")?ClaimId=' + a + '&AccidentClaimId=' + b + '&claimMode=Write' + '&policyId=' + c + '&ClaimType=' + d;
+        });
+
+        SetDivPost();
+
+    };
+    $(document).ready(do_on_load);
+    $(window).bind('page:change', do_on_load);
+
+    function OnConfirmTrue() {
+        var b = $("#claimentryform").valid();
+        $("#Hheader").val($("h3#header").text().toString().trim());
+        $("#Hmlegend").val($("#mlegend").text().toString().trim());
+        $("#ctype").is(":visible") ? $("#Hdrop").val("1") : $("#Hdrop").val("2");
+        var accdate = $('#divAccdatetime').text().trim().substring(0, 10);
+        var finalSettleDate = $('#FinalSettleDate').val();
+        var arr = accdate.split('/');
+        accdate = arr[1] + "/" + arr[0] + "/" + arr[2]
+        var arr1 = finalSettleDate.split('/');
+        finalSettleDate = arr1[1] + "/" + arr1[0] + "/" + arr1[2];
+        if (("" != finalSettleDate && (new Date(Date.parse(accdate)) > new Date(Date.parse(finalSettleDate)))) && b) return alert("Final date must be bigger then accident date", this.id), !1;
+        FormatValue();
+        GetDisabledValue();
+        IsPageChanged() && b && $("#claimentryform").submit();
+    }
+
+    function OnConfirmReopen() {
+        var b = $("#claimentryform").valid();
+        GetDisabledValue();
+        FormatValue();
+        $("#Hheader").val($("h3#header").text().toString().trim());
+        $("#Hmlegend").val($("#mlegend").text().toString().trim());
+        $("#ctype").is(":visible") ? $("#Hdrop").val("1") : $("#Hdrop").val("2");
+        var accdate = $('#divAccdatetime').text().trim().substring(0, 10);
+        var finalSettleDate = $('#FinalSettleDate').val();
+        var arr = accdate.split('/');
+        accdate = arr[1] + "/" + arr[0] + "/" + arr[2]
+        var arr1 = finalSettleDate.split('/');
+        finalSettleDate = arr1[1] + "/" + arr1[0] + "/" + arr1[2];
+        if (("" != finalSettleDate && (new Date(Date.parse(accdate)) > new Date(Date.parse(finalSettleDate)))) && b) return alert("Final date must be bigger then accident date", this.id), !1;
+        if (IsPageChanged() && b && $("#ReopenedDate").removeAttr("disabled").removeAttr("readonly")) {
+            setTimeout($("#claimentryform").submit(), 2000);
+        }
+    }
+    function InitializeDialog($element, a) {
+        $element.dialog({
+            width: "900",
+            resizable: false,
+            draggable: true,
+            show: { effect: 'drop', direction: "up" },
+            title: "Print",
+            model: true,
+            show: 'slide',
+            dialogClass: 'alert',
+            closeOnEscape: true,
+            open: function (event, ui) {
+                var path = '@Url.Content("~/ClaimMasters/PreviewDocumentIndex")' + "?ClaimID=" + a + "&AccidentClaimId=" + '@accidentClaimIdNew' + "&ScreenId=" + '@Model.screenId' + "&uid=" + guid();
+                $element.load(path);
+            },
+            position: {
+                my: "center",
+                at: "center",
+                of: window
+            },
+            close: function () {
+                $element.dialog('destroy').remove();
+                if ($("#HChildGrid").val() != "" && $("#" + $("#HChildGrid").val()).length) {
+                    try {
+                        $("#" + $("#HChildGrid").val()).remove()
+                        $('div[aria-describedby="' + $("#HChildGrid").val() + '"]').remove();
+                        $("#HChildGrid").val("");
+                    }
+                    catch (exx) {
+                    }
+                }
+            }
+
+        }).css('max-height', '500px').css('overflow-y', 'scroll');
+    };
+    function ExpandGridAfterPost(a) {
+        $("table.ui-ebixgrid-btable span").each(function () {
+            if ($(this).hasClass("ui-icon-minus") || $(this).hasClass("ui-icon-plus")) {
+                if (a.beginsWith($(this).context.id)) {
+                    var spanid = $(this).context.id, id = spanid.slice(5, spanid.length);
+                    $('#' + id).show();
+                    $('#' + spanid).removeClass('ui-icon-plus').addClass('ui-icon-minus');
+                }
+            }
+        });
+    };
+    function SetHiddenSpan() {
+        var AccidentClaimId = '@mMCASQueryString["AccidentClaimId"]', ClaimID = (null == '@mMCASQueryString["ClaimID"]') ? "@Model.ClaimID" : '@mMCASQueryString["ClaimID"]', ClaimType = '@mMCASQueryString["ClaimType"]';
+        $(".ui-ebixgrid-view > table > tbody > tr > td > a").each(function () {
+            $(this).attr("href") && $(this).attr("href").getstringinbetween("AccidentClaimId") == AccidentClaimId && $(this).attr("href").getstringinbetween("ClaimID") == ClaimID && $(this).attr("href").getstringinbetween("ClaimType") == ClaimType && $("#Hshowgrid").val("span_" + $(this).closest('tr')[0].id + "_s0");
+        });
+    }
+    function OnConfirmCancel() {
+        var b = $("#claimentryform").valid();
+        GetDisabledValue();
+        FormatValue();
+        $("#Hheader").val($("h3#header").text().toString().trim());
+        $("#Hmlegend").val($("#mlegend").text().toString().trim());
+        $("#ctype").is(":visible") ? $("#Hdrop").val("1") : $("#Hdrop").val("2");
+        //RetainMainGrid();
+        var accdate = $('#divAccdatetime').text().trim().substring(0, 10);
+        var finalSettleDate = $('#FinalSettleDate').val();
+        var arr = accdate.split('/');
+        accdate = arr[1] + "/" + arr[0] + "/" + arr[2]
+        var arr1 = finalSettleDate.split('/');
+        finalSettleDate = arr1[1] + "/" + arr1[0] + "/" + arr1[2];
+        if (("" != finalSettleDate && (new Date(Date.parse(accdate)) > new Date(Date.parse(finalSettleDate)))) && b) return alert("Final date must be bigger then accident date", this.id), !1;
+        if (IsPageChanged() && b) {
+            setTimeout($("#claimentryform").submit(), 2000);
+        }
+    };
+
+    function DatepickerLen() {
+        $("input[type=text]").each(function () {
+            $(this).hasClass("datepicker") && 10 < $(this).val().length && $(this).val($(this).val().substring(0, 10));
+
+            $(this).hasClass("datepicker") && $(this).is('[readonly]') && $(this).datepicker("destroy");
+
+
+            if (void 0 !== $(this).attr("data-val-date") && "The field " == $(this).attr("data-val-date").substring(0, 10)) {
+                var a = $(this).attr("data-val-date").substring(10, $(this).attr("data-val-date").length).replace("must be a date.", "must be in 'dd/mm/yyyy' format.");
+                $(this).removeAttr("data-val-date");
+                $(this).attr("data-val-date", a);
+            };
+        });
+        $("td.format").css("text-align", "right");
+    };
+
+    function getQueryVariable(a) {
+        for (var c = "@MenuListItem.ClaimTabs.GetQueryStringVal()".replace(/amp;/ig, "").split("&"), b = 0; b < c.length; b++) {
+            var d = c[b].split("=");
+            if (d[0] == a) return d[1]
+        }
+    };
+
+    //Added by Shikha
+    function GetDisabledValue() {
+        $('#claimentryform').find("*").removeProp("disabled");
+    };
+
+
+
+
+    function ClearForm(a) {
+        $("#error").hide();
+        $("#" + a).find(":input:not([id=CreatedBy]):not([id=ClaimType1]):not([id=Createddate]):not([id=ClaimRecordNo])").each(function () {
+            switch (this.type) {
+                case "text":
+                    $(this).val($(this).hasClass("format") ? "0.00" : "");
+                    break;
+                case "textarea":
+                    $(this).val("");
+                    break;
+                case "checkbox":
+                case "radio":
+                    this.checked = !1
+            }
+        });
+        $("#" + a).find("select").each(function () {
+            $(this).prop("selectedIndex", 0)
+        });
+        "t2" == a && $("#iftant1,#iftant2").hide();
+        $("span.field-validation-error").removeClass("field-validation-error").addClass("field-validation-valid")
+    };
+
+    function MobileNumberLengthCheck(ControlId, Msg) {
+        if ($.trim($("#" + ControlId).val()).length < 4 || $.trim($("#" + ControlId).val()).length > 15) {
+            alert(Msg, ControlId);
+            return false;
+        }
+    };
+    var guid = (function () {
+        function s4() {
+            return Math.floor((1 + Math.random()) * 0x10000).toString(16).substring(1);
+        }
+        return function () {
+            return s4() + s4() + '-' + s4() + '-' + s4() + '-' + s4() + '-' + s4() + s4() + s4();
+        };
+    })();
+
+
+    String.prototype.beginsWith = function (string) {
+        return (this.indexOf(string) === 0);
+    };
+    String.prototype.getstringinbetween = function (a) {
+        for (var e = this.split("&"), d = 0; d < e.length; d++) {
+            var b = e[d].split("=");
+            if (b[0] == a) return b[1]
+        };
+    };
+    $("body").delegate("a.btn.btn-xs.btn-info", "click", function () {
+        var sPageURL = $(this)[0].getAttribute("href");
+        if ('@isEncryptedParams' == "YES") {
+            $.ajax({
+                type: "POST",
+                url: '@Url.Action("GetEncryptedUrl", "ClaimProcessing")',
+                data: {
+                    Url: sPageURL
+                },
+                success: function (data) {
+                    window.location.href = data;
+                }
+            });
+        }
+        else {
+            window.location.href = sPageURL;
+        }
+    });
+    
+</script>

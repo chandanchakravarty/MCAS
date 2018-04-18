@@ -1,0 +1,462 @@
+﻿@using System;
+@using System.Globalization;
+@using MCAS.Web.Objects.Resources.ClaimProcessing;
+@using MCAS.Web.Objects.Resources.Common;
+@model MCAS.Web.Objects.ClaimObjectHelper.LogRequestModel
+@using MCAS.Globalisation
+@{
+    ViewBag.Title = "ClaimLogRequestNew";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var mMCASQueryString = Html.MCASQueryString(Request.QueryString);
+    var mandateID = mMCASQueryString["MandateId"].ToString();
+    var caller = "";
+    var accidentClaimIdNew = TempData["AccidentClaimId"] == null ? 0 : Convert.ToInt32(TempData["AccidentClaimId"].ToString());
+    if (accidentClaimIdNew == 0)
+    {
+        accidentClaimIdNew = Convert.ToInt32(mMCASQueryString["AccidentClaimId"]);
+    }
+    var Log_Id = TempData["LogId"] == null ? 0 : Convert.ToInt32(TempData["LogId"].ToString());
+    if (Log_Id == 0)
+    {
+        Log_Id = Convert.ToInt32(mMCASQueryString["LogId"]);
+    }
+    var Claim_ID = TempData["ClaimID"] == null ? 0 : Convert.ToInt32(TempData["ClaimID"].ToString());
+    if (Claim_ID == 0)
+    {
+        Claim_ID = mMCASQueryString["Claim_ID"] != null ? Convert.ToInt32(mMCASQueryString["Claim_ID"]) : Convert.ToInt32(Model.ClaimID.ToString());
+    }
+
+     caller = mMCASQueryString["claimMode"] != null ? mMCASQueryString["claimMode"].ToString() : "Read";
+    var SubMenu = "";
+    var voidScueess = "";
+
+    if (@caller == "Recovery")
+    {
+        SubMenu = "Claims Recovery Processing";
+    }
+    var mode = mMCASQueryString["Mode"] == null ? "" : mMCASQueryString["Mode"];
+
+    if (mode == "")
+    {
+        voidScueess = TempData["mode"].ToString();
+    }
+    @Html.Hidden("oldgroup", 1)
+    var isPrint = "none";
+    var IsVoid = "";
+    var isDisable = "";
+    var isSave = "";
+    var isValid = Model.IsVoid;
+    var isLogRefNo = Model.LogRefNo;
+    var logId = Log_Id.ToString();
+    if ((logId != "0" || logId != null) && (isValid == false))
+    {
+        if (mode == null)
+        {
+            mode = TempData["mode"].ToString();
+        }
+        if (mode == "Edit")
+        {
+            IsVoid = "none";
+            isSave = "block";
+            isPrint = isLogRefNo != null ? "block" : "block";
+        }
+        else
+        {
+            if (mode == "")
+            {
+                if (voidScueess != null && voidScueess == "V")
+                {
+                    IsVoid = "block";
+                    isSave = "none";
+                    isPrint = "none";
+                }
+                else
+                {
+                    IsVoid = "none";
+                    isSave = "block";
+                    isPrint = "block";
+                }
+            }
+            else
+            {
+                IsVoid = "block";
+                isSave = "none";
+                isPrint = "none";
+            }
+
+        }
+    }
+    else
+    {
+        IsVoid = "none";
+
+    }
+    if (isValid == true)
+    {
+        isDisable = "Y";
+        isSave = "none";
+    }
+
+}
+<style>
+    .form-horizontal .control-label
+    {
+        text-align: left;
+    }
+    td
+    {
+        word-break: break-all;
+    }
+    input[type=text], textarea
+    {
+        text-transform: capitalize;
+    }
+    .ui-dialog-buttonset
+    {
+        margin-right: 40%;
+    }
+</style>
+<script src="@Url.Content("~/Scripts/jquery-2.1.0.min.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/Scripts/jquery.validate.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.min.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/Scripts/globalize/globalize.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/Scripts/globalize/cultures/globalize.culture.en-GB.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/Scripts/jquery-ui-v1.10.3.js")" type="text/javascript"></script>
+<script type="text/javascript">
+    $(function () {
+    PageModel = @(Html.Raw(Json.Encode(Model)));
+});
+</script>
+<div class="dashboard-wrapper">
+    <div class="container" id="reg3">
+        <div class="row page-title" id="reg">
+            <div class="row page-title" id="reg">
+                <div class="col-lg-12" id="reg2" style="background-color: white;">
+                    <h2>
+                        @ClaimLogRequest.LOGRequest</h2>
+                    <ul class="breadcrumb">
+                        <li>@ClaimLogRequest.NewLOGProcessing</li>
+                        <li>@ClaimLogRequest.LOGRequest</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <hr />
+        <div id="testdiv">
+        </div>
+        <div id="toprow">
+            <div class="row">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <div class="panel panel-secondary">
+                        <div class="panel-heading">
+                            @{
+                                if (@caller == "Recovery")
+                                { <h3 class="panel-title">
+                                    <i class="icon-keyboard"></i>@ClaimLogRequest.ClaimLogProcessing</h3> }
+                                else
+                                { <h3 class="panel-title">
+                                    <i class="icon-keyboard"></i>@ClaimLogRequest.NewLOGRequest</h3> }
+                            }
+                        </div>
+                        @using (Html.BeginForm("ClaimLogRequestNew", "ClaimRecoveryProcessing", new { LogId = Log_Id, ClaimID = Claim_ID, AccidentClaimId = @accidentClaimIdNew, @MandateId = mandateID, Mode = mode }, FormMethod.Post, new { role = "form", @class = "form-horizontal", id = "ClaimLogRequestNewform", name = "ClaimLogRequestNewform" }))
+                        {
+
+                            @Html.HiddenFor(m => m.Prop1);
+                            @Html.HiddenFor(m => m.HChildGrid)                                      
+                            <div style="color: Red; font-weight: bold;" class="has-error" id="error">
+                                <p align="center" id="SuccessMessage">
+                                    @if (@TempData["SuccessMsg"] != null)
+                                    {
+                                        @TempData["SuccessMsg"]
+                                    }
+                                </p>
+                            </div>
+                            <div class="panel-body">
+                                <div class="row">
+                                    <div class="col-lg-12">
+                                        <div class="col-lg-6">
+                                            <div class="form-group">
+                                                <label class="col-sm-4 control-label" for="inputAssignTo">
+                                                    @ClaimLogRequest.ClaimNo.
+                                                </label>
+                                                <div class="col-sm-8 control-label">
+                                                    @Model.ClaimNo
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <div class="form-group">
+                                                <label class="col-sm-4 control-label" for="inputHospitalName">
+                                                    @ClaimLogRequest.SubClaimNo.
+                                                </label>
+                                                <div class="col-sm-8 control-label">
+                                                    @Model.SubClaimNo
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-12">
+                                        <div class="col-lg-6">
+                                            <div class="form-group">
+                                                <label class="col-sm-4 control-label" for="inputLOGDate">
+                                                    @ClaimLogRequest.LOGRefNo.
+                                                </label>
+                                                <div class="col-sm-8 control-label">
+                                                    @Model.LogRefNo
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="panel-body" id="LOGRequestEditor" style="display: block;">
+                                @Html.HiddenFor(m => m.LogId)
+                                @Html.HiddenFor(m => m.ClaimID)
+                                @Html.HiddenFor(m => m.LogRefNo)
+                                @Html.HiddenFor(m => m.VoidStatus)
+                                <fieldset>
+                                    <legend>@ClaimLogRequest.LOGRequestDetails</legend>
+                                    <div id="Logdiv" class="row">
+                                        <div class="col-lg-12">
+                                            <div class="col-lg-6">
+                                                <div class="form-group">
+                                                    <label class="col-sm-4 control-label" for="inputAssignTo">
+                                                        @ClaimLogRequest.ClaimantNameId
+                                                    </label>
+                                                    <div class="col-sm-8">
+                                                        @Html.DropDownListFor(m => m.ClaimantNameId, new SelectList(Model.SelectListClamiantName, "intID", "Text", "[Select...]"), new { @class = "form-control" })
+                                                        @Html.ValidationMessageFor(m => m.ClaimantNameId)
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-6">
+                                                <div class="form-group">
+                                                    <label class="col-sm-4 control-label" for="inputHospitalName">
+                                                        @ClaimLogRequest.Hospital_Id&nbsp;<span class="text-danger">*</span>
+                                                    </label>
+                                                    <div class="col-sm-8">
+                                                        @Html.DropDownListFor(m => m.Hospital_Id, new SelectList(Model.HopitalNameIdList, "intID", "Text", "[Select...]"), new { @class = "form-control" })
+                                                        @Html.ValidationMessageFor(m => m.Hospital_Id)
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-12">
+                                            <div class="col-lg-6">
+                                                <div class="form-group">
+                                                    <label class="col-sm-4 control-label" for="inputLOGAmt">
+                                                        @ClaimLogRequest.LOGAmount&nbsp;<span class="text-danger">*</span>
+                                                    </label>
+                                                    <div class="col-sm-8">
+                                                        @Html.TextBoxFor(m => m.LOGAmount, new { @maxlength = "14", @class = "form-control format Number NegativeAllow" })
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-6">
+                                                <div class="form-group">
+                                                    <label class="col-sm-4 control-label" for="inputLOGDate">
+                                                        @ClaimLogRequest.LOGDate&nbsp;<span class="text-danger">*</span>
+                                                    </label>
+                                                    <div class="col-sm-8">
+                                                        @Html.TextBoxFor(m => m.LOGDate, "{0:d}", new { @class = "form-control validateDateFormare" })
+                                                        @Html.ValidationMessageFor(m => m.LOGDate)
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-12">
+                                            <div class="col-lg-6">
+                                                <div class="form-group">
+                                                    <label class="col-sm-4 control-label" for="inputCORemarks">
+                                                        @ClaimLogRequest.CORemarks
+                                                    </label>
+                                                    <div class="col-sm-8">
+                                                        @Html.TextAreaFor(m => m.CORemarks, new { @maxlength = "500", @class = "form-control", @rows = "2" })
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </fieldset>
+                                <div style="width: 100%">
+                                    <div style="margin: 0 auto; text-align: center;">
+                                        <button class="btn btn-info" type="submit" id="btnSave">
+                                            @Common.Save</button>
+                                        <button class="btn btn-info" type="submit" id="IsVoid">
+                                            @ClaimLogRequest.Void</button>
+                                        <a class="Print btn btn-info " id="Print"  url='@Url.ActionEncoded("ClaimLogRequestNew", "ClaimRecoveryProcessing", new { AccidentClaimId = @accidentClaimIdNew, ClaimID = Claim_ID, MandateId = mandateID, LogId = Log_Id, Mode = mode })' href="#" >@ClaimLogRequest.Print</a>
+                                        @Html.EncodedActionLink(Common.Back, "ClaimLogRequest", "ClaimRecoveryProcessing", "", new { @class = "btn btn-info", @id = "Back" })</div>
+                                </div>
+                                <div class="panel">
+                                    <fieldset class="col-lg-12">
+                                        <legend></legend>
+                                        <div class="row">
+                                            <div class="">
+                                                @Html.Partial("~/Views/Shared/_TimeStamp.cshtml", Model)
+                                            </div>
+                                        </div>
+                                    </fieldset>
+                                </div>
+                            </div> 
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    $("#Print").click(function () {
+        $("div.PreviewDocumentClass").length && $("div.PreviewDocumentClass").remove();
+        var a = guid(), b = "#" + a;
+        $('<div class="PreviewDocumentClass"  id="' + a + '" title="Print" style="overflow: hidden;"><div class="Printloading"><p>Please wait...<br><img src="@Url.Content("~/Images/ajax-loader.gif")" alt="Loading.."></p></div></div>').appendTo(".PrintDialogue");
+        InitializeDialogLog($(b), '@Claim_ID');
+        $(b).dialog("open");
+        return !1
+    });
+    $(document).on("focus", ":input", function () { $(this).attr("autocomplete", "off") });
+    $(".datepicker").datepicker({ dateFormat: "dd/mm/yy", showStatus: !0, showWeeks: !0, currentText: "Now", autoSize: !0, gotoCurrent: !0, showAnim: "blind", highlightWeek: !0, changeMonth: !0, changeYear: !0, yearRange: "1951:2050", onSelect: function () { $(this).valid() } });
+    $('#LOGAmount').attr('disabled', 'disabled');
+    //    $('#ClaimantNameId').attr('disabled', 'disabled');
+    $('#LOGDate').removeAttr('data-val-date');
+
+    $("#ClaimantNameId option[value!='@Claim_ID']").remove();
+    $("#ClaimantNameId").css({ "pointer-events": "none", "cursor": "default" }).css('background-color', '#eee');
+    if ('@isDisable' == 'Y') {
+        $('#CORemarks').attr('disabled', 'disabled');
+        $('#LOGDate').attr('disabled', 'disabled');
+        $('#Hospital_Id').attr('disabled', 'disabled');
+        $('#ClaimantNameId').attr('disabled', 'disabled');
+    }
+    if ('@mode' == "Edit") {
+    }
+    else {
+    }
+    $("#LOGDate").datepicker({
+        dateFormat: "dd/mm/yy",
+        showStatus: !0,
+        showWeeks: !0,
+        currentText: "Now",
+        autoSize: !0,
+        gotoCurrent: !0,
+        showAnim: "blind",
+        highlightWeek: !0,
+        changeMonth: !0,
+        changeYear: !0,
+        yearRange: "1951:2050",
+        onSelect: function (a) {
+            $(this).valid()
+        }
+    });
+    if ("" != $("#LOGDate").val()) {
+        var c = $("#LOGDate").val().split(" ");
+        $("#LOGDate").val(c[0])
+    }
+    $("#IsVoid").click(function () {
+        $("#VoidStatus").val('1');
+    });
+    function showclaimDocument(url) {
+        window.open(url, "ClaimDocumentWindow", "scrollbars=no, resizable=yes,top=100, left=200, width=770,height=350,toolbar=no");
+
+    };
+    $(".validateDateFormare").blur(function (event) {
+        if ($(this).val() != "" && $(this).val() != 'DD/MM/YYYY') {
+            var errMessage = "";
+            var dob = $(this).val();
+            var pattern = /^(?:(?:31(\/|-|\.)(?:0?[13578]|1[02]))\1|(?:(?:29|30)(\/|-|\.)(?:0?[1,3-9]|1[0-2])\2))(?:(?:1[6-9]|[2-9]\d)?\d{2})$|^(?:29(\/|-|\.)0?2\3(?:(?:(?:1[6-9]|[2-9]\d)?(?:0[48]|[2468][048]|[13579][26])|(?:(?:16|[2468][048]|[3579][26])00))))$|^(?:0?[1-9]|1\d|2[0-8])(\/|-|\.)(?:(?:0?[1-9])|(?:1[0-2]))\4(?:(?:1[6-9]|[2-9]\d)?\d{2})$/;
+            if (!pattern.test(dob)) {
+                errMessage += "Date must be in 'dd/mm/yyyy' format.\n";
+                alert(errMessage);
+                $(this).val("");
+                event.preventDefault();
+                return false;
+            }
+        }
+    });
+    if ("@isSave" == "block" || "@isSave" == "") {
+        $("#btnSave").show();
+    }
+    else {
+        $("#btnSave").hide();
+    }
+    if ("@IsVoid" == "block") {
+        $("#IsVoid").show();
+    }
+    else {
+        $("#IsVoid").hide();
+    }
+    if ("@isPrint" == "block") {
+        $("#Print").show();
+    }
+    else {
+        $("#Print").hide();
+    }
+    $("#btnSave").click(function () {
+        if ($("#Hospital_Id").val() == '0') {
+            if (IsPageChanged()) {
+                alert('Hospital Name is required.');
+                return false;
+            }
+        }
+    });
+    var hospital_Id = "";
+    $('#Hospital_Id option:selected').each(function () {
+        if ($(this).attr("selected", "selected")) {
+            hospital_Id = "1";
+            return false;
+        }
+    });
+    if (hospital_Id != "1") {
+        $("#Hospital_Id option[value='0']").attr('selected', true);
+
+    }
+    function InitializeDialogLog($element, a) {
+        $element.dialog({
+            width: "900",
+            resizable: false,
+            draggable: true,
+            show: { effect: 'drop', direction: "up" },
+            title: "Print",
+            model: true,
+            show: 'slide',
+            dialogClass: 'alert',
+            closeOnEscape: true,
+            open: function (event, ui) {
+                var path = '@Url.Content("~/ClaimMasters/PreviewDocumentIndex")' + "?ClaimID=" + a + "&AccidentClaimId=" + '@accidentClaimIdNew' + "&ScreenId=" + '@Model.screenId' + "&SId=" + '@Log_Id' + "&uid=" + guid();
+                $element.load(path);
+            },
+            position: {
+                my: "center",
+                at: "center",
+                of: window
+            },
+            close: function () {
+                $element.dialog('destroy').remove();
+                if ($("#HChildGrid").val() != "" && $("#" + $("#HChildGrid").val()).length) {
+                    try {
+                        $("#" + $("#HChildGrid").val()).remove()
+                        $('div[aria-describedby="' + $("#HChildGrid").val() + '"]').remove();
+                        $("#HChildGrid").val("");
+                    }
+                    catch (exx) {
+                    }
+                }
+            }
+
+        }).css('max-height', '500px').css('overflow-y', 'scroll');
+    };
+    function showChildGrid(id, spanid) {
+        $('#' + id).slideToggle();
+        if ($('#' + spanid).hasClass('ui-icon-plus'))
+            $('#' + spanid).removeClass('ui-icon-plus').addClass('ui-icon-minus');
+        else
+            $('#' + spanid).removeClass('ui-icon-minus').addClass('ui-icon-plus');
+        hideLoading();
+    }
+    String.prototype.getstringinbetween = function (a) {
+        for (var e = this.split("&"), d = 0; d < e.length; d++) {
+            var b = e[d].split("=");
+            if (b[0] == a) return b[1]
+        };
+    };
+</script>

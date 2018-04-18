@@ -1,0 +1,857 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<quickQuote>
+	<basicpolicy>
+		<PolicyTerm>
+			<Term Code="12">1 Year</Term>
+			<Term Code="6">6 Months</Term>
+		</PolicyTerm>
+		<IsLocation>
+			<Location Code="PRI">Primary</Location>
+			<Location Code="SEC">Secondary</Location>
+			<Location Code="SEA">Seasonal</Location>
+		</IsLocation>
+		<policyType STATE="INDIANA">
+			<type Code="HO-2^REPAIR" Desc="HO-2 Repair Cost">Repair</type>
+			<type Code="HO-2^REPLACE" Desc="HO-2">Replacement</type>
+			<type Code="HO-3^REPAIR" Desc="HO-3 Repair Cost">Repair</type>
+			<type Code="HO-3^REPLACE" Desc="HO-3">Replacement</type>
+			<type Code="HO-4^TENANT" Desc="HO-4">Tenants</type>
+			<type Code="HO-5^REPLACE" Desc="HO-5">Replacement</type>
+			<type Code="HO-6^UNIT" Desc="HO-6">Unit Owners</type>
+		</policyType>
+		<policyType STATE="MICHIGAN">
+			<type Code="HO-2^REPAIR" Desc="HO-2 Repair Cost">Repair</type>
+			<type Code="HO-2^REPLACE" Desc="HO-2">Replacement</type>
+			<type Code="HO-3^PREMIER" Desc="HO-3 Premier">Premier</type>
+			<type Code="HO-3^REPAIR" Desc="HO-3 Repair Cost">Repair</type>
+			<type Code="HO-3^REPLACE" Desc="HO-3">Replacement</type>
+			<type Code="HO-4^TENANT" Desc="HO-4">Tenants</type>
+			<type Code="HO-5^PREMIER" Desc="HO-5 Premier">Premier</type>
+			<type Code="HO-5^REPLACE" Desc="HO-5">Replacement</type>
+			<type Code="HO-6^UNIT" Desc="HO-6">Unit Owners</type>
+		</policyType>
+		<fireProtectionClass>
+			<class>01</class>
+			<class>02</class>
+			<class>03</class>
+			<class>04</class>
+			<class>05</class>
+			<class>06</class>
+			<class>07</class>
+			<class>08</class>
+			<class>8B</class>
+			<class>09</class>
+			<class>10</class>
+		</fireProtectionClass>
+		<HydrantDist>
+			<Dist>1000 or less</Dist>
+			<Dist>Over 1000</Dist>
+		</HydrantDist>
+		<COV_A_LIMIT_RULE>
+			<NODE NAME="COVERAGE_A_LIMIT" DATE_START="01/01/2000" END="10/14/2008" STATE="INDIANA" >
+					<ATTRIBUTES PRODUCTNAME="HO-3" POLICYTYPE="REPLACE"   MINIMUM_LIMIT="50000" />
+					<ATTRIBUTES PRODUCTNAME="HO-5" POLICYTYPE="REPLACE"   MINIMUM_LIMIT="125000"/>
+					<ATTRIBUTES PRODUCTNAME="HO-2" POLICYTYPE="REPLACE"   MINIMUM_LIMIT="50000" />
+					<ATTRIBUTES PRODUCTNAME="HO-2" POLICYTYPE="REPAIR"    MINIMUM_LIMIT="50000" />
+					<ATTRIBUTES PRODUCTNAME="HO-3" POLICYTYPE="REPAIR"    MINIMUM_LIMIT="50000" />
+					<ATTRIBUTES PRODUCTNAME="HO-4" POLICYTYPE="TENANT"    MINIMUM_LIMIT="10000" />
+					<ATTRIBUTES PRODUCTNAME="HO-6" POLICYTYPE="UNIT"      MINIMUM_LIMIT="15000" />
+			</NODE>
+			<NODE NAME="COVERAGE_A_LIMIT" DATE_START="10/15/2008" END="12/31/9999" STATE="INDIANA" >
+					<ATTRIBUTES PRODUCTNAME="HO-3" POLICYTYPE="REPLACE"   MINIMUM_LIMIT="50000" />
+					<ATTRIBUTES PRODUCTNAME="HO-5" POLICYTYPE="REPLACE"   MINIMUM_LIMIT="200000"/>
+					<ATTRIBUTES PRODUCTNAME="HO-2" POLICYTYPE="REPLACE"   MINIMUM_LIMIT="50000" />
+					<ATTRIBUTES PRODUCTNAME="HO-2" POLICYTYPE="REPAIR"    MINIMUM_LIMIT="50000" />
+					<ATTRIBUTES PRODUCTNAME="HO-3" POLICYTYPE="REPAIR"    MINIMUM_LIMIT="50000" />
+					<ATTRIBUTES PRODUCTNAME="HO-4" POLICYTYPE="TENANT"    MINIMUM_LIMIT="10000" />
+					<ATTRIBUTES PRODUCTNAME="HO-6" POLICYTYPE="UNIT"      MINIMUM_LIMIT="15000" />
+			</NODE>
+			<NODE NAME="COVERAGE_A_LIMIT"  DATE_START="01/01/2000" END="01/31/2009" STATE="MICHIGAN">
+				<ATTRIBUTES PRODUCTNAME="HO-3" POLICYTYPE="REPLACE"   MINIMUM_LIMIT="50000" />
+				<ATTRIBUTES PRODUCTNAME="HO-5" POLICYTYPE="REPLACE"   MINIMUM_LIMIT="125000"/>
+				<ATTRIBUTES PRODUCTNAME="HO-2" POLICYTYPE="REPLACE"   MINIMUM_LIMIT="35000" />
+				<ATTRIBUTES PRODUCTNAME="HO-2" POLICYTYPE="REPAIR"    MINIMUM_LIMIT="15000" />
+				<ATTRIBUTES PRODUCTNAME="HO-3" POLICYTYPE="REPAIR"    MINIMUM_LIMIT="50000" />
+				<ATTRIBUTES PRODUCTNAME="HO-4" POLICYTYPE="TENANT"    MINIMUM_LIMIT="10000" />
+				<ATTRIBUTES PRODUCTNAME="HO-6" POLICYTYPE="UNIT"      MINIMUM_LIMIT="15000" />
+				<ATTRIBUTES PRODUCTNAME="HO-3" POLICYTYPE="PREMIER"   MINIMUM_LIMIT="175000" />
+				<ATTRIBUTES PRODUCTNAME="HO-5" POLICYTYPE="PREMIER"   MINIMUM_LIMIT="175000" />
+			</NODE>
+			<NODE NAME="COVERAGE_A_LIMIT" DATE_START="02/01/2009" END="12/31/9999" STATE="MICHIGAN">
+				<ATTRIBUTES PRODUCTNAME="HO-3" POLICYTYPE="REPLACE"   MINIMUM_LIMIT="50000" />
+				<ATTRIBUTES PRODUCTNAME="HO-5" POLICYTYPE="REPLACE"   MINIMUM_LIMIT="200000"/>
+				<ATTRIBUTES PRODUCTNAME="HO-2" POLICYTYPE="REPLACE"   MINIMUM_LIMIT="35000" />
+				<ATTRIBUTES PRODUCTNAME="HO-2" POLICYTYPE="REPAIR"    MINIMUM_LIMIT="15000" />
+				<ATTRIBUTES PRODUCTNAME="HO-3" POLICYTYPE="REPAIR"    MINIMUM_LIMIT="50000" />
+				<ATTRIBUTES PRODUCTNAME="HO-4" POLICYTYPE="TENANT"    MINIMUM_LIMIT="10000" />
+				<ATTRIBUTES PRODUCTNAME="HO-6" POLICYTYPE="UNIT"      MINIMUM_LIMIT="15000" />
+				<ATTRIBUTES PRODUCTNAME="HO-3" POLICYTYPE="PREMIER"   MINIMUM_LIMIT="175000" />
+				<ATTRIBUTES PRODUCTNAME="HO-5" POLICYTYPE="PREMIER"   MINIMUM_LIMIT="200000" />
+			</NODE>
+		</COV_A_LIMIT_RULE>
+		<!--State Check-->
+		<Deductibles Code="1" STATE="INDIANA">
+			<DATE START="01/01/2006" END="01/01/9999">
+				<Deductible>500</Deductible>
+				<Deductible>750</Deductible>
+				<Deductible>1000</Deductible>
+				<Deductible>2500</Deductible>
+				<Deductible>5000</Deductible>
+			</DATE>
+			<DATE START="01/01/1900" END="12/31/2004">
+				<Deductible>100</Deductible>
+				<Deductible>150</Deductible>
+				<Deductible>250</Deductible>
+				<Deductible>500</Deductible>
+				<Deductible>750</Deductible>
+				<Deductible>1000</Deductible>
+				<Deductible>2500</Deductible>
+			</DATE>
+			<DATE START="01/01/2005" END="01/01/2006">
+				<Deductible>500</Deductible>
+				<Deductible>750</Deductible>
+				<Deductible>1000</Deductible>
+				<Deductible>2500</Deductible>
+			</DATE>
+		</Deductibles>
+		<Deductibles Code="1" STATE="MICHIGAN">
+			<DATE START="01/01/2006" END="01/01/9999">
+				<Deductible>500</Deductible>
+				<Deductible>750</Deductible>
+				<Deductible>1000</Deductible>
+				<Deductible>2500</Deductible>
+				<Deductible>5000</Deductible>
+			</DATE>
+			<DATE START="01/01/1900" END="12/31/2004">
+				<Deductible>100</Deductible>
+				<Deductible>150</Deductible>
+				<Deductible>250</Deductible>
+				<Deductible>500</Deductible>
+				<Deductible>750</Deductible>
+				<Deductible>1000</Deductible>
+				<Deductible>2500</Deductible>
+			</DATE>
+			<DATE START="01/01/2005" END="01/01/2006">
+				<Deductible>500</Deductible>
+				<Deductible>750</Deductible>
+				<Deductible>1000</Deductible>
+				<Deductible>2500</Deductible>
+			</DATE>
+		</Deductibles>
+		<!--END State Check-->
+		<Deductibles Code="2">
+			<Deductible>250</Deductible>
+			<Deductible>500</Deductible>
+			<Deductible>1000</Deductible>
+			<Deductible>2500</Deductible>
+		</Deductibles>
+		<Deductibles Code="3">
+			<Deductible>250</Deductible>
+			<Deductible>500</Deductible>
+			<Deductible>750</Deductible>
+			<Deductible>1000</Deductible>
+			<Deductible>2500</Deductible>
+		</Deductibles>
+		<Deductibles Code="4">
+			<Deductible>100</Deductible>
+			<Deductible>150</Deductible>
+			<Deductible>250</Deductible>
+			<Deductible>500</Deductible>
+			<Deductible>1000</Deductible>
+			<Deductible>2500</Deductible>
+		</Deductibles>
+		<Deductibles Code="5">
+			<Deductible>100</Deductible>
+			<Deductible>150</Deductible>
+			<Deductible>250</Deductible>
+			<Deductible>500</Deductible>
+			<Deductible>750</Deductible>
+			<Deductible>1000</Deductible>
+			<Deductible>2500</Deductible>
+		</Deductibles>
+		<Deductibles Code="6">
+			<Deductible>500</Deductible>
+			<Deductible>1000</Deductible>
+			<Deductible>2500</Deductible>
+		</Deductibles>
+		<HO455_LIMITS STATE="INDIANA">
+			<DATE START="01/01/1950" END="10/14/2008">
+				<Limit>5000</Limit>
+			</DATE>
+			<DATE START="10/15/2008" END="01/01/9999">
+				<Limit>15000</Limit>
+			</DATE>
+		</HO455_LIMITS>
+		<HO455_LIMITS STATE="MICHIGAN">
+			<DATE START="01/01/1950" END="01/31/2009">
+				<Limit>5000</Limit>
+			</DATE>
+			<DATE START="02/01/2009" END="01/01/9999">
+				<Limit>15000</Limit>
+			</DATE>
+		</HO455_LIMITS>
+		<Construction>
+			<Type id="11852" Code="F">Aluminum</Type>
+			<Type id="11300" Code="M">Block (Painted)</Type>
+			<Type id="11298" Code="M">Brick Veneer</Type>
+			<Type id="8936" Code="M">Brick, Stone or Masonry</Type>
+			<Type id="8937" Code="M">Brick, Stone or Masonry Veneer</Type>
+			<Type id="11368" Code="F">Clapboard Asphalt</Type>
+			<Type id="8934" Code="F">Frame</Type>
+			<Type id="8935" Code="F">Frame with Aluminium or Plastic Sides</Type>
+			<Type id="11809" Code="F">Log</Type>
+			<Type id="11301" Code="M">Solid Brick</Type>
+			<Type id="11302" Code="M">Solid Stone</Type>
+			<Type id="11299" Code="M">Stone Veneer</Type>
+			<Type id="11810" Code="M">Fire Resistive</Type>
+			<Type id="11288" Code="F">Stucco on Frame</Type>
+			<Type id="11853" Code="F">Vinyl Siding Built-up</Type>
+			<Type id="11851" Code="F">Wood Shakes</Type>
+			<Type id="11850" Code="F">Wood Siding</Type>
+		</Construction>
+		<LiabilityLimits>
+			<Limit>100000</Limit>
+			<Limit>300000</Limit>
+			<Limit>500000</Limit>
+		</LiabilityLimits>
+		<MedicalPayments>
+			<Limit>1000</Limit>
+			<Limit>2000</Limit>
+			<Limit>3000</Limit>
+			<Limit>4000</Limit>
+			<Limit>5000</Limit>
+		</MedicalPayments>
+	</basicpolicy>
+	<propertyOptions>
+		<WaterBackup>
+			<HO327>0</HO327>
+			<HO327>1000</HO327>
+			<HO327>2000</HO327>
+			<HO327>3000</HO327>
+			<HO327>4000</HO327>
+			<HO327>5000</HO327>
+			<HO327>6000</HO327>
+			<HO327>7000</HO327>
+			<HO327>8000</HO327>
+			<HO327>9000</HO327>
+			<HO327>10000</HO327>
+		</WaterBackup>
+		<WATERBACKUP_LOSS>
+			<VALUE></VALUE>
+			<VALUE>Yes</VALUE>
+			<VALUE>No</VALUE>
+		</WATERBACKUP_LOSS>
+		<CondoHO33>
+			<HO33>Not Rented</HO33>
+			<HO33>Under 2 Months</HO33>
+			<HO33>2 to 6 Months</HO33>
+		</CondoHO33>
+		<!--HO287 Only available for counties : -->
+		<COUNTY STATE="INDIANA">
+			<NAME>CLAY</NAME>
+			<NAME>CRAWFORD</NAME>
+			<NAME>DAVIESS</NAME>
+			<NAME>DUBOIS</NAME>
+			<NAME>FOUNTAIN</NAME>
+			<NAME>GIBSON</NAME>
+			<NAME>GREENE</NAME>
+			<NAME>KNOX</NAME>
+			<NAME>KNOX</NAME>
+			<NAME>LAWRENCE</NAME>
+			<NAME>MARTIN</NAME>
+			<NAME>MONROE</NAME>
+			<NAME>MONTGOMERY</NAME>
+			<NAME>ORANGE</NAME>
+			<NAME>OWEN</NAME>
+			<NAME>PARKE</NAME>
+			<NAME>PERRY</NAME>
+			<NAME>PIKE</NAME>
+			<NAME>POSEY</NAME>
+			<NAME>PUTNAM</NAME>
+			<NAME>SPENCER</NAME>
+			<NAME>SULLIVAN</NAME>
+			<NAME>VANDERBURGH</NAME>
+			<NAME>VERMILLION</NAME>
+			<NAME>VIGO</NAME>
+			<NAME>WARREN</NAME>
+			<NAME>WARRICK</NAME>
+		</COUNTY>
+		<HO5INCLVALUES>
+			<UNSCHJEWEL HO5VAL="10000" OLD="1000" />
+			<MONEY HO5VAL="1000" OLD="200" />
+			<FIREARMS HO5VAL="2500" OLD="2000" />
+			<SILVERWARE HO5VAL="10000" OLD="2500" />
+		</HO5INCLVALUES>
+		<HO-Grid>
+			<Grid>
+				<AdditionalCvg>Fire Department Service Charge (HO-96)</AdditionalCvg>
+				<Included>500</Included>
+				<Additional>0</Additional>
+			</Grid>
+			<Grid>
+				<AdditionalCvg>Other Structures Increased Limit (HO-48)</AdditionalCvg>
+				<Included>17500</Included>
+				<Additional>0</Additional>
+			</Grid>
+			<Grid>
+				<AdditionalCvg>Other Structures Rented to Others (HO-40)</AdditionalCvg>
+				<Included></Included>
+				<Additional>0</Additional>
+			</Grid>
+			<Grid>
+				<AdditionalCvg>Other Structures Repair Cost Coverage (HO-489)</AdditionalCvg>
+				<Included></Included>
+				<Additional>0</Additional>
+			</Grid>
+			<Grid>
+				<AdditionalCvg>Personal Property (Coverage C)</AdditionalCvg>
+				<Included>87500</Included>
+				<Additional>0</Additional>
+			</Grid>
+			<Grid>
+				<AdditionalCvg>Personal Property Away from Premises (HO-50)</AdditionalCvg>
+				<Included></Included>
+				<Additional>0</Additional>
+			</Grid>
+			<Grid>
+				<AdditionalCvg>Unscheduled Jewelry &amp; Furs</AdditionalCvg>
+				<Included>1000</Included>
+				<Additional>0</Additional>
+			</Grid>
+			<Grid>
+				<AdditionalCvg>Money</AdditionalCvg>
+				<Included>200</Included>
+				<Additional>0</Additional>
+			</Grid>
+			<Grid>
+				<AdditionalCvg>Securities</AdditionalCvg>
+				<Included>1000</Included>
+				<Additional>0</Additional>
+			</Grid>
+			<Grid>
+				<AdditionalCvg>Silverware, Goldware &amp; Pewterware (Unscheduled)</AdditionalCvg>
+				<Included>2500</Included>
+				<Additional>0</Additional>
+			</Grid>
+			<Grid>
+				<AdditionalCvg>Firearms (Unscheduled)</AdditionalCvg>
+				<Included>2000</Included>
+				<Additional>0</Additional>
+			</Grid>
+			<Grid>
+				<AdditionalCvg>Business Property On Increase Limits (HO-312)</AdditionalCvg>
+				<Included>2500</Included>
+				<Additional>0</Additional>
+			</Grid>
+			<Grid>
+				<AdditionalCvg>Business Property Off Increase Limits (HO-312)</AdditionalCvg>
+				<Included>250</Included>
+				<Additional>0</Additional>
+			</Grid>
+			<Grid>
+				<AdditionalCvg>Additional Living Expenses (Coverage D)</AdditionalCvg>
+				<Included>52500</Included>
+				<Additional>0</Additional>
+			</Grid>
+			<Grid>
+				<AdditionalCvg>Credit Card and Depositors Forgery (HO-53)</AdditionalCvg>
+				<Included>500</Included>
+				<Additional>0</Additional>
+			</Grid>
+			<Grid>
+				<AdditionalCvg>Loss Assessment Coverage (HO-35)</AdditionalCvg>
+				<Included>N/A</Included>
+				<Additional>0</Additional>
+			</Grid>
+			<Grid>
+				<AdditionalCvg>Specific Structures Away from Premises (HO-490)</AdditionalCvg>
+				<Included></Included>
+				<Additional>222222</Additional>
+			</Grid>
+			<HO96>
+				<ADDITIONAL>0</ADDITIONAL>
+			</HO96>
+			<HO96>
+				<ADDITIONAL>250</ADDITIONAL>
+			</HO96>
+			<HO96>
+				<ADDITIONAL>500</ADDITIONAL>
+			</HO96>
+			<FURS>
+				<ADDITIONAL>0</ADDITIONAL>
+			</FURS>
+			<FURS>
+				<ADDITIONAL>500</ADDITIONAL>
+			</FURS>
+			<FURS>
+				<ADDITIONAL>1000</ADDITIONAL>
+			</FURS>
+			<FURS>
+				<ADDITIONAL>1500</ADDITIONAL>
+			</FURS>
+			<FURS>
+				<ADDITIONAL>2000</ADDITIONAL>
+			</FURS>
+			<FURS>
+				<ADDITIONAL>2500</ADDITIONAL>
+			</FURS>
+			<FURS>
+				<ADDITIONAL>3000</ADDITIONAL>
+			</FURS>
+			<FURS>
+				<ADDITIONAL>3500</ADDITIONAL>
+			</FURS>
+			<FURS>
+				<ADDITIONAL>4000</ADDITIONAL>
+			</FURS>
+			<FURS>
+				<ADDITIONAL>4500</ADDITIONAL>
+			</FURS>
+			<FURS>
+				<ADDITIONAL>5000</ADDITIONAL>
+			</FURS>
+			<MONEY>
+				<ADDITIONAL>0</ADDITIONAL>
+			</MONEY>
+			<MONEY>
+				<ADDITIONAL>100</ADDITIONAL>
+			</MONEY>
+			<MONEY>
+				<ADDITIONAL>200</ADDITIONAL>
+			</MONEY>
+			<MONEY>
+				<ADDITIONAL>300</ADDITIONAL>
+			</MONEY>
+			<MONEY>
+				<ADDITIONAL>400</ADDITIONAL>
+			</MONEY>
+			<MONEY>
+				<ADDITIONAL>500</ADDITIONAL>
+			</MONEY>
+			<MONEY>
+				<ADDITIONAL>600</ADDITIONAL>
+			</MONEY>
+			<MONEY>
+				<ADDITIONAL>700</ADDITIONAL>
+			</MONEY>
+			<MONEY>
+				<ADDITIONAL>800</ADDITIONAL>
+			</MONEY>
+			<MONEY>
+				<ADDITIONAL>900</ADDITIONAL>
+			</MONEY>
+			<MONEY>
+				<ADDITIONAL>1000</ADDITIONAL>
+			</MONEY>
+			<SECURITY>
+				<ADDITIONAL>0</ADDITIONAL>
+			</SECURITY>
+			<SECURITY>
+				<ADDITIONAL>100</ADDITIONAL>
+			</SECURITY>
+			<SECURITY>
+				<ADDITIONAL>200</ADDITIONAL>
+			</SECURITY>
+			<SECURITY>
+				<ADDITIONAL>300</ADDITIONAL>
+			</SECURITY>
+			<SECURITY>
+				<ADDITIONAL>400</ADDITIONAL>
+			</SECURITY>
+			<SECURITY>
+				<ADDITIONAL>500</ADDITIONAL>
+			</SECURITY>
+			<SECURITY>
+				<ADDITIONAL>600</ADDITIONAL>
+			</SECURITY>
+			<SECURITY>
+				<ADDITIONAL>700</ADDITIONAL>
+			</SECURITY>
+			<SECURITY>
+				<ADDITIONAL>800</ADDITIONAL>
+			</SECURITY>
+			<SECURITY>
+				<ADDITIONAL>900</ADDITIONAL>
+			</SECURITY>
+			<SECURITY>
+				<ADDITIONAL>1000</ADDITIONAL>
+			</SECURITY>
+			<SECURITY>
+				<ADDITIONAL>1100</ADDITIONAL>
+			</SECURITY>
+			<SECURITY>
+				<ADDITIONAL>1200</ADDITIONAL>
+			</SECURITY>
+			<SECURITY>
+				<ADDITIONAL>1300</ADDITIONAL>
+			</SECURITY>
+			<SECURITY>
+				<ADDITIONAL>1400</ADDITIONAL>
+			</SECURITY>
+			<SECURITY>
+				<ADDITIONAL>1500</ADDITIONAL>
+			</SECURITY>
+			<SECURITY>
+				<ADDITIONAL>1600</ADDITIONAL>
+			</SECURITY>
+			<SECURITY>
+				<ADDITIONAL>1700</ADDITIONAL>
+			</SECURITY>
+			<SECURITY>
+				<ADDITIONAL>1800</ADDITIONAL>
+			</SECURITY>
+			<SECURITY>
+				<ADDITIONAL>1900</ADDITIONAL>
+			</SECURITY>
+			<SECURITY>
+				<ADDITIONAL>2000</ADDITIONAL>
+			</SECURITY>
+			<SILVERWARE>
+				<ADDITIONAL>0</ADDITIONAL>
+			</SILVERWARE>
+			<SILVERWARE>
+				<ADDITIONAL>500</ADDITIONAL>
+			</SILVERWARE>
+			<SILVERWARE>
+				<ADDITIONAL>1000</ADDITIONAL>
+			</SILVERWARE>
+			<SILVERWARE>
+				<ADDITIONAL>1500</ADDITIONAL>
+			</SILVERWARE>
+			<SILVERWARE>
+				<ADDITIONAL>2000</ADDITIONAL>
+			</SILVERWARE>
+			<SILVERWARE>
+				<ADDITIONAL>2500</ADDITIONAL>
+			</SILVERWARE>
+			<SILVERWARE>
+				<ADDITIONAL>3000</ADDITIONAL>
+			</SILVERWARE>
+			<SILVERWARE>
+				<ADDITIONAL>3500</ADDITIONAL>
+			</SILVERWARE>
+			<SILVERWARE>
+				<ADDITIONAL>4000</ADDITIONAL>
+			</SILVERWARE>
+			<SILVERWARE>
+				<ADDITIONAL>4500</ADDITIONAL>
+			</SILVERWARE>
+			<SILVERWARE>
+				<ADDITIONAL>5000</ADDITIONAL>
+			</SILVERWARE>
+			<SILVERWARE>
+				<ADDITIONAL>5500</ADDITIONAL>
+			</SILVERWARE>
+			<SILVERWARE>
+				<ADDITIONAL>6000</ADDITIONAL>
+			</SILVERWARE>
+			<SILVERWARE>
+				<ADDITIONAL>6500</ADDITIONAL>
+			</SILVERWARE>
+			<SILVERWARE>
+				<ADDITIONAL>7000</ADDITIONAL>
+			</SILVERWARE>
+			<SILVERWARE>
+				<ADDITIONAL>7500</ADDITIONAL>
+			</SILVERWARE>
+			<SILVERWARE>
+				<ADDITIONAL>8000</ADDITIONAL>
+			</SILVERWARE>
+			<SILVERWARE>
+				<ADDITIONAL>8500</ADDITIONAL>
+			</SILVERWARE>
+			<SILVERWARE>
+				<ADDITIONAL>9000</ADDITIONAL>
+			</SILVERWARE>
+			<SILVERWARE>
+				<ADDITIONAL>9500</ADDITIONAL>
+			</SILVERWARE>
+			<SILVERWARE>
+				<ADDITIONAL>10000</ADDITIONAL>
+			</SILVERWARE>
+			<HO312>
+				<ADDITIONAL>0</ADDITIONAL>
+			</HO312>
+			<HO312>
+				<ADDITIONAL>2500</ADDITIONAL>
+			</HO312>
+			<HO312>
+				<ADDITIONAL>5000</ADDITIONAL>
+			</HO312>
+			<HO312>
+				<ADDITIONAL>7500</ADDITIONAL>
+			</HO312>
+			<HO312>
+				<ADDITIONAL>10000</ADDITIONAL>
+			</HO312>
+			<HO53>
+				<ADDITIONAL>0</ADDITIONAL>
+			</HO53>
+			<HO53>
+				<ADDITIONAL>500</ADDITIONAL>
+			</HO53>
+			<HO53>
+				<ADDITIONAL>2000</ADDITIONAL>
+			</HO53>
+		</HO-Grid>
+	</propertyOptions>
+	<CreditCharges>
+		<DOGSURCHAGE>
+			<SURCHARGE>0</SURCHARGE>
+			<SURCHARGE>1</SURCHARGE>
+			<SURCHARGE>2</SURCHARGE>
+			<SURCHARGE>3</SURCHARGE>
+			<SURCHARGE>4</SURCHARGE>
+			<SURCHARGE>5</SURCHARGE>
+			<SURCHARGE>6</SURCHARGE>
+			<SURCHARGE>7</SURCHARGE>
+			<SURCHARGE>8</SURCHARGE>
+			<SURCHARGE>9</SURCHARGE>
+			<SURCHARGE>10</SURCHARGE>
+		</DOGSURCHAGE>
+		<BREEDOFDOG>
+			<BREED CODE="Aki" ID="11604">Akita</BREED>
+			<BREED CODE="Chow" ID="11605">Chow</BREED>
+			<BREED CODE="Dob" ID="11606">Doberman</BREED>
+			<BREED CODE="GeSh" ID="11607">German Shepherd</BREED>
+			<BREED CODE="GrD" ID="11608">Great Dane</BREED>
+			<BREED CODE="HOM" ID="11609">Huskie or Malamute</BREED>
+			<BREED CODE="Mat" ID="11610">Mastiff</BREED>
+			<BREED CODE="PRC" ID="11611">Presna Canario</BREED>
+			<BREED CODE="Rotw" ID="11612">Rottweiler</BREED>
+			<BREED CODE="SBD" ID="11613">Saint Bernard</BREED>
+			<BREED CODE="STR" ID="11614">Staffordshire Terrier</BREED>
+			<BREED CODE="PBLL" ID="11615">Pit Bull</BREED>
+			<BREED CODE="WOWH" ID="11616">Wolf or Wolf Hybrid</BREED>
+			<BREED CODE="ANM" ID="11657">Any Mixed Breed</BREED>
+		</BREEDOFDOG>
+		<LOCATED_IN_SUBDIVISION>
+			<VALUE></VALUE>
+			<VALUE>Yes</VALUE>
+			<VALUE>No</VALUE>
+		</LOCATED_IN_SUBDIVISION>
+	</CreditCharges>
+	<InlandMarine>
+		<SCHPP-Grid>
+			<Grid>
+				<SchPP>Bicycles (HO-900)</SchPP>
+				<Deductible>0</Deductible>
+				<Amount>0</Amount>
+			</Grid>
+			<Grid>
+				<SchPP>Cameras (Non Professional) (HO-61)</SchPP>
+				<Deductible>0</Deductible>
+				<Amount>0</Amount>
+			</Grid>
+			<Grid>
+				<SchPP>Cellular Phones (HO-900)</SchPP>
+				<Deductible>0</Deductible>
+				<Amount>0</Amount>
+			</Grid>
+			<Grid>
+				<SchPP>Fine Arts without Breakage</SchPP>
+				<Deductible>0</Deductible>
+				<Amount>0</Amount>
+			</Grid>
+			<Grid>
+				<SchPP>Fine Arts with Breakage</SchPP>
+				<Deductible>0</Deductible>
+				<Amount>0</Amount>
+			</Grid>
+			<Grid>
+				<SchPP>Furs</SchPP>
+				<Deductible>0</Deductible>
+				<Amount>0</Amount>
+			</Grid>
+			<Grid>
+				<SchPP>Golf Equipment</SchPP>
+				<Deductible>0</Deductible>
+				<Amount>0</Amount>
+			</Grid>
+			<Grid>
+				<SchPP>Guns</SchPP>
+				<Deductible>0</Deductible>
+				<Amount>0</Amount>
+			</Grid>
+			<Grid>
+				<SchPP>Handicap Electronics</SchPP>
+				<Deductible>0</Deductible>
+				<Amount>0</Amount>
+			</Grid>
+			<Grid>
+				<SchPP>Hearing Aids</SchPP>
+				<Deductible>0</Deductible>
+				<Amount>0</Amount>
+			</Grid>
+			<Grid>
+				<SchPP>Insulin Pumps</SchPP>
+				<Deductible>0</Deductible>
+				<Amount>0</Amount>
+			</Grid>
+			<Grid>
+				<SchPP>Jewelry</SchPP>
+				<Deductible>0</Deductible>
+				<Amount>0</Amount>
+			</Grid>
+			<Grid>
+				<SchPP>Mary Kay/Amway</SchPP>
+				<Deductible>0</Deductible>
+				<Amount>0</Amount>
+			</Grid>
+			<Grid>
+				<SchPP>Musical Instruments  (Non Professional) (HO-61)</SchPP>
+				<Deductible>0</Deductible>
+				<Amount>0</Amount>
+			</Grid>
+			<Grid>
+				<SchPP>Personal Computers - Desktop (HO-214)</SchPP>
+				<Deductible>0</Deductible>
+				<Amount>0</Amount>
+			</Grid>
+			<Grid>
+				<SchPP>Personal Computers - Laptop (HO-214)</SchPP>
+				<Deductible>0</Deductible>
+				<Amount>0</Amount>
+			</Grid>
+			<Grid>
+				<SchPP>Rare Coins</SchPP>
+				<Deductible>0</Deductible>
+				<Amount>0</Amount>
+			</Grid>
+			<Grid>
+				<SchPP>Salesman Supplies</SchPP>
+				<Deductible>0</Deductible>
+				<Amount>0</Amount>
+			</Grid>
+			<Grid>
+				<SchPP>Scuba Diving Equipment</SchPP>
+				<Deductible>0</Deductible>
+				<Amount>0</Amount>
+			</Grid>
+			<Grid>
+				<SchPP>Silver</SchPP>
+				<Deductible>0</Deductible>
+				<Amount>0</Amount>
+			</Grid>
+			<Grid>
+				<SchPP>Snow Skis</SchPP>
+				<Deductible>0</Deductible>
+				<Amount>0</Amount>
+			</Grid>
+			<Grid>
+				<SchPP>Stamps</SchPP>
+				<Deductible>0</Deductible>
+				<Amount>0</Amount>
+			</Grid>
+			<Grid>
+				<SchPP>Tack and Saddle</SchPP>
+				<Deductible>0</Deductible>
+				<Amount>0</Amount>
+			</Grid>
+			<Grid>
+				<SchPP>Tools (At Business Location)</SchPP>
+				<Deductible>0</Deductible>
+				<Amount>0</Amount>
+			</Grid>
+			<Grid>
+				<SchPP>Tools (At Premises)</SchPP>
+				<Deductible>0</Deductible>
+				<Amount>0</Amount>
+			</Grid>
+			<Grid>
+				<SchPP>Tractors</SchPP>
+				<Deductible>0</Deductible>
+				<Amount>0</Amount>
+			</Grid>
+			<Grid>
+				<SchPP>Train Collections</SchPP>
+				<Deductible>0</Deductible>
+				<Amount>0</Amount>
+			</Grid>
+			<Grid>
+				<SchPP>Wheelchairs/Scooters</SchPP>
+				<Deductible>0</Deductible>
+				<Amount>0</Amount>
+			</Grid>
+			<Grid>
+				<SchPP>Cameras (Professional Use) (HO-61)</SchPP>
+				<Deductible>0</Deductible>
+				<Amount>0</Amount>
+			</Grid>
+			<Grid>
+				<SchPP>Musical Instruments (Used for Remuneration) (HO-61)</SchPP>
+				<Deductible>0</Deductible>
+				<Amount>0</Amount>
+			</Grid>
+			<DROPDOWN>
+				<DEDUCTIBLE>0</DEDUCTIBLE>
+			</DROPDOWN>
+			<DROPDOWN>
+				<DEDUCTIBLE>100</DEDUCTIBLE>
+			</DROPDOWN>
+			<DROPDOWN>
+				<DEDUCTIBLE>250</DEDUCTIBLE>
+			</DROPDOWN>
+			<DROPDOWN>
+				<DEDUCTIBLE>500</DEDUCTIBLE>
+			</DROPDOWN>
+			<DROPDOWN>
+				<DEDUCTIBLE>750</DEDUCTIBLE>
+			</DROPDOWN>
+			<DROPDOWN>
+				<DEDUCTIBLE>1000</DEDUCTIBLE>
+			</DROPDOWN>
+			<DROPDOWN>
+				<DEDUCTIBLE>2500</DEDUCTIBLE>
+			</DROPDOWN>
+			<CELL>
+				<DEDUCTIBLE>0</DEDUCTIBLE>
+			</CELL>
+			<!--<CELL>
+				<DEDUCTIBLE>100</DEDUCTIBLE>
+			</CELL>
+			<CELL>
+				<DEDUCTIBLE>250</DEDUCTIBLE>
+			</CELL>
+			<CELL>
+				<DEDUCTIBLE>500</DEDUCTIBLE>
+			</CELL>
+			<CELL>
+				<DEDUCTIBLE>750</DEDUCTIBLE>
+			</CELL>
+			<CELL>
+				<DEDUCTIBLE>1000</DEDUCTIBLE>
+			</CELL>
+			<CELL>
+				<DEDUCTIBLE>2500</DEDUCTIBLE>
+			</CELL>-->
+			<PCOMP>
+				<DEDUCTIBLE>0</DEDUCTIBLE>
+			</PCOMP>
+			<PCOMP>
+				<DEDUCTIBLE>100</DEDUCTIBLE>
+			</PCOMP>
+			<HCAP>
+				<DEDUCTIBLE>100</DEDUCTIBLE>
+			</HCAP>
+			<SALES>
+				<DEDUCTIBLE>50</DEDUCTIBLE>
+			</SALES>
+			<TOOL>
+				<DEDUCTIBLE>50</DEDUCTIBLE>
+			</TOOL>
+			<TOOL>
+				<DEDUCTIBLE>100</DEDUCTIBLE>
+			</TOOL>
+			<TRAC>
+				<DEDUCTIBLE>100</DEDUCTIBLE>
+			</TRAC>
+			<TRAC>
+				<DEDUCTIBLE>250</DEDUCTIBLE>
+			</TRAC>
+			<TRAC>
+				<DEDUCTIBLE>500</DEDUCTIBLE>
+			</TRAC>
+		</SCHPP-Grid>
+	</InlandMarine>
+</quickQuote>

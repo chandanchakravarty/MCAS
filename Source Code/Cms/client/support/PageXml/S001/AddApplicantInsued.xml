@@ -1,0 +1,298 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Root>
+
+  <PageTitle>
+    <Culture Code="en-US">Co-Applicant Details</Culture>
+    <Culture Code="pt-BR">Co-Applicant Details</Culture>
+    <Culture Code="zh-SG">Co-Applicant Details</Culture>
+  </PageTitle>
+  <PageElement name="txtFIRST_NAME" type="TextBox" Desc=""
+        IsMandatory="Yes"
+        IsReadOnly="No"
+        IsDisabled="No"
+        IsDisplay="Yes"
+        MaxLength="100"
+        IsFormatingRequired="No" JsFunctionToFormat="" OnClickJSFunction=""
+        OnChangeJSFunction="" >
+    <Style Position="relative" Top="0" Left="10" CssClass="midcolora" />
+    <Culture Code="en-US" Desc="set Label and Message for English language">
+      <DefaultValue></DefaultValue>
+      <revExpMessage>Please enter Customer Name</revExpMessage>
+    </Culture>
+    <Culture Code="zh-SG" Desc="set Label and Message for Singapore language">
+      <DefaultValue></DefaultValue>
+      <revExpMessage>Please enter Customer Name</revExpMessage>
+    </Culture>
+  </PageElement>
+  <PageElement name="hlkZipLookup" type="HyperLink" Desc="" 
+               IsMandatory="No" 
+               IsReadOnly="No" 
+               IsDisabled="No"  
+               IsDisplay="No"
+					 JsFunctionToFormat="" OnClickJSFunction=""  OnChangeJSFunction="">
+    <rev Enabled="No" ExpKey=""></rev>
+</PageElement>
+  <PageElement name="hlkTitleLookup" type="HyperLink" Desc=""
+               IsMandatory="No"
+               IsReadOnly="No"
+               IsDisabled="No"
+               IsDisplay="No"
+					 JsFunctionToFormat="" OnClickJSFunction=""  OnChangeJSFunction="">
+    <rev Enabled="No" ExpKey=""></rev>
+  </PageElement>
+ 
+  <!--<PageElement name="hlkREG_ID_ISSUE" type="HyperLink" Desc="" IsMandatory="No" IsReadOnly="No" IsDisabled="Yes"  IsDisplay="Yes"
+					 JsFunctionToFormat="" OnClickJSFunction=""  OnChangeJSFunction="">
+    <rev Enabled="No" ExpKey=""></rev>
+  </PageElement>-->
+  
+  <PageElement name="txtADDRESS2" type="TextBox" Desc=""
+				IsMandatory="No"
+				IsReadOnly="No"
+				IsDisabled="Yes"
+				IsDisplay="Yes"
+				IsFormatingRequired="No" JsFunctionToFormat="" OnClickJSFunction=""
+				OnChangeJSFunction="" >
+    <Style Position="relative" Top="0" Left="10" CssClass="midcolora" />
+    <rev Enabled="No" ExpKey="" />
+    <Culture Code="en-US" Desc="set Label and Message for English language">
+      <Caption>Compliment</Caption>
+      <DefaultValue></DefaultValue>
+    </Culture>
+    <Culture Code="zh-SG" Desc="set Label and Message for Singapore language">
+      <Caption>Compliment</Caption>
+      <DefaultValue></DefaultValue>
+    </Culture>
+  </PageElement>
+  <PageElement name="txtZIP_CODE" type="TextBox" Desc=""
+				IsMandatory="No"
+				IsReadOnly="No"
+				IsDisabled="No"
+				IsDisplay="Yes"
+				IsFormatingRequired="No" JsFunctionToFormat="" OnClickJSFunction=""
+				OnChangeJSFunction="" >
+    <Style Position="relative" Top="0" Left="10" CssClass="midcolora" />
+    <rev Enabled="Yes" ExpKey="^[0-9]{6}"></rev>
+    <Culture Code="en-US" Desc="set Label and Message for English language">
+      <Caption>Postal Code</Caption>
+      <DefaultValue></DefaultValue>
+      <rfvMessage></rfvMessage>
+      <revExpMessage></revExpMessage>
+    </Culture>
+    <Culture Code="zh-SG" Desc="set Label and Message for Singapore language">
+      <Caption>Postal Code</Caption>
+      <DefaultValue></DefaultValue>
+      <rfvMessage></rfvMessage>      
+      <revExpMessage>Postal Code should be in '######' format.</revExpMessage>
+    </Culture>
+  </PageElement>
+  
+  <PageElement name="txtDISTRICT" type="TextBox" Desc=""
+				IsMandatory="No"
+				IsReadOnly="No"
+				IsDisabled="Yes"
+				IsDisplay="Yes"
+				IsFormatingRequired="No" JsFunctionToFormat="" OnClickJSFunction=""
+				OnChangeJSFunction="" >
+      <Style Position="relative" Top="0" Left="10" CssClass="midcolora" />
+      <rev Enabled="No" ExpKey="" />
+    <Culture Code="en-US" Desc="set Label and Message for English language">
+      <Caption>District</Caption>
+      <DefaultValue></DefaultValue>
+    </Culture>
+    <Culture Code="zh-SG" Desc="set Label and Message for Singapore language">
+      <Caption>District</Caption>
+      <DefaultValue></DefaultValue>
+    </Culture>
+  </PageElement>
+  
+  <PageElement name="txtREGIONAL_IDENTIFICATION" type="TextBox" Desc=""
+				IsMandatory="No"
+				IsReadOnly="No"
+				IsDisabled="Yes"
+				IsDisplay="Yes"
+				IsFormatingRequired="No" JsFunctionToFormat="" OnClickJSFunction=""
+				OnChangeJSFunction="" >
+    <Style Position="relative" Top="0" Left="10" CssClass="midcolora" />
+    <rev Enabled="No" ExpKey="" />
+    <Culture Code="en-US" Desc="set Label and Message for English language">
+      <Caption>Regional Identification</Caption>
+      <DefaultValue></DefaultValue>
+    </Culture>
+    <Culture Code="zh-SG" Desc="set Label and Message for Singapore language">
+      <Caption>Regional Identification</Caption>
+      <DefaultValue></DefaultValue>
+    </Culture>
+  </PageElement>
+  
+  <PageElement name="txtREG_ID_ISSUE" type="TextBox" Desc=""
+				IsMandatory="No"
+				IsReadOnly="No"
+				IsDisabled="Yes"
+				IsDisplay="Yes"
+				IsFormatingRequired="No" JsFunctionToFormat="" OnClickJSFunction=""
+				OnChangeJSFunction="" >
+    <Style Position="relative" Top="0" Left="10" CssClass="midcolora" />
+    <rev Enabled="No" ExpKey="" />
+    <Culture Code="en-US" Desc="set Label and Message for English language">
+      <Caption>Reg Id Issue</Caption>
+      <DefaultValue></DefaultValue>
+    </Culture>
+    <Culture Code="zh-SG" Desc="set Label and Message for Singapore language">
+      <Caption>Reg Id Issue</Caption>
+      <DefaultValue></DefaultValue>
+    </Culture>
+  </PageElement>
+  
+  <PageElement name="txtORIGINAL_ISSUE" type="TextBox" Desc=""
+				IsMandatory="No"
+				IsReadOnly="No"
+				IsDisabled="Yes"
+				IsDisplay="Yes"
+				IsFormatingRequired="No" JsFunctionToFormat="" OnClickJSFunction=""
+				OnChangeJSFunction="" >
+    <Style Position="relative" Top="0" Left="10" CssClass="midcolora" />
+    <rev Enabled="No" ExpKey="" />
+    <Culture Code="en-US" Desc="set Label and Message for English language">
+      <Caption>Original Issue</Caption>
+      <DefaultValue></DefaultValue>
+    </Culture>
+    <Culture Code="zh-SG" Desc="set Label and Message for Singapore language">
+      <Caption>Original Issue</Caption>
+      <DefaultValue></DefaultValue>
+    </Culture>
+  </PageElement>
+  
+  <PageElement name="cmbACCOUNT_TYPE" type="DDL"
+         IsMandatory="No"
+         IsReadOnly="No"
+         IsDisabled="Yes"
+         IsDisplay="Yes"
+         IsFormatingRequired="No" JsFunctionToFormat="" OnClickJSFunction=""
+         OnChangeJSFunction="">
+    <rev Enabled="No" ExpKey=""></rev>
+    <Culture Code="en-US" Desc="set Label and Message for English language">
+      <Caption>Account Type</Caption>
+      <DefaultValue></DefaultValue>
+    </Culture>
+    <Culture Code="zh-SG" Desc="set Label and Message for Singapore language">
+      <Caption>Account Type</Caption>
+      <DefaultValue></DefaultValue>
+    </Culture>
+  </PageElement>
+  
+  <PageElement name="txtBANK_NUMBER" type="TextBox" Desc=""
+													IsMandatory="No"
+													IsReadOnly="No"
+													IsDisabled="No"
+													IsDisplay="Yes"
+													IsFormatingRequired="No" JsFunctionToFormat="" OnClickJSFunction=""
+													OnChangeJSFunction="" >
+    <Style Position="relative" Top="0" Left="10" CssClass="midcolora" />
+    <rev Enabled="No" ExpKey="" />
+    <Culture Code="en-US" Desc="set Label and Message for English language">
+      <Caption>Bank Code</Caption>
+      <DefaultValue></DefaultValue>
+      <revExpMessage></revExpMessage>
+    </Culture>
+    <Culture Code="zh-SG" Desc="set Label and Message for Singapore language">
+      <Caption>Bank Code</Caption>
+          <DefaultValue></DefaultValue>
+      <revExpMessage></revExpMessage>
+    </Culture>
+  </PageElement>
+  
+  <PageElement name="cmbSTATE" type="DDL"
+           IsMandatory="No"
+           IsReadOnly="No"
+           IsDisabled="Yes"
+           IsDisplay="Yes"
+           IsFormatingRequired="No" JsFunctionToFormat="" OnClickJSFunction=""
+           OnChangeJSFunction="">
+    <rev Enabled="No" ExpKey=""></rev>
+    <Culture Code="en-US" Desc="set Label and Message for English language">
+      <Caption>State</Caption>
+      <DefaultValue></DefaultValue>
+    </Culture>
+    <Culture Code="zh-SG" Desc="set Label and Message for Singapore language">
+      <Caption>State</Caption>
+      <DefaultValue></DefaultValue>
+    </Culture>
+  </PageElement>
+  
+  <!--<PageElement name="txtCPF_CNPJ" type="TextBox" Desc=""
+				IsMandatory="No"
+				IsReadOnly="No"
+				IsDisabled="Yes"
+				IsDisplay="Yes"
+				IsFormatingRequired="No" JsFunctionToFormat="" OnClickJSFunction=""
+				OnChangeJSFunction="" >
+    <Style Position="relative" Top="0" Left="10" CssClass="midcolora" />
+    <rev Enabled="No" ExpKey="" />
+    <Culture Code="en-US" Desc="set Label and Message for English language">
+      <Caption>CPF/CNPJ #</Caption>
+      <DefaultValue></DefaultValue>
+    </Culture>
+    <Culture Code="zh-SG" Desc="set Label and Message for Singapore language">
+      <Caption>CPF/CNPJ #</Caption>
+      <DefaultValue></DefaultValue>
+    </Culture>
+  </PageElement>-->
+  
+  <PageElement name="cmbCOUNTRY" type="DDL" Desc=""
+								IsMandatory="No"
+								IsReadOnly="No"
+								IsDisabled="No"
+								IsDisplay="Yes"
+								IsFormatingRequired="No" JsFunctionToFormat="" OnClickJSFunction=""
+								OnChangeJSFunction="" >
+    <Style Position="relative" Top="0" Left="10" CssClass="midcolora" />
+    <rev Enabled="No"/>
+    <Culture Code="en-US" Desc="set Label and Message for English language">
+      <Caption>Country</Caption>
+       <DefaultValue>7</DefaultValue>
+    </Culture>
+    <Culture Code="zh-SG" Desc="set Label and Message for Singapore language">
+      <Caption>Country</Caption>
+       <DefaultValue>7</DefaultValue>    
+    </Culture>
+  </PageElement>
+  
+  <!--<PageElement name="txtCONTACT_CODE" type="TextBox" Desc=""
+                  IsMandatory="No"
+                  IsReadOnly="No"
+                  IsDisabled="No"
+                  IsDisplay="Yes"
+                  IsFormatingRequired="No" JsFunctionToFormat="" OnClickJSFunction=""
+                  OnChangeJSFunction="" >
+    <Style Position="relative" Top="0" Left="10" CssClass="midcolora" />
+    <rev Enabled="No"/>
+    <Culture Code="en-US" Desc="set Label and Message for English language">
+      <Caption>Contact Code</Caption>
+      <DefaultValue>7</DefaultValue>
+    </Culture>
+    <Culture Code="zh-SG" Desc="set Label and Message for Singapore language">
+      <Caption>Contact Code</Caption>
+      <DefaultValue>7</DefaultValue>
+    </Culture>
+  </PageElement>-->
+  <PageElement name="txtCO_APPL_DOB" type="TextBox" Desc=""
+          IsMandatory="No"
+          IsReadOnly="No"
+          IsDisabled="No"
+          IsDisplay="Yes"
+          IsFormatingRequired="No" JsFunctionToFormat="" OnClickJSFunction=""
+          OnChangeJSFunction="" >
+    <Style Position="relative" Top="0" Left="10" CssClass="midcolora" />
+    <rev Enabled="Yes" ExpKey="(0[1-9]|[1-9]|[12][0-9]|3[01])[- /.](0[1-9]|[1-9]|1[012])[- /.](19|20)\d\d" />
+    <Culture Code="en-US" Desc="set Label and Message for English language">
+       <DefaultValue></DefaultValue>
+      <revExpMessage>Date should be in 'dd/mm/yyyy' format. </revExpMessage>
+    </Culture>
+    <Culture Code="zh-SG" Desc="set Label and Message for Singapore language">
+        <DefaultValue></DefaultValue>
+      <revExpMessage>Date should be in 'dd/mm/yyyy' format. </revExpMessage>
+    </Culture>
+  </PageElement> 
+
+</Root>

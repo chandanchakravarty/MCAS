@@ -1,0 +1,368 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Root>
+  <PageTitle>
+    <Culture Code="en-US">Add Agency</Culture>
+    <Culture Code="zh-SG">Add Agency</Culture>
+    <Culture Code="pt-BR">Add Agency</Culture>
+  </PageTitle>
+
+  <PageElement name="txtAGENCY_COMBINED_CODE" type="TextBox" Desc=""
+     IsMandatory="Yes"
+     IsReadOnly="No"
+     IsDisabled="No"
+     IsDisplay="Yes"
+     MaxLength=""
+     MaxSize=""
+     IsFormatingRequired="" JsFunctionToFormat="" OnClickJSFunction=""
+     OnChangeJSFunction="" >
+    <rev Enabled="No" ExpKey="" />
+    <Culture Code="en-US" Desc="set Label and Message for English language">
+      <Caption>Combined Agency Code</Caption>
+      <rfvMessage>Please Enter Combined Agency Code</rfvMessage>
+      <DefaultValue></DefaultValue>
+      <revExpMessage></revExpMessage>
+    </Culture>
+    <Culture Code="zh-SG" Desc="set Label and Message for Singapore language">
+      <Caption>Combined Agency Code</Caption>
+      <rfvMessage>Please Enter Combined Agency Code</rfvMessage>
+      <DefaultValue></DefaultValue>
+      <revExpMessage></revExpMessage>
+    </Culture>
+    <Culture Code="pt-BR" Desc="set Label and Message for Brazil language">
+      <Caption>Cód.Combinado</Caption>
+      <rfvMessage>Insira o Cód.Combinado.</rfvMessage>
+      <DefaultValue></DefaultValue>
+      <revExpMessage></revExpMessage>
+    </Culture>
+  </PageElement>
+
+  <PageElement name="txtBROKER_CPF_CNPJ" type="TextBox" Desc=""
+     IsMandatory="No"
+     IsReadOnly="No"
+     IsDisabled="No"
+     IsDisplay="Yes"
+     MaxLength=""
+     MaxSize=""
+     IsFormatingRequired="" JsFunctionToFormat="" OnClickJSFunction=""
+     OnChangeJSFunction="" >
+    <rev Enabled="Yes" ExpKey="^([0-9]{3}[.][0-9]{3}[.][0-9]{3}[-][0-9]{2})|([0-9]{2}[.][0-9]{3}[.][0-9]{3}[/][0-9]{4}[-][0-9]{2})$" />
+    <Culture Code="en-US" Desc="set Label and Message for English language">
+      <Caption>Broker CPF/CNPJ</Caption>
+      <rfvMessage></rfvMessage>
+      <DefaultValue></DefaultValue>
+      <revExpMessage>Please enter CPF format xxx.xxx.xxx-xx or CNPJ format xx.xxx.xxx/xxxx-xx.</revExpMessage>
+    </Culture>
+    <Culture Code="zh-SG" Desc="set Label and Message for Singapore language">
+      <Caption>Broker CPF/CNPJ</Caption>
+      <rfvMessage></rfvMessage>
+      <DefaultValue></DefaultValue>
+      <revExpMessage>Please enter CPF format xxx.xxx.xxx-xx or CNPJ format xx.xxx.xxx/xxxx-xx.</revExpMessage>
+    </Culture>
+    <Culture Code="pt-BR" Desc="set Label and Message for Brazil language">
+      <Caption>CPF/CNPJ</Caption>
+      <rfvMessage></rfvMessage>
+      <DefaultValue></DefaultValue>
+      <revExpMessage>Insira CPF no formato xxx.xxx.xxx-xx ou CNPJ no formato xx.xxx.xxx/xxxx-xx.</revExpMessage>
+    </Culture>
+  </PageElement>
+
+
+  <PageElement name="txtM_AGENCY_ADD_1" type="TextBox" Desc=""
+     IsMandatory="Yes"
+     IsReadOnly="No"
+     IsDisabled="No"
+     IsDisplay="Yes"
+     MaxLength=""
+     MaxSize=""
+     IsFormatingRequired="" JsFunctionToFormat="" OnClickJSFunction=""
+     OnChangeJSFunction="" >
+    <rev Enabled="No" ExpKey="" />
+    <Culture Code="en-US" Desc="set Label and Message for English language">
+      <Caption>Address 1</Caption>
+      <rfvMessage>Please Enter Address 1.</rfvMessage>
+      <DefaultValue></DefaultValue>
+      <revExpMessage></revExpMessage>
+    </Culture>
+    <Culture Code="zh-SG" Desc="set Label and Message for Singapore language">
+      <Caption>Address 1</Caption>
+      <rfvMessage>Please Enter Address 1.</rfvMessage>
+      <DefaultValue></DefaultValue>
+      <revExpMessage></revExpMessage>
+    </Culture>
+    <Culture Code="pt-BR" Desc="set Label and Message for Brazil language">
+      <Caption>Endereço</Caption>
+      <rfvMessage>Insira o Endereço</rfvMessage>
+      <DefaultValue></DefaultValue>
+      <revExpMessage></revExpMessage>
+    </Culture>
+  </PageElement>
+
+  <PageElement name="txtAGENCY_PHONE" type="TextBox" Desc=""
+     IsMandatory="No"
+     IsReadOnly="No"
+     IsDisabled="No"
+     IsDisplay="Yes"
+     MaxLength=""
+     MaxSize=""
+     IsFormatingRequired="" JsFunctionToFormat="" OnClickJSFunction=""
+     OnChangeJSFunction="" >
+    <rev Enabled="Yes" ExpKey="^1?((\(\d{3}\) ?)|(\d{3}-))?\d{3}-\d{4}" />
+    <Culture Code="en-US" Desc="set Label and Message for English language">
+      <Caption>Phone #1</Caption>
+      <rfvMessage></rfvMessage>
+      <DefaultValue></DefaultValue>
+      <revExpMessage>Phone Number should be either in '(###)###-#####' format.</revExpMessage>
+    </Culture>
+    <Culture Code="zh-SG" Desc="set Label and Message for Singapore language">
+      <Caption>Phone #1</Caption>
+      <rfvMessage></rfvMessage>
+      <DefaultValue></DefaultValue>
+      <revExpMessage>Phone Number should be either in '(###)###-#####' format.</revExpMessage>
+    </Culture>
+    <Culture Code="pt-BR" Desc="set Label and Message for Brazil language">
+      <Caption>Telefone</Caption>
+      <rfvMessage></rfvMessage>
+      <DefaultValue></DefaultValue>
+      <revExpMessage>O Telefone deve ser em formato  '(###)###-#####'.</revExpMessage>
+    </Culture>
+  </PageElement>
+
+  <PageElement name="txtAGENCY_EXT" type="TextBox" Desc=""
+     IsMandatory="No"
+     IsReadOnly="No"
+     IsDisabled="No"
+     IsDisplay="Yes"
+     MaxLength=""
+     MaxSize=""
+     IsFormatingRequired="" JsFunctionToFormat="" OnClickJSFunction=""
+     OnChangeJSFunction="" >
+    <rev Enabled="Yes" ExpKey="^1?((\(\d{3}\) ?)|(\d{3}-))?\d{3}-\d{4}" />
+    <Culture Code="en-US" Desc="set Label and Message for English language">
+      <Caption>Phone #2</Caption>
+      <rfvMessage></rfvMessage>
+      <DefaultValue></DefaultValue>
+      <revExpMessage>Phone Number should be either in '(###)###-#####' format.</revExpMessage>
+    </Culture>
+    <Culture Code="zh-SG" Desc="set Label and Message for Singapore language">
+      <Caption>Phone #2</Caption>
+      <rfvMessage></rfvMessage>
+      <DefaultValue></DefaultValue>
+      <revExpMessage>Phone Number should be either in '(###)###-#####' format.</revExpMessage>
+    </Culture>
+    <Culture Code="pt-BR" Desc="set Label and Message for Brazil language">
+      <Caption>Telefone</Caption>
+      <rfvMessage></rfvMessage>
+      <DefaultValue></DefaultValue>
+      <revExpMessage>O Telefone deve ser em formato  '(###)###-#####'.</revExpMessage>
+    </Culture>
+  </PageElement>
+
+  <PageElement name="txtAGENCY_ZIP" type="TextBox" Desc=""
+     IsMandatory="No"
+     IsReadOnly="No"
+     IsDisabled="No"
+     IsDisplay="Yes"
+     MaxLength=""
+     MaxSize=""
+     IsFormatingRequired="" JsFunctionToFormat="" OnClickJSFunction=""
+     OnChangeJSFunction="" >
+    <rev Enabled="Yes" ExpKey="^[0-9]{5}-[0-9]{4}|[0-9]{5}" />
+    <Culture Code="en-US" Desc="set Label and Message for English language">
+      <Caption>Zip</Caption>
+      <rfvMessage></rfvMessage>
+      <DefaultValue></DefaultValue>
+      <revExpMessage>Zip code should be either in '#####' or '#####-####' format.</revExpMessage>
+    </Culture>
+    <Culture Code="zh-SG" Desc="set Label and Message for Singapore language">
+      <Caption>Zip</Caption>
+      <rfvMessage></rfvMessage>
+      <DefaultValue></DefaultValue>
+      <revExpMessage>Zip code should be either in '#####' or '#####-####' format.</revExpMessage>
+    </Culture>
+    <Culture Code="pt-BR" Desc="set Label and Message for Brazil language">
+      <Caption>CEP</Caption>
+      <rfvMessage></rfvMessage>
+      <DefaultValue></DefaultValue>
+      <revExpMessage>O CEP deve ser em formato '#####' or '#####-####'.</revExpMessage>
+    </Culture>
+  </PageElement>
+
+  <PageElement name="txtAGENCY_FAX" type="TextBox" Desc=""
+       IsMandatory="No"
+       IsReadOnly="No"
+       IsDisabled="No"
+       IsDisplay="Yes"
+       MaxLength=""
+       MaxSize=""
+       IsFormatingRequired="" JsFunctionToFormat="" OnClickJSFunction=""
+       OnChangeJSFunction="" >
+    <rev Enabled="Yes" ExpKey="^1?((\(\d{3}\) ?)|(\d{3}-))?\d{3}-\d{4}" />
+    <Culture Code="en-US" Desc="set Label and Message for English language">
+      <Caption>Fax</Caption>
+      <rfvMessage></rfvMessage>
+      <DefaultValue></DefaultValue>
+      <revExpMessage>Fax should be either in '(###)###-#####' format.</revExpMessage>
+    </Culture>
+    <Culture Code="zh-SG" Desc="set Label and Message for Singapore language">
+      <Caption>Fax</Caption>
+      <rfvMessage></rfvMessage>
+      <DefaultValue></DefaultValue>
+      <revExpMessage>Fax should be either in '(###)###-#####' format.</revExpMessage>
+    </Culture>
+    <Culture Code="pt-BR" Desc="set Label and Message for Brazil language">
+      <Caption>Fax</Caption>
+      <rfvMessage></rfvMessage>
+      <DefaultValue></DefaultValue>
+      <revExpMessage>O Fax deve ser em formato '(###)###-#####'.</revExpMessage>
+    </Culture>
+  </PageElement>
+
+  <PageElement name="txtM_AGENCY_ZIP" type="TextBox" Desc=""
+     IsMandatory="No"
+     IsReadOnly="No"
+     IsDisabled="No"
+     IsDisplay="Yes"
+     MaxLength="10"
+     MaxSize=""
+     IsFormatingRequired="" JsFunctionToFormat="" OnClickJSFunction=""
+     OnChangeJSFunction="" >
+    <rev Enabled="Yes" ExpKey="^[0-9]{5}-[0-9]{4}|[0-9]{5}" />
+    <Culture Code="en-US" Desc="set Label and Message for English language">
+      <Caption>Zip</Caption>
+      <rfvMessage></rfvMessage>
+      <DefaultValue></DefaultValue>
+      <revExpMessage>Zip code should be either in '#####' or '#####-####' format.</revExpMessage>
+    </Culture>
+    <Culture Code="zh-SG" Desc="set Label and Message for Singapore language">
+      <Caption>Zip</Caption>
+      <rfvMessage></rfvMessage>
+      <DefaultValue></DefaultValue>
+      <revExpMessage>Zip code should be either in '#####' format.</revExpMessage>
+    </Culture>
+    <Culture Code="pt-BR" Desc="set Label and Message for Brazil language">
+      <Caption>CEP</Caption>
+      <rfvMessage></rfvMessage>
+      <DefaultValue></DefaultValue>
+      <revExpMessage>O CEP deve ser em formato '#####' or '#####-####'.</revExpMessage>
+    </Culture>
+  </PageElement>
+
+  <PageElement name="txtREGIONAL_ID_ISSUE_DATE" type="TextBox" Desc=""
+     IsMandatory="Yes"
+     IsReadOnly="No"
+     IsDisabled="No"
+     IsDisplay="Yes"
+     MaxLength=""
+     MaxSize=""
+     IsFormatingRequired="" JsFunctionToFormat="" OnClickJSFunction=""
+     OnChangeJSFunction="" >
+    <csv Enabled="Yes" ValidationFunction="allnumeric"/>
+    <rev Enabled="No" ExpKey="" />
+      <Culture Code="en-US" Desc="set Label and Message for English language">
+      <Caption>Regional Id Issue Date</Caption>
+      <rfvMessage></rfvMessage>
+      <DefaultValue></DefaultValue>
+      <csvMessage>Date should be in 'mm/dd/yyyy' format.</csvMessage>
+      <revExpMessage>Date should in 'mm/dd/yyyy' format.</revExpMessage>
+    </Culture>
+    <Culture Code="zh-SG" Desc="set Label and Message for Singapore language">
+      <Caption>Regional Id Issue Date</Caption>
+      <rfvMessage></rfvMessage>
+      <DefaultValue></DefaultValue>
+      <csvMessage>Date should be in 'mm/dd/yyyy' format.</csvMessage>
+      <revExpMessage>Date should in 'mm/dd/yyyy' format.</revExpMessage>
+    </Culture>
+    <Culture Code="pt-BR" Desc="set Label and Message for Brazil language">
+      <Caption>Regional Id Issue Date</Caption>
+      <rfvMessage></rfvMessage>
+      <DefaultValue></DefaultValue>
+      <revExpMessage>Date should be in 'mm/dd/yyyy' format.</revExpMessage>
+      <csvMessage>>Date should be in 'mm/dd/yyyy' format.</csvMessage>
+    </Culture>
+  </PageElement>
+
+  <PageElement name="txtAGENCY_ADD1" type="TextBox" Desc=""
+     IsMandatory="Yes"
+     IsReadOnly="No"
+     IsDisabled="No"
+     IsDisplay="Yes"
+     MaxLength=""
+     MaxSize=""
+     IsFormatingRequired="" JsFunctionToFormat="" OnClickJSFunction=""
+     OnChangeJSFunction="" >
+    <rev Enabled="No" ExpKey="" />
+    <Culture Code="en-US" Desc="set Label and Message for English language">
+      <Caption>Address 1</Caption>
+      <rfvMessage>Please Enter Address 1</rfvMessage>
+      <DefaultValue></DefaultValue>
+      <revExpMessage></revExpMessage>
+    </Culture>
+    <Culture Code="zh-SG" Desc="set Label and Message for Singapore language">
+      <Caption>Address 1</Caption>
+      <rfvMessage>Please EnterAddress 1</rfvMessage>
+      <DefaultValue></DefaultValue>
+      <revExpMessage></revExpMessage>
+    </Culture>
+   
+  </PageElement>
+
+  <PageElement name="txtSUSEP_NUMBER" type="TextBox" Desc=""
+     IsMandatory="No"
+     IsReadOnly="No"
+     IsDisabled="No"
+     IsDisplay="No"
+     MaxLength=""
+     MaxSize=""
+     IsFormatingRequired="" JsFunctionToFormat="" OnClickJSFunction=""
+     OnChangeJSFunction="" >
+    <rev Enabled="No" ExpKey="" />
+    <Culture Code="en-US" Desc="set Label and Message for English language">
+      <Caption></Caption>
+      <rfvMessage></rfvMessage>
+      <DefaultValue></DefaultValue>
+      <revExpMessage></revExpMessage>
+    </Culture>
+    <Culture Code="zh-SG" Desc="set Label and Message for Singapore language">
+      <Caption></Caption>
+      <rfvMessage></rfvMessage>
+      <DefaultValue></DefaultValue>
+      <revExpMessage></revExpMessage>
+    </Culture>
+    <Culture Code="pt-BR" Desc="set Label and Message for Brazil language">
+      <Caption></Caption>
+      <rfvMessage></rfvMessage>
+      <DefaultValue></DefaultValue>
+      <revExpMessage></revExpMessage>
+    </Culture>
+  </PageElement>
+
+  <PageElement name="txtBROKER_CPF_CNPJ" type="TextBox" Desc=""
+     IsMandatory="No"
+     IsReadOnly="No"
+     IsDisabled="No"
+     IsDisplay="No"
+     MaxLength=""
+     MaxSize=""
+     IsFormatingRequired="" JsFunctionToFormat="" OnClickJSFunction=""
+     OnChangeJSFunction="" >
+    <rev Enabled="No" ExpKey="" />
+    <Culture Code="en-US" Desc="set Label and Message for English language">
+      <Caption></Caption>
+      <rfvMessage></rfvMessage>
+      <DefaultValue></DefaultValue>
+      <revExpMessage></revExpMessage>
+    </Culture>
+    <Culture Code="zh-SG" Desc="set Label and Message for Singapore language">
+      <Caption></Caption>
+      <rfvMessage></rfvMessage>
+      <DefaultValue></DefaultValue>
+      <revExpMessage></revExpMessage>
+    </Culture>
+    <Culture Code="pt-BR" Desc="set Label and Message for Brazil language">
+      <Caption></Caption>
+      <rfvMessage></rfvMessage>
+      <DefaultValue></DefaultValue>
+      <revExpMessage></revExpMessage>
+    </Culture>
+  </PageElement>
+</Root>

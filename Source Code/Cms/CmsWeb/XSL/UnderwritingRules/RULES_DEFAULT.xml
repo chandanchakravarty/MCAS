@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8" ?> 
+<RULES>
+	<DATE LOB="BOAT" START="03/01/2006" END="01/01/9999">
+		<VALUE MAX_LENGTH="40" AGREED_BOAT_LENGTH="26" AGE="20" MAX_SPEED="65"></VALUE>
+	</DATE>
+	<DATE LOB="BOAT" START="01/01/1900" END="02/28/2006">
+		<VALUE MAX_LENGTH="40" AGREED_BOAT_LENGTH="26" AGE="20" MAX_SPEED="65"></VALUE>
+	</DATE>
+	<DATE LOB="REDW" START="03/01/2006" END="01/01/9999">
+		<VALUE DP3_YEAR_BUILT="1970" DP3_REPLACE_YEAR_BUILT="1940" INSURANCE_SCORE_YEAR_BUILT="1950"></VALUE>
+	</DATE>
+	<DATE LOB="REDW" START="01/01/1900" END="02/28/2006">
+		<VALUE DP3_YEAR_BUILT="1970" DP3_REPLACE_YEAR_BUILT="1940" INSURANCE_SCORE_YEAR_BUILT="1950"></VALUE>
+	</DATE>
+	
+	<DATE LOB="AUTO" START="01/01/1900" END="01/01/9999">
+		<VALUE INSURSNCE_SCORE="700"></VALUE>
+	</DATE>	
+	<RULES_FORBIDDEN_RENEWAL>
+		<LOB ID="AUTOMOBILE">				
+			<ANTIQUE_VECH>Y</ANTIQUE_VECH><!--Physical Damage coverage over 15 years vehicle-->
+			<DEDUCT_DES>Other Than Collision (Comprehensive)</DEDUCT_DES>  <!--$ 50 deductible ineligible for Comp-->
+			<LEASED_PURCHASED>Y</LEASED_PURCHASED> <!--Loan/Lease Coverage purchaesd over 90 days-->
+			<WAIVER_WORK_LOSS>Y</WAIVER_WORK_LOSS> <!--Driver having waver work loss benefit w/o sign form-->
+			<LESS_INSURANCE_SCORE>Y</LESS_INSURANCE_SCORE> <!--trailblazer referal-->
+			<INELIGIBLE_DRIVER>Y</INELIGIBLE_DRIVER> <!--trailblazer referal-->
+			<LOSS_AMT_EXCEED>Y</LOSS_AMT_EXCEED> <!--trailblazer referal-->
+			<MVR_VER>Y</MVR_VER> <!--trailblazer referal -->
+			<QUALIFIESTRAIBLAZERPROGRAM>Y</QUALIFIESTRAIBLAZERPROGRAM> <!--trailblazer referal-->
+			<PRIOR_POLICY_INFO_EXPIRE>Y</PRIOR_POLICY_INFO_EXPIRE>  <!--Prior Loss Expires Before NBS-->
+			<DRIVER_DRIV_TYPE>YN</DRIVER_DRIV_TYPE><!--Excluded Driver with sign form-->		
+			<!--If there is a loss in prior term then always be refferal-->
+		</LOB>
+		<LOB ID="HOMEOWNERS">
+			<IS_EFFECTIVE_DATE>Y</IS_EFFECTIVE_DATE><!--If there is a loss in prior term then always be refferal-->			
+		</LOB>
+		<LOB ID="MOTORCYCLE">		
+		</LOB>
+		<LOB ID="RENTAL">
+			<COVA_DP2DP3>Y</COVA_DP2DP3>
+			<COVA_DP3_REPLACEMENT>Y</COVA_DP3_REPLACEMENT> <!--If there is a loss in prior term then always be refferal-->
+		</LOB>
+		<LOB ID="WATERCRAFT">
+			<IS_EFFECTIVE_DATE_OTHER>Y</IS_EFFECTIVE_DATE_OTHER><!--If there is a loss in prior term then always be refferal-->
+		</LOB>
+		<LOB ID="UMB">		
+		</LOB>
+	</RULES_FORBIDDEN_RENEWAL>	
+	<COMMON_RULE_NODE>
+			<LOB ID="AUTOMOBILE">
+				<DRIVER_DRIV_TYPE>11603</DRIVER_DRIV_TYPE>
+				<DEDUCT_DES>N</DEDUCT_DES>
+			</LOB>
+			<LOB ID="HOMEOWNERS">
+			</LOB>
+			<LOB ID="MOTORCYCLE">		
+			</LOB>
+			<LOB ID="RENTAL">
+			</LOB>
+			<LOB ID="WATERCRAFT">
+			</LOB>
+			<LOB ID="UMB">		
+			</LOB>
+	</COMMON_RULE_NODE>
+</RULES>

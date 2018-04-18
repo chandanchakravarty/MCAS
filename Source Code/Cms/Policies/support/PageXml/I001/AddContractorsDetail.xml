@@ -1,0 +1,1988 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Root>
+  <PageTitle>
+    <Culture Code="en-US"></Culture>
+    <Culture Code="zh-SG"></Culture>
+  </PageTitle>
+
+  <PageElement name="txtTYP_CONTRACTOR" type="TextBox" Desc=""
+			IsMandatory="No"
+			IsReadOnly="No"
+			IsDisabled="No"
+			IsDisplay="Yes"
+			MaxLength=""
+			MaxSize=""
+     IsFormatingRequired="No" JsFunctionToFormat="" OnClickJSFunction=""
+			OnChangeJSFunction="" >
+
+    <rev Enabled="No" ExpKey="" />
+    <Culture Code="en-US" Desc="set Label and Message for English language">
+      <Caption>Type Of Contractor</Caption>
+      <rfvMessage></rfvMessage>
+      <DefaultValue></DefaultValue>
+      <revExpMessage></revExpMessage>
+    </Culture>
+    <Culture Code="zh-SG" Desc="set Label and Message for Singapore language">
+      <Caption>Type Of Contractor</Caption>
+      <rfvMessage></rfvMessage>
+      <DefaultValue></DefaultValue>
+      <revExpMessage></revExpMessage>
+    </Culture>
+  </PageElement>
+
+  <PageElement name="txtYR_EXP" type="TextBox" Desc=""
+			IsMandatory="No"
+			IsReadOnly="No"
+			IsDisabled="No"
+			IsDisplay="Yes"
+			MaxLength="4"
+			MaxSize="4"
+     IsFormatingRequired="No" JsFunctionToFormat="" OnClickJSFunction=""
+			OnChangeJSFunction="" >
+
+    <!--<csv Enabled="Yes" ValidationFunction="ChkOccurenceDate_YEAR_BUILT"/>-->
+    <rev Enabled="Yes" ExpKey="^\d+$" />
+    <Culture Code="en-US" Desc="set Label and Message for English language">
+      <Caption>Years of Experience</Caption>
+      <rfvMessage></rfvMessage>
+      <DefaultValue></DefaultValue>
+      <csvMessage>Please Enter Year of experience.</csvMessage>
+      <revExpMessage>Please Enter Numeric Value.</revExpMessage>
+    </Culture>
+    <Culture Code="zh-SG" Desc="set Label and Message for Singapore language">
+      <Caption>Years of Experience</Caption>
+      <rfvMessage></rfvMessage>
+      <DefaultValue></DefaultValue>
+      <csvMessage>Please Enter Year of experience.</csvMessage>
+      <revExpMessage>Please Enter Numeric Value.</revExpMessage>
+    </Culture>
+  </PageElement>
+
+  <PageElement name="txtCONT_LICENSE" type="TextBox" Desc=""
+			IsMandatory="No"
+			IsReadOnly="No"
+			IsDisabled="No"
+			IsDisplay="Yes"
+			MaxLength=""
+			MaxSize=""
+     IsFormatingRequired="No" JsFunctionToFormat="" OnClickJSFunction=""
+			OnChangeJSFunction="" >
+
+    <rev Enabled="No" ExpKey="" />
+    <Culture Code="en-US" Desc="set Label and Message for English language">
+      <Caption>Contractor's License #</Caption>
+      <rfvMessage></rfvMessage>
+      <DefaultValue></DefaultValue>
+      <revExpMessage></revExpMessage>
+    </Culture>
+    <Culture Code="zh-SG" Desc="set Label and Message for Singapore language">
+      <Caption>Contractor's License #</Caption>
+      <rfvMessage></rfvMessage>
+      <DefaultValue></DefaultValue>
+      <revExpMessage></revExpMessage>
+    </Culture>
+  </PageElement>
+
+  <PageElement name="cmbLICENSE_HOLDER" type="DDL" Desc=""
+			IsMandatory="No"
+			IsReadOnly="No"
+			IsDisabled="No"
+			IsDisplay="Yes"
+			MaxLength=""
+			MaxSize=""
+     IsFormatingRequired="No" JsFunctionToFormat="" OnClickJSFunction=""
+			OnChangeJSFunction="" >
+    <Bindings>
+      <DataSource type="Proc" name="Proc_GetLookupValues" TextField="LOOKUP_VALUE_DESC" ValueField="LOOKUP_UNIQUE_ID" WhereClause="">
+        <Params name="@LookupCode" Value="INTCE" />
+        <Params name="@LANG_ID" Value="1" />
+      </DataSource>
+    </Bindings>
+    <rev Enabled="No" ExpKey="" />
+    <Culture Code="en-US" Desc="set Label and Message for English language">
+      <Caption>License Holder</Caption>
+      <rfvMessage></rfvMessage>
+      <DefaultValue></DefaultValue>
+      <revExpMessage></revExpMessage>
+    </Culture>
+    <Culture Code="zh-SG" Desc="set Label and Message for Singapore language">
+      <Caption>License Holder</Caption>
+      <rfvMessage></rfvMessage>
+      <DefaultValue></DefaultValue>
+      <revExpMessage></revExpMessage>
+    </Culture>
+  </PageElement>
+
+  <PageElement name="cmbLMT_CONTRACTOR_OCC" type="DDL" Desc=""
+			IsMandatory="No"
+			IsReadOnly="No"
+			IsDisabled="No"
+			IsDisplay="Yes"
+			MaxLength=""
+			MaxSize=""
+     IsFormatingRequired="No" JsFunctionToFormat="" OnClickJSFunction=""
+			OnChangeJSFunction="" >
+    <Bindings>
+      <DataSource type="Proc" name="Proc_GetLookupValues" TextField="LOOKUP_VALUE_DESC" ValueField="LOOKUP_UNIQUE_ID" WhereClause="">
+        <Params name="@LookupCode" Value="PBICSL" />
+        <Params name="@LANG_ID" Value="1" />
+      </DataSource>
+    </Bindings>
+    <rev Enabled="No" ExpKey="" />
+    <Culture Code="en-US" Desc="set Label and Message for English language">
+      <Caption>Min GL Limits for Subcontractors - Occurrence</Caption>
+      <rfvMessage></rfvMessage>
+      <DefaultValue></DefaultValue>
+      <revExpMessage></revExpMessage>
+    </Culture>
+    <Culture Code="zh-SG" Desc="set Label and Message for Singapore language">
+      <Caption>Min GL Limits for Subcontractors - Occurrence</Caption>
+      <rfvMessage></rfvMessage>
+      <DefaultValue></DefaultValue>
+      <revExpMessage></revExpMessage>
+    </Culture>
+  </PageElement>
+
+  <PageElement name="cmbLMT_CONTRACTOR_AGG" type="DDL" Desc=""
+			IsMandatory="No"
+			IsReadOnly="No"
+			IsDisabled="No"
+			IsDisplay="Yes"
+			MaxLength=""
+			MaxSize=""
+     IsFormatingRequired="No" JsFunctionToFormat="" OnClickJSFunction=""
+			OnChangeJSFunction="" >
+    <Bindings>
+      <DataSource type="Proc" name="Proc_GetLookupValues" TextField="LOOKUP_VALUE_DESC" ValueField="LOOKUP_UNIQUE_ID" WhereClause="">
+        <Params name="@LookupCode" Value="PBICSL" />
+        <Params name="@LANG_ID" Value="1" />
+      </DataSource>
+    </Bindings>
+    <rev Enabled="No" ExpKey="" />
+    <Culture Code="en-US" Desc="set Label and Message for English language">
+      <Caption>Min GL Limits for Subcontractors - Aggregate</Caption>
+      <rfvMessage></rfvMessage>
+      <DefaultValue></DefaultValue>
+      <revExpMessage></revExpMessage>
+    </Culture>
+    <Culture Code="zh-SG" Desc="set Label and Message for Singapore language">
+      <Caption>Min GL Limits for Subcontractors - Aggregate</Caption>
+      <rfvMessage></rfvMessage>
+      <DefaultValue></DefaultValue>
+      <revExpMessage></revExpMessage>
+    </Culture>
+  </PageElement>
+
+  <PageElement name="txtTOT_CST_PST_YR" type="TextBox" Desc=""
+			IsMandatory="No"
+			IsReadOnly="No"
+			IsDisabled="No"
+			IsDisplay="Yes"
+			MaxLength=""
+			MaxSize=""
+     IsFormatingRequired="No" JsFunctionToFormat="" OnClickJSFunction=""
+			OnChangeJSFunction="" >
+
+    <rev Enabled="No" ExpKey="" />
+    <Culture Code="en-US" Desc="set Label and Message for English language">
+      <Caption>Total Costs of Subcontracted Work in the past year</Caption>
+      <rfvMessage></rfvMessage>
+      <DefaultValue></DefaultValue>
+      <revExpMessage></revExpMessage>
+    </Culture>
+    <Culture Code="zh-SG" Desc="set Label and Message for Singapore language">
+      <Caption>Total Costs of Subcontracted Work in the past year</Caption>
+      <rfvMessage></rfvMessage>
+      <DefaultValue></DefaultValue>
+      <revExpMessage></revExpMessage>
+    </Culture>
+  </PageElement>
+
+  <PageElement name="chkIS_EXPL_ENVRNT" type="CheckBox" Desc=""
+			IsMandatory="No"
+			IsReadOnly="No"
+			IsDisabled="No"
+			IsDisplay="Yes"
+			MaxLength=""
+			MaxSize=""
+     IsFormatingRequired="No" JsFunctionToFormat="" OnClickJSFunction=""
+			OnChangeJSFunction="" >
+
+    <rev Enabled="No" ExpKey="" />
+    <Culture Code="en-US" Desc="set Label and Message for English language">
+      <Caption>Explosive Environment</Caption>
+      <rfvMessage></rfvMessage>
+      <DefaultValue></DefaultValue>
+      <revExpMessage></revExpMessage>
+    </Culture>
+    <Culture Code="zh-SG" Desc="set Label and Message for Singapore language">
+      <Caption>Explosive Environment</Caption>
+      <rfvMessage></rfvMessage>
+      <DefaultValue></DefaultValue>
+      <revExpMessage></revExpMessage>
+    </Culture>
+  </PageElement>
+
+  <PageElement name="chkIS_FIRE_ALARM" type="CheckBox" Desc=""
+			IsMandatory="No"
+			IsReadOnly="No"
+			IsDisabled="No"
+			IsDisplay="Yes"
+			MaxLength=""
+			MaxSize=""
+     IsFormatingRequired="No" JsFunctionToFormat="" OnClickJSFunction=""
+			OnChangeJSFunction="" >
+
+    <rev Enabled="No" ExpKey="" />
+    <Culture Code="en-US" Desc="set Label and Message for English language">
+      <Caption>Fire alarm or Automatic sprkler design, Install or repair</Caption>
+      <rfvMessage></rfvMessage>
+      <DefaultValue></DefaultValue>
+      <revExpMessage></revExpMessage>
+    </Culture>
+    <Culture Code="zh-SG" Desc="set Label and Message for Singapore language">
+      <Caption>Fire alarm or Automatic sprkler design, Install or repair</Caption>
+      <rfvMessage></rfvMessage>
+      <DefaultValue></DefaultValue>
+      <revExpMessage></revExpMessage>
+    </Culture>
+  </PageElement>
+  
+  <PageElement name="chkIS_HOSPITALS" type="CheckBox" Desc=""
+        IsMandatory="No"
+        IsReadOnly="No"
+        IsDisabled="No"
+        IsDisplay="Yes"
+        MaxLength=""
+        MaxSize=""
+       IsFormatingRequired="No" JsFunctionToFormat="" OnClickJSFunction=""
+        OnChangeJSFunction="" >
+
+    <rev Enabled="No" ExpKey="" />
+    <Culture Code="en-US" Desc="set Label and Message for English language">
+      <Caption>Hospitals</Caption>
+      <rfvMessage></rfvMessage>
+      <DefaultValue></DefaultValue>
+      <revExpMessage></revExpMessage>
+    </Culture>
+    <Culture Code="zh-SG" Desc="set Label and Message for Singapore language">
+      <Caption>Hospitals</Caption>
+      <rfvMessage></rfvMessage>
+      <DefaultValue></DefaultValue>
+      <revExpMessage></revExpMessage>
+    </Culture>
+  </PageElement>
+  
+  <PageElement name="chkIS_SWIMMING_POOL" type="CheckBox" Desc=""
+        IsMandatory="No"
+        IsReadOnly="No"
+        IsDisabled="No"
+        IsDisplay="Yes"
+        MaxLength=""
+        MaxSize=""
+       IsFormatingRequired="No" JsFunctionToFormat="" OnClickJSFunction=""
+        OnChangeJSFunction="" >
+
+    <rev Enabled="No" ExpKey="" />
+    <Culture Code="en-US" Desc="set Label and Message for English language">
+      <Caption>Swimming pools</Caption>
+      <rfvMessage></rfvMessage>
+      <DefaultValue></DefaultValue>
+      <revExpMessage></revExpMessage>
+    </Culture>
+    <Culture Code="zh-SG" Desc="set Label and Message for Singapore language">
+      <Caption>Swimming pools</Caption>
+      <rfvMessage></rfvMessage>
+      <DefaultValue></DefaultValue>
+      <revExpMessage></revExpMessage>
+    </Culture>
+  </PageElement>
+  
+  <PageElement name="chkIS_BRG_ALARM" type="CheckBox" Desc=""
+        IsMandatory="No"
+        IsReadOnly="No"
+        IsDisabled="No"
+        IsDisplay="Yes"
+        MaxLength=""
+        MaxSize=""
+       IsFormatingRequired="No" JsFunctionToFormat="" OnClickJSFunction=""
+        OnChangeJSFunction="" >
+
+    <rev Enabled="No" ExpKey="" />
+    <Culture Code="en-US" Desc="set Label and Message for English language">
+      <Caption>Burg  alarm design, install or repair</Caption>
+      <rfvMessage></rfvMessage>
+      <DefaultValue></DefaultValue>
+      <revExpMessage></revExpMessage>
+    </Culture>
+    <Culture Code="zh-SG" Desc="set Label and Message for Singapore language">
+      <Caption>Burg  alarm design, install or repair</Caption>
+      <rfvMessage></rfvMessage>
+      <DefaultValue></DefaultValue>
+      <revExpMessage></revExpMessage>
+    </Culture>
+  </PageElement>
+  
+  <PageElement name="chkIS_PWR_PLANTS" type="CheckBox" Desc=""
+        IsMandatory="No"
+        IsReadOnly="No"
+        IsDisabled="No"
+        IsDisplay="Yes"
+        MaxLength=""
+        MaxSize=""
+       IsFormatingRequired="No" JsFunctionToFormat="" OnClickJSFunction=""
+        OnChangeJSFunction="" >
+
+    <rev Enabled="No" ExpKey="" />
+    <Culture Code="en-US" Desc="set Label and Message for English language">
+      <Caption>power Plants</Caption>
+      <rfvMessage></rfvMessage>
+      <DefaultValue></DefaultValue>
+      <revExpMessage></revExpMessage>
+    </Culture>
+    <Culture Code="zh-SG" Desc="set Label and Message for Singapore language">
+      <Caption>power Plants</Caption>
+      <rfvMessage></rfvMessage>
+      <DefaultValue></DefaultValue>
+      <revExpMessage></revExpMessage>
+    </Culture>
+  </PageElement>
+  
+  <PageElement name="chkIS_BCK_EQUIPMNT" type="CheckBox" Desc=""
+        IsMandatory="No"
+        IsReadOnly="No"
+        IsDisabled="No"
+        IsDisplay="Yes"
+        MaxLength=""
+        MaxSize=""
+       IsFormatingRequired="No" JsFunctionToFormat="" OnClickJSFunction=""
+        OnChangeJSFunction="" >
+
+    <rev Enabled="No" ExpKey="" />
+    <Culture Code="en-US" Desc="set Label and Message for English language">
+      <Caption>Installation of back-up equipment</Caption>
+      <rfvMessage></rfvMessage>
+      <DefaultValue></DefaultValue>
+      <revExpMessage></revExpMessage>
+    </Culture>
+    <Culture Code="zh-SG" Desc="set Label and Message for Singapore language">
+      <Caption>Installation of back-up equipment</Caption>
+      <rfvMessage></rfvMessage>
+      <DefaultValue></DefaultValue>
+      <revExpMessage></revExpMessage>
+    </Culture>
+  </PageElement>
+  
+  <PageElement name="chkIS_LIVE_WIRES" type="CheckBox" Desc=""
+        IsMandatory="No"
+        IsReadOnly="No"
+        IsDisabled="No"
+        IsDisplay="Yes"
+        MaxLength=""
+        MaxSize=""
+       IsFormatingRequired="No" JsFunctionToFormat="" OnClickJSFunction=""
+        OnChangeJSFunction="" >
+
+    <rev Enabled="No" ExpKey="" />
+    <Culture Code="en-US" Desc="set Label and Message for English language">
+      <Caption>Hot or Live Wires</Caption>
+      <rfvMessage></rfvMessage>
+      <DefaultValue></DefaultValue>
+      <revExpMessage></revExpMessage>
+    </Culture>
+    <Culture Code="zh-SG" Desc="set Label and Message for Singapore language">
+      <Caption>Hot or Live Wires</Caption>
+      <rfvMessage></rfvMessage>
+      <DefaultValue></DefaultValue>
+      <revExpMessage></revExpMessage>
+    </Culture>
+  </PageElement>
+  
+  <PageElement name="chkIS_ARPT_CONSTRCT" type="CheckBox" Desc=""
+        IsMandatory="No"
+        IsReadOnly="No"
+        IsDisabled="No"
+        IsDisplay="Yes"
+        MaxLength=""
+        MaxSize=""
+       IsFormatingRequired="No" JsFunctionToFormat="" OnClickJSFunction=""
+        OnChangeJSFunction="" >
+
+    <rev Enabled="No" ExpKey="" />
+    <Culture Code="en-US" Desc="set Label and Message for English language">
+      <Caption>Airport Construction or repair</Caption>
+      <rfvMessage></rfvMessage>
+      <DefaultValue></DefaultValue>
+      <revExpMessage></revExpMessage>
+    </Culture>
+    <Culture Code="zh-SG" Desc="set Label and Message for Singapore language">
+      <Caption>Airport Construction or repair</Caption>
+      <rfvMessage></rfvMessage>
+      <DefaultValue></DefaultValue>
+      <revExpMessage></revExpMessage>
+    </Culture>
+  </PageElement>
+  
+  <PageElement name="chkIS_HIGH_VOLTAGE" type="CheckBox" Desc=""
+        IsMandatory="No"
+        IsReadOnly="No"
+        IsDisabled="No"
+        IsDisplay="Yes"
+        MaxLength=""
+        MaxSize=""
+       IsFormatingRequired="No" JsFunctionToFormat="" OnClickJSFunction=""
+        OnChangeJSFunction="" >
+
+    <rev Enabled="No" ExpKey="" />
+    <Culture Code="en-US" Desc="set Label and Message for English language">
+      <Caption>High voltage or high amperage</Caption>
+      <rfvMessage></rfvMessage>
+      <DefaultValue></DefaultValue>
+      <revExpMessage></revExpMessage>
+    </Culture>
+    <Culture Code="zh-SG" Desc="set Label and Message for Singapore language">
+      <Caption>High voltage or high amperage</Caption>
+      <rfvMessage></rfvMessage>
+      <DefaultValue></DefaultValue>
+      <revExpMessage></revExpMessage>
+    </Culture>
+  </PageElement>
+  
+  <PageElement name="chkIS_TRAFFIC_WRK" type="CheckBox" Desc=""
+        IsMandatory="No"
+        IsReadOnly="No"
+        IsDisabled="No"
+        IsDisplay="Yes"
+        MaxLength=""
+        MaxSize=""
+       IsFormatingRequired="No" JsFunctionToFormat="" OnClickJSFunction=""
+        OnChangeJSFunction="" >
+
+    <rev Enabled="No" ExpKey="" />
+    <Culture Code="en-US" Desc="set Label and Message for English language">
+      <Caption>Traffic or signal work</Caption>
+      <rfvMessage></rfvMessage>
+      <DefaultValue></DefaultValue>
+      <revExpMessage></revExpMessage>
+    </Culture>
+    <Culture Code="zh-SG" Desc="set Label and Message for Singapore language">
+      <Caption>Traffic or signal work</Caption>
+      <rfvMessage></rfvMessage>
+      <DefaultValue></DefaultValue>
+      <revExpMessage></revExpMessage>
+    </Culture>
+  </PageElement>
+  
+  <PageElement name="chkIS_LND_FILL" type="CheckBox" Desc=""
+        IsMandatory="No"
+        IsReadOnly="No"
+        IsDisabled="No"
+        IsDisplay="Yes"
+        MaxLength=""
+        MaxSize=""
+       IsFormatingRequired="No" JsFunctionToFormat="" OnClickJSFunction=""
+        OnChangeJSFunction="" >
+
+    <rev Enabled="No" ExpKey="" />
+    <Culture Code="en-US" Desc="set Label and Message for English language">
+      <Caption>Land Fill</Caption>
+      <rfvMessage></rfvMessage>
+      <DefaultValue></DefaultValue>
+      <revExpMessage></revExpMessage>
+    </Culture>
+    <Culture Code="zh-SG" Desc="set Label and Message for Singapore language">
+      <Caption>Land Fill</Caption>
+      <rfvMessage></rfvMessage>
+      <DefaultValue></DefaultValue>
+      <revExpMessage></revExpMessage>
+    </Culture>
+  </PageElement>
+  
+  <PageElement name="chkIS_DAM_CONSTRNT" type="CheckBox" Desc=""
+        IsMandatory="No"
+        IsReadOnly="No"
+        IsDisabled="No"
+        IsDisplay="Yes"
+        MaxLength=""
+        MaxSize=""
+       IsFormatingRequired="No" JsFunctionToFormat="" OnClickJSFunction=""
+        OnChangeJSFunction="" >
+
+    <rev Enabled="No" ExpKey="" />
+    <Culture Code="en-US" Desc="set Label and Message for English language">
+      <Caption>Dam. Bridge or river related const</Caption>
+      <rfvMessage></rfvMessage>
+      <DefaultValue></DefaultValue>
+      <revExpMessage></revExpMessage>
+    </Culture>
+    <Culture Code="zh-SG" Desc="set Label and Message for Singapore language">
+      <Caption>Dam. Bridge or river related const</Caption>
+      <rfvMessage></rfvMessage>
+      <DefaultValue></DefaultValue>
+      <revExpMessage></revExpMessage>
+    </Culture>
+  </PageElement>
+  
+  <PageElement name="chkIS_REFINERY" type="CheckBox" Desc=""
+        IsMandatory="No"
+        IsReadOnly="No"
+        IsDisabled="No"
+        IsDisplay="Yes"
+        MaxLength=""
+        MaxSize=""
+       IsFormatingRequired="No" JsFunctionToFormat="" OnClickJSFunction=""
+        OnChangeJSFunction="" >
+
+    <rev Enabled="No" ExpKey="" />
+    <Culture Code="en-US" Desc="set Label and Message for English language">
+      <Caption>Oil or Gas refiniers</Caption>
+      <rfvMessage></rfvMessage>
+      <DefaultValue></DefaultValue>
+      <revExpMessage></revExpMessage>
+    </Culture>
+    <Culture Code="zh-SG" Desc="set Label and Message for Singapore language">
+      <Caption>Oil or Gas refiniers</Caption>
+      <rfvMessage></rfvMessage>
+      <DefaultValue></DefaultValue>
+      <revExpMessage></revExpMessage>
+    </Culture>
+  </PageElement>
+  
+  <PageElement name="chkIS_HZD_MATERIAL" type="CheckBox" Desc=""
+        IsMandatory="No"
+        IsReadOnly="No"
+        IsDisabled="No"
+        IsDisplay="Yes"
+        MaxLength=""
+        MaxSize=""
+       IsFormatingRequired="No" JsFunctionToFormat="" OnClickJSFunction=""
+        OnChangeJSFunction="" >
+
+    <rev Enabled="No" ExpKey="" />
+    <Culture Code="en-US" Desc="set Label and Message for English language">
+      <Caption>Hazardous material abatement</Caption>
+      <rfvMessage></rfvMessage>
+      <DefaultValue></DefaultValue>
+      <revExpMessage></revExpMessage>
+    </Culture>
+    <Culture Code="zh-SG" Desc="set Label and Message for Singapore language">
+      <Caption>Hazardous material abatement</Caption>
+      <rfvMessage></rfvMessage>
+      <DefaultValue></DefaultValue>
+      <revExpMessage></revExpMessage>
+    </Culture>
+  </PageElement>
+  
+  <PageElement name="chkIS_PETRO_PLNT" type="CheckBox" Desc=""
+        IsMandatory="No"
+        IsReadOnly="No"
+        IsDisabled="No"
+        IsDisplay="Yes"
+        MaxLength=""
+        MaxSize=""
+       IsFormatingRequired="No" JsFunctionToFormat="" OnClickJSFunction=""
+        OnChangeJSFunction="" >
+
+    <rev Enabled="No" ExpKey="" />
+    <Culture Code="en-US" Desc="set Label and Message for English language">
+      <Caption>Petrochemical Plants</Caption>
+      <rfvMessage></rfvMessage>
+      <DefaultValue></DefaultValue>
+      <revExpMessage></revExpMessage>
+    </Culture>
+    <Culture Code="zh-SG" Desc="set Label and Message for Singapore language">
+      <Caption>Petrochemical Plants</Caption>
+      <rfvMessage></rfvMessage>
+      <DefaultValue></DefaultValue>
+      <revExpMessage></revExpMessage>
+    </Culture>
+  </PageElement>
+  
+  <PageElement name="chkIS_NUCL_PLNT" type="CheckBox" Desc=""
+        IsMandatory="No"
+        IsReadOnly="No"
+        IsDisabled="No"
+        IsDisplay="Yes"
+        MaxLength=""
+        MaxSize=""
+       IsFormatingRequired="No" JsFunctionToFormat="" OnClickJSFunction=""
+        OnChangeJSFunction="" >
+
+    <rev Enabled="No" ExpKey="" />
+    <Culture Code="en-US" Desc="set Label and Message for English language">
+      <Caption>Nuclear Plants</Caption>
+      <rfvMessage></rfvMessage>
+      <DefaultValue></DefaultValue>
+      <revExpMessage></revExpMessage>
+    </Culture>
+    <Culture Code="zh-SG" Desc="set Label and Message for Singapore language">
+      <Caption>Nuclear Plants</Caption>
+      <rfvMessage></rfvMessage>
+      <DefaultValue></DefaultValue>
+      <revExpMessage></revExpMessage>
+    </Culture>
+  </PageElement>
+  
+  <PageElement name="chkIS_PWR_LINES" type="CheckBox" Desc=""
+        IsMandatory="No"
+        IsReadOnly="No"
+        IsDisabled="No"
+        IsDisplay="Yes"
+        MaxLength=""
+        MaxSize=""
+       IsFormatingRequired="No" JsFunctionToFormat="" OnClickJSFunction=""
+        OnChangeJSFunction="" >
+
+    <rev Enabled="No" ExpKey="" />
+    <Culture Code="en-US" Desc="set Label and Message for English language">
+      <Caption>Power Lines</Caption>
+      <rfvMessage></rfvMessage>
+      <DefaultValue></DefaultValue>
+      <revExpMessage></revExpMessage>
+    </Culture>
+    <Culture Code="zh-SG" Desc="set Label and Message for Singapore language">
+      <Caption>Power Lines</Caption>
+      <rfvMessage></rfvMessage>
+      <DefaultValue></DefaultValue>
+      <revExpMessage></revExpMessage>
+    </Culture>
+  </PageElement>
+  
+  <PageElement name="cmbDRW_PLANS" type="DDL" Desc=""
+        IsMandatory="No"
+        IsReadOnly="No"
+        IsDisabled="No"
+        IsDisplay="Yes"
+        MaxLength=""
+        MaxSize=""
+       IsFormatingRequired="No" JsFunctionToFormat="" OnClickJSFunction=""
+        OnChangeJSFunction="" >
+    <Bindings>
+      <DataSource type="Proc" name="Proc_GetLookupValues" TextField="LOOKUP_VALUE_DESC" ValueField="LOOKUP_UNIQUE_ID" WhereClause="">
+        <Params name="@LookupCode" Value="YESNO" />
+        <Params name="@LANG_ID" Value="1" />
+      </DataSource>
+    </Bindings>
+    <rev Enabled="No" ExpKey="" />
+    <Culture Code="en-US" Desc="set Label and Message for English language">
+      <Caption>Does applicant draw plans, designs or spec for others?</Caption>
+      <rfvMessage></rfvMessage>
+      <DefaultValue></DefaultValue>
+      <revExpMessage></revExpMessage>
+    </Culture>
+    <Culture Code="zh-SG" Desc="set Label and Message for Singapore language">
+      <Caption>Does applicant draw plans, designs or spec for others?</Caption>
+      <rfvMessage></rfvMessage>
+      <DefaultValue></DefaultValue>
+      <revExpMessage></revExpMessage>
+    </Culture>
+  </PageElement>
+  
+  <PageElement name="cmbOPR_BLASTING" type="DDL" Desc=""
+        IsMandatory="No"
+        IsReadOnly="No"
+        IsDisabled="No"
+        IsDisplay="Yes"
+        MaxLength=""
+        MaxSize=""
+       IsFormatingRequired="No" JsFunctionToFormat="" OnClickJSFunction=""
+        OnChangeJSFunction="" >
+    <Bindings>
+      <DataSource type="Proc" name="Proc_GetLookupValues" TextField="LOOKUP_VALUE_DESC" ValueField="LOOKUP_UNIQUE_ID" WhereClause="">
+        <Params name="@LookupCode" Value="YESNO" />
+        <Params name="@LANG_ID" Value="1" />
+      </DataSource>
+    </Bindings>
+    <rev Enabled="No" ExpKey="" />
+    <Culture Code="en-US" Desc="set Label and Message for English language">
+      <Caption>Do any operations include blasting or utilize/store explosives?</Caption>
+      <rfvMessage></rfvMessage>
+      <DefaultValue></DefaultValue>
+      <revExpMessage></revExpMessage>
+    </Culture>
+    <Culture Code="zh-SG" Desc="set Label and Message for Singapore language">
+      <Caption>Do any operations include blasting or utilize/store explosives?</Caption>
+      <rfvMessage></rfvMessage>
+      <DefaultValue></DefaultValue>
+      <revExpMessage></revExpMessage>
+    </Culture>
+  </PageElement>
+  
+  <PageElement name="cmbOPR_TRENCHING" type="DDL" Desc=""
+        IsMandatory="No"
+        IsReadOnly="No"
+        IsDisabled="No"
+        IsDisplay="Yes"
+        MaxLength=""
+        MaxSize=""
+       IsFormatingRequired="No" JsFunctionToFormat="" OnClickJSFunction=""
+        OnChangeJSFunction="" >
+    <Bindings>
+      <DataSource type="Proc" name="Proc_GetLookupValues" TextField="LOOKUP_VALUE_DESC" ValueField="LOOKUP_UNIQUE_ID" WhereClause="">
+        <Params name="@LookupCode" Value="YESNO" />
+        <Params name="@LANG_ID" Value="1" />
+      </DataSource>
+    </Bindings>
+    <rev Enabled="No" ExpKey="" />
+    <Culture Code="en-US" Desc="set Label and Message for English language">
+      <Caption>Do any operations include trenching, splinkler installsation, or underground cable work?</Caption>
+      <rfvMessage></rfvMessage>
+      <DefaultValue></DefaultValue>
+      <revExpMessage></revExpMessage>
+    </Culture>
+    <Culture Code="zh-SG" Desc="set Label and Message for Singapore language">
+      <Caption>Do any operations include trenching, splinkler installsation, or underground cable work?</Caption>
+      <rfvMessage></rfvMessage>
+      <DefaultValue></DefaultValue>
+      <revExpMessage></revExpMessage>
+    </Culture>
+  </PageElement>
+  
+  <PageElement name="cmbOPR_EXCAVACATION" type="DDL" Desc=""
+        IsMandatory="No"
+        IsReadOnly="No"
+        IsDisabled="No"
+        IsDisplay="Yes"
+        MaxLength=""
+        MaxSize=""
+       IsFormatingRequired="No" JsFunctionToFormat="" OnClickJSFunction=""
+        OnChangeJSFunction="" >
+    <Bindings>
+      <DataSource type="Proc" name="Proc_GetLookupValues" TextField="LOOKUP_VALUE_DESC" ValueField="LOOKUP_UNIQUE_ID" WhereClause="">
+        <Params name="@LookupCode" Value="YESNO" />
+        <Params name="@LANG_ID" Value="1" />
+      </DataSource>
+    </Bindings>
+    <rev Enabled="No" ExpKey="" />
+    <Culture Code="en-US" Desc="set Label and Message for English language">
+      <Caption>Do any operations include excavation, tunnelling, underground work or earth moving (excluding landscaping)?</Caption>
+      <rfvMessage></rfvMessage>
+      <DefaultValue></DefaultValue>
+      <revExpMessage></revExpMessage>
+    </Culture>
+    <Culture Code="zh-SG" Desc="set Label and Message for Singapore language">
+      <Caption>Do any operations include excavation, tunnelling, underground work or earth moving (excluding landscaping)?</Caption>
+      <rfvMessage></rfvMessage>
+      <DefaultValue></DefaultValue>
+      <revExpMessage></revExpMessage>
+    </Culture>
+  </PageElement>
+  
+  <PageElement name="cmbIS_SECTY_POLICY" type="DDL" Desc=""
+        IsMandatory="No"
+        IsReadOnly="No"
+        IsDisabled="No"
+        IsDisplay="Yes"
+        MaxLength=""
+        MaxSize=""
+       IsFormatingRequired="No" JsFunctionToFormat="" OnClickJSFunction=""
+        OnChangeJSFunction="" >
+    <Bindings>
+      <DataSource type="Proc" name="Proc_GetLookupValues" TextField="LOOKUP_VALUE_DESC" ValueField="LOOKUP_UNIQUE_ID" WhereClause="">
+        <Params name="@LookupCode" Value="YESNO" />
+        <Params name="@LANG_ID" Value="1" />
+      </DataSource>
+    </Bindings>
+    <rev Enabled="No" ExpKey="" />
+    <Culture Code="en-US" Desc="set Label and Message for English language">
+      <Caption>Is there a formal , written safety and security policy in effect?</Caption>
+      <rfvMessage></rfvMessage>
+      <DefaultValue></DefaultValue>
+      <revExpMessage></revExpMessage>
+    </Culture>
+    <Culture Code="zh-SG" Desc="set Label and Message for Singapore language">
+      <Caption>Is there a formal , written safety and security policy in effect?</Caption>
+      <rfvMessage></rfvMessage>
+      <DefaultValue></DefaultValue>
+      <revExpMessage></revExpMessage>
+    </Culture>
+  </PageElement>
+  <PageElement name="cmbANY_DEMOLITION" type="DDL" Desc=""
+        IsMandatory="No"
+        IsReadOnly="No"
+        IsDisabled="No"
+        IsDisplay="Yes"
+        MaxLength=""
+        MaxSize=""
+       IsFormatingRequired="No" JsFunctionToFormat="" OnClickJSFunction=""
+        OnChangeJSFunction="" >
+    <Bindings>
+      <DataSource type="Proc" name="Proc_GetLookupValues" TextField="LOOKUP_VALUE_DESC" ValueField="LOOKUP_UNIQUE_ID" WhereClause="">
+        <Params name="@LookupCode" Value="YESNO" />
+        <Params name="@LANG_ID" Value="1" />
+      </DataSource>
+    </Bindings>
+    <rev Enabled="No" ExpKey="" />
+    <Culture Code="en-US" Desc="set Label and Message for English language">
+      <Caption>Any demotion or wrecking work done?</Caption>
+      <rfvMessage></rfvMessage>
+      <DefaultValue></DefaultValue>
+      <revExpMessage></revExpMessage>
+    </Culture>
+    <Culture Code="zh-SG" Desc="set Label and Message for Singapore language">
+      <Caption>Any demotion or wrecking work done?</Caption>
+      <rfvMessage></rfvMessage>
+      <DefaultValue></DefaultValue>
+      <revExpMessage></revExpMessage>
+    </Culture>
+  </PageElement>
+  
+  <PageElement name="cmbANY_CRANES" type="DDL" Desc=""
+        IsMandatory="No"
+        IsReadOnly="No"
+        IsDisabled="No"
+        IsDisplay="Yes"
+        MaxLength=""
+        MaxSize=""
+       IsFormatingRequired="No" JsFunctionToFormat="" OnClickJSFunction=""
+        OnChangeJSFunction="" >
+    <Bindings>
+      <DataSource type="Proc" name="Proc_GetLookupValues" TextField="LOOKUP_VALUE_DESC" ValueField="LOOKUP_UNIQUE_ID" WhereClause="">
+        <Params name="@LookupCode" Value="YESNO" />
+        <Params name="@LANG_ID" Value="1" />
+      </DataSource>
+    </Bindings>
+    <rev Enabled="No" ExpKey="" />
+    <Culture Code="en-US" Desc="set Label and Message for English language">
+      <Caption>Any use of cranes?</Caption>
+      <rfvMessage></rfvMessage>
+      <DefaultValue></DefaultValue>
+      <revExpMessage></revExpMessage>
+    </Culture>
+    <Culture Code="zh-SG" Desc="set Label and Message for Singapore language">
+      <Caption>Any use of cranes?</Caption>
+      <rfvMessage></rfvMessage>
+      <DefaultValue></DefaultValue>
+      <revExpMessage></revExpMessage>
+    </Culture>
+  </PageElement>
+  
+  <PageElement name="txtPERCENT_ROOFING" type="TextBox" Desc=""
+        IsMandatory="No"
+        IsReadOnly="No"
+        IsDisabled="No"
+        IsDisplay="Yes"
+        MaxLength=""
+        MaxSize=""
+       IsFormatingRequired="No" JsFunctionToFormat="" OnClickJSFunction=""
+        OnChangeJSFunction="" >
+
+    <rev Enabled="Yes" ExpKey="^((\d*)|(\d*\.\d*))$" />
+    <Culture Code="en-US" Desc="set Label and Message for English language">
+      <Caption>What Percentage of work is roofing?</Caption>
+      <rfvMessage></rfvMessage>
+      <DefaultValue></DefaultValue>
+      <revExpMessage>Please Enter Numeric Value</revExpMessage>
+    </Culture>
+    <Culture Code="zh-SG" Desc="set Label and Message for Singapore language">
+      <Caption>What Percentage of work is roofing?</Caption>
+      <rfvMessage></rfvMessage>
+      <DefaultValue></DefaultValue>
+      <revExpMessage>Please Enter Numeric Value</revExpMessage>
+    </Culture>
+  </PageElement>
+  
+  <PageElement name="cmbANY_LESS_LMTS" type="DDL" Desc=""
+        IsMandatory="No"
+        IsReadOnly="No"
+        IsDisabled="No"
+        IsDisplay="Yes"
+        MaxLength=""
+        MaxSize=""
+       IsFormatingRequired="No" JsFunctionToFormat="" OnClickJSFunction=""
+        OnChangeJSFunction="" >
+    <Bindings>
+      <DataSource type="Proc" name="Proc_GetLookupValues" TextField="LOOKUP_VALUE_DESC" ValueField="LOOKUP_UNIQUE_ID" WhereClause="">
+        <Params name="@LookupCode" Value="YESNO" />
+        <Params name="@LANG_ID" Value="1" />
+      </DataSource>
+    </Bindings>
+    <rev Enabled="No" ExpKey="" />
+    <Culture Code="en-US" Desc="set Label and Message for English language">
+      <Caption>Do any subcontractors carry limits less than yours?</Caption>
+      <rfvMessage></rfvMessage>
+      <DefaultValue></DefaultValue>
+      <revExpMessage></revExpMessage>
+    </Culture>
+    <Culture Code="zh-SG" Desc="set Label and Message for Singapore language">
+      <Caption>Do any subcontractors carry limits less than yours?</Caption>
+      <rfvMessage></rfvMessage>
+      <DefaultValue></DefaultValue>
+      <revExpMessage></revExpMessage>
+    </Culture>
+  </PageElement>
+  
+  <PageElement name="cmbANY_SHOP_WRK" type="DDL" Desc=""
+        IsMandatory="No"
+        IsReadOnly="No"
+        IsDisabled="No"
+        IsDisplay="Yes"
+        MaxLength=""
+        MaxSize=""
+       IsFormatingRequired="No" JsFunctionToFormat="" OnClickJSFunction=""
+        OnChangeJSFunction="" >
+    <Bindings>
+      <DataSource type="Proc" name="Proc_GetLookupValues" TextField="LOOKUP_VALUE_DESC" ValueField="LOOKUP_UNIQUE_ID" WhereClause="">
+        <Params name="@LookupCode" Value="YESNO" />
+        <Params name="@LANG_ID" Value="1" />
+      </DataSource>
+    </Bindings>
+    <rev Enabled="No" ExpKey="" />
+    <Culture Code="en-US" Desc="set Label and Message for English language">
+      <Caption>Any shop work done?</Caption>
+      <rfvMessage></rfvMessage>
+      <DefaultValue></DefaultValue>
+      <revExpMessage></revExpMessage>
+    </Culture>
+    <Culture Code="zh-SG" Desc="set Label and Message for Singapore language">
+      <Caption>Any shop work done?</Caption>
+      <rfvMessage></rfvMessage>
+      <DefaultValue></DefaultValue>
+      <revExpMessage></revExpMessage>
+    </Culture>
+  </PageElement>
+  
+  <PageElement name="txtPERCENT_RENOVATION" type="TextBox" Desc=""
+        IsMandatory="No"
+        IsReadOnly="No"
+        IsDisabled="No"
+        IsDisplay="Yes"
+        MaxLength=""
+        MaxSize=""
+       IsFormatingRequired="No" JsFunctionToFormat="" OnClickJSFunction=""
+        OnChangeJSFunction="" >
+
+    <rev Enabled="Yes" ExpKey="^((\d*)|(\d*\.\d*))$" />
+    <Culture Code="en-US" Desc="set Label and Message for English language">
+      <Caption>What percentage of work is renovation?</Caption>
+      <rfvMessage></rfvMessage>
+      <DefaultValue></DefaultValue>
+      <revExpMessage>Please Enter Numeric Value</revExpMessage>
+    </Culture>
+    <Culture Code="zh-SG" Desc="set Label and Message for Singapore language">
+      <Caption>What percentage of work is renovation?</Caption>
+      <rfvMessage></rfvMessage>
+      <DefaultValue></DefaultValue>
+      <revExpMessage>Please Enter Numeric Value</revExpMessage>
+    </Culture>
+  </PageElement>
+  
+  <PageElement name="cmbANY_GUTTING" type="DDL" Desc=""
+        IsMandatory="No"
+        IsReadOnly="No"
+        IsDisabled="No"
+        IsDisplay="Yes"
+        MaxLength=""
+        MaxSize=""
+       IsFormatingRequired="No" JsFunctionToFormat="" OnClickJSFunction=""
+        OnChangeJSFunction="" >
+    <Bindings>
+      <DataSource type="Proc" name="Proc_GetLookupValues" TextField="LOOKUP_VALUE_DESC" ValueField="LOOKUP_UNIQUE_ID" WhereClause="">
+        <Params name="@LookupCode" Value="YESNO" />
+        <Params name="@LANG_ID" Value="1" />
+      </DataSource>
+    </Bindings>
+    <rev Enabled="No" ExpKey="" />
+    <Culture Code="en-US" Desc="set Label and Message for English language">
+      <Caption>Any gutting of interior load bearing walls?</Caption>
+      <rfvMessage></rfvMessage>
+      <DefaultValue></DefaultValue>
+      <revExpMessage></revExpMessage>
+    </Culture>
+    <Culture Code="zh-SG" Desc="set Label and Message for Singapore language">
+      <Caption>Any gutting of interior load bearing walls?</Caption>
+      <rfvMessage></rfvMessage>
+      <DefaultValue></DefaultValue>
+      <revExpMessage></revExpMessage>
+    </Culture>
+  </PageElement>
+  <PageElement name="txtPERCENT_SNOWPLOWING" type="TextBox" Desc=""
+        IsMandatory="No"
+        IsReadOnly="No"
+        IsDisabled="No"
+        IsDisplay="Yes"
+        MaxLength=""
+        MaxSize=""
+       IsFormatingRequired="No" JsFunctionToFormat="" OnClickJSFunction=""
+        OnChangeJSFunction="" >
+
+    <rev Enabled="Yes" ExpKey="^((\d*)|(\d*\.\d*))$" />
+    <Culture Code="en-US" Desc="set Label and Message for English language">
+      <Caption>What percentage of painting is snowplowing?</Caption>
+      <rfvMessage></rfvMessage>
+      <DefaultValue></DefaultValue>
+      <revExpMessage>Please Enter Numeric Value</revExpMessage>
+    </Culture>
+    <Culture Code="zh-SG" Desc="set Label and Message for Singapore language">
+      <Caption>What percentage of painting is snowplowing?</Caption>
+      <rfvMessage></rfvMessage>
+      <DefaultValue></DefaultValue>
+      <revExpMessage>Please Enter Numeric Value</revExpMessage>
+    </Culture>
+  </PageElement>
+  
+  <PageElement name="cmbANY_WRK_LOAD" type="DDL" Desc=""
+        IsMandatory="No"
+        IsReadOnly="No"
+        IsDisabled="No"
+        IsDisplay="Yes"
+        MaxLength=""
+        MaxSize=""
+       IsFormatingRequired="No" JsFunctionToFormat="" OnClickJSFunction=""
+        OnChangeJSFunction="" >
+    <Bindings>
+      <DataSource type="Proc" name="Proc_GetLookupValues" TextField="LOOKUP_VALUE_DESC" ValueField="LOOKUP_UNIQUE_ID" WhereClause="">
+        <Params name="@LookupCode" Value="YESNO" />
+        <Params name="@LANG_ID" Value="1" />
+      </DataSource>
+    </Bindings>
+    <rev Enabled="No" ExpKey="" />
+    <Culture Code="en-US" Desc="set Label and Message for English language">
+      <Caption>Any work involving load bearing walls?</Caption>
+      <rfvMessage></rfvMessage>
+      <DefaultValue></DefaultValue>
+      <revExpMessage></revExpMessage>
+    </Culture>
+    <Culture Code="zh-SG" Desc="set Label and Message for Singapore language">
+      <Caption>Any work involving load bearing walls?</Caption>
+      <rfvMessage></rfvMessage>
+      <DefaultValue></DefaultValue>
+      <revExpMessage></revExpMessage>
+    </Culture>
+  </PageElement>
+  
+  <PageElement name="txtPERCENT_PNTG_OUTSIDE" type="TextBox" Desc=""
+        IsMandatory="No"
+        IsReadOnly="No"
+        IsDisabled="No"
+        IsDisplay="Yes"
+        MaxLength=""
+        MaxSize=""
+       IsFormatingRequired="No" JsFunctionToFormat="" OnClickJSFunction=""
+        OnChangeJSFunction="" >
+
+    <rev Enabled="Yes" ExpKey="^((\d*)|(\d*\.\d*))$" />
+    <Culture Code="en-US" Desc="set Label and Message for English language">
+      <Caption>What percentage of painting done outside?</Caption>
+      <rfvMessage></rfvMessage>
+      <DefaultValue></DefaultValue>
+      <revExpMessage>Please Enter Numeric Value</revExpMessage>
+    </Culture>
+    <Culture Code="zh-SG" Desc="set Label and Message for Singapore language">
+      <Caption>What percentage of painting done outside?</Caption>
+      <rfvMessage></rfvMessage>
+      <DefaultValue></DefaultValue>
+      <revExpMessage>Please Enter Numeric Value</revExpMessage>
+    </Culture>
+  </PageElement>
+  
+  <PageElement name="txtPERCENT_PNTG_INSIDE" type="TextBox" Desc=""
+        IsMandatory="No"
+        IsReadOnly="No"
+        IsDisabled="No"
+        IsDisplay="Yes"
+        MaxLength=""
+        MaxSize=""
+       IsFormatingRequired="No" JsFunctionToFormat="" OnClickJSFunction=""
+        OnChangeJSFunction="" >
+    <rev Enabled="Yes" ExpKey="^((\d*)|(\d*\.\d*))$" />
+    <Culture Code="en-US" Desc="set Label and Message for English language">
+      <Caption>What percentage of painting done inside?</Caption>
+      <rfvMessage></rfvMessage>
+      <DefaultValue></DefaultValue>
+      <revExpMessage>Please Enter Numeric Value</revExpMessage>
+    </Culture>
+    <Culture Code="zh-SG" Desc="set Label and Message for Singapore language">
+      <Caption>What percentage of painting done inside?</Caption>
+      <rfvMessage></rfvMessage>
+      <DefaultValue></DefaultValue>
+      <revExpMessage>Please Enter Numeric Value</revExpMessage>
+    </Culture>
+  </PageElement>
+  
+  <PageElement name="cmbANY_PNTG_TNKS" type="DDL" Desc=""
+        IsMandatory="No"
+        IsReadOnly="No"
+        IsDisabled="No"
+        IsDisplay="Yes"
+        MaxLength=""
+        MaxSize=""
+       IsFormatingRequired="No" JsFunctionToFormat="" OnClickJSFunction=""
+        OnChangeJSFunction="" >
+    <Bindings>
+      <DataSource type="Proc" name="Proc_GetLookupValues" TextField="LOOKUP_VALUE_DESC" ValueField="LOOKUP_UNIQUE_ID" WhereClause="">
+        <Params name="@LookupCode" Value="YESNO" />
+        <Params name="@LANG_ID" Value="1" />
+      </DataSource>
+    </Bindings>
+    <rev Enabled="No" ExpKey="" />
+    <Culture Code="en-US" Desc="set Label and Message for English language">
+      <Caption>Any painting of tanks water or gas?</Caption>
+      <rfvMessage></rfvMessage>
+      <DefaultValue></DefaultValue>
+      <revExpMessage></revExpMessage>
+    </Culture>
+    <Culture Code="zh-SG" Desc="set Label and Message for Singapore language">
+      <Caption>Any painting of tanks water or gas?</Caption>
+      <rfvMessage></rfvMessage>
+      <DefaultValue></DefaultValue>
+      <revExpMessage></revExpMessage>
+    </Culture>
+  </PageElement>
+  
+  <PageElement name="txtPERCENT_PNTG_SPRY" type="TextBox" Desc=""
+        IsMandatory="No"
+        IsReadOnly="No"
+        IsDisabled="No"
+        IsDisplay="Yes"
+        MaxLength=""
+        MaxSize=""
+       IsFormatingRequired="No" JsFunctionToFormat="" OnClickJSFunction=""
+        OnChangeJSFunction="" >
+
+    <rev Enabled="Yes" ExpKey="^((\d*)|(\d*\.\d*))$" />
+    <Culture Code="en-US" Desc="set Label and Message for English language">
+      <Caption>What percentage of painting is exterior spray painting?</Caption>
+      <rfvMessage></rfvMessage>
+      <DefaultValue></DefaultValue>
+      <revExpMessage>Please Enter Numeric Value</revExpMessage>
+    </Culture>
+    <Culture Code="zh-SG" Desc="set Label and Message for Singapore language">
+      <Caption>What percentage of painting is exterior spray painting?</Caption>
+      <rfvMessage></rfvMessage>
+      <DefaultValue></DefaultValue>
+      <revExpMessage>Please Enter Numeric Value</revExpMessage>
+    </Culture>
+  </PageElement>
+  
+  <PageElement name="cmbANY_EPOXIES" type="DDL" Desc=""
+        IsMandatory="No"
+        IsReadOnly="No"
+        IsDisabled="No"
+        IsDisplay="Yes"
+        MaxLength=""
+        MaxSize=""
+       IsFormatingRequired="No" JsFunctionToFormat="" OnClickJSFunction=""
+        OnChangeJSFunction="" >
+    <Bindings>
+      <DataSource type="Proc" name="Proc_GetLookupValues" TextField="LOOKUP_VALUE_DESC" ValueField="LOOKUP_UNIQUE_ID" WhereClause="">
+        <Params name="@LookupCode" Value="YESNO" />
+        <Params name="@LANG_ID" Value="1" />
+      </DataSource>
+    </Bindings>
+    <rev Enabled="No" ExpKey="" />
+    <Culture Code="en-US" Desc="set Label and Message for English language">
+      <Caption>Any epoxies used?</Caption>
+      <rfvMessage></rfvMessage>
+      <DefaultValue></DefaultValue>
+      <revExpMessage></revExpMessage>
+    </Culture>
+    <Culture Code="zh-SG" Desc="set Label and Message for Singapore language">
+      <Caption>Any epoxies used?</Caption>
+      <rfvMessage></rfvMessage>
+      <DefaultValue></DefaultValue>
+      <revExpMessage></revExpMessage>
+    </Culture>
+  </PageElement>
+  
+  <PageElement name="cmbANY_ACID" type="DDL" Desc=""
+        IsMandatory="No"
+        IsReadOnly="No"
+        IsDisabled="No"
+        IsDisplay="Yes"
+        MaxLength=""
+        MaxSize=""
+       IsFormatingRequired="No" JsFunctionToFormat="" OnClickJSFunction=""
+        OnChangeJSFunction="" >
+    <Bindings>
+      <DataSource type="Proc" name="Proc_GetLookupValues" TextField="LOOKUP_VALUE_DESC" ValueField="LOOKUP_UNIQUE_ID" WhereClause="">
+        <Params name="@LookupCode" Value="YESNO" />
+        <Params name="@LANG_ID" Value="1" />
+      </DataSource>
+    </Bindings>
+    <rev Enabled="No" ExpKey="" />
+    <Culture Code="en-US" Desc="set Label and Message for English language">
+      <Caption>Any muriatic or sulfuric acid?</Caption>
+      <rfvMessage></rfvMessage>
+      <DefaultValue></DefaultValue>
+      <revExpMessage></revExpMessage>
+    </Culture>
+    <Culture Code="zh-SG" Desc="set Label and Message for Singapore language">
+      <Caption>Any muriatic or sulfuric acid?</Caption>
+      <rfvMessage></rfvMessage>
+      <DefaultValue></DefaultValue>
+      <revExpMessage></revExpMessage>
+    </Culture>
+  </PageElement>
+  
+  <PageElement name="cmbANY_LEASE_EQUIPMNT" type="DDL" Desc=""
+        IsMandatory="No"
+        IsReadOnly="No"
+        IsDisabled="No"
+        IsDisplay="Yes"
+        MaxLength=""
+        MaxSize=""
+       IsFormatingRequired="No" JsFunctionToFormat="" OnClickJSFunction=""
+        OnChangeJSFunction="" >
+    <Bindings>
+      <DataSource type="Proc" name="Proc_GetLookupValues" TextField="LOOKUP_VALUE_DESC" ValueField="LOOKUP_UNIQUE_ID" WhereClause="">
+        <Params name="@LookupCode" Value="YESNO" />
+        <Params name="@LANG_ID" Value="1" />
+      </DataSource>
+    </Bindings>
+    <rev Enabled="No" ExpKey="" />
+    <Culture Code="en-US" Desc="set Label and Message for English language">
+      <Caption>Does applicant lease equipment to others with or without operations?</Caption>
+      <rfvMessage></rfvMessage>
+      <DefaultValue></DefaultValue>
+      <revExpMessage></revExpMessage>
+    </Culture>
+    <Culture Code="zh-SG" Desc="set Label and Message for Singapore language">
+      <Caption>Does applicant lease equipment to others with or without operations?</Caption>
+      <rfvMessage></rfvMessage>
+      <DefaultValue></DefaultValue>
+      <revExpMessage></revExpMessage>
+    </Culture>
+  </PageElement>
+  
+  <PageElement name="cmbANY_BOATS_OWND" type="DDL" Desc=""
+        IsMandatory="No"
+        IsReadOnly="No"
+        IsDisabled="No"
+        IsDisplay="Yes"
+        MaxLength=""
+        MaxSize=""
+       IsFormatingRequired="No" JsFunctionToFormat="" OnClickJSFunction=""
+        OnChangeJSFunction="" >
+    <Bindings>
+      <DataSource type="Proc" name="Proc_GetLookupValues" TextField="LOOKUP_VALUE_DESC" ValueField="LOOKUP_UNIQUE_ID" WhereClause="">
+        <Params name="@LookupCode" Value="YESNO" />
+        <Params name="@LANG_ID" Value="1" />
+      </DataSource>
+    </Bindings>
+    <rev Enabled="No" ExpKey="" />
+    <Culture Code="en-US" Desc="set Label and Message for English language">
+      <Caption>Any boats, docks, floats owned or leased?</Caption>
+      <rfvMessage></rfvMessage>
+      <DefaultValue></DefaultValue>
+      <revExpMessage></revExpMessage>
+    </Culture>
+    <Culture Code="zh-SG" Desc="set Label and Message for Singapore language">
+      <Caption>Any boats, docks, floats owned or leased?</Caption>
+      <rfvMessage></rfvMessage>
+      <DefaultValue></DefaultValue>
+      <revExpMessage></revExpMessage>
+    </Culture>
+  </PageElement>
+  
+  <PageElement name="cmbDRCT_SIGHT_WRK_IN_PRGRSS" type="DDL" Desc=""
+        IsMandatory="No"
+        IsReadOnly="No"
+        IsDisabled="No"
+        IsDisplay="Yes"
+        MaxLength=""
+        MaxSize=""
+       IsFormatingRequired="No" JsFunctionToFormat="" OnClickJSFunction=""
+        OnChangeJSFunction="" >
+    <Bindings>
+      <DataSource type="Proc" name="Proc_GetLookupValues" TextField="LOOKUP_VALUE_DESC" ValueField="LOOKUP_UNIQUE_ID" WhereClause="">
+        <Params name="@LookupCode" Value="YESNO" />
+        <Params name="@LANG_ID" Value="1" />
+      </DataSource>
+    </Bindings>
+    <rev Enabled="No" ExpKey="" />
+    <Culture Code="en-US" Desc="set Label and Message for English language">
+      <Caption>Is there direct overslight of each jobsite in progress if radius is in excess of 100 miles?</Caption>
+      <rfvMessage></rfvMessage>
+      <DefaultValue></DefaultValue>
+      <revExpMessage></revExpMessage>
+    </Culture>
+    <Culture Code="zh-SG" Desc="set Label and Message for Singapore language">
+      <Caption>Is there direct overslight of each jobsite in progress if radius is in excess of 100 miles?</Caption>
+      <rfvMessage></rfvMessage>
+      <DefaultValue></DefaultValue>
+      <revExpMessage></revExpMessage>
+    </Culture>
+  </PageElement>
+  
+  <PageElement name="cmbPRDCT_SOLD_IN_APPL_NAME" type="DDL" Desc=""
+        IsMandatory="No"
+        IsReadOnly="No"
+        IsDisabled="No"
+        IsDisplay="Yes"
+        MaxLength=""
+        MaxSize=""
+       IsFormatingRequired="No" JsFunctionToFormat="" OnClickJSFunction=""
+        OnChangeJSFunction="" >
+    <Bindings>
+      <DataSource type="Proc" name="Proc_GetLookupValues" TextField="LOOKUP_VALUE_DESC" ValueField="LOOKUP_UNIQUE_ID" WhereClause="">
+        <Params name="@LookupCode" Value="YESNO" />
+        <Params name="@LANG_ID" Value="1" />
+      </DataSource>
+    </Bindings>
+    <rev Enabled="No" ExpKey="" />
+    <Culture Code="en-US" Desc="set Label and Message for English language">
+      <Caption>Any product manufactured or solid under the applicant's name?</Caption>
+      <rfvMessage></rfvMessage>
+      <DefaultValue></DefaultValue>
+      <revExpMessage></revExpMessage>
+    </Culture>
+    <Culture Code="zh-SG" Desc="set Label and Message for Singapore language">
+      <Caption>Any product manufactured or solid under the applicant's name?</Caption>
+      <rfvMessage></rfvMessage>
+      <DefaultValue></DefaultValue>
+      <revExpMessage></revExpMessage>
+    </Culture>
+  </PageElement>
+  
+  <PageElement name="cmbUTILITY_CMPNY_CALLED" type="DDL" Desc=""
+        IsMandatory="No"
+        IsReadOnly="No"
+        IsDisabled="No"
+        IsDisplay="Yes"
+        MaxLength=""
+        MaxSize=""
+       IsFormatingRequired="No" JsFunctionToFormat="" OnClickJSFunction=""
+        OnChangeJSFunction="" >
+    <Bindings>
+      <DataSource type="Proc" name="Proc_GetLookupValues" TextField="LOOKUP_VALUE_DESC" ValueField="LOOKUP_UNIQUE_ID" WhereClause="">
+        <Params name="@LookupCode" Value="YESNO" />
+        <Params name="@LANG_ID" Value="1" />
+      </DataSource>
+    </Bindings>
+    <rev Enabled="No" ExpKey="" />
+    <Culture Code="en-US" Desc="set Label and Message for English language">
+      <Caption>Are utility companies called prior to any digging?</Caption>
+      <rfvMessage></rfvMessage>
+      <DefaultValue></DefaultValue>
+      <revExpMessage></revExpMessage>
+    </Culture>
+    <Culture Code="zh-SG" Desc="set Label and Message for Singapore language">
+      <Caption>Are utility companies called prior to any digging?</Caption>
+      <rfvMessage></rfvMessage>
+      <DefaultValue></DefaultValue>
+      <revExpMessage></revExpMessage>
+    </Culture>
+  </PageElement>
+  
+  <PageElement name="txtTYP_IN_DGGN_PRCSS" type="TextBox" Desc=""
+        IsMandatory="No"
+        IsReadOnly="No"
+        IsDisabled="No"
+        IsDisplay="Yes"
+        MaxLength=""
+        MaxSize=""
+       IsFormatingRequired="No" JsFunctionToFormat="" OnClickJSFunction=""
+        OnChangeJSFunction="" >
+
+    <rev Enabled="No" ExpKey="" />
+    <Culture Code="en-US" Desc="set Label and Message for English language">
+      <Caption>What type of equipement is used for digging process?</Caption>
+      <rfvMessage></rfvMessage>
+      <DefaultValue></DefaultValue>
+      <revExpMessage></revExpMessage>
+    </Culture>
+    <Culture Code="zh-SG" Desc="set Label and Message for Singapore language">
+      <Caption>What type of equipement is used for digging process?</Caption>
+      <rfvMessage></rfvMessage>
+      <DefaultValue></DefaultValue>
+      <revExpMessage></revExpMessage>
+    </Culture>
+  </PageElement>
+  
+  <PageElement name="cmbPERMIT_OBTAINED" type="DDL" Desc=""
+        IsMandatory="No"
+        IsReadOnly="No"
+        IsDisabled="No"
+        IsDisplay="Yes"
+        MaxLength=""
+        MaxSize=""
+       IsFormatingRequired="No" JsFunctionToFormat="" OnClickJSFunction=""
+        OnChangeJSFunction="" >
+    <Bindings>
+      <DataSource type="Proc" name="Proc_GetLookupValues" TextField="LOOKUP_VALUE_DESC" ValueField="LOOKUP_UNIQUE_ID" WhereClause="">
+        <Params name="@LookupCode" Value="YESNO" />
+        <Params name="@LANG_ID" Value="1" />
+      </DataSource>
+    </Bindings>
+    <rev Enabled="No" ExpKey="" />
+    <Culture Code="en-US" Desc="set Label and Message for English language">
+      <Caption>If city permits are required, have they been obtained?</Caption>
+      <rfvMessage></rfvMessage>
+      <DefaultValue></DefaultValue>
+      <revExpMessage></revExpMessage>
+    </Culture>
+    <Culture Code="zh-SG" Desc="set Label and Message for Singapore language">
+      <Caption>If city permits are required, have they been obtained?</Caption>
+      <rfvMessage></rfvMessage>
+      <DefaultValue></DefaultValue>
+      <revExpMessage></revExpMessage>
+    </Culture>
+  </PageElement>
+  
+  <PageElement name="txtPERCENT_SPRINKLE_WRK" type="TextBox" Desc=""
+        IsMandatory="No"
+        IsReadOnly="No"
+        IsDisabled="No"
+        IsDisplay="Yes"
+        MaxLength=""
+        MaxSize=""
+       IsFormatingRequired="No" JsFunctionToFormat="" OnClickJSFunction=""
+        OnChangeJSFunction="" >
+
+    <rev Enabled="Yes" ExpKey="^((\d*)|(\d*\.\d*))$" />
+    <Culture Code="en-US" Desc="set Label and Message for English language">
+      <Caption>What percent of work involves sprinkler installation?</Caption>
+      <rfvMessage></rfvMessage>
+      <DefaultValue></DefaultValue>
+      <revExpMessage>Please Enter Numeric Value</revExpMessage>
+    </Culture>
+    <Culture Code="zh-SG" Desc="set Label and Message for Singapore language">
+      <Caption>What percent of work involves sprinkler installation?</Caption>
+      <rfvMessage></rfvMessage>
+      <DefaultValue></DefaultValue>
+      <revExpMessage>Please Enter Numeric Value</revExpMessage>
+    </Culture>
+  </PageElement>
+  
+  <PageElement name="cmbANY_EXCAVAION" type="DDL" Desc=""
+        IsMandatory="No"
+        IsReadOnly="No"
+        IsDisabled="No"
+        IsDisplay="Yes"
+        MaxLength=""
+        MaxSize=""
+       IsFormatingRequired="No" JsFunctionToFormat="" OnClickJSFunction=""
+        OnChangeJSFunction="" >
+    <Bindings>
+      <DataSource type="Proc" name="Proc_GetLookupValues" TextField="LOOKUP_VALUE_DESC" ValueField="LOOKUP_UNIQUE_ID" WhereClause="">
+        <Params name="@LookupCode" Value="YESNO" />
+        <Params name="@LANG_ID" Value="1" />
+      </DataSource>
+    </Bindings>
+    <rev Enabled="No" ExpKey="" />
+    <Culture Code="en-US" Desc="set Label and Message for English language">
+      <Caption>Any grading of land or excavation work done?</Caption>
+      <rfvMessage></rfvMessage>
+      <DefaultValue></DefaultValue>
+      <revExpMessage></revExpMessage>
+    </Culture>
+    <Culture Code="zh-SG" Desc="set Label and Message for Singapore language">
+      <Caption>Any grading of land or excavation work done?</Caption>
+      <rfvMessage></rfvMessage>
+      <DefaultValue></DefaultValue>
+      <revExpMessage></revExpMessage>
+    </Culture>
+  </PageElement>
+  
+  <PageElement name="cmbANY_PEST_SPRAY" type="DDL" Desc=""
+        IsMandatory="No"
+        IsReadOnly="No"
+        IsDisabled="No"
+        IsDisplay="Yes"
+        MaxLength=""
+        MaxSize=""
+       IsFormatingRequired="No" JsFunctionToFormat="" OnClickJSFunction=""
+        OnChangeJSFunction="" >
+    <Bindings>
+      <DataSource type="Proc" name="Proc_GetLookupValues" TextField="LOOKUP_VALUE_DESC" ValueField="LOOKUP_UNIQUE_ID" WhereClause="">
+        <Params name="@LookupCode" Value="YESNO" />
+        <Params name="@LANG_ID" Value="1" />
+      </DataSource>
+    </Bindings>
+    <rev Enabled="No" ExpKey="" />
+    <Culture Code="en-US" Desc="set Label and Message for English language">
+      <Caption>Any spraying of bushes,lawns, etc. with pesticides, hericides or fertilizers?</Caption>
+      <rfvMessage></rfvMessage>
+      <DefaultValue></DefaultValue>
+      <revExpMessage></revExpMessage>
+    </Culture>
+    <Culture Code="zh-SG" Desc="set Label and Message for Singapore language">
+      <Caption>Any spraying of bushes,lawns, etc. with pesticides, hericides or fertilizers?</Caption>
+      <rfvMessage></rfvMessage>
+      <DefaultValue></DefaultValue>
+      <revExpMessage></revExpMessage>
+    </Culture>
+  </PageElement>
+  
+  <PageElement name="txtPERCENT_TREE_TRIMNG" type="TextBox" Desc=""
+        IsMandatory="No"
+        IsReadOnly="No"
+        IsDisabled="No"
+        IsDisplay="Yes"
+        MaxLength=""
+        MaxSize=""
+       IsFormatingRequired="No" JsFunctionToFormat="" OnClickJSFunction=""
+        OnChangeJSFunction="" >
+
+    <rev Enabled="No" ExpKey="" />
+    <Culture Code="en-US" Desc="set Label and Message for English language">
+      <Caption>What percent of work is tree trimming?</Caption>
+      <rfvMessage></rfvMessage>
+      <DefaultValue></DefaultValue>
+      <revExpMessage></revExpMessage>
+    </Culture>
+    <Culture Code="zh-SG" Desc="set Label and Message for Singapore language">
+      <Caption>What percent of work is tree trimming?</Caption>
+      <rfvMessage></rfvMessage>
+      <DefaultValue></DefaultValue>
+      <revExpMessage></revExpMessage>
+    </Culture>
+  </PageElement>
+  
+  <PageElement name="cmbANY_WRK_OFFSEASON" type="DDL" Desc=""
+        IsMandatory="No"
+        IsReadOnly="No"
+        IsDisabled="No"
+        IsDisplay="Yes"
+        MaxLength=""
+        MaxSize=""
+       IsFormatingRequired="No" JsFunctionToFormat="" OnClickJSFunction=""
+        OnChangeJSFunction="" >
+    <Bindings>
+      <DataSource type="Proc" name="Proc_GetLookupValues" TextField="LOOKUP_VALUE_DESC" ValueField="LOOKUP_UNIQUE_ID" WhereClause="">
+        <Params name="@LookupCode" Value="YESNO" />
+        <Params name="@LANG_ID" Value="1" />
+      </DataSource>
+    </Bindings>
+    <rev Enabled="No" ExpKey="" />
+    <Culture Code="en-US" Desc="set Label and Message for English language">
+      <Caption>Any work done during season months?</Caption>
+      <rfvMessage></rfvMessage>
+      <DefaultValue></DefaultValue>
+      <revExpMessage></revExpMessage>
+    </Culture>
+    <Culture Code="zh-SG" Desc="set Label and Message for Singapore language">
+      <Caption>Any work done during season months?</Caption>
+      <rfvMessage></rfvMessage>
+      <DefaultValue></DefaultValue>
+      <revExpMessage></revExpMessage>
+    </Culture>
+  </PageElement>
+  
+  <PageElement name="cmbANY_MIX_TRANSIT" type="DDL" Desc=""
+        IsMandatory="No"
+        IsReadOnly="No"
+        IsDisabled="No"
+        IsDisplay="Yes"
+        MaxLength=""
+        MaxSize=""
+       IsFormatingRequired="No" JsFunctionToFormat="" OnClickJSFunction=""
+        OnChangeJSFunction="" >
+    <Bindings>
+      <DataSource type="Proc" name="Proc_GetLookupValues" TextField="LOOKUP_VALUE_DESC" ValueField="LOOKUP_UNIQUE_ID" WhereClause="">
+        <Params name="@LookupCode" Value="YESNO" />
+        <Params name="@LANG_ID" Value="1" />
+      </DataSource>
+    </Bindings>
+    <rev Enabled="No" ExpKey="" />
+    <Culture Code="en-US" Desc="set Label and Message for English language">
+      <Caption>Any mix-in-transits?</Caption>
+      <rfvMessage></rfvMessage>
+      <DefaultValue></DefaultValue>
+      <revExpMessage></revExpMessage>
+    </Culture>
+    <Culture Code="zh-SG" Desc="set Label and Message for Singapore language">
+      <Caption>Any mix-in-transits?</Caption>
+      <rfvMessage></rfvMessage>
+      <DefaultValue></DefaultValue>
+      <revExpMessage></revExpMessage>
+    </Culture>
+  </PageElement>
+  
+  <PageElement name="cmbANY_CONTSRUCTION_WRK" type="DDL" Desc=""
+        IsMandatory="No"
+        IsReadOnly="No"
+        IsDisabled="No"
+        IsDisplay="Yes"
+        MaxLength=""
+        MaxSize=""
+       IsFormatingRequired="No" JsFunctionToFormat="" OnClickJSFunction=""
+        OnChangeJSFunction="" >
+    <Bindings>
+      <DataSource type="Proc" name="Proc_GetLookupValues" TextField="LOOKUP_VALUE_DESC" ValueField="LOOKUP_UNIQUE_ID" WhereClause="">
+        <Params name="@LookupCode" Value="YESNO" />
+        <Params name="@LANG_ID" Value="1" />
+      </DataSource>
+    </Bindings>
+    <rev Enabled="No" ExpKey="" />
+    <Culture Code="en-US" Desc="set Label and Message for English language">
+      <Caption>Is the applicant constructing any retaining walls or structure?</Caption>
+      <rfvMessage></rfvMessage>
+      <DefaultValue></DefaultValue>
+      <revExpMessage></revExpMessage>
+    </Culture>
+    <Culture Code="zh-SG" Desc="set Label and Message for Singapore language">
+      <Caption>Is the applicant constructing any retaining walls or structure?</Caption>
+      <rfvMessage></rfvMessage>
+      <DefaultValue></DefaultValue>
+      <revExpMessage></revExpMessage>
+    </Culture>
+  </PageElement>
+  
+  <PageElement name="cmbANY_WRK_ABVE_THREE_STORIES" type="DDL" Desc=""
+        IsMandatory="No"
+        IsReadOnly="No"
+        IsDisabled="No"
+        IsDisplay="Yes"
+        MaxLength=""
+        MaxSize=""
+       IsFormatingRequired="No" JsFunctionToFormat="" OnClickJSFunction=""
+        OnChangeJSFunction="" >
+    <Bindings>
+      <DataSource type="Proc" name="Proc_GetLookupValues" TextField="LOOKUP_VALUE_DESC" ValueField="LOOKUP_UNIQUE_ID" WhereClause="">
+        <Params name="@LookupCode" Value="YESNO" />
+        <Params name="@LANG_ID" Value="1" />
+      </DataSource>
+    </Bindings>
+    <rev Enabled="No" ExpKey="" />
+    <Culture Code="en-US" Desc="set Label and Message for English language">
+      <Caption>Any work above 3 stories?</Caption>
+      <rfvMessage></rfvMessage>
+      <DefaultValue></DefaultValue>
+      <revExpMessage></revExpMessage>
+    </Culture>
+    <Culture Code="zh-SG" Desc="set Label and Message for Singapore language">
+      <Caption>Any work above 3 stories?</Caption>
+      <rfvMessage></rfvMessage>
+      <DefaultValue></DefaultValue>
+      <revExpMessage></revExpMessage>
+    </Culture>
+  </PageElement>
+  
+  <PageElement name="cmbANY_SCAFHOLDING_ABVE_TWELVE_FEET" type="DDL" Desc=""
+        IsMandatory="No"
+        IsReadOnly="No"
+        IsDisabled="No"
+        IsDisplay="Yes"
+        MaxLength=""
+        MaxSize=""
+       IsFormatingRequired="No" JsFunctionToFormat="" OnClickJSFunction=""
+        OnChangeJSFunction="" >
+    <Bindings>
+      <DataSource type="Proc" name="Proc_GetLookupValues" TextField="LOOKUP_VALUE_DESC" ValueField="LOOKUP_UNIQUE_ID" WhereClause="">
+        <Params name="@LookupCode" Value="YESNO" />
+        <Params name="@LANG_ID" Value="1" />
+      </DataSource>
+    </Bindings>
+    <rev Enabled="No" ExpKey="" />
+    <Culture Code="en-US" Desc="set Label and Message for English language">
+      <Caption>Any scaffolding above 12 feet?</Caption>
+      <rfvMessage></rfvMessage>
+      <DefaultValue></DefaultValue>
+      <revExpMessage></revExpMessage>
+    </Culture>
+    <Culture Code="zh-SG" Desc="set Label and Message for Singapore language">
+      <Caption>Any scaffolding above 12 feet?</Caption>
+      <rfvMessage></rfvMessage>
+      <DefaultValue></DefaultValue>
+      <revExpMessage></revExpMessage>
+    </Culture>
+  </PageElement>
+  
+  <PageElement name="cmbANY_PNTG_TOWERS" type="DDL" Desc=""
+        IsMandatory="No"
+        IsReadOnly="No"
+        IsDisabled="No"
+        IsDisplay="Yes"
+        MaxLength=""
+        MaxSize=""
+       IsFormatingRequired="No" JsFunctionToFormat="" OnClickJSFunction=""
+        OnChangeJSFunction="" >
+    <Bindings>
+      <DataSource type="Proc" name="Proc_GetLookupValues" TextField="LOOKUP_VALUE_DESC" ValueField="LOOKUP_UNIQUE_ID" WhereClause="">
+        <Params name="@LookupCode" Value="YESNO" />
+        <Params name="@LANG_ID" Value="1" />
+      </DataSource>
+    </Bindings>
+    <rev Enabled="No" ExpKey="" />
+    <Culture Code="en-US" Desc="set Label and Message for English language">
+      <Caption>Any painting of bridges or towers?</Caption>
+      <rfvMessage></rfvMessage>
+      <DefaultValue></DefaultValue>
+      <revExpMessage></revExpMessage>
+    </Culture>
+    <Culture Code="zh-SG" Desc="set Label and Message for Singapore language">
+      <Caption>Any painting of bridges or towers?</Caption>
+      <rfvMessage></rfvMessage>
+      <DefaultValue></DefaultValue>
+      <revExpMessage></revExpMessage>
+    </Culture>
+  </PageElement>
+  
+  <PageElement name="cmbANY_SPRAY_GUNS" type="DDL" Desc=""
+        IsMandatory="No"
+        IsReadOnly="No"
+        IsDisabled="No"
+        IsDisplay="Yes"
+        MaxLength=""
+        MaxSize=""
+       IsFormatingRequired="No" JsFunctionToFormat="" OnClickJSFunction=""
+        OnChangeJSFunction="" >
+    <Bindings>
+      <DataSource type="Proc" name="Proc_GetLookupValues" TextField="LOOKUP_VALUE_DESC" ValueField="LOOKUP_UNIQUE_ID" WhereClause="">
+        <Params name="@LookupCode" Value="YESNO" />
+        <Params name="@LANG_ID" Value="1" />
+      </DataSource>
+    </Bindings>
+    <rev Enabled="No" ExpKey="" />
+    <Culture Code="en-US" Desc="set Label and Message for English language">
+      <Caption>Any airless spray guns used?</Caption>
+      <rfvMessage></rfvMessage>
+      <DefaultValue></DefaultValue>
+      <revExpMessage></revExpMessage>
+    </Culture>
+    <Culture Code="zh-SG" Desc="set Label and Message for Singapore language">
+      <Caption>Any airless spray guns used?</Caption>
+      <rfvMessage></rfvMessage>
+      <DefaultValue></DefaultValue>
+      <revExpMessage></revExpMessage>
+    </Culture>
+  </PageElement>
+  
+  <PageElement name="cmbANY_REMOVAL_DONE" type="DDL" Desc=""
+        IsMandatory="No"
+        IsReadOnly="No"
+        IsDisabled="No"
+        IsDisplay="Yes"
+        MaxLength=""
+        MaxSize=""
+       IsFormatingRequired="No" JsFunctionToFormat="" OnClickJSFunction=""
+        OnChangeJSFunction="" >
+    <Bindings>
+      <DataSource type="Proc" name="Proc_GetLookupValues" TextField="LOOKUP_VALUE_DESC" ValueField="LOOKUP_UNIQUE_ID" WhereClause="">
+        <Params name="@LookupCode" Value="YESNO" />
+        <Params name="@LANG_ID" Value="1" />
+      </DataSource>
+    </Bindings>
+    <rev Enabled="No" ExpKey="" />
+    <Culture Code="en-US" Desc="set Label and Message for English language">
+      <Caption>Any Lead paint removal done?</Caption>
+      <rfvMessage></rfvMessage>
+      <DefaultValue></DefaultValue>
+      <revExpMessage></revExpMessage>
+    </Culture>
+    <Culture Code="zh-SG" Desc="set Label and Message for Singapore language">
+      <Caption>Any Lead paint removal done?</Caption>
+      <rfvMessage></rfvMessage>
+      <DefaultValue></DefaultValue>
+      <revExpMessage></revExpMessage>
+    </Culture>
+  </PageElement>
+  
+  <PageElement name="cmbANY_WAXING_FLOORS" type="DDL" Desc=""
+        IsMandatory="No"
+        IsReadOnly="No"
+        IsDisabled="No"
+        IsDisplay="Yes"
+        MaxLength=""
+        MaxSize=""
+       IsFormatingRequired="No" JsFunctionToFormat="" OnClickJSFunction=""
+        OnChangeJSFunction="" >
+    <Bindings>
+      <DataSource type="Proc" name="Proc_GetLookupValues" TextField="LOOKUP_VALUE_DESC" ValueField="LOOKUP_UNIQUE_ID" WhereClause="">
+        <Params name="@LookupCode" Value="YESNO" />
+        <Params name="@LANG_ID" Value="1" />
+      </DataSource>
+    </Bindings>
+    <rev Enabled="No" ExpKey="" />
+    <Culture Code="en-US" Desc="set Label and Message for English language">
+      <Caption>Will business operation include waxing floors?</Caption>
+      <rfvMessage></rfvMessage>
+      <DefaultValue></DefaultValue>
+      <revExpMessage></revExpMessage>
+    </Culture>
+    <Culture Code="zh-SG" Desc="set Label and Message for Singapore language">
+      <Caption>Will business operation include waxing floors?</Caption>
+      <rfvMessage></rfvMessage>
+      <DefaultValue></DefaultValue>
+      <revExpMessage></revExpMessage>
+    </Culture>
+  </PageElement>
+  
+  <PageElement name="txtPER_RESIDENT" type="TextBox" Desc=""
+        IsMandatory="No"
+        IsReadOnly="No"
+        IsDisabled="No"
+        IsDisplay="Yes"
+        MaxLength=""
+        MaxSize=""
+       IsFormatingRequired="No" JsFunctionToFormat="" OnClickJSFunction=""
+        OnChangeJSFunction="" >
+
+    <rev Enabled="Yes" ExpKey="^((\d*)|(\d*\.\d*))$" />
+    <Culture Code="en-US" Desc="set Label and Message for English language">
+      <Caption>%  of work Residential</Caption>
+      <rfvMessage></rfvMessage>
+      <DefaultValue></DefaultValue>
+      <revExpMessage>Please Enter Numeric value</revExpMessage>
+    </Culture>
+    <Culture Code="zh-SG" Desc="set Label and Message for Singapore language">
+      <Caption>%  of work Residential</Caption>
+      <rfvMessage></rfvMessage>
+      <DefaultValue></DefaultValue>
+      <revExpMessage>Please Enter Numeric value</revExpMessage>
+    </Culture>
+  </PageElement>
+  
+  <PageElement name="txtPER_COMMERICAL" type="TextBox" Desc=""
+        IsMandatory="No"
+        IsReadOnly="No"
+        IsDisabled="No"
+        IsDisplay="Yes"
+        MaxLength=""
+        MaxSize=""
+       IsFormatingRequired="No" JsFunctionToFormat="" OnClickJSFunction=""
+        OnChangeJSFunction="" >
+
+
+    <rev Enabled="Yes" ExpKey="^((\d*)|(\d*\.\d*))$" />
+    <Culture Code="en-US" Desc="set Label and Message for English language">
+      <Caption>%  of work Commerical</Caption>
+      <rfvMessage></rfvMessage>
+      <DefaultValue></DefaultValue>
+      <revExpMessage>Please Enter Numeric value</revExpMessage>
+    </Culture>
+    <Culture Code="zh-SG" Desc="set Label and Message for Singapore language">
+      <Caption>%  of work Commerical</Caption>
+      <rfvMessage></rfvMessage>
+      <DefaultValue></DefaultValue>
+      <revExpMessage>Please Enter Numeric value</revExpMessage>
+    </Culture>
+  </PageElement>
+  
+  <PageElement name="txtPER_CONST" type="TextBox" Desc=""
+        IsMandatory="No"
+        IsReadOnly="No"
+        IsDisabled="No"
+        IsDisplay="Yes"
+        MaxLength=""
+        MaxSize=""
+       IsFormatingRequired="No" JsFunctionToFormat="" OnClickJSFunction=""
+        OnChangeJSFunction="" >
+
+    <rev Enabled="Yes" ExpKey="^((\d*)|(\d*\.\d*))$" />
+    <Culture Code="en-US" Desc="set Label and Message for English language">
+      <Caption>%  of work New Construction</Caption>
+      <rfvMessage></rfvMessage>
+      <DefaultValue></DefaultValue>
+      <revExpMessage>Please Enter Numeric value</revExpMessage>
+    </Culture>
+    <Culture Code="zh-SG" Desc="set Label and Message for Singapore language">
+      <Caption>%  of work New Construction</Caption>
+      <rfvMessage></rfvMessage>
+      <DefaultValue></DefaultValue>
+      <revExpMessage>Please Enter Numeric value</revExpMessage>
+    </Culture>
+  </PageElement>
+  
+  <PageElement name="txtPER_REMODEL" type="TextBox" Desc=""
+        IsMandatory="No"
+        IsReadOnly="No"
+        IsDisabled="No"
+        IsDisplay="Yes"
+        MaxLength=""
+        MaxSize=""
+       IsFormatingRequired="No" JsFunctionToFormat="" OnClickJSFunction=""
+        OnChangeJSFunction="" >
+
+    <rev Enabled="Yes" ExpKey="^((\d*)|(\d*\.\d*))$" />
+    <Culture Code="en-US" Desc="set Label and Message for English language">
+      <Caption>%  of work Remodel</Caption>
+      <rfvMessage></rfvMessage>
+      <DefaultValue></DefaultValue>
+      <revExpMessage>Please Enter Numeric value</revExpMessage>
+    </Culture>
+    <Culture Code="zh-SG" Desc="set Label and Message for Singapore language">
+      <Caption>%  of work Remodel</Caption>
+      <rfvMessage></rfvMessage>
+      <DefaultValue></DefaultValue>
+      <revExpMessage>Please Enter Numeric value</revExpMessage>
+    </Culture>
+  </PageElement>
+  
+  <PageElement name="chkMAJOR_ELECT" type="CheckBox" Desc=""
+        IsMandatory="No"
+        IsReadOnly="No"
+        IsDisabled="No"
+        IsDisplay="Yes"
+        MaxLength=""
+        MaxSize=""
+       IsFormatingRequired="No" JsFunctionToFormat="" OnClickJSFunction=""
+        OnChangeJSFunction="" >
+
+    <rev Enabled="No" ExpKey="" />
+    <Culture Code="en-US" Desc="set Label and Message for English language">
+      <Caption>major electrical control panels</Caption>
+      <rfvMessage></rfvMessage>
+      <DefaultValue></DefaultValue>
+      <revExpMessage></revExpMessage>
+    </Culture>
+    <Culture Code="zh-SG" Desc="set Label and Message for Singapore language">
+      <Caption>major electrical control panels</Caption>
+      <rfvMessage></rfvMessage>
+      <DefaultValue></DefaultValue>
+      <revExpMessage></revExpMessage>
+    </Culture>
+  </PageElement>
+  
+  <PageElement name="cmbCARRY_LIMITS" type="DDL" Desc=""
+        IsMandatory="No"
+        IsReadOnly="No"
+        IsDisabled="No"
+        IsDisplay="Yes"
+        MaxLength=""
+        MaxSize=""
+       IsFormatingRequired="No" JsFunctionToFormat="" OnClickJSFunction=""
+        OnChangeJSFunction="" >
+    <Bindings>
+      <DataSource type="Proc" name="Proc_GetLookupValues" TextField="LOOKUP_VALUE_DESC" ValueField="LOOKUP_UNIQUE_ID" WhereClause="">
+        <Params name="@LookupCode" Value="YESNO" />
+        <Params name="@LANG_ID" Value="1" />
+      </DataSource>
+    </Bindings>
+    <rev Enabled="No" ExpKey="" />
+    <Culture Code="en-US" Desc="set Label and Message for English language">
+      <Caption>Do any subcontractors carry limits less than yours?</Caption>
+      <rfvMessage></rfvMessage>
+      <DefaultValue></DefaultValue>
+      <revExpMessage></revExpMessage>
+    </Culture>
+    <Culture Code="zh-SG" Desc="set Label and Message for Singapore language">
+      <Caption>Do any subcontractors carry limits less than yours?</Caption>
+      <rfvMessage></rfvMessage>
+      <DefaultValue></DefaultValue>
+      <revExpMessage></revExpMessage>
+    </Culture>
+  </PageElement>
+
+  <PageElement name="cmbOPT_CVG" type="DDL" Desc=""
+      IsMandatory="No"
+      IsReadOnly="No"
+      IsDisabled="No"
+      IsDisplay="Yes"
+      MaxLength=""
+      MaxSize=""
+     IsFormatingRequired="No" JsFunctionToFormat="" OnClickJSFunction=""
+      OnChangeJSFunction="" >
+    <Bindings>
+      <DataSource type="Proc" name="Proc_GetLookupValues" TextField="LOOKUP_VALUE_DESC" ValueField="LOOKUP_UNIQUE_ID" WhereClause="">
+        <Params name="@LookupCode" Value="YESNO" />
+        <Params name="@LANG_ID" Value="1" />
+      </DataSource>
+    </Bindings>
+    <rev Enabled="No" ExpKey="" />
+    <Culture Code="en-US" Desc="set Label and Message for English language">
+      <Caption>Do subcontractors carry limits less than yours?</Caption>
+      <rfvMessage></rfvMessage>
+      <DefaultValue></DefaultValue>
+      <revExpMessage></revExpMessage>
+    </Culture>
+    <Culture Code="zh-SG" Desc="set Label and Message for Singapore language">
+      <Caption>Do subcontractors carry limits less than yours?</Caption>
+      <rfvMessage></rfvMessage>
+      <DefaultValue></DefaultValue>
+      <revExpMessage></revExpMessage>
+    </Culture>
+  </PageElement>
+</Root>

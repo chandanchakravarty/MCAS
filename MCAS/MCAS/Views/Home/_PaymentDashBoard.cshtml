@@ -1,0 +1,104 @@
+﻿@model IEnumerable<MCAS.Web.Objects.MastersHelper.ClaimPaymentModelCollectionDashBoard>
+@using MCAS.Web.Objects.Resources.Home;
+@using MCAS.Web.Objects.Resources.Common;
+@using MCAS.Globalisation;
+@{
+    string isEncryptedParams = System.Configuration.ConfigurationManager.AppSettings["EncryptQueryParams"].ToUpper();
+}
+<style type="text/css">
+.hide
+{
+    display:none;
+}
+</style>
+<div class="panel-body">
+    <h5 class="text-info">
+         @Index.PaymentRecordTable</h5>
+    <hr />
+   <div class="col-lg-12">
+            <div class="table-responsive" id="Diary_wrapper" role="grid">
+                <table id="tableDiarySrc2" class="table table-striped table-hover">
+                    <thead>
+                        <tr>
+                            <th>
+                                 @Index.ClaimNo.
+                            </th>
+                            <th> @Index.IPNo</th>
+                            <th>
+                                 @Index.ClaimantName_
+                            </th>
+                            <th>
+                                 @Index.ClaimType
+                            </th>
+                            <th>
+                                 @Index.PaymentRequestDate
+                            </th>
+                            <th>
+                                 @Index.TotalPaymentAmountRequested
+                            </th>
+                            <th>
+                                 @Index.Requester
+                            </th>
+                            <th>
+                                 @Index.Approver
+                            </th>
+                            <th>
+                                 @Index.Approved
+                            </th>
+                            <th>
+                                 @Index.ApprovalDate
+                            </th>
+                            <th>
+                                 @Index.Action
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @{
+                            foreach (var item in Model)
+                            {
+                                var date = item.Createddate.Value.ToString("dd/MM/yyyy");
+                                
+                                <tr>
+                                <td>
+                                    @item.RecordNumber
+                                </td>
+                                <td>@item.IpNo</td>
+                                <td>
+                                    @item.ClaimantName
+                                </td>
+                                <td>
+                                    @item.ClaimTypeDesc
+                                </td>
+                                <td>
+                                    @date
+                                </td>
+                                <td class="format">
+                                    @item.Total_D
+                                </td>
+                                <td>
+                                    @item.Requester
+                                </td>
+                                <td>
+                                    @item.Approver
+                                </td>
+                                <td>
+                                    @item.Approved
+                                </td>
+                                <td>
+                                    @item.ApprovalDate
+                                </td>
+                                <td>
+                                    <a class="Dashboard btn btn-xs btn-info" ScreenNameDash="211" screenid="CLM_PAY" url='@Url.ActionEncoded("PaymentEditorNew", "ClaimProcessing", new { PolicyId = item.PolicyId, ClaimID = item.ClaimID, AccidentClaimId = item.AccidentClaimId, PaymentId = item.PaymentId, claimMode = "Write", Viewmode = "Select", mode = "Payment", ClaimType = item.ClaimType, ClaimTypeCode = item.ClaimTypeCode })' href="#">@Common.View</a>
+                                </td>
+                            </tr>
+                            
+                            }
+                            }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+</div>
+
+

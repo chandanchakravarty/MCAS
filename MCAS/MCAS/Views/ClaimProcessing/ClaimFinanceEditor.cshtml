@@ -1,0 +1,629 @@
+﻿@model MCAS.Web.Objects.ClaimObjectHelper.ClaimFinanceModel
+@{
+    Layout = null;
+    ViewBag.Title = "ClaimFinanceEditor";
+    var policyid = Request.QueryString["PolicyId"];
+    var claimMode = Request.QueryString["claimMode"];
+}
+<script src="@Url.Content("~/Scripts/jquery.validate.min.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.min.js")" type="text/javascript"></script>
+<style type="text/css">
+    fieldset
+    {
+        padding: 5px;
+        margin: 1px;
+        border: 1px solid;
+        border-color: #DAD7D7;
+    }
+    
+    legend
+    {
+        display: block;
+        width: auto;
+        padding: 1px;
+        margin-bottom: 2px;
+        font-size: 14px;
+        line-height: inherit;
+        color: #1e91cf !important;
+        border: 0;
+    }
+</style>
+<!-- Main Container Start -->
+<fieldset>
+<legend>Claim Finance</legend>
+  <div class="panel-body">
+                        @using (Html.BeginForm("ClaimFinanceEditor", "ClaimProcessing", new { PolicyId = @policyid }, FormMethod.Post, new { role = "form", @class = "form-horizontal", id = "claimfinanceform", name = "claimfinanceform" }))
+                        {
+                            <div class="panel-body">
+                             @Html.HiddenFor(m => m.ReadOnly)
+                            <input type = "hidden" id="ViewMode" value = @claimMode />
+                                <div class="row">
+                                    <div class="col-lg-12">
+                                        <div class="form-group">
+                                            <div class="col-sm-2">
+                                            </div>
+                                            <label class="col-sm-2 text-center" for="inputOwnVehicleRepair">
+                                                Total Payment before This Payment (a)</label>
+                                            <label class="col-sm-2 text-center" for="inputOwnVehicleRepair">
+                                                Total Payment (b)</label>
+                                            <label class="col-sm-2 text-center" for="inputOwnVehicleRepair">
+                                                Total Payment (a + b)</label>
+                                            <label class="col-sm-2 text-center" for="inputOwnVehicleRepair">
+                                                Outstanding Reserve (c)</label>
+                                            <label class="col-sm-2 text-center" for="inputOwnVehicleRepair">
+                                                Incurred (a + b + c)</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-lg-12">
+                                        <div class="form-group">
+                                            <label class="col-sm-2 control-label text-center" for="inputOwnVehicleRepair">
+                                                Own Vehicle Repair</label>
+                                            <div class="col-sm-2">
+                                                @Html.TextBoxFor(m => m.OwnVehicleRepair, new { id = "inputOwnVehicleRepair", @class = "form-control" })
+                                            </div>
+                                            <div class="col-sm-2">
+                                                @Html.TextBoxFor(m => m.OwnVehicleRepair, new { id = "inputOwnVehicleRepair", @class = "form-control" })
+                                            </div>
+                                            <div class="col-sm-2">
+                                                @Html.TextBoxFor(m => m.OwnVehicleRepair, new { id = "inputOwnVehicleRepair", @class = "form-control" })
+                                            </div>
+                                            <div class="col-sm-2">
+                                                @Html.TextBoxFor(m => m.OwnVehicleRepair, new { id = "inputOwnVehicleRepair", @class = "form-control" })
+                                            </div>
+                                            <div class="col-sm-2">
+                                                @Html.TextBoxFor(m => m.OwnVehicleRepair, new { id = "inputOwnVehicleRepair", @class = "form-control" })
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-lg-12">
+                                        <div class="form-group">
+                                            <label class="col-sm-2 control-label text-center" for="inputInvestigatorSurvey">
+                                                Investigator / Survey</label>
+                                            <div class="col-sm-2">
+                                                @Html.TextBoxFor(m => m.InvestigatorSurvey, new { id = "inputInvestigatorSurvey", @class = "form-control" })
+                                            </div>
+                                            <div class="col-sm-2">
+                                                @Html.TextBoxFor(m => m.InvestigatorSurvey, new { id = "inputInvestigatorSurvey", @class = "form-control" })
+                                            </div>
+                                            <div class="col-sm-2">
+                                                @Html.TextBoxFor(m => m.InvestigatorSurvey, new { id = "inputInvestigatorSurvey", @class = "form-control" })
+                                            </div>
+                                            <div class="col-sm-2">
+                                                @Html.TextBoxFor(m => m.InvestigatorSurvey, new { id = "inputInvestigatorSurvey", @class = "form-control" })
+                                            </div>
+                                            <div class="col-sm-2">
+                                                @Html.TextBoxFor(m => m.InvestigatorSurvey, new { id = "inputInvestigatorSurvey", @class = "form-control" })
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-lg-12">
+                                        <div class="form-group">
+                                            <label class="col-sm-2 control-label text-center" for="inputTPProperty">
+                                                3rd Party Property</label>
+                                            <div class="col-sm-2">
+                                                @Html.TextBoxFor(m => m.TPProperty, new { id = "inputTPProperty", @class = "form-control" })
+                                            </div>
+                                            <div class="col-sm-2">
+                                                @Html.TextBoxFor(m => m.TPProperty, new { id = "inputTPProperty", @class = "form-control" })
+                                            </div>
+                                            <div class="col-sm-2">
+                                                @Html.TextBoxFor(m => m.TPProperty, new { id = "inputTPProperty", @class = "form-control" })
+                                            </div>
+                                            <div class="col-sm-2">
+                                                @Html.TextBoxFor(m => m.TPProperty, new { id = "inputTPProperty", @class = "form-control" })
+                                            </div>
+                                            <div class="col-sm-2">
+                                                @Html.TextBoxFor(m => m.TPProperty, new { id = "inputTPProperty", @class = "form-control" })
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-lg-12">
+                                        <div class="form-group">
+                                            <label class="col-sm-2 control-label text-center" for="inputTPPersonalInjury">
+                                                3rd Party Personal Injury</label>
+                                            <div class="col-sm-2">
+                                                @Html.TextBoxFor(m => m.TPPersonalInjury, new { id = "inputTPPersonalInjury", @class = "form-control" })
+                                            </div>
+                                            <div class="col-sm-2">
+                                                @Html.TextBoxFor(m => m.TPPersonalInjury, new { id = "inputTPPersonalInjury", @class = "form-control" })
+                                            </div>
+                                            <div class="col-sm-2">
+                                                @Html.TextBoxFor(m => m.TPPersonalInjury, new { id = "inputTPPersonalInjury", @class = "form-control" })
+                                            </div>
+                                            <div class="col-sm-2">
+                                                @Html.TextBoxFor(m => m.TPPersonalInjury, new { id = "inputTPPersonalInjury", @class = "form-control" })
+                                            </div>
+                                            <div class="col-sm-2">
+                                                @Html.TextBoxFor(m => m.TPPersonalInjury, new { id = "inputTPPersonalInjury", @class = "form-control" })
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-lg-12">
+                                        <div class="form-group">
+                                            <label class="col-sm-2 control-label text-center" for="inputOurSolicitorCost">
+                                                Our Solicitor Cost</label>
+                                            <div class="col-sm-2">
+                                                @Html.TextBoxFor(m => m.OurSolicitorCost, new { id = "inputOurSolicitorCost", @class = "form-control" })
+                                            </div>
+                                            <div class="col-sm-2">
+                                                @Html.TextBoxFor(m => m.OurSolicitorCost, new { id = "inputOurSolicitorCost", @class = "form-control" })
+                                            </div>
+                                            <div class="col-sm-2">
+                                                @Html.TextBoxFor(m => m.OurSolicitorCost, new { id = "inputOurSolicitorCost", @class = "form-control" })
+                                            </div>
+                                            <div class="col-sm-2">
+                                                @Html.TextBoxFor(m => m.OurSolicitorCost, new { id = "inputOurSolicitorCost", @class = "form-control" })
+                                            </div>
+                                            <div class="col-sm-2">
+                                                @Html.TextBoxFor(m => m.OurSolicitorCost, new { id = "inputOurSolicitorCost", @class = "form-control" })
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-lg-12">
+                                        <div class="form-group">
+                                            <label class="col-sm-2 control-label text-center" for="inputOurProfessionalExperts">
+                                                Our Professional Experts</label>
+                                            <div class="col-sm-2">
+                                                @Html.TextBoxFor(m => m.OurProfessionalExperts, new { id = "inputOurProfessionalExperts", @class = "form-control" })
+                                            </div>
+                                            <div class="col-sm-2">
+                                                @Html.TextBoxFor(m => m.OurProfessionalExperts, new { id = "inputOurProfessionalExperts", @class = "form-control" })
+                                            </div>
+                                            <div class="col-sm-2">
+                                                @Html.TextBoxFor(m => m.OurProfessionalExperts, new { id = "inputOurProfessionalExperts", @class = "form-control" })
+                                            </div>
+                                            <div class="col-sm-2">
+                                                @Html.TextBoxFor(m => m.OurProfessionalExperts, new { id = "inputOurProfessionalExperts", @class = "form-control" })
+                                            </div>
+                                            <div class="col-sm-2">
+                                                @Html.TextBoxFor(m => m.OurProfessionalExperts, new { id = "inputOurProfessionalExperts", @class = "form-control" })
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-lg-12">
+                                        <div class="form-group">
+                                            <label class="col-sm-2 control-label text-center" for="inputTPLegalCosts">
+                                                3rd Party Legal Costs</label>
+                                            <div class="col-sm-2">
+                                                @Html.TextBoxFor(m => m.TPLegalCosts, new { id = "inputTPLegalCosts", @class = "form-control" })
+                                            </div>
+                                            <div class="col-sm-2">
+                                                @Html.TextBoxFor(m => m.TPLegalCosts, new { id = "inputTPLegalCosts", @class = "form-control" })
+                                            </div>
+                                            <div class="col-sm-2">
+                                                @Html.TextBoxFor(m => m.TPLegalCosts, new { id = "inputTPLegalCosts", @class = "form-control" })
+                                            </div>
+                                            <div class="col-sm-2">
+                                                @Html.TextBoxFor(m => m.TPLegalCosts, new { id = "inputTPLegalCosts", @class = "form-control" })
+                                            </div>
+                                            <div class="col-sm-2">
+                                                @Html.TextBoxFor(m => m.TPLegalCosts, new { id = "inputTPLegalCosts", @class = "form-control" })
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-lg-12">
+                                        <div class="form-group">
+                                            <label class="col-sm-2 control-label text-center" for="inputDisbursements">
+                                                Disbursements</label>
+                                            <div class="col-sm-2">
+                                                @Html.TextBoxFor(m => m.Disbursements, new { id = "inputDisbursements", @class = "form-control" })
+                                            </div>
+                                            <div class="col-sm-2">
+                                                @Html.TextBoxFor(m => m.Disbursements, new { id = "inputDisbursements", @class = "form-control" })
+                                            </div>
+                                            <div class="col-sm-2">
+                                                @Html.TextBoxFor(m => m.Disbursements, new { id = "inputDisbursements", @class = "form-control" })
+                                            </div>
+                                            <div class="col-sm-2">
+                                                @Html.TextBoxFor(m => m.Disbursements, new { id = "inputDisbursements", @class = "form-control" })
+                                            </div>
+                                            <div class="col-sm-2">
+                                                @Html.TextBoxFor(m => m.Disbursements, new { id = "inputDisbursements", @class = "form-control" })
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-lg-12">
+                                        <div class="form-group">
+                                            <label class="col-sm-2 control-label text-center" for="inputOtherExpenses">
+                                                Other Expenses</label>
+                                            <div class="col-sm-2">
+                                                @Html.TextBoxFor(m => m.OtherExpenses, new { id = "inputOtherExpenses", @class = "form-control" })
+                                            </div>
+                                            <div class="col-sm-2">
+                                                @Html.TextBoxFor(m => m.OtherExpenses, new { id = "inputOtherExpenses", @class = "form-control" })
+                                            </div>
+                                            <div class="col-sm-2">
+                                                @Html.TextBoxFor(m => m.OtherExpenses, new { id = "inputOtherExpenses", @class = "form-control" })
+                                            </div>
+                                            <div class="col-sm-2">
+                                                @Html.TextBoxFor(m => m.OtherExpenses, new { id = "inputOtherExpenses", @class = "form-control" })
+                                            </div>
+                                            <div class="col-sm-2">
+                                                @Html.TextBoxFor(m => m.OtherExpenses, new { id = "inputOtherExpenses", @class = "form-control" })
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <hr />
+                                <br />
+                                <div class="row">
+                                    <div class="col-lg-12">
+                                        <div class="form-group">
+                                            <label class="col-sm-2 control-label text-center" for="inputTotalGroundUpExpenses">
+                                                Total Ground Up Expenses</label>
+                                            <div class="col-sm-2">
+                                                @Html.TextBoxFor(m => m.TotalGroundUpExpenses, new { id = "inputTotalGroundUpExpenses", @class = "form-control" })
+                                            </div>
+                                            <div class="col-sm-2">
+                                                @Html.TextBoxFor(m => m.TotalGroundUpExpenses, new { id = "inputTotalGroundUpExpenses", @class = "form-control" })
+                                            </div>
+                                            <div class="col-sm-2">
+                                                @Html.TextBoxFor(m => m.TotalGroundUpExpenses, new { id = "inputTotalGroundUpExpenses", @class = "form-control" })
+                                            </div>
+                                            <div class="col-sm-2">
+                                                @Html.TextBoxFor(m => m.TotalGroundUpExpenses, new { id = "inputTotalGroundUpExpenses", @class = "form-control" })
+                                            </div>
+                                            <div class="col-sm-2">
+                                                @Html.TextBoxFor(m => m.TotalGroundUpExpenses, new { id = "inputTotalGroundUpExpenses", @class = "form-control" })
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <hr />
+                                <div class="row">
+                                    <div class="col-lg-12">
+                                        <div class="form-group">
+                                            <div class="col-sm-3">
+                                            </div>
+                                            <label class="col-sm-3 text-center" for="inputOwnVehicleRepair">
+                                                Received</label>
+                                            <label class="col-sm-3 text-center" for="inputOwnVehicleRepair">
+                                                Outstanding</label>
+                                            <label class="col-sm-3 text-center" for="inputOwnVehicleRepair">
+                                                Total Recovery</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-lg-12">
+                                        <div class="form-group">
+                                            <label class="col-sm-3 control-label text-center" for="inputTotalGroundUpExpenses">
+                                                3rd Party Recovery</label>
+                                            <div class="col-sm-3">
+                                                @Html.TextBoxFor(m => m.TotalGroundUpExpenses, new { id = "inputTotalGroundUpExpenses", @class = "form-control" })
+                                            </div>
+                                            <div class="col-sm-3">
+                                                @Html.TextBoxFor(m => m.TotalGroundUpExpenses, new { id = "inputTotalGroundUpExpenses", @class = "form-control" })
+                                            </div>
+                                            <div class="col-sm-3">
+                                                @Html.TextBoxFor(m => m.TotalGroundUpExpenses, new { id = "inputTotalGroundUpExpenses", @class = "form-control" })
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-lg-12">
+                                        <div class="form-group">
+                                            <label class="col-sm-3 control-label text-center" for="inputTotalGroundUpExpenses">
+                                                Other Recoveries</label>
+                                            <div class="col-sm-3">
+                                                @Html.TextBoxFor(m => m.TotalGroundUpExpenses, new { id = "inputTotalGroundUpExpenses", @class = "form-control" })
+                                            </div>
+                                            <div class="col-sm-3">
+                                                @Html.TextBoxFor(m => m.TotalGroundUpExpenses, new { id = "inputTotalGroundUpExpenses", @class = "form-control" })
+                                            </div>
+                                            <div class="col-sm-3">
+                                                @Html.TextBoxFor(m => m.TotalGroundUpExpenses, new { id = "inputTotalGroundUpExpenses", @class = "form-control" })
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>  
+                            <div class="col-xs-12 col-sm-6 col-md-6">
+                                <fieldset>
+                                    <legend>Investigator / Survey</legend>
+                                    <div class="panel-body">
+                                        <div class="row">
+                                            <div class="col-lg-12">
+                                                <div class="form-group">
+                                                    <div class="col-sm-5">
+                                                    </div>
+                                                    <label class="col-sm-7 text-center" for="inputSurveyFees">
+                                                        Paid</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-lg-12">
+                                                <div class="form-group">
+                                                    <label class="col-sm-5 control-label" for="inputSurveyFees">
+                                                        Survey Fees</label>
+                                                    <div class="col-sm-7">
+                                                        @Html.TextBoxFor(m => m.SurveyFees, new { id = "inputSurveyFees", @class = "form-control" })
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-lg-12">
+                                                <div class="form-group">
+                                                    <label class="col-sm-5 control-label" for="inputReinspectionFees">
+                                                        Reinspection Fees</label>
+                                                    <div class="col-sm-7">
+                                                        @Html.TextBoxFor(m => m.ReinspectionFees, new { id = "inputReinspectionFees", @class = "form-control" })
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-lg-12">
+                                                <div class="form-group">
+                                                    <label class="col-sm-5 control-label" for="inputPteInvestigationFees">
+                                                        Pte Investigation Fees</label>
+                                                    <div class="col-sm-7">
+                                                        @Html.TextBoxFor(m => m.PteInvestigationFees, new { id = "inputPteInvestigationFees", @class = "form-control" })
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </fieldset>
+                            </div>
+                            <div class="col-xs-6 col-md-6">
+                                <fieldset>
+                                    <legend>3rd Party Property</legend>
+                                    <div class="panel-body">
+                                        <div class="row">
+                                            <div class="col-lg-12">
+                                                <div class="form-group">
+                                                    <div class="col-sm-5">
+                                                    </div>
+                                                    <label class="col-sm-7 text-center" for="inputSurveyFees">
+                                                        Paid</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-lg-12">
+                                                <div class="form-group">
+                                                    <label class="col-sm-5 control-label" for="inputSurveyFees">
+                                                        3rd Party Loss of Use Paid</label>
+                                                    <div class="col-sm-7">
+                                                        @Html.TextBoxFor(m => m.SurveyFees, new { id = "inputSurveyFees", @class = "form-control" })
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-lg-12">
+                                                <div class="form-group">
+                                                    <label class="col-sm-5 control-label" for="inputReinspectionFees">
+                                                        3rd Party Cost of Repair Paid</label>
+                                                    <div class="col-sm-7">
+                                                        @Html.TextBoxFor(m => m.ReinspectionFees, new { id = "inputReinspectionFees", @class = "form-control" })
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-lg-12">
+                                                <div class="form-group">
+                                                    <label class="col-sm-5 control-label" for="inputPteInvestigationFees">
+                                                        3rd Loss of Rental Paid</label>
+                                                    <div class="col-sm-7">
+                                                        @Html.TextBoxFor(m => m.PteInvestigationFees, new { id = "inputPteInvestigationFees", @class = "form-control" })
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </fieldset>
+                            </div>
+                            <div class="col-xs-12 col-sm-6 col-md-6">
+                                <fieldset>
+                                    <legend>3rd Party Personal Injury</legend>
+                                    <div class="panel-body">
+                                        <div class="row">
+                                            <div class="col-lg-12">
+                                                <div class="form-group">
+                                                    <div class="col-sm-5">
+                                                    </div>
+                                                    <label class="col-sm-7 text-center" for="inputSurveyFees">
+                                                        Paid</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-lg-12">
+                                                <div class="form-group">
+                                                    <label class="col-sm-5 control-label" for="inputTPDamagePaid">
+                                                        3rd Party Damages Paid</label>
+                                                    <div class="col-sm-7">
+                                                        @Html.TextBoxFor(m => m.TPDamagesPaid, new { id = "inputTPDamagePaid", @class = "form-control" })
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-lg-12">
+                                                <div class="form-group">
+                                                    <label class="col-sm-5 control-label" for="inputTPMedicalExpPaid">
+                                                        3rd Party Medical Expenses Paid</label>
+                                                    <div class="col-sm-7">
+                                                        @Html.TextBoxFor(m => m.TPMedicalExpensesPaid, new { id = "inputTPMedicalExpPaid", @class = "form-control" })
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-lg-12">
+                                                <div class="form-group">
+                                                    <label class="col-sm-5 control-label" for="inputTPFutureMedicalExpPaid">
+                                                        3rd Party Future Medical Expenses Paid</label>
+                                                    <div class="col-sm-7">
+                                                        @Html.TextBoxFor(m => m.TPFutureMedicalExpensesPaid, new { id = "inputTPFutureMedicalExpPaid", @class = "form-control" })
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-lg-12">
+                                                <div class="form-group">
+                                                    <label class="col-sm-5 control-label" for="inputTPLossofEarningCapPaid">
+                                                        3rd Party Loss of Earning Capacity Paid</label>
+                                                    <div class="col-sm-7">
+                                                        @Html.TextBoxFor(m => m.TPLossofEarningCapacityPaid, new { id = "inputTPLossofEarningCapPaid", @class = "form-control" })
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-lg-12">
+                                                <div class="form-group">
+                                                    <label class="col-sm-5 control-label" for="inputTPLossofEarningPaid">
+                                                        3rd Party Loss of Earning Paid</label>
+                                                    <div class="col-sm-7">
+                                                        @Html.TextBoxFor(m => m.TPLossofEarningPaid, new { id = "inputTPLossofEarningPaid", @class = "form-control" })
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-lg-12">
+                                                <div class="form-group">
+                                                    <label class="col-sm-5 control-label" for="inputTPLossofFutureEarningPaid">
+                                                        3rd Party Loss of Future Earnings Paid</label>
+                                                    <div class="col-sm-7">
+                                                        @Html.TextBoxFor(m => m.TPLossofFutureEarningsPaid, new { id = "inputTPLossofFutureEarningPaid", @class = "form-control" })
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-lg-12">
+                                                <div class="form-group">
+                                                    <label class="col-sm-5 control-label" for="inputTPLOGMedicalExpPaid">
+                                                        3rd Party LOG Medical Expenses Paid</label>
+                                                    <div class="col-sm-7">
+                                                        @Html.TextBoxFor(m => m.TPLOGMedicalExpensesPaid, new { id = "inputTPLOGMedicalExpPaid", @class = "form-control" })
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-lg-12">
+                                                <div class="form-group">
+                                                    <label class="col-sm-5 control-label" for="inputTPMedicalFeesPaid">
+                                                        3rd Party Medical Report Fees Paid</label>
+                                                    <div class="col-sm-7">
+                                                        @Html.TextBoxFor(m => m.TPMedicalReportFeesPaid, new { id = "inputTPMedicalFeesPaid", @class = "form-control" })
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </fieldset>
+                            </div> 
+                            <div class="col-xs-12 col-sm-6 col-md-6">
+                                <fieldset>
+                                    <legend>3rd Party Property</legend>
+                                    <div class="panel-body">
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-lg-12">
+                                            <div class="form-group">
+                                                <div class="col-sm-5">
+                                                </div>
+                                                <label class="col-sm-7 text-center" for="inputSurveyFees">
+                                                    Paid</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-lg-12">
+                                            <div class="form-group">
+                                                <label class="col-sm-5 control-label" for="inputInterestPaid">
+                                                    Interest Paid</label>
+                                                <div class="col-sm-7">
+                                                    @Html.TextBoxFor(m => m.InterestPaid, new { id = "inputInterestPaid", @class = "form-control" })
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-lg-12">
+                                            <div class="form-group">
+                                                <label class="col-sm-5 control-label" for="inputMiscellaneousFeePaid">
+                                                    Miscellaneous Fee Paid</label>
+                                                <div class="col-sm-7">
+                                                    @Html.TextBoxFor(m => m.MiscellaneousFeePaid, new { id = "inputMiscellaneousFeePaid", @class = "form-control" })
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-lg-12">
+                                            <div class="form-group">
+                                                <label class="col-sm-5 control-label" for="inputPublicTrusteeFeePaid">
+                                                    Public Trustee Fee Paid</label>
+                                                <div class="col-sm-7">
+                                                    @Html.TextBoxFor(m => m.PublicTrusteeFeePaid, new { id = "inputPublicTrusteeFeePaid", @class = "form-control" })
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </fieldset>
+                            </div>
+                            <div class="row">
+                                <div class="clearfix igr col-md-12 text-center">
+                             <button class="btn btn-info" id="btnSave">
+                                        Save</button>
+                                    <button type="button" class="btn btn-info" onclick="onclickcancel();">
+                                        Reset</button>
+                             </div>
+                            </div> 
+                        }
+                    </div>
+                    </fieldset>
+<!-- Main Container end -->
+<script type="text/javascript">
+
+    $(document).ready(function () {
+        $(function () {
+            $('.datepicker').datepicker();
+        });
+        $("form").submit(function (event) {
+            event.preventDefault();
+            return false;
+        });
+        setTabActive('PaymentDetailsTab');
+    });
+    setTabActive('PaymentEditor');
+    function setTabActive(elementid) {
+        $('#myTab1').children().each(function (el, value) {
+            if (value.id == elementid)
+                $(value).removeClass("active").addClass("active");
+            else
+                $(value).removeClass("active");
+        }
+        );
+    };
+</script>

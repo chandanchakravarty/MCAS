@@ -1,0 +1,413 @@
+
+.aci {
+	background-color: #0099FF;
+}
+body  {
+	font: 100% Arial, Verdana, Helvetica, sans-serif;
+	background:url(../images/topbg.gif) top repeat-x;
+	background-color:#ebebeb;
+	margin: 0; /* it's good practice to zero the margin and padding of the body element to account for differing browser defaults */
+	padding: 0;
+	text-align: center; /* this centers the container in IE 5* browsers. The text is then set to the left aligned default in the #container selector */
+	color: #000000;
+}
+.thrColAbsHdr #container { 
+	position: relative;  /* adding position: relative allows you to position the two sidebars relative to this container */
+	width: 1005px;  /* using 20px less than a full 800px width allows for browser chrome and avoids a horizontal scroll bar */
+	/* background: #FFFFFF; */
+	margin: 0 auto; /* the auto margins (in conjunction with a width) center the page */
+	border: 0;
+	text-align: left; /* this overrides the text-align: center on the body element. */
+} 
+
+/* Tips for absolutely positioned sidebars with header and footer:
+1. Absolutely positioned (AP) elements must be given a top and side value, either right or left. (As a default, if no top value is given, the AP element will begin directly after the last element in the source order of the page. This means, if the sidebars are first element in the #container in the document's source order, they will appear at the top of the #container even without being given a top value. However, if they are moved later in the source order for any reason, they'll need a top value to appear where you desire.
+2. Absolutely positioned (AP) elements are taken out of the flow of the document. This means the elements around them don't know they exist and don't account for them when taking up their proper space on the page. Thus, an AP div should only be used as a side column if you are sure the middle #mainContent div will always contain the most content. If either sidebar were to contain more content, that sidebar would run over the bottom of the parent div, and in this case the footer as well, and the sidebar would not appear to be contained.
+3. If the above mentioned requirements are met, absolutely positioned sidebars can be an easy way to control the source order of the document.
+4. If the source order is changed, the top value should be equal to the height of the header since this will cause the columns to visually meet the header.
+*/
+.thrColAbsHdr #header { 
+	height: 130px; /* if you're changing the source order of the columns, you'll may want to use a height on the header so that you can give the columns a predictable top value */
+	background: url(../images/headbg.gif) left top no-repeat;
+	padding: 0 10px 0 20px;  /* this padding matches the left alignment of the elements in the divs that appear beneath it. If an image is used in the #header instead of text, you may want to remove the padding. */
+} 
+.thrColAbsHdr #header h1 {
+	margin: 0; /* zeroing the margin of the last element in the #header div will avoid margin collapse - an unexplainable space between divs. If the div has a border around it, this is not necessary as that also avoids the margin collapse */
+	padding: 10px 0; /* using padding instead of margin will allow you to keep the element away from the edges of the div */
+}
+.thrColAbsHdr #sidebar1 {
+	position: absolute;
+	top: 140px;
+	left: 0;
+	width: 225px; /* the actual width of this div, in standards-compliant browsers, or standards mode in Internet Explorer will include the padding and border in addition to the width */
+	/*background: #EBEBEB;  the background color will be displayed for the length of the content in the column, but no further */
+	padding: 0px 0px 0px 10px;  /*padding keeps the content of the div away from the edges */
+}
+.thrColAbsHdr #sidebar2 {
+	position: absolute;
+	top: 142px;
+	right: 4px;
+	width: 225px; /* the actual width of this div, in standards-compliant browsers, or standards mode in Internet Explorer will include the padding and border in addition to the width */
+	/*background: #EBEBEB;  the background color will be displayed for the length of the content in the column, but no further */
+	padding: 0px 0px 0px 10px; /* padding keeps the content of the div away from the edges */
+}
+.thrColAbsHdr #mainContent { 
+	margin: 0 225px; /* the right and left margins on this div element creates the two outer columns on the sides of the page. No matter how much content the sidebar divs contain, the column space will remain. */
+	padding: 0 10px; /* remember that padding is the space inside the div box and margin is the space outside the div box */
+}
+.thrColAbsHdr #mainContentrest { 
+	margin: 0 13em 0 10px;
+}
+.thrColAbsHdr #footer { 
+	padding: 0 10px 0 20px; /* this padding matches the left alignment of the elements in the divs that appear above it. */
+	background:#00487d;
+} 
+.thrColAbsHdr #footer p {
+	margin: 0; /* zeroing the margins of the first element in the footer will avoid the possibility of margin collapse - a space between divs */
+	padding: 10px 0; /* padding on this element will create space, just as the the margin would have, without the margin collapse issue */
+}
+.fltrt { /* this class can be used to float an element right in your page. The floated element must precede the element it should be next to on the page. */
+	float: right;
+	margin-left: 8px;
+}
+.fltlft { /* this class can be used to float an element left in your page */
+	float: left;
+	margin-right: 8px;
+}
+
+/* .pulltabtxt {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	color: #FFFFFF;
+} */
+
+.pulltabtxt {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 15px;
+	font-weight:bold;
+	color: #FFFFFF;
+}
+
+a:link.toptab {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 10px;
+	color: #d7e0e8;
+	text-decoration: none;
+}
+a:visited.toptab {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 10px;
+	color: #d7e0e8;
+	text-decoration: none;
+}
+a:hover.toptab {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 10px;
+	color: #FFFFFF;
+	text-decoration: none;
+}
+a:active.toptab {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 10px;
+	color: #FF0000;
+	text-decoration: none;
+}
+.telephone {
+position:absolute;
+top:50px;
+right:14%;
+font-family:Arial, Helvetica, sans-serif;
+font-size:15px;
+font-weight:bold;
+}
+.cobrandplace {
+position:absolute;
+top:35px;
+right:24%;
+font-family:Arial, Helvetica, sans-serif;
+font-size:12px;
+font-weight:bold;
+z-index:5;
+}
+.menuoptions {
+	position:absolute;
+	width:100%;
+	top:95px;
+	font-family:Arial, Helvetica, sans-serif;
+	font-size:12px;
+	font-weight:bold;
+	left: 0px;
+	z-index:998;
+}
+.menuoptionshome {
+	position:absolute;
+	width:100%;
+	top:90px;
+	font-family:Arial, Helvetica, sans-serif;
+	font-size:12px;
+	font-weight:bold;
+	left: 0px;
+	z-index:998;
+}
+a:link.topmenu {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	font-weight: bold;
+	color: #FFFFFF;
+	text-decoration: none;
+}
+a:visited.topmenu {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	font-weight: bold;
+	color: #FFFFFF;
+	text-decoration: none;
+}
+a:hover.topmenu {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	font-weight: bold;
+	color: #d7e0e8;
+	text-decoration: none;
+}
+a:active.topmenu {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	font-weight: bold;
+	color: #FF0000;
+	text-decoration: none;
+}
+.dividercolor {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	font-weight: bold;
+	color: #959595;
+}
+.dotcolor {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	font-weight: bold;
+	color: #e51838;
+}
+input {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 10px;
+	border: 1px solid #959595;
+}
+.buttonval {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 11px;
+	color:#FFFFFF;
+	font-weight:bold;
+	background-color: #cc092f;
+	cursor: hand;
+cursor: pointer;
+}
+.genwhite {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	font-weight: bold;
+	color: #FFFFFF;
+}
+.tablemidbg {
+background-image:url(../images/tablemidbg.gif);
+background-repeat:repeat-y;
+padding-right:10px;
+	padding-left: 10px;
+}
+.tablemidbgwide {
+background-image:url(../images/tablemidbg_wide.gif);
+background-repeat:repeat-y;
+padding-right:15px;
+	padding-left: 15px;
+}
+.tablemidbgwider {
+background-image:url(../images/tablemidbg_wider.gif);
+background-repeat:repeat-y;
+padding-right:15px;
+	padding-left: 15px;
+}
+.inntablemidbg {
+background-image:url(../images/inntablemidbg.gif);
+background-repeat:repeat-y;
+padding-left: 15px;
+padding-right: 15px;
+}
+
+.inntablemidbgwide {
+background-image:url(../images/inntablemidbg_wide.gif);
+background-repeat:repeat-y;
+padding-left: 15px;
+padding-right: 15px;
+}
+
+.formtxtheadbold {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 20px;
+	font-weight: bold;
+	color: #00204e;
+}
+.formtxtsubheadboldred {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 15px;
+	font-weight: bold;
+	color: #cc092f;
+}
+.formtxtsubheadbold {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 15px;
+	font-weight: bold;
+	color: #00204e;
+}
+.genfrm {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	color: #00204e;
+	padding:5px;
+}
+.genfrmbld {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	font-weight: bold;
+	color: #00204e;
+}
+.gen {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	color: #00204e;
+}
+.genredbold {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	font-weight: bold;
+	color: #e51838;
+}
+.genredboldlarge {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 20px;
+	font-weight: bold;
+	color: #e51838;
+}
+.genredsmall {
+font-family:Arial, Helvetica, sans-serif;
+font-size: 10px;
+color: #e51838;
+}.frmchr {
+	border: 1px solid #c6d2e1;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 11px;
+	color: #00487d;
+}
+.gengrey {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 11px;
+	color: #666666;
+}
+
+/* simple css-based tooltip */
+.tooltip {
+	background-color:#000;
+	border:1px solid #fff;
+	padding:10px 15px;
+	width:200px;
+	display:none;
+	color:#fff;
+	text-align:left;
+	font-size:12px;
+
+	/* outline radius for mozilla/firefox only */
+	-moz-box-shadow:0 0 10px #000;
+	-webkit-box-shadow:0 0 10px #000;
+}
+.footertxt {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 10px;
+	color: #6f90b8;
+}
+.bluehead {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	font-weight: bold;
+	color: #FFFFFF;
+	background-color: #00487d;
+	padding:5px;
+}
+.topseqboldwhite {
+	font-family: tahoma, Helvetica, sans-serif;
+	font-size: 10px;
+	font-weight: bold;
+	color: #00487d;
+	background-image: url(../images/selectbg.gif);
+	background-repeat: no-repeat;
+	background-position: center top;
+}
+a:link.topseq {
+	font-family: tahoma, Helvetica, sans-serif;
+	font-size: 10px;
+	font-weight: bold;
+	color: #000000;
+	text-decoration: none;
+}
+a:visited.topseq {
+	font-family: tahoma, Helvetica, sans-serif;
+	font-size: 10px;
+	font-weight: bold;
+	color: #000000;
+	text-decoration: none;
+}
+a:hover.topseq {
+	font-family: tahoma, Helvetica, sans-serif;
+	font-size: 10px;
+	font-weight: bold;
+	color: #0094da;
+	text-decoration: none;
+}
+a:active.topseq {
+	font-family: tahoma, Helvetica, sans-serif;
+	font-size: 10px;
+	color: #FF0000;
+	text-decoration: none;
+}
+.dividergrey {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 11px;
+	color: #959595;
+}
+/*.selectbg {
+	background-image: url(../images/selectbg.gif);
+	background-repeat: no-repeat;
+	background-position: center top;
+}*/
+.topseqgrey {
+	font-family: tahoma, Helvetica, sans-serif;
+	font-size: 10px;
+	font-weight: bold;
+	color: #6f90b8;
+}
+.spacepad {
+	padding-top: 5px;
+}
+.quotepopbg {
+background-color:#FFFFFF;
+}
+
+
+/* {margin:0; padding:0; font:12px Verdana,Arial} */
+code {font-family:"Courier New",Courier}
+
+#options {width:560px; margin:10px auto; text-align:right; color:#9ac1c9; font:Arial, Helvetica, sans-serif; font-size:11px;}
+#options a {text-decoration:none; color:#9ac1c9; font:Arial, Helvetica, sans-serif; font-size:11px;}
+#options a:hover {color:#033}
+
+#acc {width:575px; list-style:none; color:#033; margin:0 auto 40px}
+#acc h3 {width:560px; border:none; padding:5px 10px 2px; font-weight:bold; margin-top:5px; margin-bottom:0px; cursor:pointer; background:url(../images/cvi_table_fol_bg.gif)}
+#acc h3:hover {background:url(../images/cvi_table_fol_bg_over.gif)}
+#acc .acc-section {overflow:hidden; background:#fff}
+#acc .acc-content {width:538px; padding:10px; border:1px solid #9cb1ce; border-top:none; background:#d7e0e8}
+
+#nested {width:560px; list-style:none; color:#033; margin-bottom:15px}
+#nested h3 {width:411px; border:1px solid #9ac1c9; padding:6px 6px 8px; font-weight:bold; margin-top:5px; cursor:pointer; background:url(images/header.gif)}
+#nested h3:hover {background:url(images/header_over.gif)}
+#nested .acc-section {overflow:hidden; background:#fff}
+#nested .acc-content {width:393px; padding:15px; border:1px solid #9ac1c9; border-top:none; background:#fff}
+#nested .acc-selected {background:url(images/header_over.gif)}

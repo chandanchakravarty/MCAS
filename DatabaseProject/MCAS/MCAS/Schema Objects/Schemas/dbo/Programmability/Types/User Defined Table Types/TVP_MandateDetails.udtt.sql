@@ -1,0 +1,22 @@
+﻿CREATE TYPE [dbo].[TVP_MandateDetails] AS TABLE(
+	[MandateDetailId] [int] NOT NULL,
+	[MandateId] [int] NOT NULL,
+	[CmpCode] [nchar](15) NOT NULL,
+	[PreMandate] [numeric](18, 2) NULL,
+	[MovementMandate] [numeric](18, 2) NULL,
+	[CurrentMandate] [numeric](18, 2) NULL,
+	[Createdby] [nvarchar](max) NULL,
+	[Createddate] [datetime] NULL,
+	[Modifiedby] [nvarchar](max) NULL,
+	[Modifieddate] [datetime] NULL,
+	[IsActive] [char](1) NULL,
+	[AccidentClaimId] [int] NULL,
+	[ClaimID] [int] NULL,
+	[PreMandateSP] [numeric](18, 2) NULL,
+	[MovementMandateSP] [numeric](18, 2) NULL,
+	[CurrentMandateSP] [numeric](18, 2) NULL,
+	[PreviousOffers] [numeric](18, 2) NULL,
+	[TPCounterOffer] [numeric](18, 2) NULL,
+	[ReserveId] [int] NULL,
+	[MovementType] [char](1) NULL
+)

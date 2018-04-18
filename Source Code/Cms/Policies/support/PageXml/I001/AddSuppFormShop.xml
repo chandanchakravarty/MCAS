@@ -1,0 +1,440 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Root>
+  <PageTitle>
+    <Culture Code="en-US">Shop Info</Culture>
+    <Culture Code="zh-SG">Shop Info</Culture>
+    <Culture Code="pt-BR">Shop Info</Culture>
+  </PageTitle>
+  <ElementsLayout></ElementsLayout>
+    
+      
+  <!-- Add Premises LOCATION -->
+  <PageElement name="cmbNUM_FRYERS" type="DDL" Desc=""
+              IsMandatory="No"
+              IsReadOnly="No"
+              IsDisabled="No"
+              IsDisplay="Yes"
+              MaxSize="200"
+              IsFormatingRequired="No" JsFunctionToFormat="" OnClickJSFunction=""
+              OnChangeJSFunction=""
+               >
+  
+  <Style Position="relative" Top="0" Left="10" CssClass="midcolora" />
+  <rev Enabled="No" ExpKey="" />
+  <csv Enabled="No" csvValidationFunction="" />
+  <Culture Code="zh-SG" Desc="Set Label and Message for English language">
+    <Caption></Caption>
+    <rfvMessage></rfvMessage>
+    <DefaultValue></DefaultValue>
+    <revExpMessage></revExpMessage>
+  </Culture>
+
+  <Culture Code="en-US" Desc="Set Label and Message for English language">
+    <Caption></Caption>
+    <rfvMessage></rfvMessage>
+    <DefaultValue></DefaultValue>
+    <revExpMessage></revExpMessage>
+  </Culture>
+</PageElement>
+
+  <PageElement name="cmbNUM_GRILLS" type="DDL" Desc=""
+                IsMandatory="No"
+                IsReadOnly="No"
+                IsDisabled="No"
+                IsDisplay="Yes"
+                MaxSize="200"
+                IsFormatingRequired="No" JsFunctionToFormat="" OnClickJSFunction=""
+                OnChangeJSFunction=""
+               >
+
+    <Style Position="relative" Top="0" Left="10" CssClass="midcolora" />
+    <rev Enabled="No" ExpKey="" />
+    <csv Enabled="No" csvValidationFunction="" />
+    <Culture Code="zh-SG" Desc="Set Label and Message for English language">
+      <Caption></Caption>
+      <rfvMessage></rfvMessage>
+      <DefaultValue></DefaultValue>
+      <revExpMessage></revExpMessage>
+    </Culture>
+
+    <Culture Code="en-US" Desc="Set Label and Message for English language">
+      <Caption></Caption>
+      <rfvMessage></rfvMessage>
+      <DefaultValue></DefaultValue>
+      <revExpMessage></revExpMessage>
+    </Culture>
+  </PageElement>
+  <!-- Add Premises  ends-->
+  <PageElement name="cmbRESTURANT_OCUP" type="DDL" Desc=""
+              IsMandatory="No"
+              IsReadOnly="No"
+              IsDisabled="No"
+              IsDisplay="Yes"
+              MaxSize="200"
+              IsFormatingRequired="No" JsFunctionToFormat="" OnClickJSFunction=""
+              OnChangeJSFunction=""
+               >
+    <Bindings>
+      <DataSource type="Proc" name="Proc_GetLookupValues" TextField="LOOKUP_VALUE_DESC" ValueField="LOOKUP_UNIQUE_ID" WhereClause="">
+        <Params name="@LookupCode" Value="YES_NO" />
+      </DataSource>
+    </Bindings>
+
+    <Style Position="relative" Top="0" Left="10" CssClass="midcolora" />
+    <rev Enabled="No" ExpKey="" />
+    <csv Enabled="No" csvValidationFunction="" />
+    <Culture Code="zh-SG" Desc="Set Label and Message for English language">
+      <Caption></Caption>
+      <rfvMessage></rfvMessage>
+      <DefaultValue></DefaultValue>
+      <revExpMessage></revExpMessage>
+    </Culture>
+
+    <Culture Code="en-US" Desc="Set Label and Message for English language">
+      <Caption></Caption>
+      <rfvMessage></rfvMessage>
+      <DefaultValue></DefaultValue>
+      <revExpMessage></revExpMessage>
+    </Culture>
+  </PageElement>
+
+
+  <PageElement name="cmbFLAME_COOKING" type="DDL" Desc=""
+                IsMandatory="No"
+                IsReadOnly="No"
+                IsDisabled="No"
+                IsDisplay="Yes"
+                MaxSize="200"
+                IsFormatingRequired="No" JsFunctionToFormat="" OnClickJSFunction=""
+                OnChangeJSFunction=""
+               >
+    <Bindings>
+      <DataSource type="Proc" name="Proc_GetLookupValues" TextField="LOOKUP_VALUE_DESC" ValueField="LOOKUP_UNIQUE_ID" WhereClause="">
+        <Params name="@LookupCode" Value="YES_NO" />
+      </DataSource>
+    </Bindings>
+
+    <Style Position="relative" Top="0" Left="10" CssClass="midcolora" />
+    <rev Enabled="No" ExpKey="" />
+    <csv Enabled="No" csvValidationFunction="" />
+    <Culture Code="zh-SG" Desc="Set Label and Message for English language">
+      <Caption></Caption>
+      <rfvMessage></rfvMessage>
+      <DefaultValue></DefaultValue>
+      <revExpMessage></revExpMessage>
+    </Culture>
+
+    <Culture Code="en-US" Desc="Set Label and Message for English language">
+      <Caption></Caption>
+      <rfvMessage></rfvMessage>
+      <DefaultValue></DefaultValue>
+      <revExpMessage></revExpMessage>
+    </Culture>
+  </PageElement>
+
+
+  <PageElement name="cmbDUCT_SYS" type="DDL" Desc=""
+                IsMandatory="No"
+                IsReadOnly="No"
+                IsDisabled="No"
+                IsDisplay="Yes"
+                MaxSize="200"
+                IsFormatingRequired="No" JsFunctionToFormat="" OnClickJSFunction=""
+                OnChangeJSFunction=""
+               >
+    <Bindings>
+      <DataSource type="Proc" name="Proc_GetLookupValues" TextField="LOOKUP_VALUE_DESC" ValueField="LOOKUP_UNIQUE_ID" WhereClause="">
+        <Params name="@LookupCode" Value="YES_NO" />
+      </DataSource>
+    </Bindings>
+
+    <Style Position="relative" Top="0" Left="10" CssClass="midcolora" />
+    <rev Enabled="No" ExpKey="" />
+    <csv Enabled="No" csvValidationFunction="" />
+    <Culture Code="zh-SG" Desc="Set Label and Message for English language">
+      <Caption></Caption>
+      <rfvMessage></rfvMessage>
+      <DefaultValue></DefaultValue>
+      <revExpMessage></revExpMessage>
+    </Culture>
+
+    <Culture Code="en-US" Desc="Set Label and Message for English language">
+      <Caption></Caption>
+      <rfvMessage></rfvMessage>
+      <DefaultValue></DefaultValue>
+      <revExpMessage></revExpMessage>
+    </Culture>
+  </PageElement>
+
+
+
+  <PageElement name="cmbSUPPR_SYS" type="DDL" Desc=""
+                IsMandatory="No"
+                IsReadOnly="No"
+                IsDisabled="No"
+                IsDisplay="Yes"
+                MaxSize="200"
+                IsFormatingRequired="No" JsFunctionToFormat="" OnClickJSFunction=""
+                OnChangeJSFunction=""
+               >
+    <Bindings>
+      <DataSource type="Proc" name="Proc_GetLookupValues" TextField="LOOKUP_VALUE_DESC" ValueField="LOOKUP_UNIQUE_ID" WhereClause="">
+        <Params name="@LookupCode" Value="YES_NO" />
+      </DataSource>
+    </Bindings>
+
+    <Style Position="relative" Top="0" Left="10" CssClass="midcolora" />
+    <rev Enabled="No" ExpKey="" />
+    <csv Enabled="No" csvValidationFunction="" />
+    <Culture Code="zh-SG" Desc="Set Label and Message for English language">
+      <Caption></Caption>
+      <rfvMessage></rfvMessage>
+      <DefaultValue></DefaultValue>
+      <revExpMessage></revExpMessage>
+    </Culture>
+
+    <Culture Code="en-US" Desc="Set Label and Message for English language">
+      <Caption></Caption>
+      <rfvMessage></rfvMessage>
+      <DefaultValue></DefaultValue>
+      <revExpMessage></revExpMessage>
+    </Culture>
+  </PageElement>
+
+
+  <PageElement name="cmbDUCT_CLND_PST_SIX_MONTHS" type="DDL" Desc=""
+                IsMandatory="No"
+                IsReadOnly="No"
+                IsDisabled="No"
+                IsDisplay="Yes"
+                MaxSize="200"
+                IsFormatingRequired="No" JsFunctionToFormat="" OnClickJSFunction=""
+                OnChangeJSFunction=""
+               >
+    <Bindings>
+      <DataSource type="Proc" name="Proc_GetLookupValues" TextField="LOOKUP_VALUE_DESC" ValueField="LOOKUP_UNIQUE_ID" WhereClause="">
+        <Params name="@LookupCode" Value="YES_NO" />
+      </DataSource>
+    </Bindings>
+
+    <Style Position="relative" Top="0" Left="10" CssClass="midcolora" />
+    <rev Enabled="No" ExpKey="" />
+    <csv Enabled="No" csvValidationFunction="" />
+    <Culture Code="zh-SG" Desc="Set Label and Message for English language">
+      <Caption></Caption>
+      <rfvMessage></rfvMessage>
+      <DefaultValue></DefaultValue>
+      <revExpMessage></revExpMessage>
+    </Culture>
+
+    <Culture Code="en-US" Desc="Set Label and Message for English language">
+      <Caption></Caption>
+      <rfvMessage></rfvMessage>
+      <DefaultValue></DefaultValue>
+      <revExpMessage></revExpMessage>
+    </Culture>
+  </PageElement>
+
+  <PageElement name="cmbIS_INSURED" type="DDL" Desc=""
+                IsMandatory="No"
+                IsReadOnly="No"
+                IsDisabled="No"
+                IsDisplay="Yes"
+                MaxSize="200"
+                IsFormatingRequired="No" JsFunctionToFormat="" OnClickJSFunction=""
+                OnChangeJSFunction=""
+               >
+    <Bindings>
+      <DataSource type="Proc" name="Proc_GetLookupValues" TextField="LOOKUP_VALUE_DESC" ValueField="LOOKUP_UNIQUE_ID" WhereClause="">
+        <Params name="@LookupCode" Value="YES_NO" />
+      </DataSource>
+    </Bindings>
+
+    <Style Position="relative" Top="0" Left="10" CssClass="midcolora" />
+    <rev Enabled="No" ExpKey="" />
+    <csv Enabled="No" csvValidationFunction="" />
+    <Culture Code="zh-SG" Desc="Set Label and Message for English language">
+      <Caption></Caption>
+      <rfvMessage></rfvMessage>
+      <DefaultValue></DefaultValue>
+      <revExpMessage></revExpMessage>
+    </Culture>
+
+    <Culture Code="en-US" Desc="Set Label and Message for English language">
+      <Caption></Caption>
+      <rfvMessage></rfvMessage>
+      <DefaultValue></DefaultValue>
+      <revExpMessage></revExpMessage>
+    </Culture>
+  </PageElement>
+
+
+  <PageElement name="cmbTENANT_LIABILITY" type="DDL" Desc=""
+                IsMandatory="No"
+                IsReadOnly="No"
+                IsDisabled="No"
+                IsDisplay="Yes"
+                MaxSize="200"
+                IsFormatingRequired="No" JsFunctionToFormat="" OnClickJSFunction=""
+                OnChangeJSFunction=""
+               >
+    <Bindings>
+      <DataSource type="Proc" name="Proc_GetLookupValues" TextField="LOOKUP_VALUE_DESC" ValueField="LOOKUP_UNIQUE_ID" WhereClause="">
+        <Params name="@LookupCode" Value="YES_NO" />
+      </DataSource>
+    </Bindings>
+
+    <Style Position="relative" Top="0" Left="10" CssClass="midcolora" />
+    <rev Enabled="No" ExpKey="" />
+    <csv Enabled="No" csvValidationFunction="" />
+    <Culture Code="zh-SG" Desc="Set Label and Message for English language">
+      <Caption></Caption>
+      <rfvMessage></rfvMessage>
+      <DefaultValue></DefaultValue>
+      <revExpMessage></revExpMessage>
+    </Culture>
+
+    <Culture Code="en-US" Desc="Set Label and Message for English language">
+      <Caption></Caption>
+      <rfvMessage></rfvMessage>
+      <DefaultValue></DefaultValue>
+      <revExpMessage></revExpMessage>
+    </Culture>
+  </PageElement>
+
+
+  <PageElement name="cmbSEPARATE_BAR" type="DDL" Desc=""
+                IsMandatory="No"
+                IsReadOnly="No"
+                IsDisabled="No"
+                IsDisplay="Yes"
+                MaxSize="200"
+                IsFormatingRequired="No" JsFunctionToFormat="" OnClickJSFunction=""
+                OnChangeJSFunction=""
+               >
+    <Bindings>
+      <DataSource type="Proc" name="Proc_GetLookupValues" TextField="LOOKUP_VALUE_DESC" ValueField="LOOKUP_UNIQUE_ID" WhereClause="">
+        <Params name="@LookupCode" Value="YES_NO" />
+      </DataSource>
+    </Bindings>
+
+    <Style Position="relative" Top="0" Left="10" CssClass="midcolora" />
+    <rev Enabled="No" ExpKey="" />
+    <csv Enabled="No" csvValidationFunction="" />
+    <Culture Code="zh-SG" Desc="Set Label and Message for English language">
+      <Caption></Caption>
+      <rfvMessage></rfvMessage>
+      <DefaultValue></DefaultValue>
+      <revExpMessage></revExpMessage>
+    </Culture>
+
+    <Culture Code="en-US" Desc="Set Label and Message for English language">
+      <Caption></Caption>
+      <rfvMessage></rfvMessage>
+      <DefaultValue></DefaultValue>
+      <revExpMessage></revExpMessage>
+    </Culture>
+  </PageElement>
+
+
+  <PageElement name="cmbBBQ_PIT" type="DDL" Desc=""
+                IsMandatory="No"
+                IsReadOnly="No"
+                IsDisabled="No"
+                IsDisplay="Yes"
+                MaxSize="200"
+                IsFormatingRequired="No" JsFunctionToFormat="" OnClickJSFunction=""
+                OnChangeJSFunction=""
+               >
+    <Bindings>
+      <DataSource type="Proc" name="Proc_GetLookupValues" TextField="LOOKUP_VALUE_DESC" ValueField="LOOKUP_UNIQUE_ID" WhereClause="">
+        <Params name="@LookupCode" Value="YES_NO" />
+      </DataSource>
+    </Bindings>
+
+    <Style Position="relative" Top="0" Left="10" CssClass="midcolora" />
+    <rev Enabled="No" ExpKey="" />
+    <csv Enabled="No" csvValidationFunction="" />
+    <Culture Code="zh-SG" Desc="Set Label and Message for English language">
+      <Caption></Caption>
+      <rfvMessage></rfvMessage>
+      <DefaultValue></DefaultValue>
+      <revExpMessage></revExpMessage>
+    </Culture>
+
+    <Culture Code="en-US" Desc="Set Label and Message for English language">
+      <Caption></Caption>
+      <rfvMessage></rfvMessage>
+      <DefaultValue></DefaultValue>
+      <revExpMessage></revExpMessage>
+    </Culture>
+  </PageElement>
+  <PageElement name="cmbBLDG_TYPE_COOKNG" type="DDL" Desc=""
+                IsMandatory="No"
+                IsReadOnly="No"
+                IsDisabled="No"
+                IsDisplay="Yes"
+                MaxSize="200"
+                IsFormatingRequired="No" JsFunctionToFormat="" OnClickJSFunction=""
+                OnChangeJSFunction=""
+               >
+    <Bindings>
+      <DataSource type="Proc" name="Proc_GetLookupValues" TextField="LOOKUP_VALUE_DESC" ValueField="LOOKUP_UNIQUE_ID" WhereClause="">
+        <Params name="@LookupCode" Value="CONTYP" />
+      </DataSource>
+    </Bindings>
+
+    <Style Position="relative" Top="0" Left="10" CssClass="midcolora" />
+    <rev Enabled="No" ExpKey="" />
+    <csv Enabled="No" csvValidationFunction="" />
+    <Culture Code="zh-SG" Desc="Set Label and Message for English language">
+      <Caption></Caption>
+      <rfvMessage></rfvMessage>
+      <DefaultValue></DefaultValue>
+      <revExpMessage></revExpMessage>
+    </Culture>
+
+    <Culture Code="en-US" Desc="Set Label and Message for English language">
+      <Caption></Caption>
+      <rfvMessage></rfvMessage>
+      <DefaultValue></DefaultValue>
+      <revExpMessage></revExpMessage>
+    </Culture>
+  </PageElement>
+  <PageElement name="cmbIS_ENTERTNMT" type="DDL" Desc=""
+                IsMandatory="No"
+                IsReadOnly="No"
+                IsDisabled="No"
+                IsDisplay="Yes"
+                MaxSize="200"
+                IsFormatingRequired="No" JsFunctionToFormat="" OnClickJSFunction=""
+                OnChangeJSFunction=""
+               >
+    <Bindings>
+      <DataSource type="Proc" name="Proc_GetLookupValues" TextField="LOOKUP_VALUE_DESC" ValueField="LOOKUP_UNIQUE_ID" WhereClause="">
+        <Params name="@LookupCode" Value="YES_NO" />
+      </DataSource>
+    </Bindings>
+
+    <Style Position="relative" Top="0" Left="10" CssClass="midcolora" />
+    <rev Enabled="No" ExpKey="" />
+    <csv Enabled="No" csvValidationFunction="" />
+    <Culture Code="zh-SG" Desc="Set Label and Message for English language">
+      <Caption></Caption>
+      <rfvMessage></rfvMessage>
+      <DefaultValue></DefaultValue>
+      <revExpMessage></revExpMessage>
+    </Culture>
+
+    <Culture Code="en-US" Desc="Set Label and Message for English language">
+      <Caption></Caption>
+      <rfvMessage></rfvMessage>
+      <DefaultValue></DefaultValue>
+      <revExpMessage></revExpMessage>
+    </Culture>
+  </PageElement>
+
+
+
+
+</Root>

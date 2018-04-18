@@ -1,0 +1,229 @@
+﻿@model MCAS.Web.Objects.MastersHelper.GSTModel
+@using MCAS.Web.Objects.CommonHelper
+@using MCAS.Web.Objects.Resources.ClaimMasters;
+@using MCAS.Web.Objects.Resources.Common;
+@using MCAS.Globalisation
+@{
+    //ViewBag.Title = "GSTEditor";
+    ViewBag.Title = GSTEditor.Title;
+    var mMCASQueryString = Html.MCASQueryString(Request.QueryString);
+    Layout = "~/Views/Shared/_SystemAdminLayout.cshtml";
+    var pageMode = mMCASQueryString["pageMode"];
+    var btndisplay = "yes";
+    if (pageMode == "View")
+    {
+        btndisplay = "none";
+    }
+    SecurityPermissions myPemissions = (SecurityPermissions)ViewData["UserPermissions"];
+}
+<link href="@Url.Content("~/Content/themes/base/jquery.ui.all.css")" rel="stylesheet" type="text/css" />
+<script src='@Url.Content("~/Scripts/jquery-2.1.0.min.js")' type="text/javascript"></script>
+<script src="@Url.Content("~/Scripts/jquery.validate.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.min.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/Scripts/globalize/globalize.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/Scripts/globalize/cultures/globalize.culture.en-GB.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/Scripts/jquery-ui-v1.10.3.js")" type="text/javascript"></script>
+<div class="dashboard-wrapper">
+    <div class="container">
+        <div class="row page-title">
+            <div class="col-lg-12">
+                <h2>
+                    @Common.SystemAdmin</h2>
+                <ul class="breadcrumb">
+                    <li>@GSTEditor.GSTSettingDetails</li></ul>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <div class="panel panel-info">
+                    <div class="panel-heading clearfix">
+                        <i class="icon-check-sign"></i>
+                        <h3 class="panel-title">
+                            @GSTEditor.GSTSettingDetails
+                        </h3>
+                    </div>
+                    <div style="color: Red; font-weight: bold;" class="has-error" id="error">
+                        <p align="center">
+                            @if (TempData["notice"] != null)
+                            {
+                                @TempData["notice"]
+                            }
+                        </p>
+                    </div>
+                    <div class="panel-body">
+                        @using (Html.BeginForm("GSTEditor", "ClaimMasters", FormMethod.Post, new { role = "form", id = "GSTEditor", name = "GSTEditor", @class = "form-horizontal" }))
+                        {
+                            @Html.HiddenFor(m => m.Id)
+                            @Html.ValidationSummary(true)
+                        
+                            <div class="row top-buffer">
+                                <div class="clearfix igr col-md-12">
+                                    <div class="col-md-2">
+                                        <label for="inputDepartment">
+                                            @GSTEditor.GSTType&nbsp;<span class="text-danger">*</span></label>
+                                    </div>
+                                    <div class="col-md-3">
+                                        @Html.TextBoxFor(m => m.GSTType, new { @maxlength = "2", @class = "col-lg-12 form-control" })
+                                        @Html.ValidationMessageFor(m => m.GSTType)
+                                    </div>
+                                    <div class="col-md-2">
+                                        <label for="inputDepartment">
+                                            @GSTEditor.GSTDescription&nbsp;<span class="text-danger">*</span></label>
+                                    </div>
+                                    <div class="col-md-3">
+                                        @Html.TextBoxFor(m => m.GSTDescrpition, new { @maxlength = "50", @class = " col-lg-12 form-control" })
+                                        @Html.ValidationMessageFor(m => m.GSTDescrpition)
+                                    </div>
+                                </div>
+                            </div>
+                        
+                            <div class="row top-buffer">
+                                <div class="clearfix igr col-md-12">
+                                    <div class="col-md-2">
+                                        <label for="datepickerFrom1">
+                                            @GSTEditor.EffectiveDateFrom&nbsp;<span class="text-danger">*</span></label>
+                                    </div>
+                                    <div class="col-md-3">
+                                        @Html.TextBoxFor(m => m.EffectiveDateFrom, "{0:d}", new { id = "datepickerFrom1", @class = "form-control datepicker" })
+                                        @Html.ValidationMessageFor(m => m.EffectiveDateFrom)
+                                    </div>
+                                    <div class="col-md-2">
+                                        <label for="datepickerTo1">
+                                            @GSTEditor.EffectiveDateTo&nbsp;<span class="text-danger">*</span></label>
+                                    </div>
+                                    <div class="col-md-3 ">
+                                        @Html.TextBoxFor(m => m.EffectiveDateTo, "{0:d}", new { id = "datepickerTo1", @class = "form-control datepicker" })
+                                        @Html.ValidationMessageFor(m => m.EffectiveDateTo)
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row top-buffer">
+                                <div class="clearfix igr col-md-12">
+                                    <div class="col-md-2">
+                                        <label for="inputGropuName">
+                                            @GSTEditor.Rate&nbsp;<span class="text-danger">*</span></label>
+                                    </div>
+                                    <div class="col-md-3">
+                                        @Html.TextBoxFor(m => m.Rate, new { @id = "Rate", @numlen = "11", @format = "", @class = "col-lg-12 form-control" })<br />
+                                        @Html.ValidationMessageFor(m => m.Rate)
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row top-buffer">
+                            </div>
+                            <div class="row top-buffer">
+                            </div>
+                        
+                            <div class="row">
+                                <div class="clearfix igr col-md-12 text-center">
+                                    @if (@myPemissions.Write)
+                                    { 
+                                        <button id="btnSave" style="display:@btndisplay" class="btn btn-info">
+                                            @Common.Save</button>
+                                    }
+                                    &nbsp;&nbsp;&nbsp;&nbsp;
+                                    @Html.ActionLink(Common.Back, "GSTIndex", null, new { @class = "btn btn-info" })&nbsp;&nbsp;&nbsp;&nbsp;
+                                </div>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="panel">
+            @Html.Partial("~/Views/Shared/_TimeStamp.cshtml", Model)
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    $(function () {
+        $("#datepickerFrom1").datepicker({
+            dateFormat: "dd/mm/yy",
+            showStatus: !0,
+            showWeeks: !0,
+            currentText: "Now",
+            autoSize: !0,
+            gotoCurrent: !0,
+            showAnim: "blind",
+            highlightWeek: !0,
+            changeMonth: !0,
+            changeYear: !0,
+            yearRange: "1951:2050",
+            onSelect: function (b) {
+                $(this).valid();
+            }
+        });
+
+        $("#datepickerTo1").datepicker({
+            dateFormat: "dd/mm/yy",
+            showStatus: !0,
+            showWeeks: !0,
+            currentText: "Now",
+            autoSize: !0,
+            gotoCurrent: !0,
+            showAnim: "blind",
+            highlightWeek: !0,
+            changeMonth: !0,
+            changeYear: !0,
+            yearRange: "1951:2050",
+            onSelect: function (b) {
+                $(this).valid();
+            }
+        });
+
+
+
+        $("#btnSave").click(function (event) {
+            if ($("#datepickerFrom1").val() != '' && ($("#datepickerTo1").val() != ''))
+                var $from = $("#datepickerFrom1").datepicker('getDate');
+            var $to = $("#datepickerTo1").datepicker('getDate');
+            if ($from > $to) {
+                alert("@Html.Raw(GSTEditor.CompareFromAndToDate)");
+                event.preventDefault();
+            }
+        })
+
+
+    });
+   
+    
+</script>
+<script type="text/javascript">
+    $(function () {
+
+
+    })
+</script>
+<script type="text/javascript">
+    $(function () {
+        $(document).on("focus", ":input", function () {
+            $(this).attr("autocomplete", "off")
+        });
+        $("input[type=text]").each(function () {
+            if (void 0 !== $(this).attr("data-val-number") && "The field " == $(this).attr("data-val-number").substring(0, 10)) {
+                var a = $(this).attr("data-val-number").substring(10, $(this).attr("data-val-number").length);
+                $(this).removeAttr("data-val-number");
+                $(this).attr("data-val-number", a)
+            }
+        });
+        $.culture = Globalize.culture("en-GB");
+        $.validator.methods.date = function (value, element) {
+            return this.optional(element)
+                    || Globalize.parseDate(value, "dd/MM/yyyy", "en-GB")
+                    || Globalize.parseDate(value, "yyyy-mm-dd");
+        }
+
+        $("input[type=text]").each(function () {
+            if (void 0 !== $(this).attr("data-val-date") && "The field " == $(this).attr("data-val-date").substring(0, 10)) {
+                //var a = $(this).attr("data-val-date").substring(10, $(this).attr("data-val-date").length).replace("must be a date.", "must be in 'dd/mm/yyyy' format.");
+                var a = $(this).attr("data-val-date").substring(10, $(this).attr("data-val-date").length).replace("must be a date.", "@Html.Raw(GSTEditor.DateFormat)");
+                $(this).removeAttr("data-val-date");
+                $(this).attr("data-val-date", a)
+            }
+        });
+
+    })
+    if ('@pageMode' == 'View') {
+        $('#GSTEditor').find('input, textarea, button, select').attr('disabled', 'disabled');
+    }
+</script>

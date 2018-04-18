@@ -1,0 +1,119 @@
+﻿@using MCAS.Globalisation
+@using MCAS.Web.Objects.Resources.Common;
+@using MCAS.Web.Objects.Resources.ClaimRecoveryProcessing;
+@using MCAS.Web.Objects.CommonHelper;
+@model IEnumerable<MCAS.Web.Objects.ClaimObjectHelper.ClaimRecoveryModelCollection>
+@{
+    ViewBag.Title = "ClaimRecoveryList";
+    Layout = null;
+    var mMCASQueryString = Html.MCASQueryString(Request.QueryString);
+    var claimMode = mMCASQueryString["claimMode"] == null ? "" : Convert.ToString(mMCASQueryString["claimMode"]);
+    var mode = MenuListItem.ClaimTabs.GetMode(Convert.ToString(Session["ScreenNameDash"]), mMCASQueryString["mode"] == null ? "" : Convert.ToString(mMCASQueryString["mode"]));
+}
+<link href="@Url.Content("~/Content/EbixGrid.css")" rel="Stylesheet" media="screen" />
+<link href="@Url.Content("~/Content/jquery-ui.css")" rel="Stylesheet" media="screen" />
+<div class="table-responsive">
+    <div class="ui-ebixgrid">
+        @Html.RenderGrid((from m in Model
+                          select new
+                          {
+                              m.ClaimType,
+                              m.ClaimTypeCode,
+                              m.ClaimTypeDesc
+                          }).Distinct(),
+                                 new EbixGrid.EbixGrid
+                                 {
+                                     Columns = new List<EbixGrid.EGColumn> 
+                                 {
+                                     new EbixGrid.EGColumn { DataField = "ClaimType"   ,
+                                                        HeaderText =  ClaimRecoveryEditor.ClaimType ,
+                                                        PrimaryKey = true ,
+                                                        Hidden = true,
+                                                        Width = "0%" },
+                                     new EbixGrid.EGColumn { DataField = "ClaimTypeDesc"   ,
+                                                        HeaderText = ClaimRecoveryEditor.ClaimType ,
+                                                        PrimaryKey = false ,
+                                                        Width = "100%" }                                                        
+                                 },
+                                 
+                                     Width = "650",
+                                     Height = "350",
+
+                                     ID = "ClaimGrid",  
+                                     IsChildRequired = true,
+                                     childGrid = new EbixGrid.EbixGrid
+                                     {
+                                         Columns = new List<EbixGrid.EGColumn> 
+                                 {
+                                     new EbixGrid.EGColumn { DataField = "ClaimType",HeaderText = ClaimRecoveryEditor.ClaimType ,PrimaryKey = false,ForeinKey = true,Width = "0%",Hidden = true },
+                                     new EbixGrid.EGColumn { DataField = "RecordNumber",  HeaderText = ClaimRecoveryEditor.ClaimantRecordNumber, PrimaryKey = true,  Width = "11%"},
+                                     new EbixGrid.EGColumn { DataField = "MandateRecordNo",  HeaderText = ClaimRecoveryEditor.MandateNumber, Width = "10%"},
+                                     new EbixGrid.EGColumn { DataField = "PaymentRecordNo",  HeaderText = ClaimRecoveryEditor.PaymentNumber,  Width = "10%"},
+                                     new EbixGrid.EGColumn { DataField = "TotalAmt_R",  HeaderText = ClaimRecoveryEditor.TotalAmountRecovered,  Width = "10%"},
+                                     new EbixGrid.EGColumn { DataField = "RecoverAmt",  HeaderText = ClaimRecoveryEditor.AmounttoRecover,  Width = "10%"},
+                                     new EbixGrid.EGColumn { DataField = "NetAmtRecovered",  HeaderText = ClaimRecoveryEditor.NetAmtRecoveredGridHeader,  Width = "9%"},
+                                     new EbixGrid.EGColumn { DataField = "status",  HeaderText = ClaimRecoveryEditor.RecoveryStatus, Width = "10%"},
+                                     new EbixGrid.EGColumn { DataField = "",  HeaderText = ClaimRecoveryEditor.Action, Width = "10%",
+                                         Columntype = new EbixGrid.EGColumnType
+                                                             { Columntype = EbixGrid.ColumnType.LinkButton,
+                                                                 ColumnCell = new EbixGrid.EGCell{ Caption =Common.Select, Href = @Url.Content("~/ClaimRecoveryProcessing/ClaimRecoveryEditor"), CssClass ="btn btn-xs btn-info"}  
+                                                             } 
+                                       , QueryStringFields =  new List<string> {"PolicyId", "ClaimID","MandateId", "AccidentClaimId","RecoveryId","PaymentId","ClaimType","status","mode="+@mode, "claimMode=" + @claimMode, "Viewmode=Select"}
+                                      },
+                                      new EbixGrid.EGColumn { DataField = "",  HeaderText = Common.View, Width = "10%",
+                                         Columntype = new EbixGrid.EGColumnType
+                                                             { Columntype = EbixGrid.ColumnType.LinkButton,
+                                                                 ColumnCell = new EbixGrid.EGCell{ Caption =Common.View, Href = @Url.Content("~/ClaimRecoveryProcessing/ClaimRecoveryEditor"), CssClass ="btn btn-xs btn-info"}  
+                                                             } 
+                                       , QueryStringFields =  new List<string> {"PolicyId", "ClaimID","MandateId", "AccidentClaimId","RecoveryId","PaymentId","ClaimType","status","mode="+@mode, "claimMode=" + @claimMode, "Viewmode=View"}
+                                      },
+                                      new EbixGrid.EGColumn { DataField = "",  HeaderText = Common.Edit, Width = "10%",
+                                         Columntype = new EbixGrid.EGColumnType
+                                                             { Columntype = EbixGrid.ColumnType.LinkButton,
+                                                                 ColumnCell = new EbixGrid.EGCell{ Caption =Common.Edit, Href = @Url.Content("~/ClaimRecoveryProcessing/ClaimRecoveryEditor"), CssClass ="btn btn-xs btn-info"}  
+                                                             } 
+                                       , QueryStringFields =  new List<string> {"PolicyId", "ClaimID","MandateId", "AccidentClaimId","RecoveryId","PaymentId","ClaimType","status","mode="+@mode, "claimMode=" + @claimMode, "Viewmode=Edit"}
+                                      }
+                                      
+                                 },
+                                        
+                                                 Width = "650",
+                                                 Height = "350",
+
+                                                 ID = "ClaimGrid2",
+                                                 DataSource = (from m in Model
+                                                               select new
+                                                               {
+                                                                   m.RecordNumber,
+                                                                   m.MandateRecordNo,
+                                                                   m.AccidentClaimId,
+                                                                   m.ClaimantName,
+                                                                   m.PolicyId,
+                                                                   m.ClaimID,
+                                                                   m.ClaimType,
+                                                                   m.PaymentId,
+                                                                   m.PaymentRecordNo,
+                                                                   m.ApprovedDate,
+                                                                   m.RecoverAmt,
+                                                                   m.TotalAmt_R,
+                                                                   m.NetAmtRecovered,
+                                                                   m.status,
+                                                                   m.MandateId,
+                                                                   m.RecoveryId
+                                                               }).OrderBy(x => x.ApprovedDate).Distinct()
+                                             }
+                                     }
+                         )
+    </div>
+</div>
+<script type="text/javascript">
+    $(document).ready(do_on_load);
+    $(window).bind('page:change', do_on_load);
+    function showChildGrid(id, spanid) {
+        $('#' + id).slideToggle();
+        if ($('#span_' + id).hasClass('ui-icon-plus'))
+            $('#span_' + id).removeClass('ui-icon-plus').addClass('ui-icon-minus');
+        else
+            $('#span_' + id).removeClass('ui-icon-minus').addClass('ui-icon-plus');
+    }
+</script>

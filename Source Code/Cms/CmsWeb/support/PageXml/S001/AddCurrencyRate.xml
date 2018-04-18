@@ -1,0 +1,106 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Root>
+  <PageTitle>
+    <Culture Code="en-US">Currency Rate</Culture>
+    <Culture Code="zh-SG">Currency Rate</Culture>
+  </PageTitle>
+
+  <PageElement name="cmbCURRENCY_ID" type="DDL" Desc=""
+								IsMandatory="Yes"
+								IsReadOnly="No"
+								IsDisabled="No"
+								IsDisplay="Yes"
+								IsFormatingRequired="No" JsFunctionToFormat="" OnClickJSFunction=""
+								OnChangeJSFunction="" >
+    <Style Position="relative" Top="0" Left="10" CssClass="midcolora" />
+    <rev Enabled="No"/>
+    
+    <Culture Code="en-US" Desc="set Label and Message for English language">
+      <Caption>Currency</Caption>
+      <rfvMessage>Please select currency</rfvMessage>
+      <DefaultValue>3</DefaultValue>
+    </Culture>
+    <Culture Code="zh-SG" Desc="set Label and Message for Singapore language">
+      <Caption>Currency</Caption>
+      <rfvMessage>Please select currency</rfvMessage>
+      <DefaultValue>3</DefaultValue>
+    </Culture>
+  </PageElement>
+
+  <PageElement name="txtRATE" type="TextBox" Desc=""
+		  IsMandatory="Yes"
+		  IsReadOnly="No"
+		  IsDisabled="No"
+		  IsDisplay="Yes"
+      MaxLength="5"
+      MaxSize="12"
+		  IsFormatingRequired="No" JsFunctionToFormat="" OnClickJSFunction=""
+		  OnChangeJSFunction="">
+    <Style Position="relative" Top="0" Left="10" CssClass="midcolora" />
+    <rev Enabled="No" ExpKey="" />
+
+    <Culture Code="zh-SG" Desc="set Label and Message for Singapore language">
+      <Caption>Rate</Caption>
+      <rfvMessage>Please enter rate</rfvMessage>
+      <DefaultValue></DefaultValue>
+    </Culture>
+    <Culture Code="en-US" Desc="set Label and Message for U.S language">
+      <Caption>Rate</Caption>
+      <rfvMessage>Please enter rate</rfvMessage>
+      <DefaultValue></DefaultValue>
+    </Culture>
+  </PageElement>
+
+  <PageElement name="txtRATE_EFFETIVE_FROM" type="TextBox" Desc=""
+           IsMandatory="Yes"
+           IsReadOnly="No"
+           IsDisabled="No"
+           IsDisplay="Yes"
+           IsFormatingRequired="Yes" JsFunctionToFormat="" OnClickJSFunction=""
+           OnChangeJSFunction=""
+               >
+    <Style Position="relative" Top="0" Left="10" CssClass="midcolora" />
+    <rev Enabled="Yes" ExpKey="(0[1-9]|[1-9]|[12][0-9]|3[01])[- /.](0[1-9]|[1-9]|1[012])[- /.](19|20)\d\d" />
+    <csv Enabled="No" csvValidationFunction="" />
+    
+    <Culture Code="zh-SG" Desc="set Label and Message for English language">
+      <Caption>Effective From</Caption>
+      <rfvMessage>Please enter date</rfvMessage>
+      <DefaultValue></DefaultValue>
+      <revExpMessage>Please enter valid date format</revExpMessage>
+    </Culture>
+    <Culture Code="en-US" Desc="set Label and Message for English language">
+      <Caption>Effective From</Caption>
+      <rfvMessage>Please enter date</rfvMessage>
+      <DefaultValue></DefaultValue>
+      <revExpMessage>Please enter valid date format</revExpMessage>
+    </Culture>
+  </PageElement>
+
+  <PageElement name="txtRATE_EFFETIVE_TO" type="TextBox" Desc=""
+           IsMandatory="Yes"
+           IsReadOnly="No"
+           IsDisabled="No"
+           IsDisplay="Yes"
+           IsFormatingRequired="Yes" JsFunctionToFormat="" OnClickJSFunction=""
+           OnChangeJSFunction=""
+               >
+    <Style Position="relative" Top="0" Left="10" CssClass="midcolora" />
+    <rev Enabled="Yes" ExpKey="(0[1-9]|[1-9]|[12][0-9]|3[01])[- /.](0[1-9]|[1-9]|1[012])[- /.](19|20)\d\d" />
+    <csv Enabled="No" csvValidationFunction="" />
+
+    <Culture Code="zh-SG" Desc="set Label and Message for English language">
+      <Caption>Effective To</Caption>
+      <rfvMessage>Please enter date</rfvMessage>
+      <DefaultValue></DefaultValue>
+      <revExpMessage>Please enter valid date format</revExpMessage>
+    </Culture>
+    <Culture Code="en-US" Desc="set Label and Message for English language">
+      <Caption>Effective To</Caption>
+      <rfvMessage>Please enter date</rfvMessage>
+      <DefaultValue></DefaultValue>
+      <revExpMessage>Please enter valid date format</revExpMessage>
+    </Culture>
+  </PageElement>
+ 
+</Root>

@@ -1,0 +1,39 @@
+﻿@{
+    ViewBag.Title = "Login";
+    Layout = "~/Views/Shared/_loginPartial.cshtml";
+}
+      <div class="login-container">
+        <div class="flat-form">
+          <div id="login" class="form-action show animated bounceInDown">
+            <h1 class="text-info">Login to CDGI Brokers Pte Ltd</h1>
+            <form>
+              <ul>
+                <li>
+                  <input type="text" placeholder="User ID">
+                </li>
+                <li>
+                  <input type="password" placeholder="Password">
+                </li>
+                <li>
+                  <select id="cmbBranch" name="cmbBranch">
+                  	<option>Select Branch</option>
+                      <option value="01">Singapore Branch</option>
+                      <option value="02">Service Company</option>
+                  </select>
+                </li>
+                <li>
+                  <select id="ddlCountry" name="ddlCountry">
+                      <option>Select Country</option>
+                      <option value="UC001">Singapore</option>
+                      <option value="UC002">Hong Kong</option>
+                      <option value="UC003">United kingdom</option>
+                  </select>
+                </li>
+              </ul>
+              <a class="button" href='@Url.Action("Index","Home")'>Login</a>
+            </form>
+          </div>
+          <!--/#login.form-action-->
+        </div>
+      </div>
+  

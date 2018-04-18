@@ -1,0 +1,1 @@
+update MNT_Menus set DisplayTitle='Claim Upload',AdminDisplayText='Claim Upload',Hyp_Link_Address='/ClaimProcessing/ClaimFileUploadEditor?claimMode=ClaimUpload' where MenuId=271

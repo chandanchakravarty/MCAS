@@ -1,0 +1,311 @@
+﻿@model MCAS.Web.Objects.MastersHelper.AdjusterModel
+@using MCAS.Web.Objects.CommonHelper
+@using MCAS.Globalisation
+@{
+    ViewBag.Title = "AdjusterEditor";
+    Layout = "~/Views/Shared/_SystemAdminLayout.cshtml";
+    var mMCASQueryString = Html.MCASQueryString(Request.QueryString);
+    var pageMode = mMCASQueryString["pageMode"];
+    var btndisplay = "yes";
+    if (pageMode == "View")
+    {
+        btndisplay = "none";
+    }
+    var AdjCode = Model.AdjusterCode;
+    var dis = TempData["display"] == "" ? null : AdjCode == null ? "none;" : "Block";
+    var dis1 = Model.AdjusterId == null ? "none;" : "inline;";
+    var cedantid1 = Model.AdjusterId == null ? "" : Convert.ToString(Model.AdjusterId);
+    SecurityPermissions myPemissions = (SecurityPermissions)ViewData["UserPermissions"];
+    System.Resources.ResourceManager PageResource = (new MCAS.Web.Objects.MastersHelper.TransactionModel()).GetResourceManager(Model.Resource);
+    var screenid = Model.screenId;
+}
+}
+<link href="@Url.Content("~/Content/themes/base/jquery.ui.all.css")" rel="stylesheet" type="text/css" />
+<style type="text/css">
+    .ui-button-icon-primary.ui-icon.ui-icon-closethick
+    {
+        margin: -7px 0 0 -7px;
+    }
+    div.ui-dialog.ui-widget.ui-widget-content.ui-corner-all.ui-front.alert.ui-draggable, div.ui-dialog.ui-widget.ui-widget-content.ui-corner-all.alert.ui-draggable
+    {
+        top: 130px !important;
+    }
+@*    input[type=text]:not('#EmailAddress1'):not('#EmailAdd2'), textarea
+    {
+        text-transform: capitalize;
+    }*@
+</style>
+<link href="@Url.Content("~/Content/jquery-ui.css")" rel="Stylesheet" media="screen" />
+<link href="@Url.Content("~/Content/themes/base/jquery.ui.all.css")" rel="stylesheet" type="text/css" />
+<script src='@Url.Content("~/Scripts/jquery-2.1.0.min.js")' type="text/javascript"></script>
+<script src="@Url.Content("~/Scripts/jquery.validate.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.min.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/Scripts/globalize/globalize.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/Scripts/globalize/cultures/globalize.culture.en-GB.js")" type="text/javascript"></script>
+<div class="dashboard-wrapper">
+<div class="PaymentDialogue" style="overflow: hidden;">
+    </div>
+    <div class="container">
+        <div class="row page-title">
+            <div class="col-lg-12">
+                <h2>@MCAS.Web.Objects.Resources.Common.Common.SystemAdmin</h2>
+                <ul class="breadcrumb">
+                    <li>@PageResource.GetString("AdjusterMasterDetails")</li>
+                </ul>
+            </div>
+        </div>
+        <hr />
+        <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <div class="panel panel-info">
+                    <div class="panel-heading clearfix">
+                        <i class="icon-check-sign"></i>
+                        <h3 class="panel-title">@PageResource.GetString("AdjusterMasterDetails")</h3>
+                    </div>
+                    <div style="color: Red; font-weight: bold;" class="has-error" id="error">
+                        <p align="center">
+                            @if (TempData["notice"] != null)
+                            {
+                                @TempData["notice"]
+                            }
+                        </p>
+                    </div>
+                    <div style="color: Red; font-weight: bold;" class="has-error" id="divSuccess">
+                        <p align="center">
+                            @if (TempData["AdjCode"] != null)
+                            {
+                                @TempData["AdjCode"]
+                            }
+                        </p>
+                    </div>
+                    <div class="panel-body">
+                        @using (Html.BeginForm("AdjusterEditor", "AdjusterMasters", FormMethod.Post, new { role = "form", @class = "form-horizontal", id = "usergroupform" }))
+                        {
+                            @Html.HiddenFor(m => m.AdjusterId)
+                            @Html.ValidationSummary(true)
+
+                            <div style="display:@dis" class="row top-buffer">
+                                <div class="clearfix igr col-md-12">
+                                    <div class="col-md-2">
+                                        <label for="inputAdjusterCode">
+                                            @PageResource.GetString("AdjusterCode")
+                                        </label>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <b>@Html.DisplayFor(m => m.AdjusterCode, new { id = "inputAdjusterCode", @class = "col-lg-12 form-control" })</b>
+                                        @Html.HiddenFor(m => m.AdjusterCode)
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            
+                      
+                            <div class="clearfix igr col-md-12">
+                                @Html.Partial("../Shared/_AddressLayout", ((Model.AdjusterAddress)), new ViewDataDictionary { { "id", screenid }, { "TitleName", "Adjuster" } })
+                            </div>                
+                            
+                            <div class="row top-buffer">
+                            </div>
+                            <div class="row top-buffer">
+                            </div>
+                            <div class="row top-buffer">
+                                <div class="clearfix igr col-md-12 text-center">
+                                    @if (@myPemissions.Write)
+                                    {
+                                        <button id="btnSave" style="display:@btndisplay" class="btn btn-info">
+                                            @PageResource.GetString("Save")</button>
+                                    }
+                                    &nbsp;&nbsp;&nbsp;&nbsp;
+                                    @Html.ActionLink(@PageResource.GetString("Back"), "AdjusterIndex", null, new { @class = "btn btn-info" })&nbsp;&nbsp;&nbsp;&nbsp;
+                                    <a class="btn btn-info" style="display:@dis1" id="ViewCedantHistory" href="#">@PageResource.GetString("ViewHistory")</a> 
+                                </div>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="panel">
+            @Html.Partial("~/Views/Shared/_TimeStamp.cshtml", Model)
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    $("#InsurerName,#InsurerType").removeAttr("data-val-required");
+    $("#InsurerName").attr("data-val-required", "@PageResource.GetString("AdjusterName")"+" is required.");
+    $("#InsurerType").attr("data-val-required", "@PageResource.GetString("AdjusterType")"+" is required.");
+    var do_on_load = function () {
+        $(document).on("focus", ":input", function () {
+            $(this).attr("autocomplete", "off")
+        });
+        $("#ddlGst").change(function () {
+            $.getJSON('@Url.Action("GetGstPercent", "AdjusterMasters")', {
+                Id: $(this).val()
+            }, function (a) {
+                $("#txtVatPer").val(a)
+            })
+        });
+        if ('@pageMode' == 'View') {
+            $('#t2').find('input, textarea, button, select').attr('disabled', 'disabled');
+
+        }     
+        $("#InsurerName").blur(function (a) {
+            a = $.trim($("#InsurerName").val());
+            $.ajax({
+                type: "POST",
+                url: '@Url.Action("CheckCompanyname", "AdjusterMasters")',
+                data: {
+                    AdjusterName: a,
+                    AdjName: "@Model.AdjusterAddress.InsurerName"
+                },
+                success: function (a) {
+                    1 == a && "Edit" != getQueryVariable("pageMode") ? (alert("Duplicate"+ "@PageResource.GetString("AdjusterName")."), $("#btnSave").attr("disabled", "disabled")) : "@Model.AdjusterAddress.InsurerName" != $("#InsurerName").val() && 1 == a ? (alert("Duplicate"+ "@PageResource.GetString("AdjusterName")."), $("#btnSave").attr("disabled", "disabled")) : $("#btnSave").removeAttr("disabled")
+                }
+            })
+        });
+        $("#EmailAddress1,#EmailAdd2").blur(function (a) {
+            a = $.trim($(this).val());
+            var b = $(this).context.id;
+            $.ajax({
+                type: "POST",
+                url: '@Url.Action("ValidEmail", "AdjusterMasters")',
+                data: {
+                    EmailAdd1: a
+                },
+                success: function (a) {
+                    (1 == a ) ? ($("#" + b).val(""), alert("Please enter Email in proper format."), $("#btnsave").attr("disabled", "disabled")) : $("#btnsave").removeAttr("disabled");
+                }
+            })
+        });
+
+        $("#OfficeNo1").blur(function (a) {
+            a = $.trim($(this).val());
+            if (a == "") { } else
+                MobileNumberLengthCheck("OfficeNo1", "Office No. should be in proper format.");
+        });
+        $("#Mobile1").blur(function (a) {
+            a = $.trim($(this).val());
+            if (a == "") { } else
+                MobileNumberLengthCheck("Mobile1", "Mobile No. should be in proper format.");
+        });
+        $("#Fax1").blur(function (a) {
+            a = $.trim($(this).val());
+            if (a == "") { } else
+                MobileNumberLengthCheck("Fax1", " Fax No. should be in proper format.");
+        });
+        $("#Office2").blur(function (a) {
+            a = $.trim($(this).val());
+            if (a == "") { } else
+                MobileNumberLengthCheck("Office2", "Office No. should be in proper format.");
+        });
+        $("#MobileNo2").blur(function (a) {
+            a = $.trim($(this).val());
+            if (a == "") { } else
+                MobileNumberLengthCheck("MobileNo2", "Mobile No. should be in proper format.");
+        });
+        $("#Fax2").blur(function (a) {
+            a = $.trim($(this).val());
+            if (a == "") { } else
+                MobileNumberLengthCheck("Fax2", " Fax No. should be in proper format.");
+        });
+
+        $("#btnSave").click(function (a) {
+            if ("" != $("#EffectiveFrom").val() && "" != $("#EffectiveTo").val()) var b = $("#EffectiveFrom").datepicker("getDate");
+            var c = $("#EffectiveTo").datepicker("getDate");
+            b > c && (alert("Effective to cannot be less than Effective From date."), a.preventDefault())
+        });
+        $("#Ins").html("@PageResource.GetString("AdjusterType")"+"&nbsp;<span class='text-danger'>*</span> ");
+//        $("#Company").html("@PageResource.GetString("AdjusterName")"+"&nbsp;<span class='text-danger'>*</span> ");
+        $.culture = Globalize.culture("en-GB");
+        $.validator.methods.date = function (a, b) {
+            return this.optional(b) || Globalize.parseDate(a, "dd/MM/yyyy", "en-GB") || Globalize.parseDate(a, "yyyy-mm-dd")
+        };
+        $("input[type=text]").each(function () {
+            if (void 0 !== $(this).attr("data-val-date") && "The field " == $(this).attr("data-val-date").substring(0, 10)) {
+                var a =
+            $(this).attr("data-val-date").substring(10, $(this).attr("data-val-date").length).replace("must be a date.", "must be in 'dd/mm/yyyy' format.");
+                $(this).removeAttr("data-val-date");
+                $(this).attr("data-val-date", a)
+            }
+        });
+        $("#EffectiveFrom,#EffectiveTo").datepicker({
+            dateFormat: "dd/mm/yy",
+            showStatus: !0,
+            showWeeks: !0,
+            currentText: "Now",
+            autoSize: !0,
+            gotoCurrent: !0,
+            showAnim: "blind",
+            highlightWeek: !0,
+            changeMonth: !0,
+            changeYear: !0,
+            yearRange: "1951:2050",
+            onSelect: function (a) {
+                $(this).valid()
+            }
+        });
+        $("#ViewCedantHistory").click(function (a) {
+            var b =guid(),
+            c = "#" + b;
+            $('<div id="' + b + '" class="uid1" title="Adjuster History" style="overflow: hidden;"></div>').appendTo(".PaymentDialogue");
+            InitializeDialog($(c));
+            a.preventDefault();
+            $(c).dialog("open");
+            $("div.ui-dialog.ui-widget.ui-widget-content.ui-corner-all.ui-front.alert.ui-draggable").css("top", "130px !important");
+            $("div.ui-dialog.ui-widget.ui-widget-content.ui-corner-all.alert.ui-draggable").css("top", "130px !important");
+            return !1
+        })
+    };
+    $(document).ready(do_on_load);
+    $(window).bind("page:change", do_on_load);
+
+    function InitializeDialog(a) {
+        a.dialog({
+            width: "900",
+            resizable: !1,
+            draggable: !0,
+            show: {
+                effect: "drop",
+                direction: "up"
+            },
+            title: "@PageResource.GetString("AdjusterHistory")",
+            model: !0,
+            show: "slide",
+            dialogClass: "alert",
+            closeOnEscape: !0,
+            open: function (b, c) {
+                var d = '@Url.Content("~/Cedant/ViewCedanthistory")?Cedantid=@cedantid1&Tablename=MNT_Adjusters&Displayname=Adjuster&uid=' + guid();
+                a.load(d)
+            },
+            position: {
+                my: "center",
+                at: "center",
+                of: window
+            },
+            close: function () {
+                a.dialog("destroy").remove()
+            }
+        })
+    }
+    var guid = function () {
+        function a() {
+            return Math.floor(65536 * (1 + Math.random())).toString(16).substring(1)
+        }
+        return function () {
+            return a() + a() + "-" + a() + "-" + a() + "-" + a() + "-" + a() + a() + a()
+        }
+    } ();
+
+    function getQueryVariable(a) {
+        for (var b = "@MenuListItem.ClaimTabs.GetQueryStringVal()".replace(/amp;/ig, "").split("&"), c = 0; c < b.length; c++) {
+            var d = b[c].split("=");
+            if (d[0] == a) return d[1]
+        }
+    };
+    function MobileNumberLengthCheck(ControlId, Msg) {
+        if ($.trim($("#" + ControlId).val()).length < 4 || $.trim($("#" + ControlId).val()).length > 15) {
+            alert(Msg, ControlId);
+            return false;
+        }
+    };   
+</script>

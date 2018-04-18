@@ -1,0 +1,1084 @@
+﻿@using MCAS.Web.Objects.Resources;
+@model MCAS.Web.Objects.ClaimObjectHelper.ServiceProviderModel
+@using MCAS.Web.Objects.Resources.ClaimProcessing;
+@using MCAS.Web.Objects.Resources.Common;
+@using MCAS.Globalisation;
+@using MCAS.Web.Objects.CommonHelper
+@{
+    ViewBag.Title = "Service Provider";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var mMCASQueryString = Html.MCASQueryString(Request.QueryString);
+    System.Resources.ResourceManager PageResource = (new MCAS.Web.Objects.MastersHelper.TransactionModel()).GetResourceManager(Model.Resource);
+    var caller = mMCASQueryString["claimMode"] == null ? "" : Convert.ToString(mMCASQueryString["claimMode"]);
+    var Viewmode = mMCASQueryString["Viewmode"] == null ? "" : Convert.ToString(mMCASQueryString["Viewmode"]);
+    var pagemode = mMCASQueryString["mode"] == null ? "" : Convert.ToString(mMCASQueryString["mode"]);
+    var policyid = mMCASQueryString["PolicyId"] == null ? "" : Convert.ToString(mMCASQueryString["PolicyId"]);
+    var claimId = mMCASQueryString["ClaimId"] == null ? "" : Convert.ToString(mMCASQueryString["ClaimId"]);
+    var ClaimTypeId = mMCASQueryString["ClaimTypeId"] == null ? "" : Convert.ToString(mMCASQueryString["ClaimTypeId"]);
+    var claimMode = mMCASQueryString["claimMode"] == null ? "" : Convert.ToString(mMCASQueryString["claimMode"]);
+    var accidentClaimIdNew = mMCASQueryString["AccidentClaimId"] == null ? "" : Convert.ToString(mMCASQueryString["AccidentClaimId"]);
+    var SubMenu = !string.IsNullOrEmpty(Convert.ToString((HttpContext.Current.Session["ScreenNameDash"]))) ? MenuListItem.ClaimTabs.GetClaimLabel(Convert.ToString((HttpContext.Current.Session["ScreenNameDash"]))) : PageResource.GetString(MenuListItem.ClaimTabs.SubMenuString(@caller, @accidentClaimIdNew, @pagemode, "ServiceProvider"));
+    var dis = TempData["DisplayDiv"] == null ? "none;" : "block;";
+    var Hdivdis1 = Model.Hdivdis == null ? "1" : Model.Hdivdis;
+    var ClaimTypeId1 = (Model.ClaimTypeId == null) ? 0 : Model.ClaimTypeId;
+    var h3header1 = Model.h3header == null ? "1" : Model.h3header.Trim();
+    var Hselect1 = Model.Hselect == null ? "1" : Model.Hselect;
+    var AddNewPartyText1 = Model.AddNewPartyText == null ? "1" : Model.AddNewPartyText.Trim();
+    Model.ClaimTypeList = ("Add" == Viewmode) ? (from l in Model.ClaimTypeList where l.Id == ClaimTypeId select l).ToList() : Model.ClaimTypeList;
+    Model.ServiceProviderOption = (Model.ServiceProviderOption == null && Model.ServiceProviderTypeId != null) ? Convert.ToString(Model.ServiceProviderTypeId) : Model.ServiceProviderOption;
+    SecurityPermissions myPemissions = (SecurityPermissions)ViewData["UserPermissions"];
+    var iscompleted = (TempData["IsCompleteprop"] == null ? 0 : Convert.ToInt32(TempData["IsCompleteprop"]));
+    string isEncryptedParams = System.Configuration.ConfigurationManager.AppSettings["EncryptQueryParams"].ToUpper();
+}
+<link href="@Url.Content("~/Content/jquery-ui.css")" rel="Stylesheet" media="screen" />
+<style type="text/css">
+    .form-horizontal .control-label
+    {
+        text-align: left;
+    }
+    input[type=text]:not(#EmailAddress):not(#EmailAddress2nd):not(#AppointedDate), textarea
+    {
+        text-transform: capitalize;
+    }
+    #AppointedDate
+    {
+        text-transform: uppercase;
+    }
+    .m_title
+    {
+        text-transform: capitalize;
+    }
+</style>
+<script src="@Url.Content("~/Scripts/jquery-2.1.0.min.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/Scripts/jquery-ui-1.8.20.min.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/Scripts/jquery.validate.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.min.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/Scripts/jquery.unobtrusive-ajax.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/Scripts/globalize/globalize.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/Scripts/globalize/cultures/globalize.culture.en-GB.js")" type="text/javascript"></script>
+<div class="dashboard-wrapper">
+    <div class="container">
+        <div class="page-title" id="reg">
+            <div class="col-lg-12" id="reg2" style="background-color: white; position: fixed;
+                z-index: 1;">
+                <h2>@PageResource.GetString(MenuListItem.ClaimTabs.PreBreadCrumbString(@pagemode))</h2>
+                <ul class="breadcrumb">
+                    <li>@SubMenu</li>
+                    <li>@PageResource.GetString("ServiceProviders")</li>
+                </ul>
+            </div>
+            <div style="position: relative!important">
+                @Html.Action("_ClaimDetails", "ClaimProcessing", new { PolicyId = @policyid })
+            </div>
+        </div>
+        <hr />
+        <div class="row" id="toprow">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <div class="panel panel-info">
+                    <div class="panel-heading clearfix">
+                        <i class="icon-check-sign"></i>
+                        <h3 class="panel-title">
+                            @PageResource.GetString("ThirdPartyHeaderFirst")</h3>
+                    </div>
+                    <div class="panel-body">
+                        @Html.Partial("ServiceProviderList", Model.ServiceProviderCollection)
+                        <div>
+                            <br />
+                        </div>
+                        <div class="row">
+                            <div class="clearfix igr col-md-1 text-center">
+                                <a class="btn btn-info" id="Previous">@Common.Previous</a>
+                            </div>
+                            <div class="clearfix igr col-md-10 text-center">
+                            </div>
+                            <div class="clearfix igr col-md-1 text-center">
+                                <a class="btn btn-info" id="Next">@Common.Next</a>
+                            </div>
+                        </div>
+                        <br />
+                    </div>
+                    @{
+                        object routes = new { PolicyId = @policyid, AccidentClaimId = @accidentClaimIdNew, claimMode = @caller, mode = @pagemode };
+                        if (isEncryptedParams.ToUpper() == "YES")
+                        {
+                            string res = RouteEncryptDecrypt.getRouteString(routes);
+                            res = RouteEncryptDecrypt.Encrypt(res);
+                            routes = new { Q = res };
+                        }
+                    }
+                </div>
+                <div class="panel panel-info" id="mainfieldset" style="display:@dis">
+                    <div class="panel-heading clearfix">
+                        <i class="icon-check-sign"></i>
+                        <h3 class="panel-title" id="header">
+                            @PageResource.GetString("ThirdPartyHeaderSecond")</h3>
+                    </div>
+                    <div class="panel-body" id="ServiceProviderEditor">
+                        @using (Html.BeginForm("ServiceProvider", "ClaimProcessing", routes, FormMethod.Post, new { role = "form", @class = "form-horizontal", id = "ServiceProviderform", name = "ServiceProviderform" }))
+                        {
+                            @Html.ValidationSummary(true)
+                            @Html.HiddenFor(m => m.ServiceProviderId);
+                            @Html.HiddenFor(m => m.Hselect)
+                            @Html.HiddenFor(m => m.Hdivdis)
+                            @Html.HiddenFor(m => m.Hshowgrid)
+                            @Html.HiddenFor(m => m.HGridImageSign)
+                            @Html.HiddenFor(m => m.h3header)
+                            @Html.HiddenFor(m => m.AddNewPartyText)
+                            @Html.HiddenFor(m => m.Prop1)
+                            @Html.HiddenFor(m => m.TPVehNo, new { @Value = 1 })
+                            <a id="reload" href='@Url.ActionEncoded("ServiceProvider", "ClaimProcessing", new { ServiceProviderId = @Model.ServiceProviderId, AccidentClaimId = @accidentClaimIdNew })' style="display:none">
+                                Reload</a>    
+                            <div style="color: Red; font-weight: bold;" class="has-error result1" id="error">
+                                <p align="center">
+                                    @if (@ViewData["SuccessMsg"] != null)
+                                    {
+                                        @ViewData["SuccessMsg"]
+                                    }
+                                </p>
+                            </div>
+                            <fieldset>
+                                <legend></legend>
+                                <div class="form-group">
+                                    <div class="col-lg-6">
+                                        <div class="form-group">
+                                            <label class="col-sm-3 control-label" for="ClaimTypeId">
+                                                @PageResource.GetString("ClaimTypeId")&nbsp;<span class="text-danger">*</span>
+                                            </label>
+                                            <div class="col-sm-8">
+                                                @Html.DropDownListFor(m => m.ClaimTypeId, new SelectList(Model.ClaimTypeList, "Id", "Text", "0"),
+new { @class = "form-control" })
+                                                @Html.ValidationMessageFor(m => m.ClaimTypeId)
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="form-group">
+                                            <label class="col-sm-3 control-label" for="ClaimantNameId">
+                                                @PageResource.GetString("ClaimantNameId")&nbsp;<span class="text-danger">*</span>
+                                            </label>
+                                            <div class="col-sm-8">
+                                                @Html.DropDownListFor(m => m.ClaimantNameId, new SelectList(Model.ClaimantNameList, "Id", "Text", "0"),
+new { @class = "form-control" })
+                                                @Html.ValidationMessageFor(m => m.ClaimantNameId)
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-lg-6">
+                                        <div class="form-group">
+                                            <label class="col-sm-3 control-label" for="PartyTypeId">
+                                                @PageResource.GetString("PartyTypeId")&nbsp;<span class="text-danger">*</span>
+                                            </label>
+                                            <div class="col-sm-8">
+                                                @Html.DropDownListFor(m => m.PartyTypeId, new SelectList(Model.PartyTypeList, "Id", "Text", "0"),
+new { @class = "form-control" })
+                                                @Html.ValidationMessageFor(m => m.PartyTypeId)
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="form-group">
+                                            <label class="col-sm-3 control-label" for="ServiceProviderOption">
+                                                @PageResource.GetString("ServiceProviderTypeId")&nbsp;<span class="text-danger">*</span>
+                                            </label>
+                                            <div class="col-sm-8">
+                                                @Html.RadioButtonForSelectList(m => m.ServiceProviderOption, Model.ServiceProviderOptionList)
+                                                @Html.ValidationMessageFor(m => m.ServiceProviderOption)
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </fieldset>
+                            <fieldset>
+                                <legend id="addPartyType">@PageResource.GetString("AddInsurer")</legend>
+                                <div class="form-group">
+                                    <div class="col-lg-6">
+                                        <div class="form-group">
+                                            <label class="col-sm-3 control-label" for="CompanyNameId">
+                                                @PageResource.GetString("CompanyNameId")&nbsp;<span class="text-danger">*</span>
+                                            </label>
+                                            <div class="col-sm-8">
+                                                @Html.DropDownListFor(m => m.CompanyNameId, new SelectList(Model.CompanyNameList, "Id", "Text", "0"),
+new { @class = "form-control" })
+                                                @Html.ValidationMessageFor(m => m.CompanyNameId)
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="form-group">
+                                            <label class="col-sm-3 control-label" for="AppointedDate">
+                                                @PageResource.GetString("AppointedDate")&nbsp;<span class="text-danger" id="spanId">*</span>
+                                            </label>
+                                            <div class="col-sm-8">
+                                                @Html.TextBoxFor(m => m.AppointedDate, "{0:d}", new { @class = "form-control datepicker" })
+                                                @*  @Html.ValidationMessageFor(m => m.AppointedDate)*@
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-lg-6">
+                                        <div class="form-group">
+                                            <label class="col-sm-3 control-label" for="Address1">
+                                                @PageResource.GetString("Address1")&nbsp;<span class="text-danger">*</span>
+                                            </label>
+                                            <div class="col-sm-8">
+                                                @Html.TextAreaFor(m => m.Address1, new { @maxlength = "100", @class = "form-control", @rows = "2" })
+                                                @Html.ValidationMessageFor(m => m.Address1)
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="form-group">
+                                            <label class="col-sm-3 control-label" for="Address2">
+                                                @PageResource.GetString("Address2")
+                                            </label>
+                                            <div class="col-sm-8">
+                                                @Html.TextAreaFor(m => m.Address2, new { @maxlength = "100", @class = "form-control", @rows = "2" })
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-lg-6">
+                                        <div class="form-group">
+                                            <label class="col-sm-3 control-label" for="Address3">
+                                                @PageResource.GetString("Address3")
+                                            </label>
+                                            <div class="col-sm-8">
+                                                @Html.TextAreaFor(m => m.Address3, new { @maxlength = "100", @class = "form-control", @rows = "2" })
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="form-group">
+                                            <label class="col-sm-3 control-label" for="PostalCode">
+                                                @PageResource.GetString("PostalCode")&nbsp;<span class="text-danger">*</span>
+                                            </label>
+                                            <div class="col-sm-8">
+                                                @Html.TextBoxFor(m => m.PostalCode, new { @maxlength = "15", @class = "form-control Number" })
+                                                @Html.ValidationMessageFor(m => m.PostalCode)
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-lg-6">
+                                        <div class="form-group">
+                                            <label class="col-sm-3 control-label" for="City">
+                                                @PageResource.GetString("City")
+                                            </label>
+                                            <div class="col-sm-8">
+                                                @Html.TextBoxFor(m => m.City, new { @maxlength = "100", @class = "form-control" })
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="form-group">
+                                            <label class="col-sm-3 control-label" for="State">
+                                                @PageResource.GetString("State")
+                                            </label>
+                                            <div class="col-sm-8">
+                                                @Html.TextBoxFor(m => m.State, new { @maxlength = "100", @class = "form-control" })
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-lg-6">
+                                        <div class="form-group">
+                                            <label class="col-sm-3 control-label" for="CountryId">
+                                                @PageResource.GetString("CountryId")
+                                            </label>
+                                            <div class="col-sm-8">
+                                                @Html.DropDownListFor(m => m.CountryId, new SelectList(Model.usercountrylist, "CountryShortCode", "CountryName", "SG"),
+new { @class = "form-control" })
+                                                @Html.ValidationMessageFor(m => m.CountryId)
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="form-group">
+                                            <label class="col-sm-3 control-label" for="Reference">
+                                                @PageResource.GetString("Reference")&nbsp;<span class="text-danger">*</span>
+                                            </label>
+                                            <div class="col-sm-8">
+                                                @Html.TextBoxFor(m => m.Reference, new { @maxlength = "150", @class = "form-control" })
+                                                @Html.ValidationMessageFor(m => m.Reference)
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-lg-6">
+                                        <div class="form-group">
+                                            <label class="col-sm-3 control-label" for="ContactPersonName">
+                                                @PageResource.GetString("ContactPersonName")
+                                            </label>
+                                            <div class="col-sm-8">
+                                                @Html.TextBoxFor(m => m.ContactPersonName, new { @maxlength = "250", @class = "form-control" })
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="form-group">
+                                            <label class="col-sm-3 control-label" for="EmailAddress">
+                                                @PageResource.GetString("EmailAddress")
+                                            </label>
+                                            <div class="col-sm-8">
+                                                @Html.TextBoxFor(m => m.EmailAddress, new { @maxlength = "100", @class = "form-control" })
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-lg-6">
+                                        <div class="form-group">
+                                            <label class="col-sm-3 control-label" for="OfficeNo">
+                                                @PageResource.GetString("OfficeNo")
+                                            </label>
+                                            <div class="col-sm-8">
+                                                @Html.TextBoxFor(m => m.OfficeNo, new { @maxlength = "15", @class = "form-control Number" })
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="form-group">
+                                            <label class="col-sm-3 control-label" for="Mobile">
+                                                @PageResource.GetString("Mobile")
+                                            </label>
+                                            <div class="col-sm-8">
+                                                @Html.TextBoxFor(m => m.Mobile, new { @maxlength = "15", @class = "form-control Number" })
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-lg-6">
+                                        <div class="form-group">
+                                            <label class="col-sm-3 control-label" for="Fax">
+                                                @PageResource.GetString("Fax")
+                                            </label>
+                                            <div class="col-sm-8">
+                                                @Html.TextBoxFor(m => m.Fax, new { @maxlength = "15", @class = "form-control Number" })
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="form-group">
+                                            <label class="col-sm-3 control-label">
+                                            </label>
+                                            <div class="col-sm-8">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-lg-6">
+                                        <div class="form-group">
+                                            <label class="col-sm-3 control-label" for="ContactPersonName2nd">
+                                                @PageResource.GetString("ContactPersonName2nd")
+                                            </label>
+                                            <div class="col-sm-8">
+                                                @Html.TextBoxFor(m => m.ContactPersonName2nd, new { @maxlength = "250", @class = "form-control" })
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="form-group">
+                                            <label class="col-sm-3 control-label" for="EmailAddress2nd">
+                                                @PageResource.GetString("EmailAddress2nd")
+                                            </label>
+                                            <div class="col-sm-8">
+                                                @Html.TextBoxFor(m => m.EmailAddress2nd, new { @maxlength = "100", @class = "form-control" })
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-lg-6">
+                                        <div class="form-group">
+                                            <label class="col-sm-3 control-label" for="OfficeNo2nd">
+                                                @PageResource.GetString("OfficeNo2nd")
+                                            </label>
+                                            <div class="col-sm-8">
+                                                @Html.TextBoxFor(m => m.OfficeNo2nd, new { @maxlength = "15", @class = "form-control Number" })
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="form-group">
+                                            <label class="col-sm-3 control-label" for="Mobile2nd">
+                                                @PageResource.GetString("Mobile2nd")
+                                            </label>
+                                            <div class="col-sm-8">
+                                                @Html.TextBoxFor(m => m.Mobile2nd, new { @maxlength = "15", @class = "form-control Number" })
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-lg-6">
+                                        <div class="form-group">
+                                            <label class="col-sm-3 control-label" for="Fax2nd">
+                                                @PageResource.GetString("Fax2nd")
+                                            </label>
+                                            <div class="col-sm-8">
+                                                @Html.TextBoxFor(m => m.Fax2nd, new { @maxlength = "15", @class = "form-control Number" })
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="form-group">
+                                            <label class="col-sm-3 control-label" for="StatusId">
+                                                @PageResource.GetString("StatusId")&nbsp;<span class="text-danger">*</span>
+                                            </label>
+                                            <div class="col-sm-8">
+                                                @Html.DropDownListFor(m => m.StatusId, new SelectList(Model.StatusList, "Lookup_value", "Lookup_desc", "[Select...]"),
+new { id = "StatusId", name = "StatusId", @class = "form-control" })
+                                                @Html.ValidationMessageFor(m => m.StatusId)
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-lg-6">
+                                        <div class="form-group">
+                                            <label class="col-sm-3 control-label" for="Remarks">
+                                                @PageResource.GetString("Remarks")
+                                            </label>
+                                            <div class="col-sm-8">
+                                                @Html.TextAreaFor(m => m.Remarks, new { @maxlength = "800", @class = "form-control" })
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="form-group">
+                                            <label class="col-sm-3 control-label">
+                                            </label>
+                                            <div class="col-sm-8">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </fieldset>
+                            <div class="form-group">
+                                <div class="col-lg-1">
+                                    <div class="form-group" style="padding-left: 20px;">
+                                        <a class="btn btn-info" id="Previous">@Common.Previous</a>
+                                    </div>
+                                </div>
+                                <div class="col-lg-10 text-center">
+                                    <div class="form-group" id="DivSave">
+                                        @if (@pagemode != "Payment" && @pagemode != "Enq")
+                                        {
+                                            <button class="btn btn-info" type="submit" id="btnSave" tabindex="12">
+                                                @Common.Save</button>
+                                            if (@Model.ServiceProviderId == 0 || @Model.ServiceProviderId == null)
+                                            {
+                                            <a type="button" class="btn btn-info" id="btnReset" href="#" tabindex="13">@Common.Reset</a>
+                                            }
+                                             else
+                                                {
+                                                 <a name="btnReset1" id="btnReset1" class="btn btn-info" href="#">@Common.Reset</a> 
+                                                }
+                                        }
+                                    </div>
+                                </div>
+                                <div class="col-lg-1">
+                                    <div class="form-group">
+                                        <a class="btn btn-info" id="Next">@Common.Next</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <fieldset>
+                                <legend></legend>
+                                <div class="form-group">
+                                    <div class="col-lg-12">
+                                        @Html.Partial("~/Views/Shared/_TimeStamp.cshtml", Model)
+                                    </div>
+                                </div>
+                            </fieldset>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    setTabActive('ThirdPartyTab');
+    var Tmainheader = {
+        "1": function () {
+            return "OD Claim Breakdown"
+        },
+        "2": function () {
+            return "TPPD Claim Breakdown"
+        },
+        "3": function () {
+            return "TPBI Claim Breakdown"
+        }
+    };
+    $('#ServiceProviderform').on('submit', function (event) {
+        RetainDropDown();
+        RetianDivDisplay();
+    });
+    var do_on_load = function () {
+        $('.ui-wrapper').css("padding", 0);
+        $('#Remarks').resizable({ handles: 's' });
+
+
+
+
+        //Added for first letter Capital for Claimant Name
+        $("#ClaimGrid_table td").each(function () {
+            var id = $(this).closest("tr").attr("id");
+            $(this).attr("role") && "gridcell" == $(this).attr("role") && $("#ClaimGrid_table table").each(function () {
+                if ($(this).context.id.beginsWith(id)) {
+                    var a = "#" + $(this).context.id + " td:nth-child(2)";
+                    //  $(a).css("text-transform", "capitalize");
+                }
+            });
+        });
+
+        $("div").each(function () {
+            $(this).hasClass("RadioButton") && ($(this).removeAttr("style"), $(this).addClass("col-sm-6"), $(this).css("padding-left", "0px"))
+        });
+        $(document).on("focus", ":input", function () {
+            $(this).attr("autocomplete", "off")
+        });
+        $(".datepicker").datepicker({
+            dateFormat: "dd/mm/yy",
+            showStatus: true,
+            showWeeks: true,
+            currentText: 'Now',
+            autoSize: true,
+            gotoCurrent: true,
+            showAnim: 'blind',
+            highlightWeek: true,
+            changeMonth: !0,
+            changeYear: !0,
+            yearRange: "1951:2050",
+            onSelect: function () {
+                $(this).valid()
+            }
+        });
+
+        $.culture = Globalize.culture("en-GB");
+        $.validator.methods.date = function (value, element) {
+            return this.optional(element)
+                    || Globalize.parseDate(value, "dd/MM/yyyy", "en-GB")
+                    || Globalize.parseDate(value, "yyyy-mm-dd");
+        };
+        $.validator.unobtrusive.adapters.add("notequalto", ["other"], function (a) {
+            a.rules.notEqualTo = "#" + a.params.other;
+            a.message && (a.messages.notEqualTo = a.message)
+        });
+        $.validator.addMethod("notEqualTo", function (a, b, c) {
+            return this.optional(b) || a != $(c).val()
+        }, "");
+        $("input[type=text]").each(function () {
+            $(this).hasClass("datepicker") && 10 < $(this).val().length && $(this).val($(this).val().substring(0, 10));
+            if (void 0 !== $(this).attr("data-val-date") && "The field " == $(this).attr("data-val-date").substring(0, 10)) {
+                var e = $(this).attr("data-val-date").substring(10, $(this).attr("data-val-date").length).replace("must be a date.", "must be in 'dd/mm/yyyy' format.");
+                $(this).removeAttr("data-val-date");
+                $(this).attr("data-val-date", e)
+            }
+        });
+        $("input[type=radio],#PartyTypeId").change(function () {
+            var a, b = $("#PartyTypeId").val(),c = "add";
+            b == "1" ? $("#addPartyType").html("Add Insurer") : b == "2" ? $("#addPartyType").html("Add Surveyor") : b == "3" ? $("#addPartyType").html("Add Lawyer") : $("#addPartyType").html("Add Workshop");
+            a = $("#ServiceProviderOption_1").prop("checked") ? "1" : $("#ServiceProviderOption_2").prop("checked") ? "2" : "";
+            $("#CompanyNameId").empty();
+            $("#CompanyNameId").append(new Option("[Select...]", "0"));
+            $("#PostalCode").val(""); $("#StatusId").val(""); $("#Address1").val(""); $("#CountryId").val("SG");
+            $("#AppointedDate,#Address2,#Address3,#City,#State,#Reference,#ContactPersonName,#EmailAddress,#OfficeNo,#Mobile2nd,#Fax2nd,#Remarks,#Mobile,#Fax,#ContactPersonName2nd,#OfficeNo2nd,#EmailAddress2nd").val("");
+            "" != a && "" != b && $.ajax({
+                type: "POST",
+                url: '@Url.ActionEncoded("GetCompanyNameList", "ClaimProcessing")',
+                data: {
+                    InsurerType: a,
+                    PartyTypeId: b,
+                    Status:c
+                },
+                success: function (a) {
+                    $.each(a, function (a, b) {
+                        $("#CompanyNameId").append(new Option(b.Text, b.Id))
+                    })
+                }
+            })
+        });
+        $("#ClaimGrid a.Add").each(function () {
+            $(this).attr("href").getstringinbetween("ServiceProviderId") == "0" && $(this).attr("disabled", !0);
+        });
+        $("#EmailAddress,#EmailAddress2nd").blur(function (event) {
+            var Email = $.trim($(this).val());
+            var id = this.id;
+            $.ajax({
+                type: "POST",
+                url: '@Url.ActionEncoded("ValidEmail", "ClaimProcessing")',
+                data: {
+                    EmailAdd1: Email
+                },
+                success: function (a) {
+                    if (a == true) {
+                        alert("Please enter Email in proper format.");
+                        $("#" + id).val("");
+                        $("#" + id).focus();
+                        event.preventDefault();
+                    }
+                }
+            });
+        });
+        $("#OfficeNo").blur(function (a) {
+            a = $.trim($(this).val());
+            if (a == "") { } else
+                MobileNumberLengthCheck("OfficeNo", "Office No. should be in proper format.");
+        });
+        $("#Mobile").blur(function (a) {
+            a = $.trim($(this).val());
+            if (a == "") { } else
+                MobileNumberLengthCheck("Mobile", "Mobile No. should be in proper format.");
+        });
+        $("#Fax").blur(function (a) {
+            a = $.trim($(this).val());
+            if (a == "") { } else
+                MobileNumberLengthCheck("Fax", " Fax No. should be in proper format.");
+        });
+        $("#OfficeNo2nd").blur(function (a) {
+            a = $.trim($(this).val());
+            if (a == "") { } else
+                MobileNumberLengthCheck("OfficeNo2nd", "Office No. should be in proper format.");
+        });
+        $("#Mobile2nd").blur(function (a) {
+            a = $.trim($(this).val());
+            if (a == "") { } else
+                MobileNumberLengthCheck("Mobile2nd", "Mobile No. should be in proper format.");
+        });
+        $("#Fax2nd").blur(function (a) {
+            a = $.trim($(this).val());
+            if (a == "") { } else
+                MobileNumberLengthCheck("Fax2nd", " Fax No. should be in proper format.");
+        });
+        $("#ClaimTypeId").change(function () {
+            $("#ClaimantNameId").empty();
+            $("#ClaimantNameId").append(new Option("[Select...]", "0"));
+            $.ajax({
+                type: "POST",
+                url: '@Url.ActionEncoded("GetClaimantNameList", "ClaimProcessing")',
+                data: {
+                    Acc: '@accidentClaimIdNew',
+                    CType: $(this).val()
+                },
+                success: function (a) {
+                    $.each(a, function (a, b) {
+                        $("#ClaimantNameId").append(new Option(b.Text, b.Id))
+                    })
+                }
+            });
+        });
+        $("#ClaimantNameId").change(function () {
+            var claimant = $("#ClaimantNameId").val();
+            $.ajax({
+                type: "POST",
+                url: '@Url.ActionEncoded("chkClaimantStatus", "ClaimProcessing")',
+                data: {
+                    AccId: '@accidentClaimIdNew',
+                    ClaimantId: claimant
+                },
+                success: function (a) {
+                    if (a == 2) {
+                        alert('Claimant has been finalized, You cannot add Service Provider against it.');
+                        $("#ClaimantNameId").val($("#ClaimantNameId option:first").val());
+                    }
+                    if (a == 3) {
+                        alert('Claimant has been cancelled, You cannot add Service Provider against it.');
+                        $("#ClaimantNameId").val($("#ClaimantNameId option:first").val());
+                    }
+                }
+            });
+        });
+        $("#btnReset").click(function () {
+            ClearForm("mainfieldset");
+        });
+        $("#CompanyNameId").change(function () {
+            var a, d = $("#PartyTypeId").val(),
+        c;
+            a = $("#ServiceProviderOption_1").prop("checked") ? "0" : $("#ServiceProviderOption_2").prop("checked") ? "1" : "";
+            c = $("#CompanyNameId").val();
+            "" != a && "" != d && "0" != c ? $.ajax({
+                type: "POST",
+                url: '@Url.ActionEncoded("GetCompanyNameDetailList", "ClaimProcessing")',
+                data: {
+                    InsurerType: a,
+                    PartyTypeId: d,
+                    CompanyNameId: c
+                },
+                success: function (a) {
+                    $.each(a, function (a, b) {
+                        $("#PostalCode").val(b.PostalCode1);
+                        $("#StatusId").val("Active" == b.Status ? "1" : "1" == b.Status ? "1" : "Inactive" == b.Status ? "2" : "2" == b.Status ? "2" : "0");
+                        $("#Address1").val(b.Address1);
+                        $("#CountryId").val(b.CountryId);
+                        $("#Address2").val(b.Address2);
+                        $("#Address3").val(b.Address3);
+                        $("#City").val(b.City);
+                        $("#State").val(b.State);
+                        $("#ContactPersonName").val(b.ContactPersonName);
+                        $("#EmailAddress").val(b.EmailAddress);
+                        $("#OfficeNo").val(b.OfficeNo);
+                        $("#Mobile").val(b.Mobile);
+                        $("#Fax").val(b.Fax);
+                        $("#ContactPersonName2nd").val(b.ContactPersonName2nd);
+                        $("#EmailAddress2nd").val(b.EmailAddress2nd);
+                        $("#OfficeNo2nd").val(b.OfficeNo2nd);
+                        $("#Mobile2nd").val(b.Mobile2nd);
+                        $("#Fax2nd").val(b.Fax2nd);
+                        $("#Remarks").val(b.Remarks);
+                    })
+                }
+            }) : ($("#PostalCode").val(""), $("#StatusId").val(""), $("#Address1").val(""), $("#CountryId").val("SG"));
+        });
+        $("#CompanyNameId").focusout(function () {
+            $("#ServiceProviderform").valid();
+        });
+        //        $("#AddNewParty").click(function () {
+        //            $("#ServiceProviderId").val("0");
+        //            var b, e = [];
+        //            CollapaseGrid();
+        //            "Add New Party" != $("#AddNewParty").text() || "block" != $("#mainfieldset").css("display") && "inline" != $("#mainfieldset").css("display") ? ($("#AddNewParty").text(function (b, e) {
+        //                return "block" == $("#mainfieldset").css("display") || "inline" == $("#mainfieldset").css("display") ? "Add New Party" : "Hide New Party"
+        //            }), $("#mainfieldset").slideToggle("slow")) : $("#AddNewParty").text("Hide New Party");
+        //            $("h3#header").text("Add 3rd Party / Own Service Provider")
+        //            $("#DivSave").show();
+        //        });
+        $("table.ui-ebixgrid-btable span").click(function () {
+            var a = $(this).context.id;
+            $("#AddNewParty").text("Add New Party"); $("#mainfieldset").hide("slow");
+            $("table.ui-ebixgrid-btable span").each(function () {
+                $(this).hasClass("ui-icon-minus") && $(this).context.id != a && ($(this).addClass("ui-icon-plus").removeClass("ui-icon-minus"), $("#" + $(this).closest("tr").next("tr").attr("id")).hide())
+            });
+        });
+
+
+
+        if ("Add" == "@Viewmode") {
+            $("#mainfieldset").show();
+            //            $("#ClaimTypeId").empty();
+            //            "1" == getQueryVariable("ClaimTypeId") ? $("#ClaimTypeId").append(new Option("Own Damage (OD)", "1")) : "2" == getQueryVariable("ClaimTypeId") ? $("#ClaimTypeId").append(new Option("Property Damage (TPPD)", "2")) : $("#ClaimTypeId").append(new Option("Body Injury (TPBI)", "3"));
+
+            $.ajax({
+                type: "POST",
+                url: '@Url.ActionEncoded("OpenServiceProviderEditor", "ClaimProcessing")',
+                data: {
+                    ClaimTypeCat: "ClaimType",
+                    claimType: $("#ClaimTypeId").val()
+                },
+                success: function (a) {
+                    $.each(a, function (a, b) {
+                        $.ajax({
+                            type: "POST",
+                            url: '@Url.ActionEncoded("GetClaimantNameList", "ClaimProcessing")',
+                            data: {
+                                Acc: '@accidentClaimIdNew',
+                                CType: b.Id
+                            },
+                            success: function (a) {
+                                $.each(a, function (a, b) {
+                                    $("#ClaimantNameId").append(new Option(b.Text, b.Id))
+                                })
+                            }
+                        });
+                    })
+                }
+            });
+
+        };
+
+        if ("@ClaimTypeId1" != "0" && !"@AddNewPartyText1".contains("ADD")) {
+            RetainMainGrid();
+            $.ajax({
+                type: "POST",
+                url: '@Url.ActionEncoded("GetClaimType", "ClaimProcessing")',
+                data: {
+                    ClaimTypeNo: "@ClaimTypeId1"
+                },
+                success: function (d) {
+                    for (var c = $("#Hshowgrid").val().split(","), b = 0, a; a = c[b]; b++) a.split("~"), a = a.split("~")[1], $("#" + a).prev().find("td:eq(1)").text() == d ? $("#" + a).css("display", "table-row") : $("#" + a).hide();
+                    c = $("#HGridImageSign").val().split(",");
+                    for (b = 0; a = c[b]; b++) a.split("~"), a = a.split("~")[1], $("#" + a).closest("td").next().text() == d && $("#" + a).addClass("ui-icon-minus").removeClass("ui-icon-plus")
+                }
+            });
+        };
+
+        if ('@Hselect1' != '1') {
+            for (var arr = [], arr = $("#Hselect").val().split("~"), k = 0, curr; curr = arr[k]; k++) {
+                var a1 = curr.split("***")[0],
+        a2 = curr.split("***")[1],
+        a3 = curr.split("***")[2];
+                $("#" + a1).empty();
+                for (var i = 0; i < a2.split("**").length; i += 2) $("#" + a1).append(new Option(a2.split("**")[i + 1], a2.split("**")[i]));
+                $("#" + a1).val(a3)
+            };
+        };
+        if ('@Hdivdis1' != 1) {
+            for (var arr = [], arr = $("#Hdivdis").val().split(","), i = 0, curr; curr = arr[i]; i++) {
+                var a1 = curr.split("~")[0],
+        a2 = curr.split("~")[1];
+                "T" == a1 ? $("#" + a2).show() : "error" != a2 && $("#" + a2).hide()
+            };
+        };
+        if ('@h3header1' != 1) {
+            $("h3#header").text('@h3header1');
+            $("#AddNewParty").text('@AddNewPartyText1');
+        };
+
+        $('#Remarks').each(function () {
+            $(this).removeAttr('width').removeAttr('height').parents('div:eq(0)').css('width', '').css('height', "50px");
+        });
+
+        $("#btnReset1").click(function () {
+            debugger;
+            var policyId = '@Model.PolicyId';
+            var accidentclaimId = '@Model.AccidentClaimId';
+            var ServiceProviderId = '@Model.ServiceProviderId';
+            var a = parseInt(policyId);
+            var b = parseInt(accidentclaimId);
+            var c = parseInt(ServiceProviderId);
+            window.location.href = '@Url.Action("ServiceProvider", "ClaimProcessing")?policyId=' + a + '&AccidentClaimId=' + b + '&claimMode=Write' + '&ServiceProviderId=' + c;
+        });
+
+        SetDivPost();
+
+        $("body").delegate("a.btn.btn-xs.btn-info", "click", function () {
+            var sPageURL = $(this)[0].getAttribute("href");
+            if ('@isEncryptedParams' == "YES") {
+                $.ajax({
+                    type: "POST",
+                    url: '@Url.Action("GetEncryptedUrl", "ClaimProcessing")',
+                    data: {
+                        Url: sPageURL
+                    },
+                    success: function (data) {
+                        window.location.href = data;
+                    }
+                });
+            }
+            else {
+                window.location.href = sPageURL;
+            }
+        });
+        if ('Select' == '@mMCASQueryString["Viewmode"]') {
+            SetHiddenSpan();
+            ExpandGridAfterPost($("#Hshowgrid").val());
+        }
+    };
+    $(document).ready(do_on_load);
+    $(window).bind('page:change', do_on_load);
+
+    function SetHiddenSpan() {
+        var AccidentClaimId = '@mMCASQueryString["AccidentClaimId"]', ServiceProviderId = (null == '@mMCASQueryString["ServiceProviderId"]') ? "@Model.ServiceProviderId" : '@mMCASQueryString["ServiceProviderId"]', ClaimTypeId = '@mMCASQueryString["ClaimTypeId"]';
+        $(".ui-ebixgrid-view > table > tbody > tr > td > a").each(function () {
+            $(this).attr("href") && $(this).attr("href").getstringinbetween("AccidentClaimId") == AccidentClaimId && $(this).attr("href").getstringinbetween("ServiceProviderId") == ServiceProviderId && $(this).attr("href").getstringinbetween("ClaimTypeId") == ClaimTypeId && $("#Hshowgrid").val("span_" + $(this).closest('tr')[0].id + "_s0");
+        });
+    }
+    function ExpandGridAfterPost(a) {
+        $("table.ui-ebixgrid-btable span").each(function () {
+            if ($(this).hasClass("ui-icon-minus") || $(this).hasClass("ui-icon-plus")) {
+                if (a.beginsWith($(this).context.id)) {
+                    var spanid = $(this).context.id, id = spanid.slice(5, spanid.length);
+                    $('#' + id).show();
+                    $('#' + spanid).removeClass('ui-icon-plus').addClass('ui-icon-minus');
+                }
+            }
+        });
+    };
+    function ClearForm(a) {
+        $("#error").hide();
+        $("#" + a).find(':input').each(function () {
+            switch (this.type) {
+                case 'text':
+                case 'textarea':
+                    $(this).val('');
+                    break;
+                case 'checkbox':
+                case 'radio':
+                    this.checked = false;
+            }
+        });
+        $("#" + a).find('select').each(function () {
+            $(this).prop('selectedIndex', 0);
+        });
+        $('#CountryId').val("SG");
+        ClearDropDown("CompanyNameId,ClaimantNameId");
+        $('span.field-validation-error').removeClass('field-validation-error').addClass('field-validation-valid');
+    };
+    function getQueryVariable(a) {
+        for (var c = "@MenuListItem.ClaimTabs.GetQueryStringVal()".replace(/amp;/ig, "").split("&"), b = 0; b < c.length; b++) {
+            var d = c[b].split("=");
+            if (d[0] == a) return d[1]
+        }
+    };
+    function RetainMainGrid() {
+        var a = "", b = "";
+        $("table.ui-ebixgrid-btable tr").each(function () {
+            if ($(this).hasClass("ui-subgrid")) {
+                $(this).is(":visible") ? "" != $(this).context.id && (a = a + "," + "T~" + $(this).context.id) : "" != $(this).context.id && (a = a + "," + "F~" + $(this).context.id)
+            }
+        });
+        $("table.ui-ebixgrid-btable span").each(function () {
+            if ($(this).hasClass("ui-icon ui-icon-plus") || $(this).hasClass("ui-icon ui-icon-minus")) {
+                $(this).hasClass("ui-icon ui-icon-plus") ? "" != $(this).context.id && (b = b + "," + "F~" + $(this).context.id) : "" != $(this).context.id && (b = b + "," + "T~" + $(this).context.id)
+            }
+        });
+        $("#Hshowgrid").val(a.substring(1, a.length));
+        $("#HGridImageSign").val(b.substring(1, b.length));
+    };
+    function CollapaseGrid() {
+        $("table.ui-ebixgrid-btable tr.ui-subgrid").hide();
+        $("table.ui-ebixgrid-btable span").each(function () {
+            $(this).hasClass("ui-icon ui-icon-minus") && $(this).addClass("ui-icon-plus").removeClass("ui-icon-minus");
+        });
+        ClearForm("mainfieldset");
+        $("#Hshowgrid").val("");
+    };
+    function RetainDropDown() {
+        var a = "";
+        $("#mainfieldset select").each(function () {
+            if ("CompanyNameId" == $(this).context.id || "ClaimantNameId" == $(this).context.id) a = $(this).context.id + "***" + DropValue($(this).context.id) + "***" + $(this).val() + "~" + a
+        });
+        $("#Hselect").val(a.substring(0, a.length - 1))
+    }
+
+    function RetianDivDisplay() {
+        var a = "";
+        $("#toprow div").each(function () {
+            $(this).is(":visible") ? "" != $(this).context.id && (a = "T~" + $(this).context.id + "," + a) : "" != $(this).context.id && (a = "F~" + $(this).context.id + "," + a)
+        });
+        $("#Hdivdis").val(a.substring(0, a.length - 1));
+        $("#h3header").val($("h3#header").text());
+        $("#AddNewPartyText").val($("#AddNewParty").text());
+    }
+    function DropValue(c) {
+        for (var a = "", d = $("#" + c).children("option").length, b = 0; b < d; b++) a = a + "**" + $("#" + c)[0].options[b].value + "**" + $("#" + c)[0].options[b].text;
+        return a.substring(2, a.length)
+    };
+
+    function ClearDropDown(a) {
+        for (var b = [], b = a.split(","), c = 0; b[c]; c++) $("#" + a).empty(), $("#" + a).append(new Option("[Select...]", ""));
+    };
+    String.prototype.contains = function (a) {
+        return -1 != this.indexOf(a)
+    };
+    if ('@caller' == 'Read') {
+        $('#ServiceProviderEditor').find('input, textarea, button, select').attr('disabled', 'disabled');
+        $('#btnReset').attr('disabled', 'disabled');
+    }
+    function MobileNumberLengthCheck(ControlId, Msg) {
+        if ($.trim($("#" + ControlId).val()).length < 4 || $.trim($("#" + ControlId).val()).length > 15) {
+            alert(Msg, ControlId);
+            return false;
+        }
+    };
+    String.prototype.getstringinbetween = function (a) {
+        for (var e = this.split("&"), d = 0; d < e.length; d++) {
+            var b = e[d].split("=");
+            if (b[0] == a) return b[1]
+        };
+    };
+    function checkKeyCode(evt)// for F5 disable
+    {
+
+        var evt = (evt) ? evt : ((event) ? event : null);
+        var node = (evt.target) ? evt.target : ((evt.srcElement) ? evt.srcElement : null);
+        if (event.keyCode == 116)//disable F5
+        {
+            evt.keyCode = 0;
+            alert('This operation is not allowed.')
+            return false
+        }
+    }
+
+    document.onkeydown = checkKeyCode;
+
+    String.prototype.beginsWith = function (string) {
+        return (this.indexOf(string) === 0);
+    };
+    $(':radio[name=ServiceProviderOption]').change(function () {
+        if ($(this).val() == '1') {
+            var partyTypeId = $('#PartyTypeId').val();
+            if (partyTypeId == '3') {
+                $('#spanId').show();
+            }
+        } else {
+            $('#spanId').hide();
+        }
+    });
+    $('#PartyTypeId').change(function () {
+        DisplayAppointedDtMandatory();
+    });
+    $(document).ready(function () {
+
+        $('#btnSave').click(function () {
+            if ($("#EmailAddress").val() != "") {
+                var Email = $.trim($("#EmailAddress").val());
+                var emailRegex = new RegExp(/^([\w\.\-]+)@@([\w\-]+)((\.(\w){2,3})+)$/i);
+                var valid = emailRegex.test(Email);
+                if (!valid) {
+                    alert("Please enter Email in proper format.");
+                    $("#EmailAddress").val("");
+                    $("#EmailAddress").focus();
+                    return false;
+                }
+            }
+            if ($("#EmailAddress2nd").val() != "") {
+                var Email2 = $.trim($("#EmailAddress2nd").val());
+                var emailRegex = new RegExp(/^([\w\.\-]+)@@([\w\-]+)((\.(\w){2,3})+)$/i);
+                var valid2 = emailRegex.test(Email2);
+                if (!valid2) {
+                    alert("Please enter Email in proper format.");
+                    $("#EmailAddress2nd").val("");
+                    $("#EmailAddress2nd").focus();
+                    return false;
+                }
+            }
+
+            var partyTypeId = $('#PartyTypeId').val();
+            var serviceProviderID = $('input:radio[name=ServiceProviderOption]:checked').val();
+            var appointedDate = $('#AppointedDate').val();
+            if (partyTypeId == '3' && serviceProviderID == '1' && appointedDate == '') {
+                alert('Appointed Date is required.');
+                return false;
+            }
+
+        });
+    });
+    function DisplayAppointedDtMandatory() {
+        var partyTypeId = $('#PartyTypeId').val();
+        var serviceProviderID = $('input:radio[name=ServiceProviderOption]:checked').val();
+        if (partyTypeId == '3' && serviceProviderID == '1') {
+            var partyTypeId = $('#PartyTypeId').val();
+            if (partyTypeId == '3') {
+                $('#spanId').show();
+            }
+        } else {
+            $('#spanId').hide();
+        }
+    }
+    DisplayAppointedDtMandatory();
+    $(".datepicker").blur(function (event) {
+        if ($(this).val() != "" && $(this).val() != 'DD/MM/YYYY') {
+            var errMessage = "";
+            var dob = $(this).val();
+            var pattern = /^(?:(?:31(\/|-|\.)(?:0?[13578]|1[02]))\1|(?:(?:29|30)(\/|-|\.)(?:0?[1,3-9]|1[0-2])\2))(?:(?:1[6-9]|[2-9]\d)?\d{2})$|^(?:29(\/|-|\.)0?2\3(?:(?:(?:1[6-9]|[2-9]\d)?(?:0[48]|[2468][048]|[13579][26])|(?:(?:16|[2468][048]|[3579][26])00))))$|^(?:0?[1-9]|1\d|2[0-8])(\/|-|\.)(?:(?:0?[1-9])|(?:1[0-2]))\4(?:(?:1[6-9]|[2-9]\d)?\d{2})$/;
+            if (!pattern.test(dob)) {
+                errMessage += "Date must be in 'dd/mm/yyyy' format.\n";
+                alert(errMessage);
+                $(this).val("");
+                event.preventDefault();
+                return false;
+            }
+        }
+    });
+</script>

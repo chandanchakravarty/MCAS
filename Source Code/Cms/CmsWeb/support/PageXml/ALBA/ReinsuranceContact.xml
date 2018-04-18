@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Root>
+  <PageTitle>
+    <Culture Code="en-US">Reinsurance Contact</Culture>
+    <Culture Code="zh-SG">Reinsurance Contact</Culture>
+    <Culture Code="pt-BR">Reinsurance Contact</Culture>
+  </PageTitle>
+
+ <!--Salutation textbox visible false-->
+  <PageElement name="txtREIN_CONTACT_SALUTATION" type="TextBox" Desc=""
+     IsMandatory="No"
+     IsReadOnly="No"
+     IsDisabled="No"
+     IsDisplay="Yes"
+     MaxLength=""
+     MaxSize=""
+     IsFormatingRequired="No" JsFunctionToFormat="" OnClickJSFunction=""
+     OnChangeJSFunction="" >
+    <rev Enabled="No" ExpKey=""/>
+    <Culture Code="en-US" Desc="set Label and Message for English language">
+      <Caption>Salutation</Caption>
+      <rfvMessage></rfvMessage>
+      <DefaultValue></DefaultValue>
+      <revExpMessage></revExpMessage>
+    </Culture>
+    <Culture Code="zh-SG" Desc="set Label and Message for Singapore language">
+      <Caption>Salutation</Caption>
+      <rfvMessage></rfvMessage>
+      <DefaultValue></DefaultValue>
+      <revExpMessage></revExpMessage>
+    </Culture>
+    <Culture Code="pt-BR" Desc="set Label and Message for Brazil language">
+      <Caption>Saudação</Caption>
+      <rfvMessage></rfvMessage>
+      <DefaultValue></DefaultValue>
+      <revExpMessage></revExpMessage>
+    </Culture>
+  </PageElement>
+
+  <!--Salutation Drop Down visible True-->
+  <PageElement name="cmbREIN_CONTACT_SALUTATION" type="DDL" Desc=""
+     IsMandatory="No"
+     IsReadOnly="No"
+     IsDisabled="No"
+     IsDisplay="No"
+     MaxLength=""
+     MaxSize=""
+     IsFormatingRequired="" JsFunctionToFormat="" OnClickJSFunction=""
+     OnChangeJSFunction="" >
+    <rev Enabled="No" ExpKey=""/>
+    <Culture Code="en-US" Desc="set Label and Message for English language">
+      <Caption></Caption>
+      <rfvMessage></rfvMessage>
+      <DefaultValue></DefaultValue>
+      <revExpMessage></revExpMessage>
+    </Culture>
+    <Culture Code="zh-SG" Desc="set Label and Message for Singapore language">
+      <Caption></Caption>
+      <rfvMessage></rfvMessage>
+      <DefaultValue></DefaultValue>
+      <revExpMessage></revExpMessage>
+    </Culture>
+    <Culture Code="pt-BR" Desc="set Label and Message for Brazil language">
+      <Caption></Caption>
+      <rfvMessage></rfvMessage>
+      <DefaultValue></DefaultValue>
+      <revExpMessage></revExpMessage>
+    </Culture>
+  </PageElement>
+
+  <!--Salutation Drop Down Caption-->
+  <PageElement name="capREIN_CONTACT_SALUTATION" type="Label" Desc=""
+     IsMandatory="No"
+     IsReadOnly="No"
+     IsDisabled="No"
+     IsDisplay="Yes"
+     MaxLength=""
+     MaxSize=""
+     IsFormatingRequired="" JsFunctionToFormat="" OnClickJSFunction=""
+     OnChangeJSFunction="" >
+    <rev Enabled="No" ExpKey=""/>
+    <Culture Code="en-US" Desc="set Label and Message for English language">
+      <Caption>Salutation</Caption>
+      <rfvMessage></rfvMessage>
+      <DefaultValue></DefaultValue>
+      <revExpMessage></revExpMessage>
+    </Culture>
+    <Culture Code="zh-SG" Desc="set Label and Message for Singapore language">
+      <Caption>Salutation</Caption>
+      <rfvMessage></rfvMessage>
+      <DefaultValue></DefaultValue>
+      <revExpMessage></revExpMessage>
+    </Culture>
+    <Culture Code="pt-BR" Desc="set Label and Message for Brazil language">
+      <Caption>Saudação</Caption>
+      <rfvMessage></rfvMessage>
+      <DefaultValue></DefaultValue>
+      <revExpMessage></revExpMessage>
+    </Culture>
+  </PageElement>
+
+  <!--FAX NUMBER SHOULD NOT BE MANDATORY-->
+  <PageElement name="txtREIN_CONTACT_FAX" type="TextBox" Desc=""
+   IsMandatory="Yes"
+   IsReadOnly="No"
+   IsDisabled="No"
+   IsDisplay="Yes"
+   MaxLength=""
+   MaxSize=""
+   IsFormatingRequired="" JsFunctionToFormat="" OnClickJSFunction="" OnChangeJSFunction="" >
+    <rev Enabled="Yes" ExpKey="^(\d{2}[-]\d{2}[-]\d{4}[-]\d{4})|(\d{4}[-]\d{4})$"></rev>
+    <Culture Code="en-US" Desc="set Label and Message for English language">
+      <Caption>Fax</Caption>
+      <rfvMessage>Please enter Fax Number.</rfvMessage>
+      <DefaultValue></DefaultValue>
+      <revExpMessage>Fax number should be either in "##-##-####-####" ou "####-####" format.</revExpMessage>
+    </Culture>
+    <Culture Code="zh-SG" Desc="set Label and Message for Singapore language">
+      <Caption>Fax</Caption>
+      <rfvMessage>Please enter Fax Number.</rfvMessage>
+      <DefaultValue></DefaultValue>
+      <revExpMessage>Fax number should be either in '"##-##-####-####" ou "####-####" format.</revExpMessage>
+    </Culture>
+    <Culture Code="pt-BR" Desc="set Label and Message for Brazil language">
+      <Caption>Fax</Caption>
+      <rfvMessage>Insira o número de fax.</rfvMessage>
+      <DefaultValue></DefaultValue>
+      <revExpMessage>O número do fax deve estar no formato "##-##-####-####" ou "####-####".</revExpMessage>
+    </Culture>
+  </PageElement>
+
+</Root>

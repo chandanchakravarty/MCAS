@@ -1,0 +1,184 @@
+﻿@model IEnumerable<MCAS.Web.Objects.ClaimObjectHelper.ReverseInfo>
+@{
+    Layout = null;
+}
+<div class="panel-body">
+    @using (Html.BeginForm("ReverseChange", "ClaimProcessing", FormMethod.Post, new { role = "form", @class = "form-horizontal", id = "ReverseChangeform", name = "ReverseChangeform" }))
+    {
+        <h5 class="text-info">
+            Reserves</h5>
+        <hr />
+        <div class="panel-body">
+            <div class="col-lg-12">
+                <div class="table-responsive">
+                    <table class="table table-striped table-hover">
+                        <thead>
+                            <tr>
+                                <th style="width: 15%;padding-left:10px;">
+                                    Date
+                                </th>
+                                <th style="width: 15%;">
+                                    Type
+                                </th>
+                                <th style="width: 18%;">
+                                    Claimant Name
+                                </th>
+                                <th style="width: 18%;">
+                                    Previous Reserve
+                                </th>
+                                <th style="width: 18%;">
+                                    Reserve Movement
+                                </th>
+                                <th style="width: 16%;text-align:center;">
+                                    Current Reserve
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @{
+        int trid = 1;
+        int rowmatch = 0;
+        var display = "";
+
+        foreach (var item in Model)
+        {
+            rowmatch += 1;
+                                <tr group='@(trid)' style="display:@display;">
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Date)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Type)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.ClaimantNo)
+                                    </td>
+                                    <td>
+                                        &#36;
+                                        @Html.DisplayFor(modelItem => item.PreReserveOrgAmt)
+                                    </td>
+                                    <td>
+                                        &#36;
+                                        @Html.DisplayFor(modelItem => item.MoveReserveOrgAmt)
+                                    </td>
+                                    <td>
+                                        &#36;
+                                        @Html.DisplayFor(modelItem => item.FinalReserveOrgAmt)
+                                    </td>
+                                </tr>
+            if (rowmatch > 9)
+            {
+                rowmatch = 0;
+                trid += 1;
+                display = "none";
+            }
+        }}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            @{
+        decimal count = (decimal)Model.Count() / 10;
+        int totalcount = (int)Math.Ceiling(count);
+                <div class="row">
+                    <div class="clearfix igr col-md-1 text-center">
+                        <a class="btn btn-info" id="Previous">Previous</a>
+                    </div>
+                    <div class="col-lg-10 text-center">
+                        <ul class="pagination no-margin">
+                            <li id="liprevious" onclick="Pagination('liprevious');"><a href="#">«</a> </li>
+                            @for (int j = 0; j < totalcount; j++)
+                            {
+                                if (j == 0)
+                                { 
+                                <li id="li@(j + 1)" class="active" onclick="Pagination('li@(j + 1)');"><a href="#">@(j + 1)</a>
+                                </li>
+                                }
+                                else
+                                {
+                                    if (j > 4)
+                                    {
+                                <li id="li@(j + 1)" style="display: none;" onclick="Pagination('li@(j + 1)');" ><a
+                                    href="#">@(j + 1)</a></li>
+                                    }
+                                    else
+                                    { 
+                                <li id="li@(j + 1)" onclick="Pagination('li@(j + 1)');" ><a href="#">@(j + 1)</a></li>
+                                    }
+                                }
+                            }
+                            <li id="linext" onclick="Pagination('linext');"><a href="#">»</a> </li>
+                        </ul>
+                    </div>
+                    <div class="clearfix igr col-md-1 text-center">
+                        <a class="btn btn-info" id="Next">Next</a>
+                    </div>
+                </div>
+            }
+        </div>
+    }
+</div>
+<script type="text/javascript">
+    $(document).ready(function () {
+        setTabActive('ThirdPartyTab');
+    });
+</script>
+<script type="text/javascript">
+$(document).ready(function () {
+$("#AccidentTab,#ClaimTab,#ThirdPartyTab,#NotesTab,#ReserveTab,#TransactionsTab,#AttachmentsTab,#ToDoTab,#PaymentEditor").removeClass("active");
+                $("#ReverseEditor").addClass("active");
+                });
+function Pagination(id) {
+     var totalcount = Math.ceil(parseFloat(@Model.Count() / 10));
+        if (id == "linext") {
+            id = "li" + (parseInt($("#oldgroup").val())==totalcount ? totalcount :(parseInt($("#oldgroup").val())+ 1 ));
+        }
+        if (id == "liprevious") {
+            id = "li" + (parseInt($("#oldgroup").val()) == 1 ? 1 : (parseInt($("#oldgroup").val()) - 1));
+        }
+        var oldgroup_id = $("#oldgroup").val();
+        var tabid_id = id.replace("li", "");
+        $("#oldgroup").val(tabid_id);
+        $("table tr[group=" + oldgroup_id + "]").css("display", "none");
+        $("table tr[group=" + tabid_id + "]").css("display", "");
+         $('.active').removeClass();
+        $('#'+id).addClass("active");
+
+         if(totalcount>0)
+        {
+          for(i=1;i<=totalcount;i++)
+                    {
+                     $("#li"+i).css("display", "none");
+                    }
+            if(tabid_id>1)
+            {
+                   
+                   if(parseFloat( tabid_id)+2 <= parseFloat(totalcount))
+                   {
+                        for(i=parseFloat( tabid_id==2?3:tabid_id)-2;i<= parseFloat( tabid_id==2?3:tabid_id)+2;i++)
+                        {
+                            if(i<=totalcount)
+                            {
+                             $("#li"+i).css("display", "");
+                            }
+                        }
+                    }
+                    else
+                    {
+                        for(i=parseFloat( totalcount)-4;i<= parseFloat( totalcount);i++)
+                        {
+                           
+                             $("#li"+i).css("display", "");
+                        }
+                    }
+            }
+             else
+            {
+           for(i=parseFloat(1);i<= parseFloat( 5);i++)
+                        {
+                             $("#li"+i).css("display", "");
+                        }
+            }
+        }
+    }
+</script>

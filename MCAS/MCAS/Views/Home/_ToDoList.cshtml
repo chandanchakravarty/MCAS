@@ -1,0 +1,78 @@
+﻿@using MCAS.Web.Objects.Resources.Home
+@{
+    string isEncryptedParams = System.Configuration.ConfigurationManager.AppSettings["EncryptQueryParams"].ToUpper();
+ }
+
+<style>
+    td.class1
+    {
+        color:black !important;background-color:#f9f9f9 !important;
+    }
+    td.class2
+    {
+        color:black !important;background-color:yellow !important;
+    }
+    td.class3
+    {
+        color:#FFFFFF !important;background-color:red !important;
+    }
+</style>
+<div class="panel-body">
+    <h5 class="text-info">
+        @Index.AlertsRecordTable</h5>
+    <hr />
+    <div class="col-lg-12">
+        <div class="table-responsive" id="Diary_wrapper" role="grid">
+            <table id="tableDiarySrc3" class="table table-striped table-hover">
+                <thead>
+                    <tr>
+                        <th>
+                        
+                        </th>
+                        <th>
+                            @Index.ClaimNo.
+                        </th>
+                        <th>
+                            @Index.IPNo
+                        </th>
+                        <th>
+                            @Index.AlertsDescription
+                        </th>
+                        <th>
+                            @Index.CreatedBy
+                        </th>
+                        <th>
+                            @Index.EstCompletionDate
+                        </th>
+                        <th>
+                            @Index.AssignedTo
+                        </th>
+                        <th>
+                            @Index.ReassignedTo
+                        </th>
+                        <th>
+                            @Index.EscalatedTo
+                        </th>
+                        <th>
+                            @Index.Action
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-1 text-left">
+        </div>
+        <div class="col-lg-9 text-left">
+        </div>
+        <div class="col-lg-1 text-right">
+            @* @if (@myPemissions.SplPermission)
+            {*@ <a class="btn btn-info" id="openDiaryReassignment" href="#">@Index.AlertReassignment</a>
+            @* }*@
+        </div>
+    </div>
+</div>

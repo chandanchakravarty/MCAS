@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Root>
+	<EODParameters>
+		<WebAppUNCPath>\\192.168.91.179\CMS-Res</WebAppUNCPath>
+		<connStr>user id=sa;password=ebix123;initial catalog=ebix-advantage-dev-new;data source=192.168.91.34\sql2008;Connect Timeout=30</connStr>
+		<BricsUser>207</BricsUser>
+		<CarrierSystemID>w001</CarrierSystemID>
+		<BRICSConfigFile>cmsweb\support\BRICSConfig.xml</BRICSConfigFile>
+		<UploadPath>\\192.168.91.179\CmsUpload</UploadPath>
+		<ImpersonationUserId>pravesh</ImpersonationUserId>
+		<ImpersonationPassword>password</ImpersonationPassword>
+		<ImpersonationDomain>INDIA</ImpersonationDomain>
+		<CmsWebUrl>http://192.168.91.179/cms/CmsWeb/</CmsWebUrl>
+		<UploadURL>/cms/Upload</UploadURL>
+		<EODSystemID>w001</EODSystemID>
+		<IIXUrl>https://expressnet.iix.com/web-services/Auth</IIXUrl>
+		<IIXUserName>IIX</IIXUserName>
+		<IIXPassword>DEMO-WS3</IIXPassword>
+		<IIXAccountNumber>099901</IIXAccountNumber>
+		<VehicleClassXml>\QuickQuote\VEHICLE_CLASS.XML</VehicleClassXml>
+		<PayPalHostName>pilot-payflowpro.paypal.com</PayPalHostName>
+		<PaypalPartner>paypal</PaypalPartner>
+		<PayPalUserName>ebixasp</PayPalUserName>
+		<PayPalPassword>ebixasp1</PayPalPassword>
+		<PayPalVendor>ebixasp</PayPalVendor>
+		<FetchInsuranceScore>No</FetchInsuranceScore>
+		<AuthenticationToken>NnkENmCzaZUlkSvGLDgZwr3Vj1x5kwc9n4S2KT6CvpbW6yed6GXax4xE2KHFbMgn</AuthenticationToken>
+	</EODParameters>
+	<PositivePayParameters>
+		<LocalUploadDirectory>\\192.168.91.179\CmsUpload\PostivePay\</LocalUploadDirectory>
+	</PositivePayParameters>
+	<EFTParameters>
+		<NACHALocalUploadDirectory>\\192.168.91.179\CmsUpload\NACHA Files\</NACHALocalUploadDirectory>
+		<NACHAHostName>ftp.ebix.com</NACHAHostName>
+		<NACHAUserName>ftpguest</NACHAUserName>
+		<NACHAPassword>ftpguest</NACHAPassword>
+		<NACHARemoteDirectory>EBXDV25/NACHA-Ftp</NACHARemoteDirectory>
+	</EFTParameters>
+	<RTLParameters>
+		<LocalUploadDirectory>\\192.168.91.179\CmsUpload\RTLHotFiles\</LocalUploadDirectory>
+		<RemoteHostName>ftp.ebix.com</RemoteHostName>
+		<RemoteUserName>ftpguest</RemoteUserName>
+		<RemotePassword>ftpguest</RemotePassword>
+		<RemoteDirectory>EBXDV25/RTL-Ftp</RemoteDirectory>
+		<RTLFileName>RTLHotFile</RTLFileName>
+	</RTLParameters>
+	<EODSchedule>
+		<Activity NAME="ACC_SPOOLING" RUN="Daily" TIME_HR="19" TIME_MIN="00" DESCRIPTION="Spooling of EFT and premium notices"></Activity>
+		<Activity NAME="EFT" RUN="Daily" TIME_HR="19" TIME_MIN="20" DESCRIPTION="EFT Processing and NACHA transmission"></Activity>
+		<Activity NAME="ACCOUNTING" RUN="Daily" TIME_HR="19" TIME_MIN="40" DESCRIPTION="Accounting related EOD tasks"></Activity>
+		<Activity NAME="POL_PROCESS" RUN="Daily" TIME_HR="16" TIME_MIN="00" DESCRIPTION="Policy Processing related EOD tasks"></Activity>
+		<Activity NAME="PREM_NOTICES" RUN="Daily" TIME_HR="21" TIME_MIN="00" DESCRIPTION="Generation of Premium Notices"></Activity>
+		<Activity NAME="FOLLOWUP" RUN="Daily" TIME_HR="22" TIME_MIN="00" DESCRIPTION="Followup for pending processes"></Activity>
+		<Activity NAME="AGN_REGULAR" RUN="Monthly" TIME_HR="23" TIME_MIN="00" DESCRIPTION="Process Regular Agency Commission"
+			LAST_RUN=""></Activity>
+		<Activity NAME="AGN_ADDITIONAL" RUN="BiMonthly" TIME_HR="23" TIME_MIN="10" DESCRIPTION="Process Additional Agency Commission"
+			LAST_RUN=""></Activity>
+		<Activity NAME="SM_WRITE_OFF" RUN="Monthly" TIME_HR="23" TIME_MIN="20" DESCRIPTION="Writeoff Small Balances"
+			LAST_RUN=""></Activity>
+		<Activity NAME="EARNED_PREMIUM" RUN="Monthly" TIME_HR="23" TIME_MIN="30" DESCRIPTION="Process Earned Premium"
+			LAST_RUN=""></Activity>
+		<Activity NAME="REPORTS" RUN="Monthly" TIME_HR="11" TIME_MIN="45" DESCRIPTION="Month end reports"
+			LAST_RUN=""></Activity>
+    <Activity NAME="CLAIMS" RUN="Daily" TIME_HR="16" TIME_MIN="40" DESCRIPTION="Claims related EOD tasks" LAST_RUN="" LAST_RESERVE_UPDATE=""></Activity>
+	</EODSchedule>
+	<PendingFollowUP>
+		<FOLLOWUP ID="1" DAYS="1" LISTTYPE="28" />
+		<FOLLOWUP ID="2" DAYS="5" LISTTYPE="29" />
+		<FOLLOWUP ID="3" DAYS="9" LISTTYPE="30" />
+	</PendingFollowUP>
+</Root>

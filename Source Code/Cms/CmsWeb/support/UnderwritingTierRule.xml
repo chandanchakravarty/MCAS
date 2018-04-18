@@ -1,0 +1,371 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Root>
+	<Master>
+		<Query Code="SELECT" Level="APP">Proc_GetTierForUnderWriter_APP</Query>
+		<Query Code="SELECT" Level="POLICY">Proc_GetTierForUnderWriter_POL</Query>
+		<Query Code="SELECT" Level="QQ">Proc_GetTierForUnderWriter_QQ</Query>
+		<Column Code="LAPSE_DAYS" MapColumnn="LAPSE_DAYS"></Column>
+		<Column Code="PRIOR_BI_LIMIT" MapColumnn="PRIOR_BI_LIMIT"></Column>
+		<Column Code="TOTAL_NAF" MapColumnn="TOTAL_NAF"></Column>
+		<Column Code="LIMIT_TYPE" MapColumnn="LIMIT_TYPE"></Column>
+		<Column Code="APP_EFFECTIVE_DATE" MapColumnn="APP_EFFECTIVE_DATE"></Column>
+		<Column Code="STATE_ID" MapColumnn="STATE_ID"></Column>
+		<Column Code="U_TIER" MapColumnn=""></Column>
+	</Master>
+	<Group Code="AUTO" CodeID="1">
+		<!-- For Indiana Automobile   -->
+		<Rule Action="Master" StartDate="1950-01-01" EndDate="3000-12-30" STATE_ID="14">
+			<Conditions>
+				<Condition Operand1="$LIMIT_TYPE" Operator="==" Operand2="BI" OperandType="String">
+					<SubConditions>
+						<SubCondition Operand1="$LAPSE_DAYS" Operator="==" Operand2="0" OperandType="String">
+							<!--LAPSE DAYS 0-->
+							<SubConditions>
+								<!--Rule 1 equal state Premium-->
+								<SubCondition Operand1="$PRIOR_BI_LIMIT" Operator="==" Operand2="25" OperandType="Double">
+									<SubConditions>
+										<SubCondition Operand1="$TOTAL_NAF" Operator="==" Operand2="0" OperandType="Double">
+											<ToSet Key="$U_TIER" Value="C1"></ToSet>
+										</SubCondition>
+										<SubCondition Operand1="$TOTAL_NAF" Operator="==" Operand2="1" OperandType="Double">
+											<ToSet Key="$U_TIER" Value="D1"></ToSet>
+										</SubCondition>
+										<SubCondition Operand1="$TOTAL_NAF" Operator="==" Operand2="2" OperandType="Double">
+											<ToSet Key="$U_TIER" Value="F1"></ToSet>
+										</SubCondition>
+										<SubCondition Operand1="$TOTAL_NAF" Operator="&gt;=" Operand2="3" OperandType="Double">
+											<ToSet Key="$U_TIER" Value="G1"></ToSet>
+										</SubCondition>
+									</SubConditions>
+								</SubCondition>
+								<!--Rule 2 equal state Premium-->
+								<SubCondition Operand1="$PRIOR_BI_LIMIT" Operator="&lt;" Operand2="50" OperandType="Double">
+									<SubConditions>
+										<SubCondition Operand1="$TOTAL_NAF" Operator="==" Operand2="0" OperandType="Double">
+											<ToSet Key="$U_TIER" Value="B1"></ToSet>
+										</SubCondition>
+										<SubCondition Operand1="$TOTAL_NAF" Operator="==" Operand2="1" OperandType="Double">
+											<ToSet Key="$U_TIER" Value="B1"></ToSet>
+										</SubCondition>
+										<SubCondition Operand1="$TOTAL_NAF" Operator="==" Operand2="2" OperandType="Double">
+											<ToSet Key="$U_TIER" Value="D1"></ToSet>
+										</SubCondition>
+										<SubCondition Operand1="$TOTAL_NAF" Operator="&gt;=" Operand2="3" OperandType="Double">
+											<ToSet Key="$U_TIER" Value="E1"></ToSet>
+										</SubCondition>
+									</SubConditions>
+								</SubCondition>
+								<!--Rule3  > = 50/100 < 100/300 -->
+								<SubCondition Operand1="$PRIOR_BI_LIMIT" Operator="&lt;" Operand2="100" OperandType="Double">
+									<SubConditions>
+										<SubCondition Operand1="$TOTAL_NAF" Operator="==" Operand2="0" OperandType="Double">
+											<ToSet Key="$U_TIER" Value="B1"></ToSet>
+										</SubCondition>
+										<SubCondition Operand1="$TOTAL_NAF" Operator="==" Operand2="1" OperandType="Double">
+											<ToSet Key="$U_TIER" Value="B1"></ToSet>
+										</SubCondition>
+										<SubCondition Operand1="$TOTAL_NAF" Operator="==" Operand2="2" OperandType="Double">
+											<ToSet Key="$U_TIER" Value="D1"></ToSet>
+										</SubCondition>
+										<SubCondition Operand1="$TOTAL_NAF" Operator="&gt;=" Operand2="3" OperandType="Double">
+											<ToSet Key="$U_TIER" Value="E1"></ToSet>
+										</SubCondition>
+									</SubConditions>
+								</SubCondition>
+								<!--Rule 4  > = 100/300 -->
+								<SubCondition Operand1="$PRIOR_BI_LIMIT" Operator="&gt;=" Operand2="100" OperandType="Double">
+									<SubConditions>
+										<SubCondition Operand1="$TOTAL_NAF" Operator="==" Operand2="0" OperandType="Double">
+											<ToSet Key="$U_TIER" Value="A1"></ToSet>
+										</SubCondition>
+										<SubCondition Operand1="$TOTAL_NAF" Operator="==" Operand2="1" OperandType="Double">
+											<ToSet Key="$U_TIER" Value="B1"></ToSet>
+										</SubCondition>
+										<SubCondition Operand1="$TOTAL_NAF" Operator="==" Operand2="2" OperandType="Double">
+											<ToSet Key="$U_TIER" Value="B1"></ToSet>
+										</SubCondition>
+										<SubCondition Operand1="$TOTAL_NAF" Operator="&gt;=" Operand2="3" OperandType="Double">
+											<ToSet Key="$U_TIER" Value="D1"></ToSet>
+										</SubCondition>
+									</SubConditions>
+								</SubCondition>
+							</SubConditions>
+						</SubCondition>
+						<!--LAPSE DAYS 1 TO 30-->
+						<SubCondition Operand1="$LAPSE_DAYS" Operator="&lt;=" Operand2="30" OperandType="Double">
+							<SubConditions>
+								<!--Rule 1 LAPSE DAYS 1 TO 30-->
+								<SubCondition Operand1="$PRIOR_BI_LIMIT" Operator="==" Operand2="25" OperandType="Double">
+									<SubConditions>
+										<SubCondition Operand1="$TOTAL_NAF" Operator="==" Operand2="0" OperandType="Double">
+											<ToSet Key="$U_TIER" Value="D1"></ToSet>
+										</SubCondition>
+										<SubCondition Operand1="$TOTAL_NAF" Operator="==" Operand2="1" OperandType="Double">
+											<ToSet Key="$U_TIER" Value="E1"></ToSet>
+										</SubCondition>
+										<SubCondition Operand1="$TOTAL_NAF" Operator="==" Operand2="2" OperandType="Double">
+											<ToSet Key="$U_TIER" Value="F1"></ToSet>
+										</SubCondition>
+										<SubCondition Operand1="$TOTAL_NAF" Operator="&gt;=" Operand2="3" OperandType="Double">
+											<ToSet Key="$U_TIER" Value="G1"></ToSet>
+										</SubCondition>
+									</SubConditions>
+								</SubCondition>
+								<!--Rule 2-->
+								<SubCondition Operand1="$PRIOR_BI_LIMIT" Operator="&lt;" Operand2="50" OperandType="Double">
+									<SubConditions>
+										<SubCondition Operand1="$TOTAL_NAF" Operator="==" Operand2="0" OperandType="Double">
+											<ToSet Key="$U_TIER" Value="B1"></ToSet>
+										</SubCondition>
+										<SubCondition Operand1="$TOTAL_NAF" Operator="==" Operand2="1" OperandType="Double">
+											<ToSet Key="$U_TIER" Value="C1"></ToSet>
+										</SubCondition>
+										<SubCondition Operand1="$TOTAL_NAF" Operator="==" Operand2="2" OperandType="Double">
+											<ToSet Key="$U_TIER" Value="E1"></ToSet>
+										</SubCondition>
+										<SubCondition Operand1="$TOTAL_NAF" Operator="&gt;=" Operand2="3" OperandType="Double">
+											<ToSet Key="$U_TIER" Value="F1"></ToSet>
+										</SubCondition>
+									</SubConditions>
+								</SubCondition>
+								<!--Rule3  > = 50/100 < 100/300 -->
+								<SubCondition Operand1="$PRIOR_BI_LIMIT" Operator="&lt;" Operand2="100" OperandType="Double">
+									<SubConditions>
+										<SubCondition Operand1="$TOTAL_NAF" Operator="==" Operand2="0" OperandType="Double">
+											<ToSet Key="$U_TIER" Value="B1"></ToSet>
+										</SubCondition>
+										<SubCondition Operand1="$TOTAL_NAF" Operator="==" Operand2="1" OperandType="Double">
+											<ToSet Key="$U_TIER" Value="C1"></ToSet>
+										</SubCondition>
+										<SubCondition Operand1="$TOTAL_NAF" Operator="==" Operand2="2" OperandType="Double">
+											<ToSet Key="$U_TIER" Value="E1"></ToSet>
+										</SubCondition>
+										<SubCondition Operand1="$TOTAL_NAF" Operator="&gt;=" Operand2="3" OperandType="Double">
+											<ToSet Key="$U_TIER" Value="F1"></ToSet>
+										</SubCondition>
+									</SubConditions>
+								</SubCondition>
+								<!--Rule 4  > = 100/300 -->
+								<SubCondition Operand1="$PRIOR_BI_LIMIT" Operator="&gt;=" Operand2="100" OperandType="Double">
+									<SubConditions>
+										<SubCondition Operand1="$TOTAL_NAF" Operator="==" Operand2="0" OperandType="Double">
+											<ToSet Key="$U_TIER" Value="B1"></ToSet>
+										</SubCondition>
+										<SubCondition Operand1="$TOTAL_NAF" Operator="==" Operand2="1" OperandType="Double">
+											<ToSet Key="$U_TIER" Value="B1"></ToSet>
+										</SubCondition>
+										<SubCondition Operand1="$TOTAL_NAF" Operator="==" Operand2="2" OperandType="Double">
+											<ToSet Key="$U_TIER" Value="D1"></ToSet>
+										</SubCondition>
+										<SubCondition Operand1="$TOTAL_NAF" Operator="&gt;=" Operand2="3" OperandType="Double">
+											<ToSet Key="$U_TIER" Value="E1"></ToSet>
+										</SubCondition>
+									</SubConditions>
+								</SubCondition>
+							</SubConditions>
+						</SubCondition>
+						<!--LAPSE DAYS 30 MORE-->
+						<SubCondition Operand1="$LAPSE_DAYS" Operator="&gt;=" Operand2="31" OperandType="Double">
+							<SubConditions>
+								<!--Rule 1 LAPSE DAYS 1 TO 30-->
+								<SubCondition Operand1="$PRIOR_BI_LIMIT" Operator="==" Operand2="25" OperandType="Double">
+									<SubConditions>
+										<SubCondition Operand1="$TOTAL_NAF" Operator="==" Operand2="0" OperandType="Double">
+											<ToSet Key="$U_TIER" Value="E1"></ToSet>
+										</SubCondition>
+										<SubCondition Operand1="$TOTAL_NAF" Operator="==" Operand2="1" OperandType="Double">
+											<ToSet Key="$U_TIER" Value="F1"></ToSet>
+										</SubCondition>
+										<SubCondition Operand1="$TOTAL_NAF" Operator="==" Operand2="2" OperandType="Double">
+											<ToSet Key="$U_TIER" Value="G1"></ToSet>
+										</SubCondition>
+										<SubCondition Operand1="$TOTAL_NAF" Operator="&gt;=" Operand2="3" OperandType="Double">
+											<ToSet Key="$U_TIER" Value="G1"></ToSet>
+										</SubCondition>
+									</SubConditions>
+								</SubCondition>
+								<!--Rule 2-->
+								<SubCondition Operand1="$PRIOR_BI_LIMIT" Operator="&lt;" Operand2="50" OperandType="Double">
+									<SubConditions>
+										<SubCondition Operand1="$TOTAL_NAF" Operator="==" Operand2="0" OperandType="Double">
+											<ToSet Key="$U_TIER" Value="E1"></ToSet>
+										</SubCondition>
+										<SubCondition Operand1="$TOTAL_NAF" Operator="==" Operand2="1" OperandType="Double">
+											<ToSet Key="$U_TIER" Value="F1"></ToSet>
+										</SubCondition>
+										<SubCondition Operand1="$TOTAL_NAF" Operator="==" Operand2="2" OperandType="Double">
+											<ToSet Key="$U_TIER" Value="G1"></ToSet>
+										</SubCondition>
+										<SubCondition Operand1="$TOTAL_NAF" Operator="&gt;=" Operand2="3" OperandType="Double">
+											<ToSet Key="$U_TIER" Value="G1"></ToSet>
+										</SubCondition>
+									</SubConditions>
+								</SubCondition>
+								<!--Rule3  > = 50/100 < 100/300 -->
+								<SubCondition Operand1="$PRIOR_BI_LIMIT" Operator="&lt;" Operand2="100" OperandType="Double">
+									<SubConditions>
+										<SubCondition Operand1="$TOTAL_NAF" Operator="==" Operand2="0" OperandType="Double">
+											<ToSet Key="$U_TIER" Value="E1"></ToSet>
+										</SubCondition>
+										<SubCondition Operand1="$TOTAL_NAF" Operator="==" Operand2="1" OperandType="Double">
+											<ToSet Key="$U_TIER" Value="F1"></ToSet>
+										</SubCondition>
+										<SubCondition Operand1="$TOTAL_NAF" Operator="==" Operand2="2" OperandType="Double">
+											<ToSet Key="$U_TIER" Value="G1"></ToSet>
+										</SubCondition>
+										<SubCondition Operand1="$TOTAL_NAF" Operator="&gt;=" Operand2="3" OperandType="Double">
+											<ToSet Key="$U_TIER" Value="G1"></ToSet>
+										</SubCondition>
+									</SubConditions>
+								</SubCondition>
+								<!--Rule 4  > = 100/300 -->
+								<SubCondition Operand1="$PRIOR_BI_LIMIT" Operator="&gt;=" Operand2="100" OperandType="Double">
+									<SubConditions>
+										<SubCondition Operand1="$TOTAL_NAF" Operator="==" Operand2="0" OperandType="Double">
+											<ToSet Key="$U_TIER" Value="E1"></ToSet>
+										</SubCondition>
+										<SubCondition Operand1="$TOTAL_NAF" Operator="==" Operand2="1" OperandType="Double">
+											<ToSet Key="$U_TIER" Value="F1"></ToSet>
+										</SubCondition>
+										<SubCondition Operand1="$TOTAL_NAF" Operator="==" Operand2="2" OperandType="Double">
+											<ToSet Key="$U_TIER" Value="G1"></ToSet>
+										</SubCondition>
+										<SubCondition Operand1="$TOTAL_NAF" Operator="&gt;=" Operand2="3" OperandType="Double">
+											<ToSet Key="$U_TIER" Value="G1"></ToSet>
+										</SubCondition>
+									</SubConditions>
+								</SubCondition>
+							</SubConditions>
+						</SubCondition>
+					</SubConditions>
+				</Condition>
+				<!--CSL-->
+				<Condition Operand1="$LIMIT_TYPE" Operator="==" Operand2="CSL" OperandType="String">
+					<!--LAPSE DAYS 1 TO 30-->
+					<SubConditions>
+						<!--0 lapse Days CSL-->
+						<SubCondition Operand1="$LAPSE_DAYS" Operator="==" Operand2="0" OperandType="Double">
+							<SubConditions>
+								<!--Rule 1-->
+								<SubCondition Operand1="$PRIOR_BI_LIMIT" Operator="&lt;" Operand2="100000" OperandType="Double">
+									<SubConditions>
+										<SubCondition Operand1="$TOTAL_NAF" Operator="==" Operand2="0" OperandType="Double">
+											<ToSet Key="$U_TIER" Value="B1"></ToSet>
+										</SubCondition>
+										<SubCondition Operand1="$TOTAL_NAF" Operator="==" Operand2="1" OperandType="Double">
+											<ToSet Key="$U_TIER" Value="B1"></ToSet>
+										</SubCondition>
+										<SubCondition Operand1="$TOTAL_NAF" Operator="==" Operand2="2" OperandType="Double">
+											<ToSet Key="$U_TIER" Value="D1"></ToSet>
+										</SubCondition>
+										<SubCondition Operand1="$TOTAL_NAF" Operator="&gt;=" Operand2="3" OperandType="Double">
+											<ToSet Key="$U_TIER" Value="E1"></ToSet>
+										</SubCondition>
+									</SubConditions>
+								</SubCondition>
+								<!--Rule 2-->
+								<SubCondition Operand1="$PRIOR_BI_LIMIT" Operator="&gt;=" Operand2="100000" OperandType="Double">
+									<SubConditions>
+										<SubCondition Operand1="$TOTAL_NAF" Operator="==" Operand2="0" OperandType="Double">
+											<ToSet Key="$U_TIER" Value="A1"></ToSet>
+										</SubCondition>
+										<SubCondition Operand1="$TOTAL_NAF" Operator="==" Operand2="1" OperandType="Double">
+											<ToSet Key="$U_TIER" Value="B1"></ToSet>
+										</SubCondition>
+										<SubCondition Operand1="$TOTAL_NAF" Operator="==" Operand2="2" OperandType="Double">
+											<ToSet Key="$U_TIER" Value="B1"></ToSet>
+										</SubCondition>
+										<SubCondition Operand1="$TOTAL_NAF" Operator="&gt;=" Operand2="3" OperandType="Double">
+											<ToSet Key="$U_TIER" Value="D1"></ToSet>
+										</SubCondition>
+									</SubConditions>
+								</SubCondition>
+							</SubConditions>
+						</SubCondition>
+						<!--0 Lapse Days CSL-->
+						<SubCondition Operand1="$LAPSE_DAYS" Operator="&lt;=" Operand2="30" OperandType="Double">
+							<SubConditions>
+								<!--Rule 1 LAPSE DAYS 1 TO 30 AND CSL LESS THAN 100000-->
+								<SubCondition Operand1="$PRIOR_BI_LIMIT" Operator="&lt;" Operand2="100000" OperandType="Double">
+									<SubConditions>
+										<SubCondition Operand1="$TOTAL_NAF" Operator="==" Operand2="0" OperandType="Double">
+											<ToSet Key="$U_TIER" Value="B1"></ToSet>
+										</SubCondition>
+										<SubCondition Operand1="$TOTAL_NAF" Operator="==" Operand2="1" OperandType="Double">
+											<ToSet Key="$U_TIER" Value="C1"></ToSet>
+										</SubCondition>
+										<SubCondition Operand1="$TOTAL_NAF" Operator="==" Operand2="2" OperandType="Double">
+											<ToSet Key="$U_TIER" Value="E1"></ToSet>
+										</SubCondition>
+										<SubCondition Operand1="$TOTAL_NAF" Operator="&gt;=" Operand2="3" OperandType="Double">
+											<ToSet Key="$U_TIER" Value="F1"></ToSet>
+										</SubCondition>
+									</SubConditions>
+								</SubCondition>
+								<!--Rule 1 LAPSE DAYS 1 TO 30 AND CSL GREATER THAN 100000-->
+								<SubCondition Operand1="$PRIOR_BI_LIMIT" Operator="&gt;=" Operand2="100000" OperandType="Double">
+									<SubConditions>
+										<SubCondition Operand1="$TOTAL_NAF" Operator="==" Operand2="0" OperandType="Double">
+											<ToSet Key="$U_TIER" Value="B1"></ToSet>
+										</SubCondition>
+										<SubCondition Operand1="$TOTAL_NAF" Operator="==" Operand2="1" OperandType="Double">
+											<ToSet Key="$U_TIER" Value="B1"></ToSet>
+										</SubCondition>
+										<SubCondition Operand1="$TOTAL_NAF" Operator="==" Operand2="2" OperandType="Double">
+											<ToSet Key="$U_TIER" Value="D1"></ToSet>
+										</SubCondition>
+										<SubCondition Operand1="$TOTAL_NAF" Operator="&gt;=" Operand2="3" OperandType="Double">
+											<ToSet Key="$U_TIER" Value="E1"></ToSet>
+										</SubCondition>
+									</SubConditions>
+								</SubCondition>
+							</SubConditions>
+						</SubCondition>
+						<!--LAPSE DAYS 30 MORE-->
+						<SubCondition Operand1="$LAPSE_DAYS" Operator="&gt;=" Operand2="31" OperandType="Double">
+							<SubConditions>
+								<!--Rule 1 LAPSE DAYS 31 MORE AND CSL LESS THAN 100000-->
+								<SubCondition Operand1="$PRIOR_BI_LIMIT" Operator="&lt;" Operand2="100000" OperandType="Double">
+									<SubConditions>
+										<SubCondition Operand1="$TOTAL_NAF" Operator="==" Operand2="0" OperandType="Double">
+											<ToSet Key="$U_TIER" Value="E1"></ToSet>
+										</SubCondition>
+										<SubCondition Operand1="$TOTAL_NAF" Operator="==" Operand2="1" OperandType="Double">
+											<ToSet Key="$U_TIER" Value="F1"></ToSet>
+										</SubCondition>
+										<SubCondition Operand1="$TOTAL_NAF" Operator="==" Operand2="2" OperandType="Double">
+											<ToSet Key="$U_TIER" Value="G1"></ToSet>
+										</SubCondition>
+										<SubCondition Operand1="$TOTAL_NAF" Operator="&gt;=" Operand2="3" OperandType="Double">
+											<ToSet Key="$U_TIER" Value="G1"></ToSet>
+										</SubCondition>
+									</SubConditions>
+								</SubCondition>
+								<!--Rule 1 LAPSE DAYS 31 AND CSL GREATER THAN 100000-->
+								<SubCondition Operand1="$PRIOR_BI_LIMIT" Operator="&gt;=" Operand2="100000" OperandType="Double">
+									<SubConditions>
+										<SubCondition Operand1="$TOTAL_NAF" Operator="==" Operand2="0" OperandType="Double">
+											<ToSet Key="$U_TIER" Value="E1"></ToSet>
+										</SubCondition>
+										<SubCondition Operand1="$TOTAL_NAF" Operator="==" Operand2="1" OperandType="Double">
+											<ToSet Key="$U_TIER" Value="F1"></ToSet>
+										</SubCondition>
+										<SubCondition Operand1="$TOTAL_NAF" Operator="==" Operand2="2" OperandType="Double">
+											<ToSet Key="$U_TIER" Value="G1"></ToSet>
+										</SubCondition>
+										<SubCondition Operand1="$TOTAL_NAF" Operator="&gt;=" Operand2="3" OperandType="Double">
+											<ToSet Key="$U_TIER" Value="G1"></ToSet>
+										</SubCondition>
+									</SubConditions>
+								</SubCondition>
+							</SubConditions>
+						</SubCondition>
+					</SubConditions>
+				</Condition>
+				<!--END CSL-->
+			</Conditions>
+		</Rule>
+		<!-- For  Automobile   -->
+		<Rule Action="Master" StartDate="1950-01-01" EndDate="3000-12-30" STATE_ID="22"></Rule>
+	</Group>
+</Root>

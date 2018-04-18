@@ -1,0 +1,155 @@
+<Configuration>
+	<Parameters Type="Path">
+		<Parameter Name="MasterDataXMLPath" Value="cmsweb\XSL\Quote\MasterData\ProductFactorsMaster.xml"></Parameter>
+		<Parameter Name="MasterDataXSLPath" Value="cmsweb\XSL\Quote\MasterData\ProductFactorsMaster.xsl"></Parameter>
+		<Parameter Name="FinalQuoteHO3" Value="cmsweb\XSL\Quote\PremiumPath\HO\FinalQuote.xsl"></Parameter>
+		<Parameter Name="PremiumDriverComponentXSL" Value="cmsweb\XSL\Quote\PremiumPath\Auto\Personal\Premium_DriverComponent.xsl"></Parameter>
+		<Parameter Name="PremiumVehicleComponentXSL" Value="cmsweb\XSL\Quote\PremiumPath\Auto\Personal\Premium_VehicleComponent.xsl"></Parameter>
+		<Parameter Name="FinalQuoteAuto" Value="cmsweb\XSL\Quote\PremiumPath\Auto\Personal\FinalQuote.xsl"></Parameter>
+		<Parameter Name="PremiumViolationComponentXSL" Value="cmsweb\XSL\Quote\PremiumPath\Auto\Personal\Premium_ViolationComponent.xsl"></Parameter>
+		<Parameter Name="FinalQuoteREDW" Value="cmsweb\XSL\Quote\PremiumPath\RentalDwelling\FinalQuote.xsl"></Parameter>
+		<Parameter Name="FinalQuoteBOAT" Value="cmsweb\XSL\Quote\PremiumPath\Watercraft\FinalQuote.xsl"></Parameter>
+		<Parameter Name="FinalQuoteCYCL" Value="cmsweb\XSL\Quote\PremiumPath\Motorcycle\FinalQuote.xsl"></Parameter>
+		<Parameter Name="FinalQutoteUMB" Value="cmsweb\XSL\Quote\PremiumPath\Umbrella\FinalQuote.xsl"></Parameter>
+		<Parameter Name="FinalQutoteAVIA" Value="cmsweb\XSL\Quote\PremiumPath\Aviation\FinalQuote.xsl"></Parameter>
+		<Parameter Name="EffectivePremiumPath" Value="cmsweb\XSL\Quote\PremiumPath\XEffectivePremiumXSL.xsl"></Parameter>
+		<Parameter Name="FilePathInputMessageXSLHO" Value="cmsweb\XSL\UnderwritingRules\HO\UWRulesInputMsg.xsl"></Parameter>
+		<Parameter Name="FilePathUnderwritingRulesHO" Value="cmsweb\XSL\UnderwritingRules\HO\UWRules.xsl"></Parameter>
+		<Parameter Name="FilePathInputMessageXSLAuto" Value="cmsweb\XSL\UnderwritingRules\Auto\UWRulesInputMsg.xsl"></Parameter>
+		<Parameter Name="FilePathUnderwritingRulesAuto" Value="cmsweb\XSL\UnderwritingRules\Auto\UWRules.xsl"></Parameter>
+		<Parameter Name="FilePathInputMessageXSLMotor" Value="cmsweb\XSL\UnderwritingRules\Motorcycle\UWRulesInputMsg.xsl"></Parameter>
+		<Parameter Name="FilePathUnderwritingRulesMotor" Value="cmsweb\XSL\UnderwritingRules\Motorcycle\UWRules.xsl"></Parameter>
+		<Parameter Name="FilePathInputMessageXSLWater" Value="cmsweb\XSL\UnderwritingRules\Watercraft\UWRulesInputMsg.xsl"></Parameter>
+		<Parameter Name="FilePathUnderwritingRulesWater" Value="cmsweb\XSL\UnderwritingRules\Watercraft\UWRules.xsl"></Parameter>
+		<Parameter Name="FilePathInputMessageXSLRental" Value="cmsweb\XSL\UnderwritingRules\RentalDwelling\UWRulesInputMsg.xsl"></Parameter>
+		<Parameter Name="FilePathUnderwritingRulesRental" Value="cmsweb\XSL\UnderwritingRules\RentalDwelling\UWRules.xsl"></Parameter>
+		<Parameter Name="ProductFactorsMasterPath" Value="cmsweb\XSL\Quote\ProductFactorPath\HO\FactorMasterPath.xsl"></Parameter>
+		<Parameter Name="ProductFactorsMasterPath_RV" Value="cmsweb\XSL\Quote\ProductFactorPath\RV\FactorMasterPath.xsl"></Parameter>
+		<Parameter Name="ProductFactorsMasterPath_Auto" Value="cmsweb\XSL\Quote\ProductFactorPath\Auto\FactorMasterPath.xsl"></Parameter>
+		<Parameter Name="ProductFactorsMasterPath_REDW" Value="cmsweb\XSL\Quote\ProductFactorPath\RentalDwelling\FactorMasterPath.xsl"></Parameter>
+		<Parameter Name="ProductFactorsMasterPath_BOAT" Value="cmsweb\XSL\Quote\ProductFactorPath\Watercraft\FactorMasterPath.xsl"></Parameter>
+		<Parameter Name="ProductFactorsMasterPath_CYCL" Value="cmsweb\XSL\Quote\ProductFactorPath\Motorcycle\FactorMasterPath.xsl"></Parameter>
+		<Parameter Name="ProductFactorsMasterPath_UMB" Value="cmsweb\XSL\Quote\ProductFactorPath\Umbrella\FactorMasterPath.xsl"></Parameter>
+		<Parameter Name="ProductFactorMasterDetailsPath" Value="cmsweb\XSL\Quote\ProductFactorPath\ProductFactorPathDetails.xml"></Parameter>
+		<Parameter Name="ProductPremiumrPath_HO" Value="cmsweb\XSL\Quote\ProductPremiumPath\HO\PremiumPath.xsl"></Parameter>
+		<Parameter Name="ProductPremium_RV" Value="cmsweb\XSL\Quote\ProductPremiumPath\RV\PremiumPath.xsl"></Parameter>
+		<Parameter Name="ProductPremium_Auto" Value="cmsweb\XSL\Quote\ProductPremiumPath\Auto\PremiumPath.xsl"></Parameter>
+		<Parameter Name="ProductPremium_REDW" Value="cmsweb\XSL\Quote\ProductPremiumPath\RentalDwelling\PremiumPath.xsl"></Parameter>
+		<Parameter Name="ProductPremium_BOAT" Value="cmsweb\XSL\Quote\ProductPremiumPath\Watercraft\PremiumPath.xsl"></Parameter>
+		<Parameter Name="ProductPremium_CYCL" Value="cmsweb\XSL\Quote\ProductPremiumPath\Motorcycle\PremiumPath.xsl"></Parameter>
+		<Parameter Name="ProductPremium_UMB" Value="cmsweb\XSL\Quote\ProductPremiumPath\Umbrella\PremiumPath.xsl"></Parameter>
+		<Parameter Name="ProductPremiumDetailsPath" Value="cmsweb\XSL\Quote\ProductPremiumPath\ProductPremiumPathDetails.xml"></Parameter>
+		<Parameter Name="DisountAndSurcharge_Auto" Value="cmsweb\XSL\DiscountAndSurcharge\DiscountAndSurcharge_Auto.xsl"></Parameter>
+		<Parameter Name="DisountAndSurcharge_Cycle" Value="cmsweb\XSL\DiscountAndSurcharge\DiscountAndSurcharge_Cycle.xsl"></Parameter>
+		<Parameter Name="DisountAndSurcharge_HO" Value="cmsweb\XSL\DiscountAndSurcharge\DiscountAndSurcharge_HO.xsl"></Parameter>
+		<Parameter Name="DisountAndSurcharge_RentalDwelling" Value="cmsweb\XSL\DiscountAndSurcharge\DiscountAndSurcharge_RentalDwelling.xsl"></Parameter>
+		<Parameter Name="DisountAndSurcharge_WaterCraft" Value="cmsweb\XSL\DiscountAndSurcharge\DiscountAndSurcharge_WaterCraft.xsl"></Parameter>
+		<Parameter Name="VEHICLE_CLASS" Value="cmsweb\QuickQuote\VEHICLE_CLASS.XML"></Parameter>
+		<Parameter Name="Rental_Input_Xml_Verification" Value="cmsweb\XSL\InputVerificationForQuote\Rental\RentalInputVerification.XSL"></Parameter>
+		<Parameter Name="WaterCraft_Input_Xml_Verification" Value="cmsweb\XSL\InputVerificationForQuote\Watercraft\WatercraftInputVerification.XSL"></Parameter>
+		<Parameter Name="HO_Input_Xml_Verification" Value="cmsweb\XSL\InputVerificationForQuote\HO\HOInputVerification.XSL"></Parameter>
+		<Parameter Name="MotorCycle_Input_Xml_Verification" Value="cmsweb\XSL\InputVerificationForQuote\Motor\InputVerificationDisplay.XSL"></Parameter>
+		<Parameter Name="RULES_DEFAULT" Value="cmsweb\XSL\UnderwritingRules\RULES_DEFAULT.xml"></Parameter>
+		<Parameter Name="FilePathInputMessageXSLUmbrella" Value="cmsweb\XSL\UnderwritingRules\Umbrella\UWRulesInputMsg.xsl"></Parameter>
+		<Parameter Name="FilePathInputRulesXSLUmbrella" Value="cmsweb\XSL\UnderwritingRules\Umbrella\UWRules.xsl"></Parameter>
+		<Parameter Name="AutoXSL_Capital2QQ_Path" Value="cmsweb\XSL\RatesComparison\ConvertAcordToQQXML.xsl"></Parameter>
+		<Parameter Name="QQAcordMapping_AUTO_path" Value="cmsweb\XSL\RatesComparison\AcordCodeMapping\QQAcordMapping_Auto.xml"></Parameter>
+		<Parameter Name="ProductFactorsMasterPath_UMB" Value="cmsweb\XSL\Quote\ProductFactorPath\Umbrella\FactorMasterPath.xsl"></Parameter>
+		<Parameter Name="FinalQutoteUMB" Value="cmsweb\XSL\Quote\PremiumPath\Umbrella\FinalQuote.xsl"></Parameter>
+		<Parameter Name="ProductPremium_UMB" Value="cmsweb\XSL\Quote\ProductPremiumPath\Umbrella\PremiumPath.xsl"></Parameter>
+		<Parameter Name="XMLMessagesPath" Value="cmsweb\support\CustomizedMessages.xml"></Parameter>
+		<Parameter Name="MasterDataXMLPath" Value="cmsweb\XSL\Quote\MasterData\ProductFactorsMaster.xml"></Parameter>
+		<Parameter Name="CapitalURL" Value="aspx/CapitalRaterLogin.aspx"></Parameter>
+		<Parameter Name="UnderwritingTierPath" Value="cmsweb/support/UnderwritingTierRule.xml"></Parameter>
+		<Parameter Name="RealTimeErrorMessagePath" Value="cmsweb/support/RealTimeRatingErrors.xml"></Parameter>
+		<Parameter Name="FilePathInputMessageXSLAviation" Value="cmsweb\XSL\UnderwritingRules\Aviation\UWRulesInputMsg.xsl"></Parameter>
+		<Parameter Name="FilePathUnderwritingRulesAviation" Value="cmsweb\XSL\UnderwritingRules\Aviation\UWRules.xsl"></Parameter>
+    <Parameter Name="FilePathInputMessageXSLProducts" Value="cmsweb\XSL\UnderwritingRules\UWRulesInputMsg.xsl"></Parameter>
+    <Parameter Name="FilePathUnderwritingRulesProducts" Value="cmsweb\XSL\UnderwritingRules\UWRules.xsl"></Parameter>
+    <Parameter Name="FilePathCustomiseProductsRuleXML" Value="CmsWeb\support\UnderwritingRules\ProductRule.xml"></Parameter>    
+    <Parameter Name="FilePathRatingXML" Value="CmsWeb\XSL\Quote\Rate.xsl"></Parameter>
+    <Parameter Name="FilePathRuleMessages" Value="CmsWeb\XSL\UnderwritingRules\RuleMessages.xml"></Parameter>
+    
+    <!--Added By Pradeep Kushwaha for to Generate the pdf on th fly itrack-872 -->
+    <Parameter Name="RTF_HTML" Value="Logo\RTF_DOC_TO_HTM.htm"></Parameter>
+    <Parameter Name="FinalPathpdf" Value="final"></Parameter>
+    <Parameter Name="CompanyLogo" Value="Logo\Boleto\"></Parameter>
+    <Parameter Name="BoletoPDFCss" Value="Logo\BoletoCss.htm"></Parameter>
+    <Parameter Name="BarcodeImagePath" Value="Logo\Barcode.jpg"></Parameter>
+    <Parameter Name="LogoPath" Value="Logo\Logo.jpg"></Parameter>
+    
+   
+
+    <Parameter Name="Xsl_Coverage_114_Comprehensive_Dwelling" Value="XslTemplate\Coverage_NBS_114_Comprehensive_Dwelling.xsl"></Parameter>
+    <Parameter Name="Xsl_Coverage_114_More_Than_One_Broker_Dwelling" Value="XslTemplate\Coverage_114_More_Than_One_Broker_Policy.xsl"></Parameter>
+    <Parameter Name="Xsl_Coverage_114_More_Than_One_Broker__With_Ceded_COI_Dwelling" Value="XslTemplate\Coverage_114_More_than_One_Broker_with_CededCOI.xsl"></Parameter>
+
+
+     <Parameter Name="Xsl_Coverage_116_Comprehensive_Condominium" Value="XslTemplate\Coverage_NBS_116_Comprehensive_Condominium.xsl"></Parameter>
+     <Parameter Name="Xsl_Coverage_116_More_Than_One_Broker_Condominium" Value="XslTemplate\Coverage_116_More_Than_One_Broker_Policy.xsl"></Parameter>
+     <Parameter Name="Xsl_Coverage_116_More_Than_One_Broker__With_Ceded_COI_Condominium" Value="XslTemplate\Coverage_116_More_Than_One_Broker_With_CededCOI.xsl"></Parameter>
+
+
+     <Parameter Name="Xsl_Coverage_118_Comprehensive_Company" Value="XslTemplate\Coverage_NBS_118_Comprehensive_Company.xsl"></Parameter>
+     <Parameter Name="Xsl_Coverage_118_More_Than_One_Broker_Company" Value="XslTemplate\Coverage_118_More_Than_One_Broker_Policy.xsl"></Parameter>
+     <Parameter Name="Xsl_Coverage_118_More_Than_One_Broker__With_Ceded_COI_Company" Value="XslTemplate\Coverage_118_More_Than_One_Broker_With_CededCOI.xsl"></Parameter>
+     <Parameter Name="Xsl_Coverage_Endorsement_Type_21_0114_0116_0118_0196_0115_0167" Value="XslTemplate\D009_Endorsement_Type_21_0114_0116_0118_0196_0115_0167.xsl"></Parameter>
+    <Parameter Name="xslFilepathCover_Endorsement_Type_21_0114" Value="XslTemplate\D009_Endorsement_Type_21_0114.xsl"></Parameter>
+    
+    <Parameter Name="Xsl_Coverage_523_Liability_Transportation" Value="XslTemplate\D-010_Policy_Doc_Insured_Object_Page_523_Civil_Liability_Transportation_v3.xsl"></Parameter>
+    <Parameter Name="Xsl_Coverage_523_Liability_Transportation_withPremium" Value="XslTemplate\D-010_Policy_Doc_Insured_Object_Page_523_Civil_Liability_Transportation_v3_WithPremium.xsl"></Parameter>
+    <Parameter Name="Xsl_Coverage_553_Facultive_Liability" Value="XslTemplate\D-011_Policy_Doc_Insured_Object_Page_553_Facultative_Liability_v3.xsl"></Parameter>
+
+    <Parameter Name="Xsl_Coverage_D_012_Endorsement_type_0993_0982_0520_v2" Value="XslTemplate\D_12_Endorsement_type_031_0982_0993_0520_v2.xsl"></Parameter>
+    <!--Added new key for lob 22-->
+    <Parameter Name="Xsl_Coverage_D_037_Endorsement_type_31_Product_0520_v1" Value="XslTemplate\D_037_Endorsement_type_31_Product_0520_v1.xsl"></Parameter>
+
+    <Parameter Name="xsl_Coverage_171_Diversified_Risk" Value="XslTemplate\Coverage_NBS_171_Diversified_Risks.xsl"></Parameter>
+    <Parameter Name="xsl_Coverage_171_Diversified_Risk_More_Than_One_Broker" Value="XslTemplate\Coverage_NBS_171_More_Than_One_Broker_Policy.xsl"></Parameter>
+    <Parameter Name="xsl_Coverage_171_Diversified_Risk_More_Than_One_Broker_With_Ceded_COI" Value="XslTemplate\Coverage_NBS_171_More_Than_One_Broker_With_CededCOI.xsl"></Parameter>
+
+    <Parameter Name="Xsl_Coverage_981_Individual_personal_accident" Value="XslTemplate\Coverage_NBS_981_More_Than_One_Broker_Policy.xsl"></Parameter>
+                                                                        
+    <Parameter Name="COI_More_Thn_One_Broker_Policy" Value="XslTemplate\COI_More_Thn_One_Broker_Policy.xsl"></Parameter>
+    <Parameter Name="COI_More_Thn_One_Broker_Policy_Endorsement" Value="XslTemplate\COI_More_Thn_One_Broker_Policy_Endoso.xsl"></Parameter>
+
+
+    <Parameter Name="Endorsement_type_31_523_Civil_Liability_Transportation" Value="XslTemplate\D-013_Endorsement_type_31_523_Civil_Liability_Transportation_v2.xsl"></Parameter>
+    <Parameter Name="Endorsement_type_31_553_D_015_Facultive_Liability" Value="XslTemplate\D-015_Endorsement_type_31_553_Facultative_Liability_v2.xsl"></Parameter>
+
+
+    <Parameter Name="xslFilepathCover" Value="XslTemplate\CoverPageNewBusiness.xsl"></Parameter>
+    <Parameter Name="xslFilepathHeader" Value="XslTemplate\HeaderNewBusiness.xsl"></Parameter>
+    <Parameter Name="xslFilepathCover_Endorsement" Value="XslTemplate\Endorsement_CoverPage.xsl"></Parameter>
+    <Parameter Name="xslFilepathHeader_Endorsement" Value="XslTemplate\Endorsement_Header.xsl"></Parameter>
+    <Parameter Name="Xsl_Cover_Renewal" Value="XslTemplate\Renewal_CoverPage.xsl"></Parameter>
+    <Parameter Name="Xsl_Header_Renewal" Value="XslTemplate\Renewal_Header.xsl"></Parameter>
+    <!--itrack 1449, modified by naveen-->
+    <Parameter Name="Xsl_Cover_Cancel_Policy"  Value="XslTemplate\Cancel_Policy_Cover.xsl"></Parameter>
+    <Parameter Name ="Xsl__header_Cancel_Policy" Value="XslTemplate\Cancel_Policy_Header.xsl"></Parameter>
+    <!--Added till here  -->
+    <Parameter Name ="eRate_Webservice_URL" Value="http://115.113.95.22/eRateEngine/eRateEngine.asmx?wsdl"></Parameter>
+    <Parameter Name ="eRate_RequestXmlPath" Value="cmsweb\XSL\Quote\eRateInput.xml"></Parameter>
+    <Parameter Name ="eRate_RequestXmlPathMarine" Value="cmsweb\XSL\Quote\eRateInputMarine.xml"></Parameter>
+    <Parameter Name="FilePathQQRatingXML" Value="cmsWeb\XSL\Quote\QQRate.xsl"></Parameter>
+    <Parameter Name="FilePathQQRatingXMLMarine" Value="cmsWeb\XSL\Quote\QQRate_Marine.xsl"></Parameter>
+    <Parameter Name="MotorRateFactorXmlPath" Value="CmsWeb\XSL\Quote\MOTOR_RATE_FACTOR.xml"></Parameter>
+    <Parameter Name="QuickQuoteVehiclePdfXSLPath" Value="cmsWeb\XSL\Quote\MOTOR_COI_XSL.xsl"></Parameter>
+    <Parameter Name="VehiclePdfFileName" Value="cmsWeb\XSL\Quote\TempCOI.pdf"></Parameter>
+    
+    <Parameter Name="PDF_Template_Path" Value="CmsWeb\support\PDFTemplates\"></Parameter>
+    <Parameter Name="NEWBUSINESSMAPPINGXML" Value="CmsWeb\support\PDFTemplates\PNBControlMap.xml"></Parameter>
+    <Parameter Name="ENDORSEMENTMAPPINGXML" Value="CmsWeb\support\PDFTemplates\ENDControlMap.xml"></Parameter>
+    <Parameter Name="CANCELLATIONMAPPINGXML" Value="CmsWeb\support\PDFTemplates\CANControlMap.xml"></Parameter>
+    <Parameter Name="RENEWALMAPPINGXML" Value="CmsWeb\support\PDFTemplates\RENEWControlMap.xml"></Parameter>
+    <Parameter Name="PNBControlMap_Fire" Value="CmsWeb\support\PDFTemplates\PNBControlMap_Fire.xml"></Parameter>
+    <Parameter Name="RENEWALMAPPINGXML_Fire" Value="CmsWeb\support\PDFTemplates\RENEWALMAPPINGXML_Fire.xml"></Parameter>
+    
+  </Parameters>
+	<Parameters Type="Display">
+		<Parameter Name="Rating_Header" Value="Document Information"></Parameter><!--Ebix Mutual Insurance Company-->
+  </Parameters>
+	<Parameters Type="Setup">
+		<Parameter Name="InputVerificationForQuote" Value="N"></Parameter>
+	</Parameters>
+</Configuration>

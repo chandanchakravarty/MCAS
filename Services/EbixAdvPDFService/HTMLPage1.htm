@@ -1,0 +1,332 @@
+﻿    <html>
+      <head>
+        <title>
+          <xsl:text> </xsl:text>
+        </title>
+        <meta http-equiv="X-UA-Compatible" content="IE=7"/>
+        <xsl:comment>[if IE]&gt;&lt;STYLE type=&quot;text/css&quot;&gt;.altova-rotate-left-textbox{filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=3)} .altova-rotate-right-textbox{filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=1)} &lt;/STYLE&gt;&lt;![endif]</xsl:comment>
+        <xsl:comment>[if !IE]&gt;&lt;!</xsl:comment>
+        <style type="text/css">.altova-rotate-left-textbox{-webkit-transform: rotate(-90deg) translate(-100%, 0%); -webkit-transform-origin: 0% 0%;-moz-transform: rotate(-90deg) translate(-100%, 0%); -moz-transform-origin: 0% 0%}.altova-rotate-right-textbox{-webkit-transform: rotate(90deg) translate(0%, -100%); -webkit-transform-origin: 0% 0%;-moz-transform: rotate(90deg) translate(0%, -100%); -moz-transform-origin: 0% 0%}</style>
+        <xsl:comment>&lt;![endif]</xsl:comment>
+        <style type="text/css">
+          @page { margin-left:0.60in; margin-right:0.79in; margin-top:0.0in; margin-bottom:0.79in } @media print { br.altova-page-break { page-break-before: always; } }
+        </style>
+      </head>
+      <body>
+        <xsl:for-each select="$XML">
+          <br/>
+          <table cellpadding="0" cellspacing="0"  border="0" cellpadding="0" cellspacing="0" width="100%">
+            <xsl:variable name="altova:CurrContextGrid_07128DA8" select="."/>
+            <tbody>
+              <tr>
+                <td style="width:1.20in; ">
+                  <img>
+                    <xsl:attribute name="src">
+                      <xsl:value-of select="POLICY_DOCUMENTS/IMAGE_PATH"/>
+                    </xsl:attribute>
+                    <xsl:attribute name="alt"/>
+                  </img>
+                </td>
+                <td  valign="top">
+                  <span style="font-family:Arial Narrow; font-size:26pt; font-weight:normal; ">
+                    <xsl:text>COMPANHIA DE SEGUROS ALIANÇA DA BAHIA</xsl:text>
+                  </span>
+                  <br/>
+                  <table border="0" width="100%">
+                    <xsl:variable name="altova:CurrContextGrid_07125068" select="."/>
+                    <tbody>
+                      <tr>
+                        <td style="text-align:center; ">
+                          <xsl:for-each select="POLICY_DOCUMENTS">
+                            <xsl:for-each select="COMPANY">
+                              <xsl:for-each select="CMPL">
+                                <xsl:for-each select="COMPANY_ADDRESS">
+                                  <span style="font-family:Arial Narrow; font-size:12pt; ">
+                                    <xsl:apply-templates/>
+                                  </span>
+                                </xsl:for-each>
+                              </xsl:for-each>
+                            </xsl:for-each>
+                          </xsl:for-each>
+
+                          <span>
+                            <xsl:text>&#160;-&#160;</xsl:text>
+                          </span>
+                          <span style="font-family:Arial Narrow; font-size:12pt;">
+                            <xsl:text>C.N.P.J:</xsl:text>
+                          </span>
+                          <xsl:for-each select="POLICY_DOCUMENTS">
+                            <xsl:for-each select="COMPANY">
+                              <xsl:for-each select="CMPL">
+                                <xsl:for-each select="BRANCH_CNPJ">
+                                  <span style="font-family:Arial Narrow; font-size:12pt; ">
+                                    <xsl:apply-templates/>
+                                  </span>
+                                </xsl:for-each>
+                              </xsl:for-each>
+                            </xsl:for-each>
+                          </xsl:for-each>
+                          <span>
+                            <xsl:text>&#160;</xsl:text>
+                          </span>
+                          <br/>
+                          <span style="font-family:Arial Narrow; font-size:12pt;">
+                            <xsl:text>Tel.:&#160;(11)</xsl:text>
+                          </span>
+                          <xsl:for-each select="POLICY_DOCUMENTS">
+                            <xsl:for-each select="COMPANY">
+                              <xsl:for-each select="CMPL">
+                                <xsl:for-each select="BRANCH_PHONE">
+                                  <span>
+                                    <xsl:text>&#160;</xsl:text>
+                                  </span>
+                                  <span style="font-family:Arial Narrow; font-size:12pt;">
+                                    <xsl:apply-templates/>
+                                  </span>
+                                </xsl:for-each>
+                              </xsl:for-each>
+                            </xsl:for-each>
+                          </xsl:for-each>
+                          <span>
+                            <xsl:text>-</xsl:text>
+                          </span>
+                          <span style="font-family:Arial Narrow; font-size:12pt; ">
+                            <xsl:text>Fax:&#160;(11)</xsl:text>
+                          </span>
+                          <span style="font-family:Arial Narrow; font-size:12pt; ">
+                            <xsl:text>&#160;</xsl:text>
+                          </span>
+                          <xsl:for-each select="POLICY_DOCUMENTS">
+                            <xsl:for-each select="COMPANY">
+                              <xsl:for-each select="CMPL">
+                                <xsl:for-each select="BRANCH_FAX">
+                                  <span style="font-family:Arial Narrow; font-size:12pt; ">
+                                    <xsl:apply-templates/>
+                                  </span>
+                                </xsl:for-each>
+                              </xsl:for-each>
+                            </xsl:for-each>
+                          </xsl:for-each>
+                          <span style="font-family:Arial Narrow; font-size:12pt; ">
+                            <xsl:text>&#160;-&#160;</xsl:text>
+                          </span>
+                          <span style="font-family:Arial Narrow; font-size:12pt; ">
+                            <xsl:text>e-Mail:&#160;</xsl:text>
+                          </span>
+                          <xsl:for-each select="POLICY_DOCUMENTS">
+                            <xsl:for-each select="COMPANY">
+                              <xsl:for-each select="CMPL">
+                                <xsl:for-each select="BRANCH_EMAIL">
+                                  <span style="font-family:Arial Narrow; font-size:12pt; ">
+                                    <xsl:apply-templates/>
+                                  </span>
+                                </xsl:for-each>
+                              </xsl:for-each>
+                            </xsl:for-each>
+                          </xsl:for-each>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <table  cellpadding="0" cellpadding="0"  style="border-color:white; font-family:Arial Narrow; font-size:xx-small; " border="1" width="100%">
+            <xsl:variable name="altova:CurrContextGrid_07128528" select="."/>
+            <tbody>
+              <tr  style="height:0.35in; ">
+                <td align="center">
+                  <span style="font-family:Arial Narrow; font-size:large; font-weight:bold; ">
+                    <xsl:text>PROCESSO SUSEP N°</xsl:text>
+                  </span>
+                  <span style="font-family:Arial Narrow; font-size:large; font-weight:normal; ">
+                    <xsl:text>&#160;</xsl:text>
+
+                    <xsl:for-each select="POLICY_DOCUMENTS">
+                      <xsl:for-each select="BROKER">
+                        <xsl:for-each select="POL">
+                          <xsl:for-each select="PROCESS_SUSEP_NO">
+                            <span  style="font-family:Arial Narrow; font-size:12; font-weight:Normal; ">
+                              <xsl:apply-templates/>
+                            </span>
+                          </xsl:for-each>
+                        </xsl:for-each>
+                      </xsl:for-each>
+                    </xsl:for-each>
+                  </span>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <table    style="border-color:white; font-family:Arial Narrow; font-size:xx-small;"  cellpadding="0" cellspacing="0" border="1" width="100%">
+            <xsl:variable name="altova:CurrContextGrid_07124AE0" select="."/>
+            <tbody>
+              <tr style="height:0.35in; ">
+                <td style="width:7.00in; ">
+                  <span style="font-family:Arial Narrow; font-size:12pt; font-weight:normal; ">
+                    <xsl:text>Ramo:&#160;&#160;&#160;&#160;&#160;</xsl:text>
+                  </span>
+                  <span>
+                    <xsl:text> </xsl:text>
+                  </span>
+                  <xsl:for-each select="POLICY_DOCUMENTS">
+                    <xsl:for-each select="APPLICATION">
+                      <xsl:for-each select="SUSEP_LOB_DESC">
+                        <span style="font-family:Arial Narrow; font-size:12pt; ">
+                          <xsl:apply-templates/>
+                        </span>
+                      </xsl:for-each>
+                    </xsl:for-each>
+                  </xsl:for-each>
+                  <br/>
+                  <span style="font-family:Arial Narrow; font-size:12pt; font-weight:normal; ">
+                    <xsl:text>Sub-Ramo:</xsl:text>
+                  </span>
+                  <span>
+                    <xsl:text>&#160;&#160; </xsl:text>
+                  </span>
+                  <xsl:for-each select="POLICY_DOCUMENTS">
+                    <xsl:for-each select="APPLICATION">
+                      <xsl:for-each select="SUB_LOB_DESC">
+                        <span style="font-family:Arial Narrow; font-size:12pt; ">
+                          <xsl:apply-templates/>
+                        </span>
+                      </xsl:for-each>
+                    </xsl:for-each>
+                  </xsl:for-each>
+                  <br/>
+                </td>
+                <td style="width:2.40in;" >
+                  <span style="font-family:Arial Narrow; font-size:12pt; font-weight:normal; ">
+                    <xsl:text>Órgão Emissor:</xsl:text>
+                  </span>
+                  <span>
+                    <xsl:text>&#160;</xsl:text>
+                  </span>
+                  <br/>
+                  <span>
+                    <xsl:text>&#160; </xsl:text>
+                  </span>&#160;&#160;
+                  <xsl:for-each select="POLICY_DOCUMENTS">
+                    <xsl:for-each select="APPLICATION">
+                      <xsl:for-each select="BRANCH_DESC">
+                        <span style="font-family:Arial Narrow; font-size:12pt; ">
+                          <xsl:apply-templates/>
+                        </span>
+                      </xsl:for-each>
+                    </xsl:for-each>
+                  </xsl:for-each>
+                </td>
+                <td style="width:2.50in;" >
+                  <span style="font-family:Arial Narrow; font-size:12pt; font-weight:normal; ">
+                    <xsl:text>Proposta:</xsl:text>
+                  </span>
+                  <br/>
+                  <span>
+                    <xsl:text>&#160;</xsl:text>
+                  </span>
+                  <xsl:for-each select="POLICY_DOCUMENTS">
+                    <xsl:for-each select="PRODUCER">
+                      <xsl:for-each select="POL_CUSTOMER_POLICY_LIST">
+                        <xsl:for-each select="PRODUCER_CODE">
+                          <span style="font-family:Arial Narrow; font-size:12pt; ">
+                            <xsl:apply-templates/>
+                          </span>
+                        </xsl:for-each>
+                      </xsl:for-each>
+                    </xsl:for-each>
+                  </xsl:for-each>
+                </td>
+                <td  style="width:1.30in;">
+                  <span style="font-family:Arial Narrow; font-size:12pt; font-weight:normal; ">
+                    <xsl:text>Apólice:</xsl:text>
+                  </span>
+                  <br/>
+                  <span>
+                    <xsl:text>&#160; </xsl:text>
+                  </span>&#160;&#160;
+                  <xsl:for-each select="POLICY_DOCUMENTS">
+                    <xsl:for-each select="APPLICATION">
+                      <xsl:for-each select="POLICY_NUMBER">
+                        <span style="font-family:Arial Narrow; font-size:12pt; ">
+                          <xsl:apply-templates/>
+                        </span>
+                      </xsl:for-each>
+                    </xsl:for-each>
+                  </xsl:for-each>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <table   cellpadding="0" cellspacing="0" style="border-color:white; font-family:Arial Narrow; font-size:xx-small; " border="1" width="100%">
+            <xsl:variable name="altova:CurrContextGrid_07126290" select="."/>
+            <tbody>
+              <tr style="height:0.40in; ">
+                <td style="width:4.90in; ">
+                  <span style="font-family:Arial Narrow; font-size:12pt; font-weight:normal; ">
+                    <xsl:text>Vigência:</xsl:text>
+                  </span>
+                  <br/>
+                  <span style="font-family:Arial Narrow; font-size:12pt; font-weight:normal; ">
+                    &#160;&#160;&#160;&#160;&#160;&#160;
+                    Início:
+                  </span>&#160;<span  style="font-family:Arial Narrow; font-size:12pt; font-weight:normal;">
+                    24h
+                  </span>
+
+                  <xsl:for-each select="POLICY_DOCUMENTS">
+                    <xsl:for-each select="APPLICATION">
+                      <xsl:for-each select="POLICY_EFFECTIVE_DATE">
+                        <span style="font-family:Arial Narrow; font-size:12pt; ">
+                          <xsl:apply-templates/>
+                        </span>
+                      </xsl:for-each>
+                    </xsl:for-each>
+                  </xsl:for-each>
+                  <span style="font-family:Arial Narrow; font-size:12pt; font-weight:normal; ">
+                    &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;Término:&#160;
+                  </span>
+                  <span style="font-family:Arial Narrow; font-size:12pt; font-weight:Normal;">
+                    24h
+                  </span>
+                  <xsl:for-each select="POLICY_DOCUMENTS">
+                    <xsl:for-each select="APPLICATION">
+                      <xsl:for-each select="POLICY_EXPIRATION_DATE">
+                        <span style="font-family:Arial Narrow; font-size:12pt; ">
+                          <xsl:apply-templates/>
+                        </span>
+                      </xsl:for-each>
+                    </xsl:for-each>
+                  </xsl:for-each>
+                </td>
+                <td  style="width:3.10in;">
+                  <span style="font-family:Arial Narrow; font-size:12pt; font-weight:normal; ">
+                    <xsl:text>Tipo do Documento:</xsl:text>
+                  </span>
+                  <br/>&#160;&#160;&#160;&#160;&#160;&#160;
+                  <xsl:for-each select="POLICY_DOCUMENTS">
+                    <xsl:for-each select="BROKER">
+                      <xsl:for-each select="POL">
+                        <xsl:for-each select="PROCESS">
+                          <span style="font-family:Arial Narrow; font-size:12pt; ">
+                            <xsl:apply-templates/>
+                          </span>
+                        </xsl:for-each>
+                      </xsl:for-each>
+                    </xsl:for-each>
+                  </xsl:for-each>
+                  <br/>
+                </td>
+                <td style="vertical-align:top;width:2.30in;">
+                  <span style="font-family:Arial Narrow; font-size:12pt; font-weight:normal; ">
+                    <xsl:text>Endosso:</xsl:text>
+                  </span>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </xsl:for-each>
+      </body>
+    </html>

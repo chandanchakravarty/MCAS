@@ -1,0 +1,178 @@
+﻿@model MCAS.Web.Objects.MastersHelper.DeductibleModel
+@using MCAS.Web.Objects.CommonHelper
+
+@{
+    ViewBag.Title = "DeductibleNewEditor";
+    Layout = null;
+    SecurityPermissions myPemissions = (SecurityPermissions)ViewData["UserPermissions"];
+    var pageMode = Request.QueryString["pageMode"] == null ? "" : Convert.ToString(Request.QueryString["pageMode"]);
+    var DeductibleId = Request.QueryString["DeductibleId"] == null ? "" : Convert.ToString(Request.QueryString["DeductibleId"]);
+    var categ = TempData["orgCategory"] == null ? "" : Convert.ToString(TempData["orgCategory"]);
+    var catName = TempData["orgCategoryname"] == null ? "" : Convert.ToString(TempData["orgCategoryname"]);
+    System.Resources.ResourceManager PageResource = (new MCAS.Web.Objects.MastersHelper.TransactionModel()).GetResourceManager(Model.Resource);
+}
+<link href="@Url.Content("~/Content/themes/base/jquery.ui.all.css")" rel="stylesheet" type="text/css" />
+<script src="@Url.Content("~/Scripts/jquery-2.1.0.min.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/Scripts/jquery.validate.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/Scripts/jquery.unobtrusive-ajax.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.min.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/Scripts/globalize/globalize.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/Scripts/globalize/cultures/globalize.culture.en-GB.js")" type="text/javascript"></script>
+<div class="container">
+    <div class="row">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+            <div class="panel panel-info">
+            <div style="color: Red; font-weight: bold;" class="has-error" id="error">
+                        <p align="center" class="testDisplay"> @Html.DisplayFor(m => m.HResultData) </p>
+                    </div>
+               <div align="center" class="panel-body" id="mainfieldset">
+                    <div class="row top-buffer">
+                        <div class="clearfix igr col-md-12">
+                            <div class="col-md-3" style="text-align: left;">
+                                <label>@PageResource.GetString("EffectiveFrom")<span class="text-danger">*</span></label>
+                            </div>
+                            <div class="col-md-3">
+                                @Html.TextBoxFor(m => m.NewEffectiveFrom, "{0:d}", new { id = "datepickerFrom11", @class = "form-control " })
+                                @Html.ValidationMessageFor(m => m.NewEffectiveFrom)
+                            </div>
+                            <div class="col-md-3" style="text-align: center; width: 150px;">
+                                <label>@PageResource.GetString("EffectiveTo")<span class="text-danger">*</span>
+                                </label>
+                            </div>
+                            <div class="col-md-3 ">
+                                @Html.TextBoxFor(m => m.NewEffectiveTo, "{0:d}", new { id = "datepickerTo11", @class = "form-control datepicker" })
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row top-buffer">
+                        <div class="clearfix igr col-md-12">
+                            <div class="col-md-3" style="text-align: left;">
+                                <label>@PageResource.GetString("DeductibleAmt")<span class="text-danger">*</span></label>
+                            </div>
+                            <div class="col-md-3">
+                                @Html.TextBoxFor(m => m.NewDeductibleAmt, new { @id = "NewDedAmt", @maxlength = "14", @class = "col-lg-12 form-control Number format" })<br />
+                            </div>
+                        </div>
+                    </div>
+                    <br />
+                    <div class="row">
+                        <div class="clearfix igr col-md-12 text-center">
+                            <a id="btnSave1" href="#" class="btn btn-info">@PageResource.GetString("Save") </a>&nbsp;&nbsp; @Html.ActionLink(@PageResource.GetString("Back"), "DeductibleIndex", null, new { @class = "btn btn-info" })
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    var do_on_load = function () {
+        $(document).on("focus", ":input", function () {
+            $(this).attr("autocomplete", "off")
+        });
+
+       
+
+
+
+        var mydate = $("#datepickerTo1").val();
+        var todate = mydate.split('/');
+        var formattedDate = [todate[1], todate[0], todate[2]].join("/");
+
+        var date_ = new Date(Date.parse(formattedDate));
+        date_.setDate(date_.getDate() + 1);
+        var newDate_ = date_.toDateString();
+
+
+        var selectdate = new Date(Date.parse(newDate_));
+        $("#datepickerFrom11").datepicker({
+            dateFormat: "dd/mm/yy",
+            showStatus: !0,
+            showWeeks: !0,
+            currentText: "Now",
+            autoSize: !0,
+            gotoCurrent: !0,
+            showAnim: "blind",
+            highlightWeek: !0,
+            yearRange: "1951:2050",
+            minDate: selectdate,
+            changeMonth: !0,
+            changeYear: !0,
+            onSelect: function (b) {
+                $(this).valid();
+            }
+        });
+
+
+
+
+
+        var date1 = $('#datepickerFrom11').datepicker('getDate');
+        var date = new Date(Date.parse(date1));
+        date.setDate(date.getDate() + 1);
+        var newDate = date.toDateString();
+        newDate = new Date(Date.parse(newDate));
+
+        $("#datepickerTo11").datepicker({
+            dateFormat: "dd/mm/yy",
+            showStatus: !0,
+            showWeeks: !0,
+            currentText: "Now",
+            autoSize: !0,
+            gotoCurrent: !0,
+            showAnim: "blind",
+            highlightWeek: !0,
+            yearRange: "1951:2050",
+            minDate: newDate,
+            changeMonth: !0,
+            changeYear: !0,
+            onSelect: function (b) {
+                $(this).valid();
+            }
+        });
+
+        $.culture = Globalize.culture("en-GB");
+        $.validator.methods.date = function (value, element) {
+            return this.optional(element)
+                    || Globalize.parseDate(value, "dd/MM/yyyy", "en-GB")
+                    || Globalize.parseDate(value, "yyyy-mm-dd");
+        };
+        $("#btnSave1").click(function () {
+            if (PageChanged()) {
+                var effFrom = $('#datepickerFrom11').val(), effTo = $('#datepickerTo11').val(), dedAmt = $('#NewDedAmt').val(), dec = '@DeductibleId' == '' ? $("#DeductibleId").val() : '@DeductibleId';
+                if ("" == effFrom) return alert("Effective From is required."), !1;
+                if ("" == effTo) return alert("Effective To is required."), !1;
+                if ("" == dedAmt || "0.00" == dedAmt) return alert("Deductible Amount is required.", "NewDedAmt"), !1;
+                if ("" != effTo) {
+                    if ($("#datepickerFrom11").datepicker('getDate') > $("#datepickerTo11").datepicker('getDate')) return alert("Effective to cannot be less than Effective from."), !1;
+                }
+                $.ajax({
+                    type: "POST",
+                    url: '@Url.Action("SaveNewDeductible", "Masters")',
+                    data: { deductid: dec, cat: '@categ', catName: '@catName', EffFrom: effFrom, Effto: effTo, DedAmt: dedAmt },
+                    success: function (data) {
+                        "T" == data ? $('.testDisplay').html("Record saved successfully.") : $('.testDisplay').html(data.Title);
+                        $("#DivCrDtBy").html(data.CreatedBy);
+                        $("#DivMoDtBy").html(data.ModifiedBy);
+
+                        var CrDate = new Date(parseInt(data.CreatedDate.substr(6)));
+                        var ExpCrDate = CrDate.getDate() + "/" + (CrDate.getMonth()+ 1) + "/" + CrDate.getFullYear();
+                        $("#DivCrDt").html(ExpCrDate);
+                        var ExpCrTime = CrDate.getHours() + ":" + CrDate.getMinutes() + ":" + CrDate.getSeconds() + "." + CrDate.getMilliseconds();
+                        $("#DivCrTime").html(ExpCrTime);
+
+                        var UpDate = new Date(parseInt(data.ModifiedDate.substr(6)));
+                        var ExpUpDate = UpDate.getDate() + "/" + (UpDate.getMonth() + 1) + "/" + UpDate.getFullYear();
+                        $("#DivUpDt").html(ExpUpDate);
+                        var ExpUpTime = UpDate.getHours() + ":" + UpDate.getMinutes() + ":" + UpDate.getSeconds() + "." + UpDate.getMilliseconds();
+                        $("#DivUpTime").html(ExpUpTime);
+
+                        $("#btnSave1").attr("disabled", true);
+                    }
+                });
+            }
+        });
+    };
+    $(document).ready(do_on_load);
+    $(window).bind('page:change', do_on_load);
+</script>

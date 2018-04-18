@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Root>
+  <PageTitle>
+    <Culture Code="en-US">SpecialAcceptanceAmount</Culture>
+    <Culture Code="zh-SG">SpecialAcceptanceAmount</Culture>
+  </PageTitle>
+
+  <PageElement name="txtEFFECTIVE_DATE" type="TextBox" Desc=""
+                     IsMandatory="No"
+                     IsReadOnly="No"
+                     IsDisabled="No"
+                     IsDisplay="Yes"
+                     IsFormatingRequired="No"
+                     JsFunctionToFormat=""
+                     OnChangeJSFunction=""
+               >
+    <rev Enabled="Yes" ExpKey="(0[1-9]|[1-9]|[12][0-9]|3[01])[- /.](0[1-9]|[1-9]|1[012])[- /.](19|20)\d\d" />
+    <Culture Code="en-US" Desc="set Label and Message for English language">
+      <Caption>Effective Date</Caption>
+      <rfvMessage></rfvMessage>
+      <DefaultValue></DefaultValue>
+      <revExpMessage>Please enter valid date in 'dd/mm/yyyy' format.</revExpMessage>
+    </Culture>
+    <Culture Code="zh-SG" Desc="set Label and Message for Singapore language">
+      <Caption>Effective Date</Caption>
+      <rfvMessage></rfvMessage>
+      <DefaultValue></DefaultValue>
+      <revExpMessage>Please enter valid date in 'dd/mm/yyyy' format.</revExpMessage>
+    </Culture>
+  </PageElement>
+
+</Root>

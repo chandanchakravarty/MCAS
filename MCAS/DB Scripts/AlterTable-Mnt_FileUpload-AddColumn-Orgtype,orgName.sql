@@ -1,0 +1,8 @@
+IF NOT EXISTS (SELECT TOP 1
+    1
+  FROM INFORMATION_SCHEMA.COLUMNS
+  WHERE [TABLE_NAME] = '[MNT_FileUpload]'
+  AND [COLUMN_NAME] = 'UploadHistoryId')
+BEGIN
+  ALTER TABLE [dbo].MNT_FileUpload ADD [UploadHistoryId] int NULL
+END

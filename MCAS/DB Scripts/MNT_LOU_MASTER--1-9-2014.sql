@@ -1,0 +1,5 @@
+IF EXISTS (SELECT * FROM INFORMATION_SCHEMA.COLUMNS where table_name = 'MNT_LOU_MASTER' and  
+column_name = 'LouRate')
+BEGIN 
+ ALTER TABLE MNT_LOU_MASTER ALTER COLUMN  LouRate decimal(18,2)
+END

@@ -1,0 +1,157 @@
+﻿@using MCAS.Globalisation
+@using MCAS.Web.Objects.Resources.ClaimProcessing;
+@using MCAS.Web.Objects.Resources.Common;
+@model IEnumerable<MCAS.Web.Objects.ClaimObjectHelper.ClaimMandatePCNTXModel>
+@{
+    ViewBag.Title = "ClaimCrTxMandateList";
+    Layout = null;
+    var mMCASQueryString = Html.MCASQueryString(Request.QueryString);
+    var claimMode = mMCASQueryString["claimMode"] == null ? "" : Convert.ToString(mMCASQueryString["claimMode"]);
+    var mode = mMCASQueryString["mode"] == null ? "" : Convert.ToString(mMCASQueryString["mode"]);
+}
+<style type="text/css">
+    .m_title
+    {
+        text-transform: capitalize;
+    }
+</style>
+<link href="@Url.Content("~/Content/EbixGrid.css")" rel="Stylesheet" media="screen" />
+<link href="@Url.Content("~/Content/jquery-ui.css")" rel="Stylesheet" media="screen" />
+<div class="table-responsive">
+    <div class="ui-ebixgrid">
+        @Html.RenderGrid((from m in Model
+                          select new
+                          {
+                              m.ClaimType,
+                              m.ClaimTypeCode,
+                              m.ClaimTypeDesc
+                          }).Distinct(),
+            new EbixGrid.EbixGrid
+                {
+                    Columns = new List<EbixGrid.EGColumn> 
+                                 {
+                                     new EbixGrid.EGColumn { DataField = "ClaimType"   ,
+                                                        HeaderText = ClaimMandate.ClaimType,
+                                                        PrimaryKey = true ,
+                                                        Hidden = true,
+                                                        Width = "0%" },
+                                     new EbixGrid.EGColumn { DataField = "ClaimTypeDesc"   ,
+                                                        HeaderText = ClaimMandate.ClaimType,
+                                                        PrimaryKey = false ,
+                                                        Width = "100%" },                                                        
+                                    
+                                 },
+                    Width = "650",
+                    Height = "350",
+
+                    ID = "Grid",
+                    IsChildRequired = true,
+                    childGrid = new EbixGrid.EbixGrid
+                    {
+                        Columns = new List<EbixGrid.EGColumn> 
+                                 {
+                                     new EbixGrid.EGColumn { DataField = "ClaimType",
+                                                        HeaderText = ClaimMandate.ClaimType,
+                                                        PrimaryKey = false,
+                                                        ForeinKey = true,
+                                                        Hidden = true,
+                                                        Width = "0%" },
+                                     new EbixGrid.EGColumn { DataField = "RecordNumber",  HeaderText = ClaimMandate.RecordNumber, PrimaryKey = true,  Width = "30%"},
+                                     new EbixGrid.EGColumn { DataField = "ClaimantName",  HeaderText =ClaimMandate.TPVehicleNo, Width = "40%" },
+                                     new EbixGrid.EGColumn { DataField = "",  HeaderText = "Add", Width = "30%",
+                                         Columntype = new EbixGrid.EGColumnType
+                                                             { Columntype = EbixGrid.ColumnType.LinkButton,
+                                                                 ColumnCell = new EbixGrid.EGCell{ Caption =ClaimMandate.AddMandate, Href = @Url.Content("~/ClaimRegistrationProcessing/MandateCrTx"), CssClass ="btn btn-xs btn-info encryptUrl AddMandate"}  
+                                                                 
+                                                             } 
+                                       , QueryStringFields =  new List<string> {"PolicyId", "ClaimID", "AccidentClaimId","ClaimType","MandateId=0","HAssignedTo", "claimMode=" + @claimMode,"mode="+@mode,"Viewmode=AddMandate","ClaimTypeCode"}
+                                      }
+                                 },
+                        Width = "650",
+                        Height = "350",
+
+                        ID = "SubGrid",
+                        DataSource = (from m in Model
+                                      select new
+                                      {
+                                          m.ReserveId,
+                                          m.RecordNumber,
+                                          m.ClaimantName,
+                                          m.AccidentClaimId,
+                                          m.ClaimID,
+                                          m.PolicyId,
+                                          m.ClaimTypeCode,
+                                          m.ClaimType,
+                                          m.HClaimantStatus
+                                      }).Where(t => t.ReserveId >0).Distinct(),
+                        IsChildRequired = true,
+                        childGrid = new EbixGrid.EbixGrid
+                        {
+                            Columns = new List<EbixGrid.EGColumn> 
+                                 {
+                                     new EbixGrid.EGColumn { DataField = "RecordNumber",HeaderText = ClaimMandate.RecordNumber,PrimaryKey = false,ForeinKey = true,Hidden = true, Width = "0%" },
+                                     new EbixGrid.EGColumn { DataField = "MandateRecordNo",  HeaderText = ClaimMandate.MandateNumber,  Width = "25%"},
+                                     new EbixGrid.EGColumn { DataField = "ApproveRecommedations",  HeaderText = ClaimMandate.ApproveRecommedations, Width = "25%" },
+                                     new EbixGrid.EGColumn { DataField = "",  HeaderText =Common.Select, Width = "20%",
+                                         Columntype = new EbixGrid.EGColumnType
+                                                             { Columntype = EbixGrid.ColumnType.LinkButton,
+                                                                 ColumnCell = new EbixGrid.EGCell{ Caption =Common.Select, Href = @Url.Content("~/ClaimRegistrationProcessing/MandateCrTx"), CssClass ="btn btn-xs btn-info encryptUrl"}  
+                                                                 
+                                                             } 
+                                       , QueryStringFields =  new List<string> {"PolicyId", "ClaimID", "AccidentClaimId","ClaimType","MandateId", "claimMode=" + @claimMode,"mode="+@mode,"Viewmode=Select","ClaimTypeCode"}
+                                      },
+                                      new EbixGrid.EGColumn { DataField = "",  HeaderText = ClaimMandate.ApproveMandate, Width = "15%",
+                                         Columntype = new EbixGrid.EGColumnType
+                                                             { Columntype = EbixGrid.ColumnType.LinkButton,
+                                                                 ColumnCell = new EbixGrid.EGCell{ Caption =ClaimMandate.ApproveMandate, Href = @Url.Content("~/ClaimRegistrationProcessing/MandateCrTx"), CssClass ="btn btn-xs btn-info encryptUrl ApproveMandate"}  
+                                                                 
+                                                             } 
+                                       , QueryStringFields =  new List<string> {"PolicyId","ApproveRecommedations", "ClaimID", "AccidentClaimId","ClaimType", "HClaimantStatus","HAssignedTo","MandateId", "claimMode=" + @claimMode,"mode="+@mode,"Viewmode=ApproveMandate","ClaimTypeCode"}
+                                      },
+                                     new EbixGrid.EGColumn { DataField = "",  HeaderText = ClaimMandate.MandateHistory, Width = "15%",
+                                         Columntype = new EbixGrid.EGColumnType
+                                                             { Columntype = EbixGrid.ColumnType.LinkButton,
+                                                                 ColumnCell = new EbixGrid.EGCell{ Caption =Common.View,  CssClass ="btn btn-xs btn-info"}  
+                                                                 
+                                                             } 
+                                       , QueryStringFields =  new List<string> {"ApproveRecommedations","ClaimID", "AccidentClaimId","ClaimType","MandateId","MandateRecordNo"}
+                                      },
+                                 },
+
+                            Width = "650",
+                            Height = "350",
+
+                            ID = "SubGrid1",
+                            DataSource = (from m in Model
+                                          select new
+                                          {
+                                              m.SNO,
+                                              m.MandateRecordNo,
+                                              m.ApproveRecommedations,
+                                              m.RecordNumber,
+                                              m.MandateId,
+                                              m.AccidentClaimId,
+                                              m.ClaimID,
+                                              m.PolicyId,
+                                              m.ClaimTypeCode,
+                                              m.ClaimType,
+                                              m.HClaimantStatus,
+                                              m.HAssignedTo
+                                          }).OrderBy(x => x.SNO).Where(x => x.MandateId != null && x.MandateId != 0).Distinct()
+                        }
+                    }
+                }
+
+  )
+    </div>
+</div>
+<script type="text/javascript">
+
+    function showChildGrid(id, spanid) {
+        $('#' + id).slideToggle();
+        if ($('#span_' + id).hasClass('ui-icon-plus'))
+            $('#span_' + id).removeClass('ui-icon-plus').addClass('ui-icon-minus');
+        else
+            $('#span_' + id).removeClass('ui-icon-minus').addClass('ui-icon-plus');
+    }
+</script>

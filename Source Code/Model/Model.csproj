@@ -1,0 +1,405 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{8BED9EF7-4F80-4195-87FC-62CE73BC3672}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Model</RootNamespace>
+    <AssemblyName>Model</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Account\ClsAcceptedCOILoadApplicationInfo.cs" />
+    <Compile Include="Account\ClsAcceptedCOILoadInfo.cs" />
+    <Compile Include="Account\ClsAddDepositDetailsinfo.cs" />
+    <Compile Include="Account\ClsAddNSFEntryInfo.cs" />
+    <Compile Include="Account\ClsBankRconciliationInfo.cs" />
+    <Compile Include="Account\ClsBudgetPlanInfo.cs" />
+    <Compile Include="Account\ClsChecksInfo.cs" />
+    <Compile Include="Account\ClsCustAgencyPaymentsInfo.cs" />
+    <Compile Include="Account\ClsCustBalanceInfo.cs" />
+    <Compile Include="Account\ClsDepositDetailsInfo.cs" />
+    <Compile Include="Account\ClsDepositInfo.cs" />
+    <Compile Include="Account\ClsDistributeCheckInfo.cs" />
+    <Compile Include="Account\ClsEFTInfo.cs" />
+    <Compile Include="Account\ClsFeeReversalInfo.cs" />
+    <Compile Include="Account\ClsForm1099.cs" />
+    <Compile Include="Account\ClsJournalEntryDetail.cs" />
+    <Compile Include="Account\ClsJournalEntryMaster.cs" />
+    <Compile Include="Account\ClsPendingVendorInvoicesInfo.cs" />
+    <Compile Include="Account\ClsPolicyMeleventInfo.cs" />
+    <Compile Include="Account\ClsReconDetailInfo.cs" />
+    <Compile Include="Account\ClsReconGroupInfo.cs" />
+    <Compile Include="Account\ClsVendorInvoicesInfo.cs" />
+    <Compile Include="Application\Aviation\ClsAviationVehicleInfo.cs" />
+    <Compile Include="Application\ClsAdditionalInterestInfo.cs" />
+    <Compile Include="Application\ClsAppAdditionalInterestInfo.cs" />
+    <Compile Include="Application\ClsApplicantDetailsInfo.cs" />
+    <Compile Include="Application\ClsApplicantInsuredInfo.cs" />
+    <Compile Include="Application\ClsApplicantsInfo.cs" />
+    <Compile Include="Application\clsAppMiscEqptValuesInfo.cs" />
+    <Compile Include="Application\ClsAssignedVehicleInfo.cs" />
+    <Compile Include="Application\ClsAutoIDInfo.cs" />
+    <Compile Include="Application\ClsCoveragesInfo.cs" />
+    <Compile Include="Application\ClsDriverDetailsInfo.cs" />
+    <Compile Include="Application\ClsEmploymentInfo.cs" />
+    <Compile Include="Application\ClsGeneralInfo.cs" />
+    <Compile Include="Application\ClsMvrInfo.cs" />
+    <Compile Include="Application\ClsPkgLobDetailsInfo.cs" />
+    <Compile Include="Application\ClsPPGeneralInfo.cs" />
+    <Compile Include="Application\ClsPriorPolicyInfo.cs" />
+    <Compile Include="Application\ClsRealEstateLocationInfo.cs" />
+    <Compile Include="Application\ClsScheduleOfUnderlyingInfo.cs" />
+    <Compile Include="Application\ClsSearchLocationInfo.cs" />
+    <Compile Include="Application\ClsUmbrellaDwellingInfo.cs" />
+    <Compile Include="Application\ClsUmbrellaFarmInfo.cs" />
+    <Compile Include="Application\ClsUmbrellaGenInfo.cs" />
+    <Compile Include="Application\ClsUmbrellaLimitsInfo.cs" />
+    <Compile Include="Application\ClsUmbrellaOperatorInfo.cs" />
+    <Compile Include="Application\ClsUmbrellaPolicyOthersInfo.cs" />
+    <Compile Include="Application\ClsUmbrellaRatingInfo.cs" />
+    <Compile Include="Application\ClsUmbrellaRealEstateSubLocationInfo.cs" />
+    <Compile Include="Application\ClsUnderlyingPolicyCoveragesInfo.cs" />
+    <Compile Include="Application\ClsUnderwritingTierInfo.cs" />
+    <Compile Include="Application\HomeOwners\ClsChimneyStoveInfo.cs" />
+    <Compile Include="Application\HomeOwners\ClsDwellingCoverageLimitInfo.cs" />
+    <Compile Include="Application\HomeOwners\ClsDwellingDetailsInfo.cs" />
+    <Compile Include="Application\HomeOwners\ClsDwellingSectionCoveragesInfo.cs" />
+    <Compile Include="Application\HomeOwners\ClsFireProtInfo.cs" />
+    <Compile Include="Application\HomeOwners\ClsGeneralInfo.cs" />
+    <Compile Include="Application\HomeOwners\ClsHomeOwnerEndorsementInfo.cs" />
+    <Compile Include="Application\HomeOwners\ClsHomeRatingInfo.cs" />
+    <Compile Include="Application\HomeOwners\ClsLocationInfo.cs" />
+    <Compile Include="Application\HomeOwners\ClsOtherLocationsInfo.cs" />
+    <Compile Include="Application\HomeOwners\ClsOtherStructuresInfo.cs" />
+    <Compile Include="Application\HomeOwners\ClsPersArticleGenInfo.cs" />
+    <Compile Include="Application\HomeOwners\ClsProtectDevicesInfo.cs" />
+    <Compile Include="Application\HomeOwners\ClsRecrVehCoveragesInfo.cs" />
+    <Compile Include="Application\HomeOwners\ClsRecrVehiclesInfo.cs" />
+    <Compile Include="Application\HomeOwners\ClsSchItemsCovgInfo.cs" />
+    <Compile Include="Application\HomeOwners\clsSchItemsCvgsDetailsInfo.cs" />
+    <Compile Include="Application\HomeOwners\ClsSolidFuelInfo.cs" />
+    <Compile Include="Application\HomeOwners\ClsSquareFootageInfo.cs" />
+    <Compile Include="Application\HomeOwners\ClsSubjectsInsuranceInfo.cs" />
+    <Compile Include="Application\HomeOwners\ClsSubLocationInfo.cs" />
+    <Compile Include="Application\HomeOwners\ClsUnitClearanceInfo.cs" />
+    <Compile Include="Application\HomeOwners\ClsUnitClearanceScreenInfo.cs" />
+    <Compile Include="Application\PriorLoss\ClsExpiryDatesInfo.cs" />
+    <Compile Include="Application\PriorLoss\ClsPriorLossInfo.cs" />
+    <Compile Include="Application\PriorLoss\ClsPriorLossInfo_Home.cs" />
+    <Compile Include="Application\PrivatePassenger\clsAppDriverAssignedVech.cs" />
+    <Compile Include="Application\PrivatePassenger\ClsVehicleEndorsementInfo.cs" />
+    <Compile Include="Application\PrivatePassenger\ClsVehicleInfo.cs" />
+    <Compile Include="Application\Watercrafts\ClsTrailerInfo.cs" />
+    <Compile Include="Application\Watercrafts\ClsWatercraftEngineInfo.cs" />
+    <Compile Include="Application\Watercrafts\ClsWatercraftEquipmentsInfo.cs" />
+    <Compile Include="Application\Watercrafts\ClsWatercraftGenInfo.cs" />
+    <Compile Include="Application\Watercrafts\ClsWatercraftInfo.cs" />
+    <Compile Include="Application\Watercrafts\ClsWatercraftOperatorInfo.cs" />
+    <Compile Include="Claims\ClsActivityExpenseBreakdownInfo.cs" />
+    <Compile Include="Claims\ClsActivityExpenseInfo.cs" />
+    <Compile Include="Claims\ClsActivityInfo.cs" />
+    <Compile Include="Claims\ClsActivityRecoveryInfo.cs" />
+    <Compile Include="Claims\ClsAddPartyDetailsInfo.cs" />
+    <Compile Include="Claims\ClsAddReserveDetailsInfo.cs" />
+    <Compile Include="Claims\ClsAgencyDetailsInfo.cs" />
+    <Compile Include="Claims\ClsClaimCoveragesInfo.cs" />
+    <Compile Include="Claims\ClsClaimsCountAdjusterSummaryInfo.cs" />
+    <Compile Include="Claims\ClsClaimsNotficationInfo.cs" />
+    <Compile Include="Claims\ClsCoinsuranceInfo.cs" />
+    <Compile Include="Claims\ClsDriverDetailsInfo.cs" />
+    <Compile Include="Claims\ClsDummyClaimsCoverageInfo.cs" />
+    <Compile Include="Claims\ClsDummyPolicyInfo.cs" />
+    <Compile Include="Claims\ClsInsuredBoatInfo.cs" />
+    <Compile Include="Claims\ClsInsuredLocationInfo.cs" />
+    <Compile Include="Claims\ClsInsuredVehicleInfo.cs" />
+    <Compile Include="Claims\ClsLiabilityTypeInfo.cs" />
+    <Compile Include="Claims\ClsLitigationInfo.cs" />
+    <Compile Include="Claims\ClsMCCAAttachmentInfo.cs" />
+    <Compile Include="Claims\ClsOccurrenceDetailsInfo.cs" />
+    <Compile Include="Claims\ClsOwnerDetailsInfo.cs" />
+    <Compile Include="Claims\ClsPayeeInfo.cs" />
+    <Compile Include="Claims\ClsPaymentBreakDownInfo.cs" />
+    <Compile Include="Claims\ClsPaymentInfo.cs" />
+    <Compile Include="Claims\ClsPropertyDamagedInfo.cs" />
+    <Compile Include="Claims\ClsRecoveryPayerInfo.cs" />
+    <Compile Include="Claims\ClsReopenClaimInfo.cs" />
+    <Compile Include="Claims\ClsReserveBreakDownInfo.cs" />
+    <Compile Include="Claims\ClsReserveDetailsInfo.cs" />
+    <Compile Include="Claims\ClsRiskInfo.cs" />
+    <Compile Include="Claims\ClsScheduledItemsInfo.cs" />
+    <Compile Include="Claims\ClsVictimInfo.cs" />
+    <Compile Include="Claims\ClsWatercraftCompanyInfo.cs" />
+    <Compile Include="Claims\ClsWatercraftPropertyDamagedInfo.cs" />
+    <Compile Include="Client\ClsAkaDbaInfo.cs" />
+    <Compile Include="Client\ClsApplicantInsuedInfo.cs" />
+    <Compile Include="Client\ClsClientInfo.cs" />
+    <Compile Include="Client\ClsCustomerNotesInfo.cs" />
+    <Compile Include="Client\ClsEmailInfo.cs" />
+    <Compile Include="Client\ClsFaxInfo.cs" />
+    <Compile Include="ClsBillingDetailsInfo.cs" />
+    <Compile Include="Diary\ClsDiaryInfo.cs" />
+    <Compile Include="Maintenance\Accounting\ClsBankInformationInfo.cs" />
+    <Compile Include="Maintenance\Accounting\ClsBudgetCatgoryInfo.cs" />
+    <Compile Include="Maintenance\Accounting\ClsFundTypeInfo.cs" />
+    <Compile Include="Maintenance\Accounting\ClsGeneralLedgerInfo.cs" />
+    <Compile Include="Maintenance\Accounting\ClsGLAccountRangesInfo.cs" />
+    <Compile Include="Maintenance\Accounting\ClsGlAccountsInfo.cs" />
+    <Compile Include="Maintenance\Accounting\ClsInflationGuardSetup.cs" />
+    <Compile Include="Maintenance\Accounting\ClsInstallmentPlanInfo.cs" />
+    <Compile Include="Maintenance\Accounting\ClsInstallParamsInfo.cs" />
+    <Compile Include="Maintenance\Accounting\ClsPostingInterfaceInfo.cs" />
+    <Compile Include="Maintenance\Accounting\ClsRegCommSetup_AgencyInfo.cs" />
+    <Compile Include="Maintenance\Accounting\ClsTransactionCodeGroupDetailsInfo.cs" />
+    <Compile Include="Maintenance\Accounting\ClsTransactionCodeGroupInfo.cs" />
+    <Compile Include="Maintenance\Accounting\ClsTransactioncodesInfo.cs" />
+    <Compile Include="Maintenance\Accumulation\ClsAccumulationCriteriaInfo.cs" />
+    <Compile Include="Maintenance\Accumulation\ClsAccumulationReferenceInfo.cs" />
+    <Compile Include="Maintenance\Claims\ClsAdjusterDetailsInfo.cs" />
+    <Compile Include="Maintenance\Claims\ClsCatastropheEventInfo.cs" />
+    <Compile Include="Maintenance\Claims\ClsClaimsAdjusterAuthorityInfo.cs" />
+    <Compile Include="Maintenance\Claims\ClsDefaultValuesInfo.cs" />
+    <Compile Include="Maintenance\Claims\ClsExpertServiceProvidersInfo.cs" />
+    <Compile Include="Maintenance\Claims\ClsLimitsOfAuthorityInfo.cs" />
+    <Compile Include="Maintenance\Claims\ClsLossCodesInfo.cs" />
+    <Compile Include="Maintenance\ClsAccountingEntityInfo.cs" />
+    <Compile Include="Maintenance\ClsAdditionalWordingsInfo.cs" />
+    <Compile Include="Maintenance\ClsAgencyInfo.cs" />
+    <Compile Include="Maintenance\ClsAgencyStateLobAssocInfo.cs" />
+    <Compile Include="Maintenance\ClsAircraftInfo.cs" />
+    <Compile Include="Maintenance\ClsAttachmentInfo.cs" />
+    <Compile Include="Maintenance\ClsClausesInfo.cs" />
+    <Compile Include="Maintenance\ClsContactsManagerInfo.cs" />
+    <Compile Include="Maintenance\ClsCoverageDetailsInfo.cs" />
+    <Compile Include="Maintenance\ClsCoverageRangeInfo.cs" />
+    <Compile Include="Maintenance\ClsCurrencyMasterDetailsInfo.cs" />
+    <Compile Include="Maintenance\ClsCurrencyRateInfo.cs" />
+    <Compile Include="Maintenance\ClsDefaultHierarchyInfo.cs" />
+    <Compile Include="Maintenance\ClsDefaultMessageInfo.cs" />
+    <Compile Include="Maintenance\ClsDefaultValueInfo.cs" />
+    <Compile Include="Maintenance\ClsDepartmentInfo.cs" />
+    <Compile Include="Maintenance\ClsDiscountSurchargeInfo.cs" />
+    <Compile Include="Maintenance\ClsDivisionInfo.cs" />
+    <Compile Include="Maintenance\ClsEndorsementAttachmentInfo.cs" />
+    <Compile Include="Maintenance\ClsEndorsmentInfo.cs" />
+    <Compile Include="Maintenance\ClsFinanceCompany.cs" />
+    <Compile Include="Maintenance\ClsInterestRatesInfo.cs" />
+    <Compile Include="Maintenance\ClsLookupInfo.cs" />
+    <Compile Include="Maintenance\ClsMarineCargoSetAgentsInfo.cs" />
+    <Compile Include="Maintenance\clsMasterDetailInfo.cs" />
+    <Compile Include="Maintenance\ClsMasterDetailValueInfo.cs" />
+    <Compile Include="Maintenance\ClsMinimumPremAmt.cs" />
+    <Compile Include="Maintenance\ClsMonetaryInfo.cs" />
+    <Compile Include="Maintenance\ClsMortgageInfo.cs" />
+    <Compile Include="Maintenance\ClsPolicyNoSetupInfo.cs" />
+    <Compile Include="Maintenance\ClsPortMasterInfo.cs" />
+    <Compile Include="Maintenance\ClsProductMasterInfo.cs" />
+    <Compile Include="Maintenance\ClsProfitCenterInfo.cs" />
+    <Compile Include="Maintenance\ClsRequestResponseLogInfo.cs" />
+    <Compile Include="Maintenance\ClsRetentionLimitInfo.cs" />
+    <Compile Include="Maintenance\ClsRuleCollectioninfo.cs" />
+    <Compile Include="Maintenance\ClsStateInfo.cs" />
+    <Compile Include="Maintenance\ClsSystemParamsInfo.cs" />
+    <Compile Include="Maintenance\ClsTaxEntityInfo.cs" />
+    <Compile Include="Maintenance\ClsTransactionInfo.cs" />
+    <Compile Include="Maintenance\ClsTransactionXmlInfo.cs" />
+    <Compile Include="Maintenance\ClsUnderwritingAuthorityLimitsInfo.cs" />
+    <Compile Include="Maintenance\ClsUserInfo.cs" />
+    <Compile Include="Maintenance\ClsUserTypeInfo.cs" />
+    <Compile Include="Maintenance\ClsVendorInfo.cs" />
+    <Compile Include="Maintenance\ClsVesselMasterInfo.cs" />
+    <Compile Include="Maintenance\ClsXOLInfo.cs" />
+    <Compile Include="Maintenance\Reinsurance\ClsAddReinsuranceAggStopLossInfo.cs" />
+    <Compile Include="Maintenance\Reinsurance\ClsConstructionTranslationInfo.cs" />
+    <Compile Include="Maintenance\Reinsurance\ClsCoverageCategoriesInfo.cs" />
+    <Compile Include="Maintenance\Reinsurance\clsCurrentCreditRatingInfo.cs" />
+    <Compile Include="Maintenance\Reinsurance\ClsLossLayerInfo.cs" />
+    <Compile Include="Maintenance\Reinsurance\ClsReinsuranceBankingDetailsInfo.cs" />
+    <Compile Include="Maintenance\Reinsurance\ClsReinsuranceContactInfo.cs" />
+    <Compile Include="Maintenance\Reinsurance\ClsReinsuranceContractNameInfo.cs" />
+    <Compile Include="Maintenance\Reinsurance\ClsReinsuranceContractTypeInfo.cs" />
+    <Compile Include="Maintenance\Reinsurance\ClsReinsuranceExcessLayerInfo.cs" />
+    <Compile Include="Maintenance\Reinsurance\ClsReinsuranceInfo.cs" />
+    <Compile Include="Maintenance\Reinsurance\ClsReinsuranceMajorParticipationInfo.cs" />
+    <Compile Include="Maintenance\Reinsurance\ClsReinsuranceMinorParticipationInfo.cs" />
+    <Compile Include="Maintenance\Reinsurance\ClsReinsurancePostingInfo.cs" />
+    <Compile Include="Maintenance\Reinsurance\ClsReinsurancePremiumBuildInfo.cs" />
+    <Compile Include="Maintenance\Reinsurance\ClsReinsuranceQuotaShareInfo.cs" />
+    <Compile Include="Maintenance\Reinsurance\ClsReinsuranceSpecialAcceptanceAmountInfo.cs" />
+    <Compile Include="Maintenance\Reinsurance\ClsReinsurerAttachmentInfo.cs" />
+    <Compile Include="Maintenance\Reinsurance\ClsReinsurerInfo.cs" />
+    <Compile Include="Maintenance\Reinsurance\ClsSplitInfo.cs" />
+    <Compile Include="Maintenance\Reinsurance\ClsTIVGroupInfo.cs" />
+    <Compile Include="Maintenance\Security\ClsSecurityInfo.cs" />
+    <Compile Include="Policy\Accident\ClsIndividualInfo.cs" />
+    <Compile Include="Policy\Accident\ClsPassengerAccidentInfo.cs" />
+    <Compile Include="Policy\Automobile\ClsPolicyAutoMVR.cs" />
+    <Compile Include="Policy\Automobile\ClsPolicyGeneralInfo.cs" />
+    <Compile Include="Policy\Aviation\ClsPolicyAviationVehicleInfo.cs" />
+    <Compile Include="Policy\ClsAccumulationPolicyInformationInfo.cs" />
+    <Compile Include="Policy\ClsAircraftInfo.cs" />
+    <Compile Include="Policy\ClsBeneficiaryInfo.cs" />
+    <Compile Include="Policy\ClsBillingInformationInfo.cs" />
+    <Compile Include="Policy\ClsCivilTransportationVehicleInfo.cs" />
+    <Compile Include="Policy\ClsCoInsuranceInfo.cs" />
+    <Compile Include="Policy\ClsContractorsDetailInfo.cs" />
+    <Compile Include="Policy\ClsDiscountSurchargeInfo.cs" />
+    <Compile Include="Policy\ClsEODTransactionDetailInfo.cs" />
+    <Compile Include="Policy\ClsEODTransactionMasterInfo.cs" />
+    <Compile Include="Policy\ClsLiabilityCoverage.cs" />
+    <Compile Include="Policy\ClsMeritimeInfo.cs" />
+    <Compile Include="Policy\ClsNatureBusinessInfo.cs" />
+    <Compile Include="Policy\ClsOldBuildingDetailsInfo.cs" />
+    <Compile Include="Policy\ClsPenhorRuralInfo.cs" />
+    <Compile Include="Policy\ClsPolicyAccumulationDetailsInfo.cs" />
+    <Compile Include="Policy\ClsPolicyBillingInfo.cs" />
+    <Compile Include="Policy\ClsPolicyClauseInfo.cs" />
+    <Compile Include="Policy\ClsPolicyCoveragesInfo.cs" />
+    <Compile Include="Policy\ClsPolicyDriverInfo.cs" />
+    <Compile Include="Policy\ClsPolicyInfo.cs" />
+    <Compile Include="Policy\ClsPolicyInsuredInfo.cs" />
+    <Compile Include="Policy\ClsPolicyLocationInfo.cs" />
+    <Compile Include="Policy\ClsPolicyReinsurerInfo.cs" />
+    <Compile Include="Policy\ClsPolicyRejectReasonInfo.cs" />
+    <Compile Include="Policy\ClsPolicyRemunerationInfo.cs" />
+    <Compile Include="Policy\ClsPolicyUWQMarineInfo.cs" />
+    <Compile Include="Policy\ClsPolicyUWQuestionInfo.cs" />
+    <Compile Include="Policy\ClsPolicyVehicleInfo.cs" />
+    <Compile Include="Policy\clsPolMiscEqptValuesInfo.cs" />
+    <Compile Include="Policy\ClsPremiseLocationInfo.cs" />
+    <Compile Include="Policy\ClsPremisesInfo.cs" />
+    <Compile Include="Policy\ClsProductLocationInfo.cs" />
+    <Compile Include="Policy\ClsPropertyCoverages.cs" />
+    <Compile Include="Policy\ClsPropertyCoveragesInfo.cs" />
+    <Compile Include="Policy\ClsPropertyDetailInfo.cs" />
+    <Compile Include="Policy\ClsProtectiveDevicesInfo.cs" />
+    <Compile Include="Policy\ClsQuickAppInfo.cs" />
+    <Compile Include="Policy\ClsReinsuranceSurplusInfo.cs" />
+    <Compile Include="Policy\ClsSuppFormRestaurantInfo.cs" />
+    <Compile Include="Policy\ClsSuppFormShopInfo.cs" />
+    <Compile Include="Policy\ClsUnderwritingTierInfo.cs" />
+    <Compile Include="Policy\ClsVehicleEndorsementInfo.cs" />
+    <Compile Include="Policy\ClsVoyageInformationInfo.cs" />
+    <Compile Include="Policy\ClsWarehouseDetailInfo.cs" />
+    <Compile Include="Policy\GeneralLiability\ClsGeneralInfo.cs" />
+    <Compile Include="Policy\GeneralLiability\ClsGeneralLiabilityCoveragesInfo.cs" />
+    <Compile Include="Policy\GeneralLiability\ClsGeneralLiabilityDetailsInfo.cs" />
+    <Compile Include="Policy\GeneralLiability\ClsGeneralLocationInfo.cs" />
+    <Compile Include="Policy\Homeowners\ClsHomeRatingInfo.cs" />
+    <Compile Include="Policy\Homeowners\ClsPolicyChimneyStoveInfo.cs" />
+    <Compile Include="Policy\Homeowners\ClsPolicyCoveragesInfo.cs" />
+    <Compile Include="Policy\Homeowners\ClsPolicyDwellingCoverageLimitInfo.cs" />
+    <Compile Include="Policy\Homeowners\ClsPolicyDwellingDetailsInfo.cs" />
+    <Compile Include="Policy\Homeowners\ClsPolicyDwellingSectionCoveragesInfo.cs" />
+    <Compile Include="Policy\Homeowners\ClsPolicyFireProtInfo.cs" />
+    <Compile Include="Policy\Homeowners\ClsPolicyHomeOwnerEndorsementInfo.cs" />
+    <Compile Include="Policy\Homeowners\ClsPolicyHomeownerGeneralInfo.cs" />
+    <Compile Include="Policy\Homeowners\ClsPolicyOtherLocationsInfo.cs" />
+    <Compile Include="Policy\Homeowners\ClsPolicyOtherStructuresInfo.cs" />
+    <Compile Include="Policy\Homeowners\ClsPolicyPersArticleGenInfo.cs" />
+    <Compile Include="Policy\Homeowners\ClsPolicySolidFuelInfo.cs" />
+    <Compile Include="Policy\Homeowners\ClsPolRecrVehiclesInfo.cs" />
+    <Compile Include="Policy\Homeowners\ClsPolSchItemsCovgInfo.cs" />
+    <Compile Include="Policy\Homeowners\clsPolSchItemsCvgsDetailsInfo.cs" />
+    <Compile Include="Policy\NamedPerils\ClsNamedPerilsInfo.cs" />
+    <Compile Include="Policy\Process\ClsEndorsementDetailInfo.cs" />
+    <Compile Include="Policy\Process\ClsPolicyProcessNoticInfo.cs" />
+    <Compile Include="Policy\Process\ClsPrintJobsInfo.cs" />
+    <Compile Include="Policy\Process\ClsProcessInfo.cs" />
+    <Compile Include="Policy\Transportation\ClsCivilTransportVehicleInfo.cs" />
+    <Compile Include="Policy\Transportation\ClsCommodityInfo.cs" />
+    <Compile Include="Policy\Umbrella\ClsDriverOperatorInfo.cs" />
+    <Compile Include="Policy\Umbrella\ClsDwellingInfo.cs" />
+    <Compile Include="Policy\Umbrella\ClsFarmDetailsInfo.cs" />
+    <Compile Include="Policy\Umbrella\ClsPolicyLimitsInfo.cs" />
+    <Compile Include="Policy\Umbrella\ClsRatingInfo.cs" />
+    <Compile Include="Policy\Umbrella\ClsRealEstateLocationInfo.cs" />
+    <Compile Include="Policy\Umbrella\ClsRecrVehicleInfo.cs" />
+    <Compile Include="Policy\Umbrella\ClsUmbrellaGenInfo.cs" />
+    <Compile Include="Policy\Umbrella\ClsUnderlyingPoliciesInfo.cs" />
+    <Compile Include="Policy\Umbrella\ClsUnderlyingPolicyCoverages.cs" />
+    <Compile Include="Policy\Umbrella\ClsVehicleInfo.cs" />
+    <Compile Include="Policy\Umbrella\ClsWaterCraftEngineInfo.cs" />
+    <Compile Include="Policy\Umbrella\ClsWaterCraftInfo.cs" />
+    <Compile Include="Policy\Watercraft\ClsPolicyVehicleEndorsementInfo.cs" />
+    <Compile Include="Policy\Watercraft\ClsPolicyWatercraftEngineInfo.cs" />
+    <Compile Include="Policy\Watercraft\ClsPolicyWatercraftEquipmentInfo.cs" />
+    <Compile Include="Policy\Watercraft\ClsPolicyWatercraftGenInfo.cs" />
+    <Compile Include="Policy\Watercraft\ClsPolicyWatercraftInfo.cs" />
+    <Compile Include="Policy\Watercraft\ClsPolicyWatercraftOperatorInfo.cs" />
+    <Compile Include="Policy\Watercraft\ClsPolicyWatercraftTrailerInfo.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Quote\ClsCustomerParticluarInfo.cs" />
+    <Compile Include="Quote\ClsGeneratePolicyQuoteInfo.cs" />
+    <Compile Include="Quote\ClsGenerateQuoteInfo.cs" />
+    <Compile Include="Quote\ClsInvoiceDetailQQInfo.cs" />
+    <Compile Include="Quote\ClsQQMarineRiskDetailsInfo.cs" />
+    <Compile Include="Quote\ClsQuickQuoteInfo.cs" />
+    <Compile Include="Quote\ClsQuoteDetailsInfo.cs" />
+    <Compile Include="Quote\ClsQuoteDriverInformationInfo.cs" />
+    <Compile Include="Support\ClsBaseModel.cs" />
+    <Compile Include="Support\ClsLookupInfo.cs" />
+    <Compile Include="Support\ClsModelBaseClass.cs" />
+    <Compile Include="Support\IEbixModel.cs" />
+    <Compile Include="Support\ImodelInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Maintenance\Reinsurance\ClsReinsurerAttachmentInfo.resx">
+      <DependentUpon>ClsReinsurerAttachmentInfo.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\EbixDataLayer\EbixDataLayer.csproj">
+      <Project>{363C4AAB-8591-4F9D-BC45-4ED497991C43}</Project>
+      <Name>EbixDataLayer</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\EbixDataTypes\EbixDataTypes.csproj">
+      <Project>{7826B9D8-F728-465D-9226-D6E86430D6C3}</Project>
+      <Name>EbixDataTypes</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

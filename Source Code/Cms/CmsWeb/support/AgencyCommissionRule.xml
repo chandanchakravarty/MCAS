@@ -1,0 +1,460 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Root>
+  <Master>
+    <Query Code="SELECT">Proc_GetKeysForCommision</Query>
+    <Column Code="APP_EFFECTIVE_DATE" MapColumnn="APP_EFFECTIVE_DATE"></Column>
+    <Column Code="LOB_ID" MapColumnn="LOB_ID"></Column>
+    <Column Code="SUBLOB_ID" MapColumnn="SUBLOB_ID"></Column>
+    <Column Code="STATE_ID" MapColumnn="STATE_ID"></Column>
+    <Column Code="PRODUCT_TYPE" MapColumnn="PRODUCT_TYPE"></Column>
+    <Column Code="RISK_TYPE" MapColumnn="RISK_TYPE"></Column>
+    <Column Code="RISK_USE" MapColumnn="RISK_USE"></Column>
+    <Column Code="RISK_CLS" MapColumnn="RISK_CLS"></Column>
+    <Column Code="ACC_CLS" MapColumnn=""></Column>
+    <Column Code="INSURANCE_SCORE" MapColumnn="INSURANCE_SCORE"></Column>
+  </Master>
+  <Group Code="Aotomobile" CodeID="2">
+    <!-- For Michigan Automobile   -->
+    <Rule Action="Master" StartDate="1950-01-01" EndDate="3000-12-30" STATE_ID="22">
+      <Conditions>
+        <Condition Operand1="$INSURANCE_SCORE" Operator="&lt;=" Operand2="599" OperandType="Double">
+          <ToSet Key="ACC_CLS" Value="25"></ToSet>
+        </Condition>
+        <!-- Commercial & Misc Auto. Commercial(11333)-->
+        <Condition Operand1="$RISK_USE" Operator="==" Operand2="11333" OperandType="Double">
+          <ToSet Key="ACC_CLS" Value="7"></ToSet>
+        </Condition>
+        <!-- Misc Auto.  All Except PPA(11334) are treated as Misc Auto-->
+        <Condition Operand1="$RISK_TYPE" Operator="!=" Operand2="11334" OperandType="Double">
+          <ToSet Key="ACC_CLS" Value="7"></ToSet>
+        </Condition>
+        <!-- Class P 11358,11359,11360,11361,11362,11363 -->
+        <Condition Operand1="$RISK_CLS" Operator="==" Operand2="11358" OperandType="Double">
+          <ToSet Key="ACC_CLS" Value="7"></ToSet>
+        </Condition>
+        <Condition Operand1="$RISK_CLS" Operator="==" Operand2="11359" OperandType="Double">
+          <ToSet Key="ACC_CLS" Value="7"></ToSet>
+        </Condition>
+        <Condition Operand1="$RISK_CLS" Operator="==" Operand2="11360" OperandType="Double">
+          <ToSet Key="ACC_CLS" Value="7"></ToSet>
+        </Condition>
+        <Condition Operand1="$RISK_CLS" Operator="==" Operand2="11361" OperandType="Double">
+          <ToSet Key="ACC_CLS" Value="7"></ToSet>
+        </Condition>
+        <Condition Operand1="$RISK_CLS" Operator="==" Operand2="11362" OperandType="Double">
+          <ToSet Key="ACC_CLS" Value="7"></ToSet>
+        </Condition>
+        <Condition Operand1="$RISK_CLS" Operator="==" Operand2="11363" OperandType="Double">
+          <ToSet Key="ACC_CLS" Value="7"></ToSet>
+        </Condition>
+        <!-- Class 1. 11342,11343,11344,11345,11346,11347  -->
+        <Condition Operand1="$RISK_CLS" Operator="==" Operand2="11342" OperandType="Double">
+          <ToSet Key="ACC_CLS" Value="8"></ToSet>
+        </Condition>
+        <Condition Operand1="$RISK_CLS" Operator="==" Operand2="11343" OperandType="Double">
+          <ToSet Key="ACC_CLS" Value="8"></ToSet>
+        </Condition>
+        <Condition Operand1="$RISK_CLS" Operator="==" Operand2="11344" OperandType="Double">
+          <ToSet Key="ACC_CLS" Value="8"></ToSet>
+        </Condition>
+        <Condition Operand1="$RISK_CLS" Operator="==" Operand2="11345" OperandType="Double">
+          <ToSet Key="ACC_CLS" Value="8"></ToSet>
+        </Condition>
+        <Condition Operand1="$RISK_CLS" Operator="==" Operand2="11346" OperandType="Double">
+          <ToSet Key="ACC_CLS" Value="8"></ToSet>
+        </Condition>
+        <Condition Operand1="$RISK_CLS" Operator="==" Operand2="11347" OperandType="Double">
+          <ToSet Key="ACC_CLS" Value="8"></ToSet>
+        </Condition>
+        <!-- All Other Including Special Vehicles Surcharged -->
+        <Condition Operand1="$RISK_CLS" Operator="!=" Operand2="0" OperandType="Double">
+          <ToSet Key="ACC_CLS" Value="9"></ToSet>
+        </Condition>
+      </Conditions>
+    </Rule>
+    <!-- For Indiana Automobile   -->
+    <Rule Action="Master" StartDate="1950-01-01" EndDate="3000-12-30" STATE_ID="14">
+      <Conditions>
+        <Condition Operand1="$INSURANCE_SCORE" Operator="&lt;=" Operand2="599" OperandType="Double">
+          <ToSet Key="ACC_CLS" Value="26"></ToSet>
+        </Condition>
+        <!-- If SubLob is Trail blazer -->
+        <Condition Operand1="$SUBLOB_ID" Operator="==" Operand2="1" OperandType="Double">
+          <ToSet Key="ACC_CLS" Value="12"></ToSet>
+        </Condition>
+        <!-- Commercial. Commercial(11333)-->
+        <Condition Operand1="$RISK_USE" Operator="==" Operand2="11333" OperandType="Double">
+          <ToSet Key="ACC_CLS" Value="10"></ToSet>
+        </Condition>
+        <!-- Misc Auto.  All Except PPA(11334) are treated as Misc Auto-->
+        <Condition Operand1="$RISK_TYPE" Operator="!=" Operand2="11334" OperandType="Double">
+          <ToSet Key="ACC_CLS" Value="10"></ToSet>
+        </Condition>
+        <!-- Class P 14283,14284,14285,14286,14287,14288,14316,14317,14318,
+						14319,14320,14321,14322,14323,14324,14325,14326 -->
+        <Condition Operand1="$RISK_CLS" Operator="==" Operand2="14283" OperandType="Double">
+          <ToSet Key="ACC_CLS" Value="10"></ToSet>
+        </Condition>
+        <Condition Operand1="$RISK_CLS" Operator="==" Operand2="14284" OperandType="Double">
+          <ToSet Key="ACC_CLS" Value="10"></ToSet>
+        </Condition>
+        <Condition Operand1="$RISK_CLS" Operator="==" Operand2="14285" OperandType="Double">
+          <ToSet Key="ACC_CLS" Value="10"></ToSet>
+        </Condition>
+        <Condition Operand1="$RISK_CLS" Operator="==" Operand2="14286" OperandType="Double">
+          <ToSet Key="ACC_CLS" Value="10"></ToSet>
+        </Condition>
+        <Condition Operand1="$RISK_CLS" Operator="==" Operand2="14287" OperandType="Double">
+          <ToSet Key="ACC_CLS" Value="10"></ToSet>
+        </Condition>
+        <Condition Operand1="$RISK_CLS" Operator="==" Operand2="14288" OperandType="Double">
+          <ToSet Key="ACC_CLS" Value="10"></ToSet>
+        </Condition>
+        <Condition Operand1="$RISK_CLS" Operator="==" Operand2="14316" OperandType="Double">
+          <ToSet Key="ACC_CLS" Value="10"></ToSet>
+        </Condition>
+        <Condition Operand1="$RISK_CLS" Operator="==" Operand2="14317" OperandType="Double">
+          <ToSet Key="ACC_CLS" Value="10"></ToSet>
+        </Condition>
+        <Condition Operand1="$RISK_CLS" Operator="==" Operand2="14318" OperandType="Double">
+          <ToSet Key="ACC_CLS" Value="10"></ToSet>
+        </Condition>
+        <Condition Operand1="$RISK_CLS" Operator="==" Operand2="14319" OperandType="Double">
+          <ToSet Key="ACC_CLS" Value="10"></ToSet>
+        </Condition>
+        <Condition Operand1="$RISK_CLS" Operator="==" Operand2="14320" OperandType="Double">
+          <ToSet Key="ACC_CLS" Value="10"></ToSet>
+        </Condition>
+        <Condition Operand1="$RISK_CLS" Operator="==" Operand2="14321" OperandType="Double">
+          <ToSet Key="ACC_CLS" Value="10"></ToSet>
+        </Condition>
+        <Condition Operand1="$RISK_CLS" Operator="==" Operand2="14322" OperandType="Double">
+          <ToSet Key="ACC_CLS" Value="10"></ToSet>
+        </Condition>
+        <Condition Operand1="$RISK_CLS" Operator="==" Operand2="14323" OperandType="Double">
+          <ToSet Key="ACC_CLS" Value="10"></ToSet>
+        </Condition>
+        <Condition Operand1="$RISK_CLS" Operator="==" Operand2="14324" OperandType="Double">
+          <ToSet Key="ACC_CLS" Value="10"></ToSet>
+        </Condition>
+        <Condition Operand1="$RISK_CLS" Operator="==" Operand2="14325" OperandType="Double">
+          <ToSet Key="ACC_CLS" Value="10"></ToSet>
+        </Condition>
+        <Condition Operand1="$RISK_CLS" Operator="==" Operand2="14326" OperandType="Double">
+          <ToSet Key="ACC_CLS" Value="10"></ToSet>
+        </Condition>
+        <!-- All Other Classes 1,2,3,4,5,6 -->
+        <!-- Commented By Ravindra(03-08-2007) -->
+        <!--<Condition Operand1="$RISK_CLS" Operator="==" Operand2="11363" OperandType="Double">
+					<ToSet Key="ACC_CLS" Value="11"></ToSet> -->
+        <Condition Operand1="1" Operator="==" Operand2="1" OperandType="Double">
+          <ToSet Key="ACC_CLS" Value="11"></ToSet>
+        </Condition>
+      </Conditions>
+    </Rule>
+  </Group>
+  <Group Code="Motor" CodeID="3">
+    <!-- For Michigan Motor -->
+    <Rule Action="Master" StartDate="1950-01-01" EndDate="3000-12-30" STATE_ID="22">
+      <Conditions>
+        <Condition Operand1="$SUBLOB_ID" Operator="==" Operand2="1" OperandType="Double">
+          <ToSet Key="ACC_CLS" Value="22"></ToSet>
+        </Condition>
+        <Condition Operand1="1" Operator="==" Operand2="1" OperandType="Double">
+          <ToSet Key="ACC_CLS" Value="13"></ToSet>
+        </Condition>
+      </Conditions>
+    </Rule>
+    <!-- For Indiana Motor -->
+    <Rule Action="Master" StartDate="1950-01-01" EndDate="3000-12-30" STATE_ID="14">
+      <Conditions>
+        <Condition Operand1="$SUBLOB_ID" Operator="==" Operand2="1" OperandType="Double">
+          <ToSet Key="ACC_CLS" Value="21"></ToSet>
+        </Condition>
+        <Condition Operand1="1" Operator="==" Operand2="1" OperandType="Double">
+          <ToSet Key="ACC_CLS" Value="14"></ToSet>
+        </Condition>
+      </Conditions>
+    </Rule>
+  </Group>
+  <Group Code="Homeowner" CodeID="1">
+    <!-- For Michigan Homeowner-->
+    <Rule Action="Master" StartDate="1950-01-01" EndDate="3000-12-30" STATE_ID="22">
+      <Conditions>
+        <!-- Added by Charles on 25-Nov-09 for Itrack 6606 -->
+        <Condition Operand1="$INSURANCE_SCORE" Operator="&lt;=" Operand2="599" OperandType="Double">
+          <ToSet Key="ACC_CLS" Value="27"></ToSet>
+        </Condition>
+        <!-- Premier Programm (11409)HO-3 Premier  (11410)HO-5 Premier -->
+        <Condition Operand1="$PRODUCT_TYPE" Operator="==" Operand2="11409" OperandType="Double">
+          <ToSet Key="ACC_CLS" Value="2"></ToSet>
+        </Condition>
+        <Condition Operand1="$PRODUCT_TYPE" Operator="==" Operand2="11410" OperandType="Double">
+          <ToSet Key="ACC_CLS" Value="2"></ToSet>
+        </Condition>
+        <!-- Regular Programm -->
+        <Condition Operand1="1" Operator="==" Operand2="1" OperandType="Double">
+          <ToSet Key="ACC_CLS" Value="1"></ToSet>
+        </Condition>
+      </Conditions>
+    </Rule>
+    <!-- For Indiana Homeowner -->
+    <Rule Action="Master" StartDate="1950-01-01" EndDate="3000-12-30" STATE_ID="14">
+      <Conditions>
+        <!-- Added by Charles on 25-Nov-09 for Itrack 6606 -->
+        <Condition Operand1="$INSURANCE_SCORE" Operator="&lt;=" Operand2="599" OperandType="Double">
+          <ToSet Key="ACC_CLS" Value="28"></ToSet>
+        </Condition>
+        <Condition Operand1="1" Operator="==" Operand2="1" OperandType="Double">
+          <ToSet Key="ACC_CLS" Value="3"></ToSet>
+        </Condition>
+      </Conditions>
+    </Rule>
+    <!-- For Arkansas Homeowner -->
+    <Rule Action="Master" StartDate="1950-01-01" EndDate="3000-12-30" STATE_ID="4">
+      <Conditions>
+        <Condition Operand1="1" Operator="==" Operand2="1" OperandType="Double">
+          <ToSet Key="ACC_CLS" Value="24"></ToSet>
+        </Condition>
+      </Conditions>
+    </Rule>
+  </Group>
+  <Group Code="RentalDwelling" CodeID="6">
+    <!-- For Michigan RentalDwelling-->
+    <Rule Action="Master" StartDate="1950-01-01" EndDate="3000-12-30" STATE_ID="22">
+      <Conditions>
+        <!-- Premier Programm  (11458)DP-3 Premier-->
+        <Condition Operand1="$PRODUCT_TYPE" Operator="==" Operand2="11458" OperandType="Double">
+          <ToSet Key="ACC_CLS" Value="5"></ToSet>
+        </Condition>
+        <!-- Regular Programm -->
+        <Condition Operand1="$PRODUCT_TYPE" Operator="!=" Operand2="11458" OperandType="Double">
+          <ToSet Key="ACC_CLS" Value="4"></ToSet>
+        </Condition>
+      </Conditions>
+    </Rule>
+    <!-- For Indiana RentalDwelling -->
+    <Rule Action="Master" StartDate="1950-01-01" EndDate="3000-12-30" STATE_ID="14">
+      >
+      <Conditions>
+        <Condition Operand1="1" Operator="==" Operand2="1" OperandType="Double">
+          <ToSet Key="ACC_CLS" Value="6"></ToSet>
+        </Condition>
+      </Conditions>
+    </Rule>
+  </Group>
+  <Group Code="Watercraft" CodeID="4">
+    <!-- For Michigan Watercraft-->
+    <Rule Action="Master" StartDate="1950-01-01" EndDate="3000-12-30" STATE_ID="22">
+      <Conditions>
+        <Condition Operand1="1" Operator="==" Operand2="1" OperandType="Double">
+          <ToSet Key="ACC_CLS" Value="15"></ToSet>
+        </Condition>
+      </Conditions>
+    </Rule>
+    <!-- For Indiana Watercraft-->
+    <Rule Action="Master" StartDate="1950-01-01" EndDate="3000-12-30" STATE_ID="14">
+      <Conditions>
+        <Condition Operand1="1" Operator="==" Operand2="1" OperandType="Double">
+          <ToSet Key="ACC_CLS" Value="16"></ToSet>
+        </Condition>
+      </Conditions>
+    </Rule>
+    <!-- For Wisc Watercraft-->
+    <Rule Action="Master" StartDate="1950-01-01" EndDate="3000-12-30" STATE_ID="49">
+      <Conditions>
+        <Condition Operand1="1" Operator="==" Operand2="1" OperandType="Double">
+          <ToSet Key="ACC_CLS" Value="23"></ToSet>
+        </Condition>
+      </Conditions>
+    </Rule>
+  </Group>
+  <Group Code="Umbrella" CodeID="5">
+    <!-- For Michigan Umbrella-->
+    <Rule Action="Master" StartDate="1950-01-01" EndDate="3000-12-30" STATE_ID="22">
+      <Conditions>
+        <!--Michigan - Regular  -->
+        <Condition Operand1="$SUBLOB_ID" Operator="==" Operand2="1" OperandType="Double">
+          <ToSet Key="ACC_CLS" Value="20"></ToSet>
+        </Condition>
+        <!-- All Others -->
+        <Condition Operand1="$SUBLOB_ID" Operator="==" Operand2="0" OperandType="Double">
+          <ToSet Key="ACC_CLS" Value="19"></ToSet>
+        </Condition>
+      </Conditions>
+    </Rule>
+    <!-- For Indiana Umbrella-->
+    <Rule Action="Master" StartDate="1950-01-01" EndDate="3000-12-30" STATE_ID="14">
+      <Conditions>
+        <!--Indiana - Regular  -->
+        <Condition Operand1="$SUBLOB_ID" Operator="==" Operand2="1" OperandType="Double">
+          <ToSet Key="ACC_CLS" Value="17"></ToSet>
+        </Condition>
+        <!-- All Others -->
+        <Condition Operand1="$SUBLOB_ID" Operator="==" Operand2="0" OperandType="Double">
+          <ToSet Key="ACC_CLS" Value="18"></ToSet>
+        </Condition>
+      </Conditions>
+    </Rule>
+  </Group>
+  <Group Code="Aviation" CodeID="8">
+    <!-- For wisconsin Aviation-->
+    <Rule Action="Master" StartDate="1950-01-01" EndDate="3000-12-30" STATE_ID="49">
+      <Conditions>
+        <Condition Operand1="1" Operator="==" Operand2="1" OperandType="Double">
+          <ToSet Key="ACC_CLS" Value="0"></ToSet>
+        </Condition>
+      </Conditions>
+    </Rule>
+  </Group>
+  <Group Code="Comp Company" CodeID="9">
+    <!-- For products-->
+    <Rule Action="Master" StartDate="1950-01-01" EndDate="3000-12-30" STATE_ID="0">
+      <Conditions>
+        <Condition Operand1="1" Operator="==" Operand2="1" OperandType="Double">
+          <ToSet Key="ACC_CLS" Value="0"></ToSet>
+        </Condition>
+      </Conditions>
+    </Rule>
+  </Group>
+  <Group Code="Comp Company" CodeID="10">
+    <!-- For products-->
+    <Rule Action="Master" StartDate="1950-01-01" EndDate="3000-12-30" STATE_ID="0">
+      <Conditions>
+        <Condition Operand1="1" Operator="==" Operand2="1" OperandType="Double">
+          <ToSet Key="ACC_CLS" Value="0"></ToSet>
+        </Condition>
+      </Conditions>
+    </Rule>
+  </Group>
+  <Group Code="Comp Company" CodeID="11">
+    <!-- For products-->
+    <Rule Action="Master" StartDate="1950-01-01" EndDate="3000-12-30" STATE_ID="0">
+      <Conditions>
+        <Condition Operand1="1" Operator="==" Operand2="1" OperandType="Double">
+          <ToSet Key="ACC_CLS" Value="0"></ToSet>
+        </Condition>
+      </Conditions>
+    </Rule>
+  </Group>
+  <Group Code="Comp Company" CodeID="12">
+    <!-- For products-->
+    <Rule Action="Master" StartDate="1950-01-01" EndDate="3000-12-30" STATE_ID="0">
+      <Conditions>
+        <Condition Operand1="1" Operator="==" Operand2="1" OperandType="Double">
+          <ToSet Key="ACC_CLS" Value="0"></ToSet>
+        </Condition>
+      </Conditions>
+    </Rule>
+  </Group>
+  <Group Code="Comp Company" CodeID="13">
+    <!-- For products-->
+    <Rule Action="Master" StartDate="1950-01-01" EndDate="3000-12-30" STATE_ID="0">
+      <Conditions>
+        <Condition Operand1="1" Operator="==" Operand2="1" OperandType="Double">
+          <ToSet Key="ACC_CLS" Value="0"></ToSet>
+        </Condition>
+      </Conditions>
+    </Rule>
+  </Group>
+  <Group Code="Comp Company" CodeID="14">
+    <!-- For products-->
+    <Rule Action="Master" StartDate="1950-01-01" EndDate="3000-12-30" STATE_ID="0">
+      <Conditions>
+        <Condition Operand1="1" Operator="==" Operand2="1" OperandType="Double">
+          <ToSet Key="ACC_CLS" Value="0"></ToSet>
+        </Condition>
+      </Conditions>
+    </Rule>
+  </Group>
+  <Group Code="Comp Company" CodeID="15">
+    <!-- For products-->
+    <Rule Action="Master" StartDate="1950-01-01" EndDate="3000-12-30" STATE_ID="0">
+      <Conditions>
+        <Condition Operand1="1" Operator="==" Operand2="1" OperandType="Double">
+          <ToSet Key="ACC_CLS" Value="0"></ToSet>
+        </Condition>
+      </Conditions>
+    </Rule>
+  </Group>
+  <Group Code="Comp Company" CodeID="16">
+    <!-- For products-->
+    <Rule Action="Master" StartDate="1950-01-01" EndDate="3000-12-30" STATE_ID="0">
+      <Conditions>
+        <Condition Operand1="1" Operator="==" Operand2="1" OperandType="Double">
+          <ToSet Key="ACC_CLS" Value="0"></ToSet>
+        </Condition>
+      </Conditions>
+    </Rule>
+  </Group>
+  <Group Code="Comp Company" CodeID="17">
+    <!-- For products-->
+    <Rule Action="Master" StartDate="1950-01-01" EndDate="3000-12-30" STATE_ID="0">
+      <Conditions>
+        <Condition Operand1="1" Operator="==" Operand2="1" OperandType="Double">
+          <ToSet Key="ACC_CLS" Value="0"></ToSet>
+        </Condition>
+      </Conditions>
+    </Rule>
+  </Group>
+  <Group Code="Comp Company" CodeID="18">
+    <!-- For products-->
+    <Rule Action="Master" StartDate="1950-01-01" EndDate="3000-12-30" STATE_ID="0">
+      <Conditions>
+        <Condition Operand1="1" Operator="==" Operand2="1" OperandType="Double">
+          <ToSet Key="ACC_CLS" Value="0"></ToSet>
+        </Condition>
+      </Conditions>
+    </Rule>
+  </Group>
+  <Group Code="Comp Company" CodeID="19">
+    <!-- For products-->
+    <Rule Action="Master" StartDate="1950-01-01" EndDate="3000-12-30" STATE_ID="0">
+      <Conditions>
+        <Condition Operand1="1" Operator="==" Operand2="1" OperandType="Double">
+          <ToSet Key="ACC_CLS" Value="0"></ToSet>
+        </Condition>
+      </Conditions>
+    </Rule>
+  </Group>
+  <Group Code="Comp Company" CodeID="20">
+    <!-- For products-->
+    <Rule Action="Master" StartDate="1950-01-01" EndDate="3000-12-30" STATE_ID="0">
+      <Conditions>
+        <Condition Operand1="1" Operator="==" Operand2="1" OperandType="Double">
+          <ToSet Key="ACC_CLS" Value="0"></ToSet>
+        </Condition>
+      </Conditions>
+    </Rule>
+  </Group>
+  <Group Code="Comp Company" CodeID="21">
+    <!-- For products-->
+    <Rule Action="Master" StartDate="1950-01-01" EndDate="3000-12-30" STATE_ID="0">
+      <Conditions>
+        <Condition Operand1="1" Operator="==" Operand2="1" OperandType="Double">
+          <ToSet Key="ACC_CLS" Value="0"></ToSet>
+        </Condition>
+      </Conditions>
+    </Rule>
+  </Group>
+  <Group Code="Comp Company" CodeID="22">
+    <!-- For products-->
+    <Rule Action="Master" StartDate="1950-01-01" EndDate="3000-12-30" STATE_ID="0">
+      <Conditions>
+        <Condition Operand1="1" Operator="==" Operand2="1" OperandType="Double">
+          <ToSet Key="ACC_CLS" Value="0"></ToSet>
+        </Condition>
+      </Conditions>
+    </Rule>
+  </Group>
+  <Group Code="Comp Company" CodeID="23">
+    <!-- For products-->
+    <Rule Action="Master" StartDate="1950-01-01" EndDate="3000-12-30" STATE_ID="0">
+      <Conditions>
+        <Condition Operand1="1" Operator="==" Operand2="1" OperandType="Double">
+          <ToSet Key="ACC_CLS" Value="0"></ToSet>
+        </Condition>
+      </Conditions>
+    </Rule>
+  </Group>
+</Root>

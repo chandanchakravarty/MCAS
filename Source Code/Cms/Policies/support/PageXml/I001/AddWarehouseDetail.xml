@@ -1,0 +1,682 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Root>
+  <PageTitle>
+    <Culture Code="en-US"></Culture>
+    <Culture Code="zh-SG"></Culture>
+  </PageTitle>
+
+  <PageElement name="cmbBUILDINGS" type="DDL" Desc=""
+			IsMandatory="No"
+			IsReadOnly="No"
+			IsDisabled="No"
+			IsDisplay="Yes"
+			MaxLength=""
+			MaxSize=""
+     IsFormatingRequired="No" JsFunctionToFormat="" OnClickJSFunction=""
+			OnChangeJSFunction="" >
+   
+    <rev Enabled="No" ExpKey="" />
+    <Culture Code="en-US" Desc="set Label and Message for English language">
+      <Caption># of buildings?</Caption>
+      <rfvMessage></rfvMessage>
+      <DefaultValue></DefaultValue>
+      <revExpMessage></revExpMessage>
+    </Culture>
+    <Culture Code="zh-SG" Desc="set Label and Message for Singapore language">
+      <Caption># of buildings?</Caption>
+      <rfvMessage></rfvMessage>
+      <DefaultValue></DefaultValue>
+      <revExpMessage></revExpMessage>
+    </Culture>
+  </PageElement>
+
+
+  <PageElement name="cmbSTORAGEUNITS" type="DDL" Desc=""
+			IsMandatory="No"
+			IsReadOnly="No"
+			IsDisabled="No"
+			IsDisplay="Yes"
+			MaxLength=""
+			MaxSize=""
+     IsFormatingRequired="No" JsFunctionToFormat="" OnClickJSFunction=""
+			OnChangeJSFunction="" >
+    
+    <rev Enabled="No" ExpKey="" />
+    <Culture Code="en-US" Desc="set Label and Message for English language">
+      <Caption># of Storage Unit?</Caption>
+      <rfvMessage></rfvMessage>
+      <DefaultValue></DefaultValue>
+      <revExpMessage></revExpMessage>
+    </Culture>
+    <Culture Code="zh-SG" Desc="set Label and Message for Singapore language">
+      <Caption># of Storage Unit?</Caption>
+      <rfvMessage></rfvMessage>
+      <DefaultValue></DefaultValue>
+      <revExpMessage></revExpMessage>
+    </Culture>
+  </PageElement>
+
+  
+
+  <PageElement name="cmbOWN_MGMR" type="DDL" Desc=""
+        IsMandatory="No"
+        IsReadOnly="No"
+        IsDisabled="No"
+        IsDisplay="Yes"
+        MaxLength=""
+        MaxSize=""
+       IsFormatingRequired="No" JsFunctionToFormat="" OnClickJSFunction=""
+        OnChangeJSFunction="" >
+    <Bindings>
+      <DataSource type="Proc" name="Proc_GetLookupValues" TextField="LOOKUP_VALUE_DESC" ValueField="LOOKUP_UNIQUE_ID" WhereClause="">
+        <Params name="@LookupCode" Value="YESNO" />
+        <Params name="@LANG_ID" Value="1" />
+      </DataSource>
+    </Bindings>
+    <rev Enabled="No" ExpKey="" />
+    <Culture Code="en-US" Desc="set Label and Message for English language">
+      <Caption>Does owner act as a manager?</Caption>
+      <rfvMessage></rfvMessage>
+      <DefaultValue></DefaultValue>
+      <revExpMessage></revExpMessage>
+    </Culture>
+    <Culture Code="zh-SG" Desc="set Label and Message for Singapore language">
+      <Caption>Does owner act as a manager?</Caption>
+      <rfvMessage></rfvMessage>
+      <DefaultValue></DefaultValue>
+      <revExpMessage></revExpMessage>
+    </Culture>
+  </PageElement>
+
+  <PageElement name="cmbIS_FENCED" type="DDL" Desc=""
+        IsMandatory="No"
+        IsReadOnly="No"
+        IsDisabled="No"
+        IsDisplay="Yes"
+        MaxLength=""
+        MaxSize=""
+       IsFormatingRequired="No" JsFunctionToFormat="" OnClickJSFunction=""
+        OnChangeJSFunction="" >
+    <Bindings>
+      <DataSource type="Proc" name="Proc_GetLookupValues" TextField="LOOKUP_VALUE_DESC" ValueField="LOOKUP_UNIQUE_ID" WhereClause="">
+        <Params name="@LookupCode" Value="YESNO" />
+        <Params name="@LANG_ID" Value="1" />
+      </DataSource>
+    </Bindings>
+    <rev Enabled="No" ExpKey="" />
+    <Culture Code="en-US" Desc="set Label and Message for English language">
+      <Caption>Is storage warehouse complex completely fenced?</Caption>
+      <rfvMessage></rfvMessage>
+      <DefaultValue></DefaultValue>
+      <revExpMessage></revExpMessage>
+    </Culture>
+    <Culture Code="zh-SG" Desc="set Label and Message for Singapore language">
+      <Caption>Is storage warehouse complex completely fenced?</Caption>
+      <rfvMessage></rfvMessage>
+      <DefaultValue></DefaultValue>
+      <revExpMessage></revExpMessage>
+    </Culture>
+  </PageElement>
+
+  <PageElement name="cmbRES_MGMR" type="DDL" Desc=""
+        IsMandatory="No"
+        IsReadOnly="No"
+        IsDisabled="No"
+        IsDisplay="Yes"
+        MaxLength=""
+        MaxSize=""
+       IsFormatingRequired="No" JsFunctionToFormat="" OnClickJSFunction=""
+        OnChangeJSFunction="" >
+    <Bindings>
+      <DataSource type="Proc" name="Proc_GetLookupValues" TextField="LOOKUP_VALUE_DESC" ValueField="LOOKUP_UNIQUE_ID" WhereClause="">
+        <Params name="@LookupCode" Value="YESNO" />
+        <Params name="@LANG_ID" Value="1" />
+      </DataSource>
+    </Bindings>
+    <rev Enabled="No" ExpKey="" />
+    <Culture Code="en-US" Desc="set Label and Message for English language">
+      <Caption>Is there a resident manager?</Caption>
+      <rfvMessage></rfvMessage>
+      <DefaultValue></DefaultValue>
+      <revExpMessage></revExpMessage>
+    </Culture>
+    <Culture Code="zh-SG" Desc="set Label and Message for Singapore language">
+      <Caption>Is there a resident manager?</Caption>
+      <rfvMessage></rfvMessage>
+      <DefaultValue></DefaultValue>
+      <revExpMessage></revExpMessage>
+    </Culture>
+  </PageElement>
+
+  <PageElement name="cmbIS_PRKNG_AVL" type="DDL" Desc=""
+        IsMandatory="No"
+        IsReadOnly="No"
+        IsDisabled="No"
+        IsDisplay="Yes"
+        MaxLength=""
+        MaxSize=""
+       IsFormatingRequired="No" JsFunctionToFormat="" OnClickJSFunction=""
+        OnChangeJSFunction="" >
+    <Bindings>
+      <DataSource type="Proc" name="Proc_GetLookupValues" TextField="LOOKUP_VALUE_DESC" ValueField="LOOKUP_UNIQUE_ID" WhereClause="">
+        <Params name="@LookupCode" Value="YESNO" />
+        <Params name="@LANG_ID" Value="1" />
+      </DataSource>
+    </Bindings>
+    <rev Enabled="No" ExpKey="" />
+    <Culture Code="en-US" Desc="set Label and Message for English language">
+      <Caption>Is RV parking available?</Caption>
+      <rfvMessage></rfvMessage>
+      <DefaultValue></DefaultValue>
+      <revExpMessage></revExpMessage>
+    </Culture>
+    <Culture Code="zh-SG" Desc="set Label and Message for Singapore language">
+      <Caption>Is RV parking available?</Caption>
+      <rfvMessage></rfvMessage>
+      <DefaultValue></DefaultValue>
+      <revExpMessage></revExpMessage>
+    </Culture>
+  </PageElement>
+
+  <PageElement name="cmbDAYTIME_ATTNDT" type="DDL" Desc=""
+        IsMandatory="No"
+        IsReadOnly="No"
+        IsDisabled="No"
+        IsDisplay="Yes"
+        MaxLength=""
+        MaxSize=""
+       IsFormatingRequired="No" JsFunctionToFormat="" OnClickJSFunction=""
+        OnChangeJSFunction="" >
+    <Bindings>
+      <DataSource type="Proc" name="Proc_GetLookupValues" TextField="LOOKUP_VALUE_DESC" ValueField="LOOKUP_UNIQUE_ID" WhereClause="">
+        <Params name="@LookupCode" Value="YESNO" />
+        <Params name="@LANG_ID" Value="1" />
+      </DataSource>
+    </Bindings>
+    <rev Enabled="No" ExpKey="" />
+    <Culture Code="en-US" Desc="set Label and Message for English language">
+      <Caption>Is there a daytime attendant?</Caption>
+      <rfvMessage></rfvMessage>
+      <DefaultValue></DefaultValue>
+      <revExpMessage></revExpMessage>
+    </Culture>
+    <Culture Code="zh-SG" Desc="set Label and Message for Singapore language">
+      <Caption>Is there a daytime attendant?</Caption>
+      <rfvMessage></rfvMessage>
+      <DefaultValue></DefaultValue>
+      <revExpMessage></revExpMessage>
+    </Culture>
+  </PageElement>
+
+  <PageElement name="cmbIS_BOAT_PRKNG_AVL" type="DDL" Desc=""
+        IsMandatory="No"
+        IsReadOnly="No"
+        IsDisabled="No"
+        IsDisplay="Yes"
+        MaxLength=""
+        MaxSize=""
+       IsFormatingRequired="No" JsFunctionToFormat="" OnClickJSFunction=""
+        OnChangeJSFunction="" >
+    <Bindings>
+      <DataSource type="Proc" name="Proc_GetLookupValues" TextField="LOOKUP_VALUE_DESC" ValueField="LOOKUP_UNIQUE_ID" WhereClause="">
+        <Params name="@LookupCode" Value="YESNO" />
+        <Params name="@LANG_ID" Value="1" />
+      </DataSource>
+    </Bindings>
+    <rev Enabled="No" ExpKey="" />
+    <Culture Code="en-US" Desc="set Label and Message for English language">
+      <Caption>Is boat parking avaliable?</Caption>
+      <rfvMessage></rfvMessage>
+      <DefaultValue></DefaultValue>
+      <revExpMessage></revExpMessage>
+    </Culture>
+    <Culture Code="zh-SG" Desc="set Label and Message for Singapore language">
+      <Caption>Is boat parking avaliable?</Caption>
+      <rfvMessage></rfvMessage>
+      <DefaultValue></DefaultValue>
+      <revExpMessage></revExpMessage>
+    </Culture>
+  </PageElement>
+
+
+  <PageElement name="cmbANY_BUSS_ACTY" type="DDL" Desc=""
+        IsMandatory="No"
+        IsReadOnly="No"
+        IsDisabled="No"
+        IsDisplay="Yes"
+        MaxLength=""
+        MaxSize=""
+       IsFormatingRequired="No" JsFunctionToFormat="" OnClickJSFunction=""
+        OnChangeJSFunction="" >
+    <Bindings>
+      <DataSource type="Proc" name="Proc_GetLookupValues" TextField="LOOKUP_VALUE_DESC" ValueField="LOOKUP_UNIQUE_ID" WhereClause="">
+        <Params name="@LookupCode" Value="YESNO" />
+        <Params name="@LANG_ID" Value="1" />
+      </DataSource>
+    </Bindings>
+    <rev Enabled="No" ExpKey="" />
+    <Culture Code="en-US" Desc="set Label and Message for English language">
+      <Caption>Does the named insured have any business activities other than self-storage?</Caption>
+      <rfvMessage></rfvMessage>
+      <DefaultValue></DefaultValue>
+      <revExpMessage></revExpMessage>
+    </Culture>
+    <Culture Code="zh-SG" Desc="set Label and Message for Singapore language">
+      <Caption>Does the named insured have any business activities other than self-storage?</Caption>
+      <rfvMessage></rfvMessage>
+      <DefaultValue></DefaultValue>
+      <revExpMessage></revExpMessage>
+    </Culture>
+  </PageElement>
+
+  <PageElement name="cmbGUARD_DOG" type="DDL" Desc=""
+        IsMandatory="No"
+        IsReadOnly="No"
+        IsDisabled="No"
+        IsDisplay="Yes"
+        MaxLength=""
+        MaxSize=""
+       IsFormatingRequired="No" JsFunctionToFormat="" OnClickJSFunction=""
+        OnChangeJSFunction="" >
+    <Bindings>
+      <DataSource type="Proc" name="Proc_GetLookupValues" TextField="LOOKUP_VALUE_DESC" ValueField="LOOKUP_UNIQUE_ID" WhereClause="">
+        <Params name="@LookupCode" Value="YESNO" />
+        <Params name="@LANG_ID" Value="1" />
+      </DataSource>
+    </Bindings>
+    <rev Enabled="No" ExpKey="" />
+    <Culture Code="en-US" Desc="set Label and Message for English language">
+      <Caption>Are there any guard dogs?</Caption>
+      <rfvMessage></rfvMessage>
+      <DefaultValue></DefaultValue>
+      <revExpMessage></revExpMessage>
+    </Culture>
+    <Culture Code="zh-SG" Desc="set Label and Message for Singapore language">
+      <Caption>Are there any guard dogs?</Caption>
+      <rfvMessage></rfvMessage>
+      <DefaultValue></DefaultValue>
+      <revExpMessage></revExpMessage>
+    </Culture>
+  </PageElement>
+  
+  <PageElement name="cmbVLT_STYLE" type="DDL" Desc=""
+          IsMandatory="No"
+          IsReadOnly="No"
+          IsDisabled="No"
+          IsDisplay="Yes"
+          MaxLength=""
+          MaxSize=""
+         IsFormatingRequired="No" JsFunctionToFormat="" OnClickJSFunction=""
+          OnChangeJSFunction="" >
+    <Bindings>
+      <DataSource type="Proc" name="Proc_GetLookupValues" TextField="LOOKUP_VALUE_DESC" ValueField="LOOKUP_UNIQUE_ID" WhereClause="">
+        <Params name="@LookupCode" Value="YESNO" />
+        <Params name="@LANG_ID" Value="1" />
+      </DataSource>
+    </Bindings>
+    <rev Enabled="No" ExpKey="" />
+    <Culture Code="en-US" Desc="set Label and Message for English language">
+      <Caption>Vautal style rentals?</Caption>
+      <rfvMessage></rfvMessage>
+      <DefaultValue></DefaultValue>
+      <revExpMessage></revExpMessage>
+    </Culture>
+    <Culture Code="zh-SG" Desc="set Label and Message for Singapore language">
+      <Caption>Vautal style rentals?</Caption>
+      <rfvMessage></rfvMessage>
+      <DefaultValue></DefaultValue>
+      <revExpMessage></revExpMessage>
+    </Culture>
+  </PageElement>
+
+  <PageElement name="cmbANY_FIREARMS" type="DDL" Desc=""
+          IsMandatory="No"
+          IsReadOnly="No"
+          IsDisabled="No"
+          IsDisplay="Yes"
+          MaxLength=""
+          MaxSize=""
+         IsFormatingRequired="No" JsFunctionToFormat="" OnClickJSFunction=""
+          OnChangeJSFunction="" >
+    <Bindings>
+      <DataSource type="Proc" name="Proc_GetLookupValues" TextField="LOOKUP_VALUE_DESC" ValueField="LOOKUP_UNIQUE_ID" WhereClause="">
+        <Params name="@LookupCode" Value="YESNO" />
+        <Params name="@LANG_ID" Value="1" />
+      </DataSource>
+    </Bindings>
+    <rev Enabled="No" ExpKey="" />
+    <Culture Code="en-US" Desc="set Label and Message for English language">
+      <Caption>Any fireaems on premises?</Caption>
+      <rfvMessage></rfvMessage>
+      <DefaultValue></DefaultValue>
+      <revExpMessage></revExpMessage>
+    </Culture>
+    <Culture Code="zh-SG" Desc="set Label and Message for Singapore language">
+      <Caption>Any fireaems on premises?</Caption>
+      <rfvMessage></rfvMessage>
+      <DefaultValue></DefaultValue>
+      <revExpMessage></revExpMessage>
+    </Culture>
+  </PageElement>
+
+  <PageElement name="cmbTRUCK_RENTAL" type="DDL" Desc=""
+          IsMandatory="No"
+          IsReadOnly="No"
+          IsDisabled="No"
+          IsDisplay="Yes"
+          MaxLength=""
+          MaxSize=""
+         IsFormatingRequired="No" JsFunctionToFormat="" OnClickJSFunction=""
+          OnChangeJSFunction="" >
+    <Bindings>
+      <DataSource type="Proc" name="Proc_GetLookupValues" TextField="LOOKUP_VALUE_DESC" ValueField="LOOKUP_UNIQUE_ID" WhereClause="">
+        <Params name="@LookupCode" Value="YESNO" />
+        <Params name="@LANG_ID" Value="1" />
+      </DataSource>
+    </Bindings>
+    <rev Enabled="No" ExpKey="" />
+    <Culture Code="en-US" Desc="set Label and Message for English language">
+      <Caption>Truck/Trailer Rental?</Caption>
+      <rfvMessage></rfvMessage>
+      <DefaultValue></DefaultValue>
+      <revExpMessage></revExpMessage>
+    </Culture>
+    <Culture Code="zh-SG" Desc="set Label and Message for Singapore language">
+      <Caption>Truck/Trailer Rental?</Caption>
+      <rfvMessage></rfvMessage>
+      <DefaultValue></DefaultValue>
+      <revExpMessage></revExpMessage>
+    </Culture>
+  </PageElement>
+
+  <PageElement name="cmbTENANT_LCKS_CHK" type="DDL" Desc=""
+          IsMandatory="No"
+          IsReadOnly="No"
+          IsDisabled="No"
+          IsDisplay="Yes"
+          MaxLength=""
+          MaxSize=""
+         IsFormatingRequired="No" JsFunctionToFormat="" OnClickJSFunction=""
+          OnChangeJSFunction="" >
+    <Bindings>
+      <DataSource type="Proc" name="Proc_GetLookupValues" TextField="LOOKUP_VALUE_DESC" ValueField="LOOKUP_UNIQUE_ID" WhereClause="">
+        <Params name="@LookupCode" Value="YESNO" />
+        <Params name="@LANG_ID" Value="1" />
+      </DataSource>
+    </Bindings>
+    <rev Enabled="No" ExpKey="" />
+    <Culture Code="en-US" Desc="set Label and Message for English language">
+      <Caption>Does manager check tenant's locks on daily basis?</Caption>
+      <rfvMessage></rfvMessage>
+      <DefaultValue></DefaultValue>
+      <revExpMessage></revExpMessage>
+    </Culture>
+    <Culture Code="zh-SG" Desc="set Label and Message for Singapore language">
+      <Caption>Does manager check tenant's locks on daily basis?</Caption>
+      <rfvMessage></rfvMessage>
+      <DefaultValue></DefaultValue>
+      <revExpMessage></revExpMessage>
+    </Culture>
+  </PageElement>
+
+  <PageElement name="cmbMGMR_KYS_CUST_UNIT" type="DDL" Desc=""
+          IsMandatory="No"
+          IsReadOnly="No"
+          IsDisabled="No"
+          IsDisplay="Yes"
+          MaxLength=""
+          MaxSize=""
+         IsFormatingRequired="No" JsFunctionToFormat="" OnClickJSFunction=""
+          OnChangeJSFunction="" >
+    <Bindings>
+      <DataSource type="Proc" name="Proc_GetLookupValues" TextField="LOOKUP_VALUE_DESC" ValueField="LOOKUP_UNIQUE_ID" WhereClause="">
+        <Params name="@LookupCode" Value="YESNO" />
+        <Params name="@LANG_ID" Value="1" />
+      </DataSource>
+    </Bindings>
+    <rev Enabled="No" ExpKey="" />
+    <Culture Code="en-US" Desc="set Label and Message for English language">
+      <Caption>Does manager keep keys to customer's storage unit?</Caption>
+      <rfvMessage></rfvMessage>
+      <DefaultValue></DefaultValue>
+      <revExpMessage></revExpMessage>
+    </Culture>
+    <Culture Code="zh-SG" Desc="set Label and Message for Singapore language">
+      <Caption>Does manager keep keys to customer's storage unit?</Caption>
+      <rfvMessage></rfvMessage>
+      <DefaultValue></DefaultValue>
+      <revExpMessage></revExpMessage>
+    </Culture>
+  </PageElement>
+
+  <PageElement name="cmbANY_BUSN_GUIDELINES" type="DDL" Desc=""
+          IsMandatory="No"
+          IsReadOnly="No"
+          IsDisabled="No"
+          IsDisplay="Yes"
+          MaxLength=""
+          MaxSize=""
+         IsFormatingRequired="No" JsFunctionToFormat="" OnClickJSFunction=""
+          OnChangeJSFunction="" >
+    <Bindings>
+      <DataSource type="Proc" name="Proc_GetLookupValues" TextField="LOOKUP_VALUE_DESC" ValueField="LOOKUP_UNIQUE_ID" WhereClause="">
+        <Params name="@LookupCode" Value="YESNO" />
+        <Params name="@LANG_ID" Value="1" />
+      </DataSource>
+    </Bindings>
+    <rev Enabled="No" ExpKey="" />
+    <Culture Code="en-US" Desc="set Label and Message for English language">
+      <Caption>Does business have a written guideline for delinquent unit treatment?</Caption>
+      <rfvMessage></rfvMessage>
+      <DefaultValue></DefaultValue>
+      <revExpMessage></revExpMessage>
+    </Culture>
+    <Culture Code="zh-SG" Desc="set Label and Message for Singapore language">
+      <Caption>Does business have a written guideline for delinquent unit treatment?</Caption>
+      <rfvMessage></rfvMessage>
+      <DefaultValue></DefaultValue>
+      <revExpMessage></revExpMessage>
+    </Culture>
+  </PageElement>
+
+  <PageElement name="cmbNOTICE_SENT" type="DDL" Desc=""
+          IsMandatory="No"
+          IsReadOnly="No"
+          IsDisabled="No"
+          IsDisplay="Yes"
+          MaxLength=""
+          MaxSize=""
+         IsFormatingRequired="No" JsFunctionToFormat="" OnClickJSFunction=""
+          OnChangeJSFunction="" >
+    <Bindings>
+      <DataSource type="Proc" name="Proc_GetLookupValues" TextField="LOOKUP_VALUE_DESC" ValueField="LOOKUP_UNIQUE_ID" WhereClause="">
+        <Params name="@LookupCode" Value="YESNO" />
+        <Params name="@LANG_ID" Value="1" />
+      </DataSource>
+    </Bindings>
+    <rev Enabled="No" ExpKey="" />
+    <Culture Code="en-US" Desc="set Label and Message for English language">
+      <Caption>Are notices put in paper and sent to last known address?</Caption>
+      <rfvMessage></rfvMessage>
+      <DefaultValue></DefaultValue>
+      <revExpMessage></revExpMessage>
+    </Culture>
+    <Culture Code="zh-SG" Desc="set Label and Message for Singapore language">
+      <Caption>Are notices put in paper and sent to last known address?</Caption>
+      <rfvMessage></rfvMessage>
+      <DefaultValue></DefaultValue>
+      <revExpMessage></revExpMessage>
+    </Culture>
+  </PageElement>
+
+  <PageElement name="cmbNO_DYS_TENANT_PROP_SOLD" type="DDL" Desc=""
+          IsMandatory="No"
+          IsReadOnly="No"
+          IsDisabled="No"
+          IsDisplay="Yes"
+          MaxLength=""
+          MaxSize=""
+         IsFormatingRequired="No" JsFunctionToFormat="" OnClickJSFunction=""
+          OnChangeJSFunction="" >
+    
+    <rev Enabled="No" ExpKey="" />
+    <Culture Code="en-US" Desc="set Label and Message for English language">
+      <Caption>Select number of days after initial rental delinquency that tenant's property may be sold?</Caption>
+      <rfvMessage></rfvMessage>
+      <DefaultValue></DefaultValue>
+      <revExpMessage></revExpMessage>
+    </Culture>
+    <Culture Code="zh-SG" Desc="set Label and Message for Singapore language">
+      <Caption>Select number of days after initial rental delinquency that tenant's property may be sold?</Caption>
+      <rfvMessage></rfvMessage>
+      <DefaultValue></DefaultValue>
+      <revExpMessage></revExpMessage>
+    </Culture>
+  </PageElement>
+
+  <PageElement name="txtSALES_TENANT_LST_TWELVE_MNTHS" type="TextBox" Desc=""
+          IsMandatory="No"
+          IsReadOnly="No"
+          IsDisabled="No"
+          IsDisplay="Yes"
+          MaxLength=""
+          MaxSize=""
+         IsFormatingRequired="No" JsFunctionToFormat="" OnClickJSFunction=""
+          OnChangeJSFunction="" >
+
+    <rev Enabled="Yes" ExpKey="^\d+$" />
+    <Culture Code="en-US" Desc="set Label and Message for English language">
+      <Caption>How many sales of individual tenants' property occurred in the last twelve months?</Caption>
+      <rfvMessage></rfvMessage>
+      <DefaultValue></DefaultValue>
+      <revExpMessage>Please Enter Numeric Value.</revExpMessage>
+    </Culture>
+    <Culture Code="zh-SG" Desc="set Label and Message for Singapore language">
+      <Caption>How many sales of individual tenants' property occurred in the last twelve months?</Caption>
+      <rfvMessage></rfvMessage>
+      <DefaultValue></DefaultValue>
+      <revExpMessage>Please Enter Numeric Value.</revExpMessage>
+    </Culture>
+  </PageElement>
+
+
+  <PageElement name="cmbDISP_PUBL" type="DDL" Desc=""
+          IsMandatory="No"
+          IsReadOnly="No"
+          IsDisabled="No"
+          IsDisplay="Yes"
+          MaxLength=""
+          MaxSize=""
+         IsFormatingRequired="No" JsFunctionToFormat="" OnClickJSFunction=""
+          OnChangeJSFunction="" >
+    <Bindings>
+      <DataSource type="Proc" name="Proc_GetLookupValues" TextField="LOOKUP_VALUE_DESC" ValueField="LOOKUP_UNIQUE_ID" WhereClause="">
+        <Params name="@LookupCode" Value="YESNO" />
+        <Params name="@LANG_ID" Value="1" />
+      </DataSource>
+    </Bindings>
+    <rev Enabled="No" ExpKey="" />
+    <Culture Code="en-US" Desc="set Label and Message for English language">
+      <Caption>How is disposal publicized?</Caption>
+      <rfvMessage></rfvMessage>
+      <DefaultValue></DefaultValue>
+      <revExpMessage></revExpMessage>
+    </Culture>
+    <Culture Code="zh-SG" Desc="set Label and Message for Singapore language">
+      <Caption>How is disposal publicized?</Caption>
+      <rfvMessage></rfvMessage>
+      <DefaultValue></DefaultValue>
+      <revExpMessage></revExpMessage>
+    </Culture>
+  </PageElement>
+
+  <PageElement name="cmbANY_COLD_STORAGE" type="DDL" Desc=""
+          IsMandatory="No"
+          IsReadOnly="No"
+          IsDisabled="No"
+          IsDisplay="Yes"
+          MaxLength=""
+          MaxSize=""
+         IsFormatingRequired="No" JsFunctionToFormat="" OnClickJSFunction=""
+          OnChangeJSFunction="" >
+    <Bindings>
+      <DataSource type="Proc" name="Proc_GetLookupValues" TextField="LOOKUP_VALUE_DESC" ValueField="LOOKUP_UNIQUE_ID" WhereClause="">
+        <Params name="@LookupCode" Value="YESNO" />
+        <Params name="@LANG_ID" Value="1" />
+      </DataSource>
+    </Bindings>
+    <rev Enabled="No" ExpKey="" />
+    <Culture Code="en-US" Desc="set Label and Message for English language">
+      <Caption>Do facilities permit cold storage?(other than basic climate control)</Caption>
+      <rfvMessage></rfvMessage>
+      <DefaultValue></DefaultValue>
+      <revExpMessage></revExpMessage>
+    </Culture>
+    <Culture Code="zh-SG" Desc="set Label and Message for Singapore language">
+      <Caption>Do facilities permit cold storage?(other than basic climate control)</Caption>
+      <rfvMessage></rfvMessage>
+      <DefaultValue></DefaultValue>
+      <revExpMessage></revExpMessage>
+    </Culture>
+  </PageElement>
+
+  <PageElement name="cmbANY_CLIMATE_CNTL" type="DDL" Desc=""
+          IsMandatory="No"
+          IsReadOnly="No"
+          IsDisabled="No"
+          IsDisplay="Yes"
+          MaxLength=""
+          MaxSize=""
+         IsFormatingRequired="No" JsFunctionToFormat="" OnClickJSFunction=""
+          OnChangeJSFunction="" >
+    <Bindings>
+      <DataSource type="Proc" name="Proc_GetLookupValues" TextField="LOOKUP_VALUE_DESC" ValueField="LOOKUP_UNIQUE_ID" WhereClause="">
+        <Params name="@LookupCode" Value="YESNO" />
+        <Params name="@LANG_ID" Value="1" />
+      </DataSource>
+    </Bindings>
+    <rev Enabled="No" ExpKey="" />
+    <Culture Code="en-US" Desc="set Label and Message for English language">
+      <Caption>Do facilities provide basic climate control storage?</Caption>
+      <rfvMessage></rfvMessage>
+      <DefaultValue></DefaultValue>
+      <revExpMessage></revExpMessage>
+    </Culture>
+    <Culture Code="zh-SG" Desc="set Label and Message for Singapore language">
+      <Caption>Do facilities provide basic climate control storage?</Caption>
+      <rfvMessage></rfvMessage>
+      <DefaultValue></DefaultValue>
+      <revExpMessage></revExpMessage>
+    </Culture>
+  </PageElement>
+
+  <PageElement name="cmbMGMR_TYPE" type="DDL" Desc=""
+          IsMandatory="No"
+          IsReadOnly="No"
+          IsDisabled="No"
+          IsDisplay="Yes"
+          MaxLength=""
+          MaxSize=""
+         IsFormatingRequired="No" JsFunctionToFormat="" OnClickJSFunction=""
+          OnChangeJSFunction="" >
+    <Bindings>
+      <DataSource type="Proc" name="Proc_GetLookupValues" TextField="LOOKUP_VALUE_DESC" ValueField="LOOKUP_UNIQUE_ID" WhereClause="">
+        <Params name="@LookupCode" Value="OSTPL" />
+        <Params name="@LANG_ID" Value="1" />
+      </DataSource>
+    </Bindings>
+    <rev Enabled="No" ExpKey="" />
+    <Culture Code="en-US" Desc="set Label and Message for English language">
+      <Caption>Manager Type</Caption>
+      <rfvMessage></rfvMessage>
+      <DefaultValue></DefaultValue>
+      <revExpMessage></revExpMessage>
+    </Culture>
+    <Culture Code="zh-SG" Desc="set Label and Message for Singapore language">
+      <Caption>Manager Type</Caption>
+      <rfvMessage></rfvMessage>
+      <DefaultValue></DefaultValue>
+      <revExpMessage></revExpMessage>
+    </Culture>
+  </PageElement>
+</Root>

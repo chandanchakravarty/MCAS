@@ -1,0 +1,556 @@
+<?xml version="1.0"?>
+
+<!DOCTYPE ACORD PUBLIC "-//ACORD//ACORD Specification Database Dump Format Version 1.1.3 //EN" "ACORD_PC_XML_V1_7_0.dtd">
+
+<?ACORD version="1.0.0"?>
+<ACORD>
+	<SignonRq>
+		<SignonPswd>
+			<SignonRoleCd>Agent</SignonRoleCd>
+			<CustId>
+				<SPName>www.amsworld.com</SPName>
+				<CustLoginId>AMS0123</CustLoginId>
+			</CustId>
+			<CustPswd>
+				<EncryptionTypeCd>NONE</EncryptionTypeCd>
+				<Pswd>AMS9876</Pswd>
+			</CustPswd>
+		</SignonPswd>
+		<ClientDt>2004-01-09</ClientDt>
+		<CustLangPref>EN-US</CustLangPref>
+		<ClientApp>
+			<Org>AMS Services, Inc</Org>
+			<Name>Quoteworks Solution</Name>
+			<Version>2.0</Version>
+
+		</ClientApp>
+	</SignonRq>
+	<InsuranceSvcRq>
+		<RqUID>{80a24f1f-9a50-42bc-bddc-cb8439676916}</RqUID>
+		<HomePolicyQuoteInqRq>
+			<RqUID>{ef27c6d4-32fe-41c5-993a-5a3133a7da4c}</RqUID>
+			<TransactionRequestDt>2004-01-09</TransactionRequestDt>
+			<TransactionEffectiveDt>2004-01-09</TransactionEffectiveDt>
+			<CurCd>USD</CurCd>
+			<Producer>
+				<GeneralPartyInfo>
+					<NameInfo>
+						<CommlName>
+							<CommercialName>AON1</CommercialName>
+						</CommlName>
+					</NameInfo>
+					<Addr>
+						<AddrTypeCd>MailingAddress</AddrTypeCd>
+						<Addr1>3737 Park East Dr</Addr1>
+						<Addr2>Suite 202</Addr2>
+						<City>Beachwood</City>
+						<StateProvCd>OH</StateProvCd>
+						<PostalCode>44122</PostalCode>
+					</Addr>
+					<Communications>
+						<PhoneInfo>
+							<PhoneTypeCd>Phone</PhoneTypeCd>
+							<CommunicationUseCd>Business</CommunicationUseCd>
+							<PhoneNumber>+1-800-8888144</PhoneNumber>
+						</PhoneInfo>
+					</Communications>
+				</GeneralPartyInfo>
+				<ProducerInfo>
+					<ContractNumber>0000000000</ContractNumber>
+					<ProducerSubCode>Brad</ProducerSubCode>
+				</ProducerInfo>
+			</Producer>
+			<InsuredOrPrincipal>
+				<GeneralPartyInfo>
+					<NameInfo>
+						<PersonName>
+							<Surname>Test 1</Surname>
+							<GivenName>Home Acord</GivenName>
+						</PersonName>
+					</NameInfo>
+					<Addr>
+						<AddrTypeCd>StreetAddress</AddrTypeCd>
+						<Addr1>Address 1</Addr1>
+						<City>Cleveland</City>
+						<StateProvCd>Michigan</StateProvCd>
+						<PostalCode>33221</PostalCode>
+						<CountryCd>USA</CountryCd>
+					</Addr>
+					<Communications>
+						<PhoneInfo>
+							<PhoneTypeCd>Phone</PhoneTypeCd>
+							<CommunicationUseCd>Home</CommunicationUseCd>
+							<PhoneNumber>1-412-4124122</PhoneNumber>
+						</PhoneInfo>
+						<PhoneInfo>
+							<PhoneTypeCd>Phone</PhoneTypeCd>
+							<CommunicationUseCd>Business</CommunicationUseCd>
+							<PhoneNumber>1-412-4124122</PhoneNumber>
+						</PhoneInfo>
+					</Communications>
+				</GeneralPartyInfo>
+				<InsuredOrPrincipalInfo>
+					<InsuredOrPrincipalRoleCd>Insured</InsuredOrPrincipalRoleCd>
+				</InsuredOrPrincipalInfo>
+			</InsuredOrPrincipal>
+			
+			<PersPolicy>
+			
+				
+				<PolicyVersion>1.0	</PolicyVersion>
+				<LOBCd>HOME</LOBCd>
+				<ControllingStateProvCd>Michigan</ControllingStateProvCd>
+				<ContractTerm>
+					<EffectiveDt>2005-07-07</EffectiveDt>
+					<ExpirationDt>2007-07-07</ExpirationDt>
+				</ContractTerm>
+				<OriginalInceptionDt>2005-07-07</OriginalInceptionDt>
+				
+				<OtherOrPriorPolicy>
+					<PolicyCd>Audit</PolicyCd>
+					<PolicyNumber>PRIOR-9999</PolicyNumber>
+					<LOBCd>HOME</LOBCd>
+					<ContractTerm>
+						<EffectiveDt>1981-07-07</EffectiveDt>
+						<ExpirationDt>2005-07-07</ExpirationDt>
+					</ContractTerm>
+					<OriginalInceptionDt>2001-07-07</OriginalInceptionDt>
+					<LengthTimeWithPreviousInsurer>
+						<NumUnits/>
+					</LengthTimeWithPreviousInsurer>
+				</OtherOrPriorPolicy>
+				<PolicyStatusCd>Audit</PolicyStatusCd>
+					
+				<PersApplicationInfo>
+				
+					<InsuredOrPrincipal>
+					
+						<GeneralPartyInfo>
+							
+							<NameInfo>
+								<PersonName>
+									<Surname/>
+									<GivenName/>
+								</PersonName>
+							</NameInfo>
+							
+							<Addr>
+								<AddrTypeCd>StreetAddress</AddrTypeCd>
+								<Addr1>f-138</Addr1>
+								<Addr2>Block 2</Addr2>
+								<City>PA</City>
+								<StateProvCd>CA</StateProvCd>
+								<PostalCode>91906</PostalCode>
+								<CountryCd>us</CountryCd>
+							</Addr>
+							<Communications>
+								<PhoneInfo>
+									<PhoneTypeCd>Phone</PhoneTypeCd>
+									<CommunicationUseCd>Home</CommunicationUseCd>
+									<PhoneNumber>+1-412-4124122</PhoneNumber>
+								</PhoneInfo>
+								<PhoneInfo>
+									<PhoneTypeCd>Phone</PhoneTypeCd>
+									<CommunicationUseCd>Business</CommunicationUseCd>
+									<PhoneNumber>+1-412-4124122</PhoneNumber>
+								</PhoneInfo>
+							</Communications>
+						</GeneralPartyInfo>
+						<InsuredOrPrincipalInfo>
+							<PersonInfo>
+								<BirthDt></BirthDt>		
+								<MaritalStatusCd></MaritalStatusCd>
+								<LengthTimeCurrentOccupation>
+									<NumUnits></NumUnits>
+								</LengthTimeCurrentOccupation>
+								
+								
+							</PersonInfo>
+						</InsuredOrPrincipalInfo>
+					</InsuredOrPrincipal>
+					
+					<CurrentResidenceDt>2004-11-11</CurrentResidenceDt>
+					<ResidenceOwnedRentedCd>OWNED</ResidenceOwnedRentedCd>
+					<Addr>
+						<Addr1>234, Test APts</Addr1>
+						<Addr2>Mayur Vihar</Addr2>
+						<City>Delhi</City>
+						<StateProvCd>CA</StateProvCd>
+						<PostalCode>123456</PostalCode>	
+					</Addr>
+					<LengthTimePreviousAddr>
+						<DurationPeriod>
+							<NumUnits>3</NumUnits>
+						</DurationPeriod>
+					</LengthTimePreviousAddr>
+					
+				</PersApplicationInfo>
+				
+				
+			</PersPolicy>
+			
+			<Location id="L0001">
+				
+				<ItemIdInfo>
+					<AgencyId>0001</AgencyId>
+				</ItemIdInfo>
+				
+				<Addr>
+					<AddrTypeCd>StreetAddress</AddrTypeCd>
+					<Addr1>12, Clark Street</Addr1>
+					<City>CENTERDALE</City>
+					<StateProvCd>Indiana</StateProvCd>
+					<PostalCode>02911</PostalCode>
+					<County>PROVIDENCE</County>
+				</Addr>
+				<SubLocation id="L0001-1">
+				
+					<ItemIdInfo></ItemIdInfo>
+						<SubLocationName>Sub Loc 1</SubLocationName>
+					<SubLocationDesc>Sub loc 1</SubLocationDesc>
+						
+					<Addr>
+					<AddrTypeCd>StreetAddress</AddrTypeCd>
+					<City>CENTERDALE</City>
+					<StateProvCd>Indiana</StateProvCd>
+					<PostalCode>02911</PostalCode>
+					<County>PROVIDENCE</County>
+				</Addr>
+					
+				</SubLocation>	
+				<SubLocation id="L0001-2">
+				
+					<ItemIdInfo></ItemIdInfo>
+						<SubLocationName>Sub Loc 2</SubLocationName>
+					<SubLocationDesc>Sub loc 25</SubLocationDesc>
+						
+					<Addr>
+					<AddrTypeCd>StreetAddress</AddrTypeCd>
+					<City>Clarksville</City>
+					<StateProvCd>Indiana</StateProvCd>
+					<PostalCode>02911</PostalCode>
+					<County>PROVIDENCE</County>
+				</Addr>
+					
+				</SubLocation>
+				<LocationDesc>Test Location 1</LocationDesc>
+				
+			</Location>
+			<Location id="L0002">
+				<ItemIdInfo>
+					<AgencyId>0001</AgencyId>
+				</ItemIdInfo>
+				<Addr>
+					<AddrTypeCd>StreetAddress</AddrTypeCd>
+					<Addr1>13, Bond Street</Addr1>
+					<City>Washington</City>
+					<StateProvCd>Michigan</StateProvCd>
+					<PostalCode>02911</PostalCode>
+					<County>PROVIDENCE</County>
+				</Addr>
+				<SubLocation id="L0002-1">
+					<ItemIdInfo></ItemIdInfo>
+						<SubLocationName>Sub Loc 2</SubLocationName>
+					<SubLocationDesc>Sub loc 2</SubLocationDesc>
+				
+					<Addr>
+					<AddrTypeCd>StreetAddress</AddrTypeCd>
+					<City>Champoo City</City>
+					<StateProvCd>Michigan</StateProvCd>
+					<PostalCode>02911</PostalCode>
+					<County>PROVIDENCE</County>
+				</Addr>
+				
+				</SubLocation>
+				<SubLocation id="L0002-2">
+					<ItemIdInfo></ItemIdInfo>
+						<SubLocationName>Sub Loc 22</SubLocationName>
+					<SubLocationDesc>Sub loc 2</SubLocationDesc>
+				
+					<Addr>
+					<AddrTypeCd>StreetAddress</AddrTypeCd>
+					<City>LA City</City>
+					<StateProvCd>Michigan</StateProvCd>
+					<PostalCode>02911</PostalCode>
+					<County>PROVIDENCE</County>
+				</Addr>
+				
+				</SubLocation>
+				<LocationDesc>Test location</LocationDesc>
+			</Location>
+			
+			
+			<HomeLineBusiness>
+			
+				<LOBCd>HOME</LOBCd>
+				<NAICCd>21970</NAICCd>
+				<CurrentTermAmt>
+					<Amt>537.00</Amt>
+				</CurrentTermAmt>
+			
+				<RateEffectiveDt>2002-11-04</RateEffectiveDt>
+				
+				<Dwell LocationRef="L0001">
+					<PrincipalUnitAtRiskInd>1</PrincipalUnitAtRiskInd>
+					<PolicyTypeCd>03</PolicyTypeCd>
+					<PurchaseDt>2001-01-01</PurchaseDt>
+					<PurchasePriceAmt>
+						<Amt>10000000</Amt>
+					</PurchasePriceAmt>
+					<WiringTypeCd>Aluminum</WiringTypeCd>
+					<WiringInspectedDt>2001-01-01</WiringInspectedDt>
+					<AdditionalResidenceInd>Y</AdditionalResidenceInd>
+					<NumEmployeesFullTimeResidence>2</NumEmployeesFullTimeResidence>
+					<Construction>
+					
+						<ConstructionCd>F</ConstructionCd>
+						<YearBuilt>1950</YearBuilt>
+						<FoundationCd>Closed</FoundationCd>	
+							<BldgArea>
+								<NumUnits></NumUnits>
+							</BldgArea>
+						<BasementArea>
+							<NumUnits>3200</NumUnits>
+						</BasementArea>
+						
+						
+						<RoofingMaterial>
+							<RoofMaterialCd>ALUM</RoofMaterialCd>
+						</RoofingMaterial>	
+						<FinishedConstructionPct>50</FinishedConstructionPct>	
+					</Construction>
+					
+					<DwellOccupancy>
+						<NumApartments>2</NumApartments>
+						<DwellUseCd>1</DwellUseCd>
+						<OccupancyTypeCd>TENAN</OccupancyTypeCd>		
+					</DwellOccupancy>
+					<DwellRating>
+						<TerritoryCd>032</TerritoryCd>
+						<RatingMethodCd></RatingMethodCd>
+					</DwellRating>
+					<BldgProtection>
+						<FireProtectionClassCd>02</FireProtectionClassCd>
+						<DistanceToFireStation>
+							<NumUnits>200</NumUnits>
+						</DistanceToFireStation>
+						<DistanceToHydrant>
+							<NumUnits>5</NumUnits>
+						</DistanceToHydrant>
+						
+						<FireExtinguisherInd>0</FireExtinguisherInd>
+						<ProtectionDeviceBurglarCd>CN</ProtectionDeviceBurglarCd>
+						<ProtectionDeviceFireCd>NO</ProtectionDeviceFireCd>
+						<ProtectionDeviceSmokeCd>NO</ProtectionDeviceSmokeCd>
+						
+					</BldgProtection>
+					
+					<DwellInspectionValuation>
+							<HeatSourcePrimaryCd>CNPI</HeatSourcePrimaryCd>
+							<HeatSourceSupplementalCd>CPI</HeatSourceSupplementalCd>
+						<NumFamilies>1</NumFamilies>
+						<GarageInfo>
+							<SurfaceArea>
+								<NumUnits>2000</NumUnits>
+							</SurfaceArea>
+						</GarageInfo>
+						
+						<MarketValueAmt>
+							<Amt>2000000</Amt>
+						</MarketValueAmt>
+						
+					</DwellInspectionValuation>
+					
+					<SwimmingPool>
+						<AboveGroundInd>Y</AboveGroundInd>
+						<ApprovedFenceInd></ApprovedFenceInd>
+						
+					</SwimmingPool>
+					
+					<Coverage>
+						<CoverageCd>MATUR</CoverageCd>
+						
+					</Coverage>
+					<Coverage>
+						
+						<CoverageCd>DWELL</CoverageCd>
+						<Limit>
+							<FormatInteger>75000</FormatInteger>
+							<LimitAppliesToCd>Coverage</LimitAppliesToCd>
+						
+						</Limit>
+						<Deductible>
+							<FormatInteger>250</FormatInteger>
+							<DeductibleTypeCd>FL</DeductibleTypeCd>
+							<DeductibleAppliesToCd>Coverage</DeductibleAppliesToCd>
+						</Deductible>
+						<Deductible>
+							<FormatInteger>99999</FormatInteger>
+							<DeductibleTypeCd>FL</DeductibleTypeCd>
+							<DeductibleAppliesToCd>Coverage</DeductibleAppliesToCd>
+						</Deductible>
+						<Deductible>
+							<FormatPct>2.00</FormatPct>
+							<DeductibleTypeCd>PC</DeductibleTypeCd>
+							<DeductibleAppliesToCd>Coverage</DeductibleAppliesToCd>
+						</Deductible>
+						<CurrentTermAmt>
+							<Amt>203.00</Amt>
+						</CurrentTermAmt>
+					</Coverage>
+					<Coverage>
+						<CoverageCd>OS</CoverageCd>
+						<Limit>
+							<FormatInteger>7500</FormatInteger>
+							<LimitAppliesToCd>Coverage</LimitAppliesToCd>
+						</Limit>
+						<CurrentTermAmt>
+							<Amt>0.00</Amt>
+						</CurrentTermAmt>
+					</Coverage>
+					<Coverage>
+						<CoverageCd>PP</CoverageCd>
+						<Limit>
+							<FormatInteger>52500</FormatInteger>
+							<LimitAppliesToCd>Coverage</LimitAppliesToCd>
+						</Limit>
+						<CurrentTermAmt>
+							<Amt>0.00</Amt>
+						</CurrentTermAmt>
+					</Coverage>
+					<Coverage>
+						<CoverageCd>LUSE</CoverageCd>
+						<Limit>
+							<FormatInteger>15000</FormatInteger>
+							<LimitAppliesToCd>Coverage</LimitAppliesToCd>
+						</Limit>
+						<CurrentTermAmt>
+							<Amt>0.00</Amt>
+						</CurrentTermAmt>
+					</Coverage>
+					<Coverage>
+						<CoverageCd>LIAB</CoverageCd>
+						<Limit>
+							<FormatInteger>100000</FormatInteger>
+							<LimitAppliesToCd>Coverage</LimitAppliesToCd>
+						</Limit>
+						<CurrentTermAmt>
+							<Amt>0.00</Amt>
+						</CurrentTermAmt>
+					</Coverage>
+					<Coverage>
+						<CoverageCd>MEDPM</CoverageCd>
+						<Limit>
+							<FormatInteger>2500</FormatInteger>
+							<LimitAppliesToCd>Coverage</LimitAppliesToCd>
+						</Limit>
+					</Coverage>
+					<Coverage>
+						<CoverageCd>LAC</CoverageCd>
+						<Limit>
+							<FormatInteger>5000</FormatInteger>
+							<LimitAppliesToCd>Coverage</LimitAppliesToCd>
+						</Limit>
+						<Option>
+							<OptionTypeCd>TypeOf1</OptionTypeCd>
+							<OptionValue>B</OptionValue>
+						</Option>
+						<CurrentTermAmt>
+							<Amt>4.00</Amt>
+						</CurrentTermAmt>
+					</Coverage>
+					<Coverage>
+						<CoverageCd>UNJWF</CoverageCd>
+						<Limit>
+							<FormatInteger>5000</FormatInteger>
+							<LimitAppliesToCd>Coverage</LimitAppliesToCd>
+						</Limit>
+						<CurrentTermAmt>
+							<Amt>0.00</Amt>
+						</CurrentTermAmt>
+					</Coverage>
+					<Coverage>
+						<CoverageCd>INFL</CoverageCd>
+						<CurrentTermAmt>
+							<Amt>0.00</Amt>
+						</CurrentTermAmt>
+						<CreditOrSurcharge>
+							<CreditSurchargeCd>INFGD</CreditSurchargeCd>
+							<NumericValue>
+								<FormatPct>.00</FormatPct>
+							</NumericValue>
+						</CreditOrSurcharge>
+					</Coverage>
+				
+				
+					<DwellStateSupplement>
+						<MineSubsidenceCd>NO</MineSubsidenceCd>
+					</DwellStateSupplement>
+
+					<TotalInsurableReplCostAmt>
+						<Amt>1000</Amt>
+					</TotalInsurableReplCostAmt>
+				</Dwell>
+				
+				<PropertySchedule>
+					<IsSummaryInd>Y</IsSummaryInd>
+					<ItemValueAmt>
+						<Amt>2000</Amt>
+					</ItemValueAmt>
+					<PropertyClassCd>CM</PropertyClassCd>
+					
+				</PropertySchedule>
+				
+				<PropertySchedule>
+					<IsSummaryInd></IsSummaryInd>
+					<ItemValueAmt>
+						<Amt>4000</Amt>
+					</ItemValueAmt>
+					<PropertyClassCd>FR</PropertyClassCd>
+					
+				</PropertySchedule>
+				<PropertySchedule>
+					<IsSummaryInd></IsSummaryInd>
+					<ItemValueAmt>
+						<Amt>4000</Amt>
+					</ItemValueAmt>
+
+					<PropertyClassCd>CN</PropertyClassCd>
+					
+				</PropertySchedule>
+
+				
+
+				<Watercraft>
+				
+					<WaterUnitTypeCd></WaterUnitTypeCd>
+					
+					<CostNewAmt>
+						<Amt>34536</Amt>
+					</CostNewAmt>
+					<PurchaseDt>2001-2-3</PurchaseDt>
+					<PresentValueAmt>
+						<Amt>2000</Amt>
+					</PresentValueAmt>
+					<Length>
+						<NumUnits>20</NumUnits>
+					</Length>
+					
+					<Speed>
+						<NumUnits>20</NumUnits>					
+					</Speed>	
+					<WatersNavigatedCd>A</WatersNavigatedCd>
+					<Horsepower>
+						<NumUnits>200</NumUnits>
+					</Horsepower>
+					<HullDesignTypeCd>C</HullDesignTypeCd>
+					<HullMaterialTypeCd>F</HullMaterialTypeCd>
+					
+					<RegistrationNumber>10903839</RegistrationNumber>
+					
+				</Watercraft>
+				
+			</HomeLineBusiness>
+		</HomePolicyQuoteInqRq>
+	</InsuranceSvcRq>
+</ACORD>

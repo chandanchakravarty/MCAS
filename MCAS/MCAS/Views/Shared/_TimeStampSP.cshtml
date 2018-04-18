@@ -1,0 +1,66 @@
+﻿@model MCAS.Web.Objects.CommonHelper.BaseModel
+@using MCAS.Web.Objects.Resources.Common;
+<style type="text/css">
+#DivCrDtBy,#DivMoDtBy
+{
+     text-transform: capitalize;
+}
+</style>
+<legend></legend>
+<div class="form-group">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-3">
+                <label for="CreatedBy">                
+                    @Common.CreatedBy:
+                </label>
+            </div>
+            <div class="col-md-3" id="DivCrDtBy">
+                {{createServiceProvider.CreatedBy}}
+            </div>
+            <div class="col-md-3">
+                <label for="UpdatedBy">
+                    @Common.LastUpdatedBy:</label>
+            </div>
+            <div class="col-md-3" id="DivMoDtBy">
+                {{createServiceProvider.ModifiedBy}}
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-3">
+                <label for="CreatedDate">
+                    @Common.CreatedDate:</label>
+            </div>
+            <div class="col-md-3" id="DivCrDt">
+                {{createServiceProvider.CreatedOnDate}}
+            </div>
+            <div class="col-md-3">
+                <label for="UpdatedDate">
+                    @Common.LastUpdatedDate:</label>
+            </div>
+            <div class="col-md-3" id="DivUpDt">
+                {{createServiceProvider.ModifiedOnDate}}
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-3">
+                <label for="CreateTime">
+                    @Common.CreatedTime:</label>
+            </div>
+            <div class="col-md-3" id="DivCrTime">
+                {{createServiceProvider.CreatedOnTime}}
+            </div>
+            <div class="col-md-3">
+                <label for="UpdatedTime">
+                    @Common.LastUpdatedTime:</label>
+            </div>
+            <div class="col-md-3" id="DivUpTime">
+                {{createServiceProvider.ModifiedOnTime}}
+            </div>
+        </div>
+    </div>
+</div>

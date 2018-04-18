@@ -1,0 +1,488 @@
+﻿@model MCAS.Web.Objects.ClaimObjectHelper.ClaimTransactionsModel
+@{
+    var caller = "";
+    if (Request.QueryString["claimMode"] != null)
+    {
+        caller = Request.QueryString["claimMode"].ToString();
+    }
+
+    var lebmode = "";
+    if (Request.QueryString["mode"] != null)
+    {
+        lebmode = Request.QueryString["mode"].ToString();
+    }
+    var Date = "";
+
+    if (Model.TransactionDate.ToString() != "")
+    {
+        Date = Model.TransactionDate.ToString().Substring(0, 10);
+    }
+    var Date1 = "";
+
+    if (Model.AuthorizedDate.ToString() != "")
+    {
+        Date1 = Model.AuthorizedDate.ToString().Substring(0, 10);
+    }
+
+    var Date2 = "";
+
+    if (Model.ProcessedDate.ToString() != "")
+    {
+        Date2 = Model.ProcessedDate.ToString().Substring(0, 10);
+    }
+
+    ViewBag.Title = "ClaimTransactionsEditor";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var policyid = Request.QueryString["PolicyId"];
+    var claimId = @Model.ClaimId;
+    var claimMode = Request.QueryString["claimMode"];
+    var accidentClaimIdNew = Request.QueryString["AccidentClaimId"];
+}
+<link href="@Url.Content("~/Content/jquery-ui.css")" rel="Stylesheet" media="screen" />
+<style type="text/css">
+    fieldset
+    {
+        padding: 5px;
+        margin: 1px;
+        border: 1px solid;
+        border-color: #DAD7D7;
+        border-radius: 3px;
+    }
+    
+    legend
+    {
+        display: block;
+        width: auto;
+        padding: 1px;
+        margin-bottom: 2px;
+        font-size: 14px;
+        line-height: inherit;
+        color: #1e91cf !important;
+        border: 0;
+    }
+    input:not([type]), input[type="text"]
+    {
+        text-transform: capitalize;
+    }
+</style>
+<script src='@Url.Content("~/Scripts/jquery-2.1.0.min.js")' type="text/javascript"></script>
+<script src="@Url.Content("~/Scripts/jquery.validate.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.min.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/Scripts/globalize/globalize.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/Scripts/globalize/cultures/globalize.culture.en-GB.js")" type="text/javascript"></script>
+<!-- Main Container Start -->
+<div class="dashboard-wrapper">
+    <!-- Bootstrap Container Start -->
+    <div class="container">
+        <!-- Page title start -->
+        <div class="row page-title">
+            <div class="col-lg-12">
+                <h2>
+                    Registration</h2>
+                <ul class="breadcrumb">
+                    <li>Home</li>
+                    @{
+                        if (@caller == "Write" && @accidentClaimIdNew != null && @accidentClaimIdNew != "0")
+                        {
+                        <li>Incomplete Claim Registration</li>
+                        }
+                        else if (@caller == "Write")
+                        {
+                        <li>New Claim Registration</li>
+                        }
+                        else if (@caller == "Read" && @lebmode == "Adj")
+                        {
+                        <li>Claim Adjustments</li>
+                        }
+                        else if (@caller == "Read" && @lebmode == "Enq")
+                        {
+                        <li>Claim Enquiry</li>
+                        }
+                        else if (@caller == "Read" && @lebmode == "Payment")
+                        {
+                        <li>Claim Payment Processing</li>
+                        }
+                        else
+                        {
+                        <li>New Claim Registration</li>
+                        }
+                    }
+                </ul>
+            </div>
+        </div>
+        <!-- Page title end -->
+        <!-- Row start for sub navigation -->
+        <hr />
+        <!-- Row end for sub navigation -->
+        @Html.Action("_ClaimDetails", "ClaimProcessing")
+        <!-- Row start -->
+        <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <div class="panel panel-info">
+                    <div class="panel-heading clearfix">
+                        <i class="icon-check-sign"></i>
+                        <h3 class="panel-title">
+                            Transaction Entry</h3>
+                    </div>
+                    @Html.Action("ClaimTransactionsList", "ClaimProcessing", new { PolicyId = @policyid, ClaimId = @claimId, AccidentClaimId = @accidentClaimIdNew, claimMode = @caller })
+                    <div class="row">
+                        <div class="col-lg-12 text-left">
+                            @*<a class="btn btn-info" href="#" onclick="return OpenNewThirdPart()">New Other Party</a>*@
+                            <a class="btn btn-info" id="openTransactions" href="#" onclick='OpenTransEditor()'>Add
+                                New Tranaction</a>
+                        </div>
+                    </div>
+                    <hr style='font-weight: bold' />
+                    <div class="panel-body" id="ClaimTransEditor" style="display: none;">
+                        @using (Html.BeginForm("ClaimTransactionsEditor", "ClaimProcessing", new { PolicyId = @policyid, ClaimId = @claimId, AccidentClaimId = @accidentClaimIdNew, claimMode = @caller }, FormMethod.Post, new { role = "form", @class = "form-horizontal", id = "claimtransentryform", name = "claimtransentryform" }))
+                        {
+                            
+                            
+                            @Html.ValidationSummary(true)
+                            @Html.HiddenFor(m => m.hiddenprop)
+                            @Html.HiddenFor(m => m.ReadOnly)
+                            <input type = "hidden" id="ViewMode" value = '@claimMode' />
+                            <div style="color: Red; font-weight: bold;" class="has-error" id="error">
+                                <p align="center">
+                                    @if (@ViewData["SuccessMsg"] != null)
+                                    {
+                                        @ViewData["SuccessMsg"]
+                                    }
+                                </p>
+                            </div>
+                            
+    
+                            <fieldset>
+                                <legend>New Transaction</legend>
+                                <div class="panel-body">
+                                    <div class="row">
+                                        <div class="col-lg-6">
+                                            @Html.HiddenFor(m => m.ClaimId)
+                                            @Html.HiddenFor(m => m.TransactionId)
+                                            <div class="form-group">
+                                                <label class="col-sm-4 control-label" for="inputTransactionDate">
+                                                    Transaction Date<span class="text-danger">*</span></label>
+                                                <div class="col-sm-8">
+                                                    @Html.TextBoxFor(m => m.TransactionDate, new { id = "inputTransactionDate", @class = "form-control", @Value = @Date })
+                                                </div>
+                                                <label class="col-sm-4 control-label">
+                                                </label>
+                                                <div class="col-sm-8">
+                                                    @Html.ValidationMessageFor(m => m.TransactionDate)<br />
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <div class="form-group">
+                                                <label class="col-sm-4 control-label" for="inputAuthorizedby">
+                                                    Authorized by<span class="text-danger">*</span></label>
+                                                <div class="col-sm-8">
+                                                    @Html.TextBoxFor(m => m.Authorizedby, new { id = "inputAuthorizedby", @class = "form-control" })
+                                                </div>
+                                                <label class="col-sm-4 control-label">
+                                                </label>
+                                                <div class="col-sm-8">
+                                                    @Html.ValidationMessageFor(m => m.Authorizedby)<br />
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-lg-6">
+                                            <div class="form-group">
+                                                <label class="col-sm-4 control-label" for="inputTransactionType">
+                                                    Transaction Type<span class="text-danger">*</span>
+                                                </label>
+                                                <div class="col-sm-8">
+                                                    @Html.TextBoxFor(m => m.TransactionType, new { id = "inputTransactionType", @class = "form-control" })
+                                                </div>
+                                                <label class="col-sm-4 control-label">
+                                                </label>
+                                                <div class="col-sm-8">
+                                                    @Html.ValidationMessageFor(m => m.TransactionType)
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <div class="form-group">
+                                                <label class="col-sm-4 control-label" for="inputAuthorizedDate">
+                                                    Authorized Date<span class="text-danger">*</span>
+                                                </label>
+                                                <div class="col-sm-8">
+                                                    @Html.TextBoxFor(m => m.AuthorizedDate, new { id = "inputAuthorizedDate", @class = "form-control", @Value = @Date1 })
+                                                </div>
+                                                <label class="col-sm-4 control-label">
+                                                </label>
+                                                <div class="col-sm-8">
+                                                    @Html.ValidationMessageFor(m => m.AuthorizedDate)
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-lg-6">
+                                            <div class="form-group">
+                                                <label class="col-sm-4 control-label" for="inputCreditorName">
+                                                    Creditor Name<span class="text-danger">*</span></label>
+                                                <div class="col-sm-8">
+                                                    @Html.TextBoxFor(m => m.CreditorName, new { id = "inputCreditorName", @class = "form-control" })
+                                                </div>
+                                                <label class="col-sm-4 control-label">
+                                                </label>
+                                                <div class="col-sm-8">
+                                                    @Html.ValidationMessageFor(m => m.CreditorName)
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <div class="form-group">
+                                                <label class="col-sm-4 control-label" for="inputAuthorizedTime">
+                                                    Authorized Time <span class="text-danger">*</span></label>
+                                                <div class="col-sm-8">
+                                                    @Html.TextBoxFor(m => m.AuthorizedTime, new { id = "inputAuthorizedTime", @class = "form-control" })
+                                                </div>
+                                                <label class="col-sm-4 control-label">
+                                                </label>
+                                                <div class="col-sm-8">
+                                                    @Html.ValidationMessageFor(m => m.AuthorizedTime)
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-lg-6">
+                                            <div class="form-group">
+                                                <label class="col-sm-4 control-label" for="inputExpenseCode">
+                                                    Expense Code<span class="text-danger">*</span></label>
+                                                <div class="col-sm-8">
+                                                    @Html.TextBoxFor(m => m.ExpenseCode, new { id = "inputExpenseCode", @class = "form-control" })
+                                                </div>
+                                                <label class="col-sm-4 control-label">
+                                                </label>
+                                                <div class="col-sm-8">
+                                                    @Html.ValidationMessageFor(m => m.ExpenseCode)
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <div class="form-group">
+                                                <label class="col-sm-4 control-label" for="inputProcessedDate">
+                                                    Processed Date<span class="text-danger">*</span></label>
+                                                <div class="col-sm-8">
+                                                    @Html.TextBoxFor(m => m.ProcessedDate, new { id = "inputProcessedDate", @class = "form-control", @Value = @Date2 })
+                                                </div>
+                                                <label class="col-sm-4 control-label">
+                                                </label>
+                                                <div class="col-sm-8">
+                                                    @Html.ValidationMessageFor(m => m.ProcessedDate)
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-lg-6">
+                                            <div class="form-group">
+                                                <label class="col-sm-4 control-label" for="inputAmountPaid">
+                                                    Amount Paid<span class="text-danger">*</span>
+                                                </label>
+                                                <div class="col-sm-8">
+                                                    @Html.TextBoxFor(m => m.AmountPaid, new { id = "inputAmountPaid", @class = "form-control" })
+                                                </div>
+                                                <label class="col-sm-4 control-label">
+                                                </label>
+                                                <div class="col-sm-8">
+                                                    @Html.ValidationMessageFor(m => m.AmountPaid)
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="clearfix igr col-md-12 text-center">
+                                            <div class="form-group">
+                                                <button class="btn btn-info" id="btnSave" onclick="onclicksubmit();">
+                                                    Save</button>
+                                                <button type="button" class="btn btn-info" onclick="onclickcancel();">
+                                                    Reset</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </fieldset>
+    
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Row End -->
+    </div>
+    <!-- Bootstrap Container end -->
+</div>
+<!-- Main Container end -->
+<script type="text/javascript">
+    $(document).ready(function () {
+        $(document).on("focus", ":input", function () {
+            $(this).attr("autocomplete", "off")
+        });
+        $.culture = Globalize.culture("en-GB");
+        $.validator.methods.date = function (value, element) {
+            return this.optional(element)
+                    || Globalize.parseDate(value, "dd/MM/yyyy", "en-GB")
+                    || Globalize.parseDate(value, "yyyy-mm-dd");
+        };
+        $("#inputTransactionDate").blur(function () {
+            "The field Transaction Date must be a date." == $("#claimtransentryform > fieldset > div > div:nth-child(1) > div:nth-child(1) > div > div:nth-child(4) > span > span").text() && $("#claimtransentryform > fieldset > div > div:nth-child(1) > div:nth-child(1) > div > div:nth-child(4) > span > span").text("The Transaction date must be in DD/MM/YYYY Format")
+        });
+        $("#inputAuthorizedDate").blur(function () {
+            "The field Authorized Date must be a date." == $("#claimtransentryform > fieldset > div > div:nth-child(2) > div:nth-child(2) > div > div:nth-child(4) > span > span").text() && $("#claimtransentryform > fieldset > div > div:nth-child(2) > div:nth-child(2) > div > div:nth-child(4) > span > span").text("The Authorized date must be in DD/MM/YYYY Format")
+        });
+        $("#inputProcessedDate").blur(function () {
+            "The field Processed Date must be a date." == $("#claimtransentryform > fieldset > div > div:nth-child(4) > div:nth-child(2) > div > div:nth-child(4) > span > span").text() && $("#claimtransentryform > fieldset > div > div:nth-child(4) > div:nth-child(2) > div > div:nth-child(4) > span > span").text("The Processed date must be in DD/MM/YYYY Format")
+        });
+        $("#inputTransactionDate").datepicker({
+            dateFormat: "dd/mm/yy",
+            showStatus: !0,
+            showWeeks: !0,
+            currentText: "Now",
+            autoSize: !0,
+            gotoCurrent: !0,
+            showAnim: "blind",
+            highlightWeek: !0,
+            changeMonth: !0,
+            changeYear: !0,
+            yearRange: "1951:2050",
+            onSelect: function (b) {
+                $(this).valid();
+            }
+        });
+        $("#inputAuthorizedDate").datepicker({
+            dateFormat: "dd/mm/yy",
+            showStatus: !0,
+            showWeeks: !0,
+            currentText: "Now",
+            autoSize: !0,
+            gotoCurrent: !0,
+            showAnim: "blind",
+            highlightWeek: !0,
+            changeMonth: !0,
+            changeYear: !0,
+            yearRange: "1951:2050",
+            onSelect: function (b) {
+                $(this).valid();
+            }
+        });
+        $("#inputProcessedDate").datepicker({
+            dateFormat: "dd/mm/yy",
+            showStatus: !0,
+            showWeeks: !0,
+            currentText: "Now",
+            autoSize: !0,
+            gotoCurrent: !0,
+            showAnim: "blind",
+            highlightWeek: !0,
+            changeMonth: !0,
+            changeYear: !0,
+            yearRange: "1951:2050",
+            onSelect: function (b) {
+                $(this).valid();
+            }
+        });
+        var ispostbackObject = document.getElementById("hiddenprop").value,
+    transId = document.getElementById("TransactionId").value;
+        "1" != ispostbackObject ? null != transId && "" != transId ? ($("#ClaimTransEditor").attr("style", "Display:inline"), document.getElementById("hiddenprop").value = "0") : $("#ClaimTransEditor").attr("style", "Display:none") : ($("#ClaimTransEditor").attr("style", "Display:inline"), document.getElementById("hiddenprop").value = "0");
+        $("#inputAmountPaid").change(function () {
+            var a = "#" + this.id;
+            $(a).val("" == $(a).val() ? $(a).val() : $(a).val().contains(".") ? $(a).val() : parseInt($(a).val()) + ".00")
+        }).keypress(function () {
+            var b = $("#" + this.id).val().length;
+            if (15 > parseInt(b)) {
+                var b = "#" + this.id,
+            a = event.type,
+            a = a.which ? a.which : event.keyCode;
+                return 45 != a && 46 != a && 31 < a && (48 > a || 57 < a) ? ($(b).focus(), !1) : !0
+            }
+            return !1
+        });
+        $("#inputExpenseCode").keypress(function () {
+            var b = $("#" + this.id).val().length;
+            if (10 > parseInt(b)) {
+                var b = "#" + this.id,
+            a = event.type,
+            a = a.which ? a.which : event.keyCode;
+                return 45 != a && 31 < a && (48 > a || 57 < a) ? ($(b).focus(), !1) : !0
+            }
+            return !1
+        });
+        $("#inputAuthorizedTime").keypress(function () {
+            var b = $("#" + this.id).val().length;
+            if (5 > parseInt(b)) {
+                var b = "#" + this.id,
+            a = event.type,
+            a = a.which ? a.which : event.keyCode;
+                return 58 != a && 45 != a && 31 < a && (48 > a || 57 < a) ? ($(b).focus(), !1) : !0
+            }
+            return !1
+        });
+        $("#inputAuthorizedTime").blur(function () {
+            var b = $("#inputAuthorizedTime").val();
+            if ("" != b && !b.match(/^([0-9]|0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$/) && "24:00" != b) return alert("Please Enter Correct 24 Hours Clock Format"), $("#inputAuthorizedTime").focus(), $("#inputAuthorizedTime").val(""), !1
+        });
+        $("#inputCreditorName,#inputTransactionType,#inputAuthorizedby").keypress(function () {
+            var b = $(this).val().length;
+            if (30 > parseInt(b)) {
+                $(this);
+                var a = a || event,
+            b = 32 == a.keyCode ? !0 : /[a-z]+$/i.test(String.fromCharCode(a.keyCode || a.which));
+                return !1 == b ? !1 : b
+            }
+            return !1
+        });
+        $("input[type=text]").bind("copy paste cut", function (a) {
+            a.preventDefault()
+        }).css("cursor", "pointer").change(function () {
+            $("#error").hide()
+        }).blur(function () {
+            var a = $(this).val();
+            if ("" != a && !1 == /^[^.]+$/.test(a)) {
+                var a = a.split("."),
+         b = 2 < String(a[1]).length ? String(a[1]).substring(0, 2) : 1 == String(a[1]).length ? String(a[1]) + "0" : String(a[1]);
+                $(this).val(String(a[0]) + "." + b)
+            };
+        });
+        setTabActive("TransactionsTab");
+    });
+    function onclicksubmit() {
+        var form = $('#claimtransentryform');
+        form.validate();
+        if (form.valid()) {
+            document.getElementById('hiddenprop').value = "1";
+        }
+    };
+    function onclickcancel() {
+        $('#TransactionId').val("");
+        $('#error').hide();
+        $('#TransactionId').val("");
+        $('input[type="text"]').val("");
+        $('span.field-validation-error').removeClass('field-validation-error').addClass('field-validation-valid');
+    };
+    function OpenTransEditor() {
+        $('#ClaimTransEditor').attr('style', 'Display:inline');
+        $('#claimtransentryform')[0].reset();
+        $('#TransactionId').val("");
+        $('#error').hide();
+        $('#TransactionId').val("");
+        $('input[type="text"]').val("");
+        $('span.field-validation-error').removeClass('field-validation-error').addClass('field-validation-valid');
+    };
+    $(function () {
+        var claimentStatus = '@ViewData["EnableTab"]';
+        enableTPTab(claimentStatus.toLowerCase());
+    });
+    $(function () {
+        var ODStatus = '@ViewData["EnableODTab"]';
+        enableODTab(ODStatus.toLowerCase());
+    });
+    String.prototype.contains = function (a) {
+        return -1 != this.indexOf(a)
+    };
+</script>

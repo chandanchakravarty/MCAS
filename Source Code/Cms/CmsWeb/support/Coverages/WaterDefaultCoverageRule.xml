@@ -1,0 +1,1184 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Group Code taken from RuleType  Enumeration defined in ClsCoverages  -->
+<Root>
+	<Master>
+		<Query Code="SELECT" Level="APP">Proc_GetKeysForWaterCraft_APP</Query>
+		<Query Code="SELECT" Level="POLICY">Proc_GetKeysForWaterCraft_Policy</Query>
+		<Column Code="APP_EFFECTIVE_DATE" MapColumnn="APP_EFFECTIVE_DATE" TableAssociated="APP_LIST"
+			ColumnAssociated="APP_EFFECTIVE_DATE"></Column>
+		<Column Code="APP_YEAR" MapColumnn="APP_YEAR" TableAssociated="APP_LIST" ColumnAssociated="APP_EFFECTIVE_DATE"></Column>
+		<Column Code="BOAT_YEAR" MapColumnn="BOAT_YEAR" TableAssociated="APP_WATERCRAFT_INFO" ColumnAssociated="YEAR"></Column>
+		<Column Code="BOAT_AGE" MapColumnn="BOAT_AGE" TableAssociated="APP_WATERCRAFT_INFO" ColumnAssociated="YEAR + 5"></Column>
+		<Column Code="BOAT_TYPE" MapColumnn="BOAT_TYPE" TableAssociated="APP_WATERCRAFT_INFO" ColumnAssociated="BOAT_TYPE"></Column>
+		<Column Code="LOB_ID" MapColumnn="LOB_ID" TableAssociated="APP_LIST" ColumnAssociated="APP_LOB"></Column>
+		<Column Code="STATE_ID" MapColumnn="STATE_ID" TableAssociated="APP_LIST" ColumnAssociated="STATE_ID"></Column>
+		<Column Code="INS_VAL" MapColumnn="INS_VAL" TableAssociated="APP_WATERCRAFT_INFO" ColumnAssociated="INSURING_Value"></Column>
+		<Column Code="COV_TYPE" MapColumnn="COV_TYPE" TableAssociated="APP_WATERCRAFT_INFO" ColumnAssociated="COV_TYPE_BASIS"></Column>
+		<Column Code="BOAT_STYLE" MapColumnn="BOAT_STYLE" TableAssociated="MNT_LOOKUP_VALUES" ColumnAssociated="TYPE"></Column>
+		<Column Code="SAVED_DED_C" MapColumnn="SAVED_DED_C" TableAssociated="APP_WATERCRAFT_COVERAGE_INFO"></Column>
+		<Column Code="SAVED_DED_G" MapColumnn="SAVED_DED_G" TableAssociated="APP_WATERCRAFT_COVERAGE_INFO"></Column>
+		<Column Code="SAVED_DED_J" MapColumnn="SAVED_DED_J" TableAssociated="APP_WATERCRAFT_COVERAGE_INFO"></Column>
+		<Column Code="BOAT_LENGTH" MapColumnn="BOAT_LENGTH" TableAssociated="APP_WATERCRAFT_INFO"
+			ColumnAssociated="LENGTH"></Column>
+		<Column Code="UMBCS_OLDVALUE" MapColumnn="UMBCS_OLDVALUE" TableAssociated="APP_WATERCRAFT_COVERAGE_INFO"></Column>
+		<Column Code="WATER_SAVED_ID" MapColumnn="WATER_SAVED_ID" TableAssociated="APP_WATERCRAFT_COVERAGE_INFO"></Column>
+		<Column Code="MADICAL_SAVED_ID" MapColumnn="MADICAL_SAVED_ID" TableAssociated="APP_WATERCRAFT_COVERAGE_INFO"></Column>
+		<Column Code="WATER_SAVED_VALUE" MapColumnn="WATER_SAVED_VALUE" TableAssociated="APP_WATERCRAFT_COVERAGE_INFO"></Column>
+		<Column Code="MADICAL_SAVED_VALUE" MapColumnn="MADICAL_SAVED_VALUE" TableAssociated="APP_WATERCRAFT_COVERAGE_INFO"></Column>
+		<Column Code="UNATTACHED_SAVED_VALUE" MapColumnn="UNATTACHED_SAVED_VALUE" TableAssociated="APP_WATERCRAFT_COVERAGE_INFO"></Column>
+		<Column Code="IS_GF_DEDUCT" MapColumnn="IS_GF_DEDUCT" TableAssociated="APP_WATERCRAFT_COVERAGE_INFO"></Column>
+		<Column Code="HOCOV_E" MapColumnn="HOCOV_E"></Column>
+		<Column Code="HOCOV_F" MapColumnn="HOCOV_F"></Column>
+		<Column Code="SEC_DED" MapColumnn=""></Column>
+		<Column Code="DED_VAL" MapColumnn=""></Column>
+		<Column Code="WAT_LIMIT" MapColumnn=""></Column>
+		<Column Code="MED_LIMIT" MapColumnn=""></Column>
+		<Column Code="UMBCS_LIMIT" MapColumnn=""></Column>
+		<Column Code="UNATTACH_LIMIT" MapColumnn=""></Column>
+	</Master>
+	<!-- Coverages to be defaulted when new boat is added  -->
+	<Group Code="Default">
+		<Rule Action="Database" StartDate="1950-01-01" EndDate="3000-12-30">
+			<Conditions>
+				<Condition Operand1="1" Operator="==" Operand2="1" OperandType="Double">
+					<ToGrant CoverageCode="BTESC">
+						<Limit Value="" Operand1="$INS_VAL" Operator="*" Operand2="0.05" LimitID=""></Limit>
+						<Deductible Value="" Operand1="" Operator="" Operand2="" DeducID=""></Deductible>
+					</ToGrant>
+					<ToGrant CoverageCode="EBIUE">
+						<Limit Value="1500" Operand1="" Operator="" Operand2=""></Limit>
+						<Deductible Value="100" Operand1="" Operator="" Operand2="" DeducID=""></Deductible>
+					</ToGrant>
+					<ToGrant CoverageCode="BDEDUC">
+						<Limit Value="" Operand1="" Operator="" Operand2="" LimitID=""></Limit>
+						<Deductible Value="" Operand1="" Operator="" Operand2="" DeducID=""></Deductible>
+					</ToGrant>
+					<ToGrant CoverageCode="WP100">
+						<Limit Value="" Operand1="" Operator="" Operand2="" LimitID=""></Limit>
+						<Deductible Value="" Operand1="" Operator="" Operand2="" DeducID=""></Deductible>
+					</ToGrant>
+				</Condition>
+			</Conditions>
+		</Rule>
+	</Group>
+	<!-- Risk Dependent Rules -->
+	<Group Code="RiskDependent">
+		<!-- Rules for setting Master Keys -->
+		<Rule Action="Master" StartDate="2006-03-01" EndDate="3000-12-30">
+			<Conditions>
+				<Condition Operand1="$BOAT_STYLE" Operator="==" Operand2="JS" OperandType="String">
+					<ToSet Key="$DED_VAL" Value="0"></ToSet>
+				</Condition>
+				<Condition Operand1="$BOAT_STYLE" Operator="!=" Operand2="JS" OperandType="String">
+					<SubConditions>
+						<SubCondition Operand1="$INS_VAL" Operator=">=" Operand2="25000" OperandType="Double">
+							<ToSet Key="$DED_VAL" Value="500"></ToSet>
+						</SubCondition>
+						<SubCondition Operand1="$INS_VAL" Operator=">=" Operand2="10000" OperandType="Double">
+							<ToSet Key="$DED_VAL" Value="250"></ToSet>
+						</SubCondition>
+						<SubCondition Operand1="10000" Operator=">=" Operand2="$INS_VAL" OperandType="Double">
+							<ToSet Key="$DED_VAL" Value="100"></ToSet>
+						</SubCondition>
+					</SubConditions>
+				</Condition>
+			</Conditions>
+			<Conditions>
+				<Condition Operand1="$BOAT_STYLE" Operator="==" Operand2="JS" OperandType="String">
+					<SubConditions>
+						<SubCondition Operand1="$IS_GF_DEDUCT" Operator="==" Operand2="1" OperandType="Double">
+							<ToSet Key="$SEC_DED" Value="$SAVED_DED_J"></ToSet>
+						</SubCondition>
+						<SubCondition Operand1="$SAVED_DED_J" Operator="==" Operand2="0" OperandType="Double">
+							<ToSet Key="$SEC_DED" Value="250"></ToSet>
+						</SubCondition>
+						<SubCondition Operand1="$SAVED_DED_J" Operator="!=" Operand2="0" OperandType="Double">
+							<ToSet Key="$SEC_DED" Value="$SAVED_DED_J"></ToSet>
+						</SubCondition>
+					</SubConditions>
+				</Condition>
+				<Condition Operand1="$COV_TYPE" Operator="==" Operand2="11759">
+					<SubConditions>
+						<SubCondition Operand1="$IS_GF_DEDUCT" Operator="==" Operand2="1" OperandType="Double">
+							<ToSet Key="$SEC_DED" Value="$SAVED_DED_G"></ToSet>
+						</SubCondition>
+						<SubCondition Operand1="$DED_VAL" Operator=">=" Operand2="$SAVED_DED_G" OperandType="Double">
+							<ToSet Key="$SEC_DED" Value="$DED_VAL"></ToSet>
+						</SubCondition>
+						<SubCondition Operand1="$DED_VAL" Operator="&lt;" Operand2="$SAVED_DED_G" OperandType="Double">
+							<ToSet Key="$SEC_DED" Value="$SAVED_DED_G"></ToSet>
+						</SubCondition>
+					</SubConditions>
+				</Condition>
+				<Condition Operand1="$COV_TYPE" Operator="!=" Operand2="11759">
+					<SubConditions>
+						<SubCondition Operand1="$IS_GF_DEDUCT" Operator="==" Operand2="1" OperandType="Double">
+							<ToSet Key="$SEC_DED" Value="$SAVED_DED_C"></ToSet>
+						</SubCondition>
+						<SubCondition Operand1="$DED_VAL" Operator=">=" Operand2="$SAVED_DED_C" OperandType="Double">
+							<ToSet Key="$SEC_DED" Value="$DED_VAL"></ToSet>
+						</SubCondition>
+						<SubCondition Operand1="$DED_VAL" Operator="&lt;" Operand2="$SAVED_DED_C" OperandType="Double">
+							<ToSet Key="$SEC_DED" Value="$SAVED_DED_C"></ToSet>
+						</SubCondition>
+					</SubConditions>
+				</Condition>
+			</Conditions>
+			<Conditions>
+				<Condition Operand1="$UNATTACHED_SAVED_VALUE" Operator="==" Operand2="0" OperandType="Double">
+					<ToSet Key="$UNATTACH_LIMIT" Value="1500"></ToSet>
+				</Condition>
+				<Condition Operand1="$UNATTACHED_SAVED_VALUE" Operator="!=" Operand2="0" OperandType="Double">
+					<ToSet Key="$UNATTACH_LIMIT" Value="$UNATTACHED_SAVED_VALUE"></ToSet>
+				</Condition>
+			</Conditions>
+		</Rule>
+		<Rule Action="Master" StartDate="1950-01-01" EndDate="2006-02-28">
+			<Conditions>
+				<Condition Operand1="$BOAT_STYLE" Operator="==" Operand2="JS" OperandType="String">
+					<SubConditions>
+						<SubCondition Operand1="$IS_GF_DEDUCT" Operator="==" Operand2="1" OperandType="Double">
+							<ToSet Key="$SEC_DED" Value="$SAVED_DED_J"></ToSet>
+						</SubCondition>
+						<SubCondition Operand1="$SAVED_DED_J" Operator="==" Operand2="0" OperandType="Double">
+							<ToSet Key="$SEC_DED" Value="250"></ToSet>
+						</SubCondition>
+						<SubCondition Operand1="$SAVED_DED_J" Operator="!=" Operand2="0" OperandType="Double">
+							<ToSet Key="$SEC_DED" Value="$SAVED_DED_J"></ToSet>
+						</SubCondition>
+					</SubConditions>
+				</Condition>
+				<Condition Operand1="$SAVED_DED_C" Operator="==" Operand2="0" OperandType="Double">
+					<ToSet Key="$SEC_DED" Value="100 -1%"></ToSet>
+				</Condition>
+				<Condition Operand1="1" Operator="==" Operand2="1" OperandType="Double">
+					<ToSet Key="$SEC_DED" Value="$SAVED_DED_C"></ToSet>
+				</Condition>
+			</Conditions>
+			<Conditions>
+				<Condition Operand1="$UNATTACHED_SAVED_VALUE" Operator="==" Operand2="0" OperandType="Double">
+					<ToSet Key="$UNATTACH_LIMIT" Value="1500"></ToSet>
+				</Condition>
+				<Condition Operand1="$UNATTACHED_SAVED_VALUE" Operator="!=" Operand2="0" OperandType="Double">
+					<ToSet Key="$UNATTACH_LIMIT" Value="$UNATTACHED_SAVED_VALUE"></ToSet>
+				</Condition>
+			</Conditions>
+		</Rule>
+		<Rule Action="Master" StartDate="1950-01-01" EndDate="2006-02-28">
+			<Conditions>
+				<Condition Operand1="1" Operator="==" Operand2="1" OperandType="Double">
+					<ToSet Key="$UMBCS_LIMIT" Value="10000"></ToSet>
+				</Condition>
+			</Conditions>
+		</Rule>
+		<Rule Action="Master" StartDate="2006-03-01" EndDate="3000-12-12">
+			<Conditions>
+				<Condition Operand1="1" Operator="==" Operand2="1" OperandType="Double">
+					<ToSet Key="$UMBCS_LIMIT" Value="50000"></ToSet>
+				</Condition>
+			</Conditions>
+		</Rule>
+		<!-- Master rule for attached with home and length is greater than 26 of sail boat -->
+		<Rule Action="Master" StartDate="1950-01-01" EndDate="3000-12-30">
+			<Conditions>
+				<Condition Operand1="$WATER_SAVED_VALUE" Operator="!=" Operand2="0" OperandType="String">
+					<ToSet Key="$WAT_LIMIT" Value="$WATER_SAVED_VALUE"></ToSet>
+				</Condition>
+				<Condition Operand1="$WATER_SAVED_VALUE" Operator="==" Operand2="0" OperandType="String">
+					<SubConditions>
+						<SubCondition Operand1="$HOCOV_E" Operator="!=" Operand2="0" OperandType="String">
+							<ToSet Key="$WAT_LIMIT" Value="$HOCOV_E"></ToSet>
+						</SubCondition>
+						<SubCondition Operand1="$HOCOV_E" Operator="==" Operand2="0" OperandType="String">
+							<ToSet Key="$WAT_LIMIT" Value="25000"></ToSet>
+						</SubCondition>
+					</SubConditions>
+				</Condition>
+			</Conditions>
+			<!-- added by pravesh as liability options for Jet ski , jet ski with lift and waverunner are deffer -->
+			<Conditions>
+				<Condition Operand1="$BOAT_STYLE" Operator="==" Operand2="JS" OperandType="String">
+					<SubConditions>
+						<SubCondition Operand1="$WATER_SAVED_VALUE" Operator="&lt;" Operand2="100000" OperandType="Double">
+							<ToSet Key="$WAT_LIMIT" Value="100000"></ToSet>
+						</SubCondition>
+						<SubCondition Operand1="$WATER_SAVED_VALUE" Operator=">=" Operand2="100000" OperandType="Double">
+							<ToSet Key="$WAT_LIMIT" Value="$WATER_SAVED_VALUE"></ToSet>
+						</SubCondition>
+					</SubConditions>
+				</Condition>
+				<!-- Boat Type Waverunner -->
+				<Condition Operand1="$BOAT_TYPE" Operator="==" Operand2="11386">
+					<SubConditions>
+						<SubCondition Operand1="$WATER_SAVED_VALUE" Operator="&lt;" Operand2="100000" OperandType="Double">
+							<ToSet Key="$WAT_LIMIT" Value="100000"></ToSet>
+						</SubCondition>
+						<SubCondition Operand1="$WATER_SAVED_VALUE" Operator=">=" Operand2="100000" OperandType="Double">
+							<ToSet Key="$WAT_LIMIT" Value="$WATER_SAVED_VALUE"></ToSet>
+						</SubCondition>
+					</SubConditions>
+				</Condition>
+			</Conditions>
+			<Conditions>
+				<Condition Operand1="$MADICAL_SAVED_VALUE" Operator="!=" Operand2="0" OperandType="String">
+					<ToSet Key="$MED_LIMIT" Value="$MADICAL_SAVED_VALUE"></ToSet>
+				</Condition>
+				<Condition Operand1="$WATER_SAVED_VALUE" Operator="==" Operand2="0" OperandType="String">
+					<SubConditions>
+						<SubCondition Operand1="$HOCOV_F" Operator="!=" Operand2="0" OperandType="String">
+							<ToSet Key="$MED_LIMIT" Value="$HOCOV_F"></ToSet>
+						</SubCondition>
+						<SubCondition Operand1="$HOCOV_F" Operator="==" Operand2="0" OperandType="String">
+							<ToSet Key="$MED_LIMIT" Value="1000/25000"></ToSet>
+						</SubCondition>
+					</SubConditions>
+				</Condition>
+			</Conditions>
+		</Rule>
+		<!-- End of Master Rules -->
+		<Rule Action="Database" StartDate="1950-01-01" EndDate="3000-12-30">
+			<Conditions>
+				<Condition Operand1="1" Operator="==" Operand2="1">
+					<ToGrant CoverageCode="BTESC">
+						<Limit Value="" Operand1="$INS_VAL" Operator="*" Operand2="0.05" LimitID=""></Limit>
+						<Deductible Value="" Operand1="" Operator="" Operand2="" DeducID=""></Deductible>
+					</ToGrant>
+				</Condition>
+			</Conditions>
+			<Conditions>
+				<Condition Operand1="1" Operator="==" Operand2="1">
+						<ToSet CoverageCode="EBIUE">
+							<Limit Value="$UNATTACH_LIMIT" Operand1="" Operator="" Operand2="" LimitID=""></Limit>
+							<Deductible Value="100" Operand1="" Operator="" Operand2="" DeducID=""></Deductible>
+						</ToSet>
+				</Condition>
+			</Conditions>
+			<Conditions DependentField="TYPE_OF_WATERCRAFT">
+				<!-- If type of watercraft is Jetski -->
+				<Condition Operand1="$BOAT_TYPE" Operator="==" Operand2="11390">
+					<!-- ToGrant CoverageCode="EBPPDJ">
+						<Limit Value="$INS_VAL" Operand1="" Operator="" Operand2="" LimitID=""></Limit>
+						<Deductible Value="" Operand1="" Operator="" Operand2="" DeducID=""></Deductible>
+					</ToGrant -->
+					<!-- If Coverage Basis Type is Actual Cash Value -->
+					<SubCondition Operand1="$COV_TYPE" Operator="==" Operand2="11758">
+						<ToGrant CoverageCode="EBPPDACV">
+							<Limit Value="$INS_VAL" Operand1="" Operator="" Operand2=""></Limit>
+							<Deductible Value="" Operand1="" Operator="" Operand2=""></Deductible>
+						</ToGrant>
+						<ToRevoke CoverageCode="EBPPDAV"></ToRevoke>
+						<ToRevoke CoverageCode="EBSCEAV"></ToRevoke>	
+					</SubCondition>
+					<!-- If Coverage Basis Type is Aggreed Value -->
+					<SubCondition Operand1="$COV_TYPE" Operator="==" Operand2="11759">
+						<ToGrant CoverageCode="EBPPDAV">
+							<Limit Value="$INS_VAL" Operand1="" Operator="" Operand2=""></Limit>
+							<Deductible Value="" Operand1="" Operator="" Operand2=""></Deductible>
+						</ToGrant>
+						<ToGrant CoverageCode="EBSCEAV">
+							<Limit Value="" Operand1="" Operator="" Operand2="" LimitID=""></Limit>
+							<Deductible Value="" Operand1="" Operator="" Operand2="" DeducID=""></Deductible>
+						</ToGrant>
+						<ToRevoke CoverageCode="EBPPDACV"></ToRevoke>
+					</SubCondition>
+					<ToSet CoverageCode="BDEDUC">
+						<Limit Value="" Operand1="" Operator="" Operand2="" LimitID=""></Limit>
+						<Deductible Value="$SEC_DED" Operand1="" Operator="" Operand2="" DeducID=""></Deductible>
+					</ToSet>
+					<ToGrant CoverageCode="WAT400">
+						<Limit Value="" Operand1="" Operator="" Operand2="" LimitID=""></Limit>
+						<Deductible Value="" Operand1="" Operator="" Operand2="" DeducID=""></Deductible>
+					</ToGrant>
+					<ToGrant CoverageCode="EBSCEAV">
+						<Limit Value="" Operand1="" Operator="" Operand2="" LimitID=""></Limit>
+						<Deductible Value="" Operand1="" Operator="" Operand2="" DeducID=""></Deductible>
+					</ToGrant>
+					<ToRevoke CoverageCode="BTESC"></ToRevoke>
+					<ToRevoke CoverageCode="EBSMT"></ToRevoke>
+					<ToRevoke CoverageCode="EBSMECE"></ToRevoke>
+				</Condition>
+				<!-- If type of watercraft is Jetski (w/Lift Bar) -->
+				<Condition Operand1="$BOAT_TYPE" Operator="==" Operand2="11387">
+					<!-- ToGrant CoverageCode="EBPPDJ">
+						<Limit Value="$INS_VAL" Operand1="" Operator="" Operand2="" LimitID=""></Limit>
+						<Deductible Value="" Operand1="" Operator="" Operand2="" DeducID=""></Deductible>
+					</ToGrant -->
+					<!-- If Coverage Basis Type is Actual Cash Value -->
+					<SubCondition Operand1="$COV_TYPE" Operator="==" Operand2="11758">
+						<ToGrant CoverageCode="EBPPDACV">
+							<Limit Value="$INS_VAL" Operand1="" Operator="" Operand2=""></Limit>
+							<Deductible Value="" Operand1="" Operator="" Operand2=""></Deductible>
+						</ToGrant>
+						<ToRevoke CoverageCode="EBPPDAV"></ToRevoke>
+						<ToRevoke CoverageCode="EBSCEAV"></ToRevoke>
+					</SubCondition>
+					<!-- If Coverage Basis Type is Aggreed Value -->
+					<SubCondition Operand1="$COV_TYPE" Operator="==" Operand2="11759">
+						<ToGrant CoverageCode="EBPPDAV">
+							<Limit Value="$INS_VAL" Operand1="" Operator="" Operand2=""></Limit>
+							<Deductible Value="" Operand1="" Operator="" Operand2=""></Deductible>
+						</ToGrant>
+						<ToGrant CoverageCode="EBSCEAV">
+							<Limit Value="" Operand1="" Operator="" Operand2="" LimitID=""></Limit>
+							<Deductible Value="" Operand1="" Operator="" Operand2="" DeducID=""></Deductible>
+						</ToGrant>
+						<ToRevoke CoverageCode="EBPPDACV"></ToRevoke>
+					</SubCondition>
+					<ToSet CoverageCode="BDEDUC">
+						<Limit Value="" Operand1="" Operator="" Operand2="" LimitID=""></Limit>
+						<Deductible Value="$SEC_DED" Operand1="" Operator="" Operand2="" DeducID=""></Deductible>
+					</ToSet>
+					<ToGrant CoverageCode="WAT400">
+						<Limit Value="" Operand1="" Operator="" Operand2="" LimitID=""></Limit>
+						<Deductible Value="" Operand1="" Operator="" Operand2="" DeducID=""></Deductible>
+					</ToGrant>
+					<ToRevoke CoverageCode="BTESC"></ToRevoke>
+					<!-- ToRevoke CoverageCode="EBPPDAV"></ToRevoke>
+					<ToRevoke CoverageCode="EBPPDACV"></ToRevoke  -->
+					<ToRevoke CoverageCode="EBSMT"></ToRevoke>
+					<ToRevoke CoverageCode="EBSMECE"></ToRevoke>
+					<!--ToRevoke CoverageCode="EBSCEAV"></ToRevoke-->
+				</Condition>
+				<!-- Any other boat -->
+				<Condition Operand1="$BOAT_TYPE" Operator="!=" Operand2="0">
+					<ToRevoke CoverageCode="EBPPDJ"></ToRevoke>
+					<ToRevoke CoverageCode="WAT400"></ToRevoke>
+					<!-- If Coverage Basis Type is Actual Cash Value -->
+					<SubCondition Operand1="$COV_TYPE" Operator="==" Operand2="11758">
+						<ToRevoke CoverageCode="EBPPDAV"></ToRevoke>
+						<ToRevoke CoverageCode="EBSCEAV"></ToRevoke>
+						<ToGrant CoverageCode="EBPPDACV">
+							<Limit Value="$INS_VAL" Operand1="" Operator="" Operand2=""></Limit>
+							<Deductible Value="" Operand1="" Operator="" Operand2=""></Deductible>
+							<!--changed<Deductible Value="$SEC_DED" Operand1="" Operator="" Operand2=""></Deductible>  -->
+						</ToGrant>
+						<ToSet CoverageCode="BDEDUC">
+							<Limit Value="" Operand1="" Operator="" Operand2="" LimitID=""></Limit>
+							<Deductible Value="$SEC_DED" Operand1="" Operator="" Operand2="" DeducID=""></Deductible>
+						</ToSet>
+					</SubCondition>
+					<!-- If Coverage Basis Type is Aggreed Value -->
+					<SubCondition Operand1="$COV_TYPE" Operator="==" Operand2="11759">
+						<ToRevoke CoverageCode="EBPPDACV"></ToRevoke>
+						<ToGrant CoverageCode="EBPPDAV">
+							<Limit Value="$INS_VAL" Operand1="" Operator="" Operand2=""></Limit>
+							<Deductible Value="" Operand1="" Operator="" Operand2=""></Deductible>
+							<!--changed <Deductible Value="$SEC_DED" Operand1="" Operator="" Operand2=""></Deductible> -->
+						</ToGrant>
+						<ToSet CoverageCode="BDEDUC">
+							<Limit Value="" Operand1="" Operator="" Operand2="" LimitID=""></Limit>
+							<Deductible Value="$SEC_DED" Operand1="" Operator="" Operand2="" DeducID=""></Deductible>
+						</ToSet>
+						<!--by pravesh -->
+						<ToGrant CoverageCode="EBSCEAV">
+							<Limit Value="" Operand1="" Operator="" Operand2=""></Limit>
+							<Deductible Value="" Operand1="" Operator="" Operand2=""></Deductible>
+						</ToGrant>
+					</SubCondition>
+				</Condition>
+			</Conditions>
+			<Conditions>
+				<!-- If Coverage type basis is Not Applicable Then PD will not be applicable -->
+				<Condition Operand1="$COV_TYPE" Operator="==" Operand2="11978">
+					<ToRevoke CoverageCode="EBPPDAV"></ToRevoke>
+					<ToRevoke CoverageCode="EBSCEAV"></ToRevoke>
+					<ToRevoke CoverageCode="EBPPDACV"></ToRevoke>
+					<ToRevoke CoverageCode="EBPPDJ"></ToRevoke>
+					<ToRevoke CoverageCode="BDEDUC"></ToRevoke>
+					<ToRevoke CoverageCode="BTESC"></ToRevoke>
+					<ToGrant CoverageCode="LCCSL">
+						<Limit Value="$WAT_LIMIT" Operand1="" Operator="" Operand2="" LimitID=""></Limit>
+						<Deductible Value="" Operand1="" Operator="" Operand2="" DeducID=""></Deductible>
+					</ToGrant>
+					<ToGrant CoverageCode="MCPAY">
+						<Limit Value="$MED_LIMIT" Operand1="" Operator="" Operand2="" LimitID=""></Limit>
+						<Deductible Value="" Operand1="" Operator="" Operand2="" DeducID=""></Deductible>
+					</ToGrant>
+					<!--ToSet CoverageCode="BDEDUC"> //commeted by Pravesh as if coverage base is not applicable then Boat deductible will be removed
+						<Limit Value="" Operand1="" Operator="" Operand2="" LimitID=""></Limit>
+						<Deductible Value="$SEC_DED" Operand1="" Operator="" Operand2="" DeducID=""></Deductible>
+					/ToSet -->
+				</Condition>
+				<Condition Operand1="$COV_TYPE" Operator="!=" Operand2="11978">
+					<ToGrant CoverageCode="BDEDUC">
+						<Limit Value="" Operand1="" Operator="" Operand2="" LimitID=""></Limit>
+						<Deductible Value="$SEC_DED" Operand1="" Operator="" Operand2="" DeducID=""></Deductible>
+					</ToGrant>
+				</Condition>
+			</Conditions>
+			<!-- to handel Extented from HO limit for Liability -->
+			<Conditions>
+				<Condition Operand1="$BOAT_TYPE" Operator="==" Operand2="11390">
+					<SubCondition Operand1="$WATER_SAVED_ID" Operator="!=" Operand2="0" OperandType="Double">
+						<ToSet CoverageCode="LCCSL">
+							<Limit Value="25000" Operand1="" Operator="" Operand2="" LimitID=""></Limit>
+							<Deductible Value="" Operand1="" Operator="" Operand2="" DeducID=""></Deductible>
+						</ToSet>
+					</SubCondition>
+				</Condition>
+				<Condition Operand1="$BOAT_TYPE" Operator="==" Operand2="11387">
+					<SubCondition Operand1="$WATER_SAVED_ID" Operator="!=" Operand2="0" OperandType="Double">
+						<ToSet CoverageCode="LCCSL">
+							<Limit Value="25000" Operand1="" Operator="" Operand2="" LimitID=""></Limit>
+							<Deductible Value="" Operand1="" Operator="" Operand2="" DeducID=""></Deductible>
+						</ToSet>
+					</SubCondition>
+				</Condition>
+				<Condition Operand1="$BOAT_TYPE" Operator="==" Operand2="11373">
+					<SubCondition Operand1="$WATER_SAVED_ID" Operator="!=" Operand2="0" OperandType="Double">
+						<ToSet CoverageCode="LCCSL">
+							<Limit Value="25000" Operand1="" Operator="" Operand2="" LimitID=""></Limit>
+							<Deductible Value="" Operand1="" Operator="" Operand2="" DeducID=""></Deductible>
+						</ToSet>
+					</SubCondition>
+				</Condition>
+				<Condition Operand1="$BOAT_TYPE" Operator="==" Operand2="11375">
+					<SubCondition Operand1="$WATER_SAVED_ID" Operator="!=" Operand2="0" OperandType="Double">
+						<ToSet CoverageCode="LCCSL">
+							<Limit Value="25000" Operand1="" Operator="" Operand2="" LimitID=""></Limit>
+							<Deductible Value="" Operand1="" Operator="" Operand2="" DeducID=""></Deductible>
+						</ToSet>
+					</SubCondition>
+				</Condition>
+				<Condition Operand1="$BOAT_TYPE" Operator="==" Operand2="11371">
+					<SubCondition Operand1="$WATER_SAVED_ID" Operator="!=" Operand2="0" OperandType="Double">
+						<ToSet CoverageCode="LCCSL">
+							<Limit Value="25000" Operand1="" Operator="" Operand2="" LimitID=""></Limit>
+							<Deductible Value="" Operand1="" Operator="" Operand2="" DeducID=""></Deductible>
+						</ToSet>
+					</SubCondition>
+				</Condition>
+				<Condition Operand1="$BOAT_TYPE" Operator="==" Operand2="11370">
+					<SubCondition Operand1="$WATER_SAVED_ID" Operator="!=" Operand2="0" OperandType="Double">
+						<ToSet CoverageCode="LCCSL">
+							<Limit Value="25000" Operand1="" Operator="" Operand2="" LimitID=""></Limit>
+							<Deductible Value="" Operand1="" Operator="" Operand2="" DeducID=""></Deductible>
+						</ToSet>
+					</SubCondition>
+				</Condition>
+				<!--Remove Rule 02 May 2008-->
+				<!--<Condition Operand1="$BOAT_TYPE" Operator="==" Operand2="11757">
+					<SubCondition Operand1="$WATER_SAVED_ID" Operator="!=" Operand2="0" OperandType="Double">
+						<ToSet CoverageCode="LCCSL">
+							<Limit Value="25000" Operand1="" Operator="" Operand2="" LimitID=""></Limit>
+							<Deductible Value="" Operand1="" Operator="" Operand2="" DeducID=""></Deductible>
+						</ToSet>
+					</SubCondition>
+				</Condition>-->
+				<Condition Operand1="$BOAT_TYPE" Operator="==" Operand2="11386">
+					<SubCondition Operand1="$WATER_SAVED_ID" Operator="!=" Operand2="0" OperandType="Double">
+						<ToSet CoverageCode="LCCSL">
+							<Limit Value="25000" Operand1="" Operator="" Operand2="" LimitID=""></Limit>
+							<Deductible Value="" Operand1="" Operator="" Operand2="" DeducID=""></Deductible>
+						</ToSet>
+					</SubCondition>
+				</Condition>
+				<Condition Operand1="$BOAT_TYPE" Operator="==" Operand2="11372">
+					<!--Sailboat -->
+					<SubCondition Operand1="$BOAT_LENGTH" Operator="&gt;" Operand2="26">
+						<ToSet CoverageCode="MCPAY">
+							<Limit Value="$MED_LIMIT" Operand1="" Operator="" Operand2="" LimitID=""></Limit>
+							<Deductible Value="" Operand1="" Operator="" Operand2="" DeducID=""></Deductible>
+						</ToSet>
+						<ToSet CoverageCode="LCCSL">
+							<Limit Value="$WAT_LIMIT" Operand1="" Operator="" Operand2="" LimitID=""></Limit>
+							<Deductible Value="" Operand1="" Operator="" Operand2="" DeducID=""></Deductible>
+						</ToSet>
+					</SubCondition>
+					<SubCondition Operand1="$WATER_SAVED_ID" Operator="!=" Operand2="0" OperandType="Double">
+						<ToSet CoverageCode="LCCSL">
+							<Limit Value="25000" Operand1="" Operator="" Operand2="" LimitID=""></Limit>
+							<Deductible Value="" Operand1="" Operator="" Operand2="" DeducID=""></Deductible>
+						</ToSet>
+					</SubCondition>
+					<SubCondition Operand1="$MADICAL_SAVED_ID" Operator="!=" Operand2="0" OperandType="Double">
+						<ToSet CoverageCode="MCPAY">
+							<Limit Value="1000/25000" Operand1="" Operator="" Operand2="" LimitID=""></Limit>
+							<Deductible Value="" Operand1="" Operator="" Operand2="" DeducID=""></Deductible>
+						</ToSet>
+					</SubCondition>
+				</Condition>
+				<Condition Operand1="$BOAT_TYPE" Operator="==" Operand2="11672">
+					<!--Sailboat w/outboard -->
+					<SubCondition Operand1="$BOAT_LENGTH" Operator="&gt;" Operand2="26">
+						<ToSet CoverageCode="MCPAY">
+							<Limit Value="$MED_LIMIT" Operand1="" Operator="" Operand2="" LimitID=""></Limit>
+							<Deductible Value="" Operand1="" Operator="" Operand2="" DeducID=""></Deductible>
+						</ToSet>
+						<ToSet CoverageCode="LCCSL">
+							<Limit Value="$WAT_LIMIT" Operand1="" Operator="" Operand2="" LimitID=""></Limit>
+							<Deductible Value="" Operand1="" Operator="" Operand2="" DeducID=""></Deductible>
+						</ToSet>
+					</SubCondition>
+					<SubCondition Operand1="$WATER_SAVED_ID" Operator="!=" Operand2="0" OperandType="Double">
+						<ToSet CoverageCode="LCCSL">
+							<Limit Value="25000" Operand1="" Operator="" Operand2="" LimitID=""></Limit>
+							<Deductible Value="" Operand1="" Operator="" Operand2="" DeducID=""></Deductible>
+						</ToSet>
+					</SubCondition>
+					<SubCondition Operand1="$MADICAL_SAVED_ID" Operator="!=" Operand2="0" OperandType="Double">
+						<ToSet CoverageCode="MCPAY">
+							<Limit Value="1000/25000" Operand1="" Operator="" Operand2="" LimitID=""></Limit>
+							<Deductible Value="" Operand1="" Operator="" Operand2="" DeducID=""></Deductible>
+						</ToSet>
+					</SubCondition>
+				</Condition>
+			</Conditions>
+			<!-- handling Extented From HO limit for madical payment -->
+			<Conditions>
+				<Condition Operand1="$BOAT_TYPE" Operator="==" Operand2="11390">
+					<SubCondition Operand1="$MADICAL_SAVED_ID" Operator="!=" Operand2="0" OperandType="Double">
+						<ToSet CoverageCode="MCPAY">
+							<Limit Value="1000/25000" Operand1="" Operator="" Operand2="" LimitID=""></Limit>
+							<Deductible Value="" Operand1="" Operator="" Operand2="" DeducID=""></Deductible>
+						</ToSet>
+					</SubCondition>
+				</Condition>
+				<Condition Operand1="$BOAT_TYPE" Operator="==" Operand2="11387">
+					<SubCondition Operand1="$MADICAL_SAVED_ID" Operator="!=" Operand2="0" OperandType="Double">
+						<ToSet CoverageCode="MCPAY">
+							<Limit Value="1000/25000" Operand1="" Operator="" Operand2="" LimitID=""></Limit>
+							<Deductible Value="" Operand1="" Operator="" Operand2="" DeducID=""></Deductible>
+						</ToSet>
+					</SubCondition>
+				</Condition>
+				<Condition Operand1="$BOAT_TYPE" Operator="==" Operand2="11373">
+					<SubCondition Operand1="$MADICAL_SAVED_ID" Operator="!=" Operand2="0" OperandType="Double">
+						<ToSet CoverageCode="MCPAY">
+							<Limit Value="1000/25000" Operand1="" Operator="" Operand2="" LimitID=""></Limit>
+							<Deductible Value="" Operand1="" Operator="" Operand2="" DeducID=""></Deductible>
+						</ToSet>
+					</SubCondition>
+				</Condition>
+				<Condition Operand1="$BOAT_TYPE" Operator="==" Operand2="11375">
+					<SubCondition Operand1="$MADICAL_SAVED_ID" Operator="!=" Operand2="0" OperandType="Double">
+						<ToSet CoverageCode="MCPAY">
+							<Limit Value="1000/25000" Operand1="" Operator="" Operand2="" LimitID=""></Limit>
+							<Deductible Value="" Operand1="" Operator="" Operand2="" DeducID=""></Deductible>
+						</ToSet>
+					</SubCondition>
+				</Condition>
+				<Condition Operand1="$BOAT_TYPE" Operator="==" Operand2="11371">
+					<SubCondition Operand1="$MADICAL_SAVED_ID" Operator="!=" Operand2="0" OperandType="Double">
+						<ToSet CoverageCode="MCPAY">
+							<Limit Value="1000/25000" Operand1="" Operator="" Operand2="" LimitID=""></Limit>
+							<Deductible Value="" Operand1="" Operator="" Operand2="" DeducID=""></Deductible>
+						</ToSet>
+					</SubCondition>
+				</Condition>
+				<Condition Operand1="$BOAT_TYPE" Operator="==" Operand2="11370">
+					<SubCondition Operand1="$MADICAL_SAVED_ID" Operator="!=" Operand2="0" OperandType="Double">
+						<ToSet CoverageCode="MCPAY">
+							<Limit Value="1000/25000" Operand1="" Operator="" Operand2="" LimitID=""></Limit>
+							<Deductible Value="" Operand1="" Operator="" Operand2="" DeducID=""></Deductible>
+						</ToSet>
+					</SubCondition>
+				</Condition>
+				<!--Removed 02 May 2008-->
+				<!--<Condition Operand1="$BOAT_TYPE" Operator="==" Operand2="11757">
+					<SubCondition Operand1="$MADICAL_SAVED_ID" Operator="!=" Operand2="0" OperandType="Double">
+						<ToSet CoverageCode="MCPAY">
+							<Limit Value="1000/25000" Operand1="" Operator="" Operand2="" LimitID=""></Limit>
+							<Deductible Value="" Operand1="" Operator="" Operand2="" DeducID=""></Deductible>
+						</ToSet>
+					</SubCondition>
+				</Condition>-->
+				<Condition Operand1="$BOAT_TYPE" Operator="==" Operand2="11386">
+					<SubCondition Operand1="$MADICAL_SAVED_ID" Operator="!=" Operand2="0" OperandType="Double">
+						<ToSet CoverageCode="MCPAY">
+							<Limit Value="1000/25000" Operand1="" Operator="" Operand2="" LimitID=""></Limit>
+							<Deductible Value="" Operand1="" Operator="" Operand2="" DeducID=""></Deductible>
+						</ToSet>
+					</SubCondition>
+				</Condition>
+				<Condition Operand1="$BOAT_TYPE" Operator="==" Operand2="11372">
+					<!--Sailboat -->
+					<SubCondition Operand1="$BOAT_LENGTH" Operator="&gt;" Operand2="26">
+						<ToSet CoverageCode="MCPAY">
+							<Limit Value="$MED_LIMIT" Operand1="" Operator="" Operand2="" LimitID=""></Limit>
+							<Deductible Value="" Operand1="" Operator="" Operand2="" DeducID=""></Deductible>
+						</ToSet>
+						<ToSet CoverageCode="LCCSL">
+							<Limit Value="$WAT_LIMIT" Operand1="" Operator="" Operand2="" LimitID=""></Limit>
+							<Deductible Value="" Operand1="" Operator="" Operand2="" DeducID=""></Deductible>
+						</ToSet>
+					</SubCondition>
+					<SubCondition Operand1="$MADICAL_SAVED_ID" Operator="!=" Operand2="0" OperandType="Double">
+						<ToSet CoverageCode="MCPAY">
+							<Limit Value="1000/25000" Operand1="" Operator="" Operand2="" LimitID=""></Limit>
+							<Deductible Value="" Operand1="" Operator="" Operand2="" DeducID=""></Deductible>
+						</ToSet>
+					</SubCondition>
+				</Condition>
+				<Condition Operand1="$BOAT_TYPE" Operator="==" Operand2="11672">
+					<!--Sailboat w/outboard -->
+					<SubCondition Operand1="$BOAT_LENGTH" Operator="&gt;" Operand2="26">
+						<ToSet CoverageCode="MCPAY">
+							<Limit Value="$MED_LIMIT" Operand1="" Operator="" Operand2="" LimitID=""></Limit>
+							<Deductible Value="" Operand1="" Operator="" Operand2="" DeducID=""></Deductible>
+						</ToSet>
+						<ToSet CoverageCode="LCCSL">
+							<Limit Value="$WAT_LIMIT" Operand1="" Operator="" Operand2="" LimitID=""></Limit>
+							<Deductible Value="" Operand1="" Operator="" Operand2="" DeducID=""></Deductible>
+						</ToSet>
+					</SubCondition>
+					<SubCondition Operand1="$MADICAL_SAVED_ID" Operator="!=" Operand2="0" OperandType="Double">
+						<ToSet CoverageCode="MCPAY">
+							<Limit Value="1000/25000" Operand1="" Operator="" Operand2="" LimitID=""></Limit>
+							<Deductible Value="" Operand1="" Operator="" Operand2="" DeducID=""></Deductible>
+						</ToSet>
+					</SubCondition>
+					<SubCondition Operand1="$WATER_SAVED_ID" Operator="!=" Operand2="0" OperandType="Double">
+						<ToSet CoverageCode="LCCSL">
+							<Limit Value="25000" Operand1="" Operator="" Operand2="" LimitID=""></Limit>
+							<Deductible Value="" Operand1="" Operator="" Operand2="" DeducID=""></Deductible>
+						</ToSet>
+					</SubCondition>
+				</Condition>
+			</Conditions>
+			<!-- For Handling Uninsured Boaters depndency -->
+			<Conditions>
+				<!-- Boat Type MiniJetBoat -->
+				<Condition Operand1="$BOAT_TYPE" Operator="==" Operand2="11373">
+					<ToRevoke CoverageCode="UMBCS"></ToRevoke>
+					<ToRevoke CoverageCode="EBSMECE"></ToRevoke>
+					<ToSet CoverageCode="MCPAY">
+						<Limit Value="1000/25000" Operand1="" Operator="" Operand2="" LimitID=""></Limit>
+						<Deductible Value="" Operand1="" Operator="" Operand2="" DeducID=""></Deductible>
+					</ToSet>
+					<ToGrant CoverageCode="WAT400">
+						<Limit Value="" Operand1="" Operator="" Operand2="" LimitID=""></Limit>
+						<Deductible Value="" Operand1="" Operator="" Operand2="" DeducID=""></Deductible>
+					</ToGrant>
+					<ToRevoke CoverageCode="BTESC"></ToRevoke>
+				</Condition>
+				<!-- Boat Type Waverunner -->
+				<Condition Operand1="$BOAT_TYPE" Operator="==" Operand2="11386">
+					<ToRevoke CoverageCode="UMBCS"></ToRevoke>
+					<ToRevoke CoverageCode="EBSCEAV"></ToRevoke>
+					<ToRevoke CoverageCode="EBSMECE"></ToRevoke>
+					<ToSet CoverageCode="MCPAY">
+						<Limit Value="1000/25000" Operand1="" Operator="" Operand2="" LimitID=""></Limit>
+						<Deductible Value="" Operand1="" Operator="" Operand2="" DeducID=""></Deductible>
+					</ToSet>
+					<ToSet CoverageCode="LCCSL">
+						<Limit Value="$WAT_LIMIT" Operand1="" Operator="" Operand2="" LimitID=""></Limit>
+						<Deductible Value="" Operand1="" Operator="" Operand2="" DeducID=""></Deductible>
+					</ToSet>
+					<ToGrant CoverageCode="WAT400">
+						<Limit Value="" Operand1="" Operator="" Operand2="" LimitID=""></Limit>
+						<Deductible Value="" Operand1="" Operator="" Operand2="" DeducID=""></Deductible>
+					</ToGrant>
+					<ToRevoke CoverageCode="BTESC"></ToRevoke>
+				</Condition>
+				<!-- If type of watercraft is Jetski -->
+				<Condition Operand1="$BOAT_TYPE" Operator="==" Operand2="11390">
+					<ToRevoke CoverageCode="UMBCS"></ToRevoke>
+					<ToSet CoverageCode="MCPAY">
+						<Limit Value="1000/25000" Operand1="" Operator="" Operand2="" LimitID=""></Limit>
+						<Deductible Value="" Operand1="" Operator="" Operand2="" DeducID=""></Deductible>
+					</ToSet>
+					<ToSet CoverageCode="LCCSL">
+						<Limit Value="$WAT_LIMIT" Operand1="" Operator="" Operand2="" LimitID=""></Limit>
+						<Deductible Value="" Operand1="" Operator="" Operand2="" DeducID=""></Deductible>
+					</ToSet>
+				</Condition>
+				<!-- If type of watercraft is Jetski (w/Lift Bar) -->
+				<Condition Operand1="$BOAT_TYPE" Operator="==" Operand2="11387">
+					<ToRevoke CoverageCode="UMBCS"></ToRevoke>
+					<ToSet CoverageCode="MCPAY">
+						<Limit Value="1000/25000" Operand1="" Operator="" Operand2="" LimitID=""></Limit>
+						<Deductible Value="" Operand1="" Operator="" Operand2="" DeducID=""></Deductible>
+					</ToSet>
+					<ToSet CoverageCode="LCCSL">
+						<Limit Value="$WAT_LIMIT" Operand1="" Operator="" Operand2="" LimitID=""></Limit>
+						<Deductible Value="" Operand1="" Operator="" Operand2="" DeducID=""></Deductible>
+					</ToSet>
+				</Condition>
+				<!-- Any other boat -->
+				<!--commented by Pravesh on 30 april 2007 uninsured Boater Limit was updated to Default every time from boat page -->
+				<!--Condition Operand1="$BOAT_TYPE" Operator="!=" Operand2="0"> 
+					<SubCondition Operand1="$LOB_ID" Operator="==" Operand2="1">
+						<ToGrant CoverageCode="UMBCS">
+							<Limit Value="$UMBCS_LIMIT" Operand1="" Operator="" Operand2=""></Limit>
+							<Deductible Value="" Operand1="" Operator="" Operand2=""></Deductible>
+						</ToGrant>
+						<ToSet CoverageCode="MCPAY">
+							<Limit Value="$HOCOV_F" Operand1="" Operator="" Operand2="" LimitID=""></Limit>
+							<Deductible Value="" Operand1="" Operator="" Operand2="" DeducID=""></Deductible>
+						</ToSet>
+					</SubCondition>
+				  /Condition-->
+			</Conditions>
+		</Rule>
+		<!-- Boat Length Dependncy -->
+		<Rule>
+			<Conditions>
+				<Condition Operand1="$BOAT_LENGTH" Operator="&gt;" Operand2="26">
+					<ToRevoke CoverageCode="EBSCEAV"></ToRevoke>
+				</Condition>
+			</Conditions>
+		</Rule>
+		<!-- Boat Age Dependency -->
+		<!-- If BoatAge is less than 5 grant Boat Replacement Coverage -->
+		<Rule Action="Database" StartDate="1950-01-01" EndDate="3000-12-30">
+			<Conditions>
+				<Condition Operand1="$BOAT_AGE" Operator="&lt;" Operand2="6">
+					<!-- if coverage Base is agreed value then do not grant Boat replacement cost coverage itrack 4029-->
+					<SubCondition Operand1="$COV_TYPE" Operator="!=" Operand2="11759">
+						<ToGrant CoverageCode="BRCC">
+							<Limit Value="$INS_VAL" Operand1="" Operator="" Operand2=""></Limit>
+							<Deductible Value="$SEC_DED" Operand1="" Operator="" Operand2=""></Deductible>
+						</ToGrant>
+					</SubCondition>
+					<SubCondition Operand1="$COV_TYPE" Operator="==" Operand2="11759">
+						<ToRevoke CoverageCode="BRCC"></ToRevoke>
+					</SubCondition>
+				</Condition>
+				<Condition Operand1="$BOAT_AGE" Operator="&gt;" Operand2="5">
+					<ToRevoke CoverageCode="BRCC"></ToRevoke>
+				</Condition>
+			</Conditions>
+			<Conditions>
+				<Condition Operand1="$BOAT_AGE" Operator="&gt;" Operand2="20">
+					<ToRevoke CoverageCode="EBSCEAV"></ToRevoke>
+				</Condition>
+			</Conditions>
+		</Rule>
+	</Group>
+	<!-- Application Dependent Coverages -->
+	<Group Code="AppDependent">
+		<!-- Rules for setting Master Keys -->
+		<Rule Action="Master" StartDate="2006-03-01" EndDate="3000-12-30">
+			<Conditions>
+				<Condition Operand1="$BOAT_STYLE" Operator="==" Operand2="JS" OperandType="String">
+					<ToSet Key="$DED_VAL" Value="0"></ToSet>
+				</Condition>
+				<Condition Operand1="$BOAT_STYLE" Operator="!=" Operand2="JS" OperandType="String">
+					<SubConditions>
+						<SubCondition Operand1="$INS_VAL" Operator="&gt;" Operand2="25000" OperandType="Double">
+							<ToSet Key="$DED_VAL" Value="500"></ToSet>
+						</SubCondition>
+						<SubCondition Operand1="$INS_VAL" Operator="&gt;" Operand2="10000" OperandType="Double">
+							<ToSet Key="$DED_VAL" Value="250"></ToSet>
+						</SubCondition>
+						<SubCondition Operand1="10000" Operator=">=" Operand2="$INS_VAL" OperandType="Double">
+							<ToSet Key="$DED_VAL" Value="0"></ToSet>
+						</SubCondition>
+					</SubConditions>
+				</Condition>
+			</Conditions>
+			<Conditions>
+				<Condition Operand1="$BOAT_STYLE" Operator="==" Operand2="JS" OperandType="String">
+					<SubConditions>
+						<SubCondition Operand1="$IS_GF_DEDUCT" Operator="==" Operand2="1" OperandType="Double">
+							<ToSet Key="$SEC_DED" Value="$SAVED_DED_J"></ToSet>
+						</SubCondition>
+						<SubCondition Operand1="$SAVED_DED_J" Operator="==" Operand2="0" OperandType="Double">
+							<ToSet Key="$SEC_DED" Value="250"></ToSet>
+						</SubCondition>
+						<SubCondition Operand1="$SAVED_DED_J" Operator="!=" Operand2="0" OperandType="Double">
+							<ToSet Key="$SEC_DED" Value="$SAVED_DED_J"></ToSet>
+						</SubCondition>
+					</SubConditions>
+				</Condition>
+				<Condition Operand1="$IS_GF_DEDUCT" Operator="==" Operand2="1" OperandType="Double">
+					<ToSet Key="$SEC_DED" Value="$SAVED_DED_C"></ToSet>
+				</Condition>
+				<Condition Operand1="$DED_VAL" Operator=">=" Operand2="$SAVED_DED_C" OperandType="Double">
+					<ToSet Key="$SEC_DED" Value="$DED_VAL"></ToSet>
+				</Condition>
+				<Condition Operand1="$DED_VAL" Operator="&lt;" Operand2="$SAVED_DED_C" OperandType="Double">
+					<ToSet Key="$SEC_DED" Value="$SAVED_DED_C"></ToSet>
+				</Condition>
+			</Conditions>
+		</Rule>
+		<Rule Action="Master" StartDate="1950-01-01" EndDate="2006-02-28">
+			<Conditions>
+				<Condition Operand1="$BOAT_STYLE" Operator="==" Operand2="JS" OperandType="String">
+					<SubConditions>
+						<SubCondition Operand1="$IS_GF_DEDUCT" Operator="==" Operand2="1" OperandType="Double">
+							<ToSet Key="$SEC_DED" Value="$SAVED_DED_J"></ToSet>
+						</SubCondition>
+						<SubCondition Operand1="$SAVED_DED_J" Operator="==" Operand2="0" OperandType="Double">
+							<ToSet Key="$SEC_DED" Value="250"></ToSet>
+						</SubCondition>
+						<SubCondition Operand1="$SAVED_DED_J" Operator="!=" Operand2="0" OperandType="Double">
+							<ToSet Key="$SEC_DED" Value="$SAVED_DED_J"></ToSet>
+						</SubCondition>
+					</SubConditions>
+				</Condition>
+				<Condition Operand1="$IS_GF_DEDUCT" Operator="==" Operand2="1" OperandType="Double">
+					<ToSet Key="$SEC_DED" Value="$SAVED_DED_C"></ToSet>
+				</Condition>
+				<Condition Operand1="$SAVED_DED_C" Operator="==" Operand2="0" OperandType="Double">
+					<ToSet Key="$SEC_DED" Value="100 -1%"></ToSet>
+				</Condition>
+				<Condition Operand1="1" Operator="==" Operand2="1" OperandType="Double">
+					<ToSet Key="$SEC_DED" Value="$SAVED_DED_C"></ToSet>
+				</Condition>
+			</Conditions>
+		</Rule>
+		<Rule Action="Master" StartDate="1950-01-01" EndDate="2006-02-28">
+			<Conditions>
+				<Condition Operand1="1" Operator="==" Operand2="1" OperandType="Double">
+					<ToSet Key="$UMBCS_LIMIT" Value="10000"></ToSet>
+				</Condition>
+			</Conditions>
+		</Rule>
+		<Rule Action="Master" StartDate="2006-03-01" EndDate="3000-12-12">
+			<Conditions>
+				<Condition Operand1="1" Operator="==" Operand2="1" OperandType="Double">
+					<ToSet Key="$UMBCS_LIMIT" Value="50000"></ToSet>
+				</Condition>
+			</Conditions>
+		</Rule>
+		<!-- End of Master Rules -->
+		<!-- Boat Age Dependency -->
+		<!-- If BoatAge is less than 5 grant Boat Replacement Coverage -->
+		<Rule Action="Database" StartDate="1950-01-01" EndDate="3000-12-30">
+			<Conditions>
+				<Condition Operand1="$BOAT_AGE" Operator="&lt;" Operand2="6">
+					<!-- if coverage Base is agreed value then do not grant Boat replacement cost coverage itrack 4029-->
+					<SubCondition Operand1="$COV_TYPE" Operator="!=" Operand2="11759"> 
+						<ToGrant CoverageCode="BRCC">
+							<Limit Value="$INS_VAL" Operand1="" Operator="" Operand2=""></Limit>
+							<Deductible Value="$SEC_DED" Operand1="" Operator="" Operand2=""></Deductible>
+						</ToGrant>
+					</SubCondition>
+					<SubCondition Operand1="$COV_TYPE" Operator="==" Operand2="11759">
+						<ToRevoke CoverageCode="BRCC"></ToRevoke>
+					</SubCondition>
+				</Condition>
+				<Condition Operand1="$BOAT_AGE" Operator="&gt;" Operand2="5">
+					<ToRevoke CoverageCode="BRCC"></ToRevoke>
+				</Condition>
+			</Conditions>
+			<Conditions>
+				<Condition Operand1="$BOAT_AGE" Operator="&gt;" Operand2="20">
+					<ToRevoke CoverageCode="EBSCEAV"></ToRevoke>
+				</Condition>
+			</Conditions>
+		</Rule>
+	</Group>
+	<Group Code="LobDependent">
+		<Rule Action="Master" StartDate="2006-03-01" EndDate="3000-12-30">
+			<Conditions>
+				<Condition Operand1="$WATER_SAVED_VALUE" Operator="!=" Operand2="0" OperandType="String">
+					<ToSet Key="$WAT_LIMIT" Value="$WATER_SAVED_VALUE"></ToSet>
+				</Condition>
+				<Condition Operand1="$WATER_SAVED_VALUE" Operator="==" Operand2="0" OperandType="String">
+					<SubConditions>
+						<SubCondition Operand1="$HOCOV_E" Operator="!=" Operand2="0" OperandType="String">
+							<ToSet Key="$WAT_LIMIT" Value="$HOCOV_E"></ToSet>
+						</SubCondition>
+						<SubCondition Operand1="$HOCOV_E" Operator="==" Operand2="0" OperandType="String">
+							<ToSet Key="$WAT_LIMIT" Value="25000"></ToSet>
+						</SubCondition>
+					</SubConditions>
+				</Condition>
+			</Conditions>
+			<!-- added by pravesh as liability options for Jet ski , jet ski with lift and waverunner are deffer -->
+			<Conditions>
+				<Condition Operand1="$BOAT_STYLE" Operator="==" Operand2="JS" OperandType="String">
+					<SubConditions>
+						<SubCondition Operand1="$WATER_SAVED_VALUE" Operator="&lt;" Operand2="100000" OperandType="Double">
+							<ToSet Key="$WAT_LIMIT" Value="100000"></ToSet>
+						</SubCondition>
+						<SubCondition Operand1="$WATER_SAVED_VALUE" Operator=">=" Operand2="100000" OperandType="Double">
+							<ToSet Key="$WAT_LIMIT" Value="$WATER_SAVED_VALUE"></ToSet>
+						</SubCondition>
+					</SubConditions>
+				</Condition>
+				<!-- Boat Type Waverunner -->
+				<Condition Operand1="$BOAT_TYPE" Operator="==" Operand2="11386">
+					<SubConditions>
+						<SubCondition Operand1="$WATER_SAVED_VALUE" Operator="&lt;" Operand2="100000" OperandType="Double">
+							<ToSet Key="$WAT_LIMIT" Value="100000"></ToSet>
+						</SubCondition>
+						<SubCondition Operand1="$WATER_SAVED_VALUE" Operator=">=" Operand2="100000" OperandType="Double">
+							<ToSet Key="$WAT_LIMIT" Value="$WATER_SAVED_VALUE"></ToSet>
+						</SubCondition>
+					</SubConditions>
+				</Condition>
+			</Conditions>			
+			<Conditions>
+				<Condition Operand1="$MADICAL_SAVED_VALUE" Operator="!=" Operand2="0" OperandType="String">
+					<ToSet Key="$MED_LIMIT" Value="$MADICAL_SAVED_VALUE"></ToSet>
+				</Condition>
+				<Condition Operand1="$WATER_SAVED_VALUE" Operator="==" Operand2="0" OperandType="String">
+					<SubConditions>
+						<SubCondition Operand1="$HOCOV_F" Operator="!=" Operand2="0" OperandType="String">
+							<ToSet Key="$MED_LIMIT" Value="$HOCOV_F"></ToSet>
+						</SubCondition>
+						<SubCondition Operand1="$HOCOV_F" Operator="==" Operand2="0" OperandType="String">
+							<ToSet Key="$MED_LIMIT" Value="1000/25000"></ToSet>
+						</SubCondition>
+					</SubConditions>
+				</Condition>
+			</Conditions>
+		</Rule>
+		<Rule Action="Database" StartDate="1950-01-01" EndDate="2002-02-28">
+			<Conditions>
+				<Condition Operand1="$LOB_ID" Operator="==" Operand2="1">
+					<ToRevoke CoverageCode="WP100"></ToRevoke>
+					<ToGrant CoverageCode="LCCSL">
+						<Limit Value="$HOCOV_E" Operand1="" Operator="" Operand2=""></Limit>
+						<Deductible Value="" Operand1="" Operator="" Operand2=""></Deductible>
+					</ToGrant>
+					<ToGrant CoverageCode="MCPAY">
+						<Limit Value="$HOCOV_F" Operand1="" Operator="" Operand2=""></Limit>
+						<Deductible Value="" Operand1="" Operator="" Operand2=""></Deductible>
+					</ToGrant>
+					<ToGrant CoverageCode="UMBCS">
+						<Limit Value="10000" Operand1="" Operator="" Operand2=""></Limit>
+						<Deductible Value="" Operand1="" Operator="" Operand2=""></Deductible>
+					</ToGrant>
+					<!-- added by pravesh for medical payment in case of attach with home -->
+					<!-- Boat Type MiniJetBoat -->
+					<SubCondition Operand1="$BOAT_TYPE" Operator="==" Operand2="11373">
+						<ToSet CoverageCode="MCPAY">
+							<Limit Value="1000/25000" Operand1="" Operator="" Operand2="" LimitID=""></Limit>
+							<Deductible Value="" Operand1="" Operator="" Operand2="" DeducID=""></Deductible>
+						</ToSet>
+					</SubCondition>
+					<!-- Boat Type Waverunner -->
+					<SubCondition Operand1="$BOAT_TYPE" Operator="==" Operand2="11386">
+						<ToSet CoverageCode="MCPAY">
+							<Limit Value="1000/25000" Operand1="" Operator="" Operand2="" LimitID=""></Limit>
+							<Deductible Value="" Operand1="" Operator="" Operand2="" DeducID=""></Deductible>
+						</ToSet>
+					</SubCondition>
+					<!-- If type of watercraft is Jetski -->
+					<SubCondition Operand1="$BOAT_TYPE" Operator="==" Operand2="11390">
+						<ToSet CoverageCode="MCPAY">
+							<Limit Value="1000/25000" Operand1="" Operator="" Operand2="" LimitID=""></Limit>
+							<Deductible Value="" Operand1="" Operator="" Operand2="" DeducID=""></Deductible>
+						</ToSet>
+					</SubCondition>
+					<!-- If type of watercraft is Jetski (w/Lift Bar) -->
+					<SubCondition Operand1="$BOAT_TYPE" Operator="==" Operand2="11387">
+						<ToSet CoverageCode="MCPAY">
+							<Limit Value="1000/25000" Operand1="" Operator="" Operand2="" LimitID=""></Limit>
+							<Deductible Value="" Operand1="" Operator="" Operand2="" DeducID=""></Deductible>
+						</ToSet>
+					</SubCondition>
+					<!-- end here -->
+				</Condition>
+			</Conditions>
+		</Rule>
+		<Rule Action="Database" StartDate="2002-03-01" EndDate="3000-12-30">
+			<Conditions>
+				<Condition Operand1="$LOB_ID" Operator="==" Operand2="1">
+					<ToRevoke CoverageCode="WP100"></ToRevoke>
+					<ToGrant CoverageCode="LCCSL">
+						<Limit Value="$HOCOV_E" Operand1="" Operator="" Operand2=""></Limit>
+						<Deductible Value="" Operand1="" Operator="" Operand2=""></Deductible>
+					</ToGrant>
+					<ToGrant CoverageCode="MCPAY">
+						<Limit Value="$HOCOV_F" Operand1="" Operator="" Operand2=""></Limit>
+						<Deductible Value="" Operand1="" Operator="" Operand2=""></Deductible>
+					</ToGrant>
+					<!-- added by pravesh for medical payment in case of attach with home -->
+					<!-- Boat Type MiniJetBoat -->
+					<SubCondition Operand1="$BOAT_TYPE" Operator="==" Operand2="11373">
+						<ToSet CoverageCode="MCPAY">
+							<Limit Value="1000/25000" Operand1="" Operator="" Operand2="" LimitID=""></Limit>
+							<Deductible Value="" Operand1="" Operator="" Operand2="" DeducID=""></Deductible>
+						</ToSet>
+					</SubCondition>
+					<!-- Boat Type Waverunner -->
+					<SubCondition Operand1="$BOAT_TYPE" Operator="==" Operand2="11386">
+						<ToSet CoverageCode="MCPAY">
+							<Limit Value="1000/25000" Operand1="" Operator="" Operand2="" LimitID=""></Limit>
+							<Deductible Value="" Operand1="" Operator="" Operand2="" DeducID=""></Deductible>
+						</ToSet>
+					</SubCondition>
+					<!-- If type of watercraft is Jetski -->
+					<SubCondition Operand1="$BOAT_TYPE" Operator="==" Operand2="11390">
+						<ToSet CoverageCode="MCPAY">
+							<Limit Value="1000/25000" Operand1="" Operator="" Operand2="" LimitID=""></Limit>
+							<Deductible Value="" Operand1="" Operator="" Operand2="" DeducID=""></Deductible>
+						</ToSet>
+					</SubCondition>
+					<!-- If type of watercraft is Jetski (w/Lift Bar) -->
+					<SubCondition Operand1="$BOAT_TYPE" Operator="==" Operand2="11387">
+						<ToSet CoverageCode="MCPAY">
+							<Limit Value="1000/25000" Operand1="" Operator="" Operand2="" LimitID=""></Limit>
+							<Deductible Value="" Operand1="" Operator="" Operand2="" DeducID=""></Deductible>
+						</ToSet>
+					</SubCondition>
+					<!-- end here -->
+					<SubCondition Operand1="$UMBCS_OLDVALUE" Operator="&lt;" Operand2="50000" OperandType="Double">
+						<ToGrant CoverageCode="UMBCS">
+							<Limit Value="50000" Operand1="" Operator="" Operand2=""></Limit>
+							<Deductible Value="" Operand1="" Operator="" Operand2=""></Deductible>
+						</ToGrant>
+					</SubCondition>
+					<!--ToGrant CoverageCode="UMBCS">
+						<Limit Value="50000" Operand1="" Operator="" Operand2=""></Limit>
+						<Deductible Value="" Operand1="" Operator="" Operand2=""></Deductible>
+					 /ToGrant -->
+				</Condition>
+			</Conditions>
+			<Conditions>
+				<!-- if at home extented from Primary is selected and Extended from Home is not applicable for boat type -->
+				<Condition Operand1="$HOCOV_E" Operator="==" Operand2="0" OperandType="String">
+					<!-- If type of watercraft is Inboard/Outboard -->
+					<SubCondition Operand1="$BOAT_TYPE" Operator="==" Operand2="11370">
+						<ToSet CoverageCode="LCCSL">
+							<Limit Value="$WAT_LIMIT" Operand1="" Operator="" Operand2="" LimitID=""></Limit>
+							<Deductible Value="" Operand1="" Operator="" Operand2="" DeducID=""></Deductible>
+						</ToSet>
+					</SubCondition>
+					<!-- If type of watercraft is Inboard -->
+					<SubCondition Operand1="$BOAT_TYPE" Operator="==" Operand2="11371">
+						<ToSet CoverageCode="LCCSL">
+							<Limit Value="$WAT_LIMIT" Operand1="" Operator="" Operand2="" LimitID=""></Limit>
+							<Deductible Value="" Operand1="" Operator="" Operand2="" DeducID=""></Deductible>
+						</ToSet>
+					</SubCondition>
+					<!-- If type of watercraft is Mini Jet Boat -->
+					<SubCondition Operand1="$BOAT_TYPE" Operator="==" Operand2="11373">
+						<ToSet CoverageCode="LCCSL">
+							<Limit Value="$WAT_LIMIT" Operand1="" Operator="" Operand2="" LimitID=""></Limit>
+							<Deductible Value="" Operand1="" Operator="" Operand2="" DeducID=""></Deductible>
+						</ToSet>
+					</SubCondition>
+					<!-- If type of watercraft is Pontoon Inboard / Outboard -->
+					<SubCondition Operand1="$BOAT_TYPE" Operator="==" Operand2="11375">
+						<ToSet CoverageCode="LCCSL">
+							<Limit Value="$WAT_LIMIT" Operand1="" Operator="" Operand2="" LimitID=""></Limit>
+							<Deductible Value="" Operand1="" Operator="" Operand2="" DeducID=""></Deductible>
+						</ToSet>
+					</SubCondition>
+					<!-- If type of watercraft is Waverunner -->
+					<SubCondition Operand1="$BOAT_TYPE" Operator="==" Operand2="11386">
+						<ToSet CoverageCode="LCCSL">
+							<Limit Value="$WAT_LIMIT" Operand1="" Operator="" Operand2="" LimitID=""></Limit>
+							<Deductible Value="" Operand1="" Operator="" Operand2="" DeducID=""></Deductible>
+						</ToSet>
+					</SubCondition>
+					<!-- If type of watercraft is Jetski (w/Lift Bar)-->
+					<SubCondition Operand1="$BOAT_TYPE" Operator="==" Operand2="11387">
+						<ToSet CoverageCode="LCCSL">
+							<Limit Value="$WAT_LIMIT" Operand1="" Operator="" Operand2="" LimitID=""></Limit>
+							<Deductible Value="" Operand1="" Operator="" Operand2="" DeducID=""></Deductible>
+						</ToSet>
+					</SubCondition>
+					<!-- If type of watercraft is Jetski -->
+					<SubCondition Operand1="$BOAT_TYPE" Operator="==" Operand2="11390">
+						<ToSet CoverageCode="LCCSL">
+							<Limit Value="$WAT_LIMIT" Operand1="" Operator="" Operand2="" LimitID=""></Limit>
+							<Deductible Value="" Operand1="" Operator="" Operand2="" DeducID=""></Deductible>
+						</ToSet>
+					</SubCondition>
+					<!-- If type of watercraft is Jet Drive Outboards -->
+					<SubCondition Operand1="$BOAT_TYPE" Operator="==" Operand2="11755">
+							<ToSet CoverageCode="LCCSL">
+								<Limit Value="$WAT_LIMIT" Operand1="" Operator="" Operand2="" LimitID=""></Limit>
+								<Deductible Value="" Operand1="" Operator="" Operand2="" DeducID=""></Deductible>
+							</ToSet>
+					</SubCondition>
+				</Condition>
+			</Conditions>
+			<Conditions>
+				<Condition Operand1="$BOAT_TYPE" Operator="==" Operand2="11372" OperandType="String">
+					<SubCondition Operand1="$BOAT_LENGTH" Operator="&gt;" Operand2="26">
+						<ToSet CoverageCode="MCPAY">
+							<Limit Value="$MED_LIMIT" Operand1="" Operator="" Operand2="" LimitID=""></Limit>
+							<Deductible Value="" Operand1="" Operator="" Operand2="" DeducID=""></Deductible>
+						</ToSet>
+						<ToSet CoverageCode="LCCSL">
+							<Limit Value="$WAT_LIMIT" Operand1="" Operator="" Operand2="" LimitID=""></Limit>
+							<Deductible Value="" Operand1="" Operator="" Operand2="" DeducID=""></Deductible>
+						</ToSet>
+					</SubCondition>
+				</Condition>
+				<Condition Operand1="$BOAT_TYPE" Operator="==" Operand2="11672" OperandType="String">
+					<SubCondition Operand1="$BOAT_LENGTH" Operator="&gt;" Operand2="26">
+						<ToSet CoverageCode="MCPAY">
+							<Limit Value="$MED_LIMIT" Operand1="" Operator="" Operand2="" LimitID=""></Limit>
+							<Deductible Value="" Operand1="" Operator="" Operand2="" DeducID=""></Deductible>
+						</ToSet>
+						<ToSet CoverageCode="LCCSL">
+							<Limit Value="$WAT_LIMIT" Operand1="" Operator="" Operand2="" LimitID=""></Limit>
+							<Deductible Value="" Operand1="" Operator="" Operand2="" DeducID=""></Deductible>
+						</ToSet>
+					</SubCondition>
+				</Condition>
+			</Conditions>
+			<Conditions>
+				<!-- if at home extented from Primary is selected and Extended from Home is not applicable for boat type -->
+				<Condition Operand1="$HOCOV_F" Operator="==" Operand2="0" OperandType="String">
+					<!-- If type of watercraft is Inboard/Outboard -->
+					<SubCondition Operand1="$BOAT_TYPE" Operator="==" Operand2="11370">
+						<ToSet CoverageCode="MCPAY">
+							<Limit Value="$MED_LIMIT" Operand1="" Operator="" Operand2="" LimitID=""></Limit>
+							<Deductible Value="" Operand1="" Operator="" Operand2="" DeducID=""></Deductible>
+						</ToSet>
+					</SubCondition>
+					<!-- If type of watercraft is Inboard -->
+					<SubCondition Operand1="$BOAT_TYPE" Operator="==" Operand2="11371">
+						<ToSet CoverageCode="MCPAY">
+							<Limit Value="$MED_LIMIT" Operand1="" Operator="" Operand2="" LimitID=""></Limit>
+							<Deductible Value="" Operand1="" Operator="" Operand2="" DeducID=""></Deductible>
+						</ToSet>
+					</SubCondition>
+					<!-- If type of watercraft is Mini Jet Boat -->
+					<SubCondition Operand1="$BOAT_TYPE" Operator="==" Operand2="11373">
+						<ToSet CoverageCode="MCPAY">
+							<Limit Value="$MED_LIMIT" Operand1="" Operator="" Operand2="" LimitID=""></Limit>
+							<Deductible Value="" Operand1="" Operator="" Operand2="" DeducID=""></Deductible>
+						</ToSet>
+					</SubCondition>
+					<!-- If type of watercraft is Pontoon Inboard / Outboard -->
+					<SubCondition Operand1="$BOAT_TYPE" Operator="==" Operand2="11375">
+						<ToSet CoverageCode="MCPAY">
+							<Limit Value="$MED_LIMIT" Operand1="" Operator="" Operand2="" LimitID=""></Limit>
+							<Deductible Value="" Operand1="" Operator="" Operand2="" DeducID=""></Deductible>
+						</ToSet>
+					</SubCondition>
+					<!-- If type of watercraft is Waverunner -->
+					<SubCondition Operand1="$BOAT_TYPE" Operator="==" Operand2="11386">
+						<ToSet CoverageCode="MCPAY">
+							<Limit Value="$MED_LIMIT" Operand1="" Operator="" Operand2="" LimitID=""></Limit>
+							<Deductible Value="" Operand1="" Operator="" Operand2="" DeducID=""></Deductible>
+						</ToSet>
+					</SubCondition>
+					<!-- If type of watercraft is Jetski (w/Lift Bar)-->
+					<SubCondition Operand1="$BOAT_TYPE" Operator="==" Operand2="11387">
+						<ToSet CoverageCode="MCPAY">
+							<Limit Value="$MED_LIMIT" Operand1="" Operator="" Operand2="" LimitID=""></Limit>
+							<Deductible Value="" Operand1="" Operator="" Operand2="" DeducID=""></Deductible>
+						</ToSet>
+					</SubCondition>
+					<!-- If type of watercraft is Jetski  -->
+					<SubCondition Operand1="$BOAT_TYPE" Operator="==" Operand2="11390">
+						<ToSet CoverageCode="MCPAY">
+							<Limit Value="$MED_LIMIT" Operand1="" Operator="" Operand2="" LimitID=""></Limit>
+							<Deductible Value="" Operand1="" Operator="" Operand2="" DeducID=""></Deductible>
+						</ToSet>
+					</SubCondition>
+					<!-- If type of watercraft is Jet Drive Outboards -->
+					<SubCondition Operand1="$BOAT_TYPE" Operator="==" Operand2="11755">
+							<ToSet CoverageCode="MCPAY">
+								<Limit Value="$MED_LIMIT" Operand1="" Operator="" Operand2="" LimitID=""></Limit>
+								<Deductible Value="" Operand1="" Operator="" Operand2="" DeducID=""></Deductible>
+							</ToSet>
+					</SubCondition>
+				</Condition>
+			</Conditions>
+			<Conditions>
+				<Condition Operand1="$LOB_ID" Operator="==" Operand2="1">
+					<SubCondition Operand1="$UMBCS_OLDVALUE" Operator="&lt;" Operand2="50000" OperandType="Double">
+						<ToGrant CoverageCode="UMBCS">
+							<Limit Value="50000" Operand1="" Operator="" Operand2=""></Limit>
+							<Deductible Value="" Operand1="" Operator="" Operand2=""></Deductible>
+						</ToGrant>
+					</SubCondition>
+				</Condition>
+			</Conditions>
+		</Rule>
+	</Group>
+</Root>

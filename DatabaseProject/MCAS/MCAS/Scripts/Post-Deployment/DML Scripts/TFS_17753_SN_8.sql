@@ -1,0 +1,1 @@
+Update MNT_TEMPLATE_MASTER set HasPartyType='N' where Id  in (2,3,4,42,43,44,46,47,49,50,68,69)

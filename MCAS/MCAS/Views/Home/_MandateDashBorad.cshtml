@@ -1,0 +1,120 @@
+﻿@model IEnumerable<MCAS.Web.Objects.MastersHelper.MandateModelCOllection>
+@using MCAS.Web.Objects.CommonHelper
+@using MCAS.Web.Objects.Resources.Home;
+@using MCAS.Web.Objects.Resources.Common;
+@using MCAS.Globalisation;
+<div class="panel-body">
+    <h5 class="text-info">
+         @Index.MandateRecordTable</h5>
+    <hr />
+    <div class="col-lg-12">
+            <div class="table-responsive" id="Diary_wrapper" role="grid">
+                <table id="tableDiarySrc" class="table table-striped table-hover">
+                    <thead>
+                        <tr>
+                            <th>
+                                @Index.ClaimNo.
+                            </th>
+                            <th>
+                                @Index.IPNo.
+                            </th>
+                            <th>
+                                @Index.ClaimantName_
+                            </th>
+                            <th>
+                                @Index.ClaimType
+                            </th>
+                            <th>
+                                @Index.MandateRequestDate
+                            </th>
+                            <th>
+                                @Index.TotalMandateAmountRequested
+                            </th>
+                            <th>
+                                @Index.Requester
+                            </th>
+                            <th>
+                                @Index.Approver
+                            </th>
+                            <th>
+                                @Index.Approved
+                            </th>
+                            <th>
+                                @Index.ApprovalDate
+                            </th>
+                            <th>
+                                @Index.Action
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @{
+                            
+
+                            foreach (var item in Model)
+                            {
+                                var date = item.Createddate == null ? "" : item.Createddate.Value.ToString("dd/MM/yyyy");
+                            <tr>
+                                <td>
+                                    @item.ClaimRecordNo
+                                </td>
+                                <td>
+                                    @item.IpNo
+                                </td>
+                                <td>
+                                    @item.ClaimantName
+                                </td>
+                                <td>
+                                    @item.ClaimTypeDesc
+                                </td>
+                                <td>
+                                    @date
+                                </td>
+                                <td class="format">
+                                    @item.Total_C
+                                </td>
+                                <td>
+                                    @item.Requester
+                                </td>
+                                <td>
+                                    @item.Approver
+                                </td>
+                                <td>
+                                    @item.Approved
+                                </td>
+                                <td>
+                                    @item.ApprovalDate
+                                </td>
+                                <td>
+                                <a class="Dashboard btn btn-xs btn-info" ScreenNameDash="208" screenid="CLM_REG" url='@Url.ActionEncoded("ClaimMandateReqEditor", "ClaimProcessing", new { PolicyId = item.PolicyId, ClaimID = item.claimId, AccidentClaimId = item.AccidentClaimId, MandateId = item.MandateId, claimMode = "Write", Viewmode = "Select", mode = item.mode, ClaimType = item.ClaimType, ClaimTypeCode = item.ClaimTypeCode })' href="#">@Common.View</a>
+                                </td>
+                            </tr>
+                                   
+                            }}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+</div>
+<script type="text/javascript">
+
+    function Pagination(a) {
+        var b = Math.ceil(parseFloat('@Model.Count()' / 10));
+        "linext" == a && (a = "li" + (parseInt($("#oldgroup").val()) == b ? b : parseInt($("#oldgroup").val()) + 1));
+        "liprevious" == a && (a = "li" + (1 == parseInt($("#oldgroup").val()) ? 1 : parseInt($("#oldgroup").val()) - 1));
+        var d = $("#oldgroup").val(),
+        c = a.replace("li", "");
+        $("#oldgroup").val(c);
+        $("table tr[group=" + d + "]").css("display", "none");
+        $("table tr[group=" + c + "]").css("display", "");
+        $(".active").removeClass();
+        $("#" + a).addClass("active");
+        if (0 < b) {
+            for (i = 1; i <= b; i++) $("#li" + i).css("display", "none");
+            if (1 < c) if (parseFloat(c) + 2 <= parseFloat(b)) for (i = parseFloat(2 == c ? 3 : c) - 2; i <= parseFloat(2 == c ? 3 : c) + 2; i++) i <= b && $("#li" + i).css("display", "");
+            else for (i = parseFloat(b) - 4; i <= parseFloat(b); i++) $("#li" + i).css("display", "");
+            else for (i = 1; 5 >= i; i++) $("#li" + i).css("display", "")
+        }
+        setTabActive("TasksTab");
+    }
+</script>

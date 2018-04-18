@@ -1,0 +1,1202 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<title>ComfortDelGro Insurance Brokers Pte Ltd</title>
+<meta charset="UTF-8" >
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="author" content="Ebix Software Pvt. Ltd.">
+<link rel="shortcut icon" href="img/favicon.ico">
+
+<!-- Main CSS -->
+<link href="css/import.css" rel="stylesheet" media="screen">
+
+<!-- Font Awesome CSS -->
+<link href="fonts/font-awesome.css" rel="stylesheet">
+<!--[if IE 7]>
+        <link rel="stylesheet" href="fonts/font-awesome.css">
+      <![endif]-->
+
+<!-- HTML5 shiv and Respond.js IE8 support of HTML5 elements and media queries -->
+<!--[if lt IE 9]>
+        <script src="js/html5shiv.js"></script>
+        <script src="js/respond.min.js"></script>
+      <![endif]-->
+
+</head>
+
+<body class="animated fadeInDown">
+
+<!-- Top Bar Start -->
+<div class="top-bar"> 
+  
+  
+  
+</div>
+<!-- Top Bar End --> 
+<!-- Search bar start -->
+  <div class="container visible-xs" id="phonesearch">
+    <div class="row">
+      <div class="col-lg-12">
+          <div class="custom-search">
+            <input type="text" class="search-query" placeholder="Search here">
+            <i class="icon-search"></i> </div>
+      </div>
+    </div>
+  </div>
+  <!-- Search bar end --> 
+<!-- Left sidebar start -->
+<aside id="sidebar"> 
+  
+  <!-- Search bar start -->
+  <div class="custom-search hidden-xs">
+    <input type="text" class="search-query" placeholder="Search here">
+    <i class="icon-search"></i> </div>
+  <!-- Search bar end --> 
+  
+  <!-- Menu start -->
+  <div id='menu'>
+    <ul>
+      <li> <a href='dashboard.html'> <i class="icon-dashboard text-white"></i> <span>Dashboard</span> <em class="arrow"></em> </a> </li>
+      <li class='has-sub'> <a href='#'> <i class="icon-list-ol text-blue"></i> <span>Diary Listing</span> <em class="arrow"></em> </a> 
+      	<ul>
+          <li> <a href='diaried-items.html'> <i class="icon-double-angle-right"></i> <span>Diaried items</span> </a> </li>
+          <li> <a href='assigned-tasks.html'> <i class="icon-double-angle-right"></i> <span>Assigned Tasks</span> </a> </li>
+          <li class='last'> <a href='escalation-tasks.html'> <i class="icon-double-angle-right"></i> <span>Escalation Tasks</span> </a> </li>
+        </ul>
+      </li>
+      <li class='has-sub'> <a href='#'> <i class="icon-file-text text-orange"></i> <span>Claims Registration</span> <em class="arrow"></em> </a>
+        <ul>
+          <li> <a href='new-claims-registration.html'> <i class="icon-double-angle-right"></i> <span>New Claims Registration</span> </a> </li>
+          <li> <a href='incomplete-claims-registration.html'> <i class="icon-double-angle-right"></i> <span>Incomplete Claims Registration</span> </a> </li>
+          <li> <a href='claims-adjustments.html'> <i class=" icon-double-angle-right"></i> <span>Claims Adjustments</span> </a> </li>
+          <li class='last'> <a href='claims-enquiry.html'> <i class=" icon-double-angle-right"></i> <span>Claims Enquiry</span> </a> </li>
+        </ul>
+      </li>
+      <li class='has-sub highlight'> <a href='#'> <i class="icon-dollar text-blue"></i> <span>Claims Payment</span> <em class="arrow-active"></em> </a> 
+      	<ul>
+          <li> <a href='claims-payment-processing.html'> <i class=" icon-double-angle-right"></i> <span>Claims Payment Processing</span> </a> </li>
+          <li> <a href='incomplete-claims-payment-registration.html'> <i class=" icon-double-angle-right"></i> <span>Incomplete Claims Payment Registration</span> </a> </li>
+          <li class='last'> <a href='claims-payment-document-enquiry.html'> <i class=" icon-double-angle-right"></i> <span>Claims Payment Document Enquiry</span> </a> </li>
+        </ul>
+      </li>
+      <li class='has-sub'> <a href='claims-recovery.html'> <i class="icon-briefcase text-danger"></i> <span>Claims Recovery</span> <em class="arrow"></em> </a>
+        <ul>
+          <li> <a href='claims-recovery-processing.html'> <i class=" icon-double-angle-right"></i> <span>Claims Recovery Processing</span> </a> </li>
+          <li class='last'> <a href='claims-recovery.html'> <i class=" icon-double-angle-right"></i> <span>Claims Recovery</span> </a> </li>
+        </ul>
+      </li>
+      <li class='has-sub'> <a href='#'> <i class="icon-book text-golden"></i> <span>Enquiry</span> <em class="arrow"></em> </a> 
+      	<ul>
+          <li> <a href='claims.html'> <i class=" icon-double-angle-right"></i> <span>Claims</span> </a> </li>
+          <li class='last'> <a href='claims-documents-printed.html'> <i class=" icon-double-angle-right"></i> <span>Claims Documents Printed</span> </a> </li>
+        </ul>
+      </li>
+      <li class="has-sub visible-xs"> <a href='#'> <i class="icon-cog text-success"></i> <span>System Admin</span> <em class="arrow"></em> </a> 
+      	<ul>
+          <li> <a href='insurer.html'> <i class=" icon-double-angle-right"></i> <span>Insurer</span> </a> </li>
+          <li> <a href='vehicle-listing-upload.html'> <i class=" icon-double-angle-right"></i> <span>Vehicle Listing Upload</span> </a> </li>
+          <li> <a href='@Url.Action("LossNatureMasterList", "ClaimMasters")'> <i class=" icon-double-angle-right"></i> <span>Nature of Loss</span> </a> </li>
+          <li> <a href='@Url.Action("Index","ClaimMasters")'> <i class=" icon-double-angle-right"></i> <span>Type of Loss</span> </a> </li>
+          <li> <a href='main-class-of-business.html'> <i class=" icon-double-angle-right"></i> <span>main Class of Business</span> </a> </li>
+          <li> <a href='sub-class.html'> <i class=" icon-double-angle-right"></i> <span>Sub-Class</span> </a> </li>
+          <li> <a href='depot-master.html'> <i class=" icon-double-angle-right"></i> <span>Depot Master</span> </a> </li>
+          <li> <a href='surveyor-master.html'> <i class=" icon-double-angle-right"></i> <span>Surveyor Master</span> </a> </li>
+          <li> <a href='adjuster-master.html'> <i class=" icon-double-angle-right"></i> <span>Adjuster Master</span> </a> </li>
+          <li> <a href='lawyer-master.html'> <i class=" icon-double-angle-right"></i> <span>Lawyer Master</span> </a> </li>
+          <li> <a href='claims-expense-type-master.html'> <i class=" icon-double-angle-right"></i> <span>Claims Expense Type Master</span> </a> </li>
+          <li> <a href='claims-status-master.html'> <i class=" icon-double-angle-right"></i> <span>Claims Status Master</span> </a> </li>
+          <li> <a href='currency-master.html'> <i class=" icon-double-angle-right"></i> <span>Currency Master</span> </a> </li>
+          <li> <a href='exchange-rate-master.html'> <i class=" icon-double-angle-right"></i> <span>Exchange Rate Master</span> </a> </li>
+          <li> <a href='@Url.Action("UserEntityIndex", "UserAdmin")'> <i class=" icon-double-angle-right"></i> <span>User Admin</span> </a> </li>
+          <li> <a href='country-master.html'> <i class=" icon-double-angle-right"></i> <span>Country Master</span> </a> </li>
+          <li> <a href='diary-and-follow-up-master.html'> <i class=" icon-double-angle-right"></i> <span>Diary and Follow-Up Master</span> </a> </li>
+          <li> <a href='vehicle-type.html'> <i class=" icon-double-angle-right"></i> <span>Vehicle Type</span> </a> </li>
+          <li> <a href='vehicle-type-make-and-model.html'> <i class=" icon-double-angle-right"></i> <span>Vehicle Type, Make and Model</span> </a> </li>
+          <li class='last'> <a href='bus-captain-listing.html'> <i class=" icon-double-angle-right"></i> <span>Bus Captain Listing</span> </a> </li>
+        </ul>
+      </li>
+    </ul>
+  </div>
+  <!-- Menu End --> 
+  
+
+</aside>
+<!-- Left sidebar end --> 
+
+<!-- Main Container start -->
+<div class="dashboard-wrapper"> 
+  
+  <!-- Bootstrap Container Start -->
+  <div class="container"> 
+    
+    <!-- Page title start -->
+    <div class="row page-title">
+      <div class="col-lg-12">
+        <h2>Claim</h2>
+        <ul class="breadcrumb">
+          <li>Home</li>
+          <li>New Claim Processing</li>
+         
+          </a>
+        </ul>
+      </div>
+    </div>
+    <!-- Page title end --> 
+    
+    <!-- Row start -->
+    <div class="row">
+      <div class="col-lg-12 col-md-12 col-sx-12 col-sm-12">
+        <ul class="nav nav-tabs" id="myTab1">
+          <li class="active"><a data-toggle="tab" href="#OD">OD</a></li>
+          <li><a data-toggle="tab" href="#ThirdParty">THIRD PARTY</a></li>
+          <li><a data-toggle="tab" href="#PL">PL</a></li>
+          <li><a data-toggle="tab" href="#ClaimsExpenses">CLAIMS EXPENSES</a></li>
+          <li><a data-toggle="tab" href="#Reserve">RESERVE</a></li>
+          <li><a data-toggle="tab" href="#PaymentDetails">PAYMENT DETAILS</a></li>
+          <li><a data-toggle="tab" href="#Attachments">ATTACHMENTS</a></li>
+          <li><a data-toggle="tab" href="#DocumentPrinting">DOCUMENT PRINTING</a></li>
+          <li><a data-toggle="tab" href="#ToDo">TO DO</a></li>
+        </ul>
+        <div class="tab-content" id="myTabContent2">
+          <div id="OD" class="tab-pane fade active in">
+            <div class="row">
+            	<div class="col-lg-12">
+                	<div class="table-responsive">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Policy No</th>
+                                    <th>Insured Name</th>
+                                    <th>Cedant Name</th>
+                                    <th>Broker Name</th>
+                                    <th>Main Class</th>
+                                    <th>Binder Year</th>
+                                    <th>Country</th>
+                                    <th>Construction From</th>
+                                    <th>Construction To</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>SJ004E08APEJ</td>
+                                    <td>Mumbai Metro One Private Limited</td>
+                                    <td>Reliance General Insurance Company Limited</td>
+                                    <td>Aon Re Asia Pte Ltd</td>
+                                    <td>Engineering</td>
+                                    <td>2008</td>
+                                    <td>India</td>
+                                    <td>08/02/2008</td>
+                                    <td>07/02/2012</td>
+                                    <td><button type="button" class="btn btn-xs btn-info">Select</button></td>
+                                </tr>
+                                <tr>
+                                    <td>SJ065E13APEA</td>
+                                    <td>Mumbai Metro One Private Limited</td>
+                                    <td>Reliance General Insurance Company Limited</td>
+                                    <td>Test Fiji</td>
+                                    <td>Engineering</td>
+                                    <td>2013</td>
+                                    <td>India</td>
+                                    <td>01/01/2013</td>
+                                    <td>31/12/2013</td>
+                                    <td><button type="button" class="btn btn-xs btn-info">Select</button></td>
+                                </tr>
+                                <tr>
+                                    <td>SJ004E08APEJ</td>
+                                    <td>Mumbai Metro One Private Limited</td>
+                                    <td>Reliance General Insurance Company Limited</td>
+                                    <td>Aon Re Asia Pte Ltd</td>
+                                    <td>Engineering</td>
+                                    <td>2008</td>
+                                    <td>India</td>
+                                    <td>08/02/2008</td>
+                                    <td>07/02/2012</td>
+                                    <td><button type="button" class="btn btn-xs btn-info">Select</button></td>
+                                </tr>
+                                <tr>
+                                    <td>SJ065E13APEA</td>
+                                    <td>Mumbai Metro One Private Limited</td>
+                                    <td>Reliance General Insurance Company Limited</td>
+                                    <td>Test Fiji</td>
+                                    <td>Engineering</td>
+                                    <td>2013</td>
+                                    <td>India</td>
+                                    <td>01/01/2013</td>
+                                    <td>31/12/2013</td>
+                                    <td><button type="button" class="btn btn-xs btn-info">Select</button></td>
+                                </tr>
+                                <tr>
+                                    <td>SJ004E08APEJ</td>
+                                    <td>Mumbai Metro One Private Limited</td>
+                                    <td>Reliance General Insurance Company Limited</td>
+                                    <td>Aon Re Asia Pte Ltd</td>
+                                    <td>Engineering</td>
+                                    <td>2008</td>
+                                    <td>India</td>
+                                    <td>08/02/2008</td>
+                                    <td>07/02/2012</td>
+                                    <td><button type="button" class="btn btn-xs btn-info">Select</button></td>
+                                </tr>
+                                <tr>
+                                    <td>SJ065E13APEA</td>
+                                    <td>Mumbai Metro One Private Limited</td>
+                                    <td>Reliance General Insurance Company Limited</td>
+                                    <td>Test Fiji</td>
+                                    <td>Engineering</td>
+                                    <td>2013</td>
+                                    <td>India</td>
+                                    <td>01/01/2013</td>
+                                    <td>31/12/2013</td>
+                                    <td><button type="button" class="btn btn-xs btn-info">Select</button></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+          </div>
+          <div id="ThirdParty" class="tab-pane fade">
+            <div class="row">
+            	<div class="col-lg-12">
+                	<div class="table-responsive">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Policy No</th>
+                                    <th>Insured Name</th>
+                                    <th>Cedant Name</th>
+                                    <th>Broker Name</th>
+                                    <th>Main Class</th>
+                                    <th>Binder Year</th>
+                                    <th>Country</th>
+                                    <th>Construction From</th>
+                                    <th>Construction To</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>SJ004E08APEJ</td>
+                                    <td>Mumbai Metro One Private Limited</td>
+                                    <td>Reliance General Insurance Company Limited</td>
+                                    <td>Aon Re Asia Pte Ltd</td>
+                                    <td>Engineering</td>
+                                    <td>2008</td>
+                                    <td>India</td>
+                                    <td>08/02/2008</td>
+                                    <td>07/02/2012</td>
+                                    <td><button type="button" class="btn btn-xs btn-info">Select</button></td>
+                                </tr>
+                                <tr>
+                                    <td>SJ065E13APEA</td>
+                                    <td>Mumbai Metro One Private Limited</td>
+                                    <td>Reliance General Insurance Company Limited</td>
+                                    <td>Test Fiji</td>
+                                    <td>Engineering</td>
+                                    <td>2013</td>
+                                    <td>India</td>
+                                    <td>01/01/2013</td>
+                                    <td>31/12/2013</td>
+                                    <td><button type="button" class="btn btn-xs btn-info">Select</button></td>
+                                </tr>
+                                <tr>
+                                    <td>SJ057E13APEV</td>
+                                    <td>testing of breazley application</td>
+                                    <td>c2</td>
+                                    <td>Willis Australia Limited</td>
+                                    <td>Engineering</td>
+                                    <td>2013</td>
+                                    <td>India</td>
+                                    <td>30/11/2013</td>
+                                    <td>29/12/2013</td>
+                                    <td><button type="button" class="btn btn-xs btn-info">Select</button></td>
+                                </tr>
+                                <tr>
+                                    <td>SJ057E13APEV</td>
+                                    <td>testing of breazley application</td>
+                                    <td>c2</td>
+                                    <td>Willis Australia Limited</td>
+                                    <td>Engineering</td>
+                                    <td>2013</td>
+                                    <td>India</td>
+                                    <td>30/11/2013</td>
+                                    <td>29/12/2013</td>
+                                    <td><button type="button" class="btn btn-xs btn-info">Select</button></td>
+                                </tr>
+                                <tr>
+                                    <td>SJ065E13APEA</td>
+                                    <td>Mumbai Metro One Private Limited</td>
+                                    <td>Reliance General Insurance Company Limited</td>
+                                    <td>Test Fiji</td>
+                                    <td>Engineering</td>
+                                    <td>2013</td>
+                                    <td>India</td>
+                                    <td>01/01/2013</td>
+                                    <td>31/12/2013</td>
+                                    <td><button type="button" class="btn btn-xs btn-info">Select</button></td>
+                                </tr>
+                                <tr>
+                                    <td>SJ004E08APEJ</td>
+                                    <td>Mumbai Metro One Private Limited</td>
+                                    <td>Reliance General Insurance Company Limited</td>
+                                    <td>Aon Re Asia Pte Ltd</td>
+                                    <td>Engineering</td>
+                                    <td>2008</td>
+                                    <td>India</td>
+                                    <td>08/02/2008</td>
+                                    <td>07/02/2012</td>
+                                    <td><button type="button" class="btn btn-xs btn-info">Select</button></td>
+                                </tr>
+                                <tr>
+                                    <td>SJ065E13APEA</td>
+                                    <td>Mumbai Metro One Private Limited</td>
+                                    <td>Reliance General Insurance Company Limited</td>
+                                    <td>Test Fiji</td>
+                                    <td>Engineering</td>
+                                    <td>2013</td>
+                                    <td>India</td>
+                                    <td>01/01/2013</td>
+                                    <td>31/12/2013</td>
+                                    <td><button type="button" class="btn btn-xs btn-info">Select</button></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+          </div>
+          <div id="PL" class="tab-pane fade">
+            <div class="row">
+            	<div class="col-lg-12">
+                	<div class="table-responsive">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Policy No</th>
+                                    <th>Insured Name</th>
+                                    <th>Cedant Name</th>
+                                    <th>Broker Name</th>
+                                    <th>Main Class</th>
+                                    <th>Binder Year</th>
+                                    <th>Country</th>
+                                    <th>Construction From</th>
+                                    <th>Construction To</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>SJ004E08APEJ</td>
+                                    <td>Mumbai Metro One Private Limited</td>
+                                    <td>Reliance General Insurance Company Limited</td>
+                                    <td>Aon Re Asia Pte Ltd</td>
+                                    <td>Engineering</td>
+                                    <td>2008</td>
+                                    <td>India</td>
+                                    <td>08/02/2008</td>
+                                    <td>07/02/2012</td>
+                                    <td><button type="button" class="btn btn-xs btn-info">Select</button></td>
+                                </tr>
+                                <tr>
+                                    <td>SJ065E13APEA</td>
+                                    <td>Mumbai Metro One Private Limited</td>
+                                    <td>Reliance General Insurance Company Limited</td>
+                                    <td>Test Fiji</td>
+                                    <td>Engineering</td>
+                                    <td>2013</td>
+                                    <td>India</td>
+                                    <td>01/01/2013</td>
+                                    <td>31/12/2013</td>
+                                    <td><button type="button" class="btn btn-xs btn-info">Select</button></td>
+                                </tr>
+                                <tr>
+                                    <td>SJ057E13APEV</td>
+                                    <td>testing of breazley application</td>
+                                    <td>c2</td>
+                                    <td>Willis Australia Limited</td>
+                                    <td>Engineering</td>
+                                    <td>2013</td>
+                                    <td>India</td>
+                                    <td>30/11/2013</td>
+                                    <td>29/12/2013</td>
+                                    <td><button type="button" class="btn btn-xs btn-info">Select</button></td>
+                                </tr>
+                                <tr>
+                                    <td>SJ065E13APEA</td>
+                                    <td>Mumbai Metro One Private Limited</td>
+                                    <td>Reliance General Insurance Company Limited</td>
+                                    <td>Test Fiji</td>
+                                    <td>Engineering</td>
+                                    <td>2013</td>
+                                    <td>India</td>
+                                    <td>01/01/2013</td>
+                                    <td>31/12/2013</td>
+                                    <td><button type="button" class="btn btn-xs btn-info">Select</button></td>
+                                </tr>
+                                <tr>
+                                    <td>SJ004E08APEJ</td>
+                                    <td>Mumbai Metro One Private Limited</td>
+                                    <td>Reliance General Insurance Company Limited</td>
+                                    <td>Aon Re Asia Pte Ltd</td>
+                                    <td>Engineering</td>
+                                    <td>2008</td>
+                                    <td>India</td>
+                                    <td>08/02/2008</td>
+                                    <td>07/02/2012</td>
+                                    <td><button type="button" class="btn btn-xs btn-info">Select</button></td>
+                                </tr>
+                                <tr>
+                                    <td>SJ065E13APEA</td>
+                                    <td>Mumbai Metro One Private Limited</td>
+                                    <td>Reliance General Insurance Company Limited</td>
+                                    <td>Test Fiji</td>
+                                    <td>Engineering</td>
+                                    <td>2013</td>
+                                    <td>India</td>
+                                    <td>01/01/2013</td>
+                                    <td>31/12/2013</td>
+                                    <td><button type="button" class="btn btn-xs btn-info">Select</button></td>
+                                </tr>
+                                <tr>
+                                    <td>SJ004E08APEJ</td>
+                                    <td>Mumbai Metro One Private Limited</td>
+                                    <td>Reliance General Insurance Company Limited</td>
+                                    <td>Aon Re Asia Pte Ltd</td>
+                                    <td>Engineering</td>
+                                    <td>2008</td>
+                                    <td>India</td>
+                                    <td>08/02/2008</td>
+                                    <td>07/02/2012</td>
+                                    <td><button type="button" class="btn btn-xs btn-info">Select</button></td>
+                                </tr>
+                                <tr>
+                                    <td>SJ065E13APEA</td>
+                                    <td>Mumbai Metro One Private Limited</td>
+                                    <td>Reliance General Insurance Company Limited</td>
+                                    <td>Test Fiji</td>
+                                    <td>Engineering</td>
+                                    <td>2013</td>
+                                    <td>India</td>
+                                    <td>01/01/2013</td>
+                                    <td>31/12/2013</td>
+                                    <td><button type="button" class="btn btn-xs btn-info">Select</button></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+          </div>
+          <div id="ClaimsExpenses" class="tab-pane fade">
+            <div class="row">
+            	<div class="col-lg-12">
+                	<div class="table-responsive">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Policy No</th>
+                                    <th>Insured Name</th>
+                                    <th>Cedant Name</th>
+                                    <th>Broker Name</th>
+                                    <th>Main Class</th>
+                                    <th>Binder Year</th>
+                                    <th>Country</th>
+                                    <th>Construction From</th>
+                                    <th>Construction To</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>SJ004E08APEJ</td>
+                                    <td>Mumbai Metro One Private Limited</td>
+                                    <td>Reliance General Insurance Company Limited</td>
+                                    <td>Aon Re Asia Pte Ltd</td>
+                                    <td>Engineering</td>
+                                    <td>2008</td>
+                                    <td>India</td>
+                                    <td>08/02/2008</td>
+                                    <td>07/02/2012</td>
+                                    <td><button type="button" class="btn btn-xs btn-info">Select</button></td>
+                                </tr>
+                                <tr>
+                                    <td>SJ057E13APEV</td>
+                                    <td>testing of breazley application</td>
+                                    <td>c2</td>
+                                    <td>Willis Australia Limited</td>
+                                    <td>Engineering</td>
+                                    <td>2013</td>
+                                    <td>India</td>
+                                    <td>30/11/2013</td>
+                                    <td>29/12/2013</td>
+                                    <td><button type="button" class="btn btn-xs btn-info">Select</button></td>
+                                </tr>
+                                <tr>
+                                    <td>SJ057E13APEV</td>
+                                    <td>testing of breazley application</td>
+                                    <td>c2</td>
+                                    <td>Willis Australia Limited</td>
+                                    <td>Engineering</td>
+                                    <td>2013</td>
+                                    <td>India</td>
+                                    <td>30/11/2013</td>
+                                    <td>29/12/2013</td>
+                                    <td><button type="button" class="btn btn-xs btn-info">Select</button></td>
+                                </tr>
+                                <tr>
+                                    <td>SJ065E13APEA</td>
+                                    <td>Mumbai Metro One Private Limited</td>
+                                    <td>Reliance General Insurance Company Limited</td>
+                                    <td>Test Fiji</td>
+                                    <td>Engineering</td>
+                                    <td>2013</td>
+                                    <td>India</td>
+                                    <td>01/01/2013</td>
+                                    <td>31/12/2013</td>
+                                    <td><button type="button" class="btn btn-xs btn-info">Select</button></td>
+                                </tr>
+                                <tr>
+                                    <td>SJ004E08APEJ</td>
+                                    <td>Mumbai Metro One Private Limited</td>
+                                    <td>Reliance General Insurance Company Limited</td>
+                                    <td>Aon Re Asia Pte Ltd</td>
+                                    <td>Engineering</td>
+                                    <td>2008</td>
+                                    <td>India</td>
+                                    <td>08/02/2008</td>
+                                    <td>07/02/2012</td>
+                                    <td><button type="button" class="btn btn-xs btn-info">Select</button></td>
+                                </tr>
+                                <tr>
+                                    <td>SJ065E13APEA</td>
+                                    <td>Mumbai Metro One Private Limited</td>
+                                    <td>Reliance General Insurance Company Limited</td>
+                                    <td>Test Fiji</td>
+                                    <td>Engineering</td>
+                                    <td>2013</td>
+                                    <td>India</td>
+                                    <td>01/01/2013</td>
+                                    <td>31/12/2013</td>
+                                    <td><button type="button" class="btn btn-xs btn-info">Select</button></td>
+                                </tr>
+                                <tr>
+                                    <td>SJ004E08APEJ</td>
+                                    <td>Mumbai Metro One Private Limited</td>
+                                    <td>Reliance General Insurance Company Limited</td>
+                                    <td>Aon Re Asia Pte Ltd</td>
+                                    <td>Engineering</td>
+                                    <td>2008</td>
+                                    <td>India</td>
+                                    <td>08/02/2008</td>
+                                    <td>07/02/2012</td>
+                                    <td><button type="button" class="btn btn-xs btn-info">Select</button></td>
+                                </tr>
+                                <tr>
+                                    <td>SJ065E13APEA</td>
+                                    <td>Mumbai Metro One Private Limited</td>
+                                    <td>Reliance General Insurance Company Limited</td>
+                                    <td>Test Fiji</td>
+                                    <td>Engineering</td>
+                                    <td>2013</td>
+                                    <td>India</td>
+                                    <td>01/01/2013</td>
+                                    <td>31/12/2013</td>
+                                    <td><button type="button" class="btn btn-xs btn-info">Select</button></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+          </div>
+          <div id="Reserve" class="tab-pane fade">
+            <div class="row">
+            	<div class="col-lg-12">
+                	<div class="table-responsive">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Policy No</th>
+                                    <th>Insured Name</th>
+                                    <th>Cedant Name</th>
+                                    <th>Broker Name</th>
+                                    <th>Main Class</th>
+                                    <th>Binder Year</th>
+                                    <th>Country</th>
+                                    <th>Construction From</th>
+                                    <th>Construction To</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>SJ065E13APEA</td>
+                                    <td>Mumbai Metro One Private Limited</td>
+                                    <td>Reliance General Insurance Company Limited</td>
+                                    <td>Test Fiji</td>
+                                    <td>Engineering</td>
+                                    <td>2013</td>
+                                    <td>India</td>
+                                    <td>01/01/2013</td>
+                                    <td>31/12/2013</td>
+                                    <td><button type="button" class="btn btn-xs btn-info">Select</button></td>
+                                </tr>
+                                <tr>
+                                    <td>SJ057E13APEV</td>
+                                    <td>testing of breazley application</td>
+                                    <td>c2</td>
+                                    <td>Willis Australia Limited</td>
+                                    <td>Engineering</td>
+                                    <td>2013</td>
+                                    <td>India</td>
+                                    <td>30/11/2013</td>
+                                    <td>29/12/2013</td>
+                                    <td><button type="button" class="btn btn-xs btn-info">Select</button></td>
+                                </tr>
+                                <tr>
+                                    <td>SJ065E13APEA</td>
+                                    <td>Mumbai Metro One Private Limited</td>
+                                    <td>Reliance General Insurance Company Limited</td>
+                                    <td>Test Fiji</td>
+                                    <td>Engineering</td>
+                                    <td>2013</td>
+                                    <td>India</td>
+                                    <td>01/01/2013</td>
+                                    <td>31/12/2013</td>
+                                    <td><button type="button" class="btn btn-xs btn-info">Select</button></td>
+                                </tr>
+                                <tr>
+                                    <td>SJ004E08APEJ</td>
+                                    <td>Mumbai Metro One Private Limited</td>
+                                    <td>Reliance General Insurance Company Limited</td>
+                                    <td>Aon Re Asia Pte Ltd</td>
+                                    <td>Engineering</td>
+                                    <td>2008</td>
+                                    <td>India</td>
+                                    <td>08/02/2008</td>
+                                    <td>07/02/2012</td>
+                                    <td><button type="button" class="btn btn-xs btn-info">Select</button></td>
+                                </tr>
+                                <tr>
+                                    <td>SJ065E13APEA</td>
+                                    <td>Mumbai Metro One Private Limited</td>
+                                    <td>Reliance General Insurance Company Limited</td>
+                                    <td>Test Fiji</td>
+                                    <td>Engineering</td>
+                                    <td>2013</td>
+                                    <td>India</td>
+                                    <td>01/01/2013</td>
+                                    <td>31/12/2013</td>
+                                    <td><button type="button" class="btn btn-xs btn-info">Select</button></td>
+                                </tr>
+                                <tr>
+                                    <td>SJ004E08APEJ</td>
+                                    <td>Mumbai Metro One Private Limited</td>
+                                    <td>Reliance General Insurance Company Limited</td>
+                                    <td>Aon Re Asia Pte Ltd</td>
+                                    <td>Engineering</td>
+                                    <td>2008</td>
+                                    <td>India</td>
+                                    <td>08/02/2008</td>
+                                    <td>07/02/2012</td>
+                                    <td><button type="button" class="btn btn-xs btn-info">Select</button></td>
+                                </tr>
+                                <tr>
+                                    <td>SJ065E13APEA</td>
+                                    <td>Mumbai Metro One Private Limited</td>
+                                    <td>Reliance General Insurance Company Limited</td>
+                                    <td>Test Fiji</td>
+                                    <td>Engineering</td>
+                                    <td>2013</td>
+                                    <td>India</td>
+                                    <td>01/01/2013</td>
+                                    <td>31/12/2013</td>
+                                    <td><button type="button" class="btn btn-xs btn-info">Select</button></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+          </div>
+          <div id="PaymentDetails" class="tab-pane fade">
+            <div class="row">
+            	<div class="col-lg-12">
+                	<div class="table-responsive">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Policy No</th>
+                                    <th>Insured Name</th>
+                                    <th>Cedant Name</th>
+                                    <th>Broker Name</th>
+                                    <th>Main Class</th>
+                                    <th>Binder Year</th>
+                                    <th>Country</th>
+                                    <th>Construction From</th>
+                                    <th>Construction To</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>SJ004E08APEJ</td>
+                                    <td>Mumbai Metro One Private Limited</td>
+                                    <td>Reliance General Insurance Company Limited</td>
+                                    <td>Aon Re Asia Pte Ltd</td>
+                                    <td>Engineering</td>
+                                    <td>2008</td>
+                                    <td>India</td>
+                                    <td>08/02/2008</td>
+                                    <td>07/02/2012</td>
+                                    <td><button type="button" class="btn btn-xs btn-info">Select</button></td>
+                                </tr>
+                                <tr>
+                                    <td>SJ065E13APEA</td>
+                                    <td>Mumbai Metro One Private Limited</td>
+                                    <td>Reliance General Insurance Company Limited</td>
+                                    <td>Test Fiji</td>
+                                    <td>Engineering</td>
+                                    <td>2013</td>
+                                    <td>India</td>
+                                    <td>01/01/2013</td>
+                                    <td>31/12/2013</td>
+                                    <td><button type="button" class="btn btn-xs btn-info">Select</button></td>
+                                </tr>
+                                <tr>
+                                    <td>SJ065E13APEA</td>
+                                    <td>Mumbai Metro One Private Limited</td>
+
+                                    <td>Reliance General Insurance Company Limited</td>
+                                    <td>Test Fiji</td>
+                                    <td>Engineering</td>
+                                    <td>2013</td>
+                                    <td>India</td>
+                                    <td>01/01/2013</td>
+                                    <td>31/12/2013</td>
+                                    <td><button type="button" class="btn btn-xs btn-info">Select</button></td>
+                                </tr>
+                                <tr>
+                                    <td>SJ004E08APEJ</td>
+                                    <td>Mumbai Metro One Private Limited</td>
+                                    <td>Reliance General Insurance Company Limited</td>
+                                    <td>Aon Re Asia Pte Ltd</td>
+                                    <td>Engineering</td>
+                                    <td>2008</td>
+                                    <td>India</td>
+                                    <td>08/02/2008</td>
+                                    <td>07/02/2012</td>
+                                    <td><button type="button" class="btn btn-xs btn-info">Select</button></td>
+                                </tr>
+                                <tr>
+                                    <td>SJ065E13APEA</td>
+                                    <td>Mumbai Metro One Private Limited</td>
+                                    <td>Reliance General Insurance Company Limited</td>
+                                    <td>Test Fiji</td>
+                                    <td>Engineering</td>
+                                    <td>2013</td>
+                                    <td>India</td>
+                                    <td>01/01/2013</td>
+                                    <td>31/12/2013</td>
+                                    <td><button type="button" class="btn btn-xs btn-info">Select</button></td>
+                                </tr>
+                                <tr>
+                                    <td>SJ004E08APEJ</td>
+                                    <td>Mumbai Metro One Private Limited</td>
+                                    <td>Reliance General Insurance Company Limited</td>
+                                    <td>Aon Re Asia Pte Ltd</td>
+                                    <td>Engineering</td>
+                                    <td>2008</td>
+                                    <td>India</td>
+                                    <td>08/02/2008</td>
+                                    <td>07/02/2012</td>
+                                    <td><button type="button" class="btn btn-xs btn-info">Select</button></td>
+                                </tr>
+                                <tr>
+                                    <td>SJ065E13APEA</td>
+                                    <td>Mumbai Metro One Private Limited</td>
+                                    <td>Reliance General Insurance Company Limited</td>
+                                    <td>Test Fiji</td>
+                                    <td>Engineering</td>
+                                    <td>2013</td>
+                                    <td>India</td>
+                                    <td>01/01/2013</td>
+                                    <td>31/12/2013</td>
+                                    <td><button type="button" class="btn btn-xs btn-info">Select</button></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+          </div>
+          <div id="Attachments" class="tab-pane fade">
+            <div class="row">
+            	<div class="col-lg-12">
+                	<div class="table-responsive">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Policy No</th>
+                                    <th>Insured Name</th>
+                                    <th>Cedant Name</th>
+                                    <th>Broker Name</th>
+                                    <th>Main Class</th>
+                                    <th>Binder Year</th>
+                                    <th>Country</th>
+                                    <th>Construction From</th>
+                                    <th>Construction To</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>SJ004E08APEJ</td>
+                                    <td>Mumbai Metro One Private Limited</td>
+                                    <td>Reliance General Insurance Company Limited</td>
+                                    <td>Aon Re Asia Pte Ltd</td>
+                                    <td>Engineering</td>
+                                    <td>2008</td>
+                                    <td>India</td>
+                                    <td>08/02/2008</td>
+                                    <td>07/02/2012</td>
+                                    <td><button type="button" class="btn btn-xs btn-info">Select</button></td>
+                                </tr>
+                                <tr>
+                                    <td>SJ065E13APEA</td>
+                                    <td>Mumbai Metro One Private Limited</td>
+                                    <td>Reliance General Insurance Company Limited</td>
+                                    <td>Test Fiji</td>
+                                    <td>Engineering</td>
+                                    <td>2013</td>
+                                    <td>India</td>
+                                    <td>01/01/2013</td>
+                                    <td>31/12/2013</td>
+                                    <td><button type="button" class="btn btn-xs btn-info">Select</button></td>
+                                </tr>
+                                <tr>
+                                    <td>SJ057E13APEV</td>
+                                    <td>testing of breazley application</td>
+                                    <td>c2</td>
+                                    <td>Willis Australia Limited</td>
+                                    <td>Engineering</td>
+                                    <td>2013</td>
+                                    <td>India</td>
+                                    <td>30/11/2013</td>
+                                    <td>29/12/2013</td>
+                                    <td><button type="button" class="btn btn-xs btn-info">Select</button></td>
+                                </tr>
+                                <tr>
+                                    <td>SJ057E13APEV</td>
+                                    <td>testing of breazley application</td>
+                                    <td>c2</td>
+                                    <td>Willis Australia Limited</td>
+                                    <td>Engineering</td>
+                                    <td>2013</td>
+                                    <td>India</td>
+                                    <td>30/11/2013</td>
+                                    <td>29/12/2013</td>
+                                    <td><button type="button" class="btn btn-xs btn-info">Select</button></td>
+                                </tr>
+                                <tr>
+                                    <td>SJ065E13APEA</td>
+                                    <td>Mumbai Metro One Private Limited</td>
+
+                                    <td>Reliance General Insurance Company Limited</td>
+                                    <td>Test Fiji</td>
+                                    <td>Engineering</td>
+                                    <td>2013</td>
+                                    <td>India</td>
+                                    <td>01/01/2013</td>
+                                    <td>31/12/2013</td>
+                                    <td><button type="button" class="btn btn-xs btn-info">Select</button></td>
+                                </tr>
+                                <tr>
+                                    <td>SJ004E08APEJ</td>
+                                    <td>Mumbai Metro One Private Limited</td>
+                                    <td>Reliance General Insurance Company Limited</td>
+                                    <td>Aon Re Asia Pte Ltd</td>
+                                    <td>Engineering</td>
+                                    <td>2008</td>
+                                    <td>India</td>
+                                    <td>08/02/2008</td>
+                                    <td>07/02/2012</td>
+                                    <td><button type="button" class="btn btn-xs btn-info">Select</button></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+          </div>
+          <div id="DocumentPrinting" class="tab-pane fade">
+            <div class="row">
+            	<div class="col-lg-12">
+                	<div class="table-responsive">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Policy No</th>
+                                    <th>Insured Name</th>
+                                    <th>Cedant Name</th>
+                                    <th>Broker Name</th>
+                                    <th>Main Class</th>
+                                    <th>Binder Year</th>
+                                    <th>Country</th>
+                                    <th>Construction From</th>
+                                    <th>Construction To</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>SJ057E13APEV</td>
+                                    <td>testing of breazley application</td>
+                                    <td>c2</td>
+                                    <td>Willis Australia Limited</td>
+                                    <td>Engineering</td>
+                                    <td>2013</td>
+                                    <td>India</td>
+                                    <td>30/11/2013</td>
+                                    <td>29/12/2013</td>
+                                    <td><button type="button" class="btn btn-xs btn-info">Select</button></td>
+                                </tr>
+                                <tr>
+                                    <td>SJ057E13APEV</td>
+                                    <td>testing of breazley application</td>
+                                    <td>c2</td>
+                                    <td>Willis Australia Limited</td>
+                                    <td>Engineering</td>
+                                    <td>2013</td>
+                                    <td>India</td>
+                                    <td>30/11/2013</td>
+                                    <td>29/12/2013</td>
+                                    <td><button type="button" class="btn btn-xs btn-info">Select</button></td>
+                                </tr>
+                                <tr>
+                                    <td>SJ065E13APEA</td>
+                                    <td>Mumbai Metro One Private Limited</td>
+
+                                    <td>Reliance General Insurance Company Limited</td>
+                                    <td>Test Fiji</td>
+                                    <td>Engineering</td>
+                                    <td>2013</td>
+                                    <td>India</td>
+                                    <td>01/01/2013</td>
+                                    <td>31/12/2013</td>
+                                    <td><button type="button" class="btn btn-xs btn-info">Select</button></td>
+                                </tr>
+                                <tr>
+                                    <td>SJ004E08APEJ</td>
+                                    <td>Mumbai Metro One Private Limited</td>
+                                    <td>Reliance General Insurance Company Limited</td>
+                                    <td>Aon Re Asia Pte Ltd</td>
+                                    <td>Engineering</td>
+                                    <td>2008</td>
+                                    <td>India</td>
+                                    <td>08/02/2008</td>
+                                    <td>07/02/2012</td>
+                                    <td><button type="button" class="btn btn-xs btn-info">Select</button></td>
+                                </tr>
+                                <tr>
+                                    <td>SJ065E13APEA</td>
+                                    <td>Mumbai Metro One Private Limited</td>
+                                    <td>Reliance General Insurance Company Limited</td>
+                                    <td>Test Fiji</td>
+                                    <td>Engineering</td>
+                                    <td>2013</td>
+                                    <td>India</td>
+                                    <td>01/01/2013</td>
+                                    <td>31/12/2013</td>
+                                    <td><button type="button" class="btn btn-xs btn-info">Select</button></td>
+                                </tr>
+                                <tr>
+                                    <td>SJ004E08APEJ</td>
+                                    <td>Mumbai Metro One Private Limited</td>
+                                    <td>Reliance General Insurance Company Limited</td>
+                                    <td>Aon Re Asia Pte Ltd</td>
+                                    <td>Engineering</td>
+                                    <td>2008</td>
+                                    <td>India</td>
+                                    <td>08/02/2008</td>
+                                    <td>07/02/2012</td>
+                                    <td><button type="button" class="btn btn-xs btn-info">Select</button></td>
+                                </tr>
+                                <tr>
+                                    <td>SJ065E13APEA</td>
+                                    <td>Mumbai Metro One Private Limited</td>
+                                    <td>Reliance General Insurance Company Limited</td>
+                                    <td>Test Fiji</td>
+                                    <td>Engineering</td>
+                                    <td>2013</td>
+                                    <td>India</td>
+                                    <td>01/01/2013</td>
+                                    <td>31/12/2013</td>
+                                    <td><button type="button" class="btn btn-xs btn-info">Select</button></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+          </div>
+          <div id="ToDo" class="tab-pane fade">
+            <div class="row">
+            	<div class="col-lg-12">
+                	<div class="table-responsive">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Policy No</th>
+                                    <th>Insured Name</th>
+                                    <th>Cedant Name</th>
+                                    <th>Broker Name</th>
+                                    <th>Main Class</th>
+                                    <th>Binder Year</th>
+                                    <th>Country</th>
+                                    <th>Construction From</th>
+                                    <th>Construction To</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>SJ065E13APEA</td>
+                                    <td>Mumbai Metro One Private Limited</td>
+                                    <td>Reliance General Insurance Company Limited</td>
+                                    <td>Test Fiji</td>
+                                    <td>Engineering</td>
+                                    <td>2013</td>
+                                    <td>India</td>
+                                    <td>01/01/2013</td>
+                                    <td>31/12/2013</td>
+                                    <td><button type="button" class="btn btn-xs btn-info">Select</button></td>
+                                </tr>
+                                <tr>
+                                    <td>SJ057E13APEV</td>
+                                    <td>testing of breazley application</td>
+                                    <td>c2</td>
+                                    <td>Willis Australia Limited</td>
+                                    <td>Engineering</td>
+                                    <td>2013</td>
+                                    <td>India</td>
+                                    <td>30/11/2013</td>
+                                    <td>29/12/2013</td>
+                                    <td><button type="button" class="btn btn-xs btn-info">Select</button></td>
+                                </tr>
+                                <tr>
+                                    <td>SJ065E13APEA</td>
+                                    <td>Mumbai Metro One Private Limited</td>
+
+                                    <td>Reliance General Insurance Company Limited</td>
+                                    <td>Test Fiji</td>
+                                    <td>Engineering</td>
+                                    <td>2013</td>
+                                    <td>India</td>
+                                    <td>01/01/2013</td>
+                                    <td>31/12/2013</td>
+                                    <td><button type="button" class="btn btn-xs btn-info">Select</button></td>
+                                </tr>
+                                <tr>
+                                    <td>SJ004E08APEJ</td>
+                                    <td>Mumbai Metro One Private Limited</td>
+                                    <td>Reliance General Insurance Company Limited</td>
+                                    <td>Aon Re Asia Pte Ltd</td>
+                                    <td>Engineering</td>
+                                    <td>2008</td>
+                                    <td>India</td>
+                                    <td>08/02/2008</td>
+                                    <td>07/02/2012</td>
+                                    <td><button type="button" class="btn btn-xs btn-info">Select</button></td>
+                                </tr>
+                                <tr>
+                                    <td>SJ065E13APEA</td>
+                                    <td>Mumbai Metro One Private Limited</td>
+                                    <td>Reliance General Insurance Company Limited</td>
+                                    <td>Test Fiji</td>
+                                    <td>Engineering</td>
+                                    <td>2013</td>
+                                    <td>India</td>
+                                    <td>01/01/2013</td>
+                                    <td>31/12/2013</td>
+                                    <td><button type="button" class="btn btn-xs btn-info">Select</button></td>
+                                </tr>
+                                <tr>
+                                    <td>SJ004E08APEJ</td>
+                                    <td>Mumbai Metro One Private Limited</td>
+                                    <td>Reliance General Insurance Company Limited</td>
+                                    <td>Aon Re Asia Pte Ltd</td>
+                                    <td>Engineering</td>
+                                    <td>2008</td>
+                                    <td>India</td>
+                                    <td>08/02/2008</td>
+                                    <td>07/02/2012</td>
+                                    <td><button type="button" class="btn btn-xs btn-info">Select</button></td>
+                                </tr>
+                                <tr>
+                                    <td>SJ065E13APEA</td>
+                                    <td>Mumbai Metro One Private Limited</td>
+                                    <td>Reliance General Insurance Company Limited</td>
+                                    <td>Test Fiji</td>
+                                    <td>Engineering</td>
+                                    <td>2013</td>
+                                    <td>India</td>
+                                    <td>01/01/2013</td>
+                                    <td>31/12/2013</td>
+                                    <td><button type="button" class="btn btn-xs btn-info">Select</button></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Row End -->
+    
+  </div>
+  <!-- Bootstrap Container End --> 
+  
+</div>
+<!-- Main Container End --> 
+<!-- Footer Container -->
+<div class="container">
+	<div class="row">
+    	<div class="col-lg-12 text-right text-white"><h5>Powered by <a href="http://www.ebix.com/" target="_blank"><img src="img/ebix.png" style="vertical-align:text-top"></a></h5></div>
+    </div>
+</div>
+<!-- End Footer Container -->
+<!-- jQuery (necessary for Bootstrap's JavaScript plugins) --> 
+<script src="js/jquery.js"></script> 
+
+<!-- Include all compiled plugins (below), or include individual files as needed --> 
+<script src="js/bootstrap.min.js"></script> 
+
+<!-- jquery UI v1.10.3 js --> 
+<script src="js/jquery-ui-v1.10.3.js"></script> 
+
+<!-- Sparkline graphs --> 
+<script src="js/sparkline.js"></script> 
+
+<!-- Data tables --> 
+<script src="js/jquery.datatables.js"></script> 
+
+<!-- Date Range --> 
+<script src="js/daterange/moment.js"></script> 
+<script src="js/daterange/daterangepicker.js"></script> 
+
+<!-- Animated Right Sidebar --> 
+<script src="js/slidebars.js"></script> 
+
+<!-- JVector Map --> 
+<script src="js/jvectormap/jquery-jvectormap-1.2.2.min.js"></script> 
+<script src="js/jvectormap/jquery-jvectormap-usa.js"></script> 
+
+<!-- Custom JS --> 
+<script src="js/custom.js"></script> 
+<script src="js/custom-index.js"></script>
+</body>
+</html>

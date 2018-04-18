@@ -1,0 +1,128 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Root>
+
+  <PageCalledFor TypeID="">
+
+    <HeaderString>
+      <value Culture="en-US">Complete App Bonus</value>
+      <value Culture="zh-SG">Complete App Bonus</value>
+      <value Culture="pt-BR">Complete App Bonus</value>
+    </HeaderString>
+
+    <SearchColumnHeadings>
+      <value Culture="en-US">State^LOB^From Date^To Date</value>
+      <value Culture="zh-SG">State^LOB^From Date^To Date</value>
+      <value Culture="pt-BR">State^LOB^From Date^To Date</value>
+    </SearchColumnHeadings>
+
+    <DisplayColumnHeadings>
+      <value Culture="en-US">State^LOB^From Date^To Date^Amount^Last Amended^Amended By</value>
+      <value Culture="zh-SG">State^LOB^From Date^To Date^Amount^Last Amended^Amended By</value>
+      <value Culture="pt-BR">State^LOB^From Date^To Date^Amount^Last Amended^Amended By</value>
+    </DisplayColumnHeadings>
+
+    <SearchMessage>
+      <value Culture="en-US">Please select the Search Option,enter Search Criteria,and click on the Search button^Please select the Search Option, enter Search Criteria, and click on the Search button</value>
+      <value Culture="zh-SG">Please select the Search Option,enter Search Criteria,and click on the Search button^Please select the Search Option, enter Search Criteria, and click on the Search button</value>
+      <value Culture="pt-BR">Por favor, selecione a opção de pesquisa, introduzir critérios de pesquisa, e clique no botão Pesquisar ^ Por favor, selecione a opção de pesquisa, introduzir critérios de pesquisa, e clique no botão Pesquisar</value>
+    </SearchMessage>
+
+    <FilterLabel>
+      <value Culture="en-US">Include Inactive</value>
+      <value Culture="zh-SG">Include Inactive</value>
+      <value Culture="pt-BR">Include Inactive</value>
+    </FilterLabel>
+
+    <SearchColumnNames>
+      <value>t2.STATE_NAME^t3.LOB_ID^EFFECTIVE_FROM_DATE^EFFECTIVE_TO_DATE</value>
+    </SearchColumnNames>
+
+    <SearchColumnType>
+      <value>T^L^D^D</value>
+    </SearchColumnType>
+
+    <DisplayColumnNumbers>
+      <value>2^12^5^6^7^9^14</value>
+    </DisplayColumnNumbers>
+
+    <DisplayColumnNames>
+      <value>STATE_NAME^LOB_DESC^EFFECTIVE_FROM_DATE^EFFECTIVE_TO_DATE^COMMISSION_PERCENT^LAST_UPDATED_DATETIME^userName</value>
+    </DisplayColumnNames>
+
+    <DisplayTextLength>
+      <value>15^15^20^20^10^10^10</value>
+    </DisplayTextLength>
+
+    <DisplayColumnPercent>
+      <value>15^15^20^20^10^10^10</value>
+    </DisplayColumnPercent>
+
+    <FetchColumns>
+      <value>1^2^3^4^5^6^7</value>
+    </FetchColumns>
+
+    <ColumnTypes>
+      <value>B^B^B^B^B^B^B</value>
+    </ColumnTypes>
+
+    <FilterColumnName>
+      <value>t1.IS_ACTIVE</value>
+    </FilterColumnName>
+
+    <!--<WhereClause>
+      <value>A.IS_ACTIVE = 'Y'</value>
+    </WhereClause>-->
+  
+    <DropDownColumns>
+      <value>^LOB^^</value>
+    </DropDownColumns>
+
+    <PrimaryColumns>
+      <value>1</value>
+    </PrimaryColumns>
+
+    <PrimaryColumnsName>
+      <value>t1.COMM_ID</value>
+    </PrimaryColumnsName>
+
+    <OrderByClause>
+      <value>STATE_NAME asc</value>
+    </OrderByClause>
+
+    <AllowDBLClick>
+      <value>true</value>
+    </AllowDBLClick>
+
+    <ExtraButtons>
+      <value>1^Add New^0^addRecord</value>
+    </ExtraButtons>
+
+    <RequireQuery>
+      <value>Y</value>
+    </RequireQuery>
+
+    <QueryStringColumns>
+      <value>COMM_ID</value>
+    </QueryStringColumns>
+
+    <DefaultSearch>
+      <value>Y</value>
+    </DefaultSearch>
+
+    <FilterValue>
+      <value>Y</value>
+    </FilterValue>
+
+  </PageCalledFor>
+
+  <!--<PageCalledFor TypeID="1">
+    
+    <HeaderString>
+      <value Culture="en-US">Insurance Funds</value>
+      <value Culture="zh-SG">Insurance Funds</value>
+      <value Culture="pt-BR">Insurance Funds</value>
+    </HeaderString>
+    
+  </PageCalledFor>-->
+
+</Root>

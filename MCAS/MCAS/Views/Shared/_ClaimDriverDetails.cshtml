@@ -1,0 +1,153 @@
+﻿@using MCAS.Web.Objects.Resources.ClaimProcessing;
+@model MCAS.Web.Objects.ClaimObjectHelper.ClaimAccidentDetailsModel
+@{
+    
+}
+<script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?sensor=false"></script>
+<div class="row">
+    <div class="form-group">
+        <div class="col-sm-6">
+            <div class="form-group">
+                <label class="col-sm-4 control-label">
+                    @ClaimAccident.Name</label>
+                <div class="col-sm-8">
+                    @Html.TextBoxFor(m => m.DriverAddressDlt.Name, new { id = "inputName", @class = "form-control", @maxlength = "250" })
+                </div>
+            </div>
+        </div>
+        @{
+            List<SelectListItem> listItems = new List<SelectListItem>();
+            listItems.Add(new SelectListItem
+                {
+                    Text = "Exemplo1",
+                    Value = "Exemplo1"
+                });
+            listItems.Add(new SelectListItem
+                {
+                    Text = "Exemplo2",
+                    Value = "Exemplo2",
+                    Selected = true
+                });
+            listItems.Add(new SelectListItem
+                {
+                    Text = "Exemplo3",
+                    Value = "Exemplo3"
+                });
+        }
+        <div class="col-sm-6">
+            <div class="form-group">
+                <label class="col-sm-4 control-label">
+                    @ClaimAccident.DriverType
+                </label>
+                <div class="col-sm-8">
+                    @Html.DropDownListFor(m => m.DriverAddressDlt.DriverType, listItems, new { @class = "col-lg-12 form-control" })
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-sm-6">
+            <div class="form-group">
+                <label class="col-sm-4 control-label">
+                    @ClaimAccident.Address1</label>
+                <div class="col-sm-8">
+                    @Html.TextAreaFor(m => m.DriverAddressDlt.Address1, new { id = "inputAddress1", @class = "form-control", @maxlength = "100" })
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-6">
+            <div class="form-group">
+                <label class="col-sm-4 control-label">
+                    @ClaimAccident.Gender
+                </label>
+                <div class="col-sm-8">
+                    @Html.DropDownListFor(m => m.DriverAddressDlt.Gender, new SelectList(Model.DriverAddressDlt.GenderList, "Lookup_value", "Lookup_desc"), new { @class = "col-lg-12 form-control" })
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-sm-6">
+            <div class="form-group">
+                <label class="col-sm-4 control-label">
+                    @ClaimAccident.Address2</label>
+                <div class="col-sm-8">
+                    @Html.TextAreaFor(m => m.DriverAddressDlt.Address2, new { id = "inputAddress2", @class = "form-control", @maxlength = "100" })
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-6">
+            <div class="form-group">
+                <label class="col-sm-4 control-label">
+                    @ClaimAccident.NRICPPNo
+                </label>
+                <div class="col-sm-8">
+                    @Html.TextBoxFor(m => m.DriverAddressDlt.NRIC_PPNo, new { id = "inputNRICNo", @class = "form-control", @maxlength = "100" })
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-sm-6">
+            <div class="form-group">
+                <label class="col-sm-4 control-label">
+                    @ClaimAccident.Address3</label>
+                <div class="col-sm-8">
+                    @Html.TextAreaFor(m => m.DriverAddressDlt.Address3, new { id = "inputAddress3", @class = "form-control", @maxlength = "100" })
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-6">
+            <div class="form-group">
+                <label class="col-sm-4 control-label">
+                    @ClaimAccident.ContactNo</label>
+                <div class="col-sm-8">
+                    @Html.TextBoxFor(m => m.DriverAddressDlt.ContactNo, new { id = "inputContactNo", @class = "form-control", @maxlength = "100" })
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-sm-6">
+            <div class="form-group">
+                <label class="col-sm-4 control-label">
+                    @ClaimAccident.Country</label>
+                <div class="col-sm-8">
+                     @Html.DropDownListFor(m => m.DriverAddressDlt.Country, new SelectList(Model.DriverAddressDlt.Countrylist, "CountryShortCode", "CountryName", "SG"), new { @class = "col-lg-12 form-control" })
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-6">
+            <div class="form-group">
+                <label class="col-sm-4 control-label">
+                    @ClaimAccident.FaxNo
+                </label>
+                <div class="col-sm-8">
+                    @Html.TextBoxFor(m => m.DriverAddressDlt.FaxNo, new { id = "inputFaxNo", @class = "form-control", @maxlength = "100" })
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-sm-6">
+            <div class="form-group">
+                <label class="col-sm-4 control-label">
+                    @ClaimAccident.PostalCode</label>
+                <div class="col-sm-8">
+                    @Html.TextBoxFor(m => m.DriverAddressDlt.PostalCode, new { id = "inputPostalCode", @class = "form-control", @maxlength = "25" })
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-6">
+            <div class="form-group">
+                <label class="col-sm-4 control-label">
+                    @ClaimAccident.EmailAddress
+                </label>
+                <div class="col-sm-8">
+                    @Html.TextBoxFor(m => m.DriverAddressDlt.Email, new { id = "inputEmail", @class = "form-control", @maxlength = "100" })
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

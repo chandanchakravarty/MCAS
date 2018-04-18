@@ -1,0 +1,1424 @@
+﻿@using MCAS.Web.Objects.Resources.ClaimProcessing;
+@using MCAS.Web.Objects.CommonHelper
+@using MCAS.Web.Objects.Resources.Common;
+@using MCAS.Globalisation;
+@model MCAS.Web.Objects.ClaimObjectHelper.ClaimReserveModel
+@{
+    var mMCASQueryString = Html.MCASQueryString(Request.QueryString);
+    ViewBag.Title = "ClaimReserveEditor";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var caller = mMCASQueryString["claimMode"] == null ? "" : Convert.ToString(mMCASQueryString["claimMode"]);
+    var accidentClaimIdNew = mMCASQueryString["AccidentClaimId"] == null ? "" : Convert.ToString(mMCASQueryString["AccidentClaimId"]);
+    var pagemode = mMCASQueryString["mode"] == null ? "" : Convert.ToString(mMCASQueryString["mode"]);
+    var submenuval = string.IsNullOrEmpty(Convert.ToString(HttpContext.Current.Session["ScreenNameDash"])) ? "" : Convert.ToString(HttpContext.Current.Session["ScreenNameDash"]);
+    var SubMenu = !string.IsNullOrEmpty(submenuval) ? MenuListItem.ClaimTabs.GetClaimLabel(submenuval) : ClaimReserve.ResourceManager.GetString(MenuListItem.ClaimTabs.SubMenuString(@caller, @accidentClaimIdNew, @pagemode, "ClaimReserve"));
+    var DonotDiableControl = Model.ReadOnly != true && (pagemode == "Adj" || SubMenu == MCAS.Web.Objects.Resources.Common.Menu.ResourceManager.GetString("207")) ? "form-horizontal DonotDiableControl" : "form-horizontal";
+    var policyid = mMCASQueryString["PolicyId"] == null ? "" : Convert.ToString(mMCASQueryString["PolicyId"]);
+    var claimMode = mMCASQueryString["claimMode"] == null ? "" : Convert.ToString(mMCASQueryString["claimMode"]);
+    var claimId = mMCASQueryString["ClaimID"] == null ? Model.ClaimID == null ? 0 : Model.ClaimID : Convert.ToInt32(mMCASQueryString["ClaimID"]);
+    var Hdivdis1 = Model.Hdivdis == null ? "1" : Model.Hdivdis;
+    var Himgsrc1 = Model.Himgsrc == null ? "1" : Model.Himgsrc;
+    var Hselect1 = Model.Hselect == null ? "1" : Model.Hselect;
+    var ClaimType1 = mMCASQueryString["ClaimType"] == null ? Model.ClaimType == null ? 0 : Model.ClaimType : Convert.ToInt32(mMCASQueryString["ClaimType"]);
+    var ReserveId = mMCASQueryString["ReserveId"] == null ? Model.ReserveId == null ? 0 : Model.ReserveId : Convert.ToInt32(mMCASQueryString["ReserveId"]);
+    //var ReserveId = Model.ReserveId == null ? 0 : Model.ReserveId;
+    var Display = TempData["DisplayDiv"] == null ? "none;" : "block;";
+    var ReadOnlyReserve = MenuListItem.ClaimTabs.SubMenuString(@caller, @accidentClaimIdNew, @pagemode, "ReadOnlyReserve");
+    var ShowHideButtonInGridInReserve = MenuListItem.ClaimTabs.SubMenuString(@caller, @accidentClaimIdNew, @pagemode, "ShowHideButtonInGridInReserve");
+    Model.ClaimID = claimId;
+    Model.ClaimType = ClaimType1;
+    Model.ViewMode = ((pagemode == "Adj") || ("207" == submenuval)) ? "" : "Read";
+    string isEncryptedParams = System.Configuration.ConfigurationManager.AppSettings["EncryptQueryParams"].ToUpper();
+}
+<link href="@Url.Content("~/Content/jquery-ui.css")" rel="Stylesheet" media="screen" />
+<style type="text/css">
+    .form-horizontal .control-label
+    {
+        text-align: left;
+    }
+    @*input[type=text], textarea
+    {
+        text-transform: capitalize;
+    }*@
+    .rateperday
+    {
+        padding-left: 0px;
+    }
+</style>
+<script src="@Url.Content("~/Scripts/jquery-2.1.0.min.js")" type="text/javascript"></script>
+<div class="dashboard-wrapper">
+    <div class="ReserveDialogue" style="overflow: hidden;">
+    </div>
+    <div class="container">
+        <div class="page-title" id="reg">
+            <div class="col-lg-12" id="reg2" style="background-color: white; position: fixed;
+                z-index: 1;">
+                <h2>@ClaimReserve.ResourceManager.GetString(MenuListItem.ClaimTabs.PreBreadCrumbString(@pagemode))</h2>
+                <ul class="breadcrumb">
+                    <li>@SubMenu</li>
+                    <li>@ClaimReserve.Reserve</li>
+                </ul>
+            </div>
+            <div style="position: relative!important">
+                @Html.Action("_ClaimDetails", "ClaimProcessing", new { PolicyId = @policyid })
+            </div>
+        </div>
+        @{
+            object routes = new { PolicyId = @policyid, AccidentClaimId = @accidentClaimIdNew, claimMode = @caller, mode = @pagemode };
+            if (isEncryptedParams.ToUpper() == "YES")
+            {
+                string res = RouteEncryptDecrypt.getRouteString(routes);
+                res = RouteEncryptDecrypt.Encrypt(res);
+                routes = new { Q = res };
+            }
+        }
+        <hr />
+        <div class="row" id="toprow">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <div class="panel panel-info">
+                    <div class="panel-heading clearfix">
+                        <i class="icon-check-sign"></i>
+                        <h3 class="panel-title">
+                            @ClaimReserve.Reserve</h3>
+                    </div>
+                    <div class="panel-body">
+                        @Html.Partial("ClaimReserveEditorList", Model.ClaimReserveModelCollection)
+                        <div>
+                            <br />
+                        </div>
+                        <div class="row">
+                            <div class="clearfix igr col-md-1 text-center">
+                                <a class="btn btn-info" id="Previous">@Common.Previous</a>
+                            </div>
+                            <div class="col-lg-8 text-center">
+                            </div>
+                            <div class="col-lg-2">
+                                <a class="btn btn-info" style="display: none;" id="btnLog">@ClaimReserve.AddNewLogrequest</a>
+                            </div>
+                            <div class="clearfix igr col-md-1 text-center">
+                                <a class="btn btn-info" id="Next">@Common.Next</a>
+                            </div>
+                        </div>
+                        <hr style='font-weight: bold' />
+                        <div class="panel-body" id="NewReserveEditor"  style="display:@Display">
+                            @using (Html.BeginForm("ClaimReserveEditor", "ClaimProcessing", routes, FormMethod.Post, new { role = "form", @class = @DonotDiableControl, id = "ClaimReserveEditorForm", name = "ClaimReserveEditorForm" }))
+                            {
+                               
+                                @Html.HiddenFor(m => m.ReserveId)
+                                @Html.HiddenFor(m => m.ClaimID)
+                                @Html.HiddenFor(m => m.ClaimType)
+                                @Html.HiddenFor(m => m.Hdivdis)
+                                @Html.HiddenFor(m => m.Himgsrc)
+                                @Html.HiddenFor(m => m.Hselect)
+                                @Html.HiddenFor(m => m.CreatedBy)
+                                @Html.HiddenFor(m => m.Hshowgrid)
+                                @Html.HiddenFor(m => m.HGridImageSign)
+                                @Html.HiddenFor(m => m.ReadOnly)    
+                                @Html.HiddenFor(m => m.ViewMode)  
+                                <a id="reload" href='@Url.ActionEncoded("ClaimReserveEditor", "ClaimProcessing", new { PolicyId = @policyid, ClaimId = @claimId, ReserveId = @Model.ReserveId, AccidentClaimId = @accidentClaimIdNew, claimMode = @caller })' style="display:none">
+                                    Reload</a>
+                                <div style="color: Red; font-weight: bold;" class="has-error result1" id="error">
+                                    <p align="center">
+                                        @if (@ViewData["SuccessMsg"] != null)
+                                        {
+                                            @ViewData["SuccessMsg"]
+                                        }
+                                    </p>
+                                </div>
+                                <div class="panel-body" id="ODRequestEditor" style="display:@Display">
+                                    <div class="row">
+                                        <fieldset>
+                                            <legend id="mainheader">@ClaimReserve.ODClaimBreakdown</legend>
+                                            <div id="Togglediv" class="panel-body">
+                                                <div class="row">
+                                                    <div class="col-lg-12">
+                                                        <div class="form-group">
+                                                            <div class="col-sm-3">
+                                                                <label class="control-labelcontrol-label" for="inputClaimantName">
+                                                                    @ClaimReserve.ClaimantName
+                                                                </label>
+                                                            </div>
+                                                            <div class="col-sm-6">
+                                                                @Html.TextBoxFor(m => m.ClaimantName, new { id = "ClaimantName", name = "ClaimantName", @class = "form-control" })
+                                                            </div>
+                                                            <div class="col-sm-3">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-lg-12">
+                                                        <div>
+                                                            <div class="col-sm-3">
+                                                            </div>
+                                                            <div class="col-sm-3 text-center">
+                                                                <label id="labelir" class="text-center" for="inputInitialReserve">
+                                                                    @ClaimReserve.InitialReserve</label>
+                                                            </div>
+                                                            <div class="col-sm-3 text-center">
+                                                                <label id="labelrm" class="text-center" for="inputReserveMovement">
+                                                                    @ClaimReserve.ReserveMovement</label>
+                                                            </div>
+                                                            <div class="col-sm-3 text-center">
+                                                                <label id="labelor" class="text-center" for="inputCurrentReserve">
+                                                                    @ClaimReserve.CurrentReserve</label>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                @for (int i = 0; i < Model.ReserveDetails.Count; i++)
+                                                {
+                                                    @Html.HiddenFor(m => m.ReserveDetails[i].CompCode) 
+                                                    @Html.HiddenFor(m => m.ReserveDetails[i].ReserveDetailId)
+                                                    @Html.HiddenFor(m => m.ReserveDetails[i].ReserveId)
+                                                    @Html.HiddenFor(m => m.ReserveDetails[i].PaymentId)
+                                                    @Html.HiddenFor(m => m.ReserveDetails[i].ClaimID)
+                                                    @Html.HiddenFor(m => m.ReserveDetails[i].AccidentClaimId)
+                                                    var InitialReserveId = Model.ReserveDetails[i].CompDesc + "_I";
+                                                    var MovementReserveId = Model.ReserveDetails[i].CompDesc + "_R";
+                                                    var CurrentReserveId = Model.ReserveDetails[i].CompDesc + "_O";
+                                                    var PreviousReserveId = Model.ReserveDetails[i].CompDesc + "_C";
+                                                    if (Model.ReserveDetails[i].CompCode == "GD")
+                                                    { 
+                                                    <fieldset class="BI">
+                                                        <legend class="ExpCol ui-minusicon">@ClaimReserve.GD</legend>
+                                                        <div class="row BI" id="BIl1div">
+                                                            <div class="col-lg-12">
+                                                                <div class="form-group">
+                                                                    <label class="col-sm-3 control-label">
+                                                                        @ClaimReserve.GD
+                                                                    </label>
+                                                                    <div class="col-sm-3">
+                                                                        @Html.TextBoxFor(m => m.ReserveDetails[i].InitialReserve, new { @maxlength = "14", @class = "form-control format Number", @id = @InitialReserveId })
+                                                                    </div>
+                                                                    <div class="col-sm-3">
+                                                                        @Html.TextBoxFor(m => m.ReserveDetails[i].MovementReserve, new { @maxlength = "14", @class = "form-control format Number NegativeAllow", @id = @MovementReserveId })
+                                                                    </div>
+                                                                    <div class="col-sm-3">
+                                                                        @Html.TextBoxFor(m => m.ReserveDetails[i].CurrentReserve, new { @maxlength = "14", @readonly = "", @class = "form-control format Number", @id = @CurrentReserveId })
+                                                                        @Html.HiddenFor(m => m.ReserveDetails[i].PreviousReserve, new { @Value = Model.ReserveDetails[i].CurrentReserve, @id = @PreviousReserveId })
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </fieldset>
+                                                    }
+                                                    if (Model.ReserveDetails[i].CompCode == "ME")
+                                                    {
+                                                    <fieldset class="BI">
+                                                        <legend class="ExpCol ui-minusicon">@ClaimReserve.ME</legend>
+                                                        <div class="row BI" id="BIl2div">
+                                                            @if (Model.ReserveDetails[i].CompCode == "ME")
+                                                            {
+                                                                <div>
+                                                                    <div class="col-lg-12">
+                                                                        <div class="form-group">
+                                                                            <label class="col-sm-3 control-label">
+                                                                                @ClaimReserve.ME
+                                                                            </label>
+                                                                            <div class="col-sm-3">
+                                                                                @Html.TextBoxFor(m => m.ReserveDetails[i].InitialReserve, new { @maxlength = "14", @class = "form-control format Number", @id = @InitialReserveId })
+                                                                            </div>
+                                                                            <div class="col-sm-3">
+                                                                                @Html.TextBoxFor(m => m.ReserveDetails[i].MovementReserve, new { @maxlength = "14", @class = "form-control format Number NegativeAllow", @id = @MovementReserveId })
+                                                                            </div>
+                                                                            <div class="col-sm-3">
+                                                                                @Html.TextBoxFor(m => m.ReserveDetails[i].CurrentReserve, new { @maxlength = "14", @readonly = "", @class = "form-control format Number", @id = @CurrentReserveId })
+                                                                                @Html.HiddenFor(m => m.ReserveDetails[i].PreviousReserve, new { @Value = Model.ReserveDetails[i].CurrentReserve, @id = @PreviousReserveId })
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            }
+                                                            @if (Model.ReserveDetails[i + 1].CompCode == "FME")
+                                                            {
+                                                                <div>
+                                                                    <div class="col-lg-12">
+                                                                        <div class="form-group">
+                                                                            <label class="col-sm-3 control-label">
+                                                                                @ClaimReserve.FME
+                                                                            </label>
+                                                                            <div class="col-sm-3">
+                                                                                @Html.TextBoxFor(m => m.ReserveDetails[i + 1].InitialReserve, new { @maxlength = "14", @class = "form-control format Number", @id = Model.ReserveDetails[i + 1].CompDesc + "_I" })
+                                                                            </div>
+                                                                            <div class="col-sm-3">
+                                                                                @Html.TextBoxFor(m => m.ReserveDetails[i + 1].MovementReserve, new { @maxlength = "14", @class = "form-control format Number NegativeAllow", @id = Model.ReserveDetails[i + 1].CompDesc + "_R" })
+                                                                            </div>
+                                                                            <div class="col-sm-3">
+                                                                                @Html.TextBoxFor(m => m.ReserveDetails[i + 1].CurrentReserve, new { @maxlength = "14", @readonly = "", @class = "form-control format Number", @id = Model.ReserveDetails[i + 1].CompDesc + "_O" })
+                                                                                @Html.HiddenFor(m => m.ReserveDetails[i + 1].PreviousReserve, new { @Value = Model.ReserveDetails[i + 1].CurrentReserve, @id = Model.ReserveDetails[i + 1].CompDesc + "_C" })
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            }
+                                                            @if (Model.ReserveDetails[i + 2].CompCode == "LME")
+                                                            {
+                                                                <div>
+                                                                    <div class="col-lg-12">
+                                                                        <div class="form-group">
+                                                                            <label class="col-sm-3 control-label">
+                                                                                @ClaimReserve.LME
+                                                                            </label>
+                                                                            <div class="col-sm-3">
+                                                                                @Html.TextBoxFor(m => m.ReserveDetails[i + 2].InitialReserve, new { @maxlength = "14", @class = "form-control format Number", @id = Model.ReserveDetails[i + 2].CompDesc + "_I" })
+                                                                            </div>
+                                                                            <div class="col-sm-3">
+                                                                                @Html.TextBoxFor(m => m.ReserveDetails[i + 2].MovementReserve, new { @maxlength = "14", @class = "form-control format Number NegativeAllow", @id = Model.ReserveDetails[i + 2].CompDesc + "_R" })
+                                                                            </div>
+                                                                            <div class="col-sm-3">
+                                                                                @Html.TextBoxFor(m => m.ReserveDetails[i + 2].CurrentReserve, new { @maxlength = "14", @readonly = "", @class = "form-control format Number", @id = Model.ReserveDetails[i + 2].CompDesc + "_O" })
+                                                                                @Html.HiddenFor(m => m.ReserveDetails[i + 2].PreviousReserve, new { @Value = Model.ReserveDetails[i + 2].CurrentReserve, @id = Model.ReserveDetails[i + 2].CompDesc + "_C" })
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            }
+                                                        </div>
+                                                    </fieldset>
+                                                    }
+
+                                                    if (Model.ReserveDetails[i].CompCode == "LEC")
+                                                    {
+                                                    <fieldset class="BI">
+                                                        <legend class="ExpCol ui-minusicon">@ClaimReserve.LEC</legend>
+                                                        <div class="row BI" id="BIl4div">
+                                                            @if (Model.ReserveDetails[i].CompCode == "LEC")
+                                                            {
+                                                                <div class="col-lg-12">
+                                                                    <div class="form-group">
+                                                                        <label class="col-sm-3 control-label">
+                                                                            @ClaimReserve.LEC
+                                                                        </label>
+                                                                        <div class="col-sm-3">
+                                                                            @Html.TextBoxFor(m => m.ReserveDetails[i].InitialReserve, new { @maxlength = "14", @class = "form-control format Number", @id = @InitialReserveId })
+                                                                        </div>
+                                                                        <div class="col-sm-3">
+                                                                            @Html.TextBoxFor(m => m.ReserveDetails[i].MovementReserve, new { @maxlength = "14", @class = "form-control format Number NegativeAllow", @id = @MovementReserveId })
+                                                                        </div>
+                                                                        <div class="col-sm-3">
+                                                                            @Html.TextBoxFor(m => m.ReserveDetails[i].CurrentReserve, new { @maxlength = "14", @readonly = "", @class = "form-control format Number", @id = @CurrentReserveId })
+                                                                            @Html.HiddenFor(m => m.ReserveDetails[i].PreviousReserve, new { @Value = Model.ReserveDetails[i].CurrentReserve, @id = @PreviousReserveId })
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            }
+                                                            @if (Model.ReserveDetails[i + 1].CompCode == "LOEAR")
+                                                            {
+                                                                <div class="col-lg-12">
+                                                                    <div class="form-group">
+                                                                        <label class="col-sm-3 control-label">
+                                                                            @ClaimReserve.LOEAR
+                                                                        </label>
+                                                                        <div class="col-sm-3">
+                                                                            @Html.TextBoxFor(m => m.ReserveDetails[i + 1].InitialReserve, new { @maxlength = "14", @class = "form-control format Number", @id = Model.ReserveDetails[i + 1].CompDesc + "_I" })
+                                                                        </div>
+                                                                        <div class="col-sm-3">
+                                                                            @Html.TextBoxFor(m => m.ReserveDetails[i + 1].MovementReserve, new { @maxlength = "14", @class = "form-control format Number NegativeAllow", @id = Model.ReserveDetails[i + 1].CompDesc + "_R" })
+                                                                        </div>
+                                                                        <div class="col-sm-3">
+                                                                            @Html.TextBoxFor(m => m.ReserveDetails[i + 1].CurrentReserve, new { @maxlength = "14", @readonly = "", @class = "form-control format Number", @id = Model.ReserveDetails[i + 1].CompDesc + "_O" })
+                                                                            @Html.HiddenFor(m => m.ReserveDetails[i + 1].PreviousReserve, new { @Value = Model.ReserveDetails[i + 1].CurrentReserve, @id = Model.ReserveDetails[i + 1].CompDesc + "_C" })
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            }
+                                                            @if (Model.ReserveDetails[i + 2].CompCode == "LODE")
+                                                            {
+                                                                <div class="col-lg-12">
+                                                                    <div class="form-group">
+                                                                        <label class="col-sm-3 control-label">
+                                                                            @ClaimReserve.LODE
+                                                                        </label>
+                                                                        <div class="col-sm-3">
+                                                                            @Html.TextBoxFor(m => m.ReserveDetails[i + 2].InitialReserve, new { @maxlength = "14", @class = "form-control format Number", @id = Model.ReserveDetails[i + 2].CompDesc + "_I" })
+                                                                        </div>
+                                                                        <div class="col-sm-3">
+                                                                            @Html.TextBoxFor(m => m.ReserveDetails[i + 2].MovementReserve, new { @maxlength = "14", @class = "form-control format Number NegativeAllow", @id = Model.ReserveDetails[i + 2].CompDesc + "_R" })
+                                                                        </div>
+                                                                        <div class="col-sm-3">
+                                                                            @Html.TextBoxFor(m => m.ReserveDetails[i + 2].CurrentReserve, new { @maxlength = "14", @readonly = "", @class = "form-control format Number", @id = Model.ReserveDetails[i + 2].CompDesc + "_O" })
+                                                                            @Html.HiddenFor(m => m.ReserveDetails[i + 2].PreviousReserve, new { @Value = Model.ReserveDetails[i + 2].CurrentReserve, @id = Model.ReserveDetails[i + 2].CompDesc + "_C" })
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            }
+                                                        </div>
+                                                    </fieldset>
+                                                    }
+                                                    if (Model.ReserveDetails[i].CompCode == "TRAN")
+                                                    { 
+                                                    <fieldset class="BI">
+                                                        <legend class="ExpCol ui-minusicon">@ClaimReserve.TRAN</legend>
+                                                        <div class="row BI" id="BIl5div">
+                                                            <div class="col-lg-12">
+                                                                <div class="form-group">
+                                                                    <label class="col-sm-3 control-label">
+                                                                        @ClaimReserve.TRAN
+                                                                    </label>
+                                                                    <div class="col-sm-3">
+                                                                        @Html.TextBoxFor(m => m.ReserveDetails[i].InitialReserve, new { @maxlength = "14", @class = "form-control format Number", @id = @InitialReserveId })
+                                                                    </div>
+                                                                    <div class="col-sm-3">
+                                                                        @Html.TextBoxFor(m => m.ReserveDetails[i].MovementReserve, new { @maxlength = "14", @class = "form-control format Number NegativeAllow", @id = @MovementReserveId })
+                                                                    </div>
+                                                                    <div class="col-sm-3">
+                                                                        @Html.TextBoxFor(m => m.ReserveDetails[i].CurrentReserve, new { @maxlength = "14", @readonly = "", @class = "form-control format Number", @id = @CurrentReserveId })
+                                                                        @Html.HiddenFor(m => m.ReserveDetails[i].PreviousReserve, new { @Value = Model.ReserveDetails[i].CurrentReserve, @id = @PreviousReserveId })
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </fieldset>
+                                                    }
+                                                    if (Model.ReserveDetails[i].CompCode == "COR")
+                                                    {
+                                                    <fieldset class="OD PD">
+                                                        <legend class="ExpCol ui-minusicon">@ClaimReserve.COR</legend>
+                                                        <div class="row OD PD" id="ODl1div">
+                                                            <div class="col-lg-12">
+                                                                <div class="form-group">
+                                                                    <label class="col-sm-3 control-label">
+                                                                        @ClaimReserve.COR</label>
+                                                                    <div class="col-sm-3" id="ODl1div3">
+                                                                        @Html.TextBoxFor(m => m.ReserveDetails[i].InitialReserve, new { @maxlength = "14", @class = "form-control format Number", @id = @InitialReserveId })
+                                                                    </div>
+                                                                    <div class="col-sm-3">
+                                                                        @Html.TextBoxFor(m => m.ReserveDetails[i].MovementReserve, new { @maxlength = "14", @class = "form-control format Number NegativeAllow", @id = @MovementReserveId })
+                                                                    </div>
+                                                                    <div class="col-sm-3">
+                                                                        @Html.TextBoxFor(m => m.ReserveDetails[i].CurrentReserve, new { @maxlength = "14", @readonly = "", @class = "form-control format Number", @id = @CurrentReserveId })
+                                                                        @Html.HiddenFor(m => m.ReserveDetails[i].PreviousReserve, new { @Value = Model.ReserveDetails[i].CurrentReserve, @id = @PreviousReserveId })
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </fieldset>
+                                                    }
+                                                    if (Model.ReserveDetails[i].CompCode == "LOUUN")
+                                                    {
+                                                    <fieldset class="OD PD">
+                                                        <legend class="ExpCol ui-minusicon">@ClaimReserve.LOUUN</legend>
+                                                        <div class="row" id="ODLOUDiv">
+                                                            @if (Model.ReserveDetails[i].CompCode == "LOUUN")
+                                                            {
+                                                                <div class="PD col-lg-12">
+                                                                    <div class="form-group">
+                                                                        <label class="col-sm-3 control-label">
+                                                                            @ClaimReserve.LOUUN</label>
+                                                                        <div class="col-sm-3">
+                                                                            @Html.TextBoxFor(m => m.ReserveDetails[i].InitialReserve, new { @maxlength = "24", @class = "form-control format Number", @id = @InitialReserveId })
+                                                                        </div>
+                                                                        <div class="col-sm-3">
+                                                                            @Html.TextBoxFor(m => m.ReserveDetails[i].MovementReserve, new { @maxlength = "24", @class = "form-control format Number NegativeAllow", @id = @MovementReserveId })
+                                                                        </div>
+                                                                        <div class="col-sm-3">
+                                                                            @Html.TextBoxFor(m => m.ReserveDetails[i].CurrentReserve, new { @maxlength = "24", @readonly = "", @class = "form-control format Number", @id = @CurrentReserveId })
+                                                                            @Html.HiddenFor(m => m.ReserveDetails[i].PreviousReserve, new { @Value = Model.ReserveDetails[i].CurrentReserve, @id = @PreviousReserveId })
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            }
+                                                            @if (Model.ReserveDetails[i + 1].CompCode == "LOE")
+                                                            {
+                                                                <div class="PD col-lg-12">
+                                                                    <div class="form-group">
+                                                                        <label class="col-sm-3 control-label">
+                                                                            @ClaimReserve.LOE</label>
+                                                                        <div class="col-sm-3">
+                                                                            @Html.TextBoxFor(m => m.ReserveDetails[i + 1].InitialReserve, new { @maxlength = "14", @class = "form-control format Number", @id = Model.ReserveDetails[i + 1].CompDesc + "_I" })
+                                                                        </div>
+                                                                        <div class="col-sm-3">
+                                                                            @Html.TextBoxFor(m => m.ReserveDetails[i + 1].MovementReserve, new { @maxlength = "14", @class = "form-control format Number NegativeAllow", @id = Model.ReserveDetails[i + 1].CompDesc + "_R" })
+                                                                        </div>
+                                                                        <div class="col-sm-3">
+                                                                            @Html.TextBoxFor(m => m.ReserveDetails[i + 1].CurrentReserve, new { @maxlength = "14", @readonly = "", @class = "form-control format Number", @id = Model.ReserveDetails[i + 1].CompDesc + "_O" })
+                                                                            @Html.HiddenFor(m => m.ReserveDetails[i + 1].PreviousReserve, new { @Value = Model.ReserveDetails[i + 1].CurrentReserve, @id = Model.ReserveDetails[i + 1].CompDesc + "_C" })
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            }
+                                                            @if (Model.ReserveDetails[i + 2].CompCode == "LOR")
+                                                            {
+                                                                <div class="PD col-lg-12">
+                                                                    <div class="form-group">
+                                                                        <label class="col-sm-3 control-label">
+                                                                            @ClaimReserve.LOR</label>
+                                                                        <div class="col-sm-3">
+                                                                            @Html.TextBoxFor(m => m.ReserveDetails[i + 2].InitialReserve, new { @maxlength = "14", @class = "form-control format Number", @id = Model.ReserveDetails[i + 2].CompDesc + "_I" })
+                                                                        </div>
+                                                                        <div class="col-sm-3">
+                                                                            @Html.TextBoxFor(m => m.ReserveDetails[i + 2].MovementReserve, new { @maxlength = "14", @class = "form-control format Number NegativeAllow", @id = Model.ReserveDetails[i + 2].CompDesc + "_R" })
+                                                                        </div>
+                                                                        <div class="col-sm-3">
+                                                                            @Html.TextBoxFor(m => m.ReserveDetails[i + 2].CurrentReserve, new { @maxlength = "14", @readonly = "", @class = "form-control format Number", @id = Model.ReserveDetails[i + 2].CompDesc + "_O" })
+                                                                            @Html.HiddenFor(m => m.ReserveDetails[i + 2].PreviousReserve, new { @Value = Model.ReserveDetails[i + 2].CurrentReserve, @id = Model.ReserveDetails[i + 2].CompDesc + "_C" })
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            }
+                                                            @if (Model.ReserveDetails[i + 3].CompCode == "Ex")
+                                                            {
+                                                                <div class="PD col-lg-12">
+                                                                    <div class="form-group">
+                                                                        <label class="col-sm-3 control-label">
+                                                                            @ClaimReserve.Ex</label>
+                                                                        <div class="col-sm-3">
+                                                                            @Html.TextBoxFor(m => m.ReserveDetails[i + 3].InitialReserve, new { @maxlength = "14", @class = "form-control format Number", @id = Model.ReserveDetails[i + 3].CompDesc + "_I" })
+                                                                        </div>
+                                                                        <div class="col-sm-3">
+                                                                            @Html.TextBoxFor(m => m.ReserveDetails[i + 3].MovementReserve, new { @maxlength = "14", @class = "form-control format Number NegativeAllow", @id = Model.ReserveDetails[i + 3].CompDesc + "_R" })
+                                                                        </div>
+                                                                        <div class="col-sm-3">
+                                                                            @Html.TextBoxFor(m => m.ReserveDetails[i + 3].CurrentReserve, new { @maxlength = "14", @readonly = "", @class = "form-control format Number", @id = Model.ReserveDetails[i + 3].CompDesc + "_O" })
+                                                                            @Html.HiddenFor(m => m.ReserveDetails[i + 3].PreviousReserve, new { @Value = Model.ReserveDetails[i + 3].CurrentReserve, @id = Model.ReserveDetails[i + 3].CompDesc + "_C" })
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            }
+                                                            @if (Model.ReserveDetails[i + 4].CompCode == "LOU")
+                                                            {
+                                                                <div class="OD col-lg-12">
+                                                                    <div class="form-group" style="margin-bottom: 0px;">
+                                                                        <label class="col-sm-3 control-label">
+                                                                        </label>
+                                                                        <div class="col-sm-3" style="">
+                                                                            <div class="col-sm-5" style="padding-left: 0px;">
+                                                                                <label class="control-label" style="vertical-align: baseline;">
+                                                                                    @ClaimReserve.LOU
+                                                                                </label>
+                                                                            </div>
+                                                                            <div class="col-sm-2">
+                                                                                <label class="control-label">
+                                                                                </label>
+                                                                            </div>
+                                                                            <div class="col-sm-5" style="padding-right: 0px;">
+                                                                                <label class="control-label">
+                                                                                    @ClaimReserve.perday
+                                                                                </label>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="col-sm-3" style="">
+                                                                            <div class="col-sm-5" style="padding-left: 0px;">
+                                                                                <label class="control-label" style="vertical-align: baseline;">
+                                                                                </label>
+                                                                            </div>
+                                                                            <div class="col-sm-2">
+                                                                                <label class="control-label">
+                                                                                </label>
+                                                                            </div>
+                                                                            <div class="col-sm-5" style="padding-right: 0px;">
+                                                                                <label class="control-label">
+                                                                                </label>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="col-sm-3" style="">
+                                                                            <div class="col-sm-5" style="padding-left: 0px;">
+                                                                                <label class="control-label" style="vertical-align: baseline;">
+                                                                                </label>
+                                                                            </div>
+                                                                            <div class="col-sm-2">
+                                                                                <label class="control-label">
+                                                                                </label>
+                                                                            </div>
+                                                                            <div class="col-sm-5" style="padding-right: 0px;">
+                                                                                <label class="control-label" for="inputLossofUse">
+                                                                                </label>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="OD col-lg-12">
+                                                                    <div class="form-group" style="margin-bottom: 2px;">
+                                                                        <label class="col-sm-3 control-label" for="inputLossofUse">
+                                                                        </label>
+                                                                        <div class="col-sm-3">
+                                                                            <div class="col-sm-5" style="padding-left: 0px;">
+                                                                                @Html.TextBoxFor(m => m.Noofdays_I, new { @maxlength = "6", @class = "form-control Number" })</div>
+                                                                            <div class="col-sm-2">
+                                                                                <label class="control-label">
+                                                                                    @@
+                                                                                </label>
+                                                                            </div>
+                                                                            <div class="col-sm-5" style="padding-right: 0px;">
+                                                                                @Html.DropDownListFor(m => m.Rateperday_I, new SelectList(Model.RateperdayList, "Id", "Text", "[Select...]"), new { @class = "col-lg-12 form-control rateperday" })</div>
+                                                                        </div>
+                                                                        <div class="col-sm-3">
+                                                                            <div class="col-sm-5" style="padding-left: 0px; display: none;">
+                                                                                @Html.TextBoxFor(m => m.Noofdays_R, new { @maxlength = "6", @class = "form-control Number" })</div>
+                                                                            <div class="col-sm-2">
+                                                                                <label class="control-label" for="inputLossofUse">
+                                                                                </label>
+                                                                            </div>
+                                                                            <div class="col-sm-5" style="padding-right: 0px; display: none;">
+                                                                                @Html.DropDownListFor(m => m.Rateperday_R, new SelectList(Model.RateperdayList, "Id", "Text", "[Select...]"), new { id = "Rateperday_R", name = "Rateperday_R", @class = "col-lg-12 form-control rateperday" })</div>
+                                                                        </div>
+                                                                        <div class="col-sm-3">
+                                                                            <div class="col-sm-5" style="padding-left: 0px; display: none;">
+                                                                                @Html.TextBoxFor(m => m.Noofdays_O, new { @maxlength = "6", @readonly = "", @class = "form-control Number" })</div>
+                                                                            <div class="col-sm-2">
+                                                                                <label class="control-label" for="inputLossofUse">
+                                                                                </label>
+                                                                            </div>
+                                                                            <div class="col-sm-5" style="padding-right: 0px; display: none;">
+                                                                                @Html.DropDownListFor(m => m.Rateperday_O, new SelectList(Model.RateperdayList, "Id", "Text", "250"), new { @class = "col-lg-12 form-control rateperday", @readonly = "" })</div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="OD col-lg-12">
+                                                                    <div class="form-group">
+                                                                        <label class="col-sm-3 control-label">
+                                                                            @ClaimReserve.LOUUN</label>
+                                                                        <div class="col-sm-3">
+                                                                            @Html.TextBoxFor(m => m.ReserveDetails[i + 4].InitialReserve, new { @maxlength = "24", @class = "form-control format Number", @readonly = "", @id = Model.ReserveDetails[i + 4].CompDesc + "_I" })
+                                                                        </div>
+                                                                        <div class="col-sm-3">
+                                                                            @Html.TextBoxFor(m => m.ReserveDetails[i + 4].MovementReserve, new { @maxlength = "24", @class = "form-control format Number NegativeAllow", @id = Model.ReserveDetails[i + 4].CompDesc + "_R" })
+                                                                        </div>
+                                                                        <div class="col-sm-3">
+                                                                            @Html.TextBoxFor(m => m.ReserveDetails[i + 4].CurrentReserve, new { @maxlength = "24", @readonly = "", @class = "form-control format Number", @id = Model.ReserveDetails[i + 4].CompDesc + "_O" })
+                                                                            @Html.HiddenFor(m => m.ReserveDetails[i + 4].PreviousReserve, new { @Value = Model.ReserveDetails[i + 4].CurrentReserve, @id = Model.ReserveDetails[i + 4].CompDesc + "_C" })
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            }
+                                                        </div>
+                                                    </fieldset>
+                                                    }
+                                                    if (Model.ReserveDetails[i].CompCode == "OE")
+                                                    {
+                                                    <fieldset class="OD PD BI">
+                                                        <legend class="ExpCol ui-minusicon">@ClaimReserve.OE</legend>
+                                                        <div class="row" id="ODl4div">
+                                                            @if (Model.ReserveDetails[i].CompCode == "OE")
+                                                            {
+                                                                <div class="OD PD BI col-lg-12">
+                                                                    <div class="form-group">
+                                                                        <label class="col-sm-3 control-label">
+                                                                            @ClaimReserve.OE</label>
+                                                                        <div class="col-sm-3">
+                                                                            @Html.TextBoxFor(m => m.ReserveDetails[i].InitialReserve, new { @maxlength = "14", @class = "form-control format Number", @id = @InitialReserveId })
+                                                                        </div>
+                                                                        <div class="col-sm-3">
+                                                                            @Html.TextBoxFor(m => m.ReserveDetails[i].MovementReserve, new { @maxlength = "14", @class = "form-control format Number NegativeAllow", @id = @MovementReserveId })
+                                                                        </div>
+                                                                        <div class="col-sm-3">
+                                                                            @Html.TextBoxFor(m => m.ReserveDetails[i].CurrentReserve, new { @maxlength = "14", @readonly = "", @class = "form-control format Number", @id = @CurrentReserveId })
+                                                                            @Html.HiddenFor(m => m.ReserveDetails[i].PreviousReserve, new { @Value = Model.ReserveDetails[i].CurrentReserve, @id = @PreviousReserveId })
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            }
+                                                            @if (Model.ReserveDetails[i + 1].CompCode == "IEF")
+                                                            {
+                                                                <div class="col-lg-12 BI">
+                                                                    <div class="form-group">
+                                                                        <label class="col-sm-3 control-label">
+                                                                            @ClaimReserve.IEF
+                                                                        </label>
+                                                                        <div class="col-sm-3">
+                                                                            @Html.TextBoxFor(m => m.ReserveDetails[i + 1].InitialReserve, new { @maxlength = "14", @class = "form-control format Number", @id = Model.ReserveDetails[i + 1].CompDesc + "_I" })
+                                                                        </div>
+                                                                        <div class="col-sm-3">
+                                                                            @Html.TextBoxFor(m => m.ReserveDetails[i + 1].MovementReserve, new { @maxlength = "14", @class = "form-control format Number NegativeAllow", @id = Model.ReserveDetails[i + 1].CompDesc + "_R" })
+                                                                        </div>
+                                                                        <div class="col-sm-3">
+                                                                            @Html.TextBoxFor(m => m.ReserveDetails[i + 1].CurrentReserve, new { @maxlength = "14", @readonly = "", @class = "form-control format Number", @id = Model.ReserveDetails[i + 1].CompDesc + "_O" })
+                                                                            @Html.HiddenFor(m => m.ReserveDetails[i + 1].PreviousReserve, new { @Value = Model.ReserveDetails[i + 1].CurrentReserve, @id = Model.ReserveDetails[i + 1].CompDesc + "_C" })
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            }
+                                                        </div>
+                                                    </fieldset>
+                                                    }
+                                                    if (Model.ReserveDetails[i].CompCode == "MR")
+                                                    {
+                                                    <fieldset class="OD PD BI">
+                                                        <legend class="ExpCol ui-minusicon">@ClaimReserve.MR</legend>
+                                                        <div class="row" id="ODl5div">
+                                                            @if (Model.ReserveDetails[i].CompCode == "MR")
+                                                            {
+                                                                <div class="col-lg-12 BI">
+                                                                    <div class="form-group">
+                                                                        <label class="col-sm-3 control-label">
+                                                                            @ClaimReserve.MR
+                                                                        </label>
+                                                                        <div class="col-sm-3">
+                                                                            @Html.TextBoxFor(m => m.ReserveDetails[i].InitialReserve, new { @maxlength = "14", @class = "form-control format Number", @id = @InitialReserveId })
+                                                                        </div>
+                                                                        <div class="col-sm-3">
+                                                                            @Html.TextBoxFor(m => m.ReserveDetails[i].MovementReserve, new { @maxlength = "14", @class = "form-control format Number NegativeAllow", @id = @MovementReserveId })
+                                                                        </div>
+                                                                        <div class="col-sm-3">
+                                                                            @Html.TextBoxFor(m => m.ReserveDetails[i].CurrentReserve, new { @maxlength = "14", @readonly = "", @class = "form-control format Number", @id = @CurrentReserveId })
+                                                                            @Html.HiddenFor(m => m.ReserveDetails[i].PreviousReserve, new { @Value = Model.ReserveDetails[i].CurrentReserve, @id = @PreviousReserveId })
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            }
+                                                            @if (Model.ReserveDetails[i + 1].CompCode == "PTF")
+                                                            {
+                                                                <div class="col-lg-12 BI">
+                                                                    <div class="form-group">
+                                                                        <label class="col-sm-3 control-label" for="inputRSFeeReserve">
+                                                                            @ClaimReserve.PTF
+                                                                        </label>
+                                                                        <div class="col-sm-3">
+                                                                            @Html.TextBoxFor(m => m.ReserveDetails[i + 1].InitialReserve, new { @maxlength = "14", @class = "form-control format Number", @id = Model.ReserveDetails[i + 1].CompDesc + "_I" })
+                                                                        </div>
+                                                                        <div class="col-sm-3">
+                                                                            @Html.TextBoxFor(m => m.ReserveDetails[i + 1].MovementReserve, new { @maxlength = "14", @class = "form-control format Number NegativeAllow", @id = Model.ReserveDetails[i + 1].CompDesc + "_R" })
+                                                                        </div>
+                                                                        <div class="col-sm-3">
+                                                                            @Html.TextBoxFor(m => m.ReserveDetails[i + 1].CurrentReserve, new { @maxlength = "14", @readonly = "", @class = "form-control format Number", @id = Model.ReserveDetails[i + 1].CompDesc + "_O" })
+                                                                            @Html.HiddenFor(m => m.ReserveDetails[i + 1].PreviousReserve, new { @Value = Model.ReserveDetails[i + 1].CurrentReserve, @id = Model.ReserveDetails[i + 1].CompDesc + "_C" })
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            }
+                                                            @if (Model.ReserveDetails[i + 2].CompCode == "SF")
+                                                            {
+                                                                <div class="col-lg-12 OD PD">
+                                                                    <div class="form-group">
+                                                                        <label class="col-sm-3 control-label">
+                                                                            @ClaimReserve.SF
+                                                                        </label>
+                                                                        <div class="col-sm-3">
+                                                                            @Html.TextBoxFor(m => m.ReserveDetails[i + 2].InitialReserve, new { @maxlength = "14", @class = "form-control format Number", @id = Model.ReserveDetails[i + 2].CompDesc + "_I" })
+                                                                        </div>
+                                                                        <div class="col-sm-3">
+                                                                            @Html.TextBoxFor(m => m.ReserveDetails[i + 2].MovementReserve, new { @maxlength = "14", @class = "form-control format Number NegativeAllow", @id = Model.ReserveDetails[i + 2].CompDesc + "_R" })
+                                                                        </div>
+                                                                        <div class="col-sm-3">
+                                                                            @Html.TextBoxFor(m => m.ReserveDetails[i + 2].CurrentReserve, new { @maxlength = "14", @readonly = "", @class = "form-control format Number", @id = Model.ReserveDetails[i + 2].CompDesc + "_O" })
+                                                                            @Html.HiddenFor(m => m.ReserveDetails[i + 2].PreviousReserve, new { @Value = Model.ReserveDetails[i + 2].CurrentReserve, @id = Model.ReserveDetails[i + 2].CompDesc + "_C" })
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            }
+                                                            @if (Model.ReserveDetails[i + 3].CompCode == "RSF")
+                                                            {
+                                                                <div class="col-lg-12 OD PD">
+                                                                    <div class="form-group">
+                                                                        <label class="col-sm-3 control-label" for="inputSurveyFee">
+                                                                            @ClaimReserve.RSF
+                                                                        </label>
+                                                                        <div class="col-sm-3">
+                                                                            @Html.TextBoxFor(m => m.ReserveDetails[i + 3].InitialReserve, new { @maxlength = "14", @class = "form-control format Number", @id = Model.ReserveDetails[i + 3].CompDesc + "_I" })
+                                                                        </div>
+                                                                        <div class="col-sm-3">
+                                                                            @Html.TextBoxFor(m => m.ReserveDetails[i + 3].MovementReserve, new { @maxlength = "14", @class = "form-control format Number NegativeAllow", @id = Model.ReserveDetails[i + 3].CompDesc + "_R" })
+                                                                        </div>
+                                                                        <div class="col-sm-3">
+                                                                            @Html.TextBoxFor(m => m.ReserveDetails[i + 3].CurrentReserve, new { @maxlength = "14", @readonly = "", @class = "form-control format Number", @id = Model.ReserveDetails[i + 3].CompDesc + "_O" })
+                                                                            @Html.HiddenFor(m => m.ReserveDetails[i + 3].PreviousReserve, new { @Value = Model.ReserveDetails[i + 3].CurrentReserve, @id = Model.ReserveDetails[i + 3].CompDesc + "_C" })
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            }
+                                                            @if (Model.ReserveDetails[i + 4].CompCode == "LPRF")
+                                                            {
+                                                                <div class="col-lg-12 OD PD BI">
+                                                                    <div class="form-group">
+                                                                        <label class="col-sm-3 control-label">
+                                                                            @ClaimReserve.LPRF
+                                                                        </label>
+                                                                        <div class="col-sm-3">
+                                                                            @Html.TextBoxFor(m => m.ReserveDetails[i + 4].InitialReserve, new { @maxlength = "14", @class = "form-control format Number", @id = Model.ReserveDetails[i + 4].CompDesc + "_I" })
+                                                                        </div>
+                                                                        <div class="col-sm-3">
+                                                                            @Html.TextBoxFor(m => m.ReserveDetails[i + 4].MovementReserve, new { @maxlength = "14", @class = "form-control format Number NegativeAllow", @id = Model.ReserveDetails[i + 4].CompDesc + "_R" })
+                                                                        </div>
+                                                                        <div class="col-sm-3">
+                                                                            @Html.TextBoxFor(m => m.ReserveDetails[i + 4].CurrentReserve, new { @maxlength = "14", @readonly = "", @class = "form-control format Number", @id = Model.ReserveDetails[i + 4].CompDesc + "_O" })
+                                                                            @Html.HiddenFor(m => m.ReserveDetails[i + 4].PreviousReserve, new { @Value = Model.ReserveDetails[i + 4].CurrentReserve, @id = Model.ReserveDetails[i + 4].CompDesc + "_C" })
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            }
+                                                            @if (Model.ReserveDetails[i + 5].CompCode == "OPEF")
+                                                            {
+                                                                <div class="col-lg-12 BI">
+                                                                    <div class="form-group">
+                                                                        <label class="col-sm-3 control-label">
+                                                                            @ClaimReserve.OPEF
+                                                                        </label>
+                                                                        <div class="col-sm-3">
+                                                                            @Html.TextBoxFor(m => m.ReserveDetails[i + 5].InitialReserve, new { @maxlength = "14", @class = "form-control format Number", @id = Model.ReserveDetails[i + 5].CompDesc + "_I" })
+                                                                        </div>
+                                                                        <div class="col-sm-3">
+                                                                            @Html.TextBoxFor(m => m.ReserveDetails[i + 5].MovementReserve, new { @maxlength = "14", @class = "form-control format Number NegativeAllow", @id = Model.ReserveDetails[i + 5].CompDesc + "_R" })
+                                                                        </div>
+                                                                        <div class="col-sm-3">
+                                                                            @Html.TextBoxFor(m => m.ReserveDetails[i + 5].CurrentReserve, new { @maxlength = "14", @readonly = "", @class = "form-control format Number", @id = Model.ReserveDetails[i + 5].CompDesc + "_O" })
+                                                                            @Html.HiddenFor(m => m.ReserveDetails[i + 5].PreviousReserve, new { @Value = Model.ReserveDetails[i + 5].CurrentReserve, @id = Model.ReserveDetails[i + 5].CompDesc + "_C" })
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            }
+                                                        </div>
+                                                    </fieldset>
+                                                    }
+                                                    if (Model.ReserveDetails[i].CompCode == "PLC")
+                                                    {
+                                                    <fieldset>
+                                                        <legend class="ExpCol ui-minusicon">@ClaimReserve.PLC </legend>
+                                                        <div class="row" id="ODl6div">
+                                                            @if (Model.ReserveDetails[i].CompCode == "PLC")
+                                                            {
+                                                                <div class="col-lg-12">
+                                                                    <div class="form-group">
+                                                                        <label class="col-sm-3 control-label" for="inputTPLawyerCost">
+                                                                            @ClaimReserve.PLC
+                                                                        </label>
+                                                                        <div class="col-sm-3">
+                                                                            @Html.TextBoxFor(m => m.ReserveDetails[i].InitialReserve, new { @maxlength = "14", @class = "form-control format Number", @id = @InitialReserveId })
+                                                                        </div>
+                                                                        <div class="col-sm-3">
+                                                                            @Html.TextBoxFor(m => m.ReserveDetails[i].MovementReserve, new { @maxlength = "14", @class = "form-control format Number NegativeAllow", @id = @MovementReserveId })
+                                                                        </div>
+                                                                        <div class="col-sm-3">
+                                                                            @Html.TextBoxFor(m => m.ReserveDetails[i].CurrentReserve, new { @maxlength = "14", @readonly = "", @class = "form-control format Number", @id = @CurrentReserveId })
+                                                                            @Html.HiddenFor(m => m.ReserveDetails[i].PreviousReserve, new { @Value = Model.ReserveDetails[i].CurrentReserve, @id = @PreviousReserveId })
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            }
+                                                            @if (Model.ReserveDetails[i + 1].CompCode == "PLD")
+                                                            {
+                                                                <div class="col-lg-12">
+                                                                    <div class="form-group">
+                                                                        <label class="col-sm-3 control-label" for="inputTPLawyerDis">
+                                                                            @ClaimReserve.PLD
+                                                                        </label>
+                                                                        <div class="col-sm-3">
+                                                                            @Html.TextBoxFor(m => m.ReserveDetails[i + 1].InitialReserve, new { @maxlength = "14", @class = "form-control format Number", @id = Model.ReserveDetails[i + 1].CompDesc + "_I" })
+                                                                        </div>
+                                                                        <div class="col-sm-3">
+                                                                            @Html.TextBoxFor(m => m.ReserveDetails[i + 1].MovementReserve, new { @maxlength = "14", @class = "form-control format Number NegativeAllow", @id = Model.ReserveDetails[i + 1].CompDesc + "_R" })
+                                                                        </div>
+                                                                        <div class="col-sm-3">
+                                                                            @Html.TextBoxFor(m => m.ReserveDetails[i + 1].CurrentReserve, new { @maxlength = "14", @readonly = "", @class = "form-control format Number", @id = Model.ReserveDetails[i + 1].CompDesc + "_O" })
+                                                                            @Html.HiddenFor(m => m.ReserveDetails[i + 1].PreviousReserve, new { @Value = Model.ReserveDetails[i + 1].CurrentReserve, @id = Model.ReserveDetails[i + 1].CompDesc + "_C" })
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            }
+                                                        </div>
+                                                    </fieldset>
+                                                    }
+                                                    if (Model.ReserveDetails[i].CompCode == "OLC")
+                                                    {
+                                                    <fieldset>
+                                                        <legend class="ExpCol ui-minusicon">@ClaimReserve.OurLegalFees</legend>
+                                                        <div class="row" id="ODl7div">
+                                                            @if (Model.ReserveDetails[i].CompCode == "OLC")
+                                                            {
+                                                            
+                                                                <div class="col-lg-12">
+                                                                    <div class="form-group">
+                                                                        <label class="col-sm-3 control-label" for="inputOurLawyerCost">
+                                                                            @ClaimReserve.OLC
+                                                                        </label>
+                                                                        <div class="col-sm-3">
+                                                                            @Html.TextBoxFor(m => m.ReserveDetails[i].InitialReserve, new { @maxlength = "14", @class = "form-control format Number", @id = @InitialReserveId })
+                                                                        </div>
+                                                                        <div class="col-sm-3">
+                                                                            @Html.TextBoxFor(m => m.ReserveDetails[i].MovementReserve, new { @maxlength = "14", @class = "form-control format Number NegativeAllow", @id = @MovementReserveId })
+                                                                        </div>
+                                                                        <div class="col-sm-3">
+                                                                            @Html.TextBoxFor(m => m.ReserveDetails[i].CurrentReserve, new { @maxlength = "14", @readonly = "", @class = "form-control format Number", @id = @CurrentReserveId })
+                                                                            @Html.HiddenFor(m => m.ReserveDetails[i].PreviousReserve, new { @Value = Model.ReserveDetails[i].CurrentReserve, @id = @PreviousReserveId })
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            }
+                                                            @if (Model.ReserveDetails[i + 1].CompCode == "OLD")
+                                                            {
+                                                                <div class="col-lg-12">
+                                                                    <div class="form-group">
+                                                                        <label class="col-sm-3 control-label" for="inputOurLawyerDis">
+                                                                            @ClaimReserve.OLD
+                                                                        </label>
+                                                                        <div class="col-sm-3">
+                                                                            @Html.TextBoxFor(m => m.ReserveDetails[i + 1].InitialReserve, new { @maxlength = "14", @class = "form-control format Number", @id = Model.ReserveDetails[i + 1].CompDesc + "_I" })
+                                                                        </div>
+                                                                        <div class="col-sm-3">
+                                                                            @Html.TextBoxFor(m => m.ReserveDetails[i + 1].MovementReserve, new { @maxlength = "14", @class = "form-control format Number NegativeAllow", @id = Model.ReserveDetails[i + 1].CompDesc + "_R" })
+                                                                        </div>
+                                                                        <div class="col-sm-3">
+                                                                            @Html.TextBoxFor(m => m.ReserveDetails[i + 1].CurrentReserve, new { @maxlength = "14", @readonly = "", @class = "form-control format Number", @id = Model.ReserveDetails[i + 1].CompDesc + "_O" })
+                                                                            @Html.HiddenFor(m => m.ReserveDetails[i + 1].PreviousReserve, new { @Value = Model.ReserveDetails[i + 1].CurrentReserve, @id = Model.ReserveDetails[i + 1].CompDesc + "_C" })
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            }
+                                                        </div>
+                                                    </fieldset>
+                                                    }
+                                                    if (Model.ReserveDetails[i].CompCode == "TOTAL")
+                                                    {
+                                                    <div style="padding-top: 4px">
+                                                        <div class="row">
+                                                            <div class="col-lg-12">
+                                                                <div class="form-group">
+                                                                    <label class="col-sm-3 control-label" for="inputCostofRepairs">
+                                                                        @ClaimReserve.TOTAL
+                                                                    </label>
+                                                                    <div class="col-sm-3">
+                                                                        @Html.TextBoxFor(m => m.ReserveDetails[i].InitialReserve, new { @maxlength = "24", @readonly = "", @class = "form-control format Number", @id = @InitialReserveId })
+                                                                    </div>
+                                                                    <div class="col-sm-3">
+                                                                        @Html.TextBoxFor(m => m.ReserveDetails[i].MovementReserve, new { @maxlength = "24", @readonly = "", @class = "form-control format Number NegativeAllow", @id = @MovementReserveId })
+                                                                    </div>
+                                                                    <div class="col-sm-3">
+                                                                        @Html.TextBoxFor(m => m.ReserveDetails[i].CurrentReserve, new { @maxlength = "24", @readonly = "", @class = "form-control format Number", @id = @CurrentReserveId })
+                                                                        @Html.HiddenFor(m => m.ReserveDetails[i].PreviousReserve, new { @Value = Model.ReserveDetails[i].CurrentReserve, @id = @PreviousReserveId })
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    }
+
+                                                }
+                                            </div>
+                                        </fieldset>
+                                    </div>
+                                </div>
+                                <div class="form-group" id="divsave" style="display:@Display">
+                                    <div class="col-lg-1">
+                                        <div class="form-group" style="padding-left: 20px;">
+                                            <a class="btn btn-info" id="Previous">@Common.Previous</a>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-10 text-center">
+                                        <div class="form-group" id="DivSave1">
+                                           @* <input id="btnSave" class="btn btn-info" type="button" value=@Common.Save tabindex="12" />*@
+                                            <button type="submit" class="btn btn-info" id="btnSave" name="Save">
+                                                @Common.Save</button>
+                                            @if (@ReserveId == 0 || @ReserveId == null)
+                                                {
+                                            <a class="btn btn-info" id="btnReset" tabindex="13">@Common.Reset</a>
+                                             }
+                                                 else
+                                                {
+                                                 <a name="btnReset1" id="btnReset1" class="btn btn-info" href="#">@Common.Reset</a> 
+                                                }
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-1">
+                                        <div class="form-group">
+                                            <a class="btn btn-info" id="Next">@Common.Next</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+                            <div class="panel-body">
+                                <fieldset>
+                                    <legend></legend>
+                                    <div class="row">
+                                        <div class="panel-body">
+                                            @Html.Partial("~/Views/Shared/_TimeStamp.cshtml", Model)
+                                        </div>
+                                    </div>
+                                </fieldset>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    setTabActive('ReverseEditor');
+    var do_on_load = function () {
+        $("a.Print").each(function () { $(this).attr("url", $(this).attr("href")).attr("href", "#"); })
+        $("a.Print").on('click', function () {
+            $("div.PreviewDocumentClass").length && $("div.PreviewDocumentClass").remove();
+            var a = guid(), b = "#" + a;
+            $('<div class="PreviewDocumentClass"  id="' + a + '" title="Print" style="overflow: hidden;"><div class="Printloading"><p>Please wait...<br><img src="@Url.Content("~/Images/ajax-loader.gif")" alt="Loading.."></p></div></div>').appendTo(".PrintDialogue");
+            InitializeDialogReserve($(b), $(this).attr("url").getstringinbetween("ClaimID"), $(this).attr("url").getstringinbetween("ReserveId"));
+            $(b).dialog("open");
+            return !1
+        });
+        $(document).on("focus", ":input", function () {
+            $(this).attr("autocomplete", "off")
+        });
+        $(".datepicker").datepicker({
+            dateFormat: "dd/mm/yy",
+            showStatus: true,
+            showWeeks: true,
+            currentText: 'Now',
+            autoSize: true,
+            gotoCurrent: true,
+            showAnim: 'blind',
+            highlightWeek: true,
+            changeMonth: !0,
+            changeYear: !0,
+            yearRange: "1951:2050",
+            onSelect: function () {
+                $(this).valid()
+            }
+        });
+
+        $("#ClaimGrid_table td").each(function () {
+            var id = $(this).closest("tr").attr("id");
+            $(this).attr("role") && "gridcell" == $(this).attr("role") && $("#ClaimGrid_table table").each(function () {
+                if ($(this).context.id.beginsWith(id)) {
+                    var a = "#" + $(this).context.id + " td:nth-child(2)";
+                }
+            });
+        });
+
+
+        $(".ui-ebixgrid-view > table > tbody > tr > td > a").each(function () {
+            "@Common.Edit" == $(this).text() && ($(this).attr("href").getstringinbetween("HClaimantStatus") == "2" || $(this).attr("href").getstringinbetween("HClaimantStatus") == "3") && $(this).hide();
+            "@Common.View" == $(this).text() && $(this).attr("ViewVal", $(this).attr("href")) && $(this).removeAttr("href");
+        });
+
+        $.culture = Globalize.culture("en-GB");
+        $.validator.methods.date = function (value, element) { return this.optional(element) || Globalize.parseDate(value, "dd/MM/yyyy", "en-GB") || Globalize.parseDate(value, "yyyy-mm-dd"); };
+        $("tr.ui-subgrid > td > div > div.ui-ebixgrid-view > table > tbody > tr > td:nth-child(3)").addClass("format");
+        $("#NewReserveEditor input[type=text]").change(function () {
+            var a = [], a = ["_I", "_R"];
+            if (-1 < $.inArray($(this).context.id.slice(-2), a) && $(this).hasClass("format")) {
+                if ($(this).context.id.slice(-2) == "_R") {
+                    var b = $(this).context.id.slice(0, -2) + "_I", e = $(this).context.id.slice(0, -2) + "_R", a = $(this).context.id.slice(0, -2) + "_O", c = $(this).context.id.slice(0, -2) + "_C", i = !$("#" + b).prop('readonly') ? parseFloat("" == $("#" + b).val() ? "0.00" : $("#" + b).val().replace(/,/g, "")) : parseFloat("" == $("#" + c).val() ? "0.00" : $("#" + c).val().replace(/,/g, "")),
+                b = i + parseFloat("" == $("#" + e).val() ? "0.00" : $("#" + e).val().replace(/,/g, ""));
+                    $("#" + a).val(("-" == b.toString().charAt(0) ? "-" : "") + CurrencyFormat(parseFloat(b)));
+                    $(this).context.id.slice(-2) == "_I" && $("#" + e).val(("-" == b.toString().charAt(0) ? "-" : "") + CurrencyFormat(parseFloat(b)));
+                }
+                else if ($(this).context.id.slice(-2) == "_I") {
+                    var b = $(this).context.id.slice(0, -2) + "_I", e = $(this).context.id.slice(0, -2) + "_R", a = $(this).context.id.slice(0, -2) + "_O", c = $(this).context.id.slice(0, -2) + "_C", f = $(this).val() == "" ? "0.00" : $(this).val().replace("_I", "_R");
+                    $("#" + e).val(CurrencyFormat(parseFloat(f.replace(/,/g, ""))));
+                    $("#" + a).val(CurrencyFormat(parseFloat(f.replace(/,/g, ""))));
+                    $("#" + c).val(parseFloat(f.replace(/,/g, "")));
+                }
+            };
+            SetTotal();
+        }).each(function () {
+            $(this).context.id.slice(-2) == "_I" && (($(this).is(":visible") && ($(this).val() == "" || $(this).val() == "0" || $(this).val() == "0.00")) ? $("#" + $(this).context.id.replace("_I", "_R")).prop("readonly", !0) : $(this).prop("readonly", !0));
+            ("207" == "@submenuval") && $(this).context.id.slice(-2) == "_R" && $(this).is(":visible") && $(this).prop("readonly", !0);
+            $(this).context.id.slice(-2) == "_R" && $(this).is(":visible") && $(this).hasClass("format") && $(this).val("0.00");
+        });
+        $("#Noofdays_R,#LossofUse_R").val("0");
+
+        $("#Rateperday_R").empty();
+
+        $.ajax({
+            type: "POST",
+            url: '@Url.ActionEncoded("GetRateperdayList", "ClaimProcessing")',
+            data: {
+                UniqueId: guid()
+            },
+            success: function (a) {
+                $.each(a, function (a, b) {
+                    $("#Rateperday_R").append(new Option(b.Text, b.Id))
+                })
+                if ("207" == "@submenuval") DisableRatePerDayForIncomplete();
+            }
+        });
+        DisableRatePerDay();
+        $("#Rateperday_R").prop('selectedIndex', 0);
+
+        $("#Rateperday_I,#Noofdays_I,#Rateperday_R,#Noofdays_R").change(function () {
+            debugger;
+            if (!$(this).hasClass("DisableDropDown")) {
+                var d = 0, a = $(this).context.id.slice(-1), c = "" == $("#Noofdays_" + a).val() ? 0 : parseInt(($("#Noofdays_" + a).val() == "" ? "0" : $("#Noofdays_" + a).val())), b = parseFloat(($("#Rateperday_" + a).val() == "" ? "0" : $("#Rateperday_" + a).val())), h = "#Rateperday_" + a, f = $(h + " option:selected").text(), e = parseFloat(($("#LossofUse_" + a).val() == "" ? "0" : $("#LossofUse_" + a).val()));
+                DropDownVal("Rateperday_O", b, f)
+                $("#Noofdays_O").val($("#Noofdays_" + a).val());
+                $("#LossofUse_" + a).val(CurrencyFormat(parseFloat(c) * parseFloat((f == "[Select...]" ? "0" : f))));
+                $("#LossofUse_O").val(CurrencyFormat(parseFloat(c) * parseFloat((f == "[Select...]" ? "0" : f))));
+                if ($(this).context.id.slice(-1) == "I") {
+                    DropDownVal("Rateperday_R", b, f);
+                    $("#Noofdays_R").val($("#Noofdays_" + a).val());
+                    $("#LossofUse_R").val(CurrencyFormat(parseFloat(c) * parseFloat((f == "[Select...]" ? "0" : f))));
+                    $("#LossofUse_C").val(parseFloat(c) * parseFloat((f == "[Select...]" ? "0" : f)));
+                }
+                if ($(this).context.id.slice(-1) == "R") {
+                    var lossofuse_o = parseFloat(c) * parseFloat((f == "[Select...]" ? "0" : f));
+                    var lossofuse_c = $("#LossofUse_C").val().replace(/,/g, "");
+                    $("#LossofUse_O").val(CurrencyFormat(parseFloat(lossofuse_c) + parseFloat(lossofuse_o)));
+                    $("#LossofUse_C").val(parseFloat(lossofuse_c) + parseFloat(lossofuse_o));
+                }
+                SetTotal();
+            };
+        });
+        $("table.ui-ebixgrid-btable span").click(function () {
+            var a = $(this).context.id;
+            $("#NewReserveEditor,#ODRequestEditor,#divsave").css("display", "none");
+            $("table.ui-ebixgrid-btable span").each(function () {
+                $(this).hasClass("ui-icon-minus") && $(this).context.id != a && ($(this).addClass("ui-icon-plus").removeClass("ui-icon-minus"), $("#" + $(this).closest("tr").next("tr").attr("id")).hide());
+            });
+        });
+
+        $("#btnSave").click(function (a) {
+            debugger;
+            var bool = false, boolchange = false, msg = "", id = "";
+            $("#NewReserveEditor input[type=text]").each(function () {
+                debugger;
+                if ($(this).context.id.slice(-2) == "_O" && $(this).is(":visible") && $(this).hasClass("format") && $(this).val().slice(0, 1) == "-") {
+                    DisableRatePerDay();
+                    msg = "Current reserve cannot be negative";
+                    id = this.id;
+                    bool = true;
+                    return false;
+                };
+            });
+
+            $("#NewReserveEditor input[type=text]").each(function () {
+                debugger;
+                if ($(this).context.id.slice(-2) == "_O" && $(this).is(":visible") && $(this).hasClass("format") && parseFloat($(this).val().replace(/,/g, "")) != parseFloat($("#" + $(this).context.id.slice(0, -2) + "_C").val().replace(/,/g, ""))) {
+                    boolchange = true;
+                    return false;
+                }
+            });
+
+
+            if (bool) return alert(msg, id), !1;
+
+            if (!boolchange) return alert("No Changes Have Been Made!"), !1;
+            RetainDropDown();
+            RetianDivDisplay();
+            RetainImgSrcSign();
+            FormatValue();
+            var b = $("#ClaimReserveEditorForm").valid();
+            if ("" == $("#Total_O").val() || "0.00" == $("#Total_O").val()) return alert("Total Outstanding amount is required"), a.preventDefault(), !1;
+            IsPageChanged() && b && $("#ClaimReserveEditorForm").submit();
+        });
+        $("#btnReset").click(function () { ClearForm("NewReserveEditor") });
+        $(".ui-ebixgrid-view > table > tbody > tr > td > a").click(function (event) {
+            if ("@Common.View" == $(this).text()) {
+                var a = guid(), b = "#" + a;
+                $('<div id="' + a + '" title="Reserve History" style="overflow: hidden;"></div>').appendTo(".ReserveDialogue");
+                InitializeDialog($(b), $(this).attr("ViewVal").getstringinbetween("ClaimType"), $(this).attr("ViewVal").getstringinbetween("ClaimID"));
+                event.preventDefault();
+                $(b).dialog("open");
+                return !1
+            }
+        });
+        $("#Togglediv legend").click(function (a) {
+            $(this).hasClass("ExpCol") && ($(this).hasClass("ui-minusicon") ? $(this).addClass("ui-plusicon").removeClass("ui-minusicon") : $(this).addClass("ui-minusicon").removeClass("ui-plusicon"), $(this).next("div").toggle("slow"));
+        });
+
+        DatepickerLen();
+        if ('@Hselect1' != '1') {
+            for (var arr = [], arr = $("#Hselect").val().split("~"), k = 0, curr; curr = arr[k]; k++) {
+                var a1 = curr.split("***")[0], a2 = curr.split("***")[1], a3 = curr.split("***")[2];
+                $("#" + a1).empty();
+                for (var i = 0; i < a2.split("**").length; i += 2) {
+                    $("#" + a1).append(new Option(a2.split("**")[i + 1], a2.split("**")[i]));
+                };
+                $("#" + a1).val(a3);
+            };
+        }
+
+        if ('@Hdivdis1' != "1") {
+            for (var arr = [], arr = $("#Hdivdis").val().split(","), i = 0, curr; curr = arr[i]; i++) {
+                var a1 = curr.split("~")[0], a2 = curr.split("~")[1];
+                "T" == a1 ? $("#" + a2).show() : "error" != a2 && $("#" + a2).hide();
+            };
+        }
+        if ('@Himgsrc1' != "1") {
+            for (var arr = [], arr = $("#Himgsrc").val().split(","), i = 0, curr; curr = arr[i]; i++) {
+                var a1 = curr.split("~")[0], a2 = curr.split("~")[1];
+                $("#" + a1).attr("src", a2);
+            };
+        }
+        if ('@ClaimType1' != 0) {
+            ShowHideDiv("@ClaimType1");
+            $("#mainheader").text(Tmainheader["@ClaimType1"]());
+        };
+
+        $("#btnReset1").click(function () {
+            debugger;
+            var ClaimId = '@Model.ClaimID';
+            var accidentclaimId = '@Model.AccidentClaimId';
+            var policyId = '@policyid';
+            var ReserveId = '@ReserveId';
+            var ClaimType = '@ClaimType1';
+            var mode = '@pagemode';
+            var claimMode = '@caller'
+            var a = parseInt(ClaimId);
+            var b = parseInt(accidentclaimId);
+            var c = parseInt(policyId);
+            var d = parseInt(ReserveId);
+            window.location.href = '@Url.Action("ClaimReserveEditor", "ClaimProcessing")?ClaimId=' + a + '&AccidentClaimId=' + b + '&claimMode=Write' + '&policyId=' + c + '&ReserveId=' + d + '&ClaimType=' + ClaimType + '&mode=' + mode + '&claimMode=' + claimMode;
+        });
+
+        SetDivPost();
+        SetHiddenSpan();
+        ExpandGridAfterPost($("#Hshowgrid").val());
+    };
+    $(document).ready(do_on_load);
+    $(window).bind("page:change", do_on_load);
+    var Tmainheader = { 1: function () { return '@Html.Raw(ClaimReserve.ODClaimBreakdown)' }, 2: function () { return '@Html.Raw(ClaimReserve.TPPDClaimBreakdown)' }, 3: function () { return '@Html.Raw(ClaimReserve.TPBIClaimBreakdown)' } }, CName = { 1: function () { return '@Html.Raw(ClaimReserve.OwnDamage)' }, 2: function () { return '@Html.Raw(ClaimReserve.PropertyDamage)' }, 3: function () { return '@Html.Raw(ClaimReserve.BodyInjury)' }
+    };
+
+    function InitializeDialog($element, a, f) {
+        var value = "@Html.Raw(ClaimReserve.ReserveHistory)";
+        $element.dialog({
+            width: "900",
+            resizable: false,
+            draggable: true,
+            show: { effect: 'drop', direction: "up" },
+            title: CName[a]() + "-" + value,
+            model: true,
+            show: 'slide',
+            dialogClass: 'alert',
+            closeOnEscape: true,
+            open: function (event, ui) {
+                var path = '@Url.Content("~/ClaimProcessing/ReverseChangeall")' + "?resid=" + f + "&AccidentClaimId=" + '@accidentClaimIdNew' + "&uid=" + guid();
+                $element.load(path);
+            },
+            position: {
+                my: "center",
+                at: "center",
+                of: window
+            },
+            close: function () {
+                $element.dialog('destroy').remove();
+            }
+
+        });
+    };
+
+    function SetTotal() {
+        for (var c = 0, a = 0, d = [], d = ["_I", "_R", "_O"], b; b = d[c]; c++, a = 0) {
+            $("input[type=text]").each(function () {
+                $(this).is(":visible") && $(this).context.id.slice(-2) == b && $(this).context.id != "Total" + b && $(this).context.id != "Noofdays" + b && $(this).hasClass("format") && (a = parseFloat("" == $(this).val() ? "0" : $(this).val().replace(/,/g, "")) + a)
+            }), $("#Total" + b).val(("-" == a.toString().charAt(0) ? "-" : "") + CurrencyFormat(parseFloat(a)))
+        }
+    };
+
+    function InitializeDialogReserve($element, a, b) {
+        $element.dialog({
+            width: "900",
+            resizable: false,
+            draggable: true,
+            show: { effect: 'drop', direction: "up" },
+            title: "Print",
+            model: true,
+            show: 'slide',
+            dialogClass: 'alert',
+            closeOnEscape: true,
+            open: function (event, ui) {
+                var path = '@Url.Content("~/ClaimMasters/PreviewDocumentIndex")' + "?ClaimID=" + a + "&SId=" + b + "&AccidentClaimId=" + '@accidentClaimIdNew' + "&ScreenId=" + '@Model.screenId' + "&uid=" + guid();
+                $element.load(path);
+            },
+            position: {
+                my: "center",
+                at: "center",
+                of: window
+            },
+            close: function () {
+                $element.dialog('destroy').remove();
+                if ($("#HChildGrid").val() != "" && $("#" + $("#HChildGrid").val()).length) {
+                    try {
+                        $("#" + $("#HChildGrid").val()).remove()
+                        $('div[aria-describedby="' + $("#HChildGrid").val() + '"]').remove();
+                        $("#HChildGrid").val("");
+                    }
+                    catch (exx) {
+                    }
+                }
+            }
+
+        }).css('max-height', '500px').css('overflow-y', 'scroll');
+    };
+    function FormatValue() {
+        $("input[type=text]").each(function () {
+            if ($(this).hasClass("format") && "" != $(this).val()) {
+                var a = $(this).context.id, b = $(this).val().replace(/,/g, "");
+                $("#" + a).val(b.replace("NaN", "0"))
+            }
+        });
+    };
+    function DisableRatePerDay() {
+        $("#Noofdays_I").prop('readonly') && $("#Rateperday_I").addClass("DisableDropDown").css({ "pointer-events": "none", cursor: "default" }).css("background-color", "#eee").children('option:not(:selected)');
+        $("#Noofdays_R").prop('readonly') && $("#Rateperday_R").addClass("DisableDropDown").css({ "pointer-events": "none", cursor: "default" }).css("background-color", "#eee").children('option:not(:selected)').remove();
+        $("#Noofdays_O").prop('readonly') && $("#Rateperday_O").addClass("DisableDropDown").css({ "pointer-events": "none", cursor: "default" }).css("background-color", "#eee").children('option:not(:selected)').remove();
+    };
+
+    function ExpandGridAfterPost(a) {
+        $("table.ui-ebixgrid-btable span").each(function () {
+            if ($(this).hasClass("ui-icon-minus") || $(this).hasClass("ui-icon-plus")) {
+                if (a.beginsWith($(this).context.id)) {
+                    var spanid = $(this).context.id, id = spanid.slice(5, spanid.length);
+                    $('#' + id).show();
+                    $('#' + spanid).removeClass('ui-icon-plus').addClass('ui-icon-minus');
+                }
+            }
+        });
+    };
+    function SetHiddenSpan() {
+        var AccidentClaimId = '@mMCASQueryString["AccidentClaimId"]', ClaimID = (null == '@mMCASQueryString["ClaimID"]') ? "@Model.ClaimID" : '@mMCASQueryString["ClaimID"]', ReserveId = (null == '@mMCASQueryString["ReserveId"]') ? "@Model.ReserveId" : '@mMCASQueryString["ReserveId"]', ClaimType = '@mMCASQueryString["ClaimType"]';
+        $(".ui-ebixgrid-view > table > tbody > tr > td > a").each(function () {
+            $(this).attr("href") && $(this).attr("href").getstringinbetween("AccidentClaimId") == AccidentClaimId && $(this).attr("href").getstringinbetween("ClaimID") == ClaimID && $(this).attr("href").getstringinbetween("ReserveId") == ReserveId && $(this).attr("href").getstringinbetween("ClaimType") == ClaimType && $("#Hshowgrid").val("span_" + $(this).closest('tr')[0].id + "_s0");
+        });
+    }
+    function DisableRatePerDayForIncomplete() {
+        DropDownVal("Rateperday_R", "", "[Select...]");
+        $("#Rateperday_R").addClass("DisableDropDown").css({ "pointer-events": "none", cursor: "default" }).css("background-color", "#eee").children('option:not(:selected)').remove();
+        $("#Rateperday_O").addClass("DisableDropDown").css({ "pointer-events": "none", cursor: "default" }).css("background-color", "#eee").children('option:not(:selected)').remove();
+    };
+
+    function ShowHideDiv(e) {
+        $("#NewReserveEditor fieldset,#NewReserveEditor div").each(function () {
+            if ($(this).hasClass("OD") || $(this).hasClass("PD") || $(this).hasClass("BI")) "1" == e ? $(this).hasClass("OD") ? ($(this), $(this).show()) : $(this).hide() : "2" == e ? $(this).hasClass("PD") ? $(this).show() : $(this).hide() : $(this).hasClass("BI") ? $(this).show() : $(this).hide();
+        });
+        $("#ClaimantName").prop("readonly", !0);
+        $("input[type=text]").each(function () {
+            var a = ["Noofdays_I", "Noofdays_R", "Noofdays_O"]; -1 == $.inArray($(this).context.id, a) ? $(this).hasClass("format") && "" == $(this).val() && $(this).val("0.00") : ("" == $(this).val() || "0.00" == $(this).val()) && -1 < $.inArray($(this).context.id, a) && $(this).val("0");
+        });
+    };
+    function RetainDropDown() {
+        var e = "";
+        $("#NewReserveEditor select").each(function () {
+            e = $(this).context.id + "***" + DropDownVal1($(this).context.id) + "***" + $(this).val() + "~" + e;
+        });
+        $("#Hselect").val(e.substring(0, e.length - 1));
+    };
+    function DropDownVal1(e) {
+        for (var f = "", g = $("#" + e).children("option").length, h = 0; h < g; h++) {
+            f = f + "**" + $("#" + e)[0].options[h].value + "**" + $("#" + e)[0].options[h].text;
+        };
+        return f.substring(2, f.length);
+    };
+    function ReadyOnlyReserve(a) {
+        $("#Rateperday" + a).addClass("DisableDropDown").css({ "pointer-events": "none", cursor: "default" }).css("background-color", "#eee").children('option:not(:selected)').remove();
+        $("#Rateperday_O").addClass("DisableDropDown").css({ "pointer-events": "none", cursor: "default" }).css("background-color", "#eee").children('option:not(:selected)').remove();
+        $("input[type=text]").each(function () { $(this).context.id.slice(-2) != a && "_O" != $(this).context.id.slice(-2) || $(this).prop("readonly", !0) });
+    };
+    function DropDownVal(a, b, f) {
+        $("#" + a).empty();
+        $("#" + a).append($("<option value='" + b + "'>" + f + "</option>"))
+    };
+    function DatepickerLen() {
+        $("input[type=text]").each(function () {
+            $(this).hasClass("datepicker") && 10 < $(this).val().length && $(this).val($(this).val().substring(0, 10));
+            if (void 0 !== $(this).attr("data-val-date") && "The field " == $(this).attr("data-val-date").substring(0, 10)) {
+                var a = $(this).attr("data-val-date").substring(10, $(this).attr("data-val-date").length).replace("must be a date.", "must be in 'dd/mm/yyyy' format.");
+                $(this).removeAttr("data-val-date");
+                $(this).attr("data-val-date", a);
+            };
+        });
+        $("td").each(function () {
+            $(this).hasClass("format") && $(this).css("text-align", "right")
+        })
+    };
+    function CollapaseGrid() {
+        $("table.ui-ebixgrid-btable tr.ui-subgrid").hide();
+        $("table.ui-ebixgrid-btable span").each(function () {
+            $(this).hasClass("ui-icon ui-icon-minus") && $(this).addClass("ui-icon-plus").removeClass("ui-icon-minus");
+        });
+        $("#Hshowgrid").val("");
+    };
+    function ClearForm(a) {
+        $("#error").hide();
+        $("#" + a).find(":input:not([id=ClaimantName]):not([id=ClaimType])").each(function () {
+            switch (this.type) {
+                case "text":
+-1 < $.inArray($(this).context.id.slice(-2), "_I _O _C".split(" ")) && $(this).val($(this).hasClass("format") ? "0.00" : "");
+
+                    $("#Rateperday_I").prop("selectedIndex", 0).removeClass("DisableDropDown").removeAttr("style");
+                    if ($(this).context.id.slice(-2) == "_I") {
+                        $(this).removeAttr("readonly");
+                        $(this).val('0.00');
+                    }
+                    if ($(this).context.id.slice(-2) == "_R") {
+                        $(this).attr('disabled', true);
+                        $(this).val('0.00');
+                    }
+                    if ($(this).context.id.slice(-2) == "_C") {
+                        $(this).attr('disabled', true);
+                        $(this).val('0.00');
+                    }
+                    break;
+                case "textarea":
+                    $(this).val("");
+                    break;
+                case "checkbox":
+                case "radio":
+                    this.checked = !1
+            }
+        });
+
+        $("#" + a).find("select").each(function () {
+            $(this).prop("selectedIndex", 0)
+        });
+        $("span.field-validation-error").removeClass("field-validation-error").addClass("field-validation-valid");
+        $("#Total_I,#Total_R,#Total_O,#LossofUse_I,#LossofUse_O").prop("readonly", !0).val("0.00");
+        a = ["Noofdays_I", "Noofdays_R", "Noofdays_O"];
+        for (var b = 0, c; c = a[b]; b++) $("#" + c).val("0");
+    };
+    function RetianDivDisplay() {
+        var a = "";
+        $("#toprow div").each(function () {
+            $(this).is(":visible") ? "" != $(this).context.id && (a = "T~" + $(this).context.id + "," + a) : "" != $(this).context.id && (a = "F~" + $(this).context.id + "," + a)
+        });
+        $("#Hdivdis").val(a.substring(0, a.length - 1))
+    };
+    function RetainImgSrcSign() {
+        var a = "";
+        $("#toprow img").each(function () {
+            a = $(this).context.id + "~" + $(this).attr("src") + "," + a
+        });
+        $("#Himgsrc").val(a.substring(0, a.length - 1))
+    };
+    var guid = (function () {
+        function s4() {
+            return Math.floor((1 + Math.random()) * 0x10000).toString(16).substring(1);
+        }
+        return function () {
+            return s4() + s4() + '-' + s4() + '-' + s4() + '-' + s4() + '-' + s4() + s4() + s4();
+        };
+    })();
+    String.prototype.getstringinbetween = function (a) {
+        for (var e = this.split("&"), d = 0; d < e.length; d++) {
+            var b = e[d].split("=");
+            if (b[0] == a) return b[1]
+        };
+    };
+    String.prototype.contains = function (a) {
+        return -1 != this.indexOf(a)
+    };
+    function checkKeyCode(evt)// for F5 disable
+    {
+        var evt = (evt) ? evt : ((event) ? event : null);
+        var node = (evt.target) ? evt.target : ((evt.srcElement) ? evt.srcElement : null);
+        if (event.keyCode == 116)//disable F5
+        {
+            evt.keyCode = 0;
+            alert('This operation is not allowed.')
+            return false
+        }
+    }
+
+    String.prototype.beginsWith = function (string) {
+        return (this.indexOf(string) === 0);
+    };
+
+    document.onkeydown = checkKeyCode;
+    $("body").delegate("a.btn.btn-xs.btn-info", "click", function () {
+        var sPageURL = $(this)[0].getAttribute("href");
+        if ('@isEncryptedParams' == "YES") {
+            $.ajax({
+                type: "POST",
+                url: '@Url.Action("GetEncryptedUrl", "ClaimProcessing")',
+                data: {
+                    Url: sPageURL
+                },
+                success: function (data) {
+                    window.location.href = data;
+                }
+            });
+        }
+        else {
+            window.location.href = sPageURL;
+        }
+    });
+</script>

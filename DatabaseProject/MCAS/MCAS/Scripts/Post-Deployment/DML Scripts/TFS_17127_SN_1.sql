@@ -1,0 +1,1 @@
+Update MNT_LookupsMaster set IsActive='N' where LookupCategoryCode = 'AccidentCause'

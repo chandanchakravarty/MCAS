@@ -1,0 +1,547 @@
+﻿@using MCAS.Web.Objects.Resources.Home
+@using MCAS.Web.Objects.CommonHelper
+@using MCAS.Web.Objects.Resources.ClaimProcessing;
+@using MCAS.Web.Objects.Resources.Common;
+@using MCAS.Globalisation;
+@model MCAS.Web.Objects.MastersHelper.DiaryModel
+@{
+    SecurityPermissions myPemissions = (SecurityPermissions)ViewData["UserPermissions"];
+    string isEncryptedParams = System.Configuration.ConfigurationManager.AppSettings["EncryptQueryParams"].ToUpper();
+}
+<link href="@Url.Content("~/Content/jquery.ui.datepicker.css")" rel="Stylesheet" media="screen" />
+<link href='@Url.Content("~/Content/jquery.dataTables.min.css")' rel="stylesheet" type="text/css" />
+<style type="text/css">
+    .table-responsive
+    {
+        width: 100%;
+        margin-bottom: 15px;
+        overflow-y: hidden;
+        overflow-x: scroll;
+        -ms-overflow-style: -ms-autohiding-scrollbar;
+        border: 1px solid #DDD;
+        -webkit-overflow-scrolling: touch;
+    }
+    .dataTables_wrapper
+    {
+        margin-bottom: 20px;
+    }
+    .ui-dialog-buttonset
+    {
+        margin-right: 40%;
+    }
+    #ajaxSpinnerContainer
+    {
+        height: 11px;
+    }
+    #ajaxSpinnerImage
+    {
+        display: none;
+    }
+    .ajax-loader
+    {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        margin-left: -32px;
+        margin-top: -32px;
+        display: block;
+        z-index: 999999999999999;
+    }
+</style>
+<script src='@Url.Content("~/Scripts/jquery-2.1.0.min.js")' type="text/javascript"></script>
+<script charset="utf8" src='@Url.Content("~/Scripts/jquery.dataTables.min.js")' type="text/javascript"></script>
+<div id="divLoading" class="Claimloading">
+    <p>
+        Please wait...<br>
+        <img src="@Url.Content("~/Images/ajax-loader.gif")" alt="Loading..">
+    </p>
+</div>
+<div class="dashboard-wrapper">
+    @using (Html.BeginForm("Index", "Home", FormMethod.Post, new { role = "form", id = "IndexForm", name = "IndexForm" }))
+    {
+        @Html.HiddenFor(m => m.SaveCheck)
+        <div id="ajaxSpinnerContainer">
+            <img alt="" src="../../Images/ajax-loader.gif" id="ajaxSpinnerImage" class="ajax-loader" />
+        </div>
+        <div class="container" id="reg3">
+            <div class="row page-title" id="reg">
+                <div class="col-lg-12" id="reg2" style="background-color: white;">
+                    <h2>@Index.Dashboard</h2>
+                    <ul class="breadcrumb">
+                        <li>@Index.Home</li>
+                        <li>@Index.Dashboard</li>
+                    </ul>
+                </div>
+            </div>
+            <div id="testdiv">
+            </div>
+            <div id="toprow">
+                @if (myPemissions.Read)
+                {
+                    <div id="ReAssignmentDiaryDiv">
+                    </div>
+                    
+                    <div class="row">
+                        <div class="col-lg-12 col-md-12 col-sx-12 col-sm-12">
+                            <div class="col-sm-6">
+                                @Html.HiddenFor(m => m.hiddenprop)
+                                @Html.DropDownListFor(m => m.TaskSelection, new SelectList(Model.TaskSelectionList, "Lookup_value", "Lookup_desc", "[Select...]"),
+new { @class = "form-control" })
+                            </div>
+                            <div class="col-sm-6">
+                            </div>
+                            <div class="col-sm-12">
+                                <br />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row" id="searchdivmain" style="display: none;">
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            <div class="panel panel-secondary">
+                                <div class="panel-heading">
+                                    @if (Model.TaskSelection != null)
+                                    {
+                                        <h3 class="panel-title">
+                                            <i class="icon-keyboard"></i>@DashBoard.ResourceManager.GetString(Model.TaskSelection)
+                                        </h3>
+                                    }
+                                    <div id="expanddiv" class="SearchCriteriaExpand">
+                                    </div>
+                                </div>
+                                <div class="panel-body" id="searchdiv" style="display: none;">
+                                    <div class="form-group col-lg-6">
+                                        <label class="col-sm-3 control-label">@DashBoard.IPNo</label>
+                                        <div class="col-sm-9">
+                                            @Html.TextBoxFor(m => m.IPNo, new { @maxlength = "10", @class = "form-control" })
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-lg-6 c-2">
+                                        <label class="col-sm-3 control-label">@DashBoard.ClaimantName</label>
+                                        <div class="col-sm-9">
+                                            @Html.TextBoxFor(m => m.ClaimantName, new { @maxlength = "100", @class = "form-control" })
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-lg-6 c-5 c-6">
+                                        <label class="col-sm-3 control-label">@DashBoard.AssignedTo</label>
+                                        <div class="col-sm-9">
+                                            @Html.TextBoxFor(m => m.AssignedTo, new { @maxlength = "100", @class = "form-control" })
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-lg-6 c-5 c-6 c-1">
+                                        <label class="col-sm-3 control-label">@DashBoard.ReassignedTo</label>
+                                        <div class="col-sm-9">
+                                            @Html.TextBoxFor(m => m.ReassignedTo, new { @maxlength = "100", @class = "form-control" })
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-lg-6 c-1 c-2">
+                                        <label class="col-sm-3 control-label">@DashBoard.Req</label>
+                                        <div class="col-sm-9">
+                                            @Html.TextBoxFor(m => m.Requestor, new { @maxlength = "100", @class = "form-control" })
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-lg-6 c-1 c-2">
+                                        <label class="col-sm-3 control-label">@DashBoard.App</label>
+                                        <div class="col-sm-9">
+                                            @Html.TextBoxFor(m => m.Approver, new { @maxlength = "100", @class = "form-control" })
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-lg-6 c-1 c-2">
+                                        <label class="col-sm-3 control-label">@DashBoard.Appro_</label>
+                                        <div class="col-sm-9">
+                                            @Html.DropDownListFor(m => m.Approved, new SelectList(Model.ApprovedList, "Lookup_value", "Lookup_desc", "[Select...]"), new { @class = "form-control" })
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-lg-6">
+                                        <label class="col-sm-3 control-label">
+                                        </label>
+                                        <div class="col-sm-9">
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-lg-12">
+                                            <div class="form-group text-center">
+                                                <input id="Search" class="btn btn-info" type="button" value="@Common.Search"/>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row" id="TaskSelection1" style="display: none;">
+                        <div class="col-lg-12 col-md-12 col-sx-12 col-sm-12">
+                            <div class="panel panel-secondary">
+                                @if (Model.TaskCollection != null)
+                                {
+                                    @Html.Partial("_TaskDashBoard", Model.TaskCollection);
+                                }
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row" id="TaskSelection2">
+                        <div class="col-lg-12 col-md-12 col-sx-12 col-sm-12">
+                            <div class="">
+                                @if (Model.TaskSelection == "2")
+                                {
+                                    @Html.Partial("_ToDoList");
+                                }
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row" id="TaskSelection5" style="display: none;">
+                        <div class="col-lg-12 col-md-12 col-sx-12 col-sm-12">
+                            <div class="panel panel-secondary">
+                                @if (Model.MandateList != null)
+                                {
+                                    @Html.Partial("_MandateDashBorad", Model.MandateList);
+                                }
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row" id="TaskSelection6" style="display: none;">
+                        <div class="col-lg-12 col-md-12 col-sx-12 col-sm-12">
+                            <div class="panel panel-secondary">
+                                @if (Model.PaymentList != null)
+                                {
+                                    @Html.Partial("_PaymentDashBoard", Model.PaymentList);
+                                }
+                            </div>
+                        </div>
+                    </div>
+                }
+                else
+                {
+                    <div class="row-fluid bg2 blue-bt-bdr">
+                        <br />
+                        <br />
+                        <br />
+                        <div class="container text-center">
+                            <div class="errorInfo">
+                                <p>
+                                    <b>Sorry!! You dont have permission for this screen.</b></p>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    }
+</div>
+<script type="text/javascript">
+
+    var do_on_load = function () {
+        $(document).on("focus", ":input", function () { $(this).attr("autocomplete", "off") });
+        $("#Search").click(function () { $("#SaveCheck").val("1") && $("#IndexForm").submit(); });
+
+        $("body").delegate("a.Dashboard", "click", function () {
+            var a = $(this).attr("ScreenNameDash"), c = $(this).attr("screenid"), sPageURL = $(this).attr("url"), b = '@(Url.Action("SetScreenName", "ClaimProcessing"))';
+            $.ajax({
+                type: "GET",
+                url: b,
+                data: {
+                    ScreenNameDash: a,
+                    screenid: c,
+                    uid: guid()
+                },
+                dataType: "json",
+                success: function (result) {
+                    window.location.href = sPageURL;
+                }
+            });
+        });
+        if ("5" == "@Model.TaskSelection") {
+            var table = $('#tableDiarySrc').dataTable({
+                "order": [],
+                columnDefs: [{
+                    targets: [0],
+                    orderData: [0, 0]
+                }, {
+                    targets: [0],
+                    orderData: [0, 0]
+                }, {
+                    targets: [0],
+                    orderData: [0, 0]
+                }],
+                "aoColumns": [
+            { 'sWidth': '9%' },
+            { 'sWidth': '1%' },
+            { 'sWidth': '9%' },
+            { 'sWidth': '9%' },
+            { 'sWidth': '11%' },
+            { 'sWidth': '23%' },
+            { 'sWidth': '7%' },
+            { 'sWidth': '7%' },
+            { 'sWidth': '8%' },
+            { 'sWidth': '9%' },
+            { 'bSortable': false, 'sWidth': '7%' },
+    ],
+                "oLanguage": {
+                    "sSearch": '@MCAS.Web.Objects.Resources.Common.Common.Search',
+                    "sInfo": "@MCAS.Web.Objects.Resources.Common.Common.Showing _START_ @MCAS.Web.Objects.Resources.Common.Common.to _END_ @MCAS.Web.Objects.Resources.Common.Common.of _TOTAL_ @MCAS.Web.Objects.Resources.Common.Common.entries",
+                    "sLengthMenu": "@MCAS.Web.Objects.Resources.Common.Common.Show  _MENU_ @MCAS.Web.Objects.Resources.Common.Common.entries",
+                    "sEmptyTable": "@MCAS.Web.Objects.Resources.Common.Common.sEmptyTable",
+                    "sInfoEmpty": "@MCAS.Web.Objects.Resources.Common.Common.sInfoEmpty",
+                    "sProcessing": "@MCAS.Web.Objects.Resources.Common.Common.sProcessing",
+                    "oPaginate": {
+                        "sNext": '@MCAS.Web.Objects.Resources.Common.Common.Next',
+                        "sLast": '@MCAS.Web.Objects.Resources.Common.Common.Last',
+                        "sFirst": '@MCAS.Web.Objects.Resources.Common.Common.First',
+                        "sPrevious": '@MCAS.Web.Objects.Resources.Common.Common.Previous'
+                    }
+                },
+
+                "pagingType": "full_numbers",
+                "iDisplayLength": 5,
+                "aLengthMenu": [[5, 10, 25, 50, 100, -1], [5, 10, 25, 50, 100, "All"]]
+
+            });
+        }
+        if ("1" == "@Model.TaskSelection") {
+            var table = $('#tableDiarySrc1').dataTable({
+                "order": [],
+                columnDefs: [{
+                    targets: [0],
+                    orderData: [0, 0]
+                }, {
+                    targets: [0],
+                    orderData: [0, 0]
+                }, {
+                    targets: [0],
+                    orderData: [0, 0]
+                }],
+                "aoColumns": [
+
+            { 'sWidth': '11%' },
+            { 'sWidth': '4%' },
+            { 'sWidth': '11%' },
+            { 'sWidth': '10%' },
+            { 'sWidth': '11%' },
+            { 'sWidth': '10%' },
+            { 'sWidth': '11%' },
+            { 'sWidth': '10%' },
+            { 'sWidth': '10%' },
+            { 'bSortable': false, 'sWidth': '11%' },
+            ],
+                "oLanguage": {
+                    "sSearch": '@MCAS.Web.Objects.Resources.Common.Common.Search',
+                    "sInfo": "@MCAS.Web.Objects.Resources.Common.Common.Showing _START_ @MCAS.Web.Objects.Resources.Common.Common.to _END_ @MCAS.Web.Objects.Resources.Common.Common.of _TOTAL_ @MCAS.Web.Objects.Resources.Common.Common.entries",
+                    "sLengthMenu": "@MCAS.Web.Objects.Resources.Common.Common.Show  _MENU_ @MCAS.Web.Objects.Resources.Common.Common.entries",
+                    "sEmptyTable": "@MCAS.Web.Objects.Resources.Common.Common.sEmptyTable",
+                    "sInfoEmpty": "@MCAS.Web.Objects.Resources.Common.Common.sInfoEmpty",
+                    "sProcessing": "@MCAS.Web.Objects.Resources.Common.Common.sProcessing",
+                    "oPaginate": {
+                        "sNext": '@MCAS.Web.Objects.Resources.Common.Common.Next',
+                        "sLast": '@MCAS.Web.Objects.Resources.Common.Common.Last',
+                        "sFirst": '@MCAS.Web.Objects.Resources.Common.Common.First',
+                        "sPrevious": '@MCAS.Web.Objects.Resources.Common.Common.Previous'
+                    }
+                },
+                "pagingType": "full_numbers",
+                "iDisplayLength": 5,
+                "aLengthMenu": [[5, 10, 25, 50, 100, -1], [5, 10, 25, 50, 100, "All"]]
+
+            });
+        }
+        if ("6" == "@Model.TaskSelection") {
+            var table = $('#tableDiarySrc2').dataTable({
+                "order": [],
+                columnDefs: [{
+                    targets: [0],
+                    orderData: [0, 0]
+                }, {
+                    targets: [0],
+                    orderData: [0, 0]
+                }, {
+                    targets: [0],
+                    orderData: [0, 0]
+                }],
+                "aoColumns": [
+
+            { 'sWidth': '9%' },
+            { 'sWidth': '1%' },
+            { 'sWidth': '9%' },
+            { 'sWidth': '9%' },
+            { 'sWidth': '11%' },
+            { 'sWidth': '23%' },
+            { 'sWidth': '7%' },
+            { 'sWidth': '7%' },
+            { 'sWidth': '8%' },
+            { 'sWidth': '9%' },
+            { 'bSortable': false, 'sWidth': '7%' },
+
+    ],
+                "oLanguage": {
+                    "sSearch": '@MCAS.Web.Objects.Resources.Common.Common.Search',
+                    "sInfo": "@MCAS.Web.Objects.Resources.Common.Common.Showing _START_ @MCAS.Web.Objects.Resources.Common.Common.to _END_ @MCAS.Web.Objects.Resources.Common.Common.of _TOTAL_ @MCAS.Web.Objects.Resources.Common.Common.entries",
+                    "sLengthMenu": "@MCAS.Web.Objects.Resources.Common.Common.Show  _MENU_ @MCAS.Web.Objects.Resources.Common.Common.entries",
+                    "sEmptyTable": "@MCAS.Web.Objects.Resources.Common.Common.sEmptyTable",
+                    "sInfoEmpty": "@MCAS.Web.Objects.Resources.Common.Common.sInfoEmpty",
+                    "sProcessing": "@MCAS.Web.Objects.Resources.Common.Common.sProcessing",
+                    "oPaginate": {
+                        "sNext": '@MCAS.Web.Objects.Resources.Common.Common.Next',
+                        "sLast": '@MCAS.Web.Objects.Resources.Common.Common.Last',
+                        "sFirst": '@MCAS.Web.Objects.Resources.Common.Common.First',
+                        "sPrevious": '@MCAS.Web.Objects.Resources.Common.Common.Previous'
+                    }
+                },
+
+                "pagingType": "full_numbers",
+                "iDisplayLength": 5,
+                "aLengthMenu": [[5, 10, 25, 50, 100, -1], [5, 10, 25, 50, 100, "All"]]
+
+            });
+        }
+        //start
+        var tabletodo;
+        if ("2" == "@Model.TaskSelection") {
+            $.ajaxSetup({ cache: false });
+            $("#Search").click(function () {
+                $("#SaveCheck").val("Y");
+                tabletodo.api().ajax.reload();
+            });
+            tabletodo = $('#tableDiarySrc3').dataTable({
+                "bProcessing": true,
+                "serverSide": true,
+                "cache": false,
+                "oLanguage": {
+                    "sSearch": '@MCAS.Web.Objects.Resources.Common.Common.Search',
+                    "sInfo": "@MCAS.Web.Objects.Resources.Common.Common.Showing _START_ @MCAS.Web.Objects.Resources.Common.Common.to _END_ @MCAS.Web.Objects.Resources.Common.Common.of _TOTAL_ @MCAS.Web.Objects.Resources.Common.Common.entries",
+                    "sLengthMenu": "@MCAS.Web.Objects.Resources.Common.Common.Show  _MENU_ @MCAS.Web.Objects.Resources.Common.Common.entries",
+                    "sEmptyTable": "@MCAS.Web.Objects.Resources.Common.Common.sEmptyTable",
+                    "sInfoEmpty": "@MCAS.Web.Objects.Resources.Common.Common.sInfoEmpty",
+                    "sProcessing": "@MCAS.Web.Objects.Resources.Common.Common.sProcessing",
+                    "oPaginate": {
+                        "sNext": '@MCAS.Web.Objects.Resources.Common.Common.Next',
+                        "sLast": '@MCAS.Web.Objects.Resources.Common.Common.Last',
+                        "sFirst": '@MCAS.Web.Objects.Resources.Common.Common.First',
+                        "sPrevious": '@MCAS.Web.Objects.Resources.Common.Common.Previous'
+                    }
+                },
+
+                "lengthMenu": [[5, 10, 25, 50, -1], [5, 10, 25, 50, "All"]],
+                "ajax": {
+                    "url": '@Url.ActionEncoded("DairyJson", "Home")',
+                    "type": "POST",
+                    data: function (d) {
+                        d.guid = guid(),
+                d.IPNo = $("#IPNo").val(),
+                d.ClaimantName = $("#ClaimantName").val(),
+                d.AssignedTo = $("#AssignedTo").val(),
+                d.ReassignedTo = $("#ReassignedTo").val(),
+                d.SaveCheck = $("#SaveCheck").val()
+                    }
+               ,
+                    "cache": false
+                },
+                "aoColumns": [
+            { 'bSortable': false, 'sClass': 'hidearrowloass', 'sWidth': '2%' },
+            { 'sWidth': '11%' },
+            { 'sWidth': '10%' },
+            { 'sWidth': '11%' },
+            { 'sWidth': '11%' },
+            { 'sWidth': '11%' },
+            { 'sWidth': '11%' },
+            { 'sWidth': '11%' },
+            { 'sWidth': '11%' },
+            { 'bSortable': false, 'sWidth': '10%' }
+    ],
+
+                "drawCallback": function (settings) {
+                    $("#tableDiarySrc3 u").each(function () {
+                        var cls = $(this).attr('class');
+                        var chtml = $(this).html();
+                        $(this).closest('td').addClass(cls).html(chtml);
+                    });
+                    $("th.hidearrowloass").removeAttr("class");
+                }
+
+            });
+
+        };
+        //end
+        $("#TaskSelection").change(function () {
+            "0" != $("#TaskSelection").val() ? ($("#SaveCheck").val("0"), $("#IndexForm").submit()) : $("#TaskSelection1,#TaskSelection2,#TaskSelection3,#TaskSelection4,#searchdiv,#searchdivmain").hide();
+        });
+        "0" != "@Model.TaskSelection" && "" != "@Model.TaskSelection" && $("#TaskSelection" + "@Model.TaskSelection,#searchdiv,#searchdivmain").show() && $(".c-@Model.TaskSelection").hide();
+
+        $("#openDiaryReassignment").click(function (a) {
+            $("#ajaxSpinnerImage").show();
+            var d = [], g = [], h = [], k = [];
+            $(".chk:checked").each(function () {
+                d.push($(this).val()) && g.push($(this).attr("accId")) && h.push($(this).attr("claimId")) && k.push($(this).attr("SNO"))
+            });
+            var c = guid();
+            a = (d.join(",") + ",").slice(0, -1);
+            e = (g.join(",") + ",").slice(0, -1);
+            f = (h.join(",") + ",").slice(0, -1);
+            l = (k.join(",") + ",").slice(0, -1);
+            if (0 < a.length) {
+                if (isChecked = a.length, "" != isChecked) {
+                    var b = document.createElement("div");
+                    b.id = c;
+                    b.title = "Re-Assignment Diary";
+                    b.style.cssText = "overflow: hidden";
+                    $(b).appendTo("#ReAssignmentDiaryDiv");
+                    InitializeDialog($("#" + c), a, e, f, l);
+                    $(c).dialog("open");
+                    $("#ajaxSpinnerImage").hide();
+                }
+            } else alert("Please select at least one of the checkbox")
+            $("#ajaxSpinnerImage").hide();
+        });
+    };
+    $(document).ready(do_on_load);
+    $(window).bind("page:change", do_on_load);
+
+    function setTabActive(elementid) {
+        $('#myTabs').children().each(function (el, value) {
+            if (value.id == elementid)
+                $(value).removeClass("active").addClass("active");
+            else
+                $(value).removeClass("active");
+        }
+        );
+    };
+
+    function InitializeDialog($element, id, acc, claimid, disableuserid) {
+        $element.dialog({
+            width: 800,
+            resizable: false,
+            draggable: true,
+            show: { effect: 'drop', direction: "up" },
+            title: "Re-Assignment Diary",
+            model: true,
+            show: 'slide',
+            dialogClass: 'alert',
+            open: function (event, ui) {
+                $element.load('@Url.ActionEncoded("ReAssignmentEditorP", "ClaimProcessing")' + "?DairyId=" + id + "&Accid=" + acc + "&ClaimId=" + claimid + "&disableuserid=" + disableuserid + "&random=" + guid());
+            },
+            position: {
+                my: "center",
+                at: "center",
+                of: window
+            },
+            close: function () {
+                $("#ui-datepicker-div").remove();
+                $('.ui-dialog').remove();
+                $(".ui-datepicker").datepicker("destroy");
+                if ($.datepicker._datepickerShowing) {
+                    $("#ReAssignDateFrom,#ReAssignDateTo").datepicker('destroy');
+                }
+                $element.dialog("close");
+                $("#IndexForm").submit();
+            }
+        })
+    };
+    var guid = (function () {
+        function s4() {
+            return Math.floor((1 + Math.random()) * 0x10000)
+               .toString(16)
+               .substring(1);
+        }
+        return function () {
+            return s4() + s4() + '-' + s4() + '-' + s4() + '-' +
+           s4() + '-' + s4() + s4() + s4();
+        };
+    })();
+</script>

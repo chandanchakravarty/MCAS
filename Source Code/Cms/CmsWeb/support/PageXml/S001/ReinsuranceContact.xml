@@ -1,0 +1,479 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Root>
+  <PageTitle>
+    <Culture Code="en-US">Reinsurance Contact</Culture>
+    <Culture Code="zh-SG">Reinsurance Contact</Culture>
+    <Culture Code="pt-BR">Reinsurance Contact</Culture>
+  </PageTitle>
+  <!--CUSTOMER NAME 200 CHAR-->
+  <PageElement name="txtREIN_CONTACT_NAME" type="TextBox" Desc=""
+     IsMandatory="Yes"
+     IsReadOnly="No"
+     IsDisabled="No"
+     IsDisplay="Yes"
+     MaxLength="200"
+     MaxSize=""
+     IsFormatingRequired="" JsFunctionToFormat="" OnClickJSFunction=""
+     OnChangeJSFunction="" >
+    <rev Enabled="No" ExpKey="" />
+    <Culture Code="en-US" Desc="set Label and Message for English language">
+      <Caption>Contact Name</Caption>
+      <rfvMessage>Please enter Contact Name.</rfvMessage>
+      <DefaultValue></DefaultValue>
+      <revExpMessage></revExpMessage>
+    </Culture>
+    <Culture Code="zh-SG" Desc="set Label and Message for Singapore language">
+      <Caption>Contact Name</Caption>
+      <rfvMessage>Please enter Contact Name.</rfvMessage>
+      <DefaultValue></DefaultValue>
+      <revExpMessage></revExpMessage>
+    </Culture>
+    <Culture Code="pt-BR" Desc="set Label and Message for Brazil language">
+      <Caption>Contato Nome</Caption>
+      <rfvMessage>Insira o nome do contato.</rfvMessage>
+      <DefaultValue></DefaultValue>
+      <revExpMessage></revExpMessage>
+    </Culture>
+  </PageElement>
+  
+  <!--FOR PHONE 1 SHOULD BE standardized IN PHYSICAL ADDRESS -->
+  <PageElement name="txtREIN_CONTACT_PHONE_1" type="TextBox" Desc=""
+			IsMandatory="Yes"
+			IsReadOnly="No"
+			IsDisabled="No"
+			IsDisplay="Yes"
+			MaxLength=""
+			MaxSize=""
+			IsFormatingRequired="" JsFunctionToFormat="" OnClickJSFunction=""
+			OnChangeJSFunction="" >
+    <rev Enabled="Yes" ExpKey="^((65-?)|(65))?((((\d{8}) ?)|(\d{4}-\d{4})))$"/>
+    <Culture Code="en-US" Desc="set Label and Message for English language">
+      <Caption>Phone 1</Caption>
+      <rfvMessage>Please enter Valid Phone Number.</rfvMessage>
+      <DefaultValue></DefaultValue>
+      <revExpMessage>Phone number should be either in '##-##-####-####' or '####-####' format.</revExpMessage>
+    </Culture>
+    <Culture Code="zh-SG" Desc="set Label and Message for Singapore language">
+      <Caption>Phone 1</Caption>
+      <rfvMessage>Please enter Valid Phone Number.</rfvMessage>
+      <DefaultValue></DefaultValue>
+      <revExpMessage>Phone number should be either in '##-########' or '####-####' format.</revExpMessage>
+    </Culture>
+    <Culture Code="pt-BR" Desc="set Label and Message for Brazil language">
+      <Caption>telefone 1</Caption>
+      <rfvMessage>Por favor indicar número de telefone válido.</rfvMessage>
+      <DefaultValue></DefaultValue>
+      <revExpMessage>O número de telefone deve estar no formato '##-##-####-####' ou '####-####'.</revExpMessage>
+    </Culture>
+  </PageElement>
+
+  <!--FOR PHONE 2 SHOULD BE standardized IN PHYSICAL ADDRESS -->
+  <PageElement name="txtREIN_CONTACT_PHONE_2" type="TextBox" Desc=""
+    IsMandatory="No"
+    IsReadOnly="No"
+    IsDisabled="No"
+    IsDisplay="Yes"
+    MaxLength=""
+    MaxSize=""
+    IsFormatingRequired="" JsFunctionToFormat="" OnClickJSFunction=""
+    OnChangeJSFunction="" >
+    <rev Enabled="Yes" ExpKey="^((65-?)|(65))?((((\d{8}) ?)|(\d{4}-\d{4})))$"/>
+    <Culture Code="en-US" Desc="set Label and Message for English language">
+      <Caption>Phone 2</Caption>
+      <rfvMessage>Please enter Valid Phone Number.</rfvMessage>
+      <DefaultValue></DefaultValue>
+      <revExpMessage>Phone number should be either in '##-##-####-####' or '####-####' format.</revExpMessage>
+    </Culture>
+    <Culture Code="zh-SG" Desc="set Label and Message for Singapore language">
+      <Caption>Phone 2</Caption>
+      <rfvMessage>Please enter Valid Phone Number.</rfvMessage>
+      <DefaultValue></DefaultValue>
+      <revExpMessage>Phone number should be either in '##-########' or '####-####' format.</revExpMessage>
+    </Culture>
+    <Culture Code="pt-BR" Desc="set Label and Message for Brazil language">
+      <Caption>telefone 2</Caption>
+      <rfvMessage>Por favor indicar número de telefone válido.</rfvMessage>
+      <DefaultValue></DefaultValue>
+      <revExpMessage>O número de telefone deve estar no formato '##-##-####-####' ou '####-####'.</revExpMessage>
+    </Culture>
+  </PageElement>
+
+  <!--FOR PHONE 1 SHOULD BE standardized IN MAILING ADDRESS -->
+  <PageElement name="txtM_REIN_CONTACT_PHONE_1" type="TextBox" Desc=""
+   IsMandatory="Yes"
+   IsReadOnly="No"
+   IsDisabled="No"
+   IsDisplay="Yes"
+   MaxLength=""
+   MaxSize=""
+   IsFormatingRequired="" JsFunctionToFormat="" OnClickJSFunction=""
+   OnChangeJSFunction="" >
+    <rev Enabled="Yes" ExpKey="^((65-?)|(65))?((((\d{8}) ?)|(\d{4}-\d{4})))$"/>
+    <Culture Code="en-US" Desc="set Label and Message for English language">
+      <Caption>Phone 1</Caption>
+      <rfvMessage>Please enter Valid Phone Number.</rfvMessage>
+      <DefaultValue></DefaultValue>
+      <revExpMessage>Phone number should be either in '##-##-####-####' or '####-####' format.</revExpMessage>
+    </Culture>
+    <Culture Code="zh-SG" Desc="set Label and Message for Singapore language">
+      <Caption>Phone 1</Caption>
+      <rfvMessage>Please enter Valid Phone Number.</rfvMessage>
+      <DefaultValue></DefaultValue>
+      <revExpMessage>Phone number should be either in '##-########' or '####-####' format.</revExpMessage>
+    </Culture>
+    <Culture Code="pt-BR" Desc="set Label and Message for Brazil language">
+      <Caption>telefone 2</Caption>
+      <rfvMessage>Por favor indicar número de telefone válido.</rfvMessage>
+      <DefaultValue></DefaultValue>
+      <revExpMessage>O número de telefone deve estar no formato '##-##-####-####' ou '####-####'.</revExpMessage>
+    </Culture>
+  </PageElement>
+
+  <!--FOR PHONE 2 SHOULD BE standardized IN MAILING ADDRESS -->
+  <PageElement name="txtM_REIN_CONTACT_PHONE_2" type="TextBox" Desc=""
+   IsMandatory="No"
+   IsReadOnly="No"
+   IsDisabled="No"
+   IsDisplay="Yes"
+   MaxLength=""
+   MaxSize=""
+   IsFormatingRequired="" JsFunctionToFormat="" OnClickJSFunction=""
+   OnChangeJSFunction="" >
+    <rev Enabled="Yes" ExpKey="^((65-?)|(65))?((((\d{8}) ?)|(\d{4}-\d{4})))$"/>
+    <Culture Code="en-US" Desc="set Label and Message for English language">
+      <Caption>Phone 2</Caption>
+      <rfvMessage>Please enter Valid Phone Number.</rfvMessage>
+      <DefaultValue></DefaultValue>
+      <revExpMessage>Phone number should be either in '##-##-####-####' or '####-####' format.</revExpMessage>
+    </Culture>
+    <Culture Code="zh-SG" Desc="set Label and Message for Singapore language">
+      <Caption>Phone 2</Caption>
+      <rfvMessage>Please enter Valid Phone Number.</rfvMessage>
+      <DefaultValue></DefaultValue>
+      <revExpMessage>Phone number should be either in '##-########' or '####-####' format.</revExpMessage>
+    </Culture>
+    <Culture Code="pt-BR" Desc="set Label and Message for Brazil language">
+      <Caption>telefone 2</Caption>
+      <rfvMessage>Por favor indicar número de telefone válido.</rfvMessage>
+      <DefaultValue></DefaultValue>
+      <revExpMessage>O número de telefone deve estar no formato '##-##-####-####' ou '####-####'.</revExpMessage>
+    </Culture>
+  </PageElement>
+
+  <!--STATE SHOULD NOT BE MAINDATORY--> 
+  <PageElement name="txtREIN_CONTACT_STATE" type="TextBox" Desc=""
+  IsMandatory="No"
+  IsReadOnly="No"
+  IsDisabled="No"
+  IsDisplay="Yes"
+  MaxLength=""
+  MaxSize=""
+  IsFormatingRequired="" JsFunctionToFormat="" OnClickJSFunction=""
+  OnChangeJSFunction="" >
+    <rev Enabled="No" ExpKey="" />
+    <Culture Code="en-US" Desc="set Label and Message for English language">
+      <Caption>State</Caption>
+      <rfvMessage>Please select State.</rfvMessage>
+      <DefaultValue></DefaultValue>
+      <revExpMessage></revExpMessage>
+    </Culture>
+    <Culture Code="zh-SG" Desc="set Label and Message for Singapore language">
+      <Caption>State</Caption>
+      <rfvMessage>Please select State.</rfvMessage>
+      <DefaultValue></DefaultValue>
+      <revExpMessage></revExpMessage>
+    </Culture>
+    <Culture Code="pt-BR" Desc="set Label and Message for Brazil language">
+      <Caption>estado</Caption>
+      <rfvMessage>Selecione o estado.</rfvMessage>
+      <DefaultValue></DefaultValue>
+      <revExpMessage></revExpMessage>
+    </Culture>
+  </PageElement>
+
+  <!--ZIP CODE IS MANDATORY IN MALLING ADD-->
+  <PageElement name="txtM_REIN_CONTACT_ZIP" type="TextBox" Desc=""
+  IsMandatory="YES"
+  IsReadOnly="No"
+  IsDisabled="No"
+  IsDisplay="Yes"
+  MaxLength=""
+  MaxSize=""
+  IsFormatingRequired="" JsFunctionToFormat="" OnClickJSFunction=""
+  OnChangeJSFunction="" >
+    <rev Enabled="Yes" ExpKey="^[0-9]{6}"/>
+    <Culture Code="en-US" Desc="set Label and Message for English language">
+      <Caption>Zip</Caption>
+      <rfvMessage>Zip code should be either in '#######' or '########' format.</rfvMessage>
+      <DefaultValue></DefaultValue>
+      <revExpMessage></revExpMessage>
+    </Culture>
+    <Culture Code="zh-SG" Desc="set Label and Message for Singapore language">
+      <Caption>Zip</Caption>
+      <rfvMessage></rfvMessage>
+      <DefaultValue></DefaultValue>
+      <revExpMessage>Zip code should be either in '######' format.</revExpMessage>
+    </Culture>
+    <Culture Code="pt-BR" Desc="set Label and Message for Brazil language">
+      <Caption>Zip</Caption>
+      <rfvMessage>O CEP deve estar no formato '########' ou '#####-###'.</rfvMessage>
+      <DefaultValue></DefaultValue>
+      <revExpMessage></revExpMessage>
+    </Culture>
+  </PageElement>
+  
+  <!--ZIP CODE IS MANDATORY IN PHYSICAL ADD-->
+  <PageElement name="txtREIN_CONTACT_ZIP" type="TextBox" Desc=""
+   IsMandatory="YES"
+   IsReadOnly="No"
+   IsDisabled="No"
+   IsDisplay="Yes"
+   MaxLength=""
+   MaxSize=""
+   IsFormatingRequired="" JsFunctionToFormat="" OnClickJSFunction=""
+   OnChangeJSFunction="" >
+    <rev Enabled="Yes" ExpKey="^[0-9]{6}"/>
+    <Culture Code="en-US" Desc="set Label and Message for English language">
+      <Caption>Zip</Caption>
+      <rfvMessage>Zip code should be either in '#######' or '########' format.</rfvMessage>
+      <DefaultValue></DefaultValue>
+      <revExpMessage></revExpMessage>
+    </Culture>
+    <Culture Code="zh-SG" Desc="set Label and Message for Singapore language">
+      <Caption>Zip</Caption>
+      <rfvMessage></rfvMessage>
+      <DefaultValue></DefaultValue>
+      <revExpMessage>Zip code should be either in '######' format.</revExpMessage>
+    </Culture>
+    <Culture Code="pt-BR" Desc="set Label and Message for Brazil language">
+      <Caption>Zip</Caption>
+      <rfvMessage>O CEP deve estar no formato '########' ou '#####-###'.</rfvMessage>
+      <DefaultValue></DefaultValue>
+      <revExpMessage></revExpMessage>
+    </Culture>
+  </PageElement>
+
+  <!--FAX NUMBER SHOULD NOT BE MANDATORY-->
+  <PageElement name="txtREIN_CONTACT_FAX" type="TextBox" Desc=""
+   IsMandatory="No"
+   IsReadOnly="No"
+   IsDisabled="No"
+   IsDisplay="Yes"
+   MaxLength=""
+   MaxSize=""
+   IsFormatingRequired="" JsFunctionToFormat="" OnClickJSFunction="" OnChangeJSFunction="" >
+    <rev Enabled="Yes" ExpKey="^((65-?)|(65))?((((\d{8}) ?)|(\d{4}-\d{4})))$"/>
+    <Culture Code="en-US" Desc="set Label and Message for English language">
+      <Caption>Fax</Caption>
+      <rfvMessage>Please enter Fax Number.</rfvMessage>
+      <DefaultValue></DefaultValue>
+      <revExpMessage>Fax number should be either in '##-##-####-####' or '####-####' format.</revExpMessage>
+    </Culture>
+    <Culture Code="zh-SG" Desc="set Label and Message for Singapore language">
+      <Caption>Fax</Caption>
+      <rfvMessage>Please enter Fax Number.</rfvMessage>
+      <DefaultValue></DefaultValue>
+      <revExpMessage>Fax number should be either in '##-########' or '####-####' format.</revExpMessage>
+    </Culture>
+    <Culture Code="pt-BR" Desc="set Label and Message for Brazil language">
+      <Caption>Fax</Caption>
+      <rfvMessage>Insira o número de fax.</rfvMessage>
+      <DefaultValue></DefaultValue>
+      <revExpMessage>O número do fax deve estar no formato "##-##-####-####" ou "####-####".</revExpMessage>
+    </Culture>
+  </PageElement>
+ 
+  <!--Mobile Number under Other Information should not be set as Mandatory Field-->
+  <PageElement name="txtREIN_CONTACT_MOBILE" type="TextBox" Desc=""
+    IsMandatory="No"
+    IsReadOnly="No"
+    IsDisabled="No"
+    IsDisplay="Yes"
+    MaxLength=""
+    MaxSize=""
+    IsFormatingRequired="" JsFunctionToFormat="" OnClickJSFunction=""
+    OnChangeJSFunction="" >
+        <rev Enabled="Yes" ExpKey="^((65-?)|(65))?((((\d{8}) ?)|(\d{4}-\d{4})))$"/>
+        <Culture Code="en-US" Desc="set Label and Message for English language">
+          <Caption>Mobile</Caption>
+          <rfvMessage>Please enter Mobile.</rfvMessage>
+          <DefaultValue></DefaultValue>
+          <revExpMessage>Please enter valid mobile number.</revExpMessage>
+        </Culture>
+        <Culture Code="zh-SG" Desc="set Label and Message for Singapore language">
+          <Caption>Mobile</Caption>
+          <rfvMessage>Please enter Mobile.</rfvMessage>
+          <DefaultValue></DefaultValue>
+          <revExpMessage>Phone number should be either in '##-########' or '####-####' format.</revExpMessage>
+        </Culture>
+        <Culture Code="pt-BR" Desc="set Label and Message for Brazil language">
+          <Caption>móvel</Caption>
+          <rfvMessage>Insira o telefone celular.</rfvMessage>
+          <DefaultValue></DefaultValue>
+          <revExpMessage>Insira um número do celular válido.</revExpMessage>
+        </Culture>
+  </PageElement>
+ 
+  <!--hyper link hide for physical-->
+  <PageElement name="hlkZipLookup" type="HyperLink" Desc=""
+    IsMandatory="No"
+    IsReadOnly="No"
+    IsDisabled="No"
+    IsDisplay="No"
+    MaxLength=""
+    MaxSize=""
+    IsFormatingRequired="" JsFunctionToFormat="" OnClickJSFunction=""
+    OnChangeJSFunction="" >
+    <rev Enabled="No" ExpKey=""/>
+    <Culture Code="en-US" Desc="set Label and Message for English language">
+      <Caption></Caption>
+      <rfvMessage></rfvMessage>
+      <DefaultValue></DefaultValue>
+      <revExpMessage></revExpMessage>
+    </Culture>
+    <Culture Code="zh-SG" Desc="set Label and Message for Singapore language">
+      <Caption></Caption>
+      <rfvMessage></rfvMessage>
+      <DefaultValue></DefaultValue>
+      <revExpMessage></revExpMessage>
+    </Culture>
+    <Culture Code="pt-BR" Desc="set Label and Message for Brazil language">
+      <Caption></Caption>
+      <rfvMessage></rfvMessage>
+      <DefaultValue></DefaultValue>
+      <revExpMessage></revExpMessage>
+    </Culture>
+  </PageElement>
+  
+  <!--hyper link hide for maling-->
+  <PageElement name="hlkMZipLookup" type="HyperLink" Desc=""
+   IsMandatory="No"
+   IsReadOnly="No"
+   IsDisabled="No"
+   IsDisplay="No"
+   MaxLength=""
+   MaxSize=""
+   IsFormatingRequired="" JsFunctionToFormat="" OnClickJSFunction=""
+   OnChangeJSFunction="" >
+    <rev Enabled="No" ExpKey=""/>
+    <Culture Code="en-US" Desc="set Label and Message for English language">
+      <Caption></Caption>
+      <rfvMessage></rfvMessage>
+      <DefaultValue></DefaultValue>
+      <revExpMessage></revExpMessage>
+    </Culture>
+    <Culture Code="zh-SG" Desc="set Label and Message for Singapore language">
+      <Caption></Caption>
+      <rfvMessage></rfvMessage>
+      <DefaultValue></DefaultValue>
+      <revExpMessage></revExpMessage>
+    </Culture>
+    <Culture Code="pt-BR" Desc="set Label and Message for Brazil language">
+      <Caption></Caption>
+      <rfvMessage></rfvMessage>
+      <DefaultValue></DefaultValue>
+      <revExpMessage></revExpMessage>
+    </Culture>
+  </PageElement>
+
+  <!--Salutation textbox visible false-->
+  <PageElement name="txtREIN_CONTACT_SALUTATION" type="TextBox" Desc=""
+     IsMandatory="No"
+     IsReadOnly="No"
+     IsDisabled="No"
+     IsDisplay="No"
+     MaxLength=""
+     MaxSize=""
+     IsFormatingRequired="No" JsFunctionToFormat="" OnClickJSFunction=""
+     OnChangeJSFunction="" >
+    <rev Enabled="No" ExpKey=""/>
+    <Culture Code="en-US" Desc="set Label and Message for English language">
+      <Caption>2</Caption>
+      <rfvMessage></rfvMessage>
+      <DefaultValue></DefaultValue>
+      <revExpMessage></revExpMessage>
+    </Culture>
+    <Culture Code="zh-SG" Desc="set Label and Message for Singapore language">
+      <Caption>2</Caption>
+      <rfvMessage></rfvMessage>
+      <DefaultValue></DefaultValue>
+      <revExpMessage></revExpMessage>
+    </Culture>
+    <Culture Code="pt-BR" Desc="set Label and Message for Brazil language">
+      <Caption>2</Caption>
+      <rfvMessage></rfvMessage>
+      <DefaultValue></DefaultValue>
+      <revExpMessage></revExpMessage>
+    </Culture>
+  </PageElement>
+
+  <!--Salutation Drop Down visible True-->
+  <PageElement name="cmbREIN_CONTACT_SALUTATION" type="DDL" Desc=""
+     IsMandatory="No"
+     IsReadOnly="No"
+     IsDisabled="No"
+     IsDisplay="Yes"
+     MaxLength=""
+     MaxSize=""
+     IsFormatingRequired="No" JsFunctionToFormat="" OnClickJSFunction=""
+     OnChangeJSFunction="" >
+    <Bindings>
+      <DataSource type="Proc" name="Proc_GetLookupValues" TextField="LOOKUP_VALUE_DESC" ValueField="LOOKUP_UNIQUE_ID" WhereClause="">
+        <Params name="@LookupCode" Value="%SAL" />
+        <Params name="@LANG_ID" Value="1" />
+      </DataSource>
+    </Bindings>
+    <rev Enabled="No" ExpKey=""/>
+    <Culture Code="en-US" Desc="set Label and Message for English language">
+      <Caption>2</Caption>
+      <rfvMessage></rfvMessage>
+      <DefaultValue></DefaultValue>
+      <revExpMessage></revExpMessage>
+    </Culture>
+    <Culture Code="zh-SG" Desc="set Label and Message for Singapore language">
+      <Caption>2</Caption>
+      <rfvMessage></rfvMessage>
+      <DefaultValue></DefaultValue>
+      <revExpMessage></revExpMessage>
+    </Culture>
+    <Culture Code="pt-BR" Desc="set Label and Message for Brazil language">
+      <Caption>2</Caption>
+      <rfvMessage></rfvMessage>
+      <DefaultValue></DefaultValue>
+      <revExpMessage></revExpMessage>
+    </Culture>
+  </PageElement>
+  
+  <!--Salutation Drop Down Caption-->
+  <PageElement name="capREIN_CONTACT_SALUTATION" type="Label" Desc=""
+     IsMandatory="No"
+     IsReadOnly="No"
+     IsDisabled="No"
+     IsDisplay="Yes"
+     MaxLength=""
+     MaxSize=""
+     IsFormatingRequired="No" JsFunctionToFormat="" OnClickJSFunction=""
+     OnChangeJSFunction="" >
+    <Style Position="relative" Top="0" Left="10" CssClass="midcolora" />
+    <rev Enabled="No" ExpKey="" />
+    <Culture Code="en-US" Desc="set Label and Message for English language">
+      <Caption>Salutation</Caption>
+      <rfvMessage></rfvMessage>
+      <DefaultValue></DefaultValue>
+      <revExpMessage></revExpMessage>
+    </Culture>
+    <Culture Code="zh-SG" Desc="set Label and Message for Singapore language">
+      <Caption>Salutation</Caption>
+      <rfvMessage></rfvMessage>
+      <DefaultValue></DefaultValue>
+      <revExpMessage></revExpMessage>
+    </Culture>
+    <Culture Code="pt-BR" Desc="set Label and Message for Brazil language">
+      <Caption>Saudação</Caption>
+      <rfvMessage></rfvMessage>
+      <DefaultValue></DefaultValue>
+      <revExpMessage></revExpMessage>
+    </Culture>
+  </PageElement>
+
+</Root>

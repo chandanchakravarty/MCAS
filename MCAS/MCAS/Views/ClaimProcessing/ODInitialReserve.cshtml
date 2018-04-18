@@ -1,0 +1,266 @@
+﻿@{
+    ViewBag.Title = "ODInitialReserve";
+    Layout = null;
+}
+<div class="row" id="od1">
+    <fieldset>
+        <legend>OD Claim Breakdown</legend>
+        <div id="Togglediv" class="panel-body">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="form-group">
+                        <div class="col-sm-3">
+                        </div>
+                        <label class="col-sm-3 text-center" for="inputReserve">
+                            Reserve</label>
+                    </div>
+                </div>
+            </div>
+            <fieldset>
+                <legend id="ODl1">
+                    <img alt="" id="ODl1img" src='@Url.Content("~/Images/icon_plus.png")' />Cost of
+                    Repairs </legend>
+                <div class="row" id="ODl1div">
+                    <div class="col-lg-12" id="ODl1div1">
+                        <div class="form-group" id="ODl1div2">
+                            <label class="col-sm-3 control-label" for="inputCostofRepairs">
+                                Cost of Repairs
+                            </label>
+                            <div class="col-sm-3" id="ODl1div3">
+                                <input class="form-control" id="inputCoRReserve" name="inputCoRReserve" type="text"
+                                    value="" size="10" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </fieldset>
+            <fieldset>
+                <legend id="ODl2">
+                    <img alt="" id="ODl2img" src='@Url.Content("~/Images/icon_plus.png")' />Uninsured
+                    Losses</legend>
+                <div class="row" id="ODl2div" style="display: block;">
+                    <div id="ODl2div1" style="display: block;">
+                        <div class="col-lg-12" id="ODl2div2" style="display: block;">
+                            <div class="form-group" id="ODl2div3" style="display: block;">
+                                <label class="col-sm-3 control-label" for="inputLossofUse">
+                                    Loss of Use
+                                </label>
+                                <div class="col-sm-3">
+                                    <input class="form-control" data-val="true" id="inputLoUReserve" name="inputLoUReserve"
+                                        type="text" value="" size="10">
+                                </div>
+                                <label class="col-sm-1 control-label" for="inputLossofUse" style="padding-left: 0px;
+                                    padding-right: 0px; text-align: right !important;">
+                                    No. of days
+                                </label>
+                                <div class="col-sm-2">
+                                    <input class="form-control" data-val="true" id="inputLoUNoofDays" name="inputLoUNoofDays" type="text" value="" size="10">
+                                </div>
+                                <div class="col-sm-1" style="padding-left: 0px; padding-right: 0px;">&#64;</div>
+                                <div class="col-sm-1" style="padding-left: 0px; padding-right: 0px; width: 90px;
+                                    margin-left: -30px;">
+                                    <select class="col-lg-12 form-control" id="inputLoUPerDay" name="inputLoUPerDay">
+                                        <option value="1">250</option>
+                                        <option value="2">350</option>
+                                    </select>
+                                </div>
+                                <label class="col-sm-1 control-label" for="inputLossofUse">
+                                    per day
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </fieldset>
+            <fieldset>
+                <legend id="ODl4">
+                    <img alt="" id="ODl4img" src='@Url.Content("~/Images/icon_plus.png")' />Other Expenses</legend>
+                <div class="row" id="ODl4div">
+                    <div id="ODl4div1">
+                        <div class="col-lg-12" id="ODl4div2">
+                            <div class="form-group" id="ODl4div3">
+                                <label class="col-sm-3 control-label" for="inputOtherExpenses">
+                                    Other Expenses
+                                </label>
+                                <div class="col-sm-3">
+                                    <input class="form-control" data-val="true" id="inputOTExReserve" name="inputOTExReserve"
+                                        type="text" value="" size="10" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                    </div>
+                </div>
+            </fieldset>
+            <fieldset>
+                <legend id="ODl5">
+                    <img alt="" id="ODl5img" src='@Url.Content("~/Images/icon_plus.png")' />Report Fees</legend>
+                <div class="row" id="ODl5div">
+                    <div>
+                        <div class="col-lg-12">
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label" for="inputSFeeReserve">
+                                    Survey Fee
+                                </label>
+                                <div class="col-sm-3">
+                                    <input class="form-control" id="inputSFeeReserve" name="inputSFeeReserve" type="text"
+                                        value="" size="10" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="col-lg-12" style="padding-top: 8px; padding-bottom: 8px;">
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label" for="inputRSFeeReserve">
+                                    Re-Survey Fee
+                                </label>
+                                <div class="col-sm-3">
+                                    <input class="form-control" id="inputRSFeeReserve" name="inputRSFeeReserve" type="text"
+                                        value="" size="10" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="col-lg-12">
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label" for="inputRptFeeReserve">
+                                    LTA/GIA/Police Report Fees
+                                </label>
+                                <div class="col-sm-3">
+                                    <input class="form-control" data-val="true" id="inputRptFeeReserve" name="inputRptFeeReserve"
+                                        type="text" value="" size="10" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </fieldset>
+            <fieldset>
+                <legend id="ODl6">
+                    <img alt="" id="ODl6img" src='@Url.Content("~/Images/icon_plus.png")' />3rd Party
+                    Legal Fees</legend>
+                <div class="row" id="ODl6div">
+                    <div>
+                        <div class="col-lg-12" style="padding-bottom: 8px;">
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label" for="inputTPLawyerCost">
+                                    3rd Party Lawyer's Cost
+                                </label>
+                                <div class="col-sm-3">
+                                    <input class="form-control" id="inputTPLCostReserve" name="inputTPLCostReserve" type="text"
+                                        value="" size="10" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="col-lg-12">
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label" for="inputTPLawyerDis">
+                                    3rd Party Lawyer's Disbursements
+                                </label>
+                                <div class="col-sm-3">
+                                    <input class="form-control" data-val="true" id="inputTPLDReserve" name="inputTPLDReserve"
+                                        type="text" value="" size="10" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </fieldset>
+            <fieldset>
+                <legend id="ODl7">
+                    <img alt="" id="ODl7img" src='@Url.Content("~/Images/icon_plus.png")' />Our Legal
+                    Fees</legend>
+                <div id="ODl7div" class="row">
+                    <div>
+                        <div class="col-lg-12" style="padding-bottom: 8px;">
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label" for="inputOurLawyerCost">
+                                    Our Lawyer's Cost
+                                </label>
+                                <div class="col-sm-3">
+                                    <input class="form-control" data-val="true" id="inputOLCReserve" name="inputOLCReserve"
+                                        type="text" value="" size="10" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="col-lg-12">
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label" for="inputOurLawyerDis">
+                                    Our Lawyer's Disbursements
+                                </label>
+                                <div class="col-sm-3">
+                                    <input class="form-control" data-val="true" id="inputOLDReserve" name="inputOLDReserve"
+                                        type="text" value="" size="10" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </fieldset>
+            <div style="padding-top: 10px">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label" for="inputTotal">
+                                Total
+                            </label>
+                            <div class="col-sm-3">
+                                <input class="form-control" data-val="true" id="inputTotReserve" name="inputTotReserve"
+                                    type="text" value="" size="10" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="clearfix igr col-md-12 text-center" style="padding-top: 10px;">
+                <div class="form-group">
+                    <button class="btn btn-info" id="btnSave" title="">
+                        Save</button>
+                </div>
+            </div>
+        </div>
+    </fieldset>
+</div>
+<script language="javascript" type="text/javascript">
+    $(function () {
+
+        var arr, arr1 = new Array();
+        arr = ["ODl1", "ODl2", "ODl4"];
+        arr1 = ["ODl5", "ODl6", "ODl7"];
+        for (var j = 0; j < arr.length; j++) {
+            for (var i = 1; i < 10; i++) {
+                $("#" + arr[j] + "div").hide();
+                $("#" + arr[j] + "div1").toggle();
+                $("#" + arr[j] + "div2").toggle();
+                $("#" + arr[j] + "div3").toggle();
+            }
+        }
+        for (var j = 0; j < arr1.length; j++) {
+            for (var i = 1; i < 10; i++) {
+                $("#" + arr1[j] + "div").hide();
+            }
+        }
+        $("#ODl5,#ODl6,#ODl7").click(function (a) {
+            $("#" + this.id + "img", this).attr("src", function (a, b) {
+                return '@Url.Content("~/Images/icon_minus.png")' == b ? '@Url.Content("~/Images/icon_plus.png")' : '@Url.Content("~/Images/icon_minus.png")'
+            });
+            $("#" + this.id + "div").toggle();
+        }).css("cursor", "pointer");
+        $("#ODl1,#ODl2,#ODl4").click(function (a) {
+            $("#" + this.id + "img", this).attr("src", function (a, b) {
+                return '@Url.Content("~/Images/icon_minus.png")' == b ? '@Url.Content("~/Images/icon_plus.png")' : '@Url.Content("~/Images/icon_minus.png")'
+            });
+            $("#" + this.id + "div").toggle();
+            $("#" + this.id + "div1").toggle();
+            $("#" + this.id + "div2").toggle();
+            $("#" + this.id + "div3").toggle();
+        }).css("cursor", "pointer");
+    });
+</script>

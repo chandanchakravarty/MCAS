@@ -1,0 +1,1210 @@
+﻿@using MCAS.Web.Objects.Resources.ClaimProcessing;
+@using MCAS.Web.Objects.CommonHelper
+@using MCAS.Web.Objects.Resources.Common;
+@using MCAS.Globalisation;
+@model MCAS.Web.Objects.ClaimObjectHelper.ClaimMandatePCNTXModel
+@{
+    ViewBag.Title = "MandateCrTx";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var mMCASQueryString = Html.MCASQueryString(Request.QueryString);
+    var caller = mMCASQueryString["claimMode"] != null ? Convert.ToString(mMCASQueryString["claimMode"]) : "";
+    var viewonly = mMCASQueryString["Viewmode"] == null ? "" : Convert.ToString(mMCASQueryString["Viewmode"]);
+    var pagemode = mMCASQueryString["mode"] != null ? Convert.ToString(mMCASQueryString["mode"]) : "";
+    var DonotDiableControl = Model.ReadOnly != true && pagemode == "Adj" ? "form-horizontal DonotDiableControl" : "form-horizontal";
+    var accidentClaimIdNew = Model.AccidentClaimId != null ? Convert.ToString(Model.AccidentClaimId) : "0";
+    var policyid = mMCASQueryString["PolicyId"] == null ? "" : Convert.ToString(mMCASQueryString["PolicyId"]);
+    var claimId = Model.ClaimID == null ? "" : Convert.ToString(Model.ClaimID);
+    var claimMode = mMCASQueryString["claimMode"] == null ? "" : Convert.ToString(mMCASQueryString["claimMode"]);
+    var MandateId = mMCASQueryString["MandateId"] == null ? "" : Convert.ToString(mMCASQueryString["MandateId"]);
+    var groupUser = TempData["Groupuser"] == null ? "" : Convert.ToString(TempData["Groupuser"]);
+    var roleCode = TempData["RoleCode"] == null ? "" : Convert.ToString(TempData["RoleCode"]);
+    var claimtypeId = TempData["Claimtype"] == null ? "" : Convert.ToString(TempData["Claimtype"]);
+    var assignedToSupId = TempData["AssignedToSup"] == null ? "" : Convert.ToString(TempData["AssignedToSup"]);
+    var assignedTo = TempData["AssignedTo"] == null ? "" : Convert.ToString(TempData["AssignedTo"]);
+    var display = (viewonly == "AddMandate" || viewonly == "ApproveMandate") ? "inline;" : "none;";
+    var Display = TempData["DisplayDiv1"] == null ? "none;" : "block;";
+    var SubMenu = !string.IsNullOrEmpty(Convert.ToString((HttpContext.Current.Session["ScreenNameDash"]))) ? MenuListItem.ClaimTabs.GetClaimLabel(Convert.ToString((HttpContext.Current.Session["ScreenNameDash"]))) : ClaimAccident.ResourceManager.GetString(MenuListItem.ClaimTabs.SubMenuString(@caller, @accidentClaimIdNew, @pagemode, ""));
+    string isEncryptedParams = System.Configuration.ConfigurationManager.AppSettings["EncryptQueryParams"].ToUpper();
+    if (pagemode == "Adj")
+    {
+        Session["screenID"] = "CLM_REG";
+        Session["ScreenNameDash"] = "208";
+    }
+    Model.ViewMode = pagemode == "Adj" ? "" : "Read";
+    var IsFalOD = TempData["UserFALOD"];
+    var IsFalPDBI = TempData["UserFALPDBI"];
+    var Horgtype1 = Convert.ToString(Session["OrganisationType"]) == null ? "0" : Convert.ToString(Session["OrganisationType"]);
+}
+<script type="text/javascript">
+    var MandateId = '@ViewBag.MandateId';
+</script>
+<script src="@Url.Content("~/Scripts/jquery-2.1.0.min.js")" type="text/javascript"></script>
+<style>
+    .m_l_15
+    {
+        margin-left: 15px;
+    }
+    .p_0
+    {
+        padding: 0;
+    }
+</style>
+<div class="dashboard-wrapper">
+    <div class="MandateDialogue" style="overflow: hidden;" />
+    <div class="container">
+        <div class="page-title" id="reg">
+            <div class="col-lg-12" id="reg2" style="background-color: white; position: fixed; z-index: 1;">
+                <h2>@ClaimMandate.ResourceManager.GetString(MenuListItem.ClaimTabs.PreBreadCrumbString(@pagemode))</h2>
+                <ul class="breadcrumb">
+                    <li>@SubMenu</li>
+                    <li>@ClaimMandate.Mandate</li>
+                </ul>
+            </div>
+            <div style="position: relative!important">
+                @Html.Action("_ClaimDeatailsPCNTX", "ClaimRegistrationProcessing", new { PolicyId = @policyid, AccidentDetailId = @accidentClaimIdNew })
+            </div>
+        </div>
+        <hr />
+        <div class="row" id="toprow">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <div class="panel panel-info">
+                    <div class="panel-heading clearfix">
+                        <i class="icon-check-sign"></i>
+                        <h3 class="panel-title">
+                            @ClaimMandate.MandateEntry</h3>
+                    </div>
+                    <div class="panel-body" id="MandateRqstEditor">
+                        @Html.Partial("ClaimCrTxMandateList", Model.MandateList)
+                        <div>
+                            <br />
+                        </div>
+                        <div class="row">
+                            <div class="clearfix igr col-md-1 text-center">
+                                <a class="btn btn-info" id="Previous">@Common.Previous</a>
+                            </div>
+                            <div class="col-lg-10 text-center">
+                            </div>
+                            <div class="clearfix igr col-md-1 text-center">
+                                <a class="btn btn-info" id="Next">@Common.Next</a>
+                            </div>
+                        </div>
+                        @{
+                            object routes = new { PolicyId = @policyid, claimId = @claimId, AccidentClaimId = @accidentClaimIdNew, claimMode = @caller, mode = @pagemode };
+                            if (isEncryptedParams.ToUpper() == "YES")
+                            {
+                                string res = RouteEncryptDecrypt.getRouteString(routes);
+                                res = RouteEncryptDecrypt.Encrypt(res);
+                                routes = new { Q = res };
+                            }
+                        }
+                        <hr style='font-weight: bold' />
+                        <div class="panel-body" id="NewMandateEditor">
+                            @using (Html.BeginForm("MandateCrTx", "ClaimRegistrationProcessing", routes, FormMethod.Post, new { role = "form", @class = @DonotDiableControl, id = "claimmandateentryform", name = "claimmandateentryform" }))
+                            { 
+                                @Html.ValidationSummary(true);
+                                @Html.HiddenFor(m => m.MandateId);
+                                @Html.HiddenFor(m => m.ReserveId);
+                                @Html.HiddenFor(m => m.ClaimID);
+                                @Html.HiddenFor(m => m.ClaimType);
+                                @Html.HiddenFor(m => m.Hshowgrid);
+                                @Html.HiddenFor(m => m.ReadOnly); 
+                                @Html.HiddenFor(m => m.ViewMode);
+                                <a id="reload" href='@Url.ActionEncoded("ClaimMandateReqEditor", "ClaimProcessing", new { PolicyId = @policyid, ClaimId = @claimId, MandateId = @Model.MandateId, AccidentClaimId = @accidentClaimIdNew, claimMode = @caller })' style="display:none">Reload</a>
+                                <div style="color: Red; font-weight: bold;" class="has-error" id="error">
+                                    <p align="center">
+                                        @if (@ViewData["SuccessMsg"] != null)
+                                        { @ViewData["SuccessMsg"] }
+                                    </p>
+                                </div>
+                                <div>
+                                    @if (@TempData["alertMessage"] != null)
+                                    { @TempData["alertMessage"] }
+                                </div>
+                                <div id="t2" style="display:@Display">
+                                    <div class="panel-body" style="display: none;" id="divManDtlsSupAppval">
+                                        <fieldset>
+                                            <legend>@ClaimMandate.MandateforRecoveryClaimSettlement</legend>
+                                            <div class="panel-body">
+                                                <div class="row">
+                                                    <div class="form-group">
+                                                        <div class="col-lg-6">
+                                                            <div class="form-group">
+                                                                <label class="col-sm-4 control-label">
+                                                                    @ClaimMandate.TPVehicleNo <span class="text-danger">*</span></label>
+                                                                <div class="col-sm-8">
+                                                                    @Html.TextBoxFor(m => m.ClaimantName, new { @maxlength = "250", @readonly = "readonly", @class = "form-control" })
+                                                                </div>
+                                                                <label>
+                                                                </label>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-lg-6">
+                                                            <div class="form-group">
+                                                                <label class="col-sm-4 control-label">
+                                                                    @ClaimMandate.AssignedTo <span class="text-danger">*</span>
+                                                                </label>
+                                                                <div class="col-sm-8">
+                                                                    @Html.DropDownListFor(m => m.AssignedTo, new SelectList(Model.AssignTypeListSP, "intId", "Text", "Select..."), new { id = "Assignedto", @class = "form-control CO" })
+                                                                    @Html.ValidationMessageFor(m => m.AssignedTo)
+                                                                </div>
+                                                                <label>
+                                                                </label>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="form-group">
+                                                        <div class="col-lg-6">
+                                                            <div class="form-group">
+                                                                <label class="col-sm-4 control-label">
+                                                                    @ClaimMandate.ManagerFAL</label>
+                                                                <div class="col-sm-8">
+                                                                    @Html.TextBoxFor(m => m.SPFAL, new { @maxlength = "1500", @readonly = "readonly", @class = "form-control format Number" })
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-lg-6">
+                                                            <div class="form-group">
+                                                                <label class="col-sm-4 control-label">
+                                                                    @ClaimMandate.ClaimType <span class="text-danger">*</span>
+                                                                </label>
+                                                                <div class="col-sm-8">
+                                                                    @Html.DropDownListFor(m => m.ClaimType, new SelectList(Model.ClaimTypeList, "Lookup_value", "Lookup_desc", "[Select...]"), new { id = "Claimtype", @disabled = "disabled", @class = "form-control CO" })
+                                                                    @Html.ValidationMessageFor(m => m.ClaimType)
+                                                                </div>
+                                                                <label>
+                                                                </label>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="form-group">
+                                                        <div class="col-lg-6">
+                                                            <label class="col-sm-4 control-label p_0">
+                                                                @ClaimMandate.Evidence</label>
+                                                            <div class="col-sm-8 p_0">
+                                                                @foreach (var prod in Model.EvidenceList.Where(X => X.Lookup_value != "" && X.Lookup_value != "-1"))
+                                                                {
+                                                                    var uniqId = @prod.Lookup_value; var selectedId = @prod.Lookup_value + '~' + @prod.Lookup_desc; string[] selectedCategory = Convert.ToString(@ViewData["SelectedCategory"]).Split(','); var pos = selectedCategory != null ? Array.IndexOf(selectedCategory, selectedId) : -1; var isProdSelected = pos == -1 ? false : true; 
+                                                                    <input type="checkbox" checked="@isProdSelected" value='@selectedId' id="@uniqId" style="text-align:center; vertical-align: middle; margin-left:10px;" name="query_categoryBox" class="checkBoxReadOnly" /> @Html.DisplayName(@prod.Lookup_desc) }
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-lg-6">
+                                                            <div class="form-group">
+                                                                <label class="col-sm-4 control-label">
+                                                                    @ClaimMandate.ProposedLiablity</label>
+                                                                <div class="col-sm-8">
+                                                                    @Html.TextBoxFor(m => m.ProposedLiability, new { @maxlength = "100", @class = "form-control format Number Percentage" })
+                                                                </div>
+                                                                <label>
+                                                                </label>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="form-group">
+                                                        <div class="col-lg-6">
+                                                            <div class="form-group">
+                                                                <label class="col-sm-4 control-label">
+                                                                    @ClaimMandate.RelatedFacts</label>
+                                                                <div class="col-sm-8">
+                                                                    @Html.TextAreaFor(m => m.RelatedFacts, new { @maxlength = "1500", @class = "form-control CO" })
+                                                                    @Html.ValidationMessageFor(m => m.RelatedFacts)
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-lg-6">
+                                                            <div class="form-group">
+                                                                <label class="col-sm-4 control-label">
+                                                                    @ClaimMandate.OICAssessment<span class="text-danger">*</span>
+                                                                </label>
+                                                                <div class="col-sm-8">
+                                                                    @Html.TextAreaFor(m => m.COAssessment, new { @class = "form-control CO" })
+                                                                    @Html.ValidationMessageFor(m => m.COAssessment)
+                                                                </div>
+                                                                <label>
+                                                                </label>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </fieldset>
+                                        <fieldset>
+                                            <legend>@ClaimMandate.ManagerMandateRecoveryClaim</legend>
+                                            <div id="CO" class="panel-body">
+                                                <div class="row">
+                                                    <div class="form-group">
+                                                        <label class="col-sm-2 control-label">
+                                                            @ClaimMandate.SupervisorAssignto <span class="text-danger">*</span>
+                                                        </label>
+                                                        <div class="col-sm-4">
+                                                            @Html.DropDownListFor(m => m.SupervisorAssignto, new SelectList(Model.AssignTypeListCO, "intId", "Text"), new { id = "AssignedToSup", @class = "form-control " })
+                                                            <label>
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="form-group">
+                                                        <label class="col-sm-3 control-label" style="padding-right: 0px;">
+                                                            @ClaimMandate.ApproveRecommedations <span class="text-danger">*</span>
+                                                        </label>
+                                                        <div class="col-sm-4" id="DivApproveRecommendations">
+                                                            @Html.RadioButtonForSelectList(m => m.ApproveRecommedations, new SelectList(Model.ApproveRecoList, "Lookup_value", "Lookup_desc"))
+                                                            @Html.ValidationMessageFor(m => m.ApproveRecommedations)
+                                                        </div>
+                                                        <label>
+                                                        </label>
+                                                    </div>
+                                                    <label>
+                                                    </label>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="form-group">
+                                                        <label class="col-sm-2 control-label">
+                                                            @ClaimMandate.ManagerRemarks</label>
+                                                        <div class="col-sm-10">
+                                                            @Html.TextAreaFor(m => m.SupervisorRemarks, new { @class = "form-control SP" })
+                                                            @Html.ValidationMessageFor(m => m.SupervisorRemarks)
+                                                        </div>
+                                                        <label>
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </fieldset>
+                                    </div>
+                                    <div class="panel-body" style="display: none;" id="ODPDBIRequestEditor">
+                                        <div class="row">
+                                            <div class="panel-body">
+                                                <div class="row">
+                                                    <fieldset>
+                                                        <legend id="mainheader">@ClaimMandate.ClaimBreakdown</legend>
+                                                        <div class="row">
+                                                            <div class="col-lg-12">
+                                                                <div>
+                                                                    <div class="col-sm-6">
+                                                                    </div>
+                                                                    <div class="col-sm-2 text-center">
+                                                                        <label id="labelir" class="text-center" for="inputInitialReserve">
+                                                                            @ClaimMandate.ClaimQuantum</label>
+                                                                    </div>
+                                                                    <div class="col-sm-2 text-center">
+                                                                        <label id="labelrm" class="text-center" for="inputReserveMovement">
+                                                                            @ClaimMandate.OICRecommendationsMinimumOffer</label>
+                                                                    </div>
+                                                                    <div class="col-sm-2 text-center">
+                                                                        <label id="labelor" class="text-center" for="inputCurrentReserve">
+                                                                            @ClaimMandate.ManagerMandate</label>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div id="Taxi">
+                                                            @for (int i = 0; i < Model.MandateDetails.Count; i++)
+                                                            {
+                                                                @Html.HiddenFor(m => m.MandateDetails[i].CmpCode) 
+                                                                @Html.HiddenFor(m => m.MandateDetails[i].MandateDetailId)
+                                                                @Html.HiddenFor(m => m.MandateDetails[i].MandateId)
+                                                                @Html.HiddenFor(m => m.MandateDetails[i].ClaimID)
+                                                                @Html.HiddenFor(m => m.MandateDetails[i].AccidentClaimId)
+
+                                                                var PreMandateId = Model.MandateDetails[i].CompDesc + "_Q";
+                                                                var PreviousOffers = Model.MandateDetails[i].CompDesc + "_A";
+                                                                var TPCounterOffer = Model.MandateDetails[i].CompDesc + "_R";
+
+                                                                var PreMandateId_C = Model.MandateDetails[i].CompDesc + "_T";
+                                                                var MovementMandateId_C = Model.MandateDetails[i].CompDesc + "_C";
+                                                                var CurrentMandateId_C = Model.MandateDetails[i].CompDesc + "_M";
+
+                                                                var PreMandateId_S = Model.MandateDetails[i].CompDesc + "_D";
+                                                                var MovementMandateId_S = Model.MandateDetails[i].CompDesc + "_S";
+                                                                var CurrentMandateId_S = Model.MandateDetails[i].CompDesc + "_N";
+
+                                                                if (Model.MandateDetails[i].CmpCode == "INVA")
+                                                                {
+                                                                <fieldset class="TX PC">
+                                                                    <legend>@ClaimMandate.CostOfRepairs </legend>
+                                                                    <div class="row TX PC" id="TXl1div">
+                                                                        <div class="col-lg-12">
+                                                                            <div class="form-group">
+                                                                                <div class="col-sm-4">
+                                                                                </div>
+                                                                                <label class="col-sm-2 control-label">
+                                                                                    @ClaimMandate.InvoiceAmount
+                                                                                </label>
+                                                                                <div class="col-sm-2">
+                                                                                    @Html.TextBoxFor(m => m.Reserve.ReserveDetails[i].CurrentReserve, new { @maxlength = "14", @readonly = "readonly", @Value = Model.Reserve.ReserveDetails[i].CurrentReserve, @class = "form-control format Number", @id = Model.MandateDetails[i].CompDesc + "_Q" })
+                                                                                </div>
+                                                                                <div class="col-sm-2">
+                                                                                    @Html.HiddenFor(m => m.MandateDetails[i].PreMandate, new { @id = @PreMandateId_C, @Value = "0.00" })
+                                                                                    @Html.TextBoxFor(m => m.MandateDetails[i].MovementMandate, new { @CompareTo = Model.Reserve.ReserveDetails[i].CurrentReserve, @maxlength = "14", @class = "form-control format Number CO", @id = @MovementMandateId_C })
+                                                                                    @Html.HiddenFor(m => m.MandateDetails[i].CurrentMandate, new { @id = @CurrentMandateId_C })
+                                                                                </div>
+                                                                                <div class="col-sm-2">
+                                                                                    @Html.HiddenFor(m => m.MandateDetails[i].PreMandateSP, new { @id = @PreMandateId_S, @Value = "0.00" })
+                                                                                    @Html.TextBoxFor(m => m.MandateDetails[i].MovementMandateSP, new { @CompareTo = Model.Reserve.ReserveDetails[i].CurrentReserve, @maxlength = "14", @class = "form-control format Number SP ", @id = @MovementMandateId_S, @Value = Model.MandateDetails[i].CurrentMandateSP })
+                                                                                    @Html.HiddenFor(m => m.MandateDetails[i].CurrentMandateSP, new { @id = @CurrentMandateId_S })
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </fieldset>
+                                                                }
+                                                                if (Model.MandateDetails[i].CmpCode == "OTH1S")
+                                                                {
+                                                                <fieldset class="TX PC">
+                                                                    <legend>@ClaimMandate.ClaimExpensesClaimant </legend>
+                                                                    <div class="row" id="ClEx-Cl">
+                                                                        <div class="col-lg-12">
+                                                                            @if (Convert.ToString(Session["OrganisationType"]).ToLower() == "tx")
+                                                                            {
+                                                                                <div class="forTaxi TX">
+                                                                                    @if (Model.MandateDetails[i - 4].CmpCode == "CELOR")
+                                                                                    {
+                                                                                        <div>
+                                                                                            <div class="form-group">
+                                                                                                <div class="col-sm-4">
+                                                                                                </div>
+                                                                                                <label class="col-sm-2 control-label">
+                                                                                                    @ClaimMandate.LossOfRental
+                                                                                                </label>
+                                                                                                <div class="col-sm-2">
+                                                                                                    @Html.TextBoxFor(m => m.Reserve.ReserveDetails[i - 4].CurrentReserve, new { @maxlength = "14", @readonly = "readonly", @Value = Model.Reserve.ReserveDetails[i - 4].CurrentReserve, @class = "form-control format Number", @id = Model.MandateDetails[i - 4].CompDesc + "_Q" })
+                                                                                                </div>
+                                                                                                <div class="col-sm-2">
+                                                                                                    @Html.HiddenFor(m => m.MandateDetails[i - 4].PreMandate, new { @id = @Model.MandateDetails[i - 4].CompDesc + "_T", @Value = "0.00" })
+                                                                                                    @Html.TextBoxFor(m => m.MandateDetails[i - 4].MovementMandate, new { @CompareTo = Model.Reserve.ReserveDetails[i - 4].CurrentReserve, @maxlength = "14", @class = "form-control format Number CO", @id = @Model.MandateDetails[i - 4].CompDesc + "_C" })
+                                                                                                    @Html.HiddenFor(m => m.MandateDetails[i - 4].CurrentMandate, new { @id = @Model.MandateDetails[i - 4].CompDesc + "_M" })
+                                                                                                </div>
+                                                                                                <div class="col-sm-2">
+                                                                                                    @Html.HiddenFor(m => m.MandateDetails[i - 4].PreMandateSP, new { @id = @Model.MandateDetails[i - 4].CompDesc + "_D", @Value = "0.00" })
+                                                                                                    @Html.TextBoxFor(m => m.MandateDetails[i - 4].MovementMandateSP, new { @CompareTo = Model.Reserve.ReserveDetails[i - 4].CurrentReserve, @maxlength = "14", @class = "form-control format Number SP ", @id = @Model.MandateDetails[i - 4].CompDesc + "_S", @Value = Model.MandateDetails[i - 4].CurrentMandateSP })
+                                                                                                    @Html.HiddenFor(m => m.MandateDetails[i - 4].CurrentMandateSP, new { @id = @Model.MandateDetails[i - 4].CompDesc + "_N" })
+                                                                                                </div>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                        <label>
+                                                                                        </label>
+                                                                                    }
+                                                                                    @if (Model.MandateDetails[i - 3].CmpCode == "CELOI")
+                                                                                    {
+                                                                                        <div class="form-group">
+                                                                                            <div class="col-sm-4">
+                                                                                            </div>
+                                                                                            <label class="col-sm-2 control-label">
+                                                                                                @ClaimMandate.LossOfIncome
+                                                                                            </label>
+                                                                                            <div class="col-sm-2">
+                                                                                                @Html.TextBoxFor(m => m.Reserve.ReserveDetails[i - 3].CurrentReserve, new { @maxlength = "14", @readonly = "readonly", @Value = Model.Reserve.ReserveDetails[i - 3].CurrentReserve, @class = "form-control format Number", @id = Model.MandateDetails[i - 3].CompDesc + "_Q" })
+                                                                                            </div>
+                                                                                            <div class="col-sm-2">
+                                                                                                @Html.HiddenFor(m => m.MandateDetails[i - 3].PreMandate, new { @id = @Model.MandateDetails[i - 3].CompDesc + "_T", @Value = "0.00" })
+                                                                                                @Html.TextBoxFor(m => m.MandateDetails[i - 3].MovementMandate, new { @CompareTo = Model.Reserve.ReserveDetails[i - 3].CurrentReserve, @maxlength = "14", @class = "form-control format Number CO", @id = @Model.MandateDetails[i - 3].CompDesc + "_C" })
+                                                                                                @Html.HiddenFor(m => m.MandateDetails[i - 3].CurrentMandate, new { @id = @Model.MandateDetails[i - 3].CompDesc + "_M" })
+                                                                                            </div>
+                                                                                            <div class="col-sm-2">
+                                                                                                @Html.HiddenFor(m => m.MandateDetails[i - 3].PreMandateSP, new { @id = @Model.MandateDetails[i - 3].CompDesc + "_D", @Value = "0.00" })
+                                                                                                @Html.TextBoxFor(m => m.MandateDetails[i - 3].MovementMandateSP, new { @CompareTo = Model.Reserve.ReserveDetails[i - 3].CurrentReserve, @maxlength = "14", @class = "form-control format Number SP ", @id = @Model.MandateDetails[i - 3].CompDesc + "_S", @Value = Model.MandateDetails[i - 3].CurrentMandateSP })
+                                                                                                @Html.HiddenFor(m => m.MandateDetails[i - 3].CurrentMandateSP, new { @id = @Model.MandateDetails[i - 3].CompDesc + "_N" })
+                                                                                            </div>
+                                                                                        </div>
+                                                                                        <label>
+                                                                                        </label>
+                                                                                    }
+                                                                                </div> 
+                                                                            }
+                                                                            @if (Convert.ToString(Session["OrganisationType"]).ToLower() == "pc")
+                                                                            {
+                                                                                <div class="forCar PC">
+                                                                                    @if (Model.MandateDetails[i - 2].CmpCode == "CELOU")
+                                                                                    {
+                                                                                        <div>
+                                                                                            <div class="form-group">
+                                                                                                <div class="col-sm-4">
+                                                                                                </div>
+                                                                                                <label class="col-sm-2 control-label">
+                                                                                                    @ClaimMandate.LossOfUse
+                                                                                                </label>
+                                                                                                <div class="col-sm-2">
+                                                                                                    @Html.TextBoxFor(m => m.Reserve.ReserveDetails[i - 2].CurrentReserve, new { @maxlength = "14", @readonly = "readonly", @Value = Model.Reserve.ReserveDetails[i - 2].CurrentReserve, @class = "form-control format Number", @id = Model.MandateDetails[i - 2].CompDesc + "_Q" })
+                                                                                                </div>
+                                                                                                <div class="col-sm-2">
+                                                                                                    @Html.HiddenFor(m => m.MandateDetails[i - 2].PreMandate, new { @id = @Model.MandateDetails[i - 2].CompDesc + "_T", @Value = "0.00" })
+                                                                                                    @Html.TextBoxFor(m => m.MandateDetails[i - 2].MovementMandate, new { @CompareTo = Model.Reserve.ReserveDetails[i - 2].CurrentReserve, @maxlength = "14", @class = "form-control format Number CO", @id = @Model.MandateDetails[i - 2].CompDesc + "_C" })
+                                                                                                    @Html.HiddenFor(m => m.MandateDetails[i - 2].CurrentMandate, new { @id = @Model.MandateDetails[i - 2].CompDesc + "_M" })
+                                                                                                </div>
+                                                                                                <div class="col-sm-2">
+                                                                                                    @Html.HiddenFor(m => m.MandateDetails[i - 2].PreMandateSP, new { @id = @Model.MandateDetails[i - 2].CompDesc + "_D", @Value = "0.00" })
+                                                                                                    @Html.TextBoxFor(m => m.MandateDetails[i - 2].MovementMandateSP, new { @CompareTo = Model.Reserve.ReserveDetails[i - 2].CurrentReserve, @maxlength = "14", @class = "form-control format Number SP ", @id = @Model.MandateDetails[i - 2].CompDesc + "_S", @Value = Model.MandateDetails[i - 2].CurrentMandateSP })
+                                                                                                    @Html.HiddenFor(m => m.MandateDetails[i - 2].CurrentMandateSP, new { @id = @Model.MandateDetails[i - 2].CompDesc + "_N" })
+                                                                                                </div>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                        <label>
+                                                                                        </label>
+                                                                                    }
+                                                                                    @if (Model.MandateDetails[i - 1].CmpCode == "CEME")
+                                                                                    {
+                                                                                        <div class="form-group">
+                                                                                            <div class="col-sm-4">
+                                                                                            </div>
+                                                                                            <label class="col-sm-2 control-label">
+                                                                                                @ClaimMandate.MedicalExpenses
+                                                                                            </label>
+                                                                                            <div class="col-sm-2">
+                                                                                                @Html.TextBoxFor(m => m.Reserve.ReserveDetails[i - 1].CurrentReserve, new { @maxlength = "14", @readonly = "readonly", @Value = Model.Reserve.ReserveDetails[i - 1].CurrentReserve, @class = "form-control format Number", @id = Model.MandateDetails[i - 1].CompDesc + "_Q" })
+                                                                                            </div>
+                                                                                            <div class="col-sm-2">
+                                                                                                @Html.HiddenFor(m => m.MandateDetails[i - 1].PreMandate, new { @id = @Model.MandateDetails[i - 1].CompDesc + "_T", @Value = "0.00" })
+                                                                                                @Html.TextBoxFor(m => m.MandateDetails[i - 1].MovementMandate, new { @CompareTo = Model.Reserve.ReserveDetails[i - 1].CurrentReserve, @maxlength = "14", @class = "form-control format Number CO", @id = @Model.MandateDetails[i - 1].CompDesc + "_C" })
+                                                                                                @Html.HiddenFor(m => m.MandateDetails[i - 1].CurrentMandate, new { @id = @Model.MandateDetails[i - 1].CompDesc + "_M" })
+                                                                                            </div>
+                                                                                            <div class="col-sm-2">
+                                                                                                @Html.HiddenFor(m => m.MandateDetails[i - 1].PreMandateSP, new { @id = @Model.MandateDetails[i - 1].CompDesc + "_D", @Value = "0.00" })
+                                                                                                @Html.TextBoxFor(m => m.MandateDetails[i - 1].MovementMandateSP, new { @CompareTo = Model.Reserve.ReserveDetails[i - 1].CurrentReserve, @maxlength = "14", @class = "form-control format Number SP ", @id = @Model.MandateDetails[i - 1].CompDesc + "_S", @Value = Model.MandateDetails[i - 1].CurrentMandateSP })
+                                                                                                @Html.HiddenFor(m => m.MandateDetails[i - 1].CurrentMandateSP, new { @id = @Model.MandateDetails[i - 1].CompDesc + "_N" })
+                                                                                            </div>
+                                                                                        </div>
+                                                                                        <label>
+                                                                                        </label>
+                                                                                    }
+                                                                                </div> 
+                                                                            }
+                                                                            @if (Model.MandateDetails[i].CmpCode == "OTH1S")
+                                                                            {
+                                                                                <div class="form-group TX PC">
+                                                                                    <div class="col-sm-4">
+                                                                                    </div>
+                                                                                    <label class="col-sm-2 control-label">
+                                                                                        @ClaimMandate.Others1
+                                                                                    </label>
+                                                                                    <div class="col-sm-2">
+                                                                                        @Html.TextBoxFor(m => m.Reserve.ReserveDetails[i].CurrentReserve, new { @maxlength = "14", @readonly = "readonly", @Value = Model.Reserve.ReserveDetails[i].CurrentReserve, @class = "form-control format Number", @id = Model.MandateDetails[i].CompDesc + "_Q" })
+                                                                                    </div>
+                                                                                    <div class="col-sm-2">
+                                                                                        @Html.HiddenFor(m => m.MandateDetails[i].PreMandate, new { @id = @PreMandateId_C, @Value = "0.00" })
+                                                                                        @Html.TextBoxFor(m => m.MandateDetails[i].MovementMandate, new { @CompareTo = Model.Reserve.ReserveDetails[i].CurrentReserve, @maxlength = "14", @class = "form-control format Number CO", @id = @MovementMandateId_C })
+                                                                                        @Html.HiddenFor(m => m.MandateDetails[i].CurrentMandate, new { @id = @CurrentMandateId_C })
+                                                                                    </div>
+                                                                                    <div class="col-sm-2">
+                                                                                        @Html.HiddenFor(m => m.MandateDetails[i].PreMandateSP, new { @id = @PreMandateId_S, @Value = "0.00" })
+                                                                                        @Html.TextBoxFor(m => m.MandateDetails[i].MovementMandateSP, new { @CompareTo = Model.Reserve.ReserveDetails[i].CurrentReserve, @maxlength = "14", @class = "form-control format Number SP ", @id = @MovementMandateId_S, @Value = Model.MandateDetails[i].CurrentMandateSP })
+                                                                                        @Html.HiddenFor(m => m.MandateDetails[i].CurrentMandateSP, new { @id = @CurrentMandateId_S })
+                                                                                    </div>
+                                                                                </div>
+                                                                            }
+                                                                        </div>
+                                                                    </div>
+                                                                </fieldset>
+                                                                }
+                                                                if (Model.MandateDetails[i].CmpCode == "LF")
+                                                                {
+                                                                <fieldset class="TX PC">
+                                                                    <legend>@ClaimMandate.ClaimExpensesIncidential</legend>
+                                                                    <div class="row BI" id="ClEx-In">
+                                                                        <div class="col-lg-12">
+                                                                            @if (Model.MandateDetails[i].CmpCode == "LF")
+                                                                            {
+                                                                                <div class="form-group TX PC">
+                                                                                    <div class="col-sm-4">
+                                                                                    </div>
+                                                                                    <label class="col-sm-2 control-label">
+                                                                                        @ClaimMandate.LegalFee
+                                                                                    </label>
+                                                                                    <div class="col-sm-2">
+                                                                                        @Html.TextBoxFor(m => m.Reserve.ReserveDetails[i].CurrentReserve, new { @maxlength = "14", @readonly = "readonly", @Value = Model.Reserve.ReserveDetails[i].CurrentReserve, @class = "form-control format Number", @id = Model.MandateDetails[i].CompDesc + "_Q" })
+                                                                                    </div>
+                                                                                    <div class="col-sm-2">
+                                                                                        @Html.HiddenFor(m => m.MandateDetails[i].PreMandate, new { @id = @PreMandateId_C, @Value = "0.00" })
+                                                                                        @Html.TextBoxFor(m => m.MandateDetails[i].MovementMandate, new { @CompareTo = Model.Reserve.ReserveDetails[i].CurrentReserve, @maxlength = "14", @class = "form-control format Number CO", @id = @MovementMandateId_C })
+                                                                                        @Html.HiddenFor(m => m.MandateDetails[i].CurrentMandate, new { @id = @CurrentMandateId_C })
+                                                                                    </div>
+                                                                                    <div class="col-sm-2">
+                                                                                        @Html.HiddenFor(m => m.MandateDetails[i].PreMandateSP, new { @id = @PreMandateId_S, @Value = "0.00" })
+                                                                                        @Html.TextBoxFor(m => m.MandateDetails[i].MovementMandateSP, new { @CompareTo = Model.Reserve.ReserveDetails[i].CurrentReserve, @maxlength = "14", @class = "form-control format Number SP ", @id = @MovementMandateId_S, @Value = Model.MandateDetails[i].CurrentMandateSP })
+                                                                                        @Html.HiddenFor(m => m.MandateDetails[i].CurrentMandateSP, new { @id = @CurrentMandateId_S })
+                                                                                    </div>
+                                                                                </div>
+                                                                                <label>
+                                                                                </label>
+                                                                            }
+                                                                            @if (Model.MandateDetails[i + 1].CmpCode == "CESF")
+                                                                            {
+                                                                                <div class="form-group TX PC">
+                                                                                    <div class="col-sm-4">
+                                                                                    </div>
+                                                                                    <label class="col-sm-2 control-label">
+                                                                                        @ClaimMandate.SurveyFee
+                                                                                    </label>
+                                                                                    <div class="col-sm-2">
+                                                                                        @Html.TextBoxFor(m => m.Reserve.ReserveDetails[i + 1].CurrentReserve, new { @maxlength = "14", @readonly = "readonly", @Value = Model.Reserve.ReserveDetails[i + 1].CurrentReserve, @class = "form-control format Number", @id = Model.MandateDetails[i + 1].CompDesc + "_Q" })
+                                                                                    </div>
+                                                                                    <div class="col-sm-2">
+                                                                                        @Html.HiddenFor(m => m.MandateDetails[i + 1].PreMandate, new { @id = @Model.MandateDetails[i + 1].CompDesc + "_T", @Value = "0.00" })
+                                                                                        @Html.TextBoxFor(m => m.MandateDetails[i + 1].MovementMandate, new { @CompareTo = Model.Reserve.ReserveDetails[i + 1].CurrentReserve, @maxlength = "14", @class = "form-control format Number CO", @id = @Model.MandateDetails[i + 1].CompDesc + "_C" })
+                                                                                        @Html.HiddenFor(m => m.MandateDetails[i + 1].CurrentMandate, new { @id = @Model.MandateDetails[i + 1].CompDesc + "_M" })
+                                                                                    </div>
+                                                                                    <div class="col-sm-2">
+                                                                                        @Html.HiddenFor(m => m.MandateDetails[i + 1].PreMandateSP, new { @id = @Model.MandateDetails[i + 1].CompDesc + "_D", @Value = "0.00" })
+                                                                                        @Html.TextBoxFor(m => m.MandateDetails[i + 1].MovementMandateSP, new { @CompareTo = Model.Reserve.ReserveDetails[i + 1].CurrentReserve, @maxlength = "14", @class = "form-control format Number SP ", @id = @Model.MandateDetails[i + 1].CompDesc + "_S", @Value = Model.MandateDetails[i + 1].CurrentMandateSP })
+                                                                                        @Html.HiddenFor(m => m.MandateDetails[i + 1].CurrentMandateSP, new { @id = @Model.MandateDetails[i + 1].CompDesc + "_N" })
+                                                                                    </div>
+                                                                                </div>
+                                                                                <label>
+                                                                                </label>
+                                                                            }
+                                                                            @if (Model.MandateDetails[i + 2].CmpCode == "TPGIA")
+                                                                            {
+                                                                                <div class="form-group TX PC">
+                                                                                    <div class="col-sm-4">
+                                                                                    </div>
+                                                                                    <label class="col-sm-2 control-label">
+                                                                                        @ClaimMandate.TPGIAFee
+                                                                                    </label>
+                                                                                    <div class="col-sm-2">
+                                                                                        @Html.TextBoxFor(m => m.Reserve.ReserveDetails[i + 2].CurrentReserve, new { @maxlength = "14", @readonly = "readonly", @Value = Model.Reserve.ReserveDetails[i + 2].CurrentReserve, @class = "form-control format Number", @id = Model.MandateDetails[i + 2].CompDesc + "_Q" })
+                                                                                    </div>
+                                                                                    <div class="col-sm-2">
+                                                                                        @Html.HiddenFor(m => m.MandateDetails[i + 2].PreMandate, new { @id = @Model.MandateDetails[i + 2].CompDesc + "_T", @Value = "0.00" })
+                                                                                        @Html.TextBoxFor(m => m.MandateDetails[i + 2].MovementMandate, new { @CompareTo = Model.Reserve.ReserveDetails[i + 2].CurrentReserve, @maxlength = "14", @class = "form-control format Number CO", @id = @Model.MandateDetails[i + 2].CompDesc + "_C" })
+                                                                                        @Html.HiddenFor(m => m.MandateDetails[i + 2].CurrentMandate, new { @id = @Model.MandateDetails[i + 2].CompDesc + "_M" })
+                                                                                    </div>
+                                                                                    <div class="col-sm-2">
+                                                                                        @Html.HiddenFor(m => m.MandateDetails[i + 2].PreMandateSP, new { @id = @Model.MandateDetails[i + 2].CompDesc + "_D", @Value = "0.00" })
+                                                                                        @Html.TextBoxFor(m => m.MandateDetails[i + 2].MovementMandateSP, new { @CompareTo = Model.Reserve.ReserveDetails[i + 2].CurrentReserve, @maxlength = "14", @class = "form-control format Number SP ", @id = @Model.MandateDetails[i + 2].CompDesc + "_S", @Value = Model.MandateDetails[i + 2].CurrentMandateSP })
+                                                                                        @Html.HiddenFor(m => m.MandateDetails[i + 2].CurrentMandateSP, new { @id = @Model.MandateDetails[i + 2].CompDesc + "_N" })
+                                                                                    </div>
+                                                                                </div>
+                                                                                <label>
+                                                                                </label>
+                                                                            }
+                                                                            @if (Model.MandateDetails[i + 3].CmpCode == "LTA")
+                                                                            {
+                                                                                <div class="form-group TX PC">
+                                                                                    <div class="col-sm-4">
+                                                                                    </div>
+                                                                                    <label class="col-sm-2 control-label">
+                                                                                        @ClaimMandate.LTAFee
+                                                                                    </label>
+                                                                                    <div class="col-sm-2">
+                                                                                        @Html.TextBoxFor(m => m.Reserve.ReserveDetails[i + 3].CurrentReserve, new { @maxlength = "14", @readonly = "readonly", @Value = Model.Reserve.ReserveDetails[i + 3].CurrentReserve, @class = "form-control format Number", @id = Model.MandateDetails[i + 3].CompDesc + "_Q" })
+                                                                                    </div>
+                                                                                    <div class="col-sm-2">
+                                                                                        @Html.HiddenFor(m => m.MandateDetails[i + 3].PreMandate, new { @id = @Model.MandateDetails[i + 3].CompDesc + "_T", @Value = "0.00" })
+                                                                                        @Html.TextBoxFor(m => m.MandateDetails[i + 3].MovementMandate, new { @CompareTo = Model.Reserve.ReserveDetails[i + 3].CurrentReserve, @maxlength = "14", @class = "form-control format Number CO", @id = @Model.MandateDetails[i + 3].CompDesc + "_C" })
+                                                                                        @Html.HiddenFor(m => m.MandateDetails[i + 3].CurrentMandate, new { @id = @Model.MandateDetails[i + 3].CompDesc + "_M" })
+                                                                                    </div>
+                                                                                    <div class="col-sm-2">
+                                                                                        @Html.HiddenFor(m => m.MandateDetails[i + 3].PreMandateSP, new { @id = @Model.MandateDetails[i + 3].CompDesc + "_D", @Value = "0.00" })
+                                                                                        @Html.TextBoxFor(m => m.MandateDetails[i + 3].MovementMandateSP, new { @CompareTo = Model.Reserve.ReserveDetails[i + 3].CurrentReserve, @maxlength = "14", @class = "form-control format Number SP ", @id = @Model.MandateDetails[i + 3].CompDesc + "_S", @Value = Model.MandateDetails[i + 3].CurrentMandateSP })
+                                                                                        @Html.HiddenFor(m => m.MandateDetails[i + 3].CurrentMandateSP, new { @id = @Model.MandateDetails[i + 3].CompDesc + "_N" })
+                                                                                    </div>
+                                                                                </div>
+                                                                                <label>
+                                                                                </label>
+                                                                            }
+                                                                            @if (Convert.ToString(Session["OrganisationType"]).ToLower() == "pc")
+                                                                            {
+                                                                                <div class="forCar PC">
+                                                                                    @if (Model.MandateDetails[i + 4].CmpCode == "CR")
+                                                                                    {
+                                                                                        <div class="form-group">
+                                                                                            <div class="col-sm-4">
+                                                                                            </div>
+                                                                                            <label class="col-sm-2 control-label">
+                                                                                                @ClaimMandate.CarRental
+                                                                                            </label>
+                                                                                            <div class="col-sm-2">
+                                                                                                @Html.TextBoxFor(m => m.Reserve.ReserveDetails[i + 4].CurrentReserve, new { @maxlength = "14", @readonly = "readonly", @Value = Model.Reserve.ReserveDetails[i + 4].CurrentReserve, @class = "form-control format Number", @id = Model.MandateDetails[i + 4].CompDesc + "_Q" })
+                                                                                            </div>
+                                                                                            <div class="col-sm-2">
+                                                                                                @Html.HiddenFor(m => m.MandateDetails[i + 4].PreMandate, new { @id = @Model.MandateDetails[i + 4].CompDesc + "_T", @Value = "0.00" })
+                                                                                                @Html.TextBoxFor(m => m.MandateDetails[i + 4].MovementMandate, new { @CompareTo = Model.Reserve.ReserveDetails[i + 4].CurrentReserve, @maxlength = "14", @class = "form-control format Number CO", @id = @Model.MandateDetails[i + 4].CompDesc + "_C" })
+                                                                                                @Html.HiddenFor(m => m.MandateDetails[i + 4].CurrentMandate, new { @id = @Model.MandateDetails[i + 4].CompDesc + "_M" })
+                                                                                            </div>
+                                                                                            <div class="col-sm-2">
+                                                                                                @Html.HiddenFor(m => m.MandateDetails[i + 4].PreMandateSP, new { @id = @Model.MandateDetails[i + 4].CompDesc + "_D", @Value = "0.00" })
+                                                                                                @Html.TextBoxFor(m => m.MandateDetails[i + 4].MovementMandateSP, new { @CompareTo = Model.Reserve.ReserveDetails[i + 4].CurrentReserve, @maxlength = "14", @class = "form-control format Number SP ", @id = @Model.MandateDetails[i + 4].CompDesc + "_S", @Value = Model.MandateDetails[i + 4].CurrentMandateSP })
+                                                                                                @Html.HiddenFor(m => m.MandateDetails[i + 4].CurrentMandateSP, new { @id = @Model.MandateDetails[i + 4].CompDesc + "_N" })
+                                                                                            </div>
+                                                                                        </div>
+                                                                                        <label>
+                                                                                        </label>
+                                                                                    }
+                                                                                    @if (Model.MandateDetails[i + 5].CmpCode == "CC")
+                                                                                    {
+                                                                                        <div class="form-group">
+                                                                                            <div class="col-sm-4">
+                                                                                            </div>
+                                                                                            <label class="col-sm-2 control-label">
+                                                                                                @ClaimMandate.CourtesyCar
+                                                                                            </label>
+                                                                                            <div class="col-sm-2">
+                                                                                                @Html.TextBoxFor(m => m.Reserve.ReserveDetails[i + 5].CurrentReserve, new { @maxlength = "14", @readonly = "readonly", @Value = Model.Reserve.ReserveDetails[i + 5].CurrentReserve, @class = "form-control format Number", @id = Model.MandateDetails[i + 5].CompDesc + "_Q" })
+                                                                                            </div>
+                                                                                            <div class="col-sm-2">
+                                                                                                @Html.HiddenFor(m => m.MandateDetails[i + 5].PreMandate, new { @id = @Model.MandateDetails[i + 5].CompDesc + "_T", @Value = "0.00" })
+                                                                                                @Html.TextBoxFor(m => m.MandateDetails[i + 5].MovementMandate, new { @CompareTo = Model.Reserve.ReserveDetails[i + 5].CurrentReserve, @maxlength = "14", @class = "form-control format Number CO", @id = @Model.MandateDetails[i + 5].CompDesc + "_C" })
+                                                                                                @Html.HiddenFor(m => m.MandateDetails[i + 5].CurrentMandate, new { @id = @Model.MandateDetails[i + 5].CompDesc + "_M" })
+                                                                                            </div>
+                                                                                            <div class="col-sm-2">
+                                                                                                @Html.HiddenFor(m => m.MandateDetails[i + 5].PreMandateSP, new { @id = @Model.MandateDetails[i + 5].CompDesc + "_D", @Value = "0.00" })
+                                                                                                @Html.TextBoxFor(m => m.MandateDetails[i + 5].MovementMandateSP, new { @CompareTo = Model.Reserve.ReserveDetails[i + 5].CurrentReserve, @maxlength = "14", @class = "form-control format Number SP ", @id = @Model.MandateDetails[i + 5].CompDesc + "_S", @Value = Model.MandateDetails[i + 5].CurrentMandateSP })
+                                                                                                @Html.HiddenFor(m => m.MandateDetails[i + 5].CurrentMandateSP, new { @id = @Model.MandateDetails[i + 5].CompDesc + "_N" })
+                                                                                            </div>
+                                                                                        </div>
+                                                                                        <label>
+                                                                                        </label>
+                                                                                    }
+                                                                                </div>
+                                                                            }
+                                                                            @if (Model.MandateDetails[i + 6].CmpCode == "OTH2S")
+                                                                            {
+                                                                                <div class="form-group TX PC">
+                                                                                    <div class="col-sm-4">
+                                                                                    </div>
+                                                                                    <label class="col-sm-2 control-label">
+                                                                                        @ClaimMandate.Others2
+                                                                                    </label>
+                                                                                    <div class="col-sm-2">
+                                                                                        @Html.TextBoxFor(m => m.Reserve.ReserveDetails[i + 6].CurrentReserve, new { @maxlength = "14", @readonly = "readonly", @Value = Model.Reserve.ReserveDetails[i + 6].CurrentReserve, @class = "form-control format Number", @id = Model.MandateDetails[i + 6].CompDesc + "_Q" })
+                                                                                    </div>
+                                                                                    <div class="col-sm-2">
+                                                                                        @Html.HiddenFor(m => m.MandateDetails[i + 6].PreMandate, new { @id = @Model.MandateDetails[i + 6].CompDesc + "_T", @Value = "0.00" })
+                                                                                        @Html.TextBoxFor(m => m.MandateDetails[i + 6].MovementMandate, new { @CompareTo = Model.Reserve.ReserveDetails[i + 6].CurrentReserve, @maxlength = "14", @class = "form-control format Number CO", @id = @Model.MandateDetails[i + 6].CompDesc + "_C" })
+                                                                                        @Html.HiddenFor(m => m.MandateDetails[i + 6].CurrentMandate, new { @id = @Model.MandateDetails[i + 6].CompDesc + "_M" })
+                                                                                    </div>
+                                                                                    <div class="col-sm-2">
+                                                                                        @Html.HiddenFor(m => m.MandateDetails[i + 6].PreMandateSP, new { @id = @Model.MandateDetails[i + 6].CompDesc + "_D", @Value = "0.00" })
+                                                                                        @Html.TextBoxFor(m => m.MandateDetails[i + 6].MovementMandateSP, new { @CompareTo = Model.Reserve.ReserveDetails[i + 6].CurrentReserve, @maxlength = "14", @class = "form-control format Number SP ", @id = @Model.MandateDetails[i + 6].CompDesc + "_S", @Value = Model.MandateDetails[i + 6].CurrentMandateSP })
+                                                                                        @Html.HiddenFor(m => m.MandateDetails[i + 6].CurrentMandateSP, new { @id = @Model.MandateDetails[i + 6].CompDesc + "_N" })
+                                                                                    </div>
+                                                                                </div>
+                                                                                <label>
+                                                                                </label>
+                                                                            }
+                                                                        </div>
+                                                                    </div>
+                                                                </fieldset>
+                                                                }
+                                                                if (Model.MandateDetails[i].CmpCode == "TOTAL")
+                                                                {
+                                                                <div class="form-group TX PC">
+                                                                    <div class="col-sm-4">
+                                                                    </div>
+                                                                    <label class="col-sm-2 control-label">
+                                                                        @ClaimMandate.TOTAL
+                                                                    </label>
+                                                                    <div class="col-sm-2">
+                                                                        @Html.TextBoxFor(m => m.Reserve.ReserveDetails[i].CurrentReserve, new { @maxlength = "14", @readonly = "true", @Value = Model.Reserve.ReserveDetails[i].CurrentReserve, @class = "form-control format Number", @id = Model.MandateDetails[i].CompDesc + "_Q" })
+                                                                    </div>
+                                                                    <div class="col-sm-2">
+                                                                        @Html.HiddenFor(m => m.MandateDetails[i].PreMandate, new { @id = @PreMandateId_C, @Value = "0.00" })
+                                                                        @Html.TextBoxFor(m => m.MandateDetails[i].MovementMandate, new { @maxlength = "14", @CompareTo = Model.Reserve.ReserveDetails[i].CurrentReserve, @class = "form-control format Number CO", @id = @MovementMandateId_C })
+                                                                        @Html.HiddenFor(m => m.MandateDetails[i].CurrentMandate, new { @id = @CurrentMandateId_C })
+                                                                    </div>
+                                                                    <div class="col-sm-2">
+                                                                        @Html.HiddenFor(m => m.MandateDetails[i].PreMandateSP, new { @id = @PreMandateId_S, @Value = "0.00" })
+                                                                        @Html.TextBoxFor(m => m.MandateDetails[i].MovementMandateSP, new { @maxlength = "14", @CompareTo = Model.Reserve.ReserveDetails[i].CurrentReserve, @class = "form-control format Number SP", @id = @MovementMandateId_S, @Value = Model.MandateDetails[i].CurrentMandateSP })
+                                                                        @Html.HiddenFor(m => m.MandateDetails[i].CurrentMandateSP, new { @id = @CurrentMandateId_S })
+                                                                    </div>
+                                                                </div>
+                                                                }
+                                                            }
+                                                        </div>
+                                                    </fieldset>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-lg-12 text-center">
+                                            <div class="form-group" id="DivSave1">
+                                                <input id="btnSave" class="btn btn-info" type="button" value="Save" />
+                                                <input id="btnReset" class="btn btn-info" type="button" value="Reset" />
+                                                @*<input id="testSave" class="btn btn-info" type="submit" value="Test" />*@
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <fieldset>
+                                            <div class="form-group">
+                                                <div class="col-lg-12">
+                                                    @Html.Partial("~/Views/Shared/_TimeStamp.cshtml", Model)
+                                                </div>
+                                            </div>
+                                        </fieldset>
+                                    </div>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript">
+        var CName = { 1: function () { return '@Html.Raw(ClaimMandate.OwnDamage)' }, 2: function () { return '@Html.Raw(ClaimMandate.PropertyDamage)' }, 3: function () { return '@Html.Raw(ClaimMandate.BodyInjury)' }, 4: function () { return '@Html.Raw(ClaimMandate.RecoveryClaim)' } };
+        var do_on_load = function () {
+            setTabActive('MandateTab');
+            SetDivPost();
+
+            $(".datepicker").datepicker({
+                dateFormat: "dd/mm/yy",
+                showStatus: true,
+                showWeeks: true,
+                currentText: 'Now',
+                autoSize: true,
+                gotoCurrent: true,
+                showAnim: 'blind',
+                highlightWeek: true,
+                changeMonth: !0,
+                changeYear: !0,
+                yearRange: "1951:2050",
+                onSelect: function () {
+                    $(this).valid()
+                }
+            });
+
+            $("input[type=text]").each(function () {
+                $(this).hasClass("datepicker") && 10 < $(this).val().length && $(this).val($(this).val().substring(0, 10));
+                if (void 0 !== $(this).attr("data-val-date") && "The field " == $(this).attr("data-val-date").substring(0, 10)) {
+                    var e = $(this).attr("data-val-date").substring(10, $(this).attr("data-val-date").length).replace("must be a date.", "must be in 'dd/mm/yyyy' format.");
+                    $(this).removeAttr("data-val-date");
+                    $(this).attr("data-val-date", e)
+                }
+            });
+            //        if (parseInt(MandateId) >= 0) {
+            //            $("#MandateBody").show("slow");
+            //        }
+
+            $('#Assignedto').change(function () {
+                $.ajax({
+                    type: "POST",
+                    url: '@Url.ActionEncoded("GetFALforSP", "ClaimProcessing")',
+                    data: {
+                        AssignedtoSP: $("#Assignedto").val(),
+                        ClaimType: "4"
+                    },
+                    success: function (a) {
+                        $("#SPFAL").val(a);
+                        // apply format class on 'Supervisor Name – FAL'
+                        if ($("#SPFAL").hasClass("format") && "" != $("#SPFAL").val()) {
+                            var b = "-" == $("#SPFAL").val().charAt(0) ? "-" : "", a = $("#SPFAL").val().replace(/,/g, "");
+                            "" == a || isNaN(a) || $("#SPFAL").val(b + CurrencyFormat($("#SPFAL").val().replace(/,/g, "")));
+                            $("#SPFAL").valid()
+                        }
+                        $("#SPFAL").hasClass("format") && "" == $("#SPFAL").val() && ($("#SPFAL").val("0.00"), $("#SPFAL").valid());
+                    }
+                });
+            });
+
+            SetTotal();
+            if (("ApproveMandate" == '@viewonly') || ("Select" == '@viewonly')) {
+                $("#Total_C").val($("#Total_C").attr("value"));
+                $("#Total_S").val($("#Total_S").attr("value"));
+            }
+
+            "SP" == '@roleCode' && $("input[type=text]").each(function () { $(this).hasClass("format") && ("_C" == $(this).context.id.slice(-2)) && $(this).prop("readonly", !0) }) && $("#Liability_C").attr("readonly", !0);
+
+            ('COSP' == '@roleCode' || 'NON' == '@roleCode') ? ($(".CO").removeAttr("readonly"), $(".SP").removeAttr("readonly"), $(".divSave").show(), $("#divsave").show(), $("#MandateRqstEditor input[type=text]").each(function () {
+                if ($(this).is(":visible") && ("_A" == $(this).context.id.slice(-2) || "_R" == $(this).context.id.slice(-2)) && $(this).hasClass("format") && "Total" != $(this).context.id.slice(0, 5) && "SubTotal" != $(this).context.id.slice(0, 8)) {
+                    $(this).removeAttr('readonly')
+                }
+            }), $("#Liability_A,#Liability_R").removeAttr('readonly'), $("#Total_C,#Total_S").attr("readonly", !0)) : "SP" == '@roleCode' ? ($(".CO").attr("readonly", !0), $("#Assignedto option[value!='@Model.AssignedTo']").remove(), $("#InvestigationResultId option[value!='@Model.InvestigationResult']").remove(), $("#InformSafetytoreviewfindings option[value!='@Model.InformSafetytoreviewfindings']").remove(), $("#Assignedto,#InvestigationResultId").css({
+                "pointer-events": "none",
+                cursor: "default"
+            }).css("background-color", "#eee"), ($(".divSave").show(), $("#divsave").show()), $(".checkBoxReadOnly").click(function () {
+                return !1
+            })) : "CO" == '@roleCode' ? ($(".SP").attr("readonly", !0), ($(".divSave").show(), $("#divsave").show()), $("#AssignedToSup").css({
+                "pointer-events": "none",
+                cursor: "default"
+            }).css("background-color", "#eee"), $("#DivApproveRecommendations :radio:not(:checked)").attr("disabled", !0), $("#Liability_A,#Liability_R").removeAttr('readonly'), $("#Total_C,#Total_S").attr("readonly", !0), $("#MandateRqstEditor input[type=text]").each(function () {
+                if ($(this).is(":visible") && ("_A" == $(this).context.id.slice(-2) || "_R" == $(this).context.id.slice(-2)) && $(this).hasClass("format") && "Total" != $(this).context.id.slice(0, 5) && "SubTotal" != $(this).context.id.slice(0, 8)) {
+                    $(this).removeAttr('readonly')
+                }
+            })) : $(".divSave").hide();
+
+            "AddMandate" == '@viewonly' && $("input[type=text]").each(function () { ("_S" == $(this).context.id.slice(-2)) && $(this).prop("readonly", !0) });
+            if ("ApproveMandate" == '@viewonly') {
+                $("#ClaimantName,#COAssessment,#RelatedFacts,#SPFAL,#Scenario").prop("readonly", !0);
+                $("#DivcheckBoxReadOnly input[type=checkbox]").each(function () {
+                    $(this).attr("disabled", "disabled");
+                });
+                $("#Assignedto,#Claimtype,#InvestigationResultId,#InformSafetytoreviewfindings").css({
+                    "pointer-events": "none",
+                    cursor: "default"
+                }).css("background-color", "#eee")
+
+
+                $("input[type=text]").each(function () { ("_S" != $(this).context.id.slice(-2)) && $(this).prop("readonly", !0) });
+            }
+            "AddMandate" == '@viewonly' ? ($("#SupervisorRemarks").attr("disabled", !0), $("#AssignedToSup").css({
+                "pointer-events": "none",
+                cursor: "default"
+            }).css("background-color", "#eee"), $("#DivApproveRecommendations :radio:not(:checked)").attr("disabled", !0)) : "";
+
+            ("@viewonly" == "AddMandate" || "@viewonly" == "ApproveMandate") ? $("#divbtnsave").show() : $("#divbtnsave").hide();
+
+            if (("@viewonly" != "AddMandate" && "@viewonly" != "ApproveMandate")) {
+                $("#SupervisorRemarks").attr("disabled", !0), $("#AssignedToSup").css({
+                    "pointer-events": "none",
+                    cursor: "default"
+                }).css("background-color", "#eee"), $("#DivApproveRecommendations :radio:not(:checked)").attr("disabled", !0)
+
+                $("form").find(":input:not([id=Next]):not([id=Previous])").each(function () {
+                    switch (this.type) {
+                        case "text":
+                            $(this).attr('disabled', 'disabled')
+                        case "textarea":
+                            $(this).attr('disabled', 'disabled')
+                        case "checkbox":
+                            $(this).attr('disabled', 'disabled')
+                        case "radio":
+                            $(this).attr('disabled', 'disabled')
+                        case "button":
+                            $(this).attr('disabled', 'disabled')
+
+                    }
+                }) && $('select').attr('disabled', 'disabled') && $('button').attr('disabled', 'disabled') && $("#btnReset,#btnSave").attr('disabled', 'disabled').hide
+            };
+
+            $("#NewMandateEditor input[type=text]").change(function () {
+                var b = $(this).context.id, a = "" == $(this).attr("CompareTo") ? "0" : $(this).attr("CompareTo"), c = "" == $(this).val() ? "0" : $(this).val(), d = $(this).context.id || $(this).id;
+                if (parseFloat(a) < parseFloat(c)) {
+                    return $("#" + b).val(""), alert("Mandate amount cannot be greater than respective reserve amount ie $" + CurrencyFormat(a), d), SetTotal(), SetSubTotal(), SetCurrentMandate(), SetHiddenSpan(), !1;
+                }
+                SetTotal();
+            });
+
+            $("table.ui-ebixgrid-btable span").click(function () {
+                var a = $(this).context.id;
+                $("#Hshowgrid").val(a);
+                $("table.ui-ebixgrid-btable span").each(function () {
+                    if ($(this).hasClass("ui-icon-minus") || $(this).hasClass("ui-icon-plus")) {
+                        if (!a.beginsWith($(this).context.id)) {
+                            var spanid = $(this).context.id, id = spanid.slice(5, spanid.length);
+                            $('#' + id).hide();
+                            $('#' + spanid).removeClass('ui-icon-minus').addClass('ui-icon-plus');
+                        }
+                    }
+                });
+            });
+
+            SetHiddenSpan();
+            ExpandGridAfterPost($("#Hshowgrid").val());
+
+            //            '@claimtypeId' != 0 && ShowHideDiv("@claimtypeId");
+            ShowHideDiv("@Horgtype1");
+
+            if ('@Horgtype1' != "") {
+                $('#divManDtlsSupAppval').attr('style', 'Display:block');
+                $('#ODPDBIRequestEditor').attr('style', 'Display:block');
+            };
+
+            $("#btnSave").click(function () {
+                if (!IsPageChanged()) return !1;
+                var Ctrlmsg = "", Ctrlres = false, Ctrlid = "";
+                $("#NewMandateEditor input[type=text]").each(function () {
+                    if ($(this).is(":visible") && ("_C" == $(this).context.id.slice(-2) || "_S" == $(this).context.id.slice(-2)) && $(this).hasClass("format")) {
+                        var Lastid = $(this).context.id.slice(-2);
+                        if ($("#" + $(this).context.id.replace(Lastid, "_Q")).length != 0) {
+                            var minvalue = parseFloat($("#" + $(this).context.id.replace(Lastid, "_Q")).val().replace(/,/g, ""));
+                            if (parseFloat($(this).val().replace(/,/g, "")) > minvalue) {
+                                Ctrlid = $(this).context.id;
+                                Ctrlmsg = "Mandate amount can not be greater than respective reserve amount ie $ " + minvalue + ".";
+                                Ctrlres = true;
+                                return false;
+                            }
+                        }
+                    }
+                });
+
+                if (Ctrlres) return $("#" + Ctrlid).val("0.00"), SetTotal(), SetSubTotal(), SetCurrentMandate(), alert(Ctrlmsg, Ctrlid), !1;
+                if ("SP" == '@roleCode') {
+                    if ("0" == $("#AssignedToSup").val()) return alert("Assigned To is required.", "AssignedToSup"), !1;
+                    if (!$('#ApproveRecommedations_Y').is(":checked") && !$('#ApproveRecommedations_N').is(":checked")) return alert("Approve Recommendations is required.", "ApproveRecommedations_Y"), !1;
+                    if ("" == $("#Total_S").val() || "0.00" == $("#Total_S").val()) return alert("Amount Due Total is required", "Total_S"), !1;
+                } else if ("CO" == '@roleCode') {
+                    if ("0" == $("#Assignedto").val()) return alert("Assigned To is required.", "Assignedto"), !1;
+                    if ("0" == $("#Claimtype").val()) return alert("Type of Claim is required.", "Claimtype"), !1;
+                    if ("" == $("#Scenario").val()) return alert("Scenario is required.", "Scenario"), !1;
+                    if ("" == $("#COAssessment").val()) return alert("OIC's Assessment is required .", "COAssessment"), !1;
+                    if ("[Select...]" == $("#InformSafetytoreviewfindings").val()) return alert("Inform Safety to review findings is required.", "InformSafetytoreviewfindings"), !1;
+                    if ("" == $("#Total_C").val() || "0.00" == $("#Total_C").val()) return alert("Amount Due Total is required", "Total_C"), !1;
+                }
+
+                if ("COSP" == '@roleCode') {
+                    if ("ApproveMandate" == '@viewonly') {
+                        if ("0" == $("#AssignedToSup").val()) return alert("Assigned To is required.", "AssignedToSup"), !1;
+                        if (!$('#ApproveRecommedations_Y').is(":checked") && !$('#ApproveRecommedations_N').is(":checked")) return alert("Approve Recommendations is required.", "ApproveRecommedations_Y"), !1;
+                        if ("" == $("#Total_S").val() || "0.00" == $("#Total_S").val()) return alert("Amount Due Total is required", "Total_S"), !1;
+                    }
+                    if ("0" == $("#Assignedto").val()) return alert("Assigned To is required.", "Assignedto"), !1;
+                    if ("0" == $("#Claimtype").val()) return alert("Type of Claim is required.", "Claimtype"), !1;
+                    if ("" == $("#COAssessment").val()) return alert("OIC's Assessment is required .", "COAssessment"), !1;
+                    if ("[Select...]" == $("#InformSafetytoreviewfindings").val()) return alert("Inform Safety to review findings is required.", "InformSafetytoreviewfindings"), !1;
+                    if ("" == $("#Total_C").val() || "0.00" == $("#Total_C").val()) return alert("Amount Due Total is required", "Total_C"), !1;
+                    //if ("" == $("#Total_S").val() || "0.00" == $("#Total_S").val()) return alert("Amount Due Total is required", "Total_S"), !1;
+                }
+                if ("CO" == '@roleCode' && ("" == $("#Total_C").val() || "0.00" == $("#Total_C").val())) return alert("Total amount is required", "Total_C"), !1;
+
+                if ("SP" == '@roleCode' && ("" == $("#Total_S").val() || "0.00" == $("#Total_S").val())) return alert("Total amount is required", "Total_S"), !1;
+                if (("SP" == '@roleCode' || "COSP" == '@roleCode') && "@claimtypeId" == "1" && ('@IsFalOD' == 'True') && ((parseFloat($("#Total_S").val().replace(/,/g, ""))) > parseFloat("@Model.HFALAmtOD"))) {
+                    CreateDialog("You can't approve amount.Your FAL limit is : $" + "@Model.HFALAmtOD" + ", Click OK to Continue", "Yes", "Cancel");
+                } else if ("CO" == '@roleCode' && "@claimtypeId" == "1" && ('@IsFalOD' == 'True') && ((parseFloat($("#Total_C").val().replace(/,/g, ""))) > parseFloat("@Model.HFALAmtOD"))) {
+                    CreateDialog("You can't approve amount.Your FAL limit is : $" + "@Model.HFALAmtOD" + ", Click OK to Continue", "Yes", "Cancel");
+                }
+                else if ((("SP" == '@roleCode' || "COSP" == '@roleCode') && "@claimtypeId" == "2" && ('@IsFalPDBI' == 'True') && (parseFloat($("#Total_S").val().replace(/,/g, ""))) > parseFloat("@Model.HFALAmtPDBI")))
+                { CreateDialog("You can't approve amount.Your FAL limit is : $" + "@Model.HFALAmtPDBI" + ", Click OK to Continue", "Yes", "Cancel"); }
+                else if ("CO" == '@roleCode' && "@claimtypeId" == "2" && ('@IsFalPDBI' == 'True') && ((parseFloat($("#Total_C").val().replace(/,/g, ""))) > parseFloat("@Model.HFALAmtPDBI")))
+                { CreateDialog("You can't approve amount.Your FAL limit is : $" + "@Model.HFALAmtPDBI" + ", Click OK to Continue", "Yes", "Cancel"); }
+                else if ((("SP" == '@roleCode' || "COSP" == '@roleCode') && "@claimtypeId" == "3" && ('@IsFalPDBI' == 'True') && (parseFloat($("#Total_S").val().replace(/,/g, ""))) > parseFloat("@Model.HFALAmtPDBI")))
+                { CreateDialog("You can't approve amount.Your FAL limit is : $" + "@Model.HFALAmtPDBI" + ", Click OK to Continue", "Yes", "Cancel"); }
+                else if ("CO" == '@roleCode' && "@claimtypeId" == "3" && ('@IsFalPDBI' == 'True') && ((parseFloat($("#Total_C").val().replace(/,/g, ""))) > parseFloat("@Model.HFALAmtPDBI")))
+                { CreateDialog("You can't approve amount.Your FAL limit is : $" + "@Model.HFALAmtPDBI" + ", Click OK to Continue", "Yes", "Cancel"); }
+                else if (Date.parse("@Model.HEffdateto") < Date.parse(new Date()) && ((parseFloat("@Model.HTotalPreviousApproveMandate") + parseFloat($("#Total_S").val().replace(/,/g, "")) > parseFloat("@Model.HDeductibleAmt")) || (parseFloat("@Model.HTotalPreviousApproveMandate") + parseFloat($("#Total_C").val().replace(/,/g, "")) > parseFloat("@Model.HDeductibleAmt"))) && "@claimtypeId" == "3") {
+                    CreateDialog1("Deductible has expired for" + "@Model.HOrgname" + ".", "Ok", OnConfirmT);
+                }
+                else if (!(Date.parse("@Model.HEffdateto") < Date.parse(new Date())) && ((parseFloat("@Model.HTotalPreviousApproveMandate") + parseFloat($("#Total_S").val().replace(/,/g, "")) > parseFloat("@Model.HDeductibleAmt")) || (parseFloat("@Model.HTotalPreviousApproveMandate") + parseFloat($("#Total_C").val().replace(/,/g, "")) > parseFloat("@Model.HDeductibleAmt"))) && "@claimtypeId" == "3") {
+                    CreateDialog("Deductible amount exceeded $" + "@Model.HDeductibleAmt" + ", Click OK to Continue", "Yes", "Cancel", OnConfirmTrue);
+                }
+                else {
+                    SetTotal(), SetCurrentMandate(), FormatValue(), SetHiddenSpan();
+                    //                , SetCurrentMandate(), FormatValue(), SetHiddenSpan(),
+                    var b = $("#claimmandateentryform").valid();
+                    var d = $("#CostofRepairs_D").val();
+                    var d1 = $("#CostofRepairs_S").val();
+                    var d2 = $("#CostofRepairs_N").val();
+                    IsPageChanged() && b && $("#claimmandateentryform").submit();
+                }
+            });
+
+            $(".ui-ebixgrid-view > table > tbody > tr > td > a").each(function () {
+                $(this).hasClass("ApproveMandate") && "@Model.HUserId" != $(this).attr("href").getstringinbetween("HAssignedTo") && $(this).attr('disabled', 'disabled').attr('readonly', 'readonly');
+                $(this).hasClass("AddMandate") && ($(this).attr("href").getstringinbetween("HClaimantStatus") == "2" || $(this).attr("href").getstringinbetween("HClaimantStatus") == "3") && $(this).hide();
+                "SP" == '@roleCode' && $(this).hasClass("AddMandate") && $(this).attr('disabled', 'disabled').attr('readonly', 'readonly');
+                $(this).hasClass("ApproveMandate") && $(this).attr("href").getstringinbetween("HClaimantStatus") == "2" && $(this).hide();
+            });
+
+            $("#ApproveRecommedations_Y").click(function () {
+                if ($("#ApproveRecommedations_Y").is(":checked")) {
+                    var a = 0, b = [], b = ["SubTotal_C", "SubTotal_S", "Total_C", "SubTotal_S"];
+                    $("#NewMandateEditor  input[type=text]").each(function () {
+                        $(this).is(":visible") && $(this).hasClass("format") && "_C" == $(this).context.id.slice(-2) && -1 == $.inArray($(this).context.id, b) && $("#" + $(this).context.id.substring(0, $(this).context.id.length - 2) + "_S").val(CurrencyFormat("" == $("#" + $(this).context.id.substring(0, $(this).context.id.length - 2) + "_S").val().replace(/,/g, "") || "0.00" == $("#" + $(this).context.id.substring(0, $(this).context.id.length - 2) + "_S").val().replace(/,/g, "") ? $(this).val().replace(/,/g, "") : $("#" + $(this).context.id.substring(0, $(this).context.id.length - 2) + "_S").val().replace(/,/g, "")))
+                    });
+                    $("#NewMandateEditor  input[type=text]").each(function () {
+                        $(this).is(":visible") && $(this).hasClass("format") && "_S" == $(this).context.id.slice(-2) && -1 == $.inArray($(this).context.id, b) && (a = parseFloat("" == $(this).val().replace(/,/g, "") ? "0" : $(this).val().replace(/,/g, "")) + a)
+                    });
+                    SetTotal(), SetCurrentMandate();
+                }
+            });
+
+            $("#NewMandateEditor input[type=text]").blur(function () {
+                var Ctrlmsg = "", Ctrlres = false, Ctrlid = "";
+                var Lastid = $(this).context.id.slice(-2);
+                //$(this).is(":visible") && "_C" == $(this).context.id.slice(-2) && "COSP" == '@roleCode' && $("#" + $(this).context.id.replace(Lastid, "_S")).val("Liability" == $(this).context.id.slice(0, -2) ? $(this).val() : "" == $(this).val() ? "0.00" : CurrencyFormat($(this).val().replace(/,/g, "")));
+                $(this).is(":visible") && "_C" == $(this).context.id.slice(-2) && $("#" + $(this).context.id.replace(Lastid, "_S")).val("Liability" == $(this).context.id.slice(0, -2) ? $(this).val() : "" == $(this).val() ? "0.00" : CurrencyFormat($(this).val().replace(/,/g, "")));
+                $("#MandateRqstEditor input[type=text]").each(function () {
+                    if ($(this).is(":visible") && ("_C" == $(this).context.id.slice(-2) || "_S" == $(this).context.id.slice(-2)) && $(this).hasClass("format")) {
+                        if ($("#" + $(this).context.id.replace(Lastid, "_Q")).length != 0) {
+                            var minvalue = parseFloat($("#" + $(this).context.id.replace(Lastid, "_Q")).val().replace(/,/g, ""));
+                            if (parseFloat($(this).val().replace(/,/g, "")) > minvalue) {
+                                Ctrlid = $(this).context.id;
+                                Ctrlmsg = "Mandate amount cannot be greater than respective reserve amount ie $ " + minvalue + ".";
+                                Ctrlres = true;
+                                return false;
+                            }
+                        }
+
+                    }
+                });
+                SetTotal(), SetCurrentMandate();
+                Ctrlres && "COSP" == "@roleCode" && "_C" == Ctrlid.slice(-2) && $("#" + Ctrlid.replace("_C", "_S")).val("0.00");
+                if (Ctrlres) return $("#" + Ctrlid).val("0.00"), alert(Ctrlmsg, Ctrlid), !1;
+            });
+
+            $(".ui-ebixgrid-view > table > tbody > tr > td > a").each(function () {
+                ("SP" != '@roleCode' && "COSP" != '@roleCode' && $(this).hasClass("ApproveMandate") && $(this).hide());
+                $(this).hasClass("ApproveMandate") && ("Approved" == $(this).attr("href").getstringinbetween("ApproveRecommedations") || "Rejected" == $(this).attr("href").getstringinbetween("ApproveRecommedations")) && $(this).attr("disabled", !0);
+            });
+        };
+
+        $(".ui-ebixgrid-view > table > tbody > tr > td > a").on("click", function (e) {
+            if ("@Common.View" == $(this).text()) {
+                e.preventDefault();
+                var MR = $(this).attr("href").getstringinbetween("MandateRecordNo");
+                var CD = $(this).attr("href").getstringinbetween("ClaimID");
+                var AId = $(this).attr("href").getstringinbetween("AccidentClaimId");
+                var CT = $(this).attr("href").getstringinbetween("ClaimType");
+                var MId = $(this).attr("href").getstringinbetween("MandateId");
+                var a = guid(), b = "#" + a;
+                $('<div id="' + a + '" title="@ClaimMandate.MandateHistory" style="overflow: hidden;"></div>').appendTo(".MandateDialogue");
+                InitializeDialog($(b), MR, CD, AId, CT, MId);
+                $(b).dialog("open");
+            }
+        });
+
+        function InitializeDialog($element, MR, CD, AId, CT, MID) {
+            $element.dialog({
+                width: "900",
+                resizable: false,
+                draggable: true,
+                show: { effect: 'drop', direction: "up" },
+                title: CName[CT]() + "-@ClaimMandate.MandateHistory",
+                model: true,
+                show: 'slide',
+                dialogClass: 'alert',
+                closeOnEscape: true,
+                open: function (event, ui) {
+                    var path = '@Url.Content("~/ClaimRegistrationProcessing/_MandateCRTXListAll")' + "?MandateRecordNo=" + MR + "&AccidentClaimId=" + AId + "&ClaimID=" + CD + "&ClaimType=" + CT + "&MandateId=" + MID + "&uid=" + guid();
+                    $element.load(path);
+                },
+                position: {
+                    my: "center",
+                    at: "center",
+                    of: window
+                },
+                close: function () {
+                    $element.dialog('destroy').remove();
+                }
+
+            });
+        };
+
+        function SetTotal() {
+            for (var c = 0, a = 0, e = 0, arr = [], arr = ["CostofRepairs", "LossofRental", "LossofIncome", "OthersCEC", "LegalFee", "CESurveyFee", "TPGIAFee", "LTAFee", "OthersCEI", "CELossofUse", "MedicalExpenses", "CarRental", "CarCourtesy"], d = [], d = ["_A", "_R", "_C", "_S"], b; b = d[c]; c++, a = 0, e = 0) $("input[type=text]").each(function () {
+                $(this).context.id.slice(-2) == b && $(this).context.id != "Total" + b && $(this).context.id != "Liability" + b && $(this).context.id != "SubTotal" + b && $(this).hasClass("format") && (a = parseFloat("" == $(this).val() ? "0" : $(this).val().replace(/,/g, "")) + a);
+                //            $(this).context.id.slice(-2) == b && -1 != $.inArray($(this).context.id.slice(0, -2), arr) && $(this).hasClass("format") && (e = parseFloat("" == $(this).val() ? "0" : $(this).val().replace(/,/g, "")) + e)
+            }), $("#Total" + b).val(("-" == a.toString().charAt(0) ? "-" : "") + CurrencyFormat(parseFloat(a)))
+        };
+
+        function FormatValue() {
+            $("input[type=text]").each(function () {
+                if ($(this).hasClass("format") && "" != $(this).val()) {
+                    var a = $(this).context.id, b = $(this).val().replace(/,/g, "");
+                    $("#" + a).val(b.replace("NaN", "0"))
+                }
+            });
+        };
+
+        function SetCurrentMandate() {
+            $("input[type=text]").each(function () {
+                if ($(this).hasClass("format") && $(this).context.id.slice(-2) == "_C" && $("#" + $(this).context.id.replace("_C", "_T")).length != 0) {
+                    var a = $(this).context.id.replace("_C", "_T"), b = $(this).context.id.replace("_C", "_M");
+                    $("#" + b).val(parseFloat($("#" + a).val().replace(/,/g, "") == "" ? "0.00" : $("#" + a).val().replace(/,/g, "")) + parseFloat($(this).val().replace(/,/g, "") == "" ? "0.00" : $(this).val().replace(/,/g, "")));
+                }
+                if ($(this).hasClass("format") && $(this).context.id.slice(-2) == "_S" && $("#" + $(this).context.id.replace("_S", "_D")).length != 0) {
+
+                    var a = $(this).context.id.replace("_S", "_D"), b = $(this).context.id.replace("_S", "_N");
+                    $("#" + b).val(parseFloat($("#" + a).val().replace(/,/g, "") == "" ? "0.00" : $("#" + a).val().replace(/,/g, "")) + parseFloat($(this).val().replace(/,/g, "") == "" ? "0.00" : $(this).val().replace(/,/g, "")));
+                }
+            });
+        }
+
+        //    String.prototype.getstringinbetween = function (a) {
+        //        for (var e = this.split("&"), d = 0; d < e.length; d++) {
+        //            var b = e[d].split("=");
+        //            if (b[0] == a) return b[1]
+        //        };
+        //    };
+
+        $(document).ready(do_on_load);
+        $(window).bind('page:change', do_on_load);
+
+        function ShowHideDiv(e) {
+            $("#NewMandateEditor fieldset,#NewMandateEditor div").each(function () {
+                if ($(this).hasClass("TX") || $(this).hasClass("PC")) "TX" == e ? $(this).hasClass("TX") ? ($(this), $(this).show()) : $(this).hide() : $(this).hasClass("PC") ? $(this).show() : $(this).hide();
+            });
+
+            $("input[type=text]").each(function () {
+                var a = ["Noofdays_I", "Noofdays_R", "Noofdays_O", "LOINoofdays_I", "LOINoofdays_R", "LOINoofdays_O"]; -1 == $.inArray($(this).context.id, a) ? $(this).hasClass("format") && "" == $(this).val() && $(this).val("0.00") : ("" == $(this).val() || "0.00" == $(this).val()) && -1 < $.inArray($(this).context.id, a) && $(this).val("0");
+            });
+        };
+
+        function SetHiddenSpan() {
+            if (($("#Hshowgrid").val() == null || $("#Hshowgrid").val() == "") && getQueryVariable("Viewmode") == "Select" || getQueryVariable("Viewmode") == "ApproveMandate" || getQueryVariable("Viewmode") == "AddMandate") {
+                var AccidentClaimId = getQueryVariable("AccidentClaimId"), ClaimID = getQueryVariable("ClaimID"), ClaimType = getQueryVariable("ClaimType"), MandateId = getQueryVariable("MandateId");
+                $(".ui-ebixgrid-view > table > tbody > tr > td > a").each(function () {
+                    if ($(this).attr("href") && $(this).attr("href").getstringinbetween("AccidentClaimId") == AccidentClaimId && $(this).attr("href").getstringinbetween("ClaimID") == ClaimID && $(this).attr("href").getstringinbetween("ClaimType") == ClaimType && $(this).attr("href").getstringinbetween("MandateId") == MandateId) {
+                        $("#Hshowgrid").val("span_" + $(this).closest('tr')[0].id + "_s0");
+                    }
+                });
+            }
+        }
+        function ExpandGridAfterPost(a) {
+            $("table.ui-ebixgrid-btable span").each(function () {
+                if ($(this).hasClass("ui-icon-minus") || $(this).hasClass("ui-icon-plus")) {
+                    if (a.beginsWith($(this).context.id)) {
+                        var spanid = $(this).context.id, id = spanid.slice(5, spanid.length);
+                        $('#' + id).show();
+                        $('#' + spanid).removeClass('ui-icon-plus').addClass('ui-icon-minus');
+                    }
+                }
+            });
+        };
+
+        function SveGridIdBeforePost(a) {
+            $("table.ui-ebixgrid-btable span").each(function () {
+                if ($(this).hasClass("ui-icon-minus") || $(this).hasClass("ui-icon-plus")) {
+                    if (a.beginsWith($(this).context.id)) {
+                        var spanid = $(this).context.id, id = spanid.slice(5, spanid.length);
+                        $('#' + id).show();
+                        $('#' + spanid).removeClass('ui-icon-plus').addClass('ui-icon-minus');
+                    }
+                }
+            });
+        };
+
+
+        var guid = (function () {
+            function s4() {
+                return Math.floor((1 + Math.random()) * 0x10000).toString(16).substring(1);
+            }
+            return function () {
+                return s4() + s4() + '-' + s4() + '-' + s4() + '-' + s4() + '-' + s4() + s4() + s4();
+            };
+        })();
+        String.prototype.getstringinbetween = function (a) {
+            for (var e = this.split("&"), d = 0; d < e.length; d++) {
+                var b = e[d].split("=");
+                if (b[0] == a) return b[1]
+            };
+        };
+        String.prototype.contains = function (a) {
+            return -1 != this.indexOf(a)
+        };
+        String.prototype.beginsWith = function (string) {
+            return (this.indexOf(string) === 0);
+        };
+        $("body").delegate("a.btn.btn-xs.btn-info.encryptUrl", "click", function () {
+            var sPageURL = $(this)[0].getAttribute("href");
+            if ('@isEncryptedParams' == "YES") {
+                $.ajax({
+                    type: "POST",
+                    url: '@Url.Action("GetEncryptedUrl", "ClaimProcessing")',
+                    data: {
+                        Url: sPageURL
+                    },
+                    success: function (data) {
+                        window.location.href = data;
+                    }
+                });
+            }
+            else {
+                window.location.href = sPageURL;
+            }
+        });
+        $(".Percentage").change(function () {
+            var value = parseFloat($(this).val());
+            if (value > 100) {
+                alert("Percentage cannot be greater then 100%.");
+                $(this).val(0.00);
+            }
+        });
+    </script>

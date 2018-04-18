@@ -1,0 +1,369 @@
+﻿@model MCAS.Web.Objects.MastersHelper.AddressModel
+@{ 
+    var error = "";
+    string valuePassedIn = this.ViewData.ContainsKey("id") ? this.ViewData["id"].ToString() : string.Empty;
+    string TxtPassedIn = this.ViewData.ContainsKey("TitleName") ? this.ViewData["TitleName"].ToString() : string.Empty;
+    System.Resources.ResourceManager PageResource = (new MCAS.Web.Objects.MastersHelper.TransactionModel()).GetResourceManager("MCAS.Web.Objects.Resources.Cedant.Cedant");
+    System.Resources.ResourceManager PageResource1 = (new MCAS.Web.Objects.MastersHelper.TransactionModel()).GetResourceManager("MCAS.Web.Objects.Resources.Common.Common");
+}
+
+<script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?sensor=false"></script>
+<style type="text/css">
+    .capitalize
+    {
+        text-transform: capitalize;
+    }
+    
+    .lowercase
+    {
+        text-transform: lowercase;
+    }
+</style>
+<div class="row">
+    @Html.ValidationSummary(true)
+    <div style="color: Red; font-weight: bold;" class="has-error" id="error">
+        <p align="center">
+            @if (@TempData["ErrorMsg"] != null)
+            {
+                error = @TempData["ErrorMsg"].ToString();
+            }
+        </p>
+    </div>
+    <div id="dvMap">
+    </div>
+    <div id="t2">
+        <div class="row top-buffer">
+            <div class="clearfix igr col-md-12">
+                <div class="col-md-2">
+                 @{
+                   var compnyname = valuePassedIn == "231" && TxtPassedIn == "Cedent" ? @PageResource1.GetString("CedantName") :
+                    valuePassedIn == "241" && TxtPassedIn == "Surveyor" ?  @PageResource1.GetString("SurveyorName") :
+                    valuePassedIn == "241" && TxtPassedIn == "Solicitor" ? @PageResource1.GetString("LawFirmName") :
+                    valuePassedIn == "236" && TxtPassedIn == "WorkShop" ? @PageResource1.GetString("WorkshopName") :
+                    valuePassedIn == "220" && TxtPassedIn == "Hospital" ? @PageResource1.GetString("HospitalName") :
+                    valuePassedIn == "241" && TxtPassedIn == "Adjuster" ? @PageResource1.GetString("AdjusterName") :
+                    PageResource.GetString("CompanyName");
+                    }
+                    <label id="Company"> @compnyname
+                     &nbsp;<span id="star"
+                        class="text-danger">*</span></label>
+                </div>
+                <div class="col-md-3">
+                    @Html.TextBoxFor(m => m.InsurerName, new { id = "InsurerName", @len = "100", @class = "col-lg-12 form-control capitalize" })
+                    @Html.ValidationMessageFor(m => m.InsurerName)
+                </div>
+                <div class="col-md-2">
+                    <label>@PageResource.GetString("Address1")&nbsp;<span class="text-danger">*</span></label>
+                </div>
+                <div class="col-md-3">
+                    @Html.TextBoxFor(m => m.Address1, new { @len = "100", id = "Add1", @class = "col-lg-12 form-control capitalize" })
+                    @Html.ValidationMessageFor(m => m.Address1)
+                </div>
+            </div>
+        </div>
+        <div class="row top-buffer">
+            <div class="clearfix igr col-md-12">
+                <div class="col-md-2">
+                    <label>@PageResource.GetString("Address2")</label>
+                </div>
+                <div class="col-md-3">
+                    @Html.TextBoxFor(m => m.Address2, new { id = "Add2", @len = "100", @class = "col-lg-12 form-control capitalize" })
+                    @Html.ValidationMessageFor(m => m.Address2)
+                </div>
+                <div class="col-md-2">
+                    <label>@PageResource.GetString("Address3")</label>
+                </div>
+                <div class="col-md-3">
+                    @Html.TextBoxFor(m => m.Address3, new { @len = "100", id = "Add3", @class = "col-lg-12 form-control capitalize" })
+                    @Html.ValidationMessageFor(m => m.Address3)
+                </div>
+            </div>
+        </div>
+        <div class="row top-buffer">
+            <div class="clearfix igr col-md-12">
+                <div class="col-md-2">
+                    <label>@PageResource.GetString("City")</label>
+                </div>
+                <div class="col-md-3">
+                    @Html.TextBoxFor(m => m.City, new { @class = "col-lg-12 form-control capitalize", @strlen = "50" })
+                    @Html.ValidationMessageFor(m => m.City)
+                </div>
+                <div class="col-md-2">
+                    <label>@PageResource.GetString("State")</label>
+                </div>
+                <div class="col-md-3">
+                    @Html.TextBoxFor(m => m.State, new { @class = "col-lg-12 form-control capitalize", @strlen = "50" })
+                    @Html.ValidationMessageFor(m => m.State)
+                </div>
+            </div>
+        </div>
+        <div class="row top-buffer">
+            <div class="clearfix igr col-md-12">
+                <div class="col-md-2">
+                    <label>@PageResource.GetString("Country")&nbsp;<span class="text-danger">*</span></label>
+                </div>
+                <div class="col-md-3">
+                    @Html.DropDownListFor(m => m.Country, new SelectList(Model.usercountrylist, "CountryShortCode", "CountryName", "SG"), new { @class = "col-lg-12 form-control" })
+                    @Html.ValidationMessageFor(m => m.Country)
+                </div>
+                <div class="col-md-2">
+                    <label>@PageResource.GetString("PostalCode")&nbsp;<span class="text-danger">*</span>
+                    </label>
+                </div>
+                <div class="col-md-3">
+                    @Html.TextBoxFor(m => m.PostalCode, new { id = "PostalCode", @numlen = "10", @class = "col-lg-12 form-control" })
+                    @Html.ValidationMessageFor(m => m.PostalCode)
+                    <a id="lnkViewOnMap" href="#" class="btn btn-xs" style="text-decoration: underline;">
+                        @MCAS.Web.Objects.Resources.Common.Common.ViewOnMap</a>
+                </div>
+            </div>
+        </div>
+        <br />
+        <hr />
+        <div class="row top-buffer">
+            <div class="clearfix igr col-md-12">
+                <div class="col-md-2">
+                    <label>@PageResource.GetString("FirstContactPersonName")
+                    </label>
+                </div>
+                <div class="col-md-3">
+                    @Html.TextBoxFor(m => m.FirstContactPersonName, new { id = "FirstContact", @maxlength = "50", @class = "col-lg-12 form-control capitalize" })
+                    @Html.ValidationMessageFor(m => m.FirstContactPersonName)
+                </div>
+                <div class="col-md-2">
+                    <label>@PageResource.GetString("EmailAddress1")</label>
+                </div>
+                <div class="col-md-3">
+                    @Html.TextBoxFor(m => m.EmailAddress1, new { @maxlength = "30", id = "EmailAddress1", @class = "col-lg-12 form-control lowercase" })
+                    @*@Html.ValidationMessageFor(m => m.EmailAddress1)*@
+                    <p style="color: Red">@Html.Label("", @error)</p>
+                </div>
+            </div>
+        </div>
+        <div class="row top-buffer">
+            <div class="clearfix igr col-md-12">
+                <div class="col-md-2">
+                    <label>@PageResource.GetString("OfficeNo1")</label>
+                </div>
+                <div class="col-md-3">
+                    @Html.TextBoxFor(m => m.OffNo1, new { id = "OfficeNo1", @maxlength = "15", @class = "col-lg-12 form-control Number" })
+                    @Html.ValidationMessageFor(m => m.OffNo1)
+                </div>
+                <div class="col-md-2">
+                    <label>@PageResource.GetString("MobileNo1")</label>
+                </div>
+                <div class="col-md-3">
+                    @Html.TextBoxFor(m => m.MobileNo1, new { @maxlength = "15", id = "Mobile1", @class = "col-lg-12 form-control Number" })
+                    @Html.ValidationMessageFor(m => m.MobileNo1)
+                </div>
+            </div>
+        </div>
+        <div class="row top-buffer">
+            <div class="clearfix igr col-md-12">
+                <div class="col-md-2">
+                    <label>@PageResource.GetString("FaxNo1")</label>
+                </div>
+                <div class="col-md-3">
+                    @Html.TextBoxFor(m => m.Fax1, new { @class = "col-lg-12 form-control Number", @maxlength = "15" })
+                    @Html.ValidationMessageFor(m => m.Fax1)
+                </div>
+            </div>
+        </div>
+        <br />
+        <hr />
+        <div class="row top-buffer">
+            <div class="clearfix igr col-md-12">
+                <div class="col-md-2">
+                    <label>@PageResource.GetString("SecondContactPersonName")</label>
+                </div>
+                <div class="col-md-3">
+                    @Html.TextBoxFor(m => m.SecondContactPersonName, new { id = "2ndContact", @maxlength = "50", @class = "col-lg-12 form-control capitalize" })
+                    @Html.ValidationMessageFor(m => m.SecondContactPersonName)
+                </div>
+                <div class="col-md-2">
+                    <label>@PageResource.GetString("EmailAddress2")</label>
+                </div>
+                <div class="col-md-3">
+                    @Html.TextBoxFor(m => m.EmailAddress2, new { @maxlength = "30", id = "EmailAdd2", @class = "col-lg-12 form-control lowercase" })
+                    <p style="color: Red">@Html.Label("", @error)</p>
+                </div>
+            </div>
+        </div>
+        <div class="row top-buffer">
+            <div class="clearfix igr col-md-12">
+                <div class="col-md-2">
+                    <label>@PageResource.GetString("OfficeNo2")</label>
+                </div>
+                <div class="col-md-3">
+                    @Html.TextBoxFor(m => m.OffNo2, new { id = "Office2", @maxlength = "15", @class = "col-lg-12 form-control Number" })
+                    @Html.ValidationMessageFor(m => m.OffNo2)
+                </div>
+                <div class="col-md-2">
+                    <label>@PageResource.GetString("MobileNo2")</label>
+                </div>
+                <div class="col-md-3">
+                    @Html.TextBoxFor(m => m.MobileNo2, new { @maxlength = "15", id = "MobileNo2", @class = "col-lg-12 form-control Number" })
+                    @Html.ValidationMessageFor(m => m.MobileNo2)
+                </div>
+            </div>
+        </div>
+        <div class="row top-buffer">
+            <div class="clearfix igr col-md-12">
+                <div class="col-md-2">
+                    <label>@PageResource.GetString("FaxNo2")</label>
+                </div>
+                <div class="col-md-3">
+                    @Html.TextBoxFor(m => m.Fax2, new { @class = "col-lg-12 form-control Number", @maxlength = "15" })
+                    @Html.ValidationMessageFor(m => m.Fax2)
+                </div>
+            </div>
+        </div>
+        <br />
+        <hr />
+        <div class="row top-buffer">
+            <div class="clearfix igr col-md-12">
+                <div class="col-md-2">
+                    <label id="Ins">@PageResource.GetString("InsurerType") &nbsp;<span class="text-danger">*</span>
+                    </label>
+                </div>
+                <div class="col-md-3">
+                    @Html.DropDownListFor(m => m.InsurerType, new SelectList(Model.Insurerlist, "Lookup_value", "Lookup_desc", 0), new { id = "InsurerType", @class = "col-lg-12 form-control" })
+                    @Html.ValidationMessageFor(m => m.InsurerType)
+                    <br />
+                </div>
+                <div class="col-md-2">
+                    <label>@PageResource.GetString("Status") &nbsp;<span class="text-danger">*</span></label>
+                </div>
+                <div class="col-md-3">
+                    @Html.DropDownListFor(m => m.Status, new SelectList(Model.Statuslist, "Lookup_value", "Lookup_desc", "Active"), new { id = "ddlStatus", @class = "col-lg-12 form-control" })
+                    @Html.ValidationMessageFor(m => m.Status)
+                </div>
+            </div>
+        </div>
+        <div class="row top-buffer">
+            <div class="clearfix igr col-md-12">
+                <div class="col-md-2">
+                    <label>@PageResource.GetString("EffectiveFrom") &nbsp;<span class="text-danger">*</span>
+                    </label>
+                </div>
+                <div class="col-md-3">
+                    @Html.TextBoxFor(m => m.EffectiveFromDate, "{0:d}", new { id = "EffectiveFrom", @maxlength = "10", @class = "form-control datepicker" })
+                    @Html.ValidationMessageFor(m => m.EffectiveFromDate)
+                </div>
+                <div id="EffTo">
+                    <div class="col-md-2">
+                        <label>@PageResource.GetString("EffectiveTo")</label>
+                    </div>
+                    <div class="col-md-3">
+                        @Html.TextBoxFor(m => m.Effectiveto, "{0:d}", new { @maxlength = "10", id = "EffectiveTo", @class = "form-control datepicker" })
+                        @Html.ValidationMessageFor(m => m.Effectiveto)
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row top-buffer">
+            <div class="clearfix igr col-md-12">
+                <div class="col-md-2">
+                    <label>@PageResource.GetString("Remarks")</label>
+                </div>
+                <div class="col-md-3">
+                    @Html.TextAreaFor(m => m.Remarks, new { id = "Remarks", @len = "500", @class = "col-lg-12 form-control" })
+                    @Html.ValidationMessageFor(m => m.Remarks)
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    $(document).on("focus", ":input", function () {
+        $(this).attr("autocomplete", "off")
+    });
+
+//'@valuePassedIn' == '231' && '@TxtPassedIn' == 'Cedent' ? $("#Company").html("@PageResource1.GetString("CedantName")"+"&nbsp;<span class='text-danger'>*</span> ") : '@valuePassedIn' == '241' && '@TxtPassedIn' == 'Surveyor' ? $("#Company").html("@PageResource1.GetString("SurveyorName")"+"&nbsp;<span class='text-danger'>*</span> ") : '@valuePassedIn' == '241' && '@TxtPassedIn' == 'Solicitor' ? $("#Company").html("@PageResource1.GetString("LawFirmName")"+"&nbsp;<span class='text-danger'>*</span> ") : '@valuePassedIn' == '236' && '@TxtPassedIn' == 'WorkShop' ? $("#Company").html("@PageResource1.GetString("WorkshopName")"+"&nbsp;<span class='text-danger'>*</span> ") : '@valuePassedIn' == '220' && '@TxtPassedIn' == 'Hospital' ? $("#Company").html("@PageResource1.GetString("HospitalName")"+"&nbsp;<span class='text-danger'>*</span> ") : '@valuePassedIn' == '241' && '@TxtPassedIn' == 'Adjuster' ? $("#Company").html("@PageResource1.GetString("AdjusterName")"+"&nbsp;<span class='text-danger'>*</span> ") : $("#Company").html("Company Name&nbsp;<span class='text-danger'>*</span> ");
+
+    var country = "";
+    $('#Country option:selected').each(function () {
+        if ($(this).attr("selected", "selected")) {
+            country = "1";
+            return false;
+        }
+    });
+    if (country != "1") {
+        $("#Country option[value='']").attr('selected', true);
+
+    }
+
+    $("#lnkViewOnMap").click(function () {
+        var address = "";
+        var insurerName = $.trim($("#InsurerName").val());
+        var add1 = $.trim($("#Add1").val());
+        var add2 = $.trim($("#Add2").val());
+        var add3 = $.trim($("#Add3").val());
+        var city = $.trim($("#City").val());
+        var state = $.trim($("#State").val());
+        var country = "";
+        if ($("#Country").val() != "") {
+            country = $.trim($("#Country option:selected").text());
+        }
+        var postalCode = $.trim($("#PostalCode").val());
+
+        address = $.trim(address) + " " + (insurerName = "" ? "" : insurerName);
+        address = $.trim(address) + " " + (add1 = "" ? "" : add1);
+        address = $.trim(address) + " " + (add2 = "" ? "" : add2);
+        address = $.trim(address) + " " + (add3 = "" ? "" : add3);
+        address = $.trim(address) + " " + (city = "" ? "" : city);
+        address = $.trim(address) + " " + (state = "" ? "" : state);
+        address = $.trim(address) + " " + (country = "" ? "" : country);
+        address = $.trim(address) + " " + (postalCode = "" ? "" : postalCode);
+        address = $.trim(address);
+
+        if (address == "") {
+            alert('Address could not be located. Please verify address.');
+        }
+        else {
+            $('#dvMap').dialog({
+                autoOpen: true,
+                width: 800,
+                height: 500,
+                resizable: true,
+                draggable: true,
+                title: 'Map',
+                modal: true,
+                open: function (event, ui) {
+                    //google.maps.event.addDomListener(window, 'load', initialize);
+                    initialize();
+                    codeAddress(address);
+                }
+            });
+        }
+    });
+
+    var geocoder;
+    var map;
+    function initialize() {
+        geocoder = new google.maps.Geocoder();
+        //var latlng = new google.maps.LatLng(-34.397, 150.644);
+        var latlng = new google.maps.LatLng(1.352083, 103.819836);
+        var mapOptions = {
+            zoom: 10,
+            center: latlng
+        }
+        map = new google.maps.Map(document.getElementById('dvMap'), mapOptions);
+    }
+
+    function codeAddress(address) {
+        //var address = document.getElementById('address').value;        
+        geocoder.geocode({ 'address': address }, function (results, status) {
+            if (status == google.maps.GeocoderStatus.OK) {
+                map.setCenter(results[0].geometry.location);
+                var marker = new google.maps.Marker({
+                    map: map,
+                    position: results[0].geometry.location
+                });
+            } else {
+                alert('Address could not be located. Please verify address.');
+            }
+        });
+    }
+    
+</script>

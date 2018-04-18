@@ -1,0 +1,622 @@
+﻿@using MCAS.Web.Objects.Resources.ClaimProcessing;
+@using MCAS.Web.Objects.Resources.Common;
+@using MCAS.Globalisation;
+@model MCAS.Web.Objects.MastersHelper.TaskModel
+@using MCAS.Web.Objects.CommonHelper
+@{
+    ViewBag.Title = "TaskEditor";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var Display = TempData["Display"] == "Display" ? "inline;" : "none;";
+    if (TempData["result"] != null && TempData["result"].ToString().Substring(0, 4) == "File")
+    {
+        TempData.Remove("result");
+    }
+    var mMCASQueryString = Html.MCASQueryString(Request.QueryString);
+    var Viewmode = mMCASQueryString["Viewmode"] == null ? "" : Convert.ToString(mMCASQueryString["Viewmode"]);
+    var taval = Convert.ToString(Model.TaskNo) != "" ? Convert.ToString(Model.TaskNo) : "1";
+    var caller = mMCASQueryString["claimMode"] != null ? Convert.ToString(mMCASQueryString["claimMode"]) : "";
+    var lebmode = mMCASQueryString["mode"] != null ? Convert.ToString(mMCASQueryString["mode"]) : "";
+    var accidentClaimIdNew = mMCASQueryString["AccidentClaimId"] != null ? Convert.ToString(mMCASQueryString["AccidentClaimId"]) : "";
+    var SubMenu = !string.IsNullOrEmpty(Convert.ToString((HttpContext.Current.Session["ScreenNameDash"]))) ? MenuListItem.ClaimTabs.GetClaimLabel(Convert.ToString((HttpContext.Current.Session["ScreenNameDash"]))) : ClaimReserve.ResourceManager.GetString(MenuListItem.ClaimTabs.SubMenuString(@caller, @accidentClaimIdNew, @lebmode, "ClaimReserve"));
+    var policyid = mMCASQueryString["PolicyId"];
+    var Hclaimant = mMCASQueryString["ClaimId"] == null ? "0" : mMCASQueryString["ClaimId"];
+    var AccId = mMCASQueryString["AccidentClaimId"] == null ? "0" : mMCASQueryString["AccidentClaimId"];
+    var Cmode = mMCASQueryString["claimMode"] == null ? "Read" : mMCASQueryString["claimMode"];
+    var chkClaim = Model.HchkhasClaim;
+    var DonotDiableControl = lebmode == "Enq" ? "form-horizontal" : lebmode == "Payment" ? "form-horizontal" : lebmode == "Recovery" ? "form-horizontal" : chkClaim == 0 ? "form-horizontal" : Model.ReadOnly == true ? "form-horizontal" : "form-horizontal DonotDiableControl";
+    SecurityPermissions myPemissions = (SecurityPermissions)ViewData["UserPermissions"];
+    Model.TaskNo = Viewmode == "" && TempData["result"] == null ? null : Model.TaskNo;
+    taval = Viewmode == "" && TempData["result"] == null ? "" : taval;
+    if (lebmode == "Adj")
+    {
+        Session["screenID"] = "CLM_REG";
+        Session["ScreenNameDash"] = "208";
+    }
+    string isEncryptedParams = System.Configuration.ConfigurationManager.AppSettings["EncryptQueryParams"].ToUpper();
+}
+<link href="@Url.Content("~/Content/jquery-ui.css")" rel="Stylesheet" media="screen" />
+<style type="text/css">
+    .form-horizontal .control-label
+    {
+        text-align: left;
+    }
+</style>
+<script src="@Url.Content("~/Scripts/jquery-2.1.0.min.js")" type="text/javascript"></script>
+<div class="dashboard-wrapper">
+    <div class="container">
+        <div class="page-title" id="reg">
+            @{
+                if ((Convert.ToString(Session["OrganisationType"]).ToLower() == "tx") || (Convert.ToString(Session["OrganisationType"]).ToLower() == "pc")) { }
+                else
+                {
+                <div class="col-lg-12" id="reg2" style="background-color: white; position: fixed;
+                    z-index: 1;">
+                    <h2>@ClaimReserve.ResourceManager.GetString(MenuListItem.ClaimTabs.PreBreadCrumbString(@lebmode))</h2>
+                    <ul class="breadcrumb">
+                        <li>@SubMenu</li>
+                        <li>@TaskEditor.Tasks</li>
+                    </ul>
+                </div>
+                }
+            }
+            <div style="position: relative!important">
+                @{
+                    if ((Convert.ToString(Session["OrganisationType"]).ToLower() == "tx") || (Convert.ToString(Session["OrganisationType"]).ToLower() == "pc"))
+                    { 
+                    @Html.Action("_ClaimDeatailsPCNTX", "ClaimRegistrationProcessing")
+                    }
+                    else
+                    {
+                    @Html.Action("_ClaimDetails", "ClaimProcessing", new { PolicyId = @policyid })
+                    }
+                }
+            </div>
+        </div>
+        <hr />
+        <div class="row" id="toprow">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <div class="panel panel-info">
+                    @Html.Partial("TaskIndex", Model.TaskIndexList)
+                    <div class="row">
+                        <div class="clearfix igr col-md-1 text-center">
+                            <a class="btn btn-info" id="Previous">@Common.Previous</a>
+                        </div>
+                        <div class="col-lg-10 text-center">
+                        </div>
+                        <div class="clearfix igr col-md-1 text-center">
+                            <a class="btn btn-info" id="Next">@Common.Next</a>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <br />
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-6 text-left">
+                            @if (@myPemissions.Write)
+                            {
+                                @Html.EncodedActionLink(TaskEditor.AddNewTask, "TaskEditor", new { PolicyId = @policyid, ClaimId = @Hclaimant, AccidentClaimId = @accidentClaimIdNew, claimMode = @Cmode, @Viewmode = "AddNewTask", mode = @lebmode }, new { @id = "NewTask", @class = "btn btn-info" })
+                                
+                            }
+                        </div>
+                        <div class="col-lg-5 text-center">
+                        </div>
+                        <div class="col-lg-1 text-center">
+                            <a href="#" data-action="collapse"><i id="iconWidget" class="icon-chevron-down"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <hr style='font-weight: bold' />
+                    <div style="color: Red; font-weight: bold;" class="has-error" id="error">
+                        <p align="center" id="result">
+                            @if (TempData["result"] != null)
+                            {
+                                @TempData["result"]
+                                TempData.Remove("result");
+                            }
+                        </p>
+                    </div>
+                    @{
+                        object routes = new { PolicyId = @policyid, AccidentClaimId = @AccId, claimMode = @Cmode, ClaimId = @Hclaimant, mode = lebmode };
+                        if (isEncryptedParams.ToUpper() == "YES")
+                        {
+                            string res = RouteEncryptDecrypt.getRouteString(routes);
+                            res = RouteEncryptDecrypt.Encrypt(res);
+                            routes = new { Q = res };
+                        }
+                    }
+                    <div class="panel-body" id="NewTaskEditor" style="display: @Display">
+                        @using (Html.BeginForm("TaskEditor", "ClaimProcessing", routes, FormMethod.Post, new { role = "form", @class = @DonotDiableControl, id = "TaskEditor", name = "TaskEditor" }))
+                        {
+                            @Html.HiddenFor(m => m.AccidentClaimId)
+                            @Html.HiddenFor(m => m.ReadOnly)
+                            @Html.HiddenFor(m => m.ViewMode)
+                            @Html.HiddenFor(m => m.Id)
+                            <a id="reload" href='@Url.ActionEncoded("TaskEditor", "ClaimProcessing", new { PolicyId = @policyid, AccidentClaimId = @AccId, claimMode = @Cmode, ClaimId = @Hclaimant, Id = @Model.Id })' style="display:none">
+                                Reload</a>    
+                            <fieldset id="Task_Editor_Fieldset">
+                                <div class="panel-body">
+                                    <div class="row">
+                                        <div class="col-lg-6">
+                                            <div class="form-group">
+                                                <label class="col-sm-4 control-label" for="inputTaskNo">
+                                                    @TaskEditor.TaskNo<span class="text-danger">*</span>
+                                                </label>
+                                                <div class="col-sm-8">
+                                                    @Html.TextBoxFor(m => m.TaskNo, new { id = "TaskNo", @class = "form-control", @Value = @taval, @numlen = "10" })
+                                                    @Html.ValidationMessageFor(m => m.TaskNo)
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <div class="form-group">
+                                                <label class="col-sm-4 control-label" for="inputActionDate">
+                                                    @TaskEditor.ActionDue<span class="text-danger">*</span>
+                                                </label>
+                                                <div class="col-sm-8">
+                                                    @Html.TextBoxFor(m => m.ActionDue, "{0:d}", new { id = "ActionDue", @class = "form-control", maxlength = 10 })
+                                                    @Html.ValidationMessageFor(m => m.ActionDue)
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-lg-6">
+                                            <div class="form-group">
+                                                <label class="col-sm-4 control-label" for="inputCloseDate">
+                                                    @TaskEditor.CloseDate
+                                                </label>
+                                                <div class="col-sm-8">
+                                                    @Html.TextBoxFor(m => m.CloseDate, "{0:d}", new { id = "CloseDate", @class = "form-control datepicker validateDateFormare", maxlength = 10 })
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <div class="form-group">
+                                                <label class="col-sm-4 control-label" for="inputModifiedDate">
+                                                    @TaskEditor.TaskModifiedDate<span class="text-danger">*</span>
+                                                </label>
+                                                <div class="col-sm-8">
+                                                    @Html.TextBoxFor(m => m.TaskModifiedDate, "{0:d}", new { id = "ModifiedDate", @class = "form-control", maxlength = 10, @readonly = "readonly" })
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-lg-6">
+                                            <div class="form-group">
+                                                <label class="col-sm-4 control-label" for="inputPromtDetails">
+                                                    @TaskEditor.PromtDetails<span class="text-danger">*</span>
+                                                </label>
+                                                <div class="col-sm-8">
+                                                    @Html.DropDownListFor(m => m.PromtDetails, new SelectList(Model.PromtDetails_List, "Lookup_value", "Lookup_desc"), new { id = "ClaimantID", @class = "form-control" })
+                                                    @Html.ValidationMessageFor(m => m.PromtDetails)
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <div class="form-group">
+                                                <label class="col-sm-4 control-label" for="inputClaimantName">
+                                                    @{
+                            if ((Convert.ToString(Session["OrganisationType"]).ToLower() == "tx") || (Convert.ToString(Session["OrganisationType"]).ToLower() == "pc"))
+                            {
+                                                        @TaskEditor.TPVehicleNo
+                            }
+                            else
+                            { 
+                                                        @TaskEditor.ClaimantNames @*<span class="text-danger">*</span>*@
+                            }
+                                                    }
+                                                </label>
+                                                <div class="col-sm-8">
+                                                    @Html.DropDownListFor(m => m.ClaimantNames, new SelectList(Model.ClaimantNameList, "ID", "Text", "0"), new { id = "ClaimantName", @class = "form-control" })
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-lg-6">
+                                            <div class="form-group">
+                                                <label class="col-sm-4 control-label" for="inputPromtDetails">
+                                                    @{
+                            if ((Convert.ToString(Session["OrganisationType"]).ToLower() == "tx") || (Convert.ToString(Session["OrganisationType"]).ToLower() == "pc"))
+                            {
+                                                        @TaskEditor.OfficerInCharge
+                            }
+                            else
+                            { 
+                                                        @TaskEditor.ClaimsOfficer @* <span class="text-danger">*</span>*@
+                            }
+                                                    }
+                                                </label>
+                                                <div class="col-sm-8">
+                                                    @Html.DropDownListFor(m => m.ClaimsOfficer, new SelectList(Model.ClaimOfficerList, "TranId", "ClaimOfficerName", "0"), new { id = "ClaimsOfficerID", @class = "form-control" })
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <div class="form-group">
+                                                <label class="col-sm-4 control-label" for="inputRemarks">
+                                                    @TaskEditor.Remarks
+                                                </label>
+                                                <div class="col-sm-8">
+                                                    @{
+                            if ((Convert.ToString(Session["OrganisationType"]).ToLower() == "tx") || (Convert.ToString(Session["OrganisationType"]).ToLower() == "pc"))
+                            {
+                                                        @Html.TextAreaFor(m => m.Remarks, new { id = "Remarks", @class = "form-control", @maxlength = "2500" })
+                                                        @Html.ValidationMessageFor(m => m.Remarks)
+                            }
+                            else
+                            {
+                                                        @Html.TextAreaFor(m => m.Remarks, new { id = "Remarks", @class = "form-control", @maxlength = "800" })
+                                                        @Html.ValidationMessageFor(m => m.Remarks)
+                            }
+                                                    }
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </fieldset>
+                            <div class="row">
+                                <div class="clearfix igr col-md-12 text-center">
+                                    @if (myPemissions.Write)
+                                    {
+                                        <input id="btnSaveTask" class="btn btn-info" type="button" value="@Common.Save" />
+                                        
+                                        if (@Model.Id == 0 || @Model.Id == null)
+                                                {
+                                        <button type="button" class="btn btn-info" onclick="onclickcancel();">
+                                            @Common.Reset</button>
+                                        
+                                        }
+                                                 else
+                                                {
+                                                 <a name="btnReset1" id="btnReset1" class="btn btn-info" href="#">@Common.Reset</a> 
+                                                }
+                                    }
+                                </div>
+                            </div>
+                            <fieldset>
+                                <div class="panel-body">
+                                    <div class="row">
+                                        <div>
+                                            @Html.Partial("~/Views/Shared/_TimeStamp.cshtml", Model)
+                                        </div>
+                                    </div>
+                                </div>
+                            </fieldset>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    setTabActive('TasksTab');
+
+    var do_on_load = function () {
+        $('.ui-wrapper').css("padding", 0);
+        $('textarea').resizable({ handles: 's' });
+
+      
+
+        
+        DatepickerLen();
+        $("#iconWidget").click(function () {
+            $("#iconWidget").toggleClass('icon-chevron-up icon-chevron-down');
+            $("#result").hide();
+            $("#NewTaskEditor").toggle();
+            return false;
+
+        });
+
+         
+        $(".validateDateFormare").blur(function (event) {
+            if ($(this).val() != "" && $(this).val() != 'DD/MM/YYYY') {
+                var errMessage = "";
+                var dob = $(this).val();
+                var pattern = /^(?:(?:31(\/|-|\.)(?:0?[13578]|1[02]))\1|(?:(?:29|30)(\/|-|\.)(?:0?[1,3-9]|1[0-2])\2))(?:(?:1[6-9]|[2-9]\d)?\d{2})$|^(?:29(\/|-|\.)0?2\3(?:(?:(?:1[6-9]|[2-9]\d)?(?:0[48]|[2468][048]|[13579][26])|(?:(?:16|[2468][048]|[3579][26])00))))$|^(?:0?[1-9]|1\d|2[0-8])(\/|-|\.)(?:(?:0?[1-9])|(?:1[0-2]))\4(?:(?:1[6-9]|[2-9]\d)?\d{2})$/;
+                if (!pattern.test(dob)) {
+                    errMessage += "Date must be in 'dd/mm/yyyy' format.\n";
+                    alert(errMessage);
+                    $(this).val("");
+                    event.preventDefault();
+                    return false;
+                }
+            }
+        });
+        $(document).on("focus", ":input", function () {
+            $(this).attr("autocomplete", "off")
+        });
+        $.culture = Globalize.culture("en-GB");
+        $.validator.methods.date = function (a, b) {
+            return this.optional(b) || Globalize.parseDate(a, "dd/MM/yyyy", "en-GB") || Globalize.parseDate(a, "yyyy-mm-dd")
+        };
+
+        $("#TaskNo").prop("readonly", !0);
+
+
+        $('#btnSaveTask').click(function (event) {
+            if (!IsPageChangedTask()) {
+                alert(vNoChange);
+                event.preventDefault()
+                return false;
+            }
+            var currdate = new Date();
+            currdate = currdate.getDate() + '/' + (currdate.getMonth() + 1) + '/' + currdate.getFullYear();
+            //IsPageChangedTask() && $("#TaskEditor").valid() && $('#ModifiedDate').val(currdate) && $("#TaskEditor").submit();
+            IsPageChangedTask() && $( "form[name*='TaskEditor']" ).valid() && $('#ModifiedDate').val(currdate) && $( "form[name*='TaskEditor']" ).submit();
+        });
+
+        $("#ClaimantName").change(function () {
+            var claimant = $("#ClaimantName").val();
+            $.ajax({
+                type: "POST",
+                url: '@Url.ActionEncoded("chkClaimantStatus", "ClaimProcessing")',
+                data: {
+                    AccId: '@accidentClaimIdNew',
+                    ClaimantId: claimant
+                },
+                success: function (a) {
+                    if (a == 2) {
+                        alert('Claimant has been finalized, You cannot add Task for it.');
+                        $("#ClaimantName").val($("#ClaimantName option:first").val());
+                    }
+                    if (a == 3) {
+                        alert('Claimant has been cancelled, You cannot add Task for it.');
+                        $("#ClaimantName").val($("#ClaimantName option:first").val());
+                    }
+                }
+            });
+        });
+
+
+        if ("@Viewmode" == "AddNewTask") {
+            $("#NewTaskEditor").show();
+            $.ajax({
+                type: "POST",
+                url: '@Url.ActionEncoded("GetTaskval", "ClaimProcessing")',
+                data: {
+                    id1: "@AccId"
+                },
+                success: function (a) {
+                    $("#TaskNo").val(a)
+                }
+            })
+        };
+
+        ("AddNewTask" == "@Viewmode" || "Select" == "@Viewmode") && $("#iconWidget").removeClass('icon-chevron-down').addClass('icon-chevron-up');
+        ("AddNewTask" != "@Viewmode" && "Select" != "@Viewmode") && "@TempData["Display"]" != "Display" ?$("#iconWidget").hide():($("#iconWidget").show() , $("#iconWidget").removeClass('icon-chevron-down').addClass('icon-chevron-up'));
+
+        $("select").change(function () {
+            $("#result").hide()
+        });
+
+        $('#ActionDue').datepicker({ dateFormat: "dd/mm/yy",
+            showStatus: true,
+            showWeeks: true,
+            currentText: 'Now',
+            autoSize: true,
+            gotoCurrent: true,
+            showAnim: 'blind',
+            highlightWeek: true,
+            changeMonth: !0,
+            changeYear: !0,
+            yearRange: "1951:2050",
+            onSelect: function (b) {
+                $(this).valid();
+            }
+        });
+
+        $(".datepicker").datepicker({
+            dateFormat: "dd/mm/yy",
+            showStatus: !0,
+            showWeeks: !0,
+            currentText: "Now",
+            autoSize: !0,
+            gotoCurrent: !0,
+            showAnim: "blind",
+            highlightWeek: !0,
+            changeMonth: !0,
+            changeYear: !0,
+            yearRange: "1951:2050",
+            onSelect: function (a) {
+                $(this).valid()
+
+                if ($('#CloseDate').val() != '') {
+                    var closeDt = $('#CloseDate').val();
+
+                    var ary = new Array();
+                    ary = closeDt.split("/");
+
+                    var d = ary[0];
+                    var m = ary[1];
+                    var y = ary[2];
+                    closeDt = m + "/" + d + "/" + y;
+                    var d = new Date();
+                    var CurrDt = (d.getMonth() + 1) + "/" + d.getDate() + "/" + d.getFullYear();
+                    if (closeDt != '' && (this.id != 'ActionDue' || $(this).context.id != 'ActionDue')) {
+                        if (new Date(Date.parse(CurrDt)) > new Date(Date.parse(closeDt)) || new Date(Date.parse(CurrDt)) < new Date(Date.parse(closeDt))) {
+                            alert("Close date should be current date.")
+                            $('#CloseDate').val('');
+                        }
+                    }
+                }
+
+            }
+        });
+        var actionDt = "@Model.ActionDue"
+        var closeDt = "@Model.CloseDate"
+        var actionDate = actionDt.substring(0, 10);
+        var closeDate = closeDt.substring(0, 10);
+
+        var date = $('#ModifiedDate').val().substring(0, 10);
+        $('#ModifiedDate').val(date);
+
+        var claimantNames = "";
+        $('#ClaimantName option:selected').each(function () {
+            if ($(this).attr("selected", "selected")) {
+                claimantNames = "1";
+                return false;
+            }
+        });
+        "1" != claimantNames && $("#ClaimantName option[value='0']").attr('selected', true);
+        var claimantID = "";
+        $('#ClaimantID option:selected').each(function () {
+            if ($(this).attr("selected", "selected")) {
+                claimantID = "1";
+                return false;
+            }
+        });
+        if (claimantID != "1") {
+            $("#ClaimantID option[value='0']").attr('selected', true);
+
+        }
+
+       $('textarea').removeAttr('width').removeAttr('height').parents('div:eq(0)').css('width', '').css('height', "50px");
+
+       $("#btnReset1").click(function () {
+            debugger;
+            var ClaimId = '@Hclaimant';
+            var accidentclaimId = '@AccId';
+            var policyId = '@policyid';
+            var Id = '@Model.Id';
+            var claimMode = '@Cmode';
+            var a = parseInt(ClaimId);
+            var b = parseInt(accidentclaimId);
+            var c = parseInt(policyId);
+            var d = parseInt(Id);
+            window.location.href = '@Url.Action("TaskEditor", "ClaimProcessing")?ClaimId=' + a + '&AccidentClaimId=' + b + '&claimMode=' + claimMode + '&policyId=' + c + '&Id=' + d;
+        });
+
+       SetDivPost();
+    };
+    $(document).ready(do_on_load);
+    $(window).bind('page:change', do_on_load);
+    function IsPageChangedTask() {
+        var IsChanges = false;
+        $(":input:not(:button):not([type=hidden])").each(function () {
+
+            if ((this.type == "text" || this.type == "textarea" || this.type == "hidden" || this.type == "file" || this.type == "password") && this.id != "TaskNo") {
+                if (!($(this).hasClass("format") && "" == this.defaultValue && "0.00" == this.value || $(this).hasClass("format") && "" != this.defaultValue && this.value == CurrencyFormat(this.defaultValue.replace(/,/g, "")) || this.defaultValue == this.value)) {
+                    if ($.isNumeric(this.value.replace(/,/g, ""))) {
+                        if (parseFloat(this.value.replace(/,/g, "")) == parseFloat(this.defaultValue.replace(/,/g, ""))) {
+
+                        }
+                        else {
+                            return IsChanges = !0
+                        }
+                    }
+                    else {
+                        if ($(this).attr("readonly")) {
+                        }
+                        else {
+                            if (!$(this).is(":visible")) {
+
+                            }
+                            else {
+                                if (this.defaultValue == "0.00") {
+                                    if (parseFloat(this.value.replace(/,/g, "")) == parseFloat(this.defaultValue.replace(/,/g, ""))) {
+                                    }
+                                }
+                                else {
+                                    return IsChanges = !0
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            else {
+                if ((this.type == "radio" || this.type == "checkbox") && this.defaultChecked != this.checked) {
+                    IsChanges = true;
+                    return true;
+                }
+                else {
+                    if ((this.type == "select-one" || this.type == "select-multiple")) {
+                        for (var x = 0; x < this.length; x++) {
+                            if ((this.options[x].selected != this.options[x].defaultSelected) && this.options[x].outerHTML.contains("selected=") && $(this).is(":visible")) {
+                                IsChanges = true;
+                                return true;
+                            }
+                        }
+                    }
+                }
+            }
+        });
+        return IsChanges;
+    }
+
+
+
+    function getQueryVariable(a) {
+        for (var e = "@MenuListItem.ClaimTabs.GetQueryStringVal()".replace(/amp;/ig, "").split("&"), d = 0; d < e.length; d++) {
+            var b = e[d].split("=");
+            if (b[0] == a) return b[1]
+        }
+    };
+
+    
+    function onclickcancel() {
+        var a = $("#TaskNo").val();
+        $('input[type="text"]').val("");
+        $("textarea").val("");
+        $("#TaskNo").val(a);
+        $("#result").hide();
+        $("select").prop("selectedIndex", 0);
+        $("span.field-validation-error").removeClass("field-validation-error").addClass("field-validation-valid");
+        $("#Id").val("");
+        $.ajax({
+            type: "POST",
+            url: '@Url.ActionEncoded("GetTaskval", "ClaimProcessing")',
+            data: {
+                id1: "@AccId"
+            },
+            success: function (a) {
+                $("#TaskNo").val(a)
+            }
+        })
+    };
+    function DatepickerLen() {
+        $("input[type=text]").each(function () {
+            $(this).hasClass("datepicker") && 10 < $(this).val().length && $(this).val($(this).val().substring(0, 10));
+            if (void 0 !== $(this).attr("data-val-date") && "The field " == $(this).attr("data-val-date").substring(0, 10)) {
+                var b = $(this).attr("data-val-date").substring(10, $(this).attr("data-val-date").length).replace("must be a date.", "must be in 'dd/mm/yyyy' format.");
+                $(this).removeAttr("data-val-date");
+                $(this).attr("data-val-date", b)
+            };
+        });
+    };
+    function checkKeyCode(evt)// for F5 disable
+    {
+        var evt = (evt) ? evt : ((event) ? event : null);
+        var node = (evt.target) ? evt.target : ((evt.srcElement) ? evt.srcElement : null);
+        if (event.keyCode == 116)//disable F5
+        {
+            evt.keyCode = 0;
+            alert('This operation is not allowed.')
+            return false
+        }
+    }
+
+    document.onkeydown = checkKeyCode;
+    $("body").delegate("a.btn.btn-xs.btn-info", "click", function () {
+        var sPageURL = $(this)[0].getAttribute("href");
+        if ('@isEncryptedParams' == "YES") {
+            $.ajax({
+                type: "POST",
+                url: '@Url.Action("GetEncryptedUrl", "ClaimProcessing")',
+                data: {
+                    Url: sPageURL
+                },
+                success: function (data) {
+                    window.location.href = data;
+                }
+            });
+        }
+        else {
+            window.location.href = sPageURL;
+        }
+    });
+</script>

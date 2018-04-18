@@ -1,0 +1,506 @@
+﻿@using MCAS.Web.Objects.CommonHelper
+@using MCAS.Web.Objects.Resources.ClaimUploadProcessing;
+@using MCAS.Web.Objects.Resources.Common;
+@model MCAS.Web.Objects.ClaimObjectHelper.ClaimFileUploadEditorModel
+@using MCAS.Globalisation
+@{
+    var caller = "";
+    var mMCASQueryString = Html.MCASQueryString(Request.QueryString);
+    if (mMCASQueryString["claimMode"] != null)
+    {
+        caller = mMCASQueryString["claimMode"].ToString();
+    }
+    var fileid = "";
+    if (mMCASQueryString["FileId"] != null)
+    {
+        fileid = mMCASQueryString["FileId"].ToString();
+    }
+    var display = false;
+    if (Model.Hf1 != null)
+    {
+        display = true;
+    }
+    var FileRefn = "";
+    var displayFileRefNo = false;
+    if (Model.FileRefNo != null)
+    {
+        displayFileRefNo = true;
+        FileRefn = Model.FileRefNo;
+    }
+    var lebmode = "";
+    if (mMCASQueryString["mode"] != null)
+    {
+        lebmode = mMCASQueryString["mode"].ToString();
+    }
+    ViewBag.Title = "Claim File Upload";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var claimId = @Model.ClaimId;
+    SecurityPermissions myPemissions = (SecurityPermissions)ViewData["UserPermissions"];
+    var category1 = TempData["orgCategory"] == null ? "" : Convert.ToString(TempData["orgCategory"]);
+    var categoryName = TempData["orgCategoryname"] == null ? "" : Convert.ToString(TempData["orgCategoryname"]);
+    //var dis = TempData["FileRefClaim"] == null ? "none;" : "Block";
+    var FileRef = TempData["FileRefClaim"] == null ? "" : Convert.ToString(TempData["FileRefClaim"]);
+    var dis = TempData["FileRefClaim"] == null ? "none;" : FileRef == "" ? "none;" : "Block";
+    var Hselect1 = Model.Hselect == null ? "1" : Model.Hselect;
+    var HgetCatName1 = Model.HgetCatName == null ? "1" : Model.HgetCatName;
+}
+<link href="@Url.Content("~/Content/jquery-ui.css")" rel="Stylesheet" media="screen" />
+<link rel="stylesheet" media="all" type="text/css" href="@Url.Content("~/Content/jquery-ui.css")" />
+<link rel="stylesheet" media="all" type="text/css" href="@Url.Content("~/Content/jquery-ui-timepicker-addon.css")" />
+<style type="text/css">
+    .form-horizontal .control-label
+    {
+        text-align: left;
+    }
+    .ui-timepicker-div .ui-widget-header
+    {
+        margin-bottom: 8px;
+    }
+    .ui-timepicker-div dl
+    {
+        text-align: left;
+    }
+    .ui-timepicker-div dl dt
+    {
+        float: left;
+        clear: left;
+        padding: 0 0 0 5px;
+    }
+    .ui-timepicker-div dl dd
+    {
+        margin: 0 10px 10px 45%;
+    }
+    .ui-timepicker-div td
+    {
+        font-size: 90%;
+    }
+    .ui-tpicker-grid-label
+    {
+        background: none;
+        border: none;
+        margin: 0;
+        padding: 0;
+    }
+    
+    .ui-timepicker-rtl
+    {
+        direction: rtl;
+    }
+    .ui-timepicker-rtl dl
+    {
+        text-align: right;
+        padding: 0 5px 0 0;
+    }
+    .ui-timepicker-rtl dl dt
+    {
+        float: right;
+        clear: right;
+    }
+    .ui-timepicker-rtl dl dd
+    {
+        margin: 0 45% 10px 10px;
+    }
+    #ui-datepicker-div
+    {
+        z-index: 999999 !important;
+    }
+</style>
+<script src="@Url.Content("~/Scripts/jquery-2.1.0.min.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/Scripts/jquery.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/Scripts/jquery.datetimepicker.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/Scripts/jquery.validate.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.min.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/Scripts/globalize/globalize.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/Scripts/globalize/cultures/globalize.culture.en-GB.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/Scripts/jquery-ui-v1.10.3.js")" type="text/javascript"></script>
+<div class="dashboard-wrapper">
+    <div class="container">
+        <div class="page-title" id="reg">
+            <div class="col-lg-12" id="reg2" style="background-color: white; position: fixed;
+                z-index: 1;">
+                <hr />
+                <h2>
+                    @ClaimFileUploadEditor.Upload
+                </h2>
+                <ul class="breadcrumb">
+                    <li> @ClaimFileUploadEditor.ClaimUpload</li>
+                    <li> @ClaimFileUploadEditor.ClaimFileUpload</li>
+                </ul>
+            </div>
+            <div style="position: relative!important">
+            @Html.Action("_ClaimDetails", "ClaimProcessing", new { claimMode = @caller })
+        </div>
+        </div>
+        <hr />
+        
+        <div class="row" id="toprow">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <div class="panel panel-info">
+                    @if (Convert.ToBoolean(TempData["ClaimFilePermission"]))
+                    {
+                     
+                    
+                        <div class="panel-heading clearfix">
+                            <i class="icon-check-sign"></i>
+                            <h3 class="panel-title">
+                                 @ClaimFileUploadEditor.ClaimFileUpload</h3>
+                        </div>
+                        <hr style='font-weight: bold' />
+                        <div class="panel-body" id="DivClaimFileUploadEditor">
+                            @using (Html.BeginForm("ClaimFileUploadEditor", "ClaimUploadProcessing", new { claimMode = @caller }, FormMethod.Post, new { claimMode = @caller, enctype = "multipart/form-data", role = "form", @class = "form-horizontal", id = "ClaimFileUploadEditor", name = "ClaimFileUploadEditor" }))
+                            {
+                                @Html.HiddenFor(m => m.Hf1)
+                                @Html.HiddenFor(m => m.Hfn1)
+                                @Html.HiddenFor(m => m.FileId)
+                                @Html.HiddenFor(m => m.Hgetval)
+                                @Html.HiddenFor(m => m.HgetCatName)
+                                @Html.HiddenFor(m => m.FileRefNo)
+                                @Html.HiddenFor(m => m.Hselect)
+                                <div style="color: Red; font-weight: bold;" class="has-error" id="error">
+                                    <p id="SuccessMsg" align="center">
+                                        @if (@ViewData["SuccessMsg"] != null)
+                                        {
+                                            @ViewData["SuccessMsg"]
+                                        }
+                                    </p>
+                                </div>
+                                        if (displayFileRefNo)
+                                        {
+                                <div style="display:@dis" id="divReference" class="form-group">
+                                    <div class="col-lg-6">
+                                        <div class="form-group">
+                                            <label class="col-sm-6 control-label" for="TACIP">
+                                                 @ClaimFileUploadEditor.UploadReferenceNumber :</label>
+                                            <div class="col-sm-3">
+                                                <strong>@Model.FileRefNo</strong>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                        }
+                                <div class="form-group">
+                                    <div class="col-lg-6">
+                                        <div class="form-group">
+                                            <label class="col-sm-4 control-label" for="inputOrgCategory">
+                                                 @ClaimFileUploadEditor.OrganizationType <span class="text-danger">*</span></label>
+                                            <div class="col-sm-6">
+                                                @Html.DropDownListFor(m => m.OrgCategory, new SelectList(Model.Categorylist, "Lookup_value", "Lookup_desc"), new { id = "ddlCategory", @class = "col-lg-12 form-control" })
+                                                @Html.ValidationMessageFor(m => m.OrgCategory)
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="form-group">
+                                            <label class="col-sm-4 control-label" for="inputOrgName">
+                                                 @ClaimFileUploadEditor.OrganizationName <span class="text-danger">*</span></label>
+                                            <div class="col-sm-6">
+                                                <div style="display: block;" id="DivMulti">
+                                                    <select class="form-control" id="listOrgName">
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            
+                                <div class="form-group">
+                                    <div class="col-lg-6">
+                                        <div id="lblSap" class="form-group">
+                                            <label id="lblUploads" class="col-sm-4 control-label" for="TACIP">
+                                                 @ClaimFileUploadEditor.SelectFileToUpload <span class="text-danger">*</span></label>
+                                            <div class="col-sm-8">
+                                                @Html.TextBoxFor(m => m.SAPClaimfile, new { id = "SAPClaimfile", name = "SAPClaimfile", type = "file", @class = "form-control" })
+                                                @Html.ValidationMessageFor(m => m.SAPClaimfile)
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="form-group">
+                                            <label class="col-sm-4 control-label" for="Sdatetime">
+                                                 @ClaimFileUploadEditor.ScheduleStartDateTime <span class="text-danger">*</span></label>
+                                            <div class="col-sm-8">
+                                                @Html.TextBoxFor(m => m.Sdatetime, new { id = "Sdatetime", @class = "form-control" })
+                                                @Html.ValidationMessageFor(m => m.Sdatetime)
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                        if (display)
+                                        {
+                                <div class="form-group" style="margin-bottom: 0px !important; margin-top: -15px !important;">
+                                    <div class="col-lg-6">
+                                        <div>
+                                            <label class="col-sm-4">
+                                            </label>
+                                            <div class="col-sm-8">
+                                                <a gid="hs" style="text-decoration: underline;color:Blue;" href='@Url.Action("FileDownload", "ClaimUploadProcessing", new { FileRefNo = @Model.FileRefNo, FileName = @Model.Hfn1 })'>@Model.Hfn1</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                    </div>
+                                </div>  
+                                        }
+                                <div class="form-group">
+                                    <div class="col-lg-6">
+                                        <div id="lblStandardCode" class="form-group">
+                                            <label id="lblUpload" class="col-sm-4 control-label" for="TACIP">
+                                                 @ClaimFileUploadEditor.SelectFileToUploadTAC_Standard_Code) <span class="text-danger">*</span></label>
+                                            <div class="col-sm-8">
+                                                @Html.TextBoxFor(m => m.TACClaimFile, new { id = "TACClaimFile", name = "TACClaimFile", type = "file", @class = "form-control" })
+                                                @Html.ValidationMessageFor(m => m.TACClaimFile)
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                        if (display)
+                                        {
+                                <div class="form-group" style="margin-bottom: 0px !important; margin-top: -15px !important;">
+                                    <div class="col-lg-6">
+                                        <div>
+                                            <label class="col-sm-4">
+                                            </label>
+                                            <div class="col-sm-8">
+                                                @*<a gid="hs" style="text-decoration: underline;color:Blue;" href="@Url.Content("~/Uploads/ClaimUpload/")@Model.FileRefNo/@Model.Hfn1">@Model.Hfn1</a>*@
+                                                <a gid="hs" style="text-decoration: underline;color:Blue;" href='@Url.ActionEncoded("FileDownload", "ClaimUploadProcessing", new { FileRefNo = @Model.FileRefNo, FileName = @Model.Hfn2 })'>@Model.Hfn2</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                        }
+
+
+                            }
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="row-fluid bg2 blue-bt-bdr">
+                            <br />
+                            <br />
+                            <br />
+                            <div class="container text-center">
+                                <div class="errorInfo">
+                                    <p>
+                                        <b> @ClaimFileUploadEditor.SorryYoudonthavepermissionforthisscreen.</b></p>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+        <div class="clearfix igr text-center">
+            <div class="form-group">
+                @if (@myPemissions.Write)
+                {
+                    <a class="btn btn-info" id="btnClear">@Common.Clear</a>
+                    <button class="btn btn-info" id="btnSave">
+                        @ClaimFileUploadEditor.Upload</button>
+                }
+            </div>
+        </div>
+    </div>
+    
+    <div class="panel-body" style="vertical-align:top">
+        <fieldset>
+            <legend></legend>
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="col-lg-12">
+                        @Html.Partial("~/Views/Shared/_TimeStamp.cshtml", Model)
+                    </div>
+                </div>
+            </div>
+        </fieldset>
+    </div>
+</div>
+<script type="text/javascript">
+    0 == $("#divLoading").length && $("BODY").append('<div id="divLoading" class="loading"><p>Please wait...<br>&nbsp&nbsp&nbsp<img src="../Images/ajax-loader.gif" alt="Loading.."> </p></div>');
+    $("form").on("submit", function (a) {
+        0 == $("#divLoading").length && $("BODY").append('<div id="divLoading" class="loading"><p>Please wait...<br>&nbsp&nbsp&nbsp<img src="../Images/ajax-loader.gif" alt="Loading.."> </p></div>')
+    });
+   
+    
+    $("#InsurerName").removeAttr("data-val-required");
+    $("#InsurerName").attr("data-val-required", "Insurer Name is required.");
+    var do_on_load = function () {
+        $("#mini-nav").click(function () {
+            $("#toprow").css("width", "auto");
+        });
+
+        if (getQueryVariable("pageMode") == "Edit" || "@HgetCatName1" == "Y") {
+            $("#ddlCategory").attr("disabled", true);
+            $("#listOrgName").attr("disabled", true);
+            $("#HgetCatName").val("Y");
+
+
+        }
+
+        if ('@Model.OrgCategory' !== "" && '@Hselect1' == '1') {
+            $("#listOrgName").empty();
+            $("#listOrgName").append(new Option("[Select...]", ""));
+            var CategoryType = '@Model.OrgCategory';
+            if (CategoryType != null) {
+                $.ajax({
+                    type: "POST",
+                    url: '@Url.ActionEncoded("GetCategoryList", "Masters")',
+                    data: {
+                        cat: CategoryType
+                    },
+                    success: function (a) {
+                        $.each(a, function (index, item) {
+                            $("#listOrgName").append(new Option(item.orgName, item.orgCode));
+                        });
+                        $("#listOrgName").val('@TempData["orgCategoryname"]');
+
+                    }
+                });
+            };
+            //  $("#DivMulti").show();
+        };
+
+        $("#listOrgName").change(function () {
+            var CategoryName = ($(this).val());
+            $("#Hgetval").val(CategoryName);
+        });
+        $("#ddlCategory").change(function () {
+            var items = "<option value=\"\">[Select...]<\/option>";
+            var CategoryType = ($(this).val());
+            if (CategoryType == "") {
+                $('#lblUploads').html('Select File To Upload ' + '<span class="text-danger">*</span>');
+            }
+            else {
+                if (CategoryType == "BU" || CategoryType == "TR") {
+                    $('#lblUploads').html('Select File To Upload (TAC_ClaimFile)' + '<span class="text-danger">*</span>');
+                } else {
+                    $('#lblUploads').html('Select File To Upload (SAP)' + '<span class="text-danger">*</span>');
+                }
+
+            }
+
+            if (CategoryType != null) {
+
+                $.ajax({
+                    type: "POST",
+                    url: '@Url.ActionEncoded("GetCategoryList", "Masters")',
+                    data: {
+                        cat: CategoryType
+                    },
+                    success: function (a) {
+                        $.each(a, function (index, item) {
+                            items += "<option value='" + item.orgCode + "'>" + item.orgName + "</option>";
+                        });
+                        $("#listOrgName").html(items);
+                    }
+                });
+            };
+        });
+        $(document).on("focus", ":input", function () {
+            $(this).attr("autocomplete", "off")
+        });
+        $.culture = Globalize.culture("en-GB");
+        $.validator.methods.date = function (a, b) {
+            if (16 != a.toString().length) return !1;
+            var c = a.toString().substring(11, 16);
+            if (/^(2[0-3])|[01][0-9]:[0-5][0-9]$/.test(c)) {
+                if (" " != a.charAt(10)) return !1;
+                a = a.toString().substring(0, 10);
+                return this.optional(b) || Globalize.parseDate(a, "dd/MM/yyyy", "en-GB") || Globalize.parseDate(a, "yyyy-mm-dd")
+            }
+            return !1
+        };
+        $("#btnClear").click(function () {
+            $('#lblUploads').html('Select File To Upload ' + '<span class="text-danger">*</span>');
+            for (var a = [], a = ["#SAPClaimfile", "#TACClaimFile"], b = 0, c; c = a[b]; b++) c = $(c), c.replaceWith(c.clone(!0));
+            $("#DivClaimFileUploadEditor a").each(function () {
+                void 0 !== $(this).attr("gid") && $(this).hide()
+            });
+
+            $("#Sdatetime").val("");
+            $("select").prop("selectedIndex", 0);
+            $("span.field-validation-error").removeClass("field-validation-error").addClass("field-validation-valid");
+            $("#SuccessMsg").empty()
+            $("#divReference").empty()
+        });
+
+        $("#btnSave").click(function (event) {            
+            var x = $("#listOrgName").val();
+            if (x == "") {
+                alert("Organization Name is required.");
+                event.preventDefault();
+                return false;
+            }
+            else {
+                $("#ClaimFileUploadEditor").submit();
+            }
+        });
+        $("#TACClaimFile,#SAPClaimfile").change(function () {
+            var a = [".csv", ".CSV"],
+            b = $(this).val(),
+            b = b.substring(b.lastIndexOf("."));
+            return "csv" != $(this).val().split('.').pop().toLowerCase() ? (alert("Invalid file selected, valid files are of " + a.toString() + " types."), a = $(this), a.replaceWith(a.clone(!0)), !1) : !0;
+        });
+        $("#DivClaimFileUploadEditor a").each(function () {
+            void 0 !== $(this).attr("gid") && $(this).click(function (event) {
+                0 != $("#divLoading").length && (hideLoading(), $("#divLoading").remove(), event.preventDefault())
+            })
+        });
+        $("#Sdatetime").datetimepicker({
+            dateFormat: "dd/mm/yy",
+            showWeeks: !0,
+            changeMonth: !0,
+            changeYear: !0,
+            yearRange: "-65:+50",
+            minDate: 0,
+            currentText: 'Now',
+            gotoCurrent: true,
+            onSelect: function () {
+                $(this).valid()
+            }
+        });
+    };
+    $(document).ready(do_on_load);
+    $(window).bind("page:change", do_on_load);
+   
+
+    if ('@Hselect1' != '1') {
+        for (var arr = [], arr = $("#Hselect").val().split("~"), k = 0, curr; curr = arr[k]; k++) {
+            var a1 = curr.split("***")[0], a2 = curr.split("***")[1], a3 = curr.split("***")[2];
+            $("#" + a1).empty();
+            for (var i = 0; i < a2.split("**").length; i += 2) {
+                $("#" + a1).append(new Option(a2.split("**")[i + 1], a2.split("**")[i]));
+            }
+            $("#" + a1).val(a3);
+            $("#DivMulti").show();
+        };
+    };
+    function retaindrop() {
+        var status = "";
+        $("#DivClaimFileUploadEditor select").each(function () {
+            status = $(this).context.id + "***" + dropval($(this).context.id) + "***" + $(this).val() + "~" + status
+        });
+        $("#Hselect").val("");
+        $("#Hselect").val(status.substring(0, status.length - 1));
+    };
+    function dropval(a) {
+        var sasa = "";
+        var len = $("#" + a).children('option').length;
+        for (var i = 0; i < len; i++) {
+            sasa = sasa + "**" + $("#" + a)[0].options[i].value + "**" + $("#" + a)[0].options[i].text;
+        }
+        return sasa.substring(2, sasa.length);
+    }
+    String.prototype.contains = function (a) {
+        return -1 != this.indexOf(a)
+    };
+
+    $("#ClaimFileUploadEditor").on("submit", function (event) {
+        retaindrop();
+        $('#ddlCategory').attr('disabled', false);
+        $('#listOrgName').attr('disabled', false);
+        $("#Hgetval").val(($("#listOrgName").val() != null && $("#listOrgName").val() != "") && $("#listOrgName").val());
+
+        0 == $("#divLoading").length && ($("BODY").append('<div id="divLoading" class="loading"><p>Please wait...<br>&nbsp&nbsp&nbsp<img src="../Images/ajax-loader.gif" alt="Loading.."> </p></div>'), showLoading());
+    });
+</script>

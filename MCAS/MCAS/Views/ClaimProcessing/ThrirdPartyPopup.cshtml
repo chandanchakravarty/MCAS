@@ -1,0 +1,616 @@
+﻿@using MCAS.Web.Objects.CommonHelper
+@model MCAS.Web.Objects.ClaimObjectHelper.ClaimEntryInfoModel
+@{
+    Layout = null;
+}
+<style type="text/css">
+    [type="text"]
+    {
+        text-transform: capitalize;
+    }
+</style>
+@using (Html.BeginForm("ThrirdPartyPopup", "ClaimProcessing", FormMethod.Post, new { role = "form", @class = "form-horizontal", id = "ThrirdPartyPopupform", name = "ReverseChangeform" }))
+{<div id="t1">
+    <fieldset>
+        <legend id="l1" style="cursor: pointer;">
+            <img alt="" id="l1img" src='@Url.Content("~/Images/icon_plus.png")' />TP Insurer</legend>
+        <div id="l1d1">
+            <div class="form-group text-right">
+                <div class="col-lg-2">
+                    <label class="control-label" for="inputClaimantName2">
+                        Company Name</label>
+                </div>
+                <div class="col-sm-10">
+                    <input class="form-control" id="inputClaimantName2" name="inputClaimantName2" type="text"
+                        value="" />
+                </div>
+            </div>
+        </div>
+        <div id="l1d2">
+            <div class="form-group text-right">
+                <div class="col-lg-2">
+                    <label class="control-label" for="inputClaimantAddress1">
+                        Address</label>
+                </div>
+                <div class="col-lg-10">
+                    <textarea class="form-control" id="inputClaimantAddress1" name="inputClaimantAddress1"
+                        cols="" rows="2"></textarea>
+                </div>
+            </div>
+        </div>
+        <div id="l1d3">
+            <div class="form-group text-right">
+                <div class="col-lg-2">
+                    <label class="control-label" for="inputClaimantref">
+                        Reference</label>
+                </div>
+                <div class="col-sm-10">
+                    <input class="form-control" id="inputClaimantref" name="inputClaimantref" type="text"
+                        value="" />
+                </div>
+            </div>
+        </div>
+        <div id="l1d4">
+            <div class="form-group text-right">
+                <div class="col-lg-2 text-right">
+                    <label class="control-label text-right" for="inputClaimantContactP">
+                        1st Contact Person's Name</label>
+                </div>
+                <div class="col-sm-10">
+                    <input class="form-control" id="inputClaimantContactP" name="inputClaimantContactP"
+                        type="text" value="" />
+                </div>
+            </div>
+        </div>
+        <div id="l1d5">
+            <div class="form-group text-right">
+                <div class="col-lg-2">
+                    <label class="control-label" for="inputClaimantEmail1">
+                        Email Address</label>
+                </div>
+                <div class="col-sm-10">
+                    <input class="form-control" id="inputClaimantEmail1" name="inputClaimantEmail1" type="text"
+                        value="" />
+                </div>
+            </div>
+        </div>
+        <div id="l1d6">
+            <div class="col-lg-6">
+                <div class="form-group">
+                    <div class="col-lg-4" style="text-align: right; padding-right: 25px;">
+                        <label class="control-label" for="inputClaimantofficeno1">
+                            Office No.</label>
+                    </div>
+                    <div class="col-sm-8" style="padding-left: 4px;">
+                        <input class="form-control" id="inputClaimantofficeno1" name="inputClaimantofficeno1"
+                            type="text" value="">
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="form-group">
+                    <div class="col-lg-2" style="padding-right: 0px; padding-left: 0px;">
+                        <label class="control-label col-sm-12" for="inputClaimantFaxno" style="padding-left: 0px;
+                            padding-right: 0px;">
+                            Fax No.</label>
+                    </div>
+                    <div style="padding-right: 0px !important; padding-left: 20px !important;" class="col-sm-10">
+                        <input class="form-control" id="inputClaimantFaxno" name="inputClaimantFaxno" type="text"
+                            value="">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="l1d7">
+            <div class="form-group">
+                <div class="col-lg-2">
+                    <label class="control-label" for="inputClaimantContactP2">
+                        2nd Contact Person's Name</label>
+                </div>
+                <div class="col-sm-10">
+                    <input class="form-control" id="inputClaimantContactP2" name="inputClaimantContactP2"
+                        type="text" value="" />
+                </div>
+            </div>
+        </div>
+        <div id="l1d8">
+            <div class="form-group text-right">
+                <div class="col-lg-2">
+                    <label class="control-label" for="inputClaimantEmail1">
+                        Email Address</label>
+                </div>
+                <div class="col-sm-10">
+                    <input class="form-control" id="inputClaimantEmail1" name="inputClaimantEmail1" type="text"
+                        value="" />
+                </div>
+            </div>
+        </div>
+        <div id="l1d9">
+            <div class="col-lg-6">
+                <div class="form-group">
+                    <div class="col-lg-4" style="text-align: right; padding-right: 25px;">
+                        <label class="control-label" for="inputClaimantofficeno1">
+                            Office No.</label>
+                    </div>
+                    <div class="col-sm-8" style="padding-left: 4px;">
+                        <input class="form-control" id="inputClaimantofficeno1" name="inputClaimantofficeno1"
+                            type="text" value="">
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="form-group">
+                    <div class="col-lg-2" style="padding-right: 0px; padding-left: 0px;">
+                        <label class="control-label col-sm-12" for="inputClaimantFaxno" style="padding-left: 0px;
+                            padding-right: 0px;">
+                            Fax No.</label>
+                    </div>
+                    <div style="padding-right: 0px !important; padding-left: 20px !important;" class="col-sm-10">
+                        <input class="form-control" id="inputClaimantFaxno" name="inputClaimantFaxno" type="text"
+                            value="">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </fieldset>
+    <fieldset>
+        <legend id="l2" style="cursor: pointer;">
+            <img alt="" id="l2img" src='@Url.Content("~/Images/icon_plus.png")' />TP Workshop</legend>
+        <div id="l2d1">
+            <div class="form-group text-right">
+                <div class="col-lg-2">
+                    <label class="control-label" for="inputClaimantName2">
+                        Company Name</label>
+                </div>
+                <div class="col-sm-10">
+                    <input class="form-control" id="inputClaimantName2" name="inputClaimantName2" type="text"
+                        value="" />
+                </div>
+            </div>
+        </div>
+        <div id="l2d2">
+            <div class="form-group text-right">
+                <div class="col-lg-2">
+                    <label class="control-label" for="inputClaimantAddress1">
+                        Address</label>
+                </div>
+                <div class="col-lg-10">
+                    <textarea class="form-control" id="inputClaimantAddress1" name="inputClaimantAddress1"
+                        cols="" rows="2"></textarea>
+                </div>
+            </div>
+        </div>
+        <div id="l2d3">
+            <div class="form-group text-right">
+                <div class="col-lg-2">
+                    <label class="control-label" for="inputClaimantref">
+                        Reference</label>
+                </div>
+                <div class="col-sm-10">
+                    <input class="form-control" id="inputClaimantref" name="inputClaimantref" type="text"
+                        value="" />
+                </div>
+            </div>
+        </div>
+        <div id="l2d4">
+            <div class="form-group text-right">
+                <div class="col-lg-2 text-right">
+                    <label class="control-label text-right" for="inputClaimantContactP">
+                        1st Contact Person's Name</label>
+                </div>
+                <div class="col-sm-10">
+                    <input class="form-control" id="inputClaimantContactP" name="inputClaimantContactP"
+                        type="text" value="" />
+                </div>
+            </div>
+        </div>
+        <div id="l2d5">
+            <div class="form-group text-right">
+                <div class="col-lg-2">
+                    <label class="control-label" for="inputClaimantEmail">
+                        Email Address</label>
+                </div>
+                <div class="col-sm-10">
+                    <input class="form-control" id="inputClaimantEmail" name="inputClaimantEmail" type="text"
+                        value="" />
+                </div>
+            </div>
+        </div>
+        <div id="l2d6">
+            <div class="col-lg-6">
+                <div class="form-group">
+                    <div class="col-lg-4" style="text-align: right; padding-right: 25px;">
+                        <label class="control-label" for="inputClaimantofficeno1">
+                            Office No.</label>
+                    </div>
+                    <div class="col-sm-8" style="padding-left: 4px;">
+                        <input class="form-control" id="inputClaimantofficeno1" name="inputClaimantofficeno1"
+                            type="text" value="">
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="form-group">
+                    <div class="col-lg-2" style="padding-right: 0px; padding-left: 0px;">
+                        <label class="control-label col-sm-12" for="inputClaimantFaxno" style="padding-left: 0px;
+                            padding-right: 0px;">
+                            Fax No.</label>
+                    </div>
+                    <div style="padding-right: 0px !important; padding-left: 20px !important;" class="col-sm-10">
+                        <input class="form-control" id="inputClaimantFaxno" name="inputClaimantFaxno" type="text"
+                            value="">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="l2d7">
+            <div class="form-group">
+                <div class="col-lg-2">
+                    <label class="control-label" for="inputClaimantContactP2">
+                        2nd Contact Person's Name</label>
+                </div>
+                <div class="col-sm-10">
+                    <input class="form-control" id="inputClaimantContactP2" name="inputClaimantContactP2"
+                        type="text" value="" />
+                </div>
+            </div>
+        </div>
+        <div id="l2d8">
+            <div class="form-group text-right">
+                <div class="col-lg-2">
+                    <label class="control-label" for="inputClaimantEmail">
+                        Email Address</label>
+                </div>
+                <div class="col-sm-10">
+                    <input class="form-control" id="inputClaimantEmail" name="inputClaimantEmail" type="text"
+                        value="" />
+                </div>
+            </div>
+        </div>
+        <div id="l2d9">
+            <div class="col-lg-6">
+                <div class="form-group">
+                    <div class="col-lg-4" style="text-align: right; padding-right: 25px;">
+                        <label class="control-label" for="inputClaimantofficeno1">
+                            Office No.</label>
+                    </div>
+                    <div class="col-sm-8" style="padding-left: 4px;">
+                        <input class="form-control" id="inputClaimantofficeno1" name="inputClaimantofficeno1"
+                            type="text" value="">
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="form-group">
+                    <div class="col-lg-2" style="padding-right: 0px; padding-left: 0px;">
+                        <label class="control-label col-sm-12" for="inputClaimantFaxno" style="padding-left: 0px;
+                            padding-right: 0px;">
+                            Fax No.</label>
+                    </div>
+                    <div style="padding-right: 0px !important; padding-left: 20px !important;" class="col-sm-10">
+                        <input class="form-control" id="inputClaimantFaxno" name="inputClaimantFaxno" type="text"
+                            value="">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </fieldset>
+    <fieldset>
+        <legend id="l3" style="cursor: pointer;">
+            <img alt="" id="l3img" src='@Url.Content("~/Images/icon_plus.png")' />TP Lawyer</legend>
+        <div id="l3d1">
+            <div class="form-group text-right">
+                <div class="col-lg-2">
+                    <label class="control-label" for="inputClaimantName2">
+                        Company Name</label>
+                </div>
+                <div class="col-sm-10">
+                    <input class="form-control" id="inputClaimantName2" name="inputClaimantName2" type="text"
+                        value="" />
+                </div>
+            </div>
+        </div>
+        <div id="l3d2">
+            <div class="form-group text-right">
+                <div class="col-lg-2">
+                    <label class="control-label" for="inputClaimantAddress1">
+                        Address</label>
+                </div>
+                <div class="col-lg-10">
+                    <textarea class="form-control" id="inputClaimantAddress1" name="inputClaimantAddress1"
+                        cols="" rows="2"></textarea>
+                </div>
+            </div>
+        </div>
+        <div id="l3d3">
+            <div class="form-group text-right">
+                <div class="col-lg-2">
+                    <label class="control-label" for="inputClaimantref">
+                        Reference</label>
+                </div>
+                <div class="col-sm-10">
+                    <input class="form-control" id="inputClaimantref" name="inputClaimantref" type="text"
+                        value="" />
+                </div>
+            </div>
+        </div>
+        <div id="l3d4">
+            <div class="form-group text-right">
+                <div class="col-lg-2 text-right">
+                    <label class="control-label text-right" for="inputClaimantContactP">
+                        1st Contact Person's Name</label>
+                </div>
+                <div class="col-sm-10">
+                    <input class="form-control" id="inputClaimantContactP" name="inputClaimantContactP"
+                        type="text" value="" />
+                </div>
+            </div>
+        </div>
+        <div id="l3d5">
+            <div class="form-group text-right">
+                <div class="col-lg-2">
+                    <label class="control-label" for="inputClaimantEmail">
+                        Email Address</label>
+                </div>
+                <div class="col-sm-10">
+                    <input class="form-control" id="inputClaimantEmail" name="inputClaimantEmail" type="text"
+                        value="" />
+                </div>
+            </div>
+        </div>
+        <div id="l3d6">
+            <div class="col-lg-6">
+                <div class="form-group">
+                    <div class="col-lg-4" style="text-align: right; padding-right: 25px;">
+                        <label class="control-label" for="inputClaimantofficeno1">
+                            Office No.</label>
+                    </div>
+                    <div class="col-sm-8" style="padding-left: 4px;">
+                        <input class="form-control" id="inputClaimantofficeno1" name="inputClaimantofficeno1"
+                            type="text" value="">
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="form-group">
+                    <div class="col-lg-2" style="padding-right: 0px; padding-left: 0px;">
+                        <label class="control-label col-sm-12" for="inputClaimantFaxno" style="padding-left: 0px;
+                            padding-right: 0px;">
+                            Fax No.</label>
+                    </div>
+                    <div style="padding-right: 0px !important; padding-left: 20px !important;" class="col-sm-10">
+                        <input class="form-control" id="inputClaimantFaxno" name="inputClaimantFaxno" type="text"
+                            value="">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="l3d7">
+            <div class="form-group">
+                <div class="col-lg-2">
+                    <label class="control-label" for="inputClaimantContactP2">
+                        2nd Contact Person's Name</label>
+                </div>
+                <div class="col-sm-10">
+                    <input class="form-control" id="inputClaimantContactP2" name="inputClaimantContactP2"
+                        type="text" value="" />
+                </div>
+            </div>
+        </div>
+        <div id="l3d8">
+            <div class="form-group text-right">
+                <div class="col-lg-2">
+                    <label class="control-label" for="inputClaimantEmail">
+                        Email Address</label>
+                </div>
+                <div class="col-sm-10">
+                    <input class="form-control" id="inputClaimantEmail" name="inputClaimantEmail" type="text"
+                        value="" />
+                </div>
+            </div>
+        </div>
+        <div id="l3d9">
+            <div class="col-lg-6">
+                <div class="form-group">
+                    <div class="col-lg-4" style="text-align: right; padding-right: 25px;">
+                        <label class="control-label" for="inputClaimantofficeno1">
+                            Office No.</label>
+                    </div>
+                    <div class="col-sm-8" style="padding-left: 4px;">
+                        <input class="form-control" id="inputClaimantofficeno1" name="inputClaimantofficeno1"
+                            type="text" value="">
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="form-group">
+                    <div class="col-lg-2" style="padding-right: 0px; padding-left: 0px;">
+                        <label class="control-label col-sm-12" for="inputClaimantFaxno" style="padding-left: 0px;
+                            padding-right: 0px;">
+                            Fax No.</label>
+                    </div>
+                    <div style="padding-right: 0px !important; padding-left: 20px !important;" class="col-sm-10">
+                        <input class="form-control" id="inputClaimantFaxno" name="inputClaimantFaxno" type="text"
+                            value="">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </fieldset>
+    <fieldset>
+        <legend id="l4" style="cursor: pointer;">
+            <img alt="" id="l4img" src='@Url.Content("~/Images/icon_plus.png")' />TP Surveyor</legend>
+        <div id="l4d1">
+            <div class="form-group text-right">
+                <div class="col-lg-2">
+                    <label class="control-label" for="inputClaimantName2">
+                        Company Name</label>
+                </div>
+                <div class="col-sm-10">
+                    <input class="form-control" id="inputClaimantName2" name="inputClaimantName2" type="text"
+                        value="" />
+                </div>
+            </div>
+        </div>
+        <div id="l4d2">
+            <div class="form-group text-right">
+                <div class="col-lg-2">
+                    <label class="control-label" for="inputClaimantAddress1">
+                        Address</label>
+                </div>
+                <div class="col-lg-10">
+                    <textarea class="form-control" id="inputClaimantAddress1" name="inputClaimantAddress1"
+                        cols="" rows="2"></textarea>
+                </div>
+            </div>
+        </div>
+        <div id="l4d3">
+            <div class="form-group text-right">
+                <div class="col-lg-2">
+                    <label class="control-label" for="inputClaimantref">
+                        Reference</label>
+                </div>
+                <div class="col-sm-10">
+                    <input class="form-control" id="inputClaimantref" name="inputClaimantref" type="text"
+                        value="" />
+                </div>
+            </div>
+        </div>
+        <div id="l4d4">
+            <div class="form-group text-right">
+                <div class="col-lg-2 text-right">
+                    <label class="control-label text-right" for="inputClaimantContactP">
+                        1st Contact Person's Name</label>
+                </div>
+                <div class="col-sm-10">
+                    <input class="form-control" id="inputClaimantContactP" name="inputClaimantContactP"
+                        type="text" value="" />
+                </div>
+            </div>
+        </div>
+        <div id="l4d5">
+            <div class="form-group text-right">
+                <div class="col-lg-2">
+                    <label class="control-label" for="inputClaimantEmail">
+                        Email Address</label>
+                </div>
+                <div class="col-sm-10">
+                    <input class="form-control" id="inputClaimantEmail" name="inputClaimantEmail" type="text"
+                        value="" />
+                </div>
+            </div>
+        </div>
+        <div id="l4d6">
+            <div class="col-lg-6">
+                <div class="form-group">
+                    <div class="col-lg-4" style="text-align: right; padding-right: 25px;">
+                        <label class="control-label" for="inputClaimantofficeno1">
+                            Office No.</label>
+                    </div>
+                    <div class="col-sm-8" style="padding-left: 4px;">
+                        <input class="form-control" id="inputClaimantofficeno1" name="inputClaimantofficeno1"
+                            type="text" value="">
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="form-group">
+                    <div class="col-lg-2" style="padding-right: 0px; padding-left: 0px;">
+                        <label class="control-label col-sm-12" for="inputClaimantFaxno" style="padding-left: 0px;
+                            padding-right: 0px;">
+                            Fax No.</label>
+                    </div>
+                    <div style="padding-right: 0px !important; padding-left: 20px !important;" class="col-sm-10">
+                        <input class="form-control" id="inputClaimantFaxno" name="inputClaimantFaxno" type="text"
+                            value="">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="l4d7">
+            <div class="form-group">
+                <div class="col-lg-2">
+                    <label class="control-label" for="inputClaimantContactP2">
+                        2nd Contact Person's Name</label>
+                </div>
+                <div class="col-sm-10">
+                    <input class="form-control" id="inputClaimantContactP2" name="inputClaimantContactP2"
+                        type="text" value="" />
+                </div>
+            </div>
+        </div>
+        <div id="l4d8">
+            <div class="form-group text-right">
+                <div class="col-lg-2">
+                    <label class="control-label" for="inputClaimantEmail">
+                        Email Address</label>
+                </div>
+                <div class="col-sm-10">
+                    <input class="form-control" id="inputClaimantEmail" name="inputClaimantEmail" type="text"
+                        value="" />
+                </div>
+            </div>
+        </div>
+        <div id="l4d9">
+            <div class="col-lg-6">
+                <div class="form-group">
+                    <div class="col-lg-4" style="text-align: right; padding-right: 25px;">
+                        <label class="control-label" for="inputClaimantofficeno1">
+                            Office No.</label>
+                    </div>
+                    <div class="col-sm-8" style="padding-left: 4px;">
+                        <input class="form-control" id="inputClaimantofficeno1" name="inputClaimantofficeno1"
+                            type="text" value="">
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="form-group">
+                    <div class="col-lg-2" style="padding-right: 0px; padding-left: 0px;">
+                        <label class="control-label col-sm-12" for="inputClaimantFaxno" style="padding-left: 0px;
+                            padding-right: 0px;">
+                            Fax No.</label>
+                    </div>
+                    <div style="padding-right: 0px !important; padding-left: 20px !important;" class="col-sm-10">
+                        <input class="form-control" id="inputClaimantFaxno" name="inputClaimantFaxno" type="text"
+                            value="">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </fieldset>
+    <div class="clearfix igr col-md-12 text-center">
+        <div class="form-group">
+            <button class="btn btn-info" id="btnSave" title="">
+                Save</button>
+            <button type="button" class="btn btn-info" title="">
+                Reset</button>
+        </div>
+    </div>
+    </div>
+}
+<script language="javascript" type="text/javascript">
+    $('#ThrirdPartyPopupform').on('submit', function (event) {
+        hideLoading();
+        $("#divLoading").remove();
+        event.preventDefault();
+        return false;
+    });
+    $(function () {
+        var arr = new Array();
+        arr = ["l1", "l2", "l3", "l4"];
+        for (var j = 0; j < arr.length; j++) {
+            for (var i = 1; i < 10; i++) {
+                $("#" + arr[j] + "d" + i).hide();
+            }
+        }
+        $("#t1 legend").click(function (a) {
+            $("#" + this.id + "img", this).attr("src", function (a, b) {
+                return '@Url.Content("~/Images/icon_minus.png")' == b ? '@Url.Content("~/Images/icon_plus.png")' : '@Url.Content("~/Images/icon_minus.png")'
+            });
+            for (var i = 1; i < 10; i++) {
+                $("#" + this.id + "d" + i).toggle();
+            }
+        }).css("cursor", "pointer")
+    });
+</script>

@@ -1,0 +1,234 @@
+﻿@model  IEnumerable<MCAS.Web.Objects.MastersHelper.CountryModel>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_SystemAdminLayout.cshtml";
+    var Id=1;
+}
+<div class="dashboard-wrapper"> 
+  
+  <!-- Bootstrap Container Start -->
+  <div class="container"> 
+    
+    <!-- Page title start -->
+    <div class="row page-title">
+      <div class="col-lg-12">
+        <h2>Country Master</h2>
+        <ul class="breadcrumb">
+          <li>Home</li>
+          <li>Country Master</li>
+        </ul>
+      </div>
+    </div>
+    <!-- Page title end --> 
+    
+    <!-- Row start -->
+    <div class="row">
+      <div class="col-lg-12 col-md-12 col-sx-12 col-sm-12">
+        <div class="panel panel-secondary">
+        
+       <div class="row">
+      <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+        <div class="panel panel-info">
+          <div class="panel-heading clearfix"> <i class="icon-check-sign"></i>
+            <h3 class="panel-title">Country information</h3>
+            <div style="float:right">
+              <a href="javascript:showDetail();"><i class="icon-edit-sign"></i>Add New</a>
+            </div>
+          </div>
+         @* <div >
+          <button id="showAdd" onclick="showDetail();">Show</button>
+          <button id="hideAdd" onclick="hideDetail()">Hide</button>
+          </div>*@
+          <div>
+          @Html.Hidden("hidId","0")
+           <div id='AddCountry' style="display:none">
+            <section id="partialv">
+                @Html.Partial("Create", (new MCAS.Web.Objects.MastersHelper.CountryModel()))
+            </section>
+    
+            @*<form class="form-horizontal" action='@Url.Action("Create", "CountryMaster")' role="form" id="CountryMasterform" method="post">
+            <div class="row">
+                <div class="clearfix igr col-md-12">
+                    <div class="col-md-1">
+                        <label id="lbMsg" class="text-center">Message</label>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="clearfix igr col-md-12">
+                    <div class="col-md-2">
+                        <label for="inputLossTypeCode">Country Code</label>
+                    </div>
+                    <div class="col-md-3">
+                        @Html.TextBoxFor(m => m.FirstOrDefault().CountryCode, new { @maxlength = "7" })<br />
+                            @Html.ValidationMessageFor(m => m.FirstOrDefault().CountryCode, null, new { @class = "has-error" })<br />
+               
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="clearfix igr col-md-12">
+                    <div class="col-md-2">
+                        <label for="inputLossTypeName">Country Name</label>
+                    </div>
+                    <div class="col-md-3">
+                        @Html.TextBoxFor(m => m.FirstOrDefault().CountryName)<br />
+                        @Html.ValidationMessageFor(m => m.FirstOrDefault().CountryName, null, new { @class = "has-error" })<br />
+               
+                    </div>
+                </div>
+        </div>
+    
+        <div class="row">
+            <div class="clearfix igr col-md-12 text-center">
+                <button class="btn btn-info">Save</button>
+                 <button class="btn btn-info" onclick="hideDetail(); return false;">Cancel</button>
+            </div>
+        </div>
+        </form>*@
+          <div id="formStatus"></div>
+        </div>
+        </div>
+        <div id='editCountry' style="display:none">
+         <section id="partialv">
+                @Html.Partial("Edit", Model.Where(x=> x.Countryid == @Id).FirstOrDefault())
+            </section>
+        </div>
+        <div id='viewCountry' style="display:none">
+         <section id="partialv">
+                @Html.Partial("View", Model.Where(x => x.Countryid == @Id).FirstOrDefault())
+            </section>
+        </div>
+          <div class="panel-sub-heading"> <span class="text-danger">*</span> Search Screen </div>
+          <div class="panel-body">
+            <form role="form" class="form-horizontal">
+            	<div class="row">
+                	<div class="col-lg-6">
+                    	<div class="form-group">
+                          <label class="col-sm-3 control-label" for="inputName">Country Code</label>
+                          <div class="col-sm-9">
+                            <input type="text" placeholder="Entity Code" id="inputName" class="form-control">
+                          </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                    	<div class="form-group">
+                          <label class="col-sm-3 control-label" for="inputName">Country Name</label>
+                          <div class="col-sm-9">
+                            <input type="text" placeholder="Entity Name" id="inputName" class="form-control">
+                          </div>
+                        </div>
+                    </div>
+                </div>
+            
+                <div class="row">
+                	<div class="col-lg-12 text-center">
+                    	<button type="submit" class="btn btn-primary">Back</button> 
+                       @* @Html.ActionLink("Add New", "Create", "CountryMasters", new { @class = "btn btn-primary btn-large" }) *@
+                        <a href="javascript:showDetail();" class = "btn btn-primary btn-large">Add New</a>
+                        @Html.ActionLink("Search", "Index", "CountryMaster", new { @class = "btn btn-primary btn-large" })
+                    </div>
+                </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+          <div class="panel-body">
+            <div class="row">
+            	<div class="col-lg-12 text-center">
+                	<h4>Search Results</h4> 
+                </div>
+                <div class="col-lg-12">
+                	<div class="table-responsive">
+                    	<table class="table">
+                          <thead>
+                          <tr>
+                            <th>
+                            Country Code
+                   
+                            </th>
+                            <th>
+                            Country Name
+                            </th>
+                
+                            <th>
+                            </th>
+                        </tr>
+                          </thead>
+                          <tbody>
+                         @foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.CountryCode)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.CountryName)
+                                    </td>
+                    
+                                    <td>
+@*                                        @Html.ActionLink("Edit", "Edit", new { CountryId = item.Countryid }, new { @class = "btn btn-xs btn-warning" })
+                                        @Html.ActionLink("View", "View", new { CountryId = item.Countryid }, new { @class = "btn btn-xs btn-info" })
+                                        @Html.ActionLink("Delete", "Delete", new { CountryId = item.Countryid }, new { @class = "btn btn-xs btn-warning", onclick = "return confirm('Are you sure you want to delete this Channel?');" })                                        
+*@                                        <a href="javascript:showEditDetail(CountryId = @item.Countryid);" @Id = @item.Countryid class = "btn btn-xs btn-warning">Edit</a>
+                                        <a href="javascript:showViewDetail(CountryId = @item.Countryid);"   @Id = @item.Countryid class = "btn btn-xs btn-info">View</a>
+                                    </td>
+                                </tr>
+                            }
+
+                          </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Row End --> 
+    
+  </div>
+  <!-- Bootstrap Container End --> 
+  
+</div>
+    <!-- Page title end --> 
+
+    
+<script type="text/javascript">
+    function showDetail() {
+        $("#AddCountry").show(1000);
+        //$("#AddCountry").toggle(1000);
+        $(".panel-body,.panel-sub-heading").hide(1000); 
+    }
+    function hideDetail(){
+        $("#AddCountry").hide(1000);
+        $(".panel-body,.panel-sub-heading").show(1000);
+    }
+    function showEditDetail(id) {
+       
+        $("#editCountry").show(1000);
+        //$("#AddCountry").toggle(1000);
+        $(".panel-body,.panel-sub-heading").hide(1000);
+    }
+    function hideEditDetail() {
+        $("#editCountry").hide(1000);
+        $(".panel-body,.panel-sub-heading").show(1000);
+    }
+    function showViewDetail(id) {
+        alert(id);
+        $("#viewCountry").show(1000);
+        //$("#AddCountry").toggle(1000);
+        $(".panel-body,.panel-sub-heading").hide(1000);
+    }
+    function hideViewDetail() {
+        $("#viewCountry").hide(1000);
+        $(".panel-body,.panel-sub-heading").show(1000);
+    }
+</script>
+
+
+
+

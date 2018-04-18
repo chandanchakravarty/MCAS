@@ -1,0 +1,441 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="ModelName" xml:space="preserve">
+    <value>[[ModelName]]</value>
+  </data>
+  <data name="BackToListAction" xml:space="preserve">
+    <value>Back to List</value>
+  </data>
+  <data name="CreatePageTitle" xml:space="preserve">
+    <value>Create [[EntityName]]</value>
+  </data>
+  <data name="CreateValidationSummaryMessage" xml:space="preserve">
+    <value>Error creating [[EntityName]]</value>
+  </data>
+  <data name="CreateAction" xml:space="preserve">
+    <value>Create</value>
+  </data>
+  <data name="DeletePageTitle" xml:space="preserve">
+    <value>Delete [[EntityName]]</value>
+  </data>
+  <data name="DeleteConfirmMessage" xml:space="preserve">
+    <value>Are you sure you want to delete this?</value>
+  </data>
+  <data name="DeleteAction" xml:space="preserve">
+    <value>Delete</value>
+  </data>
+  <data name="EditPageTitle" xml:space="preserve">
+    <value>Edit [[EntityName]]</value>
+  </data>
+  <data name="EditValidationSummaryMessage" xml:space="preserve">
+    <value>Error updating [[EntityName]]</value>
+  </data>
+  <data name="EditAction" xml:space="preserve">
+    <value>Save</value>
+  </data>
+  <data name="DetailsPageTitle" xml:space="preserve">
+    <value>[[EntityName]] Details</value>
+  </data>
+  <data name="ListPageTitle" xml:space="preserve">
+    <value>[[EntityName]] List</value>
+  </data>
+  <data name="ListActionCreate" xml:space="preserve">
+    <value>Create New</value>
+  </data>
+  <data name="ListActionEdit" xml:space="preserve">
+    <value>Edit</value>
+  </data>
+  <data name="ListActionDetails" xml:space="preserve">
+    <value>Details</value>
+  </data>
+  <data name="ListActionDelete" xml:space="preserve">
+    <value>Delete</value>
+  </data>
+  <data name="Label_prop1" xml:space="preserve">
+    <value>[[_prop1]]</value>
+  </data>
+  <data name="ValidationMessage_prop1" xml:space="preserve">
+    <value>[[_prop1]] Required</value>
+  </data>
+  <data name="LabelProp1" xml:space="preserve">
+    <value>[[Prop1]]</value>
+  </data>
+  <data name="ValidationMessageProp1" xml:space="preserve">
+    <value>[[Prop1]] Required</value>
+  </data>
+  <data name="LabelRecoveryId" xml:space="preserve">
+    <value>[[RecoveryId]]</value>
+  </data>
+  <data name="ValidationMessageRecoveryId" xml:space="preserve">
+    <value>[[RecoveryId]] Required</value>
+  </data>
+  <data name="LabelClaimType" xml:space="preserve">
+    <value>[[ClaimType]]</value>
+  </data>
+  <data name="ValidationMessageClaimType" xml:space="preserve">
+    <value>[[ClaimType]] Required</value>
+  </data>
+  <data name="LabelAccidentClaimId" xml:space="preserve">
+    <value>[[AccidentClaimId]]</value>
+  </data>
+  <data name="ValidationMessageAccidentClaimId" xml:space="preserve">
+    <value>[[AccidentClaimId]] Required</value>
+  </data>
+  <data name="LabelClaimId" xml:space="preserve">
+    <value>[[ClaimId]]</value>
+  </data>
+  <data name="ValidationMessageClaimId" xml:space="preserve">
+    <value>[[ClaimId]] Required</value>
+  </data>
+  <data name="LabelPolicyId" xml:space="preserve">
+    <value>[[PolicyId]]</value>
+  </data>
+  <data name="ValidationMessagePolicyId" xml:space="preserve">
+    <value>[[PolicyId]] Required</value>
+  </data>
+  <data name="LabelClaimentId" xml:space="preserve">
+    <value>[[ClaimentId]]</value>
+  </data>
+  <data name="ValidationMessageClaimentId" xml:space="preserve">
+    <value>[[ClaimentId]] Required</value>
+  </data>
+  <data name="LabelRecoverFrom" xml:space="preserve">
+    <value>[[RecoverFrom]]</value>
+  </data>
+  <data name="ValidationMessageRecoverFrom" xml:space="preserve">
+    <value>[[RecoverFrom]] Required</value>
+  </data>
+  <data name="LabelAddress1" xml:space="preserve">
+    <value>[[Address1]]</value>
+  </data>
+  <data name="ValidationMessageAddress1" xml:space="preserve">
+    <value>[[Address1]] Required</value>
+  </data>
+  <data name="LabelAddress2" xml:space="preserve">
+    <value>[[Address2]]</value>
+  </data>
+  <data name="ValidationMessageAddress2" xml:space="preserve">
+    <value>[[Address2]] Required</value>
+  </data>
+  <data name="LabelAddress3" xml:space="preserve">
+    <value>[[Address3]]</value>
+  </data>
+  <data name="ValidationMessageAddress3" xml:space="preserve">
+    <value>[[Address3]] Required</value>
+  </data>
+  <data name="LabelPostalCode" xml:space="preserve">
+    <value>[[PostalCode]]</value>
+  </data>
+  <data name="ValidationMessagePostalCode" xml:space="preserve">
+    <value>[[PostalCode]] Required</value>
+  </data>
+  <data name="LabelRecoveryReason" xml:space="preserve">
+    <value>[[RecoveryReason]]</value>
+  </data>
+  <data name="ValidationMessageRecoveryReason" xml:space="preserve">
+    <value>[[RecoveryReason]] Required</value>
+  </data>
+  <data name="LabelCostofRepairs" xml:space="preserve">
+    <value>[[CostofRepairs]]</value>
+  </data>
+  <data name="ValidationMessageCostofRepairs" xml:space="preserve">
+    <value>[[CostofRepairs]] Required</value>
+  </data>
+  <data name="LabelLossofUse" xml:space="preserve">
+    <value>[[LossofUse]]</value>
+  </data>
+  <data name="ValidationMessageLossofUse" xml:space="preserve">
+    <value>[[LossofUse]] Required</value>
+  </data>
+  <data name="LabelOtherExpences" xml:space="preserve">
+    <value>[[OtherExpences]]</value>
+  </data>
+  <data name="ValidationMessageOtherExpences" xml:space="preserve">
+    <value>[[OtherExpences]] Required</value>
+  </data>
+  <data name="LabelReportServeyFee" xml:space="preserve">
+    <value>[[ReportServeyFee]]</value>
+  </data>
+  <data name="ValidationMessageReportServeyFee" xml:space="preserve">
+    <value>[[ReportServeyFee]] Required</value>
+  </data>
+  <data name="LabelReportReserveyFee" xml:space="preserve">
+    <value>[[ReportReserveyFee]]</value>
+  </data>
+  <data name="ValidationMessageReportReserveyFee" xml:space="preserve">
+    <value>[[ReportReserveyFee]] Required</value>
+  </data>
+  <data name="LabelReportLTA_GIA_PolicyFee" xml:space="preserve">
+    <value>[[ReportLTA_GIA_PolicyFee]]</value>
+  </data>
+  <data name="ValidationMessageReportLTA_GIA_PolicyFee" xml:space="preserve">
+    <value>[[ReportLTA_GIA_PolicyFee]] Required</value>
+  </data>
+  <data name="LabelTPLawyerCost" xml:space="preserve">
+    <value>[[TPLawyerCost]]</value>
+  </data>
+  <data name="ValidationMessageTPLawyerCost" xml:space="preserve">
+    <value>[[TPLawyerCost]] Required</value>
+  </data>
+  <data name="LabelTPLawyerDisbursment" xml:space="preserve">
+    <value>[[TPLawyerDisbursment]]</value>
+  </data>
+  <data name="ValidationMessageTPLawyerDisbursment" xml:space="preserve">
+    <value>[[TPLawyerDisbursment]] Required</value>
+  </data>
+  <data name="LabelLeagalLawyerCost" xml:space="preserve">
+    <value>[[LeagalLawyerCost]]</value>
+  </data>
+  <data name="ValidationMessageLeagalLawyerCost" xml:space="preserve">
+    <value>[[LeagalLawyerCost]] Required</value>
+  </data>
+  <data name="LabellegalLawyerDisbursement" xml:space="preserve">
+    <value>[[legalLawyerDisbursement]]</value>
+  </data>
+  <data name="ValidationMessagelegalLawyerDisbursement" xml:space="preserve">
+    <value>[[legalLawyerDisbursement]] Required</value>
+  </data>
+  <data name="LabelTotalAmt" xml:space="preserve">
+    <value>[[TotalAmt]]</value>
+  </data>
+  <data name="ValidationMessageTotalAmt" xml:space="preserve">
+    <value>[[TotalAmt]] Required</value>
+  </data>
+  <data name="LabelCreatedDate" xml:space="preserve">
+    <value>[[CreatedDate]]</value>
+  </data>
+  <data name="ValidationMessageCreatedDate" xml:space="preserve">
+    <value>[[CreatedDate]] Required</value>
+  </data>
+  <data name="LabelCreatedBy" xml:space="preserve">
+    <value>[[CreatedBy]]</value>
+  </data>
+  <data name="ValidationMessageCreatedBy" xml:space="preserve">
+    <value>[[CreatedBy]] Required</value>
+  </data>
+  <data name="LabelModifiedby" xml:space="preserve">
+    <value>[[Modifiedby]]</value>
+  </data>
+  <data name="ValidationMessageModifiedby" xml:space="preserve">
+    <value>[[Modifiedby]] Required</value>
+  </data>
+  <data name="LabelPaymentId" xml:space="preserve">
+    <value>[[PaymentId]]</value>
+  </data>
+  <data name="ValidationMessagePaymentId" xml:space="preserve">
+    <value>[[PaymentId]] Required</value>
+  </data>
+  <data name="LabelClaimantName" xml:space="preserve">
+    <value>[[ClaimantName]]</value>
+  </data>
+  <data name="ValidationMessageClaimantName" xml:space="preserve">
+    <value>[[ClaimantName]] Required</value>
+  </data>
+  <data name="LabelTPBIPayout" xml:space="preserve">
+    <value>[[TPBIPayout]]</value>
+  </data>
+  <data name="ValidationMessageTPBIPayout" xml:space="preserve">
+    <value>[[TPBIPayout]] Required</value>
+  </data>
+  <data name="LabelDeductible" xml:space="preserve">
+    <value>[[Deductible]]</value>
+  </data>
+  <data name="ValidationMessageDeductible" xml:space="preserve">
+    <value>[[Deductible]] Required</value>
+  </data>
+  <data name="LabelRecoverAmt" xml:space="preserve">
+    <value>[[RecoverAmt]]</value>
+  </data>
+  <data name="ValidationMessageRecoverAmt" xml:space="preserve">
+    <value>[[RecoverAmt]] Required</value>
+  </data>
+  <data name="LabelscreenId" xml:space="preserve">
+    <value>[[screenId]]</value>
+  </data>
+  <data name="ValidationMessagescreenId" xml:space="preserve">
+    <value>[[screenId]] Required</value>
+  </data>
+  <data name="LabellistscreenId" xml:space="preserve">
+    <value>[[listscreenId]]</value>
+  </data>
+  <data name="ValidationMessagelistscreenId" xml:space="preserve">
+    <value>[[listscreenId]] Required</value>
+  </data>
+  <data name="LabelCreatedOn" xml:space="preserve">
+    <value>[[CreatedOn]]</value>
+  </data>
+  <data name="ValidationMessageCreatedOn" xml:space="preserve">
+    <value>[[CreatedOn]] Required</value>
+  </data>
+  <data name="LabelModifiedOn" xml:space="preserve">
+    <value>[[ModifiedOn]]</value>
+  </data>
+  <data name="ValidationMessageModifiedOn" xml:space="preserve">
+    <value>[[ModifiedOn]] Required</value>
+  </data>
+  <data name="LabelLangId" xml:space="preserve">
+    <value>[[LangId]]</value>
+  </data>
+  <data name="ValidationMessageLangId" xml:space="preserve">
+    <value>[[LangId]] Required</value>
+  </data>
+  <data name="LabelCultureCode" xml:space="preserve">
+    <value>[[CultureCode]]</value>
+  </data>
+  <data name="ValidationMessageCultureCode" xml:space="preserve">
+    <value>[[CultureCode]] Required</value>
+  </data>
+  <data name="LabelViewMode" xml:space="preserve">
+    <value>[[ViewMode]]</value>
+  </data>
+  <data name="ValidationMessageViewMode" xml:space="preserve">
+    <value>[[ViewMode]] Required</value>
+  </data>
+  <data name="LabelReadOnly" xml:space="preserve">
+    <value>[[ReadOnly]]</value>
+  </data>
+  <data name="ValidationMessageReadOnly" xml:space="preserve">
+    <value>[[ReadOnly]] Required</value>
+  </data>
+  <data name="ClaimAdjustments" xml:space="preserve">
+    <value>Claim Adjustments</value>
+  </data>
+  <data name="ClaimEnquiry" xml:space="preserve">
+    <value>Claim Enquiry</value>
+  </data>
+  <data name="ClaimPayment" xml:space="preserve">
+    <value>Claim Payment</value>
+  </data>
+  <data name="ClaimPaymentProcessing" xml:space="preserve">
+    <value>Claim Payment Processing</value>
+  </data>
+  <data name="ClaimRecoveryProcessing" xml:space="preserve">
+    <value>Claim Recovery Processing</value>
+  </data>
+  <data name="ClaimsRecovery" xml:space="preserve">
+    <value>Claims Recovery</value>
+  </data>
+  <data name="ClaimsRegistration" xml:space="preserve">
+    <value>Claims Registration</value>
+  </data>
+  <data name="IncompleteClaimRegistration" xml:space="preserve">
+    <value>Incomplete Claim Registration</value>
+  </data>
+</root>

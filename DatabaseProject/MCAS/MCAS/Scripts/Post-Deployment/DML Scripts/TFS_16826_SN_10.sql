@@ -1,0 +1,1 @@
+update MNT_TEMPLATE_MASTER set PartyToShown = null where id in (64,65,66)

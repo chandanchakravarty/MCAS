@@ -1,0 +1,1 @@
+update MNT_Menus set IsActive='N' where MenuId in(281,282,283,284)

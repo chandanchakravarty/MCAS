@@ -1,0 +1,89 @@
+DIV.workflowContainer
+{
+	FONT-WEIGHT: normal;
+    FONT-SIZE: 8pt;
+    /*COLOR: #000000;*/
+    FONT-STYLE: normal;
+    FONT-FAMILY: "MS Sans Serif", Arial, sans-serif;
+    PADDING-RIGHT: 0px;
+    PADDING-LEFT: 0px;
+    Z-INDEX: 101;
+    LEFT: 0px;
+    VISIBILITY: hidden;
+    PADDING-BOTTOM: 0px;
+    PADDING-TOP: 0px;
+    POSITION: absolute;
+    TOP: 0px;
+    BACKGROUND-COLOR: #fefefe;/*#18459C;*/
+    border-bottom:#333333 thin outset;
+    border-right:#333333 thin outset;
+}
+DIV.workflowContainer A.workflowLink:hover
+{
+	/*COLOR: #000000;*/
+    /*background-color:#A6D36E;*/
+    COLOR: #ffffff; 
+    background-color: #0683c7;
+    background-image: url(/cms/cmsweb/images1/dropdown_hover.jpg);
+}
+DIV.workflowContainer A.workflowLink
+{
+	FONT-WEIGHT: normal;
+    FONT-SIZE: 10pt;
+    /*COLOR: #000000;*/
+    FONT-STYLE: normal;
+    FONT-FAMILY: "MS Sans Serif", Arial, sans-serif;
+    DISPLAY: block;
+    FONT-WEIGHT: normal;
+    FONT-SIZE: 11px;
+    CURSOR: hand;
+    /*COLOR: #000000;*/
+    FONT-STYLE: normal;
+    FONT-FAMILY: Verdana;
+    WHITE-SPACE: nowrap;
+    TEXT-DECORATION: none;
+    PADDING-RIGHT: 2em;
+    PADDING-LEFT: 2em;
+    PADDING-BOTTOM: 4px;
+    PADDING-TOP: 4px;
+    background-color:#fefefe; /*#CEDFFF;*/
+	border-left:#226fbf 1px solid;
+    border-top:#226fbf 1px solid;
+    
+    border-color: #b3b3b3;
+    border:1;
+    color:#6b6b6b;
+}
+DIV.workflowContainer A.workflowActiveLink
+{
+	/*COLOR: #000000;*/
+    background-color:#fefefe;/*#A6D36E;*/
+
+}
+DIV.workflowContainer A.workflowDeactiveLink
+{
+	/*COLOR: #FFFFFF;*/
+	font-style:italic;
+	cursor:default;
+	background-color:#fefefe; /*#CEDFFF;*/
+    border-left:#226fbf 1px solid;
+    border-top:#226fbf 1px solid;
+    border-color: #b3b3b3;
+    border:1;
+    color:#c0c0c0
+}
+#workflowFrame
+{
+    DISPLAY: none;
+    Z-INDEX: 101;
+    LEFT: 0px;
+    POSITION: absolute;
+    TOP: 20px;
+    BACKGROUND-COLOR: #000000
+}
+#workflowIFrame
+{
+    Z-INDEX: 1001;
+    FILTER: alpha(opacity=0);
+    BACKGROUND-COLOR: #000000
+}

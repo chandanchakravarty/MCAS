@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://tempuri.org/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://tempuri.org/">
+      <s:element name="CheckAddress">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="FirmOrHighRiseName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="UrbanizationName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="StreetAddress1n2" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="CityStateZip" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="CheckAddressResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="CheckAddressResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="CheckAddressSoapIn">
+    <wsdl:part name="parameters" element="tns:CheckAddress" />
+  </wsdl:message>
+  <wsdl:message name="CheckAddressSoapOut">
+    <wsdl:part name="parameters" element="tns:CheckAddressResponse" />
+  </wsdl:message>
+  <wsdl:portType name="VerifyAddressSoap">
+    <wsdl:operation name="CheckAddress">
+      <wsdl:input message="tns:CheckAddressSoapIn" />
+      <wsdl:output message="tns:CheckAddressSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="VerifyAddressSoap" type="tns:VerifyAddressSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="CheckAddress">
+      <soap:operation soapAction="http://tempuri.org/CheckAddress" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="VerifyAddress">
+    <wsdl:port name="VerifyAddressSoap" binding="tns:VerifyAddressSoap">
+      <soap:address location="http://wolverine.ebix.com/services/verifyaddr/verifyaddress.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

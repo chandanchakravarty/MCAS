@@ -1,0 +1,12 @@
+﻿IF NOT EXISTS(SELECT * FROM INFORMATION_SCHEMA.COLUMNS where table_name = 'POL_EMAIL_SPOOL' and column_name = 'SourceId')
+     BEGIN
+         ALTER TABLE POL_EMAIL_SPOOL ADD SourceId INT NULL
+     END
+IF NOT EXISTS(SELECT * FROM INFORMATION_SCHEMA.COLUMNS where table_name = 'POL_EMAIL_SPOOL' and column_name = 'SourceType')
+     BEGIN
+         ALTER TABLE POL_EMAIL_SPOOL ADD SourceType NVARCHAR(50) NULL
+     END
+IF NOT EXISTS(SELECT * FROM INFORMATION_SCHEMA.COLUMNS where table_name = 'POL_EMAIL_SPOOL' and column_name = 'EmailType')
+     BEGIN
+         ALTER TABLE POL_EMAIL_SPOOL ADD EmailType NVARCHAR(50) NULL
+     END

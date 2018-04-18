@@ -1,0 +1,133 @@
+﻿@using MCAS.Web.Objects.Resources.ClaimProcessing;
+@model MCAS.Web.Objects.ClaimObjectHelper.ClaimRecoveryCrTxModel
+@{
+    
+}
+<script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?sensor=false"></script>
+
+    <div class="col-lg-6">
+        <div class="form-group">
+            <label class="col-sm-4 control-label">
+                Invoice Amount
+            </label>
+            <div class="col-sm-8">
+                @Html.TextBoxFor(m => m.Confirmamtbd.ConfirmInvoiceAmt, new { @maxlength = "250", @class = "form-control format Number", @id = "InvoiceAmtPC", @readonly = "readonly" })
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-6">
+        <div class="form-group">
+            <label class="col-sm-4 control-label">
+                TP/GIA Fee
+            </label>
+            <div class="col-sm-8">
+                @Html.TextBoxFor(m => m.Confirmamtbd.TPGIAFee, new { @maxlength = "100", @class = "form-control format Number", @id = "TPGIAFeePC", @readonly = "readonly" })
+            </div>
+        </div>
+    </div>
+
+    <div class="col-lg-6">
+        <div class="form-group">
+            <label class="col-sm-4 control-label">
+                Loss Of Use
+            </label>
+            <div class="col-sm-8">
+                @Html.TextBoxFor(m => m.Confirmamtbd.LossOfUse, new { @maxlength = "250", @class = "form-control format Number", @id = "LossOfUsePC", @readonly = "readonly" })
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-6">
+        <div class="form-group">
+            <label class="col-sm-4 control-label">
+                LTA Fee
+            </label>
+            <div class="col-sm-8">
+                @Html.TextBoxFor(m => m.Confirmamtbd.LTAFee, new { @maxlength = "100", @class = "form-control format Number", @id = "LTAFeePC", @readonly = "readonly" })
+            </div>
+        </div>
+    </div>
+
+    <div class="col-lg-6">
+        <div class="form-group">
+            <label class="col-sm-4 control-label">
+                Medical Expenses
+            </label>
+            <div class="col-sm-8">
+                @Html.TextBoxFor(m => m.Confirmamtbd.MedicalExp, new { @maxlength = "250", @class = "form-control format Number", @id = "MedicalExpPC", @readonly = "readonly" })
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-6">
+        <div class="form-group">
+            <label class="col-sm-4 control-label">
+                Car Rental
+            </label>
+            <div class="col-sm-8">
+                @Html.TextBoxFor(m => m.Confirmamtbd.CarRental, new { @maxlength = "100", @class = "form-control format Number", @id = "CarRentalPC", @readonly = "readonly" })
+            </div>
+        </div>
+    </div>
+
+    <div class="col-lg-6">
+        <div class="form-group">
+            <label class="col-sm-4 control-label">
+                Others (1)
+            </label>
+            <div class="col-sm-8">
+                @Html.TextBoxFor(m => m.Confirmamtbd.Others1, new { @maxlength = "250", @class = "form-control format Number", @id = "Others1PC", @readonly = "readonly" })
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-6">
+        <div class="form-group">
+            <label class="col-sm-4 control-label">
+                Courtesy Car
+            </label>
+            <div class="col-sm-8">
+                @Html.TextBoxFor(m => m.Confirmamtbd.CourtesyCar, new { @maxlength = "100", @class = "form-control format Number", @id = "CourtesyCarPC", @readonly = "readonly" })
+            </div>
+        </div>
+    </div>
+
+    <div class="col-lg-6">
+        <div class="form-group">
+            <label class="col-sm-4 control-label">
+                Legal Fee
+            </label>
+            <div class="col-sm-8">
+                @Html.TextBoxFor(m => m.Confirmamtbd.LegalFee, new { @maxlength = "250", @class = "form-control format Number", @id = "LegalFeePC", @readonly = "readonly" })
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-6">
+        <div class="form-group">
+            <label class="col-sm-4 control-label">
+                Others (2)
+            </label>
+            <div class="col-sm-8">
+                @Html.TextBoxFor(m => m.Confirmamtbd.Others2, new { @maxlength = "100", @class = "form-control format Number", @id = "Others2PC", @readonly = "readonly" })
+            </div>
+        </div>
+    </div>
+
+    <div class="col-lg-6">
+        <div class="form-group">
+            <label class="col-sm-4 control-label">
+                Survey Fee
+            </label>
+            <div class="col-sm-8">
+                @Html.TextBoxFor(m => m.Confirmamtbd.SurveyFee, new { @maxlength = "250", @class = "form-control format Number", @id = "SurveyFeePC", @readonly = "readonly" })
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-6">
+        <div class="form-group">
+            <label class="col-sm-4 control-label">
+                Total
+            </label>
+            <div class="col-sm-8">
+                @Html.TextBoxFor(m => m.Confirmamtbd.Total, new { @maxlength = "100", @class = "form-control format Number", @readonly = "readonly", @id = "TotalPC" })
+            </div>
+        </div>
+    </div>
+

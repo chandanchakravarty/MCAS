@@ -1,0 +1,543 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Root>
+	<Master>
+		<Query Code="SELECT" Level="APP">Proc_GetKeysForRental_APP</Query>
+		<Query Code="SELECT" Level="POLICY">Proc_GetKeysForRental_POL</Query>
+		<Column Code="APP_EFFECTIVE_DATE" MapColumnn="APP_EFFECTIVE_DATE" TableAssociated="APP_LIST"
+			ColumnAssociated="APP_EFFECTIVE_DATE"></Column>
+		<Column Code="APP_YEAR" MapColumnn="APP_YEAR" TableAssociated="APP_LIST" ColumnAssociated="APP_EFFECTIVE_DATE"></Column>
+		<Column Code="LOB_ID" MapColumnn="LOB_ID" TableAssociated="APP_LIST" ColumnAssociated="APP_LOB"></Column>
+		<Column Code="STATE_ID" MapColumnn="STATE_ID" TableAssociated="APP_LIST" ColumnAssociated="STATE_ID"></Column>
+		<Column Code="REP_COST" MapColumnn="REP_COST" TableAssociated="" ColumnAssociated=""></Column>
+		<Column Code="MKT_VALUE" MapColumnn="MKT_VALUE" TableAssociated="" ColumnAssociated=""></Column>
+		<Column Code="PKG_TYPE" MapColumnn="PKG_TYPE" TableAssociated="" ColumnAssociated=""></Column>
+		<Column Code="UND_CONS" MapColumnn="UND_CONS" TableAssociated="" ColumnAssociated=""></Column>
+		<Column Code="PER_REP_COST" MapColumnn=""></Column>
+		<Column Code="MIN_VAL" MapColumnn=""></Column>
+		<Column Code="MAX_VAL" MapColumnn=""></Column>
+		<Column Code="MULT_A" MapColumnn=""></Column>
+		<Column Code="MULT_B" MapColumnn=""></Column>
+		<Column Code="MULT_C" MapColumnn=""></Column>
+		<Column Code="MULT_D" MapColumnn=""></Column>
+		<Column Code="TEMP_VAL" MapColumnn=""></Column>
+		<Column Code="VERIFY_RULE" MapColumnn="VERIFY_RULE"></Column>
+	</Master>
+	<State ID="22" Name="Michigan">
+		<Product ID="11289" Desc="DP-2">
+			<Remove>
+				<Coverages>
+				     <Coverage COV_ID="0" Code="DP321"></Coverage>
+				     <Coverage COV_ID="0" Code="DP289"></Coverage>
+				     <Coverage COV_ID="0" Code="DP03"></Coverage>
+				</Coverages>		
+				<Endorsements>
+					<Endorsement ID="267" Desc="DP-289 Repair Cost End" />
+					<Endorsement ID="276" Desc="DP-321 Premier Tree Debris Removal" />
+					<Endorsement ID="338" Desc="" />
+				</Endorsements>
+			</Remove>
+			<Mandatory>
+			  <Coverages>
+			     <Coverage COV_ID="797" Code="CSL"></Coverage>
+			     <Coverage COV_ID="798" Code="MEDPM"></Coverage>
+			     <Coverage COV_ID="798" Code="MEDPM"></Coverage>
+			  </Coverages>
+			</Mandatory>
+			<Rule Action="Master" StartDate="1950-01-01" EndDate="3000-12-12">
+				<Conditions>
+					<Condition Operand1="1" Operator="==" Operand2="1" OperandType="Double">
+						<ToSet Key="$PER_REP_COST" Value="" Operand1="$REP_COST" Operator="*" Operand2="0.8"></ToSet>
+						<ToSet Key="$MIN_VAL" Value="$PER_REP_COST"></ToSet>
+						<ToSet Key="$MAX_VAL" Value="$REP_COST"></ToSet>
+						<ToSet Key="$MULT_B" Value="0.1"></ToSet>
+						<ToSet Key="$MULT_C" Value="0.05"></ToSet>
+						<ToSet Key="$MULT_D" Value="0.1"></ToSet>
+					</Condition>
+				</Conditions>
+				<Conditions>
+				    <Condition Operand1="$VERIFY_RULE" Operator="==" Operand2="N" OperandType="String">
+						<ToSet Key="$MIN_VAL" Value="$PER_REP_COST"></ToSet>
+						<ToSet Key="$MAX_VAL" Value="$REP_COST"></ToSet>
+					</Condition>
+					<Condition Operand1="$MIN_VAL" Operator="&lt;" Operand2="30000" OperandType="Double">
+					    <ToSet Key="$MIN_VAL" Value="$PER_REP_COST"></ToSet>						
+						<ToSet Key="$MAX_VAL" Value="$REP_COST"></ToSet>
+					</Condition>
+				</Conditions>
+				<Conditions>
+					<Condition Operand1="$MULT_C" Operator="&gt;" Operand2="5000" OperandType="Double">
+						<ToSet Key="$MULT_C" Value="5000"></ToSet>
+					</Condition>
+				</Conditions>
+			</Rule>
+			<BaseCoverage Code="DWELL" MinValue="$MIN_VAL" MaxValue="$MAX_VAL" Desc="Coverage A – Dwelling "></BaseCoverage>
+			<OnChange Code="DWELL">
+				<Target Code="OSTR" Operator="*" Operand="$MULT_B"></Target>
+				<Target Code="LPP" Operator="*" Operand="$MULT_C" ExternalDependency="True" 
+				IF="Y" ConditionOn="result" ConOpr="&gt;"
+					ConVal="5000" ToSet="result" ToSetVal="5000"></Target>
+				<Target Code="RV" Operator="*" Operand="$MULT_D"></Target>
+			</OnChange>
+			<ErrorMessage>
+				<Text Value="Coverage A - Dwelling for DP-2 must be between "></Text>
+				<Text Value="$MIN_VAL"></Text>
+				<Text Value=" and "></Text>
+				<Text Value="$MAX_VAL"></Text>
+				<Text Value=". "></Text>
+			</ErrorMessage>
+			<ErrRequired Value="Please enter Coverage A"></ErrRequired>
+		</Product>
+		<Product ID="11290" Desc="DP-2 Repair Cost">
+			<Remove>
+			    <Coverages>
+				     <Coverage COV_ID="0" Code="DP03"></Coverage>
+				     <Coverage COV_ID="0" Code="DP321"></Coverage>
+	       		    <!-- added by Pravesh as these cov not applicable for Repaire cost as per Rental sheet "Endorsement List WMIC091307"  -->
+				    <Coverage COV_ID="0" Code="BR1143"></Coverage>
+				    <Coverage COV_ID="0" Code="IF184"></Coverage>
+				    <Coverage COV_ID="0" Code="IFNSE"></Coverage>
+				</Coverages>	
+				<Endorsements>
+					<Endorsement ID="276" Desc="DP-321 Premier Tree Debris Removal" />
+					<Endorsement ID="338" Desc="" />
+				</Endorsements>
+			</Remove>
+			<Mandatory>
+			   <Coverages>
+			        <Coverage COV_ID="0" Code="DP289"></Coverage>
+			   </Coverages>     
+			</Mandatory>
+			<Rule Action="Master" StartDate="1950-01-01" EndDate="3000-12-12">
+				<Conditions>
+					<Condition Operand1="1" Operator="==" Operand2="1" OperandType="Double">
+						<ToSet Key="$MIN_VAL" Value="$MKT_VALUE"></ToSet>
+						<ToSet Key="$MAX_VAL" Value="$MKT_VALUE"></ToSet>
+						<ToSet Key="$MULT_B" Value="0.1"></ToSet>
+						<ToSet Key="$MULT_C" Value="0.05"></ToSet>
+						<ToSet Key="$MULT_D" Value="0.1"></ToSet>
+					</Condition>
+				</Conditions>
+				<Conditions>
+					<Condition Operand1="$MULT_C" Operator="&gt;" Operand2="5000" OperandType="Double">
+						<ToSet Key="$MULT_C" Value="5000"></ToSet>
+					</Condition>
+				</Conditions>
+			</Rule>
+			<BaseCoverage Code="DWELL" MinValue="$MIN_VAL" MaxValue="$MAX_VAL" Desc="Coverage A – Dwelling "></BaseCoverage>
+			<OnChange Code="DWELL">
+				<Target Code="OSTR" Operator="*" Operand="$MULT_B"></Target>
+				<Target Code="LPP" Operator="*" Operand="$MULT_C" ExternalDependency="True" 
+				IF="Y" ConditionOn="result" ConOpr="&gt;"
+					ConVal="5000" ToSet="result" ToSetVal="5000"></Target>
+				<Target Code="RV" Operator="*" Operand="$MULT_D"></Target>
+			</OnChange>
+			<ErrorMessage>
+				<Text Value="Coverage A - Dwelling for DP-2 Repair must be equal to  "></Text>
+				<Text Value="$MAX_VAL"></Text>
+				<Text Value=". "></Text>
+			</ErrorMessage>
+			<ErrRequired Value="Please enter Coverage A"></ErrRequired>
+		</Product>
+		<Product ID="11292" Desc="DP-3 Repair Cost">
+			<Remove>
+				<Coverages>
+					<Coverage COV_ID="0" Code="DP321"></Coverage>
+					<Coverage COV_ID="0" Code="DP02"></Coverage>
+		   		    <!-- added by Pravesh as these cov not applicable for Repaire cost as per Rental sheet "Endorsement List WMIC091307"  -->
+				    <Coverage COV_ID="0" Code="BR1143"></Coverage>
+				    <Coverage COV_ID="0" Code="IF184"></Coverage>
+				    <Coverage COV_ID="0" Code="IFNSE"></Coverage>
+				</Coverages>	
+					<Endorsements>
+					<Endorsement ID="276" Desc="DP-321 Premier Tree Debris Removal" />
+					<Endorsement ID="336" Desc="" />
+				</Endorsements>
+			</Remove>
+			<Mandatory>
+			   <Coverages>
+			        <Coverage COV_ID="0" Code="DP289"></Coverage>
+			        <Coverage COV_ID="797" Code="CSL"></Coverage>
+			        <Coverage COV_ID="798" Code="MEDPM"></Coverage>
+			   </Coverages>     
+			</Mandatory>
+			<Rule Action="Master" StartDate="1950-01-01" EndDate="3000-12-12">
+				<Conditions>
+					<Condition Operand1="1" Operator="==" Operand2="1" OperandType="Double">
+						<ToSet Key="$MIN_VAL" Value="$MKT_VALUE"></ToSet>
+						<ToSet Key="$MAX_VAL" Value="$MKT_VALUE"></ToSet>
+						<ToSet Key="$MULT_B" Value="0.1"></ToSet>
+						<ToSet Key="$MULT_C" Value="0.05"></ToSet>
+						<ToSet Key="$MULT_D" Value="0.1"></ToSet>
+					</Condition>
+				</Conditions>
+				<Conditions>
+					<Condition Operand1="$MULT_C" Operator="&gt;" Operand2="5000" OperandType="Double">
+						<ToSet Key="$MULT_C" Value="5000"></ToSet>
+					</Condition>
+				</Conditions>
+			</Rule>
+			<BaseCoverage Code="DWELL" MinValue="$MIN_VAL" MaxValue="$MAX_VAL" Desc="Coverage A – Dwelling "></BaseCoverage>
+			<OnChange Code="DWELL">
+				<Target Code="OSTR" Operator="*" Operand="$MULT_B"></Target>
+				<Target Code="LPP" Operator="*" Operand="$MULT_C" ExternalDependency="True" 
+				IF="Y" ConditionOn="result" ConOpr="&gt;"
+					ConVal="5000" ToSet="result" ToSetVal="5000"></Target>
+				<Target Code="RV" Operator="*" Operand="$MULT_D"></Target>
+			</OnChange>
+			<ErrorMessage>
+				<Text Value="Coverage A - Dwelling for DP-3 Repair must be equal to  "></Text>
+				<Text Value="$MAX_VAL"></Text>
+				<Text Value=". "></Text>
+			</ErrorMessage>
+			<ErrRequired Value="Please enter Coverage A"></ErrRequired>
+		</Product>
+		<Product ID="11291" Desc="DP-3">
+			<Remove>
+			    <Coverages>
+					<Coverage COV_ID="0" Code="DP321"></Coverage>
+					<Coverage COV_ID="0" Code="DP289"></Coverage>
+					<Coverage COV_ID="0" Code="DP02"></Coverage>
+				</Coverages>
+				<Endorsements>
+					<Endorsement ID="267" Desc="DP-289 Repair Cost End" />
+					<Endorsement ID="276" Desc="DP-321 Premier Tree Debris Removal" />
+					<Endorsement ID="336" Desc="" />
+				</Endorsements>
+			</Remove>
+			<Mandatory>
+			<Coverages>
+			     <Coverage COV_ID="797" Code="CSL"></Coverage>
+			     <Coverage COV_ID="798" Code="MEDPM"></Coverage>
+			  </Coverages>
+			</Mandatory>
+			<Rule Action="Master" StartDate="1950-01-01" EndDate="3000-12-12">
+				<Conditions>
+					<Condition Operand1="1" Operator="==" Operand2="1" OperandType="Double">
+						<ToSet Key="$PER_REP_COST" Value="" Operand1="$REP_COST" Operator="*" Operand2="0.8"></ToSet>
+						<ToSet Key="$MIN_VAL" Value="$PER_REP_COST"></ToSet>
+						<ToSet Key="$MAX_VAL" Value="$REP_COST"></ToSet>
+						<ToSet Key="$MULT_B" Value="0.1"></ToSet>
+						<ToSet Key="$MULT_C" Value="0.05"></ToSet>
+						<ToSet Key="$MULT_D" Value="0.1"></ToSet>
+					</Condition>
+				</Conditions>								
+				<Conditions>
+					<Condition Operand1="$VERIFY_RULE" Operator="==" Operand2="N" OperandType="String">
+						<ToSet Key="$MIN_VAL" Value="$PER_REP_COST"></ToSet>
+						<ToSet Key="$MAX_VAL" Value="$REP_COST"></ToSet>						
+					</Condition>
+					<Condition Operand1="$MIN_VAL" Operator="&lt;" Operand2="75000" OperandType="Double">
+						<ToSet Key="$MIN_VAL" Value="$PER_REP_COST"></ToSet>
+						<ToSet Key="$MAX_VAL" Value="$REP_COST"></ToSet>
+					</Condition>
+				</Conditions>
+				<Conditions>
+					<Condition Operand1="$MULT_C" Operator="&gt;" Operand2="5000" OperandType="Double">
+						<ToSet Key="$MULT_C" Value="5000"></ToSet>
+					</Condition>
+				</Conditions>
+			</Rule>
+			<BaseCoverage Code="DWELL" MinValue="$MIN_VAL" MaxValue="$MAX_VAL" Desc="Coverage A – Dwelling "></BaseCoverage>
+			<OnChange Code="DWELL">
+				<Target Code="OSTR" Operator="*" Operand="$MULT_B"></Target>
+				<Target Code="LPP" Operator="*" Operand="$MULT_C" ExternalDependency="True" 
+				IF="Y" ConditionOn="result" ConOpr="&gt;"
+					ConVal="5000" ToSet="result" ToSetVal="5000"></Target>
+				<Target Code="RV" Operator="*" Operand="$MULT_D"></Target>
+			</OnChange>
+			<ErrorMessage>
+				<Text Value="Coverage A - Dwelling for DP-3 must be between "></Text>
+				<Text Value="$MIN_VAL"></Text>
+				<Text Value=" and "></Text>
+				<Text Value="$MAX_VAL"></Text>
+				<Text Value=". "></Text>
+			</ErrorMessage>
+			<ErrRequired Value="Please enter Coverage A"></ErrRequired>
+		</Product>
+		<Product ID="11458" Desc="DP-3 Premier">
+			<Remove>
+			    <Coverages>
+					<Coverage COV_ID="0" Code="DP02"></Coverage>
+					<Coverage COV_ID="0" Code="DP289"></Coverage>
+				</Coverages>
+			  
+				<Endorsements>
+					<Endorsement ID="267" Desc="DP-289 Repair Cost End" />
+					<Endorsement ID="272" Desc="IF-184 Installation Floater" />
+					<Endorsement ID="336" Desc="" />
+				</Endorsements>
+			</Remove>
+			<Mandatory>
+				<Coverages>
+			     <Coverage COV_ID="797" Code="CSL"></Coverage>
+			     <Coverage COV_ID="798" Code="MEDPM"></Coverage>
+			  </Coverages>
+			</Mandatory>
+			<Rule Action="Master" StartDate="1950-01-01" EndDate="3000-12-12">
+				<Conditions>
+					<Condition Operand1="1" Operator="==" Operand2="1" OperandType="Double">
+						<ToSet Key="$MIN_VAL" Value="$REP_COST"></ToSet>
+						<ToSet Key="$MAX_VAL" Value="$REP_COST"></ToSet>
+						<ToSet Key="$MULT_B" Value="0.1"></ToSet>
+						<ToSet Key="$MULT_C" Value="0.1"></ToSet>
+						<ToSet Key="$MULT_D" Value="0.1"></ToSet>
+					</Condition>
+				</Conditions>
+				<Conditions>
+					<Condition Operand1="$MULT_C" Operator="&gt;" Operand2="10000" OperandType="Double">
+						<ToSet Key="$MULT_C" Value="10000"></ToSet>
+					</Condition>
+				</Conditions>
+			</Rule>
+			<BaseCoverage Code="DWELL" MinValue="$MIN_VAL" MaxValue="$MAX_VAL" Desc="Coverage A – Dwelling "></BaseCoverage>
+			<OnChange Code="DWELL">
+				<Target Code="OSTR" Operator="*" Operand="$MULT_B"></Target>
+				<Target Code="LPP" Operator="*" Operand="$MULT_C" ExternalDependency="True" 
+				IF="Y" ConditionOn="result" ConOpr="&gt;"
+					ConVal="10000" ToSet="result" ToSetVal="10000"></Target>
+				<Target Code="RV" Operator="*" Operand="$MULT_D"></Target>
+			</OnChange>
+			<ErrorMessage>
+				<Text Value="Coverage A - Dwelling for DP-3 Premier must be equal to  "></Text>
+				<Text Value="$MAX_VAL"></Text>
+				<Text Value=". "></Text>
+			</ErrorMessage>
+			<ErrRequired Value="Please enter Coverage A"></ErrRequired>
+		</Product>
+	</State>
+	<State ID="14" Name="Indiana">
+		<Product ID="11479" Desc="DP-2 Replacement">
+			<Remove>
+				 <Coverages>
+					<Coverage COV_ID="0" Code="DP03"></Coverage>
+					<Coverage COV_ID="0" Code="DP289"></Coverage>
+				</Coverages>
+				<Endorsements>
+					<Endorsement ID="254" Desc="DP-289 Repair Cost End" Mandatory="Y" />
+					<Endorsement ID="339" Desc="" />
+				</Endorsements>
+			</Remove>
+			<Mandatory>
+			<Coverages>
+			     <Coverage COV_ID="777" Code="CSL"></Coverage>
+			     <Coverage COV_ID="778" Code="MEDPM"></Coverage>
+			 </Coverages>
+			</Mandatory>
+			<Rule Action="Master" StartDate="1950-01-01" EndDate="3000-12-12">
+				<Conditions>
+					<Condition Operand1="1" Operator="==" Operand2="1" OperandType="Double">
+						<ToSet Key="$PER_REP_COST" Value="" Operand1="$REP_COST" Operator="*" Operand2="0.8"></ToSet>
+						<ToSet Key="$MIN_VAL" Value="$PER_REP_COST"></ToSet>
+						<ToSet Key="$MAX_VAL" Value="$REP_COST"></ToSet>
+						<ToSet Key="$MULT_B" Value="0.1"></ToSet>
+						<ToSet Key="$MULT_C" Value="0.05"></ToSet>
+						<ToSet Key="$MULT_D" Value="0.1"></ToSet>
+					</Condition>
+				</Conditions>				
+				<Conditions>
+				    <Condition Operand1="$VERIFY_RULE" Operator="==" Operand2="N" OperandType="String">
+						<ToSet Key="$MIN_VAL" Value="$PER_REP_COST"></ToSet>
+						<ToSet Key="$MAX_VAL" Value="$REP_COST"></ToSet>
+					</Condition>				   
+					<Condition Operand1="$MIN_VAL" Operator="&lt;" Operand2="30000" OperandType="Double">
+						<ToSet Key="$MIN_VAL" Value="$PER_REP_COST"></ToSet>
+						<ToSet Key="$MAX_VAL" Value="$REP_COST"></ToSet>
+					</Condition>
+				</Conditions>
+				<Conditions>
+					<Condition Operand1="$MULT_C" Operator="&gt;" Operand2="5000" OperandType="Double">
+						<ToSet Key="$MULT_C" Value="5000"></ToSet>
+					</Condition>
+				</Conditions>
+			</Rule>
+			<BaseCoverage Code="DWELL" MinValue="$MIN_VAL" MaxValue="$MAX_VAL" Desc="Coverage A – Dwelling "></BaseCoverage>
+			<OnChange Code="DWELL">
+				<Target Code="OSTR" Operator="*" Operand="$MULT_B"></Target>
+				<Target Code="LPP" Operator="*" Operand="$MULT_C" ExternalDependency="True" 
+				IF="Y" ConditionOn="result" ConOpr="&gt;"
+					ConVal="5000" ToSet="result" ToSetVal="5000"></Target>
+				<Target Code="RV" Operator="*" Operand="$MULT_D"></Target>
+			</OnChange>
+			<ErrorMessage>
+				<Text Value="Coverage A - Dwelling for DP-2 must be between "></Text>
+				<Text Value="$MIN_VAL"></Text>
+				<Text Value=" and "></Text>
+				<Text Value="$MAX_VAL"></Text>
+				<Text Value=". "></Text>
+			</ErrorMessage>
+			<ErrRequired Value="Please enter Coverage A"></ErrRequired>
+		</Product>
+		<Product ID="11480" Desc="DP-2 Repair Cost">
+			<Remove>
+			 <Coverages>
+			   <Coverage COV_ID="963" Code="DP03"></Coverage>
+	   		    <!-- added by Pravesh as these cov not applicable for Repaire cost as per Rental sheet "Endorsement List WMIC091307"  -->
+			    <Coverage COV_ID="0" Code="BR1143"></Coverage>
+			    <Coverage COV_ID="0" Code="IF184"></Coverage>
+			    <Coverage COV_ID="0" Code="IFNSE"></Coverage>
+			 </Coverages>
+			 <Endorsements>
+				<Endorsement ID="339" Desc="" />
+			</Endorsements>
+			</Remove>
+			<Mandatory>
+			   <Coverages>
+					<Coverage COV_ID="963" Code="DP289"></Coverage>
+					<Coverage COV_ID="777" Code="CSL"></Coverage>
+			        <Coverage COV_ID="778" Code="MEDPM"></Coverage>
+			  </Coverages>
+			</Mandatory>
+			<Rule Action="Master" StartDate="1950-01-01" EndDate="3000-12-12">
+				<Conditions>
+					<Condition Operand1="1" Operator="==" Operand2="1" OperandType="Double">
+						<ToSet Key="$MIN_VAL" Value="$MKT_VALUE"></ToSet>
+						<ToSet Key="$MAX_VAL" Value="$MKT_VALUE"></ToSet>
+						<ToSet Key="$MULT_B" Value="0.1"></ToSet>
+						<ToSet Key="$MULT_C" Value="0.05"></ToSet>
+						<ToSet Key="$MULT_D" Value="0.1"></ToSet>
+					</Condition>
+				</Conditions>
+				<Conditions>
+					<Condition Operand1="$MULT_C" Operator="&gt;" Operand2="5000" OperandType="Double">
+						<ToSet Key="$MULT_C" Value="5000"></ToSet>
+					</Condition>
+				</Conditions>
+			</Rule>
+			<BaseCoverage Code="DWELL" MinValue="$MIN_VAL" MaxValue="$MAX_VAL" Desc="Coverage A – Dwelling "></BaseCoverage>
+			<OnChange Code="DWELL">
+				<Target Code="OSTR" Operator="*" Operand="$MULT_B"></Target>
+				<Target Code="LPP" Operator="*" Operand="$MULT_C" ExternalDependency="True" 
+				IF="Y" ConditionOn="result" ConOpr="&gt;"
+					ConVal="5000" ToSet="result" ToSetVal="5000"></Target>
+				<Target Code="RV" Operator="*" Operand="$MULT_D"></Target>
+			</OnChange>
+			<ErrorMessage>
+				<Text Value="Coverage A - Dwelling for DP-2 Repair must be equal to  "></Text>
+				<Text Value="$MAX_VAL"></Text>
+				<Text Value=". "></Text>
+			</ErrorMessage>
+			<ErrRequired Value="Please enter Coverage A"></ErrRequired>
+		</Product>
+		<Product ID="11481" Desc="DP-3">
+			<Remove>
+		     	 <Coverages>
+					<Coverage COV_ID="0" Code="DP02"></Coverage>
+					<Coverage COV_ID="0" Code="DP289"></Coverage>
+				</Coverages>
+			
+				<Endorsements>
+					<Endorsement ID="254" Desc="DP-289 Repair Cost End" />
+					<Endorsement ID="337" Desc="" />
+				</Endorsements>
+			</Remove>
+			<Mandatory>
+			   <Coverages> 
+					<Coverage COV_ID="777" Code="CSL" Desc="Coverage E – Personal Liability Each Occurrence" Mandatory="Y" />
+					<Coverage COV_ID="778" Code="MEDPM" Desc="Coverage F – Medical Payment Each Person" Mandatory="Y" />
+			   </Coverages>	
+			
+			
+			</Mandatory>
+			<Rule Action="Master" StartDate="1950-01-01" EndDate="3000-12-12">
+				<Conditions>
+					<Condition Operand1="1" Operator="==" Operand2="1" OperandType="Double">
+						<ToSet Key="$PER_REP_COST" Value="" Operand1="$REP_COST" Operator="*" Operand2="0.8"></ToSet>
+						<ToSet Key="$MIN_VAL" Value="$PER_REP_COST"></ToSet>
+						<ToSet Key="$MAX_VAL" Value="$REP_COST"></ToSet>
+						<ToSet Key="$MULT_B" Value="0.1"></ToSet>
+						<ToSet Key="$MULT_C" Value="0.05"></ToSet>
+						<ToSet Key="$MULT_D" Value="0.1"></ToSet>
+					</Condition>
+				</Conditions>
+				<Conditions>
+				    <Condition Operand1="$VERIFY_RULE" Operator="==" Operand2="N" OperandType="String">
+						<ToSet Key="$MIN_VAL" Value="$PER_REP_COST"></ToSet>
+						<ToSet Key="$MAX_VAL" Value="$REP_COST"></ToSet>						
+					</Condition>
+					<Condition Operand1="$MIN_VAL" Operator="&lt;" Operand2="75000" OperandType="Double">
+						<ToSet Key="$MIN_VAL" Value="$PER_REP_COST"></ToSet>
+						<ToSet Key="$MAX_VAL" Value="$REP_COST"></ToSet>
+					</Condition>
+				</Conditions>
+				<Conditions>
+					<Condition Operand1="$MULT_C" Operator="&gt;" Operand2="5000" OperandType="Double">
+						<ToSet Key="$MULT_C" Value="5000"></ToSet>
+					</Condition>
+				</Conditions>
+			</Rule>
+			<BaseCoverage Code="DWELL" MinValue="$MIN_VAL" MaxValue="$MAX_VAL" Desc="Coverage A – Dwelling "></BaseCoverage>
+			<OnChange Code="DWELL">
+				<Target Code="OSTR" Operator="*" Operand="$MULT_B"></Target>
+				<Target Code="LPP" Operator="*" Operand="$MULT_C" ExternalDependency="True" 
+				IF="Y" ConditionOn="result" ConOpr="&gt;"
+					ConVal="5000" ToSet="result" ToSetVal="5000"></Target>
+				<Target Code="RV" Operator="*" Operand="$MULT_D"></Target>
+			</OnChange>
+			<ErrorMessage>
+				<Text Value="Coverage A - Dwelling for DP-3 must be between "></Text>
+				<Text Value="$MIN_VAL"></Text>
+				<Text Value=" and "></Text>
+				<Text Value="$MAX_VAL"></Text>
+				<Text Value=". "></Text>
+			</ErrorMessage>
+			<ErrRequired Value="Please enter Coverage A"></ErrRequired>
+		</Product>
+		<Product ID="11482" Desc="DP-3 Repair Cost">
+			<Remove>
+			  <Coverages>
+			    <Coverage COV_ID="0" Code="DP02"></Coverage>
+			    <!-- added by Pravesh as these cov not applicable for Repaire cost as per Rental sheet "Endorsement List WMIC091307"  -->
+			    <Coverage COV_ID="0" Code="BR1143"></Coverage>
+			    <Coverage COV_ID="0" Code="IF184"></Coverage>
+			    <Coverage COV_ID="0" Code="IFNSE"></Coverage>
+			  </Coverages>
+			  	<Endorsements>
+					
+					<Endorsement ID="337" Desc="" />
+				</Endorsements>
+			</Remove>
+			<Mandatory>
+				<Coverages>
+					<Coverage COV_ID="773" Code="DWELL" Desc="Coverage A – Dwelling" Mandatory="Y" />
+					<Coverage COV_ID="774" Code="OSTR" Desc="Coverage B – Other Structures" Mandatory="Y" />
+					<Coverage COV_ID="775" Code="LPP" Desc="Coverage C – Landlords Personal Property" Mandatory="Y" />
+					<Coverage COV_ID="776" Code="RV" Desc="Coverage D – Rental Value" Mandatory="Y" />
+					<Coverage COV_ID="777" Code="CSL" Desc="Coverage E – Personal Liability Each Occurrence" Mandatory="Y" />
+					<Coverage COV_ID="778" Code="MEDPM" Desc="Coverage F – Medical Payment Each Person" Mandatory="Y" />
+					<Coverage COV_ID="786" Code="SD" Desc="Satellite Dishes" Mandatory="Y" />
+					<Coverage COV_ID="0" Code="DP289"></Coverage>
+				</Coverages>
+			</Mandatory>
+			<Rule Action="Master" StartDate="1950-01-01" EndDate="3000-12-12">
+				<Conditions>
+					<Condition Operand1="1" Operator="==" Operand2="1" OperandType="Double">
+						<ToSet Key="$MIN_VAL" Value="$MKT_VALUE"></ToSet>
+						<ToSet Key="$MAX_VAL" Value="$MKT_VALUE"></ToSet>
+						<ToSet Key="$MULT_B" Value="0.1"></ToSet>
+						<ToSet Key="$MULT_C" Value="0.05"></ToSet>
+						<ToSet Key="$MULT_D" Value="0.1"></ToSet>
+					</Condition>
+				</Conditions>
+				<Conditions>
+					<Condition Operand1="$MULT_C" Operator="&gt;" Operand2="5000" OperandType="Double">
+						<ToSet Key="$MULT_C" Value="5000"></ToSet>
+					</Condition>
+				</Conditions>
+			</Rule>
+			<BaseCoverage Code="DWELL" MinValue="$MIN_VAL" MaxValue="$MAX_VAL" Desc="Coverage A – Dwelling "></BaseCoverage>
+			<OnChange Code="DWELL">
+				<Target Code="OSTR" Operator="*" Operand="$MULT_B"></Target>
+				<Target Code="LPP" Operator="*" Operand="$MULT_C" ExternalDependency="True" 
+				IF="Y" ConditionOn="result" ConOpr="&gt;"
+					ConVal="5000" ToSet="result" ToSetVal="5000"></Target>
+				<Target Code="RV" Operator="*" Operand="$MULT_D"></Target>
+			</OnChange>
+			<ErrorMessage>
+				<Text Value="Coverage A - Dwelling for DP-3 Repair must be equal to  "></Text>
+				<Text Value="$MAX_VAL"></Text>
+				<Text Value=". "></Text>
+			</ErrorMessage>
+			<ErrRequired Value="Please enter Coverage A"></ErrRequired>
+		</Product>
+	</State>
+</Root>

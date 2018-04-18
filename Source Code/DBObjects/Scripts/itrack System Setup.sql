@@ -1,0 +1,62 @@
+If exists(select * from MNT_LOOKUP_VALUES_MULTILINGUAL where LOOKUP_UNIQUE_ID=11768)
+UPDATE MNT_LOOKUP_VALUES_MULTILINGUAL
+SET LOOKUP_VALUE_DESC='Nível de Apólice' WHERE  LOOKUP_UNIQUE_ID=11768 
+
+If  exists(select * from MNT_MENU_LIST_MULTILINGUAL where MENU_ID=16)
+BEGIN
+Update MNT_MENU_LIST_MULTILINGUAL
+set MENU_NAME='Configurações do Sistema'where MENU_ID=16
+END
+
+If  exists(select * from MNT_MENU_LIST_MULTILINGUAL where MENU_ID=523)
+BEGIN
+Update MNT_MENU_LIST_MULTILINGUAL
+set MENU_NAME='Taxas da Moeda'where MENU_ID=523
+END
+
+If  exists(select * from MNT_MENU_LIST_MULTILINGUAL where MENU_ID=451)
+BEGIN
+Update MNT_MENU_LIST_MULTILINGUAL
+set MENU_NAME='Informações Bancárias'where MENU_ID=451
+END
+
+If  exists(select * from MNT_MENU_LIST_MULTILINGUAL where MENU_ID=397)
+BEGIN
+Update MNT_MENU_LIST_MULTILINGUAL
+set MENU_NAME='Configurações de Agenda'where MENU_ID=397
+END
+
+If  exists(select * from MNT_MENU_LIST_MULTILINGUAL where MENU_ID=37)
+BEGIN
+Update MNT_MENU_LIST_MULTILINGUAL
+set MENU_NAME='Partes Envolvidas'where MENU_ID=37
+END
+
+If  exists(select * from MNT_MENU_LIST_MULTILINGUAL where MENU_ID=128)
+BEGIN
+Update MNT_MENU_LIST_MULTILINGUAL
+set MENU_NAME='Definições do Usuário'where MENU_ID=128
+END
+
+If  exists(select * from MNT_MENU_LIST_MULTILINGUAL where MENU_ID=188)
+BEGIN
+Update MNT_MENU_LIST_MULTILINGUAL
+set MENU_NAME='Configurações Gerais'where MENU_ID=188
+END
+
+If  exists(select * from MNT_MENU_LIST_MULTILINGUAL where MENU_ID=403)
+BEGIN
+Update MNT_MENU_LIST_MULTILINGUAL
+set MENU_NAME='Adicionar Estados'where MENU_ID=403
+END
+
+If  exists(select * from MNT_MENU_LIST_MULTILINGUAL where MENU_ID=502)
+BEGIN
+Update MNT_MENU_LIST_MULTILINGUAL
+set MENU_NAME='Configurações de Produtos'where MENU_ID=502
+END
+
+
+
+
+

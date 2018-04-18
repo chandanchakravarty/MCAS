@@ -1,0 +1,98 @@
+﻿@using MCAS.Globalisation
+@using MCAS.Web.Resources
+@model  IEnumerable<MCAS.Web.Objects.CommonHelper.MenuListItem>
+@{
+    ViewBag.Title = "MenuList";
+}
+
+
+
+  <div class="container visible-xs" id="textsearch">
+    <div class="row">
+      <div class="col-lg-12">
+          <div class="custom-search">
+            <input type="text" class="search-query" placeholder="Search here">
+            <i class="icon-search"></i> </div>
+      </div>
+    </div>
+  </div>
+<div class="top-bar"> 
+  
+  <!-- Logo start --> 
+  <a href='@Url.Action("Index","Home")' class="logo"><img src="@Url.Content("~/Images/brand-logo.png")"></a> 
+  <!-- Logo end --> 
+  
+  <!-- Mini Nav Left Start -->
+  <ul id="mini-nav" class="hidden-xs">
+    <li class="arrow-box list-box"> <a href="#"> <i class="icon-exchange text-warning"></i> </a> </li>
+  </ul>
+  <!-- Mini Nav Left End --> 
+  
+  <!-- Mini Nav Right Start -->
+  <ul id="mini-nav-right">
+    <li class="list-box hidden-xs">@Html.GlobalisedRouteLink("English", "en", ViewContext.RouteData, new { @class = "btn-primary", @style = "color: #c4c4c4;" }) </li>
+@*    <li class="list-box hidden-xs">@Html.GlobalisedRouteLink("Français", "fr", ViewContext.RouteData, new { @class = "btn-primary", @style = "color: #c4c4c4;" })  </li>  *@
+
+    <li class="list-box hidden-xs"> <a href='@Url.Action("Index", "Home")' class="btn btn-info dropdown-toggle"> <i class="icon-home"></i> @Index.Home</a> </li>
+    <li class="dropdown list-box hidden-xs"> <a href="#" class="btn btn-info dropdown-toggle" data-toggle="dropdown"> <i class="icon-user"></i> System Admin</a>
+    <ul id="mainui" class="dropdown-menu animated fadeInLeft quick-actions">
+        <li class="plain">Quick Actions</li>
+     @{
+    foreach (MCAS.Web.Objects.CommonHelper.MenuListItem item in Model.Where(x => x.TabId == "S_ADMN"))
+    {
+        if (@item.IsMenu.Equals("Y"))
+        {
+            
+            <li> <a href="@Url.Content(@item.LinkAddress)"> <i class='@item.DisplayImage'></i>
+          <p>@item.DisplayText</p>
+          </a> </li>
+        }
+    }
+    }   
+    </ul>
+    </li>
+    <li class="list-box hidden-xs"> <a href='@Url.Action("Login", "Home")' class="btn btn-warning"> <i class="icon-signout"></i> Sign Out</a> </li>
+    <li class="list-box hidden-lg hidden-md hidden-sm" id="mob-nav"> <a href="#" class="btn">Menu</a> </li>
+  </ul>
+  <!-- Mini Nav Right End --> 
+</div>
+
+  <!-- Search bar end --> 
+<aside id="sidebar"> 
+<div id='menu'>
+<ul>
+
+   @{
+       foreach (MCAS.Web.Objects.CommonHelper.MenuListItem item in Model.Where(x => x.TabId != "S_ADMN"))
+       {
+           if (@item.IsHeader.Equals("Y") && @item.IsMenu.Equals("Y"))
+           {
+               if (@item.TabId == "DASH")
+               {
+                <li class="highlight"> <a href='#'> <i class='@item.DisplayImage'></i> <span>@item.DisplayText</span><em class="arrow-active"></em> </a> </li>
+               }
+               else
+               {
+            <li class="has-sub"> <a href='#'> <i class='@item.DisplayImage'></i> <span>@item.DisplayText</span><em class="arrow"></em> </a>
+            <ul>
+            @foreach (var subitem in Model.Where(s => (s.MainHeaderId == item.MenuId && s.TabId == item.TabId)))
+            {
+                <li> <a href='@Url.Action(subitem.LinkAddress.Split(',')[0], subitem.LinkAddress.Split(',')[1])'> <i class='@subitem.DisplayImage'></i> <span>@subitem.DisplayText</span> </a> </li>
+            }
+            </ul>
+            </li>
+           }
+        }
+    }
+ }  
+</ul>
+</div>
+</aside>
+
+<script type="text/javascript">
+     function MenuLinkClicked(event, text) {
+        var url = event.target.href;
+        if (document.location.href == url) return true;
+        else { return true; }
+    }
+</script>

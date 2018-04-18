@@ -1,0 +1,33 @@
+/****** Object:  Table [dbo].[SCREEN_XML_DETAILS]    Script Date:  09/22/2011 12:55:15  ******/
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[SCREEN_XML_DETAILS]') AND type in (N'U'))
+DROP TABLE [dbo].[SCREEN_XML_DETAILS]
+GO
+/****** Object:  Table [dbo].[SCREEN_XML_DETAILS]    Script Date: 10/11/2011  ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+SET ANSI_PADDING ON
+GO
+
+CREATE TABLE [dbo].[SCREEN_XML_DETAILS](
+    [ID][int]Identity,
+	[SCREEN_ID] [varchar](10) NOT NULL ,
+	[PAGE_XML_FILENAME] [nvarchar](100)NOT NULL,
+	[PAGE_XML_FILEPATH] [nvarchar](500)NOT NULL,
+	[USER_ID] [int]NULL,
+	[LAST_UPDATED_DATETIME][DATETIME]NULL
+	CONSTRAINT [PK_SCREEN_XML_DETAILS_ID] PRIMARY KEY CLUSTERED
+    ([ID]asc))
+    EXEC Proc_AddExtendedProperty SCREEN_XML_DETAILS
+
+GO
+
+SET ANSI_PADDING OFF
+GO
+
+
+
+

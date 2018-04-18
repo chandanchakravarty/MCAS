@@ -1,0 +1,575 @@
+﻿@using MCAS.Globalisation
+@using MCAS.Web.Resources
+@using MCAS.Web.Objects.CommonHelper
+@using MCAS.Web.Objects.Resources.Common;
+@{
+    System.Resources.ResourceManager MenuResource = (new MCAS.Web.Objects.MastersHelper.TransactionModel()).GetResourceManager("MCAS.Web.Objects.Resources.Common.Menu");
+    var culture = new BaseModel().GetCulture();
+    TempData["GroupName"] = Session["GroupName"];
+    TempData["SetSystemAdminScreenName"] = Session["SetSystemAdminScreenName"];
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>ComfortDelGro Insurance Brokers Pte Ltd</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="author" content="Ebix Software Pvt. Ltd." />
+    <link rel="shortcut icon" href="/favicon.ico" />
+    <!-- Main CSS -->
+    <link href="@Url.Content("~/Content/import.css")" rel="Stylesheet" media="screen" />
+    <!-- Font Awesome CSS -->
+    <link href="@Url.Content("~/fonts/font-awesome.css")" rel="stylesheet" type="text/css" />
+    <!--[if IE 7]>
+      <link rel="stylesheet" type="text/css" href="@Url.Content("~/fonts/font-awesome.css")" />
+    <![endif]-->
+    <!-- HTML5 shiv and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script type="text/javascript" src="@Url.Content("~/Scripts/html5shiv.js")"></script>
+      <script type="text/javascript" src="@Url.Content("~/Scripts/respond.min.js")"></script>
+    <![endif]-->
+    <link href="@Url.Content("~/Content/jquery-ui.css")" rel="Stylesheet" media="screen" />
+    <link href='@Url.Content("~/Content/jquery.dataTables.min.css")' rel="stylesheet" type="text/css" />
+    <style type="text/css">
+        /* style for space betwen Row*/
+        .breadcrumb>li+li:before 
+        {
+        font-size: 16px !important;
+        color:Black !important;
+        }
+        .top-buffer
+        {
+            margin-top: 10px;
+        }
+        .ui-button-icon-primary.ui-icon.ui-icon-closethick
+        {
+            margin: -7px 0 0 -7px;
+        }
+        /* styles for validation helpers */
+        .field-validation-error
+        {
+            color: #e80c4d;
+            font-weight: bold;
+        }
+        
+        .field-validation-valid
+        {
+            display: none;
+        }
+        
+        .validation-summary-errors
+        {
+            color: #e80c4d;
+            font-weight: bold;
+            font-size: 1.1em;
+        }
+        .ui-dialog-buttonset
+        {
+            margin-right: 40%;
+        }
+        
+        .validation-summary-valid
+        {
+            display: none;
+        }
+        .rightJustified
+        {
+            text-align: right;
+        }
+        #Hormenu,#Hormenuwizard {display:none;}
+        .Systemmenu {display:none;}
+       .logo { display: none; }  
+        @@media (max-width:767px) 
+        {
+        .Systemmenu {display:block;}
+        #reg2{width:100%}
+        .custom-search {display:none;}
+        .dashboard-wrapper {margin-left:0px;}
+        aside#sidebar {left:-220px;}
+        #wizard { display: none; }
+        ul#mini-nav-right li.list-box {margin-left: 0px;}
+        ul#mini-nav-right {
+        margin: 15px 0px 0 0;
+        }
+       .top-bar .logo{width:80px;}
+        .top-bar > a > img 
+        {
+        max-width: 60px;
+        max-height: 14px;}
+        }
+        
+  
+        @@media screen and (min-width: 768px) 
+        {
+        .Systemmenu {display:block;}
+        .custom-search {display:block;}
+        .logo { display: block; }  
+        .Claimmenu {display:block;}
+        .Systemmenu {display:none;}
+        aside#sidebar {left:0px;}
+        .dashboard-wrapper {margin-left:220px;}
+        aside#sidebar {left:0px;}
+        #wizard { display: block; } 
+        } 
+ </style>
+</head>
+<body class="animated fadeInDown">
+<div id="divLoading" class="Claimloading"><p>Please wait...<br>   <img src="@Url.Content("~/Images/ajax-loader.gif")" alt="Loading.."> </p></div>
+    <!-- Top Bar Start -->
+    <div class="top-bar">
+        <!-- Logo start -->
+        <a anchorid="DASH" url='@Url.Action("Index", "Home")' href="#" class="logo">
+            <img alt="" src="@Url.Content("~/Images/brand-logo.png")"/></a>
+        <ul id="mini-nav" class="hidden-xs">
+            <li class="arrow-box list-box"><a href="#"><i class="icon-exchange text-warning"></i>
+            </a></li>
+        </ul>
+        <ul id="mini-nav-right">
+            @*<li class="list-box hidden-xs">@Html.GlobalisedRouteLink("English", "en", ViewContext.RouteData, new { @class = "btn-primary", @style = "color: #c4c4c4;" })</li>*@
+            <li class="list-box"><a anchorid="DASH" url='@Url.Action("Index", "Home")' href="#" class="btn btn-info dropdown-toggle">
+                <i class="icon-home"></i>Home</a> </li>
+            <li class="dropdown list-box hidden-xs"><a href="#" class="btn btn-info dropdown-toggle"
+                data-toggle="dropdown"><i class="icon-user"></i>System Admin</a>
+                <div id="mainui" class="dropdown-menu animated fadeInLeft quick-actions" style="overflow-y: auto;
+                    overflow-x: hidden;">
+                    <ul class="animated fadeInLeft quick-actions">
+                        @if (Session != null && Session["menuList"] != null)
+                        {
+                            string[] Group = { "A", "B" };
+                            string[] GroupName = { "Daily Operations", "GI Brokering" };
+                            for (int i = 0; i < Group.Length; i++)
+                            {
+                            <ul>
+                                <li id="@Convert.ToString(GroupName[i]).Replace(" ", "")" style="padding: 0 10px; border: 0 !important; width: 100%; font-weight: 600; display: block; font-size: 14px; background: transparent; text-align: left !important;">@MenuResource.GetString(Convert.ToString(@Convert.ToString(GroupName[i]).Replace(" ", "")))</li>
+                                @{
+                                var myMenuList = (List<MenuListItem>)Session["menuList"];
+                                var group1list = myMenuList.Where(x => x.TabId == "S_ADMN" && x.IsMenu.Equals("Y") && x.Group.Contains(Convert.ToString(Group[i])));
+                                foreach (MenuListItem item in group1list)
+                                {
+                                    var id = "S_admin" + @item.MenuId;
+                                    var b = "~" + @item.LinkAddress;
+                                    <li><a url="@Url.Content(b)" href="#" aid="@item.MenuId" gid="@Group[i]" style="display: block;">
+                                        <i class='@item.DisplayImage'></i>
+                                        <p id='@id'>@MenuResource.GetString(Convert.ToString(@item.MenuId))</p>
+                                    </a></li>
+                                }
+                                }
+                            </ul>
+                            }
+                        }
+                    </ul>
+                </div>
+            </li>
+            <li id="SystemadminLi" class="list-box visible-xs"><a id="Systemadminanchor" class="btn">
+                <i class="icon-user"></i>System Admin</a></li>
+            <li class="list-box"><a href='@Url.Action("Login", "Home")' class="btn btn-warning" style="background-color:#F27819;">
+                <i class="icon-signout"></i>Sign Out</a> </li>
+        </ul>
+        <!-- Mini Nav Right End -->
+    </div>
+    <!-- Top Bar End -->
+    <!-- Search bar start -->
+    <div class="container visible-xs" id="textsearch">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="custom-search">
+                    <input type="text" class="search-query" placeholder="Search here" />
+                    <i class="icon-search"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Search bar end -->
+    <!-- Left sidebar start -->
+    <aside id="sidebar">
+        <!-- Search bar start -->
+       
+        <!-- Search bar end -->
+        <!-- Menu start -->
+        <div id='menu'>
+            @if (Session != null && Session["menuList"] != null)
+            {
+                string[] Group = { "A", "B" };
+                string[] GroupName = { "Daily Operations", "GI Brokering" };
+                for (int i = 0; i < Group.Length; i++)
+                {
+                <ul class="Sysmmenu">
+                    <li liid="@Group[i]" class="has-sub"><a href='#'><i class="icon-cog text-success"></i><span>@MenuResource.GetString(Convert.ToString(@Convert.ToString(GroupName[i]).Replace(" ", "")))</span>
+                        <em class="arrow"></em></a>
+                        <ul ulid="@Group[i]">
+                            @{
+                    var myMenuList = (List<MenuListItem>)Session["menuList"];
+                    var group1list = myMenuList.Where(x => x.TabId == "S_ADMN" && x.IsMenu.Equals("Y") && x.Group.Contains(Convert.ToString(Group[i])));
+                    foreach (MenuListItem item in group1list)
+                    {
+                        var b = "~" + @item.LinkAddress;
+                                <li><a url="@Url.Content(b)" href="#" aid="@item.MenuId" gid="@Group[i]" style="display:block;"><i class="icon-double-angle-right"></i><span>@MenuResource.GetString(Convert.ToString(@item.MenuId))</span><em emid="@item.MenuId" class="arrow"></em></a></li> 
+                    }
+                            }
+                        </ul>
+                    </li>
+                </ul>
+                }
+            }
+        </div>
+        <!-- Menu End -->
+    </aside>
+    <div id="body">
+        @RenderSection("featured", required: false)
+        <section class="content-wrapper main-content clear-fix">@RenderBody()</section>
+    </div>
+    <!-- Footer Container -->
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 text-right text-white">
+                <h5>
+                    Powered by <a href="http://www.ebix.com/" target="_blank">
+                        <img alt="" src="@Url.Content("~/images/ebix.png")" style="vertical-align:text-top"/></a></h5>
+            </div>
+        </div>
+    </div>
+    <!-- End Footer Container -->
+    @*    @Scripts.Render("~/bundles/jquery")
+        @Scripts.Render("~/bundles/jqueryval")*@ @*  @RenderSection("scripts", required: false)*@
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script type="text/javascript">
+        '@TempData["SetSystemAdminScreenName"]' && ($('.Sysmmenu em[emid="@TempData["SetSystemAdminScreenName"]"]').removeClass("arrow").addClass("arrow-active"), $('.Sysmmenu li[liid="@TempData["GroupName"]"]').addClass("highlight active"), $('.Sysmmenu ul[ulid="@TempData["GroupName"]"]').css("display", "block"), $('.Sysmmenu em:not([emid="@TempData["SetSystemAdminScreenName"]@TempData["subscid"]"])').removeClass("arrow-active").addClass("arrow"), $('.Sysmmenu li:not([liid="@TempData["GroupName"]"])').removeClass("highlight active"), $('.Sysmmenu ul:not([ulid="@TempData["GroupName"]"])').css("display", "none"));
+        $('#menu > ul > li > a').click(function () {
+            $('#menu li').removeClass('active');
+            $(this).closest('li').addClass('active');
+            var checkElement = $(this).next();
+            if ((checkElement.is('ul')) && (checkElement.is(':visible'))) {
+                $(this).closest('li').removeClass('active');
+                checkElement.slideUp('normal');
+            }
+            if ((checkElement.is('ul')) && (!checkElement.is(':visible'))) {
+                $('#menu ul ul:visible').slideUp('normal');
+                checkElement.slideDown('normal');
+            }
+            if ($(this).closest('li').find('ul').children().length == 0) {
+                return true;
+            } else {
+                return false;
+            }
+        });
+        $("div#menu > ul.Sysmmenu > li > ul > li > a").one('click', function () {
+            var a, c, sPageURL, b = '@(Url.Action("SetSystemAdminScreenName", "ClaimProcessing"))';
+            void 0 !== $(this).attr("aid") && (a = $(this).attr("gid")) && (c = $(this).attr('aid')) && (sPageURL = $(this).attr('url'));
+            if (void 0 !== $(this).attr("aid")) {
+                $.ajax({
+                    type: "GET",
+                    url: b,
+                    data: {
+                        ScreenNameDash: a,
+                        screenid: c,
+                        uid: guid()
+                    },
+                    dataType: "json",
+                    success: function (result) {
+                        window.location.href = sPageURL;
+                    }
+                });
+            };
+        });
+        $("div#mainui > ul > ul > li > a").one('click', function () {
+            var a, c, sPageURL, b = '@(Url.Action("SetSystemAdminScreenName", "ClaimProcessing"))';
+            void 0 !== $(this).attr("aid") && (a = $(this).attr("gid")) && (c = $(this).attr('aid')) && (sPageURL = $(this).attr('url'));
+            if (void 0 !== $(this).attr("aid")) {
+                $.ajax({
+                    type: "GET",
+                    url: b,
+                    data: {
+                        ScreenNameDash: a,
+                        screenid: c,
+                        uid: guid()
+                    },
+                    dataType: "json",
+                    success: function (result) {
+                        window.location.href = sPageURL;
+                    }
+                });
+            };
+        });
+        $('a[anchorid = "DASH"]').one('click', function () {
+            var a, sPageURL = $(this).attr('url'), b = '@(Url.Action("SetMenuArrow", "ClaimProcessing"))';
+            void 0 !== $(this).attr("anchorid") && (a = $(this).attr("anchorid"));
+            if (void 0 !== $(this).attr("anchorid")) {
+                $.ajax({
+                    type: "GET",
+                    url: b,
+                    data: {
+                        screenid: a,
+                        uid: guid()
+                    },
+                    dataType: "json",
+                    success: function (result) {
+                        window.location.href = sPageURL;
+                    }
+                });
+            };
+
+        });
+    </script>
+    <script src="@Url.Content("~/Scripts/jquery.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Scripts/jquery.validate.min.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.js")" type="text/javascript"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="@Url.Content("~/Scripts/bootstrap.min.js")" type="text/javascript"></script>
+    <!-- jquery UI v1.10.3 js -->
+    <script src="@Url.Content("~/Scripts/jquery-ui-v1.10.3.js")" type="text/javascript"></script>
+    <!-- Sparkline graphs -->
+    @*<script src="@Url.Content("~/Scripts/sparkline.js")" type="text/javascript"></script>*@
+    <!-- Data tables -->
+    <script src="@Url.Content("~/Scripts/jquery.datatables.js")" type="text/javascript"></script>
+    <!-- Date Range -->
+    <script src="@Url.Content("~/Scripts/daterange/moment.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Scripts/daterange/daterangepicker.js")" type="text/javascript"></script>
+    <!-- Animated Right Sidebar -->
+    <script src="@Url.Content("~/Scripts/slidebars.js")" type="text/javascript"></script>
+    <!-- JVector Map -->
+    <script src="@Url.Content("~/Scripts/jvectormap/jquery-jvectormap-1.2.2.min.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Scripts/jvectormap/jquery-jvectormap-usa.js")" type="text/javascript"></script>
+    <!-- Custom JS -->
+    <script src="@Url.Content("~/Scripts/custom.js")" type="text/javascript"></script>
+    @*<script src="@Url.Content("~/Scripts/custom-index.js")" type="text/javascript"></script>*@
+    <script src="@Url.Content("~/Scripts/jquery.slimscroll.min.js")" type="text/javascript"></script>
+    <script charset="utf8" src='@Url.Content("~/Scripts/jquery.dataTables.min.js")' type="text/javascript"></script>
+    <script src="@Url.Content("~/Scripts/jquery.maskedinput.js")" type="text/javascript"></script>
+    <script type="text/javascript">
+        var vNoChange = "@Html.Raw(Common.NoChangeHaveBeenMade)";
+        var vDateFormat = "@Html.Raw(Common.MsgDateFormat)";
+        $("form").submit(function () {
+            $('input[type=text]').each(function () {
+                if (void 0 !== $(this).attr("format")) {
+                    if ($(this).val() != "") {
+                        $(this).val($(this).val().toString().replace(/,/g, ""));
+                    }
+                };
+            });
+        });
+        $("input[type=text]").each(function () {
+            if (void 0 !== $(this).attr("data-val-date") && "The field " == $(this).attr("data-val-date").substring(0, 10)) {
+                var a = $(this).attr("data-val-date").substring(10, $(this).attr("data-val-date").length).replace("must be a date.", "@Html.Raw(Common.MsgDateFormat)");
+                $(this).removeAttr("data-val-date");
+                $(this).attr("data-val-date", a)
+            }
+        });
+        var do_on_load = function () {
+
+
+
+            $("a").click(function () {
+                var a, b = '@(Url.Action("SetMenuArrow", "ClaimProcessing"))' + "?uid=" + guid()
+                void 0 !== $(this).attr("anchorid") && (a = $(this).attr("anchorid"));
+                if (void 0 !== $(this).attr("anchorid")) {
+                    $.ajax({
+                        type: "GET",
+                        url: b,
+                        data: { screenid: a },
+                        dataType: "json",
+                        success: function (result) {
+                        }
+                    });
+                };
+
+            });
+
+            var table = $('#tableDiarySrc').dataTable({
+                "oLanguage": {
+                    "sSearch": '@MCAS.Web.Objects.Resources.Common.Common.Search',
+                    "sInfo": "@MCAS.Web.Objects.Resources.Common.Common.Showing _START_ @MCAS.Web.Objects.Resources.Common.Common.to _END_ @MCAS.Web.Objects.Resources.Common.Common.of _TOTAL_ @MCAS.Web.Objects.Resources.Common.Common.entries",
+                    "sLengthMenu": "@MCAS.Web.Objects.Resources.Common.Common.Show  _MENU_ @MCAS.Web.Objects.Resources.Common.Common.entries",
+                    "sEmptyTable": "@MCAS.Web.Objects.Resources.Common.Common.sEmptyTable",
+                    "sInfoEmpty": "@MCAS.Web.Objects.Resources.Common.Common.sInfoEmpty",
+                    "sProcessing": "@MCAS.Web.Objects.Resources.Common.Common.sProcessing",
+                    "oPaginate": {
+                        "sNext": '@MCAS.Web.Objects.Resources.Common.Common.Next',
+                        "sLast": '@MCAS.Web.Objects.Resources.Common.Common.Last',
+                        "sFirst": '@MCAS.Web.Objects.Resources.Common.Common.First',
+                        "sPrevious": '@MCAS.Web.Objects.Resources.Common.Common.Previous'
+                    }
+                },
+                columnDefs: [
+   { orderable: false, targets: -1 }
+],
+                "pagingType": "full_numbers",
+                "iDisplayLength": 10,
+                "aLengthMenu": [[10, 20, 25, 50, 100], [10, 20, 25, 50, 100]]
+
+
+            });
+            $('td').each(function () {
+                if (void 0 !== $(this).attr("format")) {
+                    if ($(this).html() != "") {
+                        $(this).html(CurrencyFormat($(this).html()));
+                    }
+                };
+            });
+            $("input[type=text], textarea").keypress(function () {
+                if (void 0 !== $(this).attr("numlen")) {
+                    var b = $(this).val().length, a = parseInt($(this).attr("numlen"));
+                    return a == parseInt(b) && isTextSelected(document.getElementById($(this).context.id)) || a > parseInt(b) ? (b = "#" + this.id, a = event.type, a = a.which ? a.which : event.keyCode, 46 != a && 31 < a && (48 > a || 57 < a) ? ($(b).focus(), !1) : !0) : !1
+                }
+                if (void 0 !== $(this).attr("strlen")) return b = $(this).val().length, c = parseInt($(this).attr("strlen")), c == parseInt(b) && isTextSelected(document.getElementById($(this).context.id)) || c > parseInt(b) ? (a = a || event, a = 32 == a.keyCode ? !0 : /[a-z]+$/i.test(String.fromCharCode(a.keyCode || a.which)), 0 == a ? !1 : a) : !1;
+                if (void 0 !== $(this).attr("len")) return b = $(this).val().length, c = parseInt($(this).attr("len")), c == parseInt(b) && isTextSelected(document.getElementById($(this).context.id)) || c > parseInt(b) ? !0 : !1;
+                $(this).valid();
+            });
+
+            $("input[type=text]").blur(function () {
+                if ((void 0 !== $(this).attr("format")) || $(this).hasClass("format")) {
+                    var a = $(this).val().replace(/,/g, "");
+                    if ("" != a && !isNaN(a)) {
+                        $(this).val(CurrencyFormat($(this).val().replace(/,/g, "")));
+
+                    }
+                    $(this).valid();
+                };
+            }).each(function () {
+                if (void 0 !== $(this).attr("format")) {
+                    $(this).addClass("rightJustified");
+                };
+            });
+
+            //            $("input[type=text], textarea").on("paste", function (a) {
+
+            //                if (void 0 !== $(this).attr("numlen")) if (a = /^\d+$/.test(pastedText)) {
+            //                    a = parseInt(pastedText.length) + c;
+            //                    var b = parseInt($(this).attr("numlen"));
+            //                    if (a != b && a > b) return $(this).val((pastedText + $(this).val()).toString().substring(0, b)), alert("Only " + b + " characters are paste."), !1
+            //                } else return alert("String contains non numeric digit, so cannot be paste."), !1;
+            //                if (void 0 !== $(this).attr("strlen")) if (a = /^[a-zA-Z ]*$/.test(pastedText)) {
+            //                    if (a = parseInt(pastedText.length) + c, b = parseInt($(this).attr("strlen")), a != b && a > b) return $(this).val((pastedText + $(this).val()).toString().substring(0, b)), alert("Only " + b + " characters are paste."), !1
+            //                } else return alert("String contains numeric digit, so cannot be paste."), !1;
+            //                if (void 0 !== $(this).attr("len") && (a = parseInt(pastedText.length) + c, b = parseInt($(this).attr("len")), a != b && a > b)) return $(this).val((pastedText + $(this).val()).toString().substring(0, b)), alert("Only " + b + " characters are paste."), !1;
+            //                $(this).valid()
+            //            });
+
+            $('input[type=text]').each(function () {
+                if (void 0 !== $(this).attr("format")) {
+                    if ($(this).val() != "") {
+                        $(this).val(CurrencyFormat($(this).val()));
+                    }
+                };
+            });
+            $("p").each(function () {
+                if ($(this).text().toString().contains("<br>")) {
+                    $(this).html($(this).text());
+                }
+            });
+        };
+
+        $(document).ready(do_on_load);
+        $(window).bind('page:change', do_on_load);
+
+        String.prototype.contains = function (a) {
+            return -1 != this.indexOf(a)
+        };
+        var guid = (function () {
+            function s4() {
+                return Math.floor((1 + Math.random()) * 0x10000)
+               .toString(16)
+               .substring(1);
+            }
+            return function () {
+                return s4() + s4() + '-' + s4() + '-' + s4() + '-' +
+           s4() + '-' + s4() + s4() + s4();
+            };
+        })();
+        function CurrencyFormat(number) {
+            var decimalplaces = 2;
+            var decimalcharacter = ".";
+            var thousandseparater = ",";
+            number = parseFloat(number);
+            var sign = number < 0 ? "-" : "";
+            var formatted = new String(number.toFixed(decimalplaces));
+            if (decimalcharacter.length && decimalcharacter != ".") { formatted = formatted.replace(/\./, decimalcharacter); }
+            var integer = "";
+            var fraction = "";
+            var strnumber = new String(formatted);
+            var dotpos = decimalcharacter.length ? strnumber.indexOf(decimalcharacter) : -1;
+            if (dotpos > -1) {
+                if (dotpos) { integer = strnumber.substr(0, dotpos); }
+                fraction = strnumber.substr(dotpos + 1);
+            }
+            else { integer = strnumber; }
+            if (integer) { integer = String(Math.abs(integer)); }
+            while (fraction.length < decimalplaces) { fraction += "0"; }
+            temparray = new Array();
+            while (integer.length > 3) {
+                temparray.unshift(integer.substr(-3));
+                integer = integer.substr(0, integer.length - 3);
+            }
+            temparray.unshift(integer);
+            integer = temparray.join(thousandseparater);
+            return integer + decimalcharacter + fraction;
+        };
+        function isTextSelected(input) {
+            if (typeof input.selectionStart == "number") {
+                return input.selectionStart - input.selectionEnd != 0;
+            }
+        };
+        function IsTabOrBrowserClosed() {
+            var validNavigation = false;
+            $(document).bind('keypress', function (e) {
+                if (e.keyCode == 116 || e.keyCode == 13) {
+                    validNavigation = true;
+                }
+            });
+            // User presses F5 to refresh
+            $(window).keydown(function (event) {
+                if (event.keyCode == 116) {
+                    refresh = true;
+                }
+            });
+            // Attach the event click for all links in the page
+
+            $("a").bind("click", function () {
+                validNavigation = true;
+            });
+
+
+            $("body").delegate("a.btn.btn-xs.btn-info", "click", function () {
+                validNavigation = true;
+            }).delegate("a.btn.btn-xs.btn-warning", "click", function () {
+                validNavigation = true;
+            });
+            // Attach the event submit for all forms in the page
+            $("form").bind("submit", function () {
+                validNavigation = true;
+            });
+
+            // Attach the event click for all inputs in the page
+            $("input[type=submit]").bind("click", function () {
+                validNavigation = true;
+            });
+
+            // check for Tab/Browser closed
+
+            var refresh = false;  //Control variable to control refresh access
+            $(window).bind('beforeunload', function () {
+                if (refresh == false) {
+                    if (!validNavigation) {
+                        endSession();
+                    }
+                }
+            });
+            //  Insert LouOutTime
+            function endSession() {
+                var UserId;
+                $.ajax({
+                    type: "POST",
+                    url: '@Url.Action("InsertLogOutTime", "Base")',
+                    success: function (resultdata) {
+                    }
+                });
+            }
+        }
+        $(document).ready(function () {
+            IsTabOrBrowserClosed();
+        });
+        var culture_ = '@culture'
+    </script>
+</body>
+</html>

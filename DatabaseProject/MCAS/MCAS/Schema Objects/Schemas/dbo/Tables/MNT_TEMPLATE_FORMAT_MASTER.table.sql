@@ -1,0 +1,11 @@
+﻿CREATE TABLE [dbo].[MNT_TEMPLATE_FORMAT_MASTER](
+	[Template_Format_Id] [int] IDENTITY(1,1) NOT NULL,
+	[Description] [nvarchar](50) COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
+	[Format_Name] [varchar](20) COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
+ CONSTRAINT [PK_Tempate_Format_Master] PRIMARY KEY CLUSTERED 
+(
+	[Template_Format_Id] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON)
+)
+
+

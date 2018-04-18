@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Root>
+  <PageTitle>
+    <Culture Code="en-US">Add TaxEntity</Culture>
+    <Culture Code="zh-SG">Add TaxEntity</Culture>
+    <Culture Code="pt-BR">Add TaxEntity</Culture>
+  </PageTitle>
+
+  <PageElement name="txtTAX_ZIP" type="TextBox" Desc=""
+     IsMandatory="Yes"
+     IsReadOnly="No"
+     IsDisabled="No"
+     IsDisplay="Yes"
+     MaxLength="10"
+     MaxSize=""
+     IsFormatingRequired="" JsFunctionToFormat="" OnClickJSFunction=""
+     OnChangeJSFunction="" >
+    <rev Enabled="Yes" ExpKey="^[0-9]{5}-[0-9]{4}|[0-9]{5}" />
+    <Culture Code="en-US" Desc="set Label and Message for English language">
+      <Caption>Zip</Caption>
+      <rfvMessage>Please Enter Zip Code.</rfvMessage>
+      <DefaultValue></DefaultValue>
+      <revExpMessage>Zip code should be either in '#####-####' or in '#####' format.</revExpMessage>
+    </Culture>
+    <Culture Code="zh-SG" Desc="set Label and Message for Singapore language">
+      <Caption>Zip</Caption>
+      <rfvMessage>Please Enter Zip Code.</rfvMessage>
+      <DefaultValue></DefaultValue>
+      <revExpMessage>Zip code should be either in '#####-####' or in '#####' format.</revExpMessage>
+    </Culture>
+    <Culture Code="pt-BR" Desc="set Label and Message for Brazil language">
+      <Caption>CEP</Caption>
+      <rfvMessage>Insira o CEP.</rfvMessage>
+      <DefaultValue></DefaultValue>
+      <revExpMessage>O CEP deve ser em formato '#####-####' or '#####'.</revExpMessage>
+    </Culture>
+  </PageElement>
+
+  <PageElement name="txtTAX_PHONE" type="TextBox" Desc=""
+     IsMandatory="No"
+     IsReadOnly="No"
+     IsDisabled="No"
+     IsDisplay="Yes"
+     MaxLength=""
+     MaxSize=""
+     IsFormatingRequired="" JsFunctionToFormat="" OnClickJSFunction=""
+     OnChangeJSFunction="" >
+    <rev Enabled="Yes" ExpKey="^1?((\(\d{3}\) ?)|(\d{3}-))?\d{3}-\d{4}" />
+    <Culture Code="en-US" Desc="set Label and Message for English language">
+      <Caption>Phone</Caption>
+      <rfvMessage></rfvMessage>
+      <DefaultValue></DefaultValue>
+      <revExpMessage>Phone Number should be either in '(###)###-#####' format.</revExpMessage>
+    </Culture>
+    <Culture Code="zh-SG" Desc="set Label and Message for Singapore language">
+      <Caption>Phone</Caption>
+      <rfvMessage></rfvMessage>
+      <DefaultValue></DefaultValue>
+      <revExpMessage>Phone Number should be either in '(###)###-#####' format.</revExpMessage>
+    </Culture>
+    <Culture Code="pt-BR" Desc="set Label and Message for Brazil language">
+      <Caption>Telefone</Caption>
+      <rfvMessage></rfvMessage>
+      <DefaultValue></DefaultValue>
+      <revExpMessage>O Telefone deve ser em formato  '(###)###-#####'.</revExpMessage>
+    </Culture>
+  </PageElement>
+
+  <PageElement name="txtTAX_FAX" type="TextBox" Desc=""
+       IsMandatory="No"
+       IsReadOnly="No"
+       IsDisabled="No"
+       IsDisplay="Yes"
+       MaxLength=""
+       MaxSize=""
+       IsFormatingRequired="" JsFunctionToFormat="" OnClickJSFunction=""
+       OnChangeJSFunction="" >
+    <rev Enabled="Yes" ExpKey="^1?((\(\d{3}\) ?)|(\d{3}-))?\d{3}-\d{4}" />
+    <Culture Code="en-US" Desc="set Label and Message for English language">
+      <Caption>Fax</Caption>
+      <rfvMessage></rfvMessage>
+      <DefaultValue></DefaultValue>
+      <revExpMessage>Fax should be either in '(###)###-#####' format.</revExpMessage>
+    </Culture>
+    <Culture Code="zh-SG" Desc="set Label and Message for Singapore language">
+      <Caption>Fax</Caption>
+      <rfvMessage></rfvMessage>
+      <DefaultValue></DefaultValue>
+      <revExpMessage>Fax should be either in '(###)###-#####' format.</revExpMessage>
+    </Culture>
+    <Culture Code="pt-BR" Desc="set Label and Message for Brazil language">
+      <Caption>Fax</Caption>
+      <rfvMessage></rfvMessage>
+      <DefaultValue></DefaultValue>
+      <revExpMessage>O Fax deve ser em formato '(###)###-#####'.</revExpMessage>
+    </Culture>
+  </PageElement>
+</Root>

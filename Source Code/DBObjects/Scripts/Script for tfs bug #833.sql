@@ -1,0 +1,123 @@
+IF NOT Exists (SELECT * from MNT_LOOKUP_VALUES where LOOKUP_UNIQUE_ID=14969)
+BEGIN
+INSERT INTO MNT_LOOKUP_VALUES
+	   (
+		   LOOKUP_UNIQUE_ID
+           ,LOOKUP_ID
+           ,LOOKUP_VALUE_ID
+           ,LOOKUP_VALUE_CODE
+           ,LOOKUP_VALUE_DESC
+           ,IS_ACTIVE
+           )
+     VALUES
+           (
+           14969
+           ,1398
+           ,3
+           ,'CHKN'
+           ,'Checking'
+           ,'Y'
+           )
+END
+Go
+IF Exists (SELECT lookUp_unique_id from MNT_LOOKUP_VALUES where LOOKUP_UNIQUE_ID=14703 and LOOKUP_ID=1398 And LOOKUP_VALUE_CODE='NORM')
+BEGIN
+UPDATE  MNT_LOOKUP_VALUES SET IS_ACTIVE='N' WHERE LOOKUP_ID=1398 and LOOKUP_UNIQUE_ID=14703
+END
+Go
+
+IF NOT Exists (SELECT * from MNT_LOOKUP_VALUES where LOOKUP_UNIQUE_ID=14970)
+BEGIN
+INSERT INTO MNT_LOOKUP_VALUES
+	   (
+		   LOOKUP_UNIQUE_ID
+           ,LOOKUP_ID
+           ,LOOKUP_VALUE_ID
+           ,LOOKUP_VALUE_CODE
+           ,LOOKUP_VALUE_DESC
+           ,IS_ACTIVE
+           )
+     VALUES
+           (
+           14970
+           ,1362
+           ,6
+           ,'Singapore'
+           ,'SGP'
+           ,'Y'
+           )
+END
+
+
+Go
+IF NOT Exists (SELECT * from MNT_LOOKUP_VALUES where LOOKUP_UNIQUE_ID=14971)
+BEGIN
+INSERT INTO MNT_LOOKUP_VALUES
+	   (
+		   LOOKUP_UNIQUE_ID
+           ,LOOKUP_ID
+           ,LOOKUP_VALUE_ID
+           ,LOOKUP_VALUE_CODE
+           ,LOOKUP_VALUE_DESC
+           ,IS_ACTIVE
+           )
+     VALUES
+           (
+           14971
+           ,1362
+           ,7
+           ,'ASEAN'
+           ,'ASEAN'
+           ,'Y'
+           )
+END
+Go
+
+
+IF NOT Exists (SELECT * from MNT_LOOKUP_VALUES where LOOKUP_UNIQUE_ID=14972)
+BEGIN
+INSERT INTO MNT_LOOKUP_VALUES
+	   (
+		   LOOKUP_UNIQUE_ID
+           ,LOOKUP_ID
+           ,LOOKUP_VALUE_ID
+           ,LOOKUP_VALUE_CODE
+           ,LOOKUP_VALUE_DESC
+           ,IS_ACTIVE
+           )
+     VALUES
+           (
+			14972
+			,1362
+			,8
+			,'OTH'
+			,'Others'
+            ,'Y'
+           )
+END
+Go
+IF Exists (SELECT * from MNT_LOOKUP_VALUES where LOOKUP_ID=1362 And LOOKUP_UNIQUE_ID=14552)
+BEGIN
+	UPDATE  MNT_LOOKUP_VALUES SET IS_ACTIVE='N' WHERE LOOKUP_ID=1362 and LOOKUP_UNIQUE_ID=14552
+END
+Go
+IF Exists (SELECT * from MNT_LOOKUP_VALUES where LOOKUP_ID=1362 And LOOKUP_UNIQUE_ID=14553)
+BEGIN
+	UPDATE  MNT_LOOKUP_VALUES SET IS_ACTIVE='N' WHERE LOOKUP_ID=1362 and LOOKUP_UNIQUE_ID=14553
+END
+Go
+IF Exists (SELECT * from MNT_LOOKUP_VALUES where LOOKUP_ID=1362 And LOOKUP_UNIQUE_ID=14694)
+BEGIN
+	UPDATE  MNT_LOOKUP_VALUES SET IS_ACTIVE='N' WHERE LOOKUP_ID=1362 and LOOKUP_UNIQUE_ID=14694
+END
+Go
+IF Exists (SELECT * from MNT_LOOKUP_VALUES where LOOKUP_ID=1318 And LOOKUP_UNIQUE_ID=13096)
+BEGIN
+	UPDATE  MNT_LOOKUP_VALUES SET IS_ACTIVE='N' where LOOKUP_ID=1318 And LOOKUP_UNIQUE_ID=13096
+END
+Go
+IF Exists (SELECT * from MNT_LOOKUP_VALUES where LOOKUP_ID=1318 And LOOKUP_UNIQUE_ID=14909)
+BEGIN
+	UPDATE  MNT_LOOKUP_VALUES SET IS_ACTIVE='N' WHERE LOOKUP_ID=1318 and LOOKUP_UNIQUE_ID=14909
+END
+Go

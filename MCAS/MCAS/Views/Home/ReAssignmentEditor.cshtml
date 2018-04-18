@@ -1,0 +1,443 @@
+﻿@model MCAS.Web.Objects.MastersHelper.ReAssignmentModel
+@{
+    ViewBag.Title = "ReAssignmentEditor";
+    Layout = null;
+
+    var ReAssignDateFrom = "";
+    var ReAssignDateTo = "";
+    var Permanent = "Permanent";
+    var Temporary = "Temporary (period from/to)";
+    var display = "none;";
+    var DairyId = "";
+
+    if (Model.Temporary != null)
+    {
+        display = "block;";
+    }
+
+    if (Request.QueryString["DairyId"] != "")
+    {
+        DairyId = Request.QueryString["DairyId"];
+    }
+    if (Model.ReAssignDateFrom.ToString() != "")
+    {
+        ReAssignDateFrom = Model.ReAssignDateFrom.ToString().Substring(0, 10);
+    }
+    else
+    {
+        ReAssignDateFrom = DateTime.Now.ToString("dd/MM/yyyy");
+    }
+    if (Model.ReAssignDateTo.ToString() != "")
+    {
+        ReAssignDateTo = Model.ReAssignDateTo.ToString().Substring(0, 10);
+    }
+    else
+    {
+        ReAssignDateTo = DateTime.Now.ToString("dd/MM/yyyy");
+    }
+   
+}
+<style type="text/css">
+     div.ui-dialog.ui-widget.ui-widget-content.ui-corner-all.alert.ui-draggable
+    {
+        top:140px !important;
+    }
+    .ui-datepicker
+    {
+        z-index: 9999 !important;
+    }
+    #ReAssignDateToDiv
+    {
+        padding-top:.3cm;
+    }
+    .datepicker
+    {
+        z-index: 9999 !important;
+    }
+    #ajaxSpinnerContainer
+    {
+        height: 11px;
+    }
+    #ajaxSpinnerImage
+    {
+        display: none;
+    }
+    .ajax-loader
+    {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        margin-left: -32px;
+        margin-top: -32px;
+        display: block;
+        z-index: 999999999999999;
+    }
+    body > div.ui-dialog.ui-widget.ui-widget-content.ui-corner-all.alert.ui-draggable
+    {
+       font: normal 12px 'Open Sans' , arial, sans-serif;
+        line-height: 18px;
+        color: #666666;
+        font-weight:bold;
+        text-align:left; 
+    }
+    
+</style>
+<link href="@Url.Content("~/Content/import.css")" rel="Stylesheet" media="screen" />
+<link href="@Url.Content("~/fonts/font-awesome.css")" rel="stylesheet" type="text/css" />
+<link href="@Url.Content("~/Content/jquery-ui.css")" rel="Stylesheet" media="screen" />
+<script src='@Url.Content("~/Scripts/jquery-1.8.0.js")' type="text/javascript"></script>
+<script src='@Url.Content("~/Scripts/jquery-ui-1.8.23.js")' type="text/javascript"></script>
+<script src="@Url.Content("~/Scripts/moment.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/Scripts/jquery-migrate-1.1.0.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/Scripts/jquery.validate.min.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.min.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/Scripts/globalize/globalize.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/Scripts/globalize/cultures/globalize.culture.en-GB.js")" type="text/javascript"></script>
+@using (Html.BeginForm("ReAssignmentEditor", "Home", new { DairyId = @DairyId }, FormMethod.Post, new { role = "form", @class = "form-horizontal", id = "ReverseChangeform", name = "ReverseChangeform" }))
+{      
+    <div class="row" id="t1">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+            <div class="panel panel-info">
+                <div class="panel-heading clearfix">
+                    <i class="icon-check-sign"></i>
+                    <h3 class="panel-title" id="HReassign">
+                        Re-Assignment Diary</h3>
+                </div>
+                <div id="Result" style="color: Red; font-weight: bold; display: none;" class="row has-error">
+                    <p align="center">
+                        Assign Successfully</p>
+                </div>
+                 <div id="Result1" style="color: Red; font-weight: bold; display: none;" class="row has-error">
+                    <p align="center">
+                        Unable to save</p>
+                </div>
+                <div class="row" style="padding-top:.3cm;">
+                    <div >
+                        <div class="clearfix igr col-md-11" style="margin-left: 60px; margin-right: 50px;
+                            text-align: left;">
+                            <div class="col-md-7">
+                                <label for="inputGroupCode">
+                                    Please note that all field mark as &nbsp;<span class="text-danger">*</span> are
+                                    mandatory
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row" style="padding-top:.3cm;">
+                    @Html.HiddenFor(m => m.DairiestobereassignedId)
+                    @Html.HiddenFor(m => m.DairyFromUser)
+                    <div >
+                        <div class="clearfix igr col-md-11" style="margin-left: 60px;">
+                            <div class="col-md-4">
+                                <label for="inputGroupCode">
+                                    Diaries To Be Reassigned</label>
+                            </div>
+                            <div class="col-md-7">
+                                @Html.TextAreaFor(m => m.Dairiestobereassigned, new { id = "Dairiestobereassigned", @class = "form-control", rows = "4", cols = "10" })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row" style="padding-top:.3cm;display:none;">
+                    <div >
+                        <div class="clearfix igr col-md-11" style="margin-left: 60px;">
+                            <div class="col-md-4">
+                                <label for="inputGroupCode">
+                                    Type of Assignment</label>
+                            </div>
+                            <div class="col-md-7">
+                                @Html.RadioButtonFor(m => m.Permanent, "P") @Permanent<br />
+                                @Html.RadioButtonFor(m => m.Temporary, "T") @Temporary
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div id="ajaxSpinnerContainer">
+                    <img alt="" src="../../Images/ajax-loader.gif" id="ajaxSpinnerImage" class="ajax-loader" />
+                </div>
+                <div class="row" style="padding-top:.3cm;">
+                    <div >
+                        <div class="clearfix igr col-md-11" style="margin-left: 60px;">
+                            <div class="col-md-4">
+                                <label for="inputGroupCode">
+                                    Re Assignment To&nbsp;<span class="text-danger">*</span></label>
+                            </div>
+                            <div class="col-md-5">
+                            @Html.DropDownListFor(m => m.ReAssignTo, new SelectList(Model.Values, "Value", "Text", "--Individual Users--"), new { id = "ReAssignTo", @class = "form-control" })
+                                
+                                @Html.ValidationMessageFor(m => m.ReAssignTo)
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row" style="padding-top:.3cm;">
+                    <div >
+                        <div class="clearfix igr col-md-11" style="margin-left: 60px;">
+                            <div class="col-md-4">
+                                <label for="inputGroupCode">
+                                    Re Assignment Date From&nbsp;<span class="text-danger">*</span></label>
+                            </div>
+                            <div class="col-md-5">
+                                @Html.TextBoxFor(m => m.ReAssignDateFrom, new { id = "ReAssignDateFrom", @class = "form-control", @Value = @ReAssignDateFrom })
+                                @Html.ValidationMessageFor(m => m.ReAssignDateFrom, "Re Assign Date From should be in DD/MM/YY format")
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row" id="ReAssignDateToDiv" style="Display:@display">
+                    <div >
+                        <div class="clearfix igr col-md-11" style="margin-left: 60px;">
+                            <div class="col-md-4">
+                                <label for="inputGroupCode">
+                                    Re Assignment Date To&nbsp;<span class="text-danger">*</span></label>
+                            </div>
+                            <div class="col-md-5">
+                                @Html.TextBoxFor(m => m.ReAssignDateTo, new { id = "ReAssignDateTo", @class = "form-control", @Value = @ReAssignDateTo })
+                                @Html.ValidationMessageFor(m => m.ReAssignDateTo, "Re Assign To From should be in DD/MM/YY format")
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row" style="padding-top:.3cm;">
+                    <div >
+                        <div class="clearfix igr col-md-11" style="margin-left: 60px;">
+                            <div class="col-md-4">
+                                <label for="inputGroupCode">
+                                    Remarks</label>
+                            </div>
+                            <div class="col-md-7">
+                                @Html.TextAreaFor(m => m.Remark, new { id = "Remark", @class = "form-control", rows = "4", cols = "10" })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row" style="padding-top:.3cm;">
+                    <div class="clearfix igr col-md-12 text-center">
+                            <label class="btn btn-info" id="labelbtnSave">
+                                Save</label>
+                            <button type="button" class="btn btn-info" onclick="onclickcancel();">
+                                Cancel</button>
+                            @Html.HiddenFor(m => m.Prop1, new { id = "Prop1", @class = "form-control", maxlength = 30, @Value = "0" })
+                        </div>
+                </div>
+            </div>
+        </div>
+    </div>
+        
+}
+<script type="text/javascript">
+    $(document).ajaxStart(function () {
+        $("#ajaxSpinnerImage").show();
+    })
+.ajaxStop(function () {
+    $("#ajaxSpinnerImage").hide();
+});
+
+    $("#ReAssignDateFrom,#ReAssignDateTo").datepicker("refresh");
+    function onclickcancel() {
+        $('#ReverseChangeform')[0].reset();
+    }
+
+    $(document).ready(function () {
+        $.culture = Globalize.culture("en-GB");
+        $.validator.methods.date = function (value, element) {
+            return this.optional(element)
+                    || Globalize.parseDate(value, "dd/MM/yyyy", "en-GB")
+                    || Globalize.parseDate(value, "yyyy-mm-dd");
+        };
+        $(document).on("focus", ":input", function () {
+            $(this).attr("autocomplete", "off")
+        });
+        $("#Permanent").prop("checked", true)
+        $('input.datepicker').datepicker({
+            beforeShow: function () {
+                setTimeout(function () {
+                    $('.ui-datepicker').css('z-index', 99999999999999);
+                }, 0);
+            },
+
+            dateFormat: "dd/mm/yy",
+            showStatus: !0,
+            showWeeks: !0,
+            currentText: "Now",
+            autoSize: !0,
+            gotoCurrent: !0,
+            showAnim: "blind",
+            highlightWeek: !0,
+            changeMonth: !0,
+            changeYear: !0
+        });
+
+        $('#Dairiestobereassigned').prop('readOnly', true);
+        if ($("input[name='Permanent']:checked").val()) {
+            $('#Temporary').prop("checked", false);
+        }
+        else {
+            $('#Permanent').prop("checked", false);
+        }
+        $('#Temporary').click(function () {
+            $('#Permanent').prop("checked", false);
+            $('#ReAssignDateToDiv').show();
+            $("#ReAssignDateToDiv").val(moment().format("DD/MM/YYYY"));
+        });
+        $('#Permanent').click(function () {
+            $('#Temporary').prop("checked", false);
+            $('#ReAssignDateToDiv').hide();
+            $("#ReAssignDateToDiv").val(moment().format("DD/MM/YYYY"));
+        });
+        $("#AccidentTab,#ClaimTab,#ThirdPartyTab,#NotesTab,#ReserveTab,#TransactionsTab,#AttachmentsTab,#ToDoTab,#PaymentEditor").removeClass("active");
+        $("#ToDoTab").addClass("active");
+        $(".ui-dialog-title").removeClass("ui-dialog-title ").addClass("right");
+        $(function () {
+            $(document).on("focus", ":input", function () {
+                $(this).attr("autocomplete", "off")
+            });
+        });
+        $("input[type=text]").bind("copy paste cut", function (a) {
+            a.preventDefault()
+        });
+        $("#ReAssignDateTo").datepicker({
+            dateFormat: "dd/mm/yy",
+            showStatus: !0,
+            showWeeks: !0,
+            currentText: "Now",
+            autoSize: !0,
+            gotoCurrent: !0,
+            showAnim: "blind",
+            highlightWeek: !0,
+            changeMonth: !0,
+            changeYear: !0,
+            yearRange: "1951:2050",
+            onSelect: function (date) {
+                $(this).valid();
+            }
+        });
+        $("#ReAssignDateFrom").datepicker({
+            dateFormat: "dd/mm/yy",
+            showStatus: !0,
+            showWeeks: !0,
+            currentText: "Now",
+            autoSize: !0,
+            gotoCurrent: !0,
+            showAnim: "blind",
+            highlightWeek: !0,
+            changeMonth: !0,
+            changeYear: !0,
+            yearRange: "1951:2050",
+            onSelect: function (date) {
+                $(this).valid();
+            }
+        });
+        $("#labelbtnSave").click(function () {
+            if (!$("input[name='Permanent']:checked").val() && !$("input[name='Temporary']:checked").val()) {
+                alert("Please select Type Of Assignment");
+                return false;
+            }
+            if ($('#ReAssignTo').val() == "0") {
+                alert("Please select Re Assignment To");
+                return false;
+            }
+            if ($('#ReAssignDateFrom').val() == "") {
+                alert("Please Enter Re Assign Date From");
+                $('#ReAssignDateFrom').focus();
+                return false;
+            }
+
+            if (!moment($('#ReAssignDateFrom').val(), ["DD/MM/YYYY"], true).isValid()) {
+                alert("Re Assign Date From is Incorrect");
+                $('#ReAssignDateFrom').focus();
+                return false;
+            }
+            if (!$("input[name='Permanent']:checked").val() && $('#ReAssignDateTo').val() == "") {
+                alert("Please Enter Re Assign Date To");
+                $('#ReAssignDateTo').focus();
+                return false;
+            }
+            if (!$("input[name='Permanent']:checked").val() && !moment($('#ReAssignDateTo').val(), ["DD/MM/YYYY"], true).isValid()) {
+                alert("Re Assign Date To is Incorrect");
+                $('#ReAssignDateTo').focus();
+                return false;
+            }
+            if ($('#ReAssignTo').val() == "0") {
+                alert("Please select Re Assignment To");
+                $('#ReAssignTo').focus();
+                return false;
+            }
+            else {
+                $.ajax({
+                    type: "POST",
+                    url: '@Url.Action("SaveReAssign", "Home")',
+                    data: { DairyId: $('#DairiestobereassignedId').val(), TypeOfAssignment: $("#Permanent").val() == null ? "T" : "P", ReAssignTo: $("#ReAssignTo").val(), DairyFromUser: $("#DairyFromUser").val(), ReAssignDateFrom: $("#ReAssignDateFrom").val(), ReAssignDateTo: $("#ReAssignDateTo").val(), Remark: $("#Remark").val(), ClaimId: getQueryVariable('ClaimId') },
+                    success: function (data) {
+                        if (data == "T") {
+                            $('#Result').show();
+                            $('#Result1').hide();
+                        }
+                        else {
+                            $('#Result').hide();
+                            $('#Result1').show();
+                        }
+                    },
+                    error: function (data) {
+                        alert("error : " + data);
+                        $('#Result').hide();
+                        $('#Result1').hide();
+                    }
+                });
+            }
+
+
+        })
+    });
+
+    $(".ui-dialog-title").removeClass("ui-dialog-title ").addClass("right");
+    function onclickcancel() {
+        $("select").prop("selectedIndex", 0);
+        $("input[type=text]").val(moment().format("DD/MM/YYYY"));
+        $("#Remark").val("");
+        $('#Result').hide();
+        $('#Result1').hide();
+        $('#Permanent').prop("checked", true);
+        $('#Temporary').prop("checked", false);
+        $('#ReAssignDateToDiv').hide();
+        $('span.field-validation-error').removeClass('field-validation-error').addClass('field-validation-valid');
+    }
+    function getQueryVariable(a) {
+        for (var e = "@MenuListItem.ClaimTabs.GetQueryStringVal()".replace(/amp;/ig, "").split("&"), d = 0; d < e.length; d++) {
+            var b = e[d].split("=");
+            if (b[0] == a) return b[1]
+        }
+    };
+    function htmlForTextWithEmbeddedNewlines(text) {
+        var htmls = [];
+        var lines = text.split(/\n/);
+        var tmpDiv = jQuery(document.createElement('div'));
+        for (var i = 0; i < lines.length; i++) {
+            htmls.push(tmpDiv.text(lines[i]).html());
+        }
+        return htmls.join("<br>");
+    }
+    $.fn.multiline = function (text) {
+        this.text(text);
+        this.html(this.html().replace(/\n/g, '<br/>'));
+        return this;
+    }
+    $.maxZIndex = $.fn.maxZIndex = function (opt) {
+        var def = { inc: 10, group: "*" };
+        $.extend(def, opt);
+        var zmax = 0;
+        $(def.group).each(function () {
+            var cur = parseInt($(this).css('z-index'));
+            zmax = cur > zmax ? cur : zmax;
+        });
+        if (!this.jquery)
+            return zmax;
+
+        return this.each(function () {
+            zmax += def.inc;
+            $(this).css("z-index", zmax);
+        });
+    };        
+</script>
+

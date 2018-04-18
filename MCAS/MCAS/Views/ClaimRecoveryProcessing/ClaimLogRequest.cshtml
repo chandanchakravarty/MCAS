@@ -1,0 +1,179 @@
+﻿@using System;
+@using System.Globalization;
+@using MCAS.Web.Objects.Resources.ClaimProcessing;
+@using MCAS.Web.Objects.Resources.Common;
+@model MCAS.Web.Objects.ClaimObjectHelper.LogRequestModel
+@using MCAS.Globalisation
+@{
+    ViewBag.Title = "ClaimLogRequest";
+    var mMCASQueryString = Html.MCASQueryString(Request.QueryString);
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var caller = mMCASQueryString["claimMode"] != null ? Convert.ToString(mMCASQueryString["claimMode"]) : "Read";
+    var SubMenu = caller == "Recovery" ? "Claims Recovery Processing" : "";
+    var assignedTo = TempData["search"] == null ? "" : "Y";
+    var HdivShowHide = Model.HdivHidden;
+    @Html.Hidden("oldgroup", 1)
+    @Html.Hidden("HdivHidden", 0)
+}
+<link href="@Url.Content("~/Content/jquery-ui.css")" rel="Stylesheet" media="screen" />
+<link href='@Url.Content("~/Content/jquery.dataTables.min.css")' rel="stylesheet" type="text/css" />
+<script src="@Url.Content("~/Scripts/jquery-2.1.0.min.js")" type="text/javascript"></script>
+<script charset="utf8" src='@Url.Content("~/Scripts/jquery.dataTables.min.js")' type="text/javascript"></script>
+
+<script type="text/javascript">
+    $(function () {
+    PageModel = @(Html.Raw(Json.Encode(Model)));
+});
+</script>
+<div class="dashboard-wrapper" ng-app="ClaimRegistration">
+    <div class="container" id="reg3">
+        <div class="row page-title" id="reg">
+            <div class="col-lg-12" id="reg2" style="background-color: white;">
+                <h2>
+                     @ClaimLogRequest.ClaimRegistrations</h2>
+                <ul class="breadcrumb">
+                    @{
+                        <li> @ClaimLogRequest.LOGRequest</li>
+                    }
+                    @{
+
+                        <li> @ClaimLogRequest.searchscreen</li>
+                    }
+                </ul>
+            </div>
+        </div>
+        <hr />
+        <div id="testdiv">
+        </div>
+        <div id="toprow ">
+            <div class="row ">
+                <div class="col-lg-12 ">
+                    <div class="panel panel-secondary">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">
+                                <i class="icon-keyboard"></i> @ClaimLogRequest.LOGRequest</h3>
+                            <div id="expanddiv" class="SearchCriteriaExpand">
+                            </div>
+                        </div>
+                        <div class="panel-body" id="searchdiv" @*style="display: none"*@>
+                            @using (Html.BeginForm("ClaimLogRequest", "ClaimRecoveryProcessing", new { claimMode = @caller }, FormMethod.Post, new { role = "form", @class = "form-horizontal", id = "ClaimLogRequestform", name = "ClaimLogRequestform" }))
+                            {
+                                
+                                 @Html.HiddenFor(m => m.HdivHidden)
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        <div class="form-group">
+                                            <label for="inputClaimNo" class="col-sm-3 control-label">
+                                                 @ClaimLogRequest.ClaimNo.</label>
+                                            <div class="col-sm-9">
+                                                @Html.TextBoxFor(m => m.ClaimNo, new { id = "inputClaimNo", @class = "form-control", @maxlength = 25 })
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="form-group">
+                                            <label for="inputSubClaimNumber" class="col-sm-3 control-label">
+                                                 @ClaimLogRequest.SubClaimNo.</label>
+                                            <div class="col-sm-9">
+                                                @Html.TextBoxFor(m => m.SubClaimNo, new { id = "inputSubClaimNo", @class = "form-control", @maxlength = 25 })
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        <div class="form-group">
+                                            <label for="inputLogNumber" class="col-sm-3 control-label">
+                                                 @ClaimLogRequest.LOGNo.
+                                            </label>
+                                            <div class="col-sm-9">
+                                                @Html.TextBoxFor(m => m.LogRefNo, new { id = "inputLogRefNo", @class = "form-control", @maxlength = 25 })
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="form-group">
+                                            <label for="inputText6" class="col-sm-3 control-label">
+                                                 @ClaimLogRequest.Hospital</label>
+                                            <div class="col-sm-9">
+                                                @Html.DropDownListFor(m => m.Hospital_Id, new SelectList(Model.HopitalNameIdList, "intID", "Text", "[Select...]"), new { @class = "form-control" })
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-lg-12">
+                                        <div class="form-group text-center">
+                                            <button class="btn btn-info" type="submit" id="btnSearch">
+                                                @Common.Search</button>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+             @{ if (@HdivShowHide == "1") {
+            @Html.Action("ClaimLogList", "ClaimRecoveryProcessing")
+            }
+            }
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+
+    '@assignedTo' == 'Y' && $('#searchdiv').attr('style', 'Display:block');
+    var do_on_load = function () {
+
+        if ('@HdivShowHide' == '0') { $('#divdisplay').attr('style', 'Display:none'); }
+
+        var table = $('#tableDiarySrc').dataTable({
+            columnDefs: [{
+                targets: [0],
+                orderData: [0, 0]
+            }, {
+                targets: [0],
+                orderData: [0, 0]
+            }, {
+                targets: [0],
+                orderData: [0, 0]
+            }],
+            "oLanguage": {
+                "sSearch": '@MCAS.Web.Objects.Resources.Common.Common.Search',
+                "sInfo": "@MCAS.Web.Objects.Resources.Common.Common.Showing _START_ @MCAS.Web.Objects.Resources.Common.Common.to _END_ @MCAS.Web.Objects.Resources.Common.Common.of _TOTAL_ @MCAS.Web.Objects.Resources.Common.Common.entries",
+                "sLengthMenu": "@MCAS.Web.Objects.Resources.Common.Common.Show  _MENU_ @MCAS.Web.Objects.Resources.Common.Common.entries",
+                "sEmptyTable": "@MCAS.Web.Objects.Resources.Common.Common.sEmptyTable",
+                "sInfoEmpty": "@MCAS.Web.Objects.Resources.Common.Common.sInfoEmpty",
+                "sProcessing": "@MCAS.Web.Objects.Resources.Common.Common.sProcessing",
+                "oPaginate": {
+                    "sNext": '@MCAS.Web.Objects.Resources.Common.Common.Next',
+                    "sLast": '@MCAS.Web.Objects.Resources.Common.Common.Last',
+                    "sFirst": '@MCAS.Web.Objects.Resources.Common.Common.First',
+                    "sPrevious": '@MCAS.Web.Objects.Resources.Common.Common.Previous'
+                }
+            },
+            "aoColumns": [
+            { 'sWidth': '8%' },
+            { 'sWidth': '6%' },
+            { 'sWidth': '6%' },
+            { 'sWidth': '6%' },
+            { 'sWidth': '12%' },
+            { 'sWidth': '10%' },
+            { 'bSortable': false, 'sWidth': '11%' },
+            ],
+            "pagingType": "full_numbers",
+            "iDisplayLength": 10,
+            "aLengthMenu": [[5, 10, 25, 50, 100, -1], [5, 10, 25, 50, 100, "All"]]
+
+        });
+
+    };
+    $(document).ready(do_on_load);
+    $(window).bind("page:change", do_on_load);
+
+
+  
+
+</script>

@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:intf="http://com/iix/soap/SoapAuth.wsdl" xmlns:apachesoap="http://xml.apache.org/xml-soap" xmlns:wsdlsoap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:impl="http://com/iix/soap/SoapAuth.wsdl" targetNamespace="http://com/iix/soap/SoapAuth.wsdl" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types />
+  <wsdl:message name="getXmlResponseResponse">
+    <wsdl:part name="return" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="getResponse2Response">
+    <wsdl:part name="return" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="getResponseResponse">
+    <wsdl:part name="return" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="sendRequestRequest">
+    <wsdl:part name="msgString" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="getXmlResponse2Response">
+    <wsdl:part name="return" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="getXmlResponse2Request">
+    <wsdl:part name="msgString" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="getResponse2Request">
+    <wsdl:part name="msgString" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="getResponseRequest">
+    <wsdl:part name="msgString" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="sendRequest2Request">
+    <wsdl:part name="msgString" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="sendRequest2Response">
+    <wsdl:part name="return" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="getXmlResponseRequest">
+    <wsdl:part name="msgString" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="sendRequestResponse">
+    <wsdl:part name="return" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:portType name="SoapAuthPortType">
+    <wsdl:operation name="sendRequest2" parameterOrder="msgString">
+      <wsdl:input name="sendRequest2Request" message="impl:sendRequest2Request" />
+      <wsdl:output name="sendRequest2Response" message="impl:sendRequest2Response" />
+    </wsdl:operation>
+    <wsdl:operation name="sendRequest" parameterOrder="msgString">
+      <wsdl:input name="sendRequestRequest" message="impl:sendRequestRequest" />
+      <wsdl:output name="sendRequestResponse" message="impl:sendRequestResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="getResponse" parameterOrder="msgString">
+      <wsdl:input name="getResponseRequest" message="impl:getResponseRequest" />
+      <wsdl:output name="getResponseResponse" message="impl:getResponseResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="getResponse2" parameterOrder="msgString">
+      <wsdl:input name="getResponse2Request" message="impl:getResponse2Request" />
+      <wsdl:output name="getResponse2Response" message="impl:getResponse2Response" />
+    </wsdl:operation>
+    <wsdl:operation name="getXmlResponse" parameterOrder="msgString">
+      <wsdl:input name="getXmlResponseRequest" message="impl:getXmlResponseRequest" />
+      <wsdl:output name="getXmlResponseResponse" message="impl:getXmlResponseResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="getXmlResponse2" parameterOrder="msgString">
+      <wsdl:input name="getXmlResponse2Request" message="impl:getXmlResponse2Request" />
+      <wsdl:output name="getXmlResponse2Response" message="impl:getXmlResponse2Response" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="AuthSoapBinding" type="impl:SoapAuthPortType">
+    <wsdlsoap:binding transport="http://schemas.xmlsoap.org/soap/http" style="rpc" />
+    <wsdl:operation name="sendRequest2">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="sendRequest2Request">
+        <wsdlsoap:body use="encoded" namespace="auth" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output name="sendRequest2Response">
+        <wsdlsoap:body use="encoded" namespace="http://com/iix/soap/SoapAuth.wsdl" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="sendRequest">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="sendRequestRequest">
+        <wsdlsoap:body use="encoded" namespace="auth" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output name="sendRequestResponse">
+        <wsdlsoap:body use="encoded" namespace="http://com/iix/soap/SoapAuth.wsdl" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getResponse">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="getResponseRequest">
+        <wsdlsoap:body use="encoded" namespace="auth" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output name="getResponseResponse">
+        <wsdlsoap:body use="encoded" namespace="http://com/iix/soap/SoapAuth.wsdl" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getResponse2">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="getResponse2Request">
+        <wsdlsoap:body use="encoded" namespace="auth" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output name="getResponse2Response">
+        <wsdlsoap:body use="encoded" namespace="http://com/iix/soap/SoapAuth.wsdl" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getXmlResponse">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="getXmlResponseRequest">
+        <wsdlsoap:body use="encoded" namespace="auth" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output name="getXmlResponseResponse">
+        <wsdlsoap:body use="encoded" namespace="http://com/iix/soap/SoapAuth.wsdl" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getXmlResponse2">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="getXmlResponse2Request">
+        <wsdlsoap:body use="encoded" namespace="auth" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output name="getXmlResponse2Response">
+        <wsdlsoap:body use="encoded" namespace="http://com/iix/soap/SoapAuth.wsdl" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="auth">
+    <wsdl:port name="Auth" binding="impl:AuthSoapBinding">
+      <wsdlsoap:address location="https://expressnet.iix.com/web-services/Auth" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

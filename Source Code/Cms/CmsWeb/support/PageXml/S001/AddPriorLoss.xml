@@ -1,0 +1,40 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Root>
+  <PageTitle>
+    <Culture Code="en-US">Fund Type</Culture>
+    <Culture Code="zh-SG">Fund Type</Culture>
+    <Culture Code="pt-BR">Fund Type</Culture>
+  </PageTitle>
+
+  <PageElement name="txtAMOUNT_PAID" type="TextBox" Desc=""
+								IsMandatory="No"
+								IsReadOnly="No"
+								IsDisabled="No"
+								IsDisplay="Yes"
+								IsFormatingRequired="No" JsFunctionToFormat="" OnClickJSFunction=""
+								OnChangeJSFunction="" >
+    <Style Position="relative" Top="0" Left="10" CssClass="midcolora" />
+    <rev Enabled="Yes" ExpKey="^([1-9]\d{0,9}(\,\d{0,9})*|([1-9]\d*))(\.\d{0,9})?$|[0-9]\.\d{0,9}|\.\d{0,9}"/>
+    <div class="midcolora" cap_width="18" ele_width="82" POSITION ="relative" float ="left" padding="0.2" />
+    <Culture Code="en-US" Desc="set Label and Message for English language">
+      <Caption>Amount Paid</Caption>
+      <rfvMessage></rfvMessage>
+      <DefaultValue></DefaultValue>
+      <revExpMessage>Please enter a numeric, non-zero and non-negative value.</revExpMessage>
+    </Culture>
+    <Culture Code="zh-SG" Desc="set Label and Message for Singapore language">
+      <Caption>Amount Paid</Caption>
+      <rfvMessage></rfvMessage>
+      <DefaultValue></DefaultValue>
+      <revExpMessage>Please enter a numeric, non-zero and non-negative value.</revExpMessage>
+    </Culture>
+    <Culture Code="pt-BR" Desc="set Label and Message for Singapore language">
+      <Caption>Valor Pago</Caption>
+      <rfvMessage></rfvMessage>
+      <DefaultValue></DefaultValue>
+      <revExpMessage>Por favor insira um valor numérico, de zero e não-negativo.</revExpMessage>
+    </Culture>
+  </PageElement>
+
+  
+</Root>

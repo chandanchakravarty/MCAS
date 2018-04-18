@@ -1,0 +1,408 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Root>
+	<!--Remove Coverage,Endorsement on bases "Style" of watercraft -->
+	<Boat ID="I" Name="Inboard">
+		<Remove>
+			<Coverage Code="EBPPDJ" Des="Section 1 - Covered Property Damage Jet Ski" />
+			<Coverage Code="EBSMETJ" Des="Trailer - Jet Ski " />
+			<!-- removing 250 and 500 dedcutible which are applicable for Jet ski -->
+			<CoverageLimit COV_ID="1053" Desc="">
+					<LIMIT_DEDUC LIMIT_DEDUC_ID="1433" Amount="" />
+					<LIMIT_DEDUC LIMIT_DEDUC_ID="1436" Amount="" />
+			</CoverageLimit>
+			<CoverageLimit COV_ID="1054" Desc="">
+					<LIMIT_DEDUC LIMIT_DEDUC_ID="1434" Amount="" />
+					<LIMIT_DEDUC LIMIT_DEDUC_ID="1437" Amount="" />
+			</CoverageLimit>
+			<CoverageLimit COV_ID="1055" Desc="">
+					<LIMIT_DEDUC LIMIT_DEDUC_ID="1435" Amount="" />
+					<LIMIT_DEDUC LIMIT_DEDUC_ID="1438" Amount="" />
+			</CoverageLimit>
+			<!-- added by pravesh on 21 may as per itrack issue 1409 -->
+			<CoverageLimit COV_ID="19" Desc="">
+					<LIMIT_DEDUC LIMIT_DEDUC_ID="1412" Amount="" />
+			</CoverageLimit>
+			<CoverageLimit COV_ID="65" Desc="">
+					<LIMIT_DEDUC LIMIT_DEDUC_ID="1413" Amount="" />
+			</CoverageLimit>
+			<CoverageLimit COV_ID="820" Desc="">
+					<LIMIT_DEDUC LIMIT_DEDUC_ID="1414" Amount="" />
+			</CoverageLimit>
+			
+			<CoverageLimit COV_ID="21" Desc="">
+					<LIMIT_DEDUC LIMIT_DEDUC_ID="1415" Amount="" />
+			</CoverageLimit>
+			<CoverageLimit COV_ID="68" Desc="">
+					<LIMIT_DEDUC LIMIT_DEDUC_ID="1416" Amount="" />
+			</CoverageLimit>
+			<CoverageLimit COV_ID="821" Desc="">
+					<LIMIT_DEDUC LIMIT_DEDUC_ID="1417" Amount="" />
+			</CoverageLimit>
+			<!--end here -->
+		</Remove>
+		<Mandatory></Mandatory>
+	</Boat>
+	<Boat ID="IO" Name="Inboard / Outboard Boat">
+		<Remove>
+			<Coverage Code="EBPPDJ" Des="Section 1 - Covered Property Damage Jet Ski" />
+			<Coverage Code="EBSMETJ" Des="Trailer - Jet Ski " />
+			<!-- removing 250 and 500 dedcutible which are applicable for Jet ski -->
+			<CoverageLimit COV_ID="1053" Desc="">
+					<LIMIT_DEDUC LIMIT_DEDUC_ID="1433" Amount="" />
+					<LIMIT_DEDUC LIMIT_DEDUC_ID="1436" Amount="" />
+			</CoverageLimit>
+			<CoverageLimit COV_ID="1054" Desc="">
+					<LIMIT_DEDUC LIMIT_DEDUC_ID="1434" Amount="" />
+					<LIMIT_DEDUC LIMIT_DEDUC_ID="1437" Amount="" />
+			</CoverageLimit>
+			<CoverageLimit COV_ID="1055" Desc="">
+					<LIMIT_DEDUC LIMIT_DEDUC_ID="1435" Amount="" />
+					<LIMIT_DEDUC LIMIT_DEDUC_ID="1438" Amount="" />
+			</CoverageLimit>
+			<!-- added by pravesh on 21 may as per itrack issue 1409 -->
+			<CoverageLimit COV_ID="19" Desc="">
+					<LIMIT_DEDUC LIMIT_DEDUC_ID="1412" Amount="" />
+			</CoverageLimit>
+			<CoverageLimit COV_ID="65" Desc="">
+					<LIMIT_DEDUC LIMIT_DEDUC_ID="1413" Amount="" />
+			</CoverageLimit>
+			<CoverageLimit COV_ID="820" Desc="">
+					<LIMIT_DEDUC LIMIT_DEDUC_ID="1414" Amount="" />
+			</CoverageLimit>
+			
+			<CoverageLimit COV_ID="21" Desc="">
+					<LIMIT_DEDUC LIMIT_DEDUC_ID="1415" Amount="" />
+			</CoverageLimit>
+			<CoverageLimit COV_ID="68" Desc="">
+					<LIMIT_DEDUC LIMIT_DEDUC_ID="1416" Amount="" />
+			</CoverageLimit>
+			<CoverageLimit COV_ID="821" Desc="">
+					<LIMIT_DEDUC LIMIT_DEDUC_ID="1417" Amount="" />
+			</CoverageLimit>
+			<!--end here -->
+		</Remove>
+		<Mandatory></Mandatory>
+	</Boat>
+	<Boat ID="JS" Name="Jet Ski">
+		<Remove>
+			<Coverage Code="EBSMT" Des="Trailers" />
+			<!-- Coverage Code="EBPPDACV" Des="Section I - Covered Property, Physical Damage - Actual cash value" />
+			<Coverage Code="EBPPDAV" Des="Section I - Covered Property, Physical Damage - Agreed Value" / -->
+			<!--Coverage Code="EBSCEAV" Des="Agreed Value (AV 100)" /-->
+			<Coverage Code="EBSMECE" Des="Client Entertainment Liability (OP 720)" />
+			<Coverage Code="UMBCS" Des="Uninsured Boaters" />
+			<Endorsement Code="OP720" Des="Client Entertainment Liability (OP 720)"></Endorsement>
+			<!--Endorsement Code="AV100" Des="Agreed Value (AV 100)"></Endorsement-->
+		    <!-- removing dedcutible options which are not applicable for Jet ski -->
+			<CoverageLimit COV_ID="1053" Desc="">
+					<LIMIT_DEDUC LIMIT_DEDUC_ID="1061" Amount="" />
+					<LIMIT_DEDUC LIMIT_DEDUC_ID="1064" Amount="" />
+					<LIMIT_DEDUC LIMIT_DEDUC_ID="1065" Amount="" />
+					<LIMIT_DEDUC LIMIT_DEDUC_ID="1062" Amount="" />
+					<LIMIT_DEDUC LIMIT_DEDUC_ID="1063" Amount="" />
+					<!-- remove grand fathered options also  -->
+					<LIMIT_DEDUC LIMIT_DEDUC_ID="788" Amount="" />
+					<LIMIT_DEDUC LIMIT_DEDUC_ID="789" Amount="" />
+					<LIMIT_DEDUC LIMIT_DEDUC_ID="790" Amount="" />
+			</CoverageLimit>
+			<CoverageLimit COV_ID="1054" Desc="">
+					<LIMIT_DEDUC LIMIT_DEDUC_ID="1046" Amount="" />
+					<LIMIT_DEDUC LIMIT_DEDUC_ID="1049" Amount="" />
+					<LIMIT_DEDUC LIMIT_DEDUC_ID="1050" Amount="" />
+					<LIMIT_DEDUC LIMIT_DEDUC_ID="1047" Amount="" />
+					<LIMIT_DEDUC LIMIT_DEDUC_ID="1048" Amount="" />
+					<!-- remove grand fathered options also  -->
+					<LIMIT_DEDUC LIMIT_DEDUC_ID="775" Amount="" />
+					<LIMIT_DEDUC LIMIT_DEDUC_ID="776" Amount="" />
+					<LIMIT_DEDUC LIMIT_DEDUC_ID="777" Amount="" />
+			</CoverageLimit>
+			<CoverageLimit COV_ID="1055" Desc="">
+					<LIMIT_DEDUC LIMIT_DEDUC_ID="1066" Amount="" />
+					<LIMIT_DEDUC LIMIT_DEDUC_ID="1069" Amount="" />
+					<LIMIT_DEDUC LIMIT_DEDUC_ID="1070" Amount="" />
+					<LIMIT_DEDUC LIMIT_DEDUC_ID="1067" Amount="" />
+					<LIMIT_DEDUC LIMIT_DEDUC_ID="1068" Amount="" />
+					<!-- remove grand fathered options also  -->
+					<LIMIT_DEDUC LIMIT_DEDUC_ID="791" Amount="" />
+					<LIMIT_DEDUC LIMIT_DEDUC_ID="792" Amount="" />
+					<LIMIT_DEDUC LIMIT_DEDUC_ID="793" Amount="" />
+			</CoverageLimit>
+			<!-- added by pravesh on 21 may as per itrack issue 1409 -->
+			<CoverageLimit COV_ID="19" Desc="">
+					<LIMIT_DEDUC LIMIT_DEDUC_ID="1412" Amount="" />
+					<LIMIT_DEDUC LIMIT_DEDUC_ID="35" Amount="" />
+					<LIMIT_DEDUC LIMIT_DEDUC_ID="36" Amount="" />
+			</CoverageLimit>
+			<CoverageLimit COV_ID="65" Desc="">
+					<LIMIT_DEDUC LIMIT_DEDUC_ID="1413" Amount="" />
+					<LIMIT_DEDUC LIMIT_DEDUC_ID="104" Amount="" />
+					<LIMIT_DEDUC LIMIT_DEDUC_ID="105" Amount="" />
+			</CoverageLimit>
+			<CoverageLimit COV_ID="820" Desc="">
+					<LIMIT_DEDUC LIMIT_DEDUC_ID="1414" Amount="" />
+					<LIMIT_DEDUC LIMIT_DEDUC_ID="949" Amount="" />
+					<LIMIT_DEDUC LIMIT_DEDUC_ID="950" Amount="" />
+			</CoverageLimit>
+			
+			<CoverageLimit COV_ID="21" Desc="">
+					<LIMIT_DEDUC LIMIT_DEDUC_ID="1415" Amount="" />
+			</CoverageLimit>
+			<CoverageLimit COV_ID="68" Desc="">
+					<LIMIT_DEDUC LIMIT_DEDUC_ID="1416" Amount="" />
+			</CoverageLimit>
+			<CoverageLimit COV_ID="821" Desc="">
+					<LIMIT_DEDUC LIMIT_DEDUC_ID="1417" Amount="" />
+			</CoverageLimit>
+			<!--end here -->
+			
+		</Remove>
+		<Mandatory>
+			<Endorsements>
+				<Endorsement Code="OP400" Des="Client Entertainment Liability (OP 720)" Mandatory="M"></Endorsement>
+			</Endorsements>
+		</Mandatory>
+	</Boat>
+	<Boat ID="O" Name="Outboard Boat">
+		<Remove>
+			<Coverage Code="EBPPDJ" Des="Section 1 - Covered Property Damage Jet Ski" />
+			<Coverage Code="EBSMETJ" Des="Trailer - Jet Ski " />
+			<!-- removing 250 and 500 dedcutible options which are applicable for Jet ski -->
+			<CoverageLimit COV_ID="1053" Desc="">
+					<LIMIT_DEDUC LIMIT_DEDUC_ID="1433" Amount="" />
+					<LIMIT_DEDUC LIMIT_DEDUC_ID="1436" Amount="" />
+			</CoverageLimit>
+			<CoverageLimit COV_ID="1054" Desc="">
+					<LIMIT_DEDUC LIMIT_DEDUC_ID="1434" Amount="" />
+					<LIMIT_DEDUC LIMIT_DEDUC_ID="1437" Amount="" />
+			</CoverageLimit>
+			<CoverageLimit COV_ID="1055" Desc="">
+					<LIMIT_DEDUC LIMIT_DEDUC_ID="1435" Amount="" />
+					<LIMIT_DEDUC LIMIT_DEDUC_ID="1438" Amount="" />
+			</CoverageLimit>
+		</Remove>
+		<Mandatory></Mandatory>
+	</Boat>
+	<Boat ID="S" Name="Sailboat">
+		<Remove>
+			<Coverage Code="EBPPDJ" Des="Section 1 - Covered Property Damage Jet Ski" />
+			<Coverage Code="EBSMETJ" Des="Trailer - Jet Ski " />
+			<!-- removing 250 and 500 dedcutible options which are applicable for Jet ski -->
+			<CoverageLimit COV_ID="1053" Desc="">
+					<LIMIT_DEDUC LIMIT_DEDUC_ID="1433" Amount="" />
+					<LIMIT_DEDUC LIMIT_DEDUC_ID="1436" Amount="" />
+			</CoverageLimit>
+			<CoverageLimit COV_ID="1054" Desc="">
+					<LIMIT_DEDUC LIMIT_DEDUC_ID="1434" Amount="" />
+					<LIMIT_DEDUC LIMIT_DEDUC_ID="1437" Amount="" />
+			</CoverageLimit>
+			<CoverageLimit COV_ID="1055" Desc="">
+					<LIMIT_DEDUC LIMIT_DEDUC_ID="1435" Amount="" />
+					<LIMIT_DEDUC LIMIT_DEDUC_ID="1438" Amount="" />
+			</CoverageLimit>
+		</Remove>
+		<Mandatory></Mandatory>
+	</Boat>
+	<!--Remove Coverage,Endorsement on bases "Type of Watercraft" of watercraft -->
+	<Boat ID="11386" Name="Waverunner">
+		<Remove>
+			<Coverage Code="EBSMECE" Des="Client Entertainment Liability (OP 720)" />
+			<Coverage Code="UMBCS" Des="Uninsured Boaters" />
+			<Coverage Code="EBSCEAV" Des="Agreed Value (AV 100)" />
+			<Endorsement Code="AV100" Des="Agreed Value (AV 100)" />
+			<Endorsement Code="OP720" Des="Client Entertainment Liability (OP 720)" />
+			<!-- removing 250 and 500 dedcutible options which are applicable for Jet ski -->
+			<CoverageLimit COV_ID="1053" Desc="">
+					<LIMIT_DEDUC LIMIT_DEDUC_ID="1433" Amount="" />
+					<LIMIT_DEDUC LIMIT_DEDUC_ID="1436" Amount="" />
+			</CoverageLimit>
+			<CoverageLimit COV_ID="1054" Desc="">
+					<LIMIT_DEDUC LIMIT_DEDUC_ID="1434" Amount="" />
+					<LIMIT_DEDUC LIMIT_DEDUC_ID="1437" Amount="" />
+			</CoverageLimit>
+			<CoverageLimit COV_ID="1055" Desc="">
+					<LIMIT_DEDUC LIMIT_DEDUC_ID="1435" Amount="" />
+					<LIMIT_DEDUC LIMIT_DEDUC_ID="1438" Amount="" />
+			</CoverageLimit>
+				<!-- added by pravesh on 21 may as per itrack issue 1409 -->
+			<CoverageLimit COV_ID="19" Desc="">
+					<LIMIT_DEDUC LIMIT_DEDUC_ID="1412" Amount="" />
+					<LIMIT_DEDUC LIMIT_DEDUC_ID="35" Amount="" />
+					<LIMIT_DEDUC LIMIT_DEDUC_ID="36" Amount="" />
+			</CoverageLimit>
+			<CoverageLimit COV_ID="65" Desc="">
+					<LIMIT_DEDUC LIMIT_DEDUC_ID="1413" Amount="" />
+					<LIMIT_DEDUC LIMIT_DEDUC_ID="104" Amount="" />
+					<LIMIT_DEDUC LIMIT_DEDUC_ID="105" Amount="" />
+			</CoverageLimit>
+			<CoverageLimit COV_ID="820" Desc="">
+					<LIMIT_DEDUC LIMIT_DEDUC_ID="1414" Amount="" />
+					<LIMIT_DEDUC LIMIT_DEDUC_ID="949" Amount="" />
+					<LIMIT_DEDUC LIMIT_DEDUC_ID="950" Amount="" />
+			</CoverageLimit>
+			<CoverageLimit COV_ID="21" Desc="">
+					<LIMIT_DEDUC LIMIT_DEDUC_ID="1415" Amount="" />
+			</CoverageLimit>
+			<CoverageLimit COV_ID="68" Desc="">
+					<LIMIT_DEDUC LIMIT_DEDUC_ID="1416" Amount="" />
+			</CoverageLimit>
+			<CoverageLimit COV_ID="821" Desc="">
+					<LIMIT_DEDUC LIMIT_DEDUC_ID="1417" Amount="" />
+			</CoverageLimit>
+			<!--end here -->
+		</Remove>
+		<Mandatory>
+			<Endorsements>
+				<Endorsement Code="OP400" Des="Client Entertainment Liability (OP 720)" Mandatory="M"></Endorsement>
+			</Endorsements>
+		</Mandatory>
+	</Boat>
+	<Boat ID="11373" Name="Mini Jet Boat">
+		<Remove>
+			<Coverage Code="EBSMECE" Des="Client Entertainment Liability (OP 720)" />
+			<Coverage Code="UMBCS" Des="Uninsured Boaters" />
+			<Endorsement Code="OP720" Des="Client Entertainment Liability (OP 720)" />
+			<!-- removing 250 and 500 dedcutible options which are applicable for Jet ski -->
+			<CoverageLimit COV_ID="1053" Desc="">
+					<LIMIT_DEDUC LIMIT_DEDUC_ID="1433" Amount="" />
+					<LIMIT_DEDUC LIMIT_DEDUC_ID="1436" Amount="" />
+			</CoverageLimit>
+			<CoverageLimit COV_ID="1054" Desc="">
+					<LIMIT_DEDUC LIMIT_DEDUC_ID="1434" Amount="" />
+					<LIMIT_DEDUC LIMIT_DEDUC_ID="1437" Amount="" />
+			</CoverageLimit>
+			<CoverageLimit COV_ID="1055" Desc="">
+					<LIMIT_DEDUC LIMIT_DEDUC_ID="1435" Amount="" />
+					<LIMIT_DEDUC LIMIT_DEDUC_ID="1438" Amount="" />
+			</CoverageLimit>
+			<!-- added by pravesh on 21 may as per itrack issue 1409 -->
+			<CoverageLimit COV_ID="19" Desc="">
+					<LIMIT_DEDUC LIMIT_DEDUC_ID="1412" Amount="" />
+			</CoverageLimit>
+			<CoverageLimit COV_ID="65" Desc="">
+					<LIMIT_DEDUC LIMIT_DEDUC_ID="1413" Amount="" />
+			</CoverageLimit>
+			<CoverageLimit COV_ID="820" Desc="">
+					<LIMIT_DEDUC LIMIT_DEDUC_ID="1414" Amount="" />
+			</CoverageLimit>
+			
+			<CoverageLimit COV_ID="21" Desc="">
+					<LIMIT_DEDUC LIMIT_DEDUC_ID="1415" Amount="" />
+			</CoverageLimit>
+			<CoverageLimit COV_ID="68" Desc="">
+					<LIMIT_DEDUC LIMIT_DEDUC_ID="1416" Amount="" />
+			</CoverageLimit>
+			<CoverageLimit COV_ID="821" Desc="">
+					<LIMIT_DEDUC LIMIT_DEDUC_ID="1417" Amount="" />
+			</CoverageLimit>
+			<!--end here -->
+		</Remove>
+		<Mandatory>
+			<Endorsements>
+				<Endorsement Code="OP400" Des="Client Entertainment Liability (OP 720)" Mandatory="M"></Endorsement>
+			</Endorsements>
+		</Mandatory>
+	</Boat>
+	<!-- added by pravesh on 21 may as per itrack issue 1409 -->
+	<Boat ID="11375" Name="Pontoon Inboard / Outboard">
+		<Remove>
+		<!-- removing 250 and 500 dedcutible options which are applicable for Jet ski -->
+			<CoverageLimit COV_ID="1053" Desc="">
+					<LIMIT_DEDUC LIMIT_DEDUC_ID="1433" Amount="" />
+					<LIMIT_DEDUC LIMIT_DEDUC_ID="1436" Amount="" />
+			</CoverageLimit>
+			<CoverageLimit COV_ID="1054" Desc="">
+					<LIMIT_DEDUC LIMIT_DEDUC_ID="1434" Amount="" />
+					<LIMIT_DEDUC LIMIT_DEDUC_ID="1437" Amount="" />
+			</CoverageLimit>
+			<CoverageLimit COV_ID="1055" Desc="">
+					<LIMIT_DEDUC LIMIT_DEDUC_ID="1435" Amount="" />
+					<LIMIT_DEDUC LIMIT_DEDUC_ID="1438" Amount="" />
+			</CoverageLimit>
+			
+			<CoverageLimit COV_ID="19" Desc="">
+					<LIMIT_DEDUC LIMIT_DEDUC_ID="1412" Amount="" />
+			</CoverageLimit>
+			<CoverageLimit COV_ID="65" Desc="">
+					<LIMIT_DEDUC LIMIT_DEDUC_ID="1413" Amount="" />
+			</CoverageLimit>
+			<CoverageLimit COV_ID="820" Desc="">
+					<LIMIT_DEDUC LIMIT_DEDUC_ID="1414" Amount="" />
+			</CoverageLimit>
+			
+			<CoverageLimit COV_ID="21" Desc="">
+					<LIMIT_DEDUC LIMIT_DEDUC_ID="1415" Amount="" />
+			</CoverageLimit>
+			<CoverageLimit COV_ID="68" Desc="">
+					<LIMIT_DEDUC LIMIT_DEDUC_ID="1416" Amount="" />
+			</CoverageLimit>
+			<CoverageLimit COV_ID="821" Desc="">
+					<LIMIT_DEDUC LIMIT_DEDUC_ID="1417" Amount="" />
+			</CoverageLimit>
+		</Remove>
+		<Mandatory></Mandatory>
+	</Boat>  
+	<Boat ID="11755" Name="Jet Drive Outboards">
+		<Remove>
+		<!-- removing 250 and 500 dedcutible options which are applicable for Jet ski -->
+			<CoverageLimit COV_ID="1053" Desc="">
+					<LIMIT_DEDUC LIMIT_DEDUC_ID="1433" Amount="" />
+					<LIMIT_DEDUC LIMIT_DEDUC_ID="1436" Amount="" />
+			</CoverageLimit>
+			<CoverageLimit COV_ID="1054" Desc="">
+					<LIMIT_DEDUC LIMIT_DEDUC_ID="1434" Amount="" />
+					<LIMIT_DEDUC LIMIT_DEDUC_ID="1437" Amount="" />
+			</CoverageLimit>
+			<CoverageLimit COV_ID="1055" Desc="">
+					<LIMIT_DEDUC LIMIT_DEDUC_ID="1435" Amount="" />
+					<LIMIT_DEDUC LIMIT_DEDUC_ID="1438" Amount="" />
+			</CoverageLimit>
+			
+			<CoverageLimit COV_ID="19" Desc="">
+					<LIMIT_DEDUC LIMIT_DEDUC_ID="1412" Amount="" />
+			</CoverageLimit>
+			<CoverageLimit COV_ID="65" Desc="">
+					<LIMIT_DEDUC LIMIT_DEDUC_ID="1413" Amount="" />
+			</CoverageLimit>
+			<CoverageLimit COV_ID="820" Desc="">
+					<LIMIT_DEDUC LIMIT_DEDUC_ID="1414" Amount="" />
+			</CoverageLimit>
+			
+			<CoverageLimit COV_ID="21" Desc="">
+					<LIMIT_DEDUC LIMIT_DEDUC_ID="1415" Amount="" />
+			</CoverageLimit>
+			<CoverageLimit COV_ID="68" Desc="">
+					<LIMIT_DEDUC LIMIT_DEDUC_ID="1416" Amount="" />
+			</CoverageLimit>
+			<CoverageLimit COV_ID="821" Desc="">
+					<LIMIT_DEDUC LIMIT_DEDUC_ID="1417" Amount="" />
+			</CoverageLimit>
+		</Remove>
+		<Mandatory></Mandatory>
+	</Boat>
+	<LOB ID="1" Name="HOMEOWNER">
+		<Remove>
+			<!--
+			<CoverageLimit COV_ID="19" Desc="">
+					<LIMIT_DEDUC LIMIT_DEDUC_ID="1412" Amount="" />
+			</CoverageLimit>
+			<CoverageLimit COV_ID="65" Desc="">
+					<LIMIT_DEDUC LIMIT_DEDUC_ID="1413" Amount="" />
+			</CoverageLimit>
+			<CoverageLimit COV_ID="820" Desc="">
+					<LIMIT_DEDUC LIMIT_DEDUC_ID="1414" Amount="" />
+			</CoverageLimit>
+			
+			<CoverageLimit COV_ID="21" Desc="">
+					<LIMIT_DEDUC LIMIT_DEDUC_ID="1415" Amount="" />
+			</CoverageLimit>
+			<CoverageLimit COV_ID="68" Desc="">
+					<LIMIT_DEDUC LIMIT_DEDUC_ID="1416" Amount="" />
+			</CoverageLimit>
+			<CoverageLimit COV_ID="821" Desc="">
+					<LIMIT_DEDUC LIMIT_DEDUC_ID="1417" Amount="" />
+			</CoverageLimit> -->
+		</Remove>
+		<Mandatory></Mandatory>
+	</LOB>
+	<!--end here -->
+</Root>

@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Root>
+  <PageTitle>
+    <Culture Code="en-US">Contact Details</Culture>
+    <Culture Code="zh-SG">Contact Details</Culture>
+    <Culture Code="pt-BR">Contact Details</Culture>
+  </PageTitle>
+
+  <PageElement name="txtCONTACT_FNAME" type="TextBox" Desc=""
+       IsMandatory="Yes"
+       IsReadOnly="No"
+       IsDisabled="No"
+       IsDisplay="Yes"
+       MaxLength="200"
+       IsFormatingRequired="No" JsFunctionToFormat="" OnClickJSFunction=""
+       OnChangeJSFunction="" >
+    <Style Position="relative" Top="0" Left="10" CssClass="midcolora" />
+    <rev Enabled="No" ExpKey="aRegExpClientName" />
+    <Culture Code="en-US" Desc="set Label and Message for English language">
+      <Caption>Name</Caption>
+      <rfvMessage>Please enter Name.</rfvMessage>
+      <DefaultValue></DefaultValue>
+      <revExpMessage></revExpMessage>
+    </Culture>
+    <Culture Code="zh-SG" Desc="set Label and Message for Singapore language">
+      <Caption>Name</Caption>
+      <rfvMessage>Please Enter Name.</rfvMessage>
+      <DefaultValue></DefaultValue>
+      <revExpMessage></revExpMessage>
+    </Culture>
+  </PageElement>
+  
+<PageElement name="txtCONTACT_MNAME" type="TextBox" Desc=""
+				IsMandatory="No"
+				IsReadOnly="No"
+				IsDisabled="No"
+				IsDisplay="No"
+				IsFormatingRequired="No" JsFunctionToFormat="" OnClickJSFunction=""
+				OnChangeJSFunction="" >
+    <Style Position="relative" Top="0" Left="10" CssClass="midcolora" />
+    <rev Enabled="No" ExpKey="" />
+  </PageElement>
+
+<PageElement name="txtCONTACT_LNAME" type="TextBox" Desc=""
+				IsMandatory="No"
+				IsReadOnly="No"
+				IsDisabled="No"
+				IsDisplay="No"
+				IsFormatingRequired="No" JsFunctionToFormat="" OnClickJSFunction=""
+				OnChangeJSFunction="" >
+    <Style Position="relative" Top="0" Left="10" CssClass="midcolora" />
+    <rev Enabled="No" ExpKey="" />
+  </PageElement>
+</Root>

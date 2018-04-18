@@ -1,0 +1,219 @@
+﻿@model IEnumerable<MCAS.Web.Objects.MastersHelper.TaskModel>
+@using MCAS.Web.Objects.Resources.ClaimProcessing;
+@using MCAS.Web.Objects.Resources.Common;
+@using MCAS.Web.Objects.CommonHelper
+@using MCAS.Globalisation;
+@{
+    var mMCASQueryString = Html.MCASQueryString(Request.QueryString);
+    var lebmode = mMCASQueryString["mode"] != null ? Convert.ToString(mMCASQueryString["mode"]) : "";
+    Layout = null;
+    var Cmode = mMCASQueryString["claimMode"] == null ? "Read" : mMCASQueryString["claimMode"];
+    SecurityPermissions myPemissions = (SecurityPermissions)ViewData["UserPermissions"];
+    @Html.Hidden("oldgroup", 1)
+}
+<style type="text/css">
+/* Sortable tables */
+table.sortable thead {
+    background-color:#eee;
+    color:#666666;
+    font-weight: bold;
+    cursor: default;
+}   
+</style>
+
+<script src="@Url.Content("~/Scripts/sorttable.js")" type="text/javascript"></script>
+<div class="panel-body">
+    <h5 class="text-info">
+        @TaskEditor.TaskRecordTable</h5>
+    <hr />
+    <div class="panel-body">
+        <div class="col-lg-12">
+            <div class="table-responsive">
+                <table class="table table-striped table-hover sortable">
+                    <thead>
+                        <tr>
+                            <th style="padding-left: 9px">
+                                @{
+                                    if ((Convert.ToString(Session["OrganisationType"]).ToLower() == "tx") || (Convert.ToString(Session["OrganisationType"]).ToLower() == "pc"))
+                                    {
+                                    @TaskEditor.TPVehicleNo
+                                    }
+                                    else
+                                    { 
+                                    @TaskEditor.ClaimantNames 
+                                    }
+                                }
+                            </th>
+                            <th style="padding-left: 9px">
+                                @TaskEditor.ActionDue
+                            </th>
+                            <th style="padding-left: 9px">
+                                @TaskEditor.CloseDate
+                            </th>
+                            <th style="padding-left: 9px">
+                                @TaskEditor.TaskModifiedDate
+                            </th>
+                            <th style="padding-left: 9px">
+                                @TaskEditor.PromtDetails
+                            </th>
+                            <th style="padding-left: 9px">
+                                @{
+                                    if ((Convert.ToString(Session["OrganisationType"]).ToLower() == "tx") || (Convert.ToString(Session["OrganisationType"]).ToLower() == "pc"))
+                                    {
+                                    @TaskEditor.OfficerInCharge
+                                    }
+                                    else
+                                    { 
+                                    @TaskEditor.ClaimsOfficer
+                                    }
+                                }
+                            </th>
+                            @if (myPemissions.Write)
+                            {
+                                <th class="sorttable_nosort">
+                                    @Common.Select
+                                </th>
+                            }
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @{
+                            int trid = 1;
+                            int rowmatch = 0;
+                            var display = "";
+
+                            foreach (var item in Model)
+                            {
+
+                                var Tdays = (Convert.ToDateTime(item.ActionDue).Date - DateTime.Now.Date).TotalDays;
+                                var colour = "";
+                                var fclour = "black";
+                                if (Math.Round(Tdays) < 0)
+                                {
+                                    colour = "red;";
+                                    fclour = "#FFFFFF !important";
+                                }
+                                else if (Math.Round(Tdays) <= 3)
+                                {
+                                    colour = "yellow;";
+                                    fclour = "black";
+                                }
+
+                                var dd = item.ActionDue != null ? item.ActionDue.Value.ToString("dd/MM/yyyy") : "";
+                                var dd1 = "";
+                                if (item.CloseDate != null)
+                                {
+                                    dd1 = item.CloseDate.Value.ToString("dd/MM/yyyy");
+                                }
+                                var dd2 = "";
+                                if (item.TaskModifiedDate != null)
+                                {
+                                    dd2 = item.TaskModifiedDate.Value.ToString("dd/MM/yyyy");
+                                }
+
+                                var mode = @lebmode == "" ? @item.Cmode : @lebmode;
+                                var url = @Url.Content("~/ClaimProcessing/TaskEditor") + "?PolicyId=" + @item.PolicyId + "&AccidentClaimId=" + @item.AccidentClaimId + "&Id=" + @item.Id + "&claimMode=" + @Cmode + "&ClaimId=" + @item.ClaimID + "&mode=" + @mode + "&Viewmode=Select";
+                                rowmatch += 1;
+                                   
+
+                            <tr group='@(trid)' style="display:@display;">
+                                <td style="color:@fclour;background-color:@colour">
+                                    @item.ClaimantNames
+                                </td>
+                                <td style="color:@fclour;background-color:@colour">
+                                    @dd
+                                </td>
+                                <td style="color:@fclour;background-color:@colour">
+                                    @dd1
+                                </td>
+                                <td style="color:@fclour;background-color:@colour">
+                                    @dd2
+                                </td>
+                                <td style="color:@fclour;background-color:@colour">
+                                    @Html.DisplayFor(modelItem => item.PromtDetails)
+                                </td>
+                                <td style="color:@fclour;background-color:@colour">
+                                    @item.ClaimsOfficer
+                                </td>
+                                <td style="color:@fclour;background-color:@colour">
+                                    @if (myPemissions.Write)
+                                    {
+                                        <a class="btn btn-xs btn-info" href="@url">@Common.Select</a>
+                                    }
+                                </td>
+                            </tr>
+                                    if (rowmatch > 9)
+                                    {
+                                        rowmatch = 0;
+                                        trid += 1;
+                                        display = "none";
+                                    }
+
+                            }
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        @{
+            decimal count = (decimal)Model.Count() / 10;
+            int totalcount = (int)Math.Ceiling(count);
+            <div class="row">
+                <div class="clearfix igr col-md-1 text-center">
+                </div>
+                <div class="col-lg-10 text-center">
+                    <ul class="pagination no-margin">
+                        <li id="liprevious" onclick="Pagination('liprevious');"><a href="#">«</a> </li>
+                        @for (int j = 0; j < totalcount; j++)
+                        {
+                            if (j == 0)
+                            { 
+                            <li id="li@(j + 1)" class="active" onclick="Pagination('li@(j + 1)');"><a href="#">@(j + 1)</a>
+                            </li>
+                            }
+                            else
+                            {
+                                if (j > 4)
+                                {
+                            <li id="li@(j + 1)" style="display: none;" onclick="Pagination('li@(j + 1)');" ><a
+                                href="#">@(j + 1)</a></li>
+                                }
+                                else
+                                { 
+                            <li id="li@(j + 1)" onclick="Pagination('li@(j + 1)');" ><a href="#">@(j + 1)</a></li>
+                                }
+                            }
+                        }
+                        <li id="linext" onclick="Pagination('linext');"><a href="#">»</a> </li>
+                    </ul>
+                </div>
+                <div class="clearfix igr col-md-1 text-center">
+                </div>
+            </div>
+        }
+    </div>
+</div>
+<script type="text/javascript">
+
+    function Pagination(a) {
+        var b = Math.ceil(parseFloat('@Model.Count()' / 10));
+        "linext" == a && (a = "li" + (parseInt($("#oldgroup").val()) == b ? b : parseInt($("#oldgroup").val()) + 1));
+        "liprevious" == a && (a = "li" + (1 == parseInt($("#oldgroup").val()) ? 1 : parseInt($("#oldgroup").val()) - 1));
+        var d = $("#oldgroup").val(),
+        c = a.replace("li", "");
+        $("#oldgroup").val(c);
+        $("table tr[group=" + d + "]").css("display", "none");
+        $("table tr[group=" + c + "]").css("display", "");
+        $(".active").removeClass();
+        $("#" + a).addClass("active");
+        if (0 < b) {
+            for (i = 1; i <= b; i++) $("#li" + i).css("display", "none");
+            if (1 < c) if (parseFloat(c) + 2 <= parseFloat(b)) for (i = parseFloat(2 == c ? 3 : c) - 2; i <= parseFloat(2 == c ? 3 : c) + 2; i++) i <= b && $("#li" + i).css("display", "");
+            else for (i = parseFloat(b) - 4; i <= parseFloat(b); i++) $("#li" + i).css("display", "");
+            else for (i = 1; 5 >= i; i++) $("#li" + i).css("display", "")
+        }
+        setTabActive("TasksTab");
+    }
+
+    sorttable.sort_alpha = function (a, b) { return a[0].localeCompare(b[0]); }
+</script>

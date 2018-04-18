@@ -1,0 +1,445 @@
+<?xml version="1.0" encoding="utf-8" ?> 
+<Root>
+<!-- Policy Level Coverages -->
+<!--Residual Liability CSL (BI and PD) )-->
+<Coverages COVID="124" Checked="true" Code="RLCSL" Desc="Residual Liability CSL (BI and PD) )">
+	<ToDisable>
+		<Coverage Code="BISPL" Desc="Bodily Injury Liability ( Split Limit)"></Coverage>
+		<Coverage Code="PD" Desc="Property Damage Liability"></Coverage>
+		<Coverage Code="PUMSP" Desc="Uninsured Motorists (BI Split Limit)"></Coverage>
+	</ToDisable>
+	<ToEnable>
+		<Coverage Code="PUNCS" Desc="Uninsured Motorists (CSL)" Checked="false"></Coverage>
+	</ToEnable>
+	<ToUncheck>
+		<Coverage Code="PD" Desc="Property Damage Liability" Checked="false"></Coverage>
+		<Coverage Code="BISPL" Desc="Bodily Injury Liability ( Split Limit)" Checked="false"></Coverage>
+	</ToUncheck>
+	<ToCheck>
+	
+	</ToCheck>
+</Coverages>
+
+<Coverages COVID="124" Checked="false" Code="RLCSL" Desc="Residual Liability CSL (BI and PD) )">
+	<ToDisable>
+		<Coverage Code="RLCSL" Desc="Residual Liability CSL (BI and PD) )"></Coverage>
+		<Coverage Code="PUNCS" Desc="Uninsured Motorists (CSL) " Checked="false"></Coverage>
+		<Coverage Code="UNCSL" Desc="Underinsured Motorists (CSL)" Checked="false"></Coverage>
+	</ToDisable>
+	<ToEnable>
+		<Coverage Code="BISPL" Desc="Bodily Injury Liability ( Split Limit)"></Coverage>
+		<Coverage Code="PD" Desc="Property Damage Liability"></Coverage>
+		<Coverage Code="PUMSP" Desc="Uninsured Motorists (BI Split Limit) "></Coverage>
+	</ToEnable>
+	<ToUncheck>
+		<Coverage Code="PUNCS" Desc="Property Damage Liability" Checked="false"></Coverage>
+		<Coverage Code="UNCSL" Desc="Property Damage Liability" Checked="false"></Coverage>
+	</ToUncheck>
+	<ToCheck>
+		<Coverage Code="PD" Desc="Property Damage Liability" Checked="false"></Coverage>
+		<Coverage Code="BISPL" Desc="Property Damage Liability" Checked="false"></Coverage>
+	</ToCheck>
+</Coverages>
+<!--Residual Liability CSL (BI and PD) -->
+<!--Single Limits Liability CSL (BI and PD)-->
+<Coverages COVID="124" Checked="true" Code="SLL" Desc="Single Limits Liability CSL (BI and PD)">
+	<ToDisable>
+		<Coverage Code="BISPL" Desc="Bodily Injury Liability ( Split Limit)"></Coverage>
+		<Coverage Code="PD" Desc="Property Damage Liability"></Coverage>
+		<Coverage Code="PUMSP" Desc="Uninsured Motorists (BI Split Limit)"></Coverage>
+	</ToDisable>
+	<ToEnable>
+		<Coverage Code="PUNCS" Desc="Uninsured Motorists (CSL)" Checked="false"></Coverage>
+	</ToEnable>
+	<ToUncheck>
+		<Coverage Code="PD" Desc="Property Damage Liability" Checked="false"></Coverage>
+		<Coverage Code="BISPL" Desc="Bodily Injury Liability ( Split Limit)" Checked="false"></Coverage>
+	</ToUncheck>
+	<ToCheck>
+		<Coverage Code="PUNCS" Desc="Uninsured Motorists (CSL)" Checked="true"></Coverage>
+	</ToCheck>
+</Coverages>
+
+<Coverages COVID="124" Checked="false" Code="SLL" Desc="Single Limits Liability CSL (BI and PD)">
+	<ToDisable>
+		<Coverage Code="SLL" Desc="Single Limits Liability CSL (BI and PD) "></Coverage>
+		<Coverage Code="PUNCS" Desc="Uninsured Motorists (CSL) " Checked="false"></Coverage>
+		<Coverage Code="UNCSL" Desc="Underinsured Motorists (CSL)" Checked="false"></Coverage>
+	</ToDisable>
+	<ToEnable>
+		<Coverage Code="BISPL" Desc="Bodily Injury Liability ( Split Limit)"></Coverage>
+		<Coverage Code="PD" Desc="Property Damage Liability"></Coverage>
+		<Coverage Code="PUMSP" Desc="Uninsured Motorists (BI Split Limit) "></Coverage>
+		<Coverage Code="UMPD" Desc="Uninsured Motorist PD" Checked="false"></Coverage> <!-- Itrack 4516 -->
+		<Coverage Code="UNDSP" Desc="Underinsured Motorists (BI Split Limit)"></Coverage> <!-- itrack 4776 -->
+	</ToEnable>
+	<ToUncheck>
+		<Coverage Code="PUNCS" Desc="Property Damage Liability" Checked="false"></Coverage>
+		<Coverage Code="UNCSL" Desc="Property Damage Liability" Checked="false"></Coverage>
+	</ToUncheck>
+	<ToCheck>
+		<Coverage Code="PD" Desc="Property Damage Liability" Checked="false"></Coverage>
+		<Coverage Code="BISPL" Desc="Property Damage Liability" Checked="false"></Coverage>
+		<Coverage Code="PUMSP" Desc="Uninsured Motorists (BI Split Limit) "></Coverage> <!-- itrack 4776 -->
+		<Coverage Code="UNDSP" Desc="Underinsured Motorists (BI Split Limit)"></Coverage> <!-- itrack 4776 -->
+	</ToCheck>
+</Coverages>
+<!--End OSingle Limits Liability CSL (BI and PD)-->
+
+<!--Bodily Injury Liability ( Split Limit)-->
+<Coverages COVID="124" Checked="true" Code="BISPL" >
+	<ToEnable>
+		<Coverage Code="BISPL" Desc="Bodily Injury Liability ( Split Limit)"></Coverage>
+		<Coverage Code="PD" Desc="Property Damage Liability"></Coverage>
+		<Coverage Code="PUMSP" Desc="Uninsured Motorists (BI Split Limit)"></Coverage>
+	</ToEnable>
+	<ToDisable>
+		<Coverage Code="SLL" Desc="Single Limit Liability CSL"></Coverage>
+		<Coverage Code="RLCSL" Desc="Residual Liability CSL (BI and PD) )"></Coverage>
+		<Coverage Code="UNCSL" Desc="Underinsured Motorists (CSL)" Checked="false"></Coverage>
+	</ToDisable>
+	<ToUncheck>
+		<Coverage Code="SLL" Desc="Single Limit Liability CSL"></Coverage>
+		<Coverage Code="RLCSL" Desc="Residual Liability CSL (BI and PD) )"></Coverage>
+	</ToUncheck>
+	<ToCheck>
+		<Coverage Code="BISPL" Desc="Bodily Injury Liability ( Split Limit)"></Coverage>
+		<Coverage Code="PD" Desc="Property Damage Liability"></Coverage>
+		
+	</ToCheck>
+</Coverages>
+<Coverages COVID="124" Checked="false" Code="BISPL" >
+	<ToEnable>
+		<Coverage Code="SLL" Desc="Single Limit Liability CSL"></Coverage>
+		<Coverage Code="RLCSL" Desc="Residual Liability CSL (BI and PD) )"></Coverage>
+		<Coverage Code="PUNCS" Desc="Uninsured Motorists (CSL)" Checked="false"></Coverage>
+		<Coverage Code="UNCSL" Desc="Underinsured Motorists (CSL)" Checked="false"></Coverage>
+		<Coverage Code="UMPD" Desc="Uninsured Motorist PD" Checked="false"></Coverage>  <!-- Itrack 4776 -->
+	</ToEnable>
+	<ToDisable>
+		<Coverage Code="BISPL" Desc="Bodily Injury Liability ( Split Limit)"></Coverage>
+		<Coverage Code="PD" Desc="Property Damage Liability"></Coverage>
+		<Coverage Code="PUMSP" Desc="Uninsured Motorists (BI Split Limit)"></Coverage>
+		<Coverage Code="UNDSP" Desc="Underinsured Motorists (BI Split Limit)"></Coverage>
+		<!-- Coverage Code="UMPD" Desc="Uninsured Motorist PD" Checked="false"></Coverage --> <!-- Itrack 4516 -->
+	</ToDisable>
+	<ToUncheck>
+		<Coverage Code="BISPL" Desc="Bodily Injury Liability ( Split Limit)"></Coverage>
+		<Coverage Code="PD" Desc="Property Damage Liability"></Coverage>
+		<Coverage Code="PUMSP" Desc="Uninsured Motorists (BI Split Limit)"></Coverage>
+		<Coverage Code="UNDSP" Desc="Underinsured Motorists (BI Split Limit)"></Coverage>
+		<Coverage Code="RRUM" Desc="A9"></Coverage>
+		<!-- <Coverage Code="UMPD" Desc="Uninsured Motorist PD" Checked="false"></Coverage>   --> <!-- Itrack 4516 but change as per 4776 -->
+	</ToUncheck>
+	<ToCheck>
+		<Coverage Code="SLL" Desc="Single Limit Liability CSL"></Coverage>
+		<Coverage Code="RLCSL" Desc="Residual Liability CSL (BI and PD) )"></Coverage>
+		<Coverage Code="PUNCS" Desc="Uninsured Motorists (CSL)" Checked="true"></Coverage>
+		<Coverage Code="UNCSL" Desc="Underinsured Motorists (CSL)"></Coverage>	 <!-- itrack 4776 -->
+		<Coverage Code="UMPD" Desc="Uninsured Motorist PD" Checked="false"></Coverage>  <!-- Itrack 4776 -->
+	</ToCheck>
+</Coverages>
+<!--End Of Bodily Injury Liability ( Split Limit)-->
+
+<!--Property Damage Liability -->
+<Coverages COVID="124" Checked="true" Code="PD" >
+	<ToEnable>
+		<Coverage Code="BISPL" Desc="Bodily Injury Liability ( Split Limit)"></Coverage>
+		<Coverage Code="PD" Desc="Property Damage Liability"></Coverage>
+		<Coverage Code="PUMSP" Desc="Uninsured Motorists (BI Split Limit)"></Coverage>
+	</ToEnable>
+	<ToDisable>
+		<Coverage Code="SLL" Desc="Single Limit Liability CSL"></Coverage>
+		<Coverage Code="RLCSL" Desc="Residual Liability CSL (BI and PD) )"></Coverage>
+	</ToDisable>
+	<ToUncheck>
+		<Coverage Code="SLL" Desc="Single Limit Liability CSL"></Coverage>
+		<Coverage Code="RLCSL" Desc="Residual Liability CSL (BI and PD) )"></Coverage>
+	</ToUncheck>
+	<ToCheck>
+		<Coverage Code="BISPL" Desc="Bodily Injury Liability ( Split Limit)"></Coverage>
+		
+	</ToCheck>
+</Coverages>
+<Coverages COVID="124" Checked="false" Code="PD" >
+	<ToEnable>
+		<Coverage Code="SLL" Desc="Single Limit Liability CSL"></Coverage>
+		<Coverage Code="RLCSL" Desc="Residual Liability CSL (BI and PD) )"></Coverage>
+		<Coverage Code="PUNCS" Desc="Uninsured Motorists (CSL)" Checked="false"></Coverage>
+	</ToEnable>
+	<ToDisable>
+		<Coverage Code="BISPL" Desc="Bodily Injury Liability ( Split Limit)"></Coverage>
+		<Coverage Code="PD"  Desc="Property Damage Liability"></Coverage>
+		<Coverage Code="PUMSP" Desc="Uninsured Motorists (BI Split Limit)"></Coverage>
+		<Coverage Code="UNDSP" Desc="Underinsured Motorists (BI Split Limit)"></Coverage>
+	</ToDisable>
+	<ToUncheck>
+		<Coverage Code="BISPL" Desc="Bodily Injury Liability ( Split Limit)"></Coverage>
+		<Coverage Code="PUMSP" Desc="Uninsured Motorists (BI Split Limit)"></Coverage>
+		<Coverage Code="UNDSP" Desc="Underinsured Motorists (BI Split Limit)"></Coverage>
+	</ToUncheck>
+	<ToCheck>
+		<Coverage Code="SLL" Desc="Single Limit Liability CSL"></Coverage>
+		<Coverage Code="RLCSL" Desc="Residual Liability CSL (BI and PD) )"></Coverage>
+	</ToCheck>
+</Coverages>
+<!-- End oF Property Damage Liability  -->
+
+
+<!--Uninsured Motorists (CSL)  -->
+<Coverages COVID="124" Checked="true" Code="PUNCS" Desc="Uninsured Motorists (CSL)">
+	<ToDisable>
+	</ToDisable>		
+	<ToEnable>
+		<Coverage Code="UNCSL" Desc="Underinsured Motorists (CSL)"></Coverage>
+		<Coverage Code="UMPD" Desc="Uninsured Motorist PD" Checked="false"></Coverage>	
+	</ToEnable>
+	<ToUncheck>
+		
+	</ToUncheck>
+	<ToCheck>
+		<Coverage Code="UNCSL" Desc="Underinsured Motorists (CSL)"></Coverage>
+		<Coverage Code="UMPD" Desc="Uninsured Motorist PD" Checked="false"></Coverage>	
+	</ToCheck>
+</Coverages>
+
+<Coverages COVID="124" Checked="false" Code="PUNCS" Desc="Uninsured Motorists (CSL)">
+	<ToDisable>
+		<Coverage Code="UNCSL" Desc="Underinsured Motorists (CSL)"></Coverage>
+		<Coverage Code="UMPD" Desc="Uninsured Motorist PD" Checked="false"></Coverage>	
+	</ToDisable>	
+	<ToEnable>
+		
+	</ToEnable>
+	<ToUncheck>
+		<Coverage Code="UNCSL" Desc="Underinsured Motorists (CSL) "></Coverage>	
+		<Coverage Code="RRUM" Desc=" Rejection / Reduction of Uninsured &amp; Underinsured Motorist Coverage (A-9)"></Coverage>	
+		<Coverage Code="UMPD" Desc="Uninsured Motorist PD" Checked="false"></Coverage>
+	</ToUncheck>
+	<ToCheck>
+		
+	</ToCheck>
+</Coverages>
+<!--End Of Uninsured Motorists (CSL)  -->
+
+<!--"Uninsured Motorists (BI Split Limit) "-->
+<Coverages COVID="124" Checked="true" Code="PUMSP" >
+	<ToEnable>
+		<Coverage Code="UNDSP" Desc="Underinsured Motorists (BI Split Limit)"></Coverage>
+		<Coverage Code="UMPD" Desc="Uninsured Motorist PD" Checked="false"></Coverage>
+	</ToEnable>
+	<ToDisable>
+		
+	</ToDisable>
+	<ToUncheck>
+	
+	</ToUncheck>
+	<ToCheck>
+	
+	</ToCheck>
+</Coverages>
+<Coverages COVID="124" Checked="false" Code="PUMSP" >
+	<ToEnable>
+		
+	</ToEnable>
+	<ToDisable>
+		<Coverage Code="UNDSP" Desc="Underinsured Motorists (BI Split Limit)"></Coverage>
+		<Coverage Code="UMPD" Desc="Uninsured Motorist PD" Checked="false"></Coverage> 
+	</ToDisable>
+	<ToUncheck>
+		<Coverage Code="UNDSP" Desc="Underinsured Motorists (BI Split Limit)"></Coverage>
+		<Coverage Code="RRUM" Desc="Rejection / Reduction of Uninsured &amp; Underinsured Motorist Coverage (A-9)"></Coverage>
+		<Coverage Code="UMPD" Desc="Uninsured Motorist PD" Checked="false"></Coverage>
+	</ToUncheck>
+	<ToCheck>
+		
+	</ToCheck>
+</Coverages>
+<!--End Of Uninsured Motorists (BI Split Limit) -->
+<!--End Of Policy Level Coverages -->
+
+
+<!--"Risk Level Coverages"-->
+
+<!--"Other than Collision (Comprehensive) for Indiana "-->
+<Coverages COVID="" Checked="true" Code="OTC" >
+	<ToEnable>
+		<Coverage Code="COLL" Desc="Collision"></Coverage>
+		<Coverage Code="SORCV" Desc=""></Coverage>	
+		<!--- this was remove as per issue no 918 of covg '<Coverage Code="SORPE" Desc=""></Coverage>  -->
+		<Coverage Code="SRTE" Desc="Sound Receiving and Transmitting Equipment A-31"></Coverage>
+	</ToEnable>
+	<ToDisable>
+		
+	</ToDisable>
+	<ToUncheck>
+	
+	</ToUncheck>
+	<ToCheck>
+	
+	</ToCheck>
+</Coverages>
+<Coverages COVID="" Checked="false" Code="OTC" >
+	<ToEnable>
+		
+	</ToEnable>
+	<ToDisable>
+		<Coverage Code="COLL" Desc="Collision"></Coverage>
+		<Coverage Code="SORPE" Desc="Sound Reproducing - Tapes (A-29)"></Coverage>
+		<Coverage Code="SORCV" Desc=""></Coverage>		
+		<Coverage Code="ROAD" Desc="Road Service"></Coverage>
+		<Coverage Code="RREIM" Desc="Rental Reimbursement (A-89)"></Coverage>
+		<Coverage Code="LLGC" Desc="Loan / Lease Gap Coverage (A-11)"></Coverage>	
+		<Coverage Code="EECOLL" Desc="Miscellaneous Extra Equipment - Collision (A-16)"></Coverage>
+		<Coverage Code="EECOMP" Desc="Miscellaneous Extra Equipment - Comprehensive A-15"></Coverage>
+		<Coverage Code="SRTE" Desc="Sound Receiving and Transmitting Equipment A-31"></Coverage>
+	</ToDisable>
+	<ToUncheck>
+		<Coverage Code="COLL" Desc="Collision"></Coverage>
+		<Coverage Code="SORPE" Desc="Sound Reproducing - Tapes (A-29)"></Coverage>
+		<Coverage Code="SORCV" Desc=""></Coverage>		
+		<Coverage Code="ROAD" Desc="Road Service"></Coverage>
+		<Coverage Code="RREIM" Desc="Rental Reimbursement (A-89)"></Coverage>
+		<Coverage Code="LLGC" Desc="Loan / Lease Gap Coverage (A-11)"></Coverage>
+		<Coverage Code="EECOLL" Desc="Miscellaneous Extra Equipment - Collision (A-16)"></Coverage>
+		<Coverage Code="EECOMP" Desc="Miscellaneous Extra Equipment - Comprehensive A-15"></Coverage>
+		<Coverage Code="SRTE" Desc="Sound Receiving and Transmitting Equipment A-31"></Coverage>
+		<Coverage Code="RCC68" Desc="Regular Collision Coverage A-68"></Coverage>		
+	</ToUncheck>
+	<ToCheck>
+		
+	</ToCheck>
+</Coverages>
+<!--"End of Other than Collision (Comprehensive) for Indiana "-->
+
+<!--"Other than Collision (Comprehensive)  for Michigan"-->
+<Coverages COVID="" Checked="true" Code="COMP" >
+	<ToEnable>
+		<Coverage Code="COLL" Desc="Collision"></Coverage>
+		<Coverage Code="SORCV" Desc=""></Coverage>		
+		<Coverage Code="SRTE" Desc="Sound Receiving and Transmitting Equipment A-31"></Coverage>		
+		<!-- this was removed as per issue no 918 og cong'<Coverage Code="SORPE" Desc=""></Coverage> -->
+	</ToEnable>
+	<ToDisable>
+		<!-- <Coverage Code="EECOMP" Desc="Miscellaneous Extra Equipment - Comprehensive (A-16)"></Coverage>	 -->
+	</ToDisable>
+	<ToUncheck>
+	 
+	</ToUncheck>
+	<ToCheck>
+	
+	</ToCheck>
+</Coverages>
+<Coverages COVID="" Checked="false" Code="COMP" >
+	<ToEnable>
+		
+	</ToEnable>
+	<ToDisable>
+		<Coverage Code="COLL" Desc="Collision"></Coverage>
+		<Coverage Code="SORPE" Desc="Sound Reproducing - Tapes (A-29)"></Coverage>
+		<Coverage Code="SORCV" Desc=""></Coverage>		
+		<Coverage Code="ROAD" Desc="Road Service"></Coverage>
+		<Coverage Code="RREIM" Desc="Rental Reimbursement (A-89)"></Coverage>
+		<Coverage Code="LLGC" Desc="Loan / Lease Gap Coverage (A-11)"></Coverage>	
+		<Coverage Code="EECOLL" Desc="Miscellaneous Extra Equipment - Collision (A-16)"></Coverage>
+		<Coverage Code="EECOMP" Desc="Miscellaneous Extra Equipment - Comprehensive A-15"></Coverage>
+		<Coverage Code="SRTE" Desc="Sound Receiving and Transmitting Equipment A-31"></Coverage>		
+	</ToDisable>
+	<ToUncheck>
+		<Coverage Code="COLL" Desc="Collision"></Coverage>
+		<Coverage Code="SORPE" Desc="Sound Reproducing - Tapes (A-29)"></Coverage>
+		<Coverage Code="SORCV" Desc=""></Coverage>		
+		<Coverage Code="ROAD" Desc="Road Service"></Coverage>
+		<Coverage Code="RREIM" Desc="Rental Reimbursement (A-89)"></Coverage>
+		<Coverage Code="LLGC" Desc="Loan / Lease Gap Coverage (A-11)"></Coverage>
+		<Coverage Code="EECOLL" Desc="Miscellaneous Extra Equipment - Collision (A-16)"></Coverage>
+		<Coverage Code="EECOMP" Desc="Miscellaneous Extra Equipment - Comprehensive A-15"></Coverage>
+		<Coverage Code="SRTE" Desc="Sound Receiving and Transmitting Equipment A-31"></Coverage>
+		<Coverage Code="RCC68" Desc="Regular Collision Coverage A-68"></Coverage>		
+	</ToUncheck>
+	<ToCheck>
+		
+	</ToCheck>
+</Coverages>
+<!--"End of Other than Collision (Comprehensive) For Michigan "-->
+
+
+<!--Collision -->
+<Coverages COVID="" Checked="true" Code="COLL" >
+	<ToEnable>
+		<Coverage Code="ROAD" Desc="Road Service"></Coverage>
+		<Coverage Code="RREIM" Desc="Rental Reimbursement (A-89)"></Coverage>
+		<Coverage Code="LLGC" Desc="Loan / Lease Gap Coverage (A-11)"></Coverage>
+		<Coverage Code="SORPE" Desc="Sound Reproducing - Tapes (A-29)"></Coverage>
+		
+	</ToEnable>
+	<ToDisable>
+		
+	</ToDisable>
+	<ToUncheck>
+	
+	</ToUncheck>
+	<ToCheck>
+	
+	</ToCheck>
+</Coverages>
+<Coverages COVID="" Checked="false" Code="COLL" >
+	<ToEnable>
+		
+	</ToEnable>
+	<ToDisable>
+		<Coverage Code="ROAD" Desc="Road Service"></Coverage>
+		<Coverage Code="RREIM" Desc="Rental Reimbursement (A-89)"></Coverage>
+		<Coverage Code="EECOLL" Desc="Miscellaneous Extra Equipment - Collision (A-16)"></Coverage>
+		<!-- <Coverage Code="EECOMP" Desc="Miscellaneous Extra Equipment - Comprehensive (A-16)"></Coverage> -->
+		<Coverage Code="LLGC" Desc="Loan / Lease Gap Coverage (A-11)"></Coverage>
+		<Coverage Code="SORPE" Desc="Sound Reproducing - Tapes (A-29)"></Coverage>	
+				
+	</ToDisable>
+	<ToUncheck>
+		<Coverage Code="ROAD" Desc="Road Service"></Coverage>
+		<Coverage Code="RREIM" Desc="Rental Reimbursement (A-89)"></Coverage>
+		<!--<Coverage Code="EECOMP" Desc="Miscellaneous Extra Equipment - Comprehensive (A-16)"></Coverage> ITRACK 4432--> 
+		 <Coverage Code="EECOLL" Desc="Miscellaneous Extra Equipment - Collision (A-16)"></Coverage> 
+		<Coverage Code="RCC68" Desc="Regular Collision Coverage A-68"></Coverage>
+		<Coverage Code="LLGC" Desc="Loan / Lease Gap Coverage (A-11)"></Coverage>					
+		<Coverage Code="SORPE" Desc="Sound Reproducing - Tapes (A-29)"></Coverage>
+	</ToUncheck>
+	<ToCheck>
+		
+	</ToCheck>
+</Coverages>
+<!--End of Collision -->
+
+<!--Extra Equipment-Comprehensive (A-16)  -->
+<Coverages COVID="" Checked="true" Code="EECOMP" >
+	<ToEnable>
+			<!-- <Coverage Code="EECOLL" Desc=""></Coverage> -->
+	</ToEnable>
+	<ToDisable>
+		
+	</ToDisable>
+	<ToUncheck>
+	
+	</ToUncheck>
+	<ToCheck>
+	
+	</ToCheck>
+</Coverages>
+<Coverages COVID="" Checked="false" Code="EECOMP" >
+	<ToEnable>
+		
+	</ToEnable>
+	<ToDisable>
+		<Coverage Code="EECOLL" Desc="Miscellaneous Extra Equipment - Collision (A-16)"></Coverage>
+	</ToDisable>
+	<ToUncheck>
+		<Coverage Code="EECOLL" Desc="Miscellaneous Extra Equipment - Collision (A-16)"></Coverage>
+	</ToUncheck>
+	<ToCheck>
+		
+	</ToCheck>
+</Coverages>
+<!--End of Extra Equipment-Comprehensive (A-16)  -->
+
+</Root>

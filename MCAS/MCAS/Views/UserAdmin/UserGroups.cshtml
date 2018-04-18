@@ -1,0 +1,238 @@
+﻿@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<!-- Main Container start -->
+<div class="dashboard-wrapper"> 
+  
+  <!-- Bootstrap Container Start -->
+  <div class="container"> 
+    
+    <!-- Page title start -->
+    <div class="row page-title">
+      <div class="col-lg-12">
+        <h2>System Admin</h2>
+        <ul class="breadcrumb">
+          <li>Home</li>
+          <li>User Admin</li>
+        </ul>
+      </div>
+    </div>
+    <!-- Page title end --> 
+    <!-- Row start for sub navigation -->
+    <hr>
+    <div class="row">
+    	<div class="col-lg-12 text-center">
+        	<div class="btn-group less-bottom-margin">
+             @* <a class="btn btn-default" href="user-admin.html">Entity Details</a>*@
+              <a class="btn btn-info" href="user-groups.html">User Groups</a>
+              <a class="btn btn-default" href="user.html">User</a>
+              <a class="btn btn-default" href="department-master.html">Department Master</a>
+              <a class="btn btn-default" href="password-setup.html">Password Setup</a>
+              <a class="btn btn-default" href="release-locked-users.html">Release Locked Users</a>
+              <a class="btn btn-default" href="country-for-user-access.html">Country for User Access</a>
+            </div>
+        </div>
+    </div>
+    <hr>
+    <!-- Row End -->
+    <!-- Row start -->
+    <div class="row">
+      <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+        <div class="panel panel-info">
+          <div class="panel-heading clearfix"> <i class="icon-check-sign"></i>
+            <h3 class="panel-title">Search Groups</h3>
+          </div>
+          <div class="panel-sub-heading"> <span class="text-danger">*</span> Search Screen </div>
+          <div class="panel-body">
+            <form role="form" class="form-horizontal">
+            	<div class="row">
+                	<div class="col-lg-6">
+                    	<div class="form-group">
+                          <label class="col-sm-3 control-label" for="inputName">Group Code</label>
+                          <div class="col-sm-9">
+                            <input type="text" placeholder="Group Code" id="inputName" class="form-control">
+                          </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                    	<div class="form-group">
+                          <label class="col-sm-3 control-label" for="inputName">Group Name</label>
+                          <div class="col-sm-9">
+                            <input type="text" placeholder="Group Name" id="inputName" class="form-control">
+                          </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                	<div class="col-lg-6">
+                    	<div class="form-group">
+                          <label class="col-sm-3 control-label" for="inputName">Department</label>
+                          <div class="col-sm-9">
+                            <select class="form-control">
+                            	<option>[Select...]</option>
+                            </select>
+                          </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                    	<div class="form-group">
+                          <label class="col-sm-3 control-label" for="inputName">Status</label>
+                          <div class="col-sm-9">
+                            <select class="form-control">
+                            	<option>[Select...]</option>
+                            </select>
+                          </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                	<div class="col-lg-12 text-center">
+                    	<button type="submit" class="btn btn-info">Add New</button> <button type="submit" class="btn btn-info">Search</button> <button type="submit" class="btn btn-info">Excel</button>
+                    </div>
+                </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Row End -->
+    <!-- Row Start -->
+    <div class="row">
+    	<div class="col-lg-12 text-center">
+        	<h4 class="text-info">Search Results</h4>
+            <hr>
+        </div>
+        <div class="col-lg-12">
+        	<div class="table-responsive">
+            	<table class="table table-striped table-hover">
+                	<thead>
+                    	<tr>
+                        	<th>Group Code</th>
+                            <th>Group Name</th>
+                            <th>Department</th>
+                            <th>Access Level</th>
+                            <th>Group Status</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                        	<td>G0021</td>
+                            <td>Singapore Underwriting Executives</td>
+                            <td>Underwriting</td>
+                            <td>4</td>
+                            <td>Y</td>
+                            <td><button class="btn btn-xs btn-warning">Edit</button> <button class="btn btn-xs btn-info">View</button></td>
+                        </tr>
+                        <tr>
+                        	<td>G0021</td>
+                            <td>Singapore Underwriting Executives</td>
+                            <td>Underwriting</td>
+                            <td>4</td>
+                            <td>Y</td>
+                            <td><button class="btn btn-xs btn-warning">Edit</button> <button class="btn btn-xs btn-info">View</button></td>
+                        </tr>
+                        <tr>
+                        	<td>G0021</td>
+                            <td>Singapore Underwriting Executives</td>
+                            <td>Underwriting</td>
+                            <td>4</td>
+                            <td>Y</td>
+                            <td><button class="btn btn-xs btn-warning">Edit</button> <button class="btn btn-xs btn-info">View</button></td>
+                        </tr>
+                        <tr>
+                        	<td>G0021</td>
+                            <td>Singapore Underwriting Executives</td>
+                            <td>Underwriting</td>
+                            <td>4</td>
+                            <td>Y</td>
+                            <td><button class="btn btn-xs btn-warning">Edit</button> <button class="btn btn-xs btn-info">View</button></td>
+                        </tr>
+                        <tr>
+                        	<td>G0021</td>
+                            <td>Singapore Underwriting Executives</td>
+                            <td>Underwriting</td>
+                            <td>4</td>
+                            <td>Y</td>
+                            <td><button class="btn btn-xs btn-warning">Edit</button> <button class="btn btn-xs btn-info">View</button></td>
+                        </tr>
+                        <tr>
+                        	<td>G0021</td>
+                            <td>Singapore Underwriting Executives</td>
+                            <td>Underwriting</td>
+                            <td>4</td>
+                            <td>Y</td>
+                            <td><button class="btn btn-xs btn-warning">Edit</button> <button class="btn btn-xs btn-info">View</button></td>
+                        </tr>
+                        <tr>
+                        	<td>G0021</td>
+                            <td>Singapore Underwriting Executives</td>
+                            <td>Underwriting</td>
+                            <td>4</td>
+                            <td>Y</td>
+                            <td><button class="btn btn-xs btn-warning">Edit</button> <button class="btn btn-xs btn-info">View</button></td>
+                        </tr>
+                        <tr>
+                        	<td>G0021</td>
+                            <td>Singapore Underwriting Executives</td>
+                            <td>Underwriting</td>
+                            <td>4</td>
+                            <td>Y</td>
+                            <td><button class="btn btn-xs btn-warning">Edit</button> <button class="btn btn-xs btn-info">View</button></td>
+                        </tr>
+                        <tr>
+                        	<td>G0021</td>
+                            <td>Singapore Underwriting Executives</td>
+                            <td>Underwriting</td>
+                            <td>4</td>
+                            <td>Y</td>
+                            <td><button class="btn btn-xs btn-warning">Edit</button> <button class="btn btn-xs btn-info">View</button></td>
+                        </tr>
+                        <tr>
+                        	<td>G0021</td>
+                            <td>Singapore Underwriting Executives</td>
+                            <td>Underwriting</td>
+                            <td>4</td>
+                            <td>Y</td>
+                            <td><button class="btn btn-xs btn-warning">Edit</button> <button class="btn btn-xs btn-info">View</button></td>
+                        </tr>
+                        <tr>
+                        	<td>G0021</td>
+                            <td>Singapore Underwriting Executives</td>
+                            <td>Underwriting</td>
+                            <td>4</td>
+                            <td>Y</td>
+                            <td><button class="btn btn-xs btn-warning">Edit</button> <button class="btn btn-xs btn-info">View</button></td>
+                        </tr>
+                        <tr>
+                        	<td>G0021</td>
+                            <td>Singapore Underwriting Executives</td>
+                            <td>Underwriting</td>
+                            <td>4</td>
+                            <td>Y</td>
+                            <td><button class="btn btn-xs btn-warning">Edit</button> <button class="btn btn-xs btn-info">View</button></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="col-lg-12 text-center">
+        	<ul class="pagination no-margin">
+              <li class="disabled"> <a href="#">«</a> </li>
+              <li class="active"> <a href="#">1</a> </li>
+              <li> <a href="#">2</a> </li>
+              <li> <a href="#">3</a></li>
+              <li> <a href="#">4</a> </li>
+              <li> <a class="hidden-xs" href="#">5</a> </li>
+              <li> <a class="hidden-xs" href="#">6</a> </li>
+              <li> <a href="#">»</a> </li>
+            </ul>
+        </div>
+        <div class="col-lg-12">&nbsp;</div>
+    </div>
+    <!-- Row End -->
+  </div>
+  <!-- Bootstrap Container End --> 
+  
+</div>

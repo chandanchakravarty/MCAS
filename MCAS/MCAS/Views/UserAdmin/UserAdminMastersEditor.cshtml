@@ -1,0 +1,822 @@
+﻿@model MCAS.Web.Objects.CommonHelper.UserAdminModel
+@using MCAS.Web.Objects.CommonHelper
+@using System.Globalization;
+@using MCAS.Globalisation
+@{
+    ViewBag.Title = "UserAdminMastersEditor";
+    Layout = "~/Views/Shared/_SystemAdminLayout.cshtml";
+    var mMCASQueryString = Html.MCASQueryString(Request.QueryString);
+    var pageMode = mMCASQueryString["pageMode"] == null ? "" : mMCASQueryString["pageMode"];
+    var hid = pageMode == "Edit" ? "block" : "none";
+    var SNo = mMCASQueryString["SNo"] == null ? "0" : mMCASQueryString["SNo"] == "" ? "0" : Convert.ToString(mMCASQueryString["SNo"]);
+    var SNO_ = Model.SNo.ToString();
+    if (SNO_ != "")
+    {
+        SNo = SNO_;
+    }
+    var url1 = Url.ActionEncoded("UserAdminMastersEditor", "UserAdmin", new { @pageMode = pageMode, @SNo = SNo });
+    var url2 = Url.ActionEncoded("OrganizationAccess", "UserAdmin", new { @pageMode = pageMode, @SNo = SNo });
+    var btndisplay = pageMode == "View" ? "none" : "yes";
+    var url3 = Url.ActionEncoded("UserAdminMastersEditor", "UserAdmin", new { @pageMode = pageMode, @SNo = SNo });
+    SecurityPermissions myPemissions = (SecurityPermissions)ViewData["UserPermissions"];
+    SecurityPermissions orgAccessPer = (SecurityPermissions)ViewData["OrgAccessPer"];
+    var grpId = ViewData["list"];
+    var userid = Model.UserId == null ? "" : Convert.ToString(Model.UserId);
+    var countryid = Model.Country == null ? "" : Convert.ToString(Model.Country);
+    var passwordComplexity = TempData["PasswordComplexity"] == null ? "" : TempData["PasswordComplexity"].ToString();
+    var minPasswordLength = TempData["MinPasswordLength"] == null ? "" : TempData["MinPasswordLength"].ToString();
+    System.Resources.ResourceManager PageResource = (new MCAS.Web.Objects.MastersHelper.TransactionModel()).GetResourceManager(Model.Resource);
+}
+<style type="text/css">
+    .ui-dialog .ui-dialog-buttonpane .ui-dialog-buttonset
+    {
+        float: right !important;
+    }
+    
+    div.ui-dialog-buttonset
+    {
+        margin-right: 30% !important;
+    }
+    .capital
+    {
+        text-transform: capitalize;
+    }
+</style>
+<script src="@Url.Content("~/Scripts/jquery-2.1.0.min.js")" type="text/javascript"></script>
+<div class="dashboard-wrapper">
+    <!-- Bootstrap Container Start -->
+    <div class="container">
+        <!-- Page title start -->
+        <div class="row page-title">
+            <div class="col-lg-12">
+                <h2>@MCAS.Web.Objects.Resources.Common.Common.SystemAdmin</h2>
+                <ul class="breadcrumb">
+                    <li>@PageResource.GetString("UserAdmin")</li>
+                    <li>@PageResource.GetString("UserDetails")</li>
+                </ul>
+            </div>
+        </div>
+        <!-- Page title end -->
+        <!-- Row start for sub navigation -->
+        <hr />
+        <div class="row">
+            <div class="col-lg-12 text-left">
+                <div class="btn-group less-bottom-margin">
+                    @*<a class="btn btn-default" href='@Url.Action("UserEntityIndex", "UserAdmin")'>Entity
+                        Details</a> *@<a class="btn btn-default" href='@Url.Action("UserGroupsIndex", "UserAdmin")'>@PageResource.GetString("UserGroups")</a>
+                    <a class="btn btn-info" href='@Url.Action("UserAdminMastersList", "UserAdmin")'>@PageResource.GetString("User")</a>
+                    <a class="btn btn-default" href='@Url.Action("UserDeptIndex", "UserAdmin")'>@PageResource.GetString("DepartmentMaster")</a>
+                    <a class="btn btn-default" href='@Url.Action("PasswordSetUpEditor", "UserAdmin")'>@PageResource.GetString("PasswordSetup")</a>
+                    @* <a class="btn btn-default" href='@Url.Action("ReleasedLockedUser", "UserAdmin")'>
+                                            Release Locked Users</a> <a class="btn btn-default" href='@Url.Action("UserCountryIndex", "UserAdmin")'>
+                                                Country for User Access</a>*@
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-12 text-left">
+                <div class="btn-group less-bottom-margin">
+                    @*  <ul style="display:@hid" class="nav nav-tabs" id="myTab1">*@
+                    <ul style="" class="nav nav-tabs" id="myTab1">
+                        <li class="active" id="UserDetailsTab"><a  id="UserDetailsANC" href='@url1'>@PageResource.GetString("UserDetails")
+                        </a></li>
+                        <li id="OrgAccessTab"><a  id="OrgAccessANC" href='@url2'>@PageResource.GetString("OrganizationAccess")</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <!-- Row End -->
+        <!-- Row start -->
+        <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <div class="panel panel-info">
+                    <div class="panel-heading clearfix">
+                        <i class="icon-check-sign"></i>
+                        <h3 class="panel-title">@PageResource.GetString("UserDetails")</h3>
+                    </div>
+                    <div style="color: Red; font-weight: bold;" class="has-error" id="error">
+                        <p align="center">
+                            @if (TempData["notice"] != null)
+                            {
+                                @TempData["notice"]
+                            }
+                        </p>
+                    </div>
+                    <div class="panel-body">
+                        <form class="form-horizontal" action='@url3' role="form" name="useradminform" id="useradminform" method="post">
+                        @Html.ValidationSummary(true)
+                        <div class="row">
+                            <div class="clearfix igr col-md-12">
+                                <div class="clearfix igr col-md-12">
+                                    <div class="col-md-2">
+                                        @Html.HiddenFor(m => m.SNo)
+                                        @Html.HiddenFor(m => m.hiddentab)
+                                        @Html.HiddenFor(m => m.hidinput)
+                                        <label for="inputUserId">
+                                            @PageResource.GetString("UserId") &nbsp;<span class="text-danger">*</span></label>
+                                    </div>
+                                    <div class="col-md-3">
+                                        @Html.TextBoxFor(m => m.UserId, new { @maxlength = "7", id = "inputUserId", @class = "form-control" })
+                                        @Html.ValidationMessageFor(m => m.UserId)<br />
+                                    </div>
+                                    <div class="col-md-2">
+                                        <label for="inputUserFullName">
+                                            @PageResource.GetString("UserFullName")&nbsp;<span class="text-danger">*</span></label>
+                                    </div>
+                                    <div class="col-md-3">
+                                        @Html.TextBoxFor(m => m.UserFullName, new { id = "inputUserFullName", @class = "form-control capital", @maxlength = "50" })
+                                        @Html.ValidationMessageFor(m => m.UserFullName)<br />
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="clearfix igr col-md-12">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="clearfix igr col-md-12">
+                                <div class="clearfix igr col-md-12">
+                                    <div class="col-md-2">
+                                        <label for="inputpwd">
+                                            @PageResource.GetString("Password")&nbsp;<span class="text-danger">*</span></label>
+                                    </div>
+                                    <div class="col-md-3">
+                                        @Html.PasswordFor(m => m.LoginPassword, new { id = "inputpwd", value = Model.LoginPassword, @class = "form-control" })
+                                        @Html.ValidationMessageFor(m => m.LoginPassword)<br />
+                                    </div>
+                                    <div class="col-md-2">
+                                        <label for="inputConfirmPwd">
+                                            @PageResource.GetString("ConfirmPassword")&nbsp;<span class="text-danger">*</span></label>
+                                    </div>
+                                    <div class="col-md-3">
+                                        @Html.PasswordFor(m => m.LoginPassword, new { id = "inputConfirmPwd", value = Model.LoginPassword, @class = "form-control" })
+                                        @Html.ValidationMessageFor(m => m.LoginPassword)<br />
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="clearfix igr col-md-12">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="clearfix igr col-md-12">
+                                <div class="clearfix igr col-md-12">
+                                    <div class="col-md-2">
+                                        <label for="inputUserDispName">
+                                            @PageResource.GetString("UserDispName")&nbsp;<span class="text-danger">*</span></label>
+                                    </div>
+                                    <div class="col-md-3">
+                                        @Html.TextBoxFor(m => m.UserDispName, new { id = "inputUserDispName", @class = "form-control", @maxlength = "50" })
+                                        @Html.ValidationMessageFor(m => m.UserDispName)<br />
+                                    </div>
+                                    <div class="col-md-2">
+                                        <label for="inputUserDispName">@PageResource.GetString("EmailId")&nbsp;<span class="text-danger">*</span></label>
+                                    </div>
+                                    <div class="col-md-3">
+                                        @Html.TextBoxFor(m => m.EmailId, new { id = "inputEmail", @class = "form-control" })
+                                        @Html.ValidationMessageFor(m => m.EmailId)<br />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="clearfix igr col-md-12">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="clearfix igr col-md-12">
+                                <div class="clearfix igr col-md-12">
+                                    <div class="col-md-2">
+                                        <label for="inputInitial">
+                                            @PageResource.GetString("Initial")&nbsp;<span class="text-danger">*</span></label>
+                                    </div>
+                                    <div class="col-md-3">
+                                        @Html.TextBoxFor(m => m.Initial, new { id = "inputInitial", @class = "form-control", @maxlength = "5" })
+                                        @Html.ValidationMessageFor(m => m.Initial)<br />
+                                    </div>
+                                    <div class="col-md-2">
+                                        <label for="inputDidNo">
+                                            @PageResource.GetString("DID_No")
+                                        </label>
+                                    </div>
+                                    <div class="col-md-3">
+                                        @Html.TextBoxFor(m => m.DID_No, new { id = "inputDidNo", @maxlength = "20", @class = "form-control Number" })
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="clearfix igr col-md-12">
+                                </div>
+                            </div>
+                        </div>
+                        @* <div class="row" style="height: 20px">
+                            <div class="clearfix igr col-md-12">
+                            </div>
+                        </div>*@
+                        <div class="row">
+                            <div class="clearfix igr col-md-12">
+                                <div class="clearfix igr col-md-12">
+                                    <div class="col-md-2">
+                                        <label for="inputFaxNo">
+                                            @PageResource.GetString("FAX_No")
+                                        </label>
+                                    </div>
+                                    <div class="col-md-3">
+                                        @Html.TextBoxFor(m => m.FAX_No, new { id = "inputFaxNo", @maxlength = "20", @class = "form-control Number" })
+                                    </div>
+                                    <div class="col-md-2">
+                                        <label for="ddlDepartment">
+                                            @PageResource.GetString("Department")&nbsp;<span class="text-danger">*</span></label>
+                                    </div>
+                                    <div class="col-md-3">
+                                        @Html.DropDownListFor(m => m.DeptCode, new SelectList(Model.deptlist, "DeptCode", "DeptName", ""), new { id = "ddlDepartment", @class = "form-control" })
+                                        @Html.ValidationMessageFor(m => m.DeptCode)<br />
+                                    </div>
+                                    @* <div class="col-md-2">
+                                        <label for="ddlBranchCode">
+                                            Entity&nbsp;<span class="text-danger">*</span></label>
+                                    </div>
+                                    <div class="col-md-3">
+                                        @Html.DropDownListFor(m => m.BranchCode, new SelectList(Model.branchlist, "BranchCode", "BranchName"), new { id = "ddlBranchCode", @class = "form-control" })
+                                        @Html.ValidationMessageFor(m => m.BranchCode)<br />
+                                    </div>*@
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="clearfix igr col-md-12">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="clearfix igr col-md-12">
+                            </div>
+                        </div>
+                        @*<div class="row">
+                            <div class="clearfix igr col-md-12">
+                                <div class="clearfix igr col-md-12">
+                                    <div class="col-md-2">
+                                        <label for="ddlDepartment">
+                                            Main Class & Country</label>
+                                    </div>
+                                    <div class="col-md-8">
+                                        <div class="table-responsive">
+                                            <table class="table">
+                                                <thead>
+                                                    <tr>
+                                                        <th style="padding-top: 0px;">
+                                                            Country
+                                                        </th>
+                                                        <th style="padding-top: 0px;">
+                                                            MainClass
+                                                        </th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    @foreach (var item in Model.usercountrylist)
+                                                    {
+                                                        var countrycode = @item.CountryCode;
+                                                        var selectedcountries = @ViewData["SelectedCountries"];
+                                                        var isSelected = false;
+                                                        if (selectedcountries != null)
+                                                            isSelected = selectedcountries.ToString().Contains(@countrycode);
+                                                        <tr>
+                                                            <td class="capital">
+                                                                <input type="checkbox" id="@item.CountryCode" checked="@isSelected" value='@item.CountryCode' name="query_countryTextEditBox" style="text-align:center; vertical-align: middle;" onclick="selectProduct(this)" />                         
+                                                                
+                                                                @Html.DisplayName(@item.CountryName)
+                                                            </td>
+                                                            <td>
+                                                                @foreach (var prod in Model.userproductcountrylist.Where(c => c.CountryCode == @countrycode))
+                                                                {
+                                                                    var uniqId = @prod.Product_Code;
+                                                                    var selectedId = @prod.Product_Code + '~' + @prod.CountryCode;
+                                                                    var selectedProdcountries = @ViewData["SelectedProdCountries"];
+                                                                    var isProdSelected = false;
+                                                                    if (selectedProdcountries != null)
+                                                                        isProdSelected = selectedProdcountries.ToString().Contains(@selectedId);
+                                                                
+                                                                    <input type="checkbox" name="@item.CountryCode" checked="@isProdSelected" value='@prod.Product_Code' id="@uniqId" style="text-align:center; vertical-align: middle; margin-left:10px;" onclick="checkforCountry(this)" />
+                                                                    @Html.DisplayName(@prod.Product_Code) 
+                                                                }
+                                                            </td>
+                                                        </tr>
+                                                    }
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>*@
+                        <div style="display: none;" class="row">
+                            <div class="clearfix igr col-md-12">
+                                <div class="clearfix igr col-md-12">
+                                    <div class="col-md-2" style="padding-left: 0px;">
+                                        <label for="ddlDepartment">
+                                            @PageResource.GetString("OrganizationCategory") <span class="text-danger">*</span></label>
+                                    </div>
+                                    <div class="col-md-8">
+                                        <div class="table-responsive">
+                                            <table class="table">
+                                                <thead>
+                                                    <tr>
+                                                        <th style="padding-top: 0px;">
+                                                            @PageResource.GetString("Category")
+                                                        </th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <td>
+                                                            @foreach (var prod in Model.usercategorylist.Where(c => c.category == "ORGCategory"))
+                                                            {
+                                                                var uniqId = @prod.LookupValue;
+                                                                var selectedId = @prod.LookupValue + '~' + @prod.LookupDesc;
+                                                                string[] selectedCategory = Convert.ToString(@ViewData["SelectedCategory"]).Split(',');
+                                                                var pos = selectedCategory != null ? Array.IndexOf(selectedCategory, selectedId) : -1;
+                                                                var isProdSelected = pos == -1 ? false : true;
+                                                                <input type="checkbox" checked="@isProdSelected" value='@selectedId' id="@uniqId" style="text-align:center; vertical-align: middle; margin-left:10px;" name="query_categoryBox"  />
+                                                                @Html.DisplayName(@prod.LookupDesc) 
+                                                            }
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="clearfix igr col-md-12">
+                                <div class="clearfix igr col-md-12">
+                                    <div class="col-md-2">
+                                        <label for="ddlGroup">
+                                            @PageResource.GetString("Group")&nbsp;<span class="text-danger">*</span></label>
+                                    </div>
+                                    <div class="col-md-3">
+                                        @Html.DropDownListFor(m => m.GroupId, new SelectList(Model.groupslist, "GroupId", "GroupName", ""), new { id = "ddlGroup", @class = "form-control" })
+                                        @Html.ValidationMessageFor(m => m.GroupId)<br />
+                                    </div>
+                                    <div class="col-md-2">
+                                        <label for="inputAccessLevel">
+                                            @PageResource.GetString("Country")&nbsp;<span class="text-danger">*</span></label>
+                                    </div>
+                                    <div class="col-md-3">
+                                        @Html.DropDownListFor(m => m.Country, new SelectList(Model.countrylist, "CountryShortCode", "CountryName", ""), new { @class = "form-control" })
+                                        @Html.ValidationMessageFor(m => m.Country)
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="clearfix igr col-md-12">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="clearfix igr col-md-12">
+                                <div class="clearfix igr col-md-12">
+                                    <div class="col-md-2">
+                                        <label for="inputpaymentlimit">
+                                            @PageResource.GetString("FAL_OD") &nbsp;<span id="falodid" class="text-danger" style="display: none">*</span></label>
+                                    </div>
+                                    <div class="col-md-3">
+                                        @* @Html.TextBoxFor(m => m.FAL_OD, new { @class = "form-control", id = "inputpaymentlimit", @numlen = "11", @format = "" })*@
+                                        @Html.DropDownListFor(m => m.FAL_OD, new SelectList(Model.FALODlist, "FALId", "FALDisplayName", "0"), new { @class = "form-control", id = "ddlFALOD" })
+                                        @Html.ValidationMessageFor(m => m.FAL_OD)<br />
+                                        @*<input type="text" id="inputLossTypeDesc" placeholder="" name="txtDesc"/>*@
+                                    </div>
+                                    <div class="col-md-2">
+                                        <label for="inputcreditnote">
+                                            @PageResource.GetString("FAL_PDBI")&nbsp;<span id="falpdid" class="text-danger" style="display: none">*</span></label>
+                                    </div>
+                                    <div class="col-md-3">
+                                        @Html.DropDownListFor(m => m.FAL_PDBI, new SelectList(Model.FALPDBIlist, "FALId", "FALDisplayName", "0"), new { @class = "col-lg-12 form-control", id = "ddlFALPDBI" })
+                                        @*@Html.TextBoxFor(m => m.FAL_PDBI, new { @class = "form-control", id = "inputcreditnote", @numlen = "11", @format = "" })*@
+                                        @Html.ValidationMessageFor(m => m.FAL_PDBI)<br />
+                                        @*<input type="text" id="inputLossTypeDesc" placeholder="" name="txtDesc"/>*@
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="clearfix igr col-md-12">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="clearfix igr col-md-12">
+                                <div class="clearfix igr col-md-12">
+                                    <div class="col-md-2">
+                                        <label for="ddlStatuslist">
+                                            @PageResource.GetString("IsActive")</label>
+                                    </div>
+                                    <div class="col-md-3">
+                                        @Html.DropDownListFor(m => m.IsActive, new SelectList(Model.Statuslist, "Lookup_value", "Lookup_desc", "Active"), new { id = "ddlStatuslist", @class = "form-control" })<br />
+                                    </div>
+                                    <div class="col-md-2">
+                                        <label>
+                                            @PageResource.GetString("LOGApproverCheckbox")</label>
+                                    </div>
+                                    <div class="col-md-3">
+                                        @Html.CheckBoxFor(m => m.LOGApproverCheckbox)
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="clearfix igr col-md-12">
+                                <div class="clearfix igr
+                        col-md-12">
+                                    @*<div class="col-md-2">
+                                        <label for="ddlAccessLevel">
+                                            User Level</label>
+                                    </div>
+                                    <div class="col-md-3">
+                                        @Html.DropDownListFor(m => m.AccessLevel, new SelectList(Enumerable.Range(0, 11).ToList()), new { id = "ddlAccessLevel", @class = "form-control" })<br />
+                                    </div>*@
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="clearfix
+                        igr col-md-12">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="clearfix igr col-md-12
+                        text-center">
+                                @* <button type="submit" class="btn btn-primary">
+                                    Back</button>&nbsp;&nbsp;&nbsp;&nbsp;*@
+                                @if (@myPemissions.Write)
+                                {
+                                    
+                                    <button style="display:@btndisplay" class="btn btn-info" id="btnSave">
+                                        @PageResource.GetString("Save")</button>
+                                }
+                                &nbsp;&nbsp;&nbsp;&nbsp;
+                                @Html.ActionLink(@PageResource.GetString("Back"), "UserAdminMastersList", null, new { @class = "btn btn-info" })&nbsp;&nbsp;&nbsp;&nbsp;
+                                @*@Html.ActionLink("Cancel", "UserAdminMastersList", null, new { @class = "btn btn-info" })*@
+                                @*<button type="button" class="btn btn-primary btn-large" onclick="onclickcancel();">Cancel</button>*@
+                            </div>
+                        </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Row End -->
+        <div class="panel">
+            @Html.Partial("~/Views/Shared/_TimeStamp.cshtml", Model)
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    if ('@SNo' == "0") {
+        $("#inputpwd").val("");
+        $("#inputUserFullName").val("");
+    }
+    if ('@SNo' != '') {
+        $("#SNo").val('@SNo');
+    }
+    var do_on_load = function () {
+
+        "@Model.LoginRoleCode" != "Ad" && $("#LOGApproverCheckbox").attr("disabled", true);
+
+        $("#LOGApproverCheckbox").change(function () {
+            (("@Model.CurrentUserLogChkName".toUpperCase() == "FALSE") && "@Model.LogChkName" != "" && this.checked) && CreateDialog("Currently Log Approver Right is assigned to User: " + "@Model.LogChkName".toUpperCase() + ". Did you want to Change..??", "Yes", "No", "", function () {
+                $("#LOGApproverCheckbox").prop("checked", false)
+            });
+
+
+        });
+        if ('@orgAccessPer.Read' != "True") {
+            $('#OrgAccessTab').hide();
+        }
+
+        if (getQueryVariable("pageMode") == "Edit") {
+            var groupval = $("#ddlGroup option:selected").val();
+            $.ajax({
+                type: "POST",
+                url: '@Url.Action("GetGroupCode", "UserAdmin")',
+                data: {
+                    GroupVal: groupval
+                },
+                success: function (a) {
+                    $("#hidinput").val(a);
+                    if ($("#hidinput").val() == "SP" || $("#hidinput").val() == "COSP") {
+                        $("#falodid").show();
+                        $("#falpdid").show();
+                    }
+                }
+            });
+        }
+
+        $("#inputUserFullName").click(function () {
+
+            if ($("#inputUserFullName").val() == " ") {
+                $("#inputUserFullName").val("");
+            }
+
+        });
+
+        $("#btnSave").click(function (a) {
+            var user = $.trim($("#inputUserId").val());
+            var userfullname = $.trim($("#inputUserFullName").val());
+            var pwds = $.trim($("#inputpwd").val());
+            var ConfirmPwd = $.trim($("#inputConfirmPwd").val());
+            var userdisplay = $.trim($("#inputUserDispName").val());
+            var emails = $.trim($("#inputEmail").val());
+            var dept = $.trim($("#ddlDepartment").val());
+            var groups = $.trim($("#ddlGroup").val());
+            if (user != "" && userfullname != "" && pwds != "" && ConfirmPwd != "" && userdisplay != "" && emails != "" && dept != "") {
+
+                var b = $.trim($("#inputpwd").val()),
+        c = $.trim($("#inputConfirmPwd").val());
+                if ("" != b && "" != c && b != c) return alert("Password and Confirm Password don't match."), a.preventDefault(), !1;
+                if (groups == 0) {
+                    alert("Group is required.");
+                    a.preventDefault();
+                    return false;
+                }
+            }
+            if ($("#hidinput").val() == "SP" || $("#hidinput").val() == "COSP") {
+                if ($("#ddlFALOD").val() == 0 || $("#ddlFALOD").val() == "") {
+                    alert("Please select FAL(OD)");
+                    a.preventDefault();
+                    return false;
+                }
+                if ($("#ddlFALPDBI").val() == 0 || $("#ddlFALPDBI").val() == "") {
+                    alert("Please select FAL(PD/BI)");
+                    a.preventDefault();
+                    return false;
+                }
+            }
+
+        });
+
+        $(document).on("focus", ":input", function () {
+            $(this).attr("autocomplete", "off")
+        });
+
+
+        $("input[type=text]").each(function () {
+            if (void 0 !== $(this).attr("data-val-number") && "The field " == $(this).attr("data-val-number").substring(0, 10)) {
+                var a = $(this).attr("data-val-number").substring(10, $(this).attr("data-val-number").length);
+                $(this).removeAttr("data-val-number");
+                $(this).attr("data-val-number", a)
+            }
+        });
+
+
+
+
+        $("#inputUserId").blur(function (event) {
+            var user = $.trim($("#inputUserId").val());
+            $.ajax({
+                type: "POST",
+                url: '@Url.Action("UserNameExists", "UserAdmin")',
+                data: {
+                    UserId: user
+                },
+                success: function (a) {
+                    if (a == true && (getQueryVariable("pageMode") != "Edit")) {
+                        alert("Duplicate User Id.");
+                        $("#inputUserId").val('');
+                        //$("#btnSave").attr("disabled", "disabled");
+                    }
+                    else if (($("#inputUserId").val() != '@Model.UserId') && a == true) {
+                        alert("Duplicate User Id.");
+                        $("#inputUserId").val('');
+                        //$("#btnSave").attr("disabled", "disabled");
+                    }
+                    else {
+                        //$("#btnSave").removeAttr("disabled");
+                    }
+
+                }
+            });
+        });
+
+        $("#inputEmail").blur(function (event) {
+            var Email = $.trim($(this).val());
+
+            $.ajax({
+                type: "POST",
+                url: '@Url.Action("ValidEmail", "UserAdmin")',
+                data: {
+                    EmailAdd1: Email
+
+                },
+                success: function (a) {
+                    if (a == true && (getQueryVariable("pageMode") != "Edit")) {
+                        alert("Please enter Email in proper format.");
+                        $("#inputEmail").val('');
+                        //$("#btnSave").attr("disabled", "disabled");
+                    }
+                    else if (a == true && (getQueryVariable("pageMode") == "Edit")) {
+                        alert("Please enter Email in proper format.");
+                        $("#inputEmail").val('');
+                        //$("#btnSave").attr("disabled", "disabled");
+                    }
+                    else {
+                        //$("#btnSave").removeAttr("disabled");
+                    }
+
+                }
+            });
+        });
+
+
+        $("#Country").change(function (a) {
+            CreateDialog("Changing Country will remove current values from organization access screen. Do you want to continue..??", "Yes", "Cancel", OnConfirmTrue, OnCancel)
+        });
+
+        $("#ddlGroup").change(function () {
+            var groupval = $("#ddlGroup option:selected").val();
+            $.ajax({
+                type: "POST",
+                url: '@Url.Action("GetGroupCode", "UserAdmin")',
+                data: {
+                    GroupVal: groupval
+                },
+                success: function (a) {
+                    $("#hidinput").val(a);
+                    if ($("#hidinput").val() == "SP" || $("#hidinput").val() == "COSP") {
+                        $("#falodid").show();
+                        $("#falpdid").show();
+                    }
+                }
+            });
+        });
+
+    };
+    $(document).ready(do_on_load);
+    $(window).bind('page:change', do_on_load);
+    function selectProduct(elem) {
+        var id = elem.id;
+        var ischecked = elem.checked;
+        $("input[name=" + id + "]").each(function (el, v) {
+            v.checked = ischecked;
+        });
+    };
+    function OnConfirmTrue() {
+
+    };
+
+    function OnCancel() {
+        $("#Country").val("@countryid");
+    };
+    function checkforCountry(elem) {
+        var id = elem.id;
+        var name = elem.name;
+        var ischecked = elem.checked;
+
+        if (name == 'UC001') {
+            var parentval = $("input[name=query_countryTextEditBox]")[0].value;
+            var isparentchecked = $("input[id=" + parentval + "]").is(':checked');
+            if ($("input[id= " + id + "]").is(':checked')) {
+                if (!isparentchecked) {
+                    var sure = confirm("Please select country ");
+                    elem.checked = false;
+                }
+            }
+        }
+        else if (name == 'UC002') {
+            var parentval = $("input[name=query_countryTextEditBox]")[1].value;
+            var isparentchecked = $("input[id=" + parentval + "]").is(':checked');
+            if ($("input[id= " + id + "]").is(':checked')) {
+                if (!isparentchecked) {
+                    var sure = confirm("Please select country ");
+                    elem.checked = false;
+                }
+            }
+        }
+        else if (name == 'UC003') {
+            var parentval = $("input[name=query_countryTextEditBox]")[2].value;
+            var isparentchecked = $("input[id=" + parentval + "]").is(':checked');
+            if ($("input[id= " + id + "]").is(':checked')) {
+                if (!isparentchecked) {
+                    var sure = confirm("Please select country ");
+                    elem.checked = false;
+                }
+            }
+        }
+    };
+    function getQueryVariable(a) {
+        for (var e = "@MenuListItem.ClaimTabs.GetQueryStringVal()".replace(/amp;/ig, "").split("&"), d = 0; d < e.length; d++) {
+            var b = e[d].split("=");
+            if (b[0] == a) return b[1]
+        }
+    };
+
+    var guid = (function () {
+        function s4() {
+            return Math.floor((1 + Math.random()) * 0x10000).toString(16).substring(1);
+        }
+        return function () {
+            return s4() + s4() + '-' + s4() + '-' + s4() + '-' + s4() + '-' + s4() + s4() + s4();
+        };
+    })();
+    function setactivetab(tabname) {
+
+        var arr = new Array();
+        arr = ["UserDetailsTab", "OrgAccessTab"];
+        for (var i = 0; i < arr.length; i++) {
+            if (arr[i] == tabname) {
+                $("#" + tabname).addClass("active");
+                $("#" + tabname).removeClass("tab-pane fade");
+                $("#" + tabname).addClass("tab-pane fade active in");
+            }
+            else {
+                $("#" + tabname).removeClass("active");
+                $("#" + tabname).removeClass("tab-pane fade active in");
+                $("#" + tabname).addClass("tab-pane fade");
+            }
+        }
+    };
+    if ('@pageMode' == 'View') {
+        $('#useradminform').find('input, textarea, select').attr('disabled', 'disabled');
+    }
+    if ('@SNo' == '0') {
+        $('#OrgAccessANC').removeAttr('href');
+    }
+    //    else {
+    //        '@url2' = '@url2'.replace("&amp;", "&");
+    //        $('#OrgAccessANC').attr('href', '@url2');
+    //    }
+
+    $("#inputpwd").change(function (a) {
+        var password = $("#inputpwd").val();
+        var minPwdLength = '@minPasswordLength'
+        if ($("#inputpwd").val().length >= minPwdLength) {
+            if ('@passwordComplexity' == 'N') {
+
+                //var alphaNumPattern = /^[a-zA-Z0-9_-]+$/;
+                //var alphaNumPattern = /^(?=.*[0-9])(?=.*[a-zA-Z])([a-zA-Z0-9]+)$/;
+                //if (alphaNumPattern.test(password)) {
+                if (/\d/.test(password) && /[a-zA-Z]/.test(password)) {
+                    return true;
+                }
+                else {
+                    $("#inputpwd").val('');
+                    alert("Password should be combination of alphabets and digits.", "inputpwd");
+                    return false;
+                }
+            }
+            else {
+
+                var alphaNumSpePattern = /^.*(?=.{3,})(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@@#$%&]).*$/;
+
+                if (alphaNumSpePattern.test(password)) {
+                    return true;
+                }
+                else {
+                    $("#inputpwd").val('');
+                    alert('Password should be combination of at least one number, one uppercase letter, one special character.', "inputpwd");
+                    return false;
+                }
+            }
+        }
+        else {
+            return alert('Password length should be minimum  ' + minPwdLength + ' characters', "inputpwd"), $("#inputpwd").val(''), !1;
+        }
+    });
+    $("#inputConfirmPwd").change(function (a) {
+        var password = $("#inputConfirmPwd").val();
+        var minPwdLength = '@minPasswordLength'
+        if ($("#inputConfirmPwd").val().length >= minPwdLength) {
+            if ('@passwordComplexity' == 'N') {
+
+                //var alphaNumPattern = /^[a-zA-Z0-9_-]+$/;
+                //var alphaNumPattern = /^(?=.*[0-9])(?=.*[a-zA-Z])([a-zA-Z0-9]+)$/;
+                //if (alphaNumPattern.test(password)) {
+                if (/\d/.test(password) && /[a-zA-Z]/.test(password)) {
+                    return true;
+                }
+                else {
+                    $("#inputConfirmPwd").val('');
+                    alert("Password should be combination alphabets and digits.", "inputConfirmPwd");
+                    return false;
+                }
+            }
+            else {
+
+                var alphaNumSpePattern = /^.*(?=.{3,})(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@@#$%&]).*$/;
+
+                if (alphaNumSpePattern.test(password)) {
+                    return true;
+                }
+                else {
+                    $("#inputConfirmPwd").val('');
+                    alert('Password should be combination of at least one number, one uppercase letter, one special character.', "inputConfirmPwd");
+                    return false;
+                }
+            }
+        }
+        else {
+            return alert('Password length should be minimum  ' + minPwdLength + ' characters', "inputConfirmPwd"), $("#inputConfirmPwd").val(''), !1;
+        }
+    });
+</script>

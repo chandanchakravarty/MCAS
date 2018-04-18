@@ -1,0 +1,170 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{9C17273B-F9AA-4DCE-B344-4BFD098134AA}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>BlCommon</RootNamespace>
+    <AssemblyName>BlCommon</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Accounting\ClsAddNSFEntry.cs" />
+    <Compile Include="Accounting\ClsBankInformation.cs" />
+    <Compile Include="Accounting\ClsBudgetCategory.cs" />
+    <Compile Include="Accounting\ClsGeneralLedger.cs" />
+    <Compile Include="Accounting\ClsGLAccountRanges.cs" />
+    <Compile Include="Accounting\ClsGlAccounts.cs" />
+    <Compile Include="Accounting\ClsInstallmentPlan.cs" />
+    <Compile Include="Accounting\ClsInstallParams.cs" />
+    <Compile Include="Accounting\ClsRegCommSetup_Agency.cs" />
+    <Compile Include="Accounting\ClsTransactionCodeGroup.cs" />
+    <Compile Include="Accounting\ClsTransactionCodeGroupDetails.cs" />
+    <Compile Include="Accounting\ClsTransactioncodes.cs" />
+    <Compile Include="Accumulation\ClsAccumulationCriteria.cs" />
+    <Compile Include="Accumulation\ClsPolicyAccumulationDetails.cs" />
+    <Compile Include="Accumulation\ClsAccumulationReference.cs" />
+    <Compile Include="ClsMarineCargoSetAgents.cs" />
+    <Compile Include="ClsPortMaster.cs" />
+    <Compile Include="ClsAccountingEntity.cs" />
+    <Compile Include="ClsAdditionalWordings.cs" />
+    <Compile Include="ClsAddReinsuranceAggStopLoss.cs" />
+    <Compile Include="ClsAgency.cs" />
+    <Compile Include="ClsAttachment.cs" />
+    <Compile Include="clscommon.cs" />
+    <Compile Include="ClsContactsManager.cs" />
+    <Compile Include="ClsCoverageDetails.cs" />
+    <Compile Include="ClsCoverageRange.cs" />
+    <Compile Include="ClsCrypto.cs" />
+    <Compile Include="ClsCurrencyMasterDetails.cs" />
+    <Compile Include="ClsCurrencyRate.cs" />
+    <Compile Include="ClsCurrentCreditRating.cs" />
+    <Compile Include="ClsDefaultHierarchy.cs" />
+    <Compile Include="ClsDefaultMessage.cs" />
+    <Compile Include="ClsDefaultValue.cs" />
+    <Compile Include="ClsDepartment.cs" />
+    <Compile Include="clsdiary.cs" />
+    <Compile Include="ClsDiscountSurcharge.cs" />
+    <Compile Include="ClsDivision.cs" />
+    <Compile Include="ClsEndorsementAttachement.cs" />
+    <Compile Include="ClsEndorsment.cs" />
+    <Compile Include="ClsFinanceCompany.cs" />
+    <Compile Include="ClsForgotPassword.cs" />
+    <Compile Include="ClsLogin.cs" />
+    <Compile Include="ClsLookup.cs" />
+    <Compile Include="clsMasterdetails.cs" />
+    <Compile Include="ClsMasterdetailsvalue.cs" />
+    <Compile Include="ClsMonetaryDetails.cs" />
+    <Compile Include="ClsMortgage.cs" />
+    <Compile Include="ClsNatureBusiness.cs" />
+    <Compile Include="ClsPolicyNoSetup.cs" />
+    <Compile Include="ClsPremisesInformation.cs" />
+    <Compile Include="ClsProfitCentre.cs" />
+    <Compile Include="ClsQuestionTab.cs" />
+    <Compile Include="ClsRatingBuilder.cs" />
+    <Compile Include="ClsReinsuranceBankingDetails.cs" />
+    <Compile Include="ClsReinsuranceContact.cs" />
+    <Compile Include="ClsReinsuranceContractName.cs" />
+    <Compile Include="ClsReinsuranceContractType.cs" />
+    <Compile Include="ClsReinsuranceExcessLayer.cs" />
+    <Compile Include="ClsReinsuranceInformation.cs" />
+    <Compile Include="ClsReinsuranceMajorParticipation.cs" />
+    <Compile Include="ClsReinsuranceMinorParticipation.cs" />
+    <Compile Include="ClsReinsurancePosting.cs" />
+    <Compile Include="ClsReinsuranceSpecialAcceptanceAmount.cs" />
+    <Compile Include="ClsReinsurer.cs" />
+    <Compile Include="ClsReinsurerAttachment.cs" />
+    <Compile Include="ClsRetentionLimit.cs" />
+    <Compile Include="ClsSecurity.cs" />
+    <Compile Include="ClsStates.cs" />
+    <Compile Include="ClsSuppFormsInformation.cs" />
+    <Compile Include="ClsSystemParams.cs" />
+    <Compile Include="ClsTaxEntity.cs" />
+    <Compile Include="ClsTransactionLog.cs" />
+    <Compile Include="ClsUnderWriterClaimsLimit.cs" />
+    <Compile Include="ClsUnderwritingTier.cs" />
+    <Compile Include="ClsUser.cs" />
+    <Compile Include="ClsUserDefinedTwo.cs" />
+    <Compile Include="ClsUserQuestion.cs" />
+    <Compile Include="ClsUserType.cs" />
+    <Compile Include="ClsVendor.cs" />
+    <Compile Include="ClsVesselMaster.cs" />
+    <Compile Include="ClsXmlManagerBase.cs" />
+    <Compile Include="ClsXOLDetails.cs" />
+    <Compile Include="DocumentMerge\ClsBuildQueryXml.cs" />
+    <Compile Include="DocumentMerge\ClsDocumentMerge.cs" />
+    <Compile Include="DocumentMerge\ClsGetDataXml.cs" />
+    <Compile Include="FTPFactory.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="QuickQuote\ClsAuto.cs" />
+    <Compile Include="QuickQuote\ClsHome.cs" />
+    <Compile Include="QuickQuote\ClsQuickQuote.cs" />
+    <Compile Include="QuickQuote\ClsWatercraft.cs" />
+    <Compile Include="Reinsurance\ClsConstructionTranslation.cs" />
+    <Compile Include="Reinsurance\ClsCoverageCategories.cs" />
+    <Compile Include="Reinsurance\ClsLossLayer.cs" />
+    <Compile Include="Reinsurance\ClsSplit.cs" />
+    <Compile Include="Reinsurance\ClsTIVGroup.cs" />
+    <Compile Include="UserDefinedOne.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\DataLayer\DataLayer.csproj">
+      <Project>{A7B69366-3DA6-4CB3-84F3-25C88559EF12}</Project>
+      <Name>DataLayer</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\EbixDataTypes\EbixDataTypes.csproj">
+      <Project>{7826B9D8-F728-465D-9226-D6E86430D6C3}</Project>
+      <Name>EbixDataTypes</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Model\Model.csproj">
+      <Project>{8BED9EF7-4F80-4195-87FC-62CE73BC3672}</Project>
+      <Name>Model</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

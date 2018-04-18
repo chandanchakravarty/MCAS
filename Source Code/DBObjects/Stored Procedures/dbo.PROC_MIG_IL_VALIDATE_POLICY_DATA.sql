@@ -1,0 +1,521 @@
+
+/****** Object:  StoredProcedure [dbo].[PROC_MIG_IL_VALIDATE_POLICY_DATA]    Script Date: 12/02/2011 17:08:49 ******/
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[PROC_MIG_IL_VALIDATE_POLICY_DATA]') AND type in (N'P', N'PC'))
+DROP PROCEDURE [dbo].[PROC_MIG_IL_VALIDATE_POLICY_DATA]
+GO
+
+
+/****** Object:  StoredProcedure [dbo].[PROC_MIG_IL_VALIDATE_POLICY_DATA]    Script Date: 12/02/2011 17:08:50 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+-- =============================================          
+-- Author:  <ATUL KUMAR SINGH>          
+-- Create date: <2011-09-14>          
+-- Description: <validate file data [file '011800001APOLICE.xlsx']>          
+-- =============================================          
+--  UPDATE HISTORY          
+-- =============================================          
+-- Author:            
+-- update date:           
+-- Description:           
+-- =============================================          
+--drop proc [PROC_MIG_IL_VALIDATE_POLICY_DATA] 1927          
+CREATE PROCEDURE [dbo].[PROC_MIG_IL_VALIDATE_POLICY_DATA]           
+          
+--------------------------------- INPUT PARAMETER          
+@IMPORT_REQUEST_ID  INT          
+-------------------------------------------------          
+            
+AS          
+BEGIN          
+           
+-------------------------------- DECLARATION PART          
+----------------------------------------------------------------------------------------          
+DECLARE @ERROR_NUMBER    INT            
+DECLARE @ERROR_SEVERITY  INT            
+DECLARE @ERROR_STATE     INT            
+DECLARE @ERROR_PROCEDURE VARCHAR(512)            
+DECLARE @ERROR_LINE    INT            
+DECLARE @ERROR_MESSAGE   NVARCHAR(MAX)            
+          
+          
+DECLARE @LOOP_POLICY_NUMBER NVARCHAR(50)               
+DECLARE @LOOP_POLICY_SEQUANCE_NO INT              
+DECLARE @LOOP_END_SEQUANCE_NO INT              
+DECLARE @LOOP_IMPORT_SERIAL_NO INT              
+DECLARE @COUNTER INT  =1            
+DECLARE @MAX_RECORD_COUNT INT             
+DECLARE @ERROR_NO INT=0            
+DECLARE @IMPORT_SERIAL_NO INT           
+DECLARE @IMPORT_FILE_NAME NVARCHAR(50)             
+DECLARE @IMPORT_FILE_TYPE INT = 14939 -- FOR POLICY FILE TYPE            
+--DECLARE @CUSTOMER_CODE VARCHAR(20)          
+--DECLARE @CUSTOMER_ID INT          
+--DECLARE @POLICY_ID INT          
+--DECLARE @POLICY_VERSION_ID INT          
+--DECLARE @POLICY_NUMBER NVARCHAR(21)          
+--DECLARE @ENDORSEMENT_NUMBER INT          
+--DECLARE @APP_ID INT     --FOR APP_ID                  
+--DECLARE @APP_VERSION_ID INT   --FOR APP_VERSION_ID                  
+--DECLARE @POLICY_DISP_VERSION NVARCHAR(6)='1.0' --FOR POLICY_DISP_VERSION                  
+--DECLARE @APP_VERSION NVARCHAR(6)='1.0'--FOR APP VERSION             
+          
+DECLARE @DIV_CODE NVARCHAR(20)       
+DECLARE @LOB_ID INT           
+DECLARE @SUB_LOB_ID INT           
+DECLARE @TRANSACTION_TYPE INT           
+DECLARE @CSR INT           
+DECLARE @COINSURENCE_TYPE INT           
+DECLARE @BILLING_PLAN INT           
+DECLARE @DOWN_PAYMENT_MODE INT           
+DECLARE @BROKER NVARCHAR(20)           
+DECLARE @EFFECTIVE_DATE DATETIME          
+DECLARE @EXPIRY_DATE DATETIME          
+DECLARE @BILL_TYPE INT         
+DECLARE @POLICY_CURRENCY INT      
+DECLARE @CUSTOMER_CODE NVARCHAR(50)          
+DECLARE @POLICY_LEVEL_COMMISSION DECIMAL(12,2)        
+DECLARE @POLICY_LEVEL_COMMISSION_APPLIES VARCHAR(10)   
+DECLARE @PROCESS_TYPE INT     
+DECLARE @CANCELLATION_TYPE INT      
+DECLARE @CANCELLATION_OPTION INT
+DECLARE @CANCELLATION_REASON INT
+DECLARE @ENDORSEMENT_TYPE INT     
+
+DECLARE @CANCELLATION_EFFECTIVE_DATE NVARCHAR(10)  
+DECLARE @CANCELLATION_EFFECTIVE_HH  INT
+DECLARE @CANCELLATION_EFFECTIVE_MM  INT
+DECLARE @CANCELLATION_EFFECTIVE_AM_PM INT
+DECLARE @CUSTOMER_ID INT
+DECLARE @POLICY_ID INT
+DECLARE @POLICY_VERSION_ID INT
+DECLARE @UNDERWRITER INT
+
+
+DECLARE @ENDORSEMENT_EFFECTIVE_DATE NVARCHAR(10) 
+DECLARE @ENDORSEMENT_EXPIRY_DATE NVARCHAR(10)  
+DECLARE @ENDORSEMENT_NUMBER INT
+DECLARE @COAPPLICANT_CODE NVARCHAR(10)  
+DECLARE @POLICY_STAUS NVARCHAR(20)  
+DECLARE @EXISTED_ENDORSEMENT_NO INT =0                  
+          
+          
+          
+          
+BEGIN TRY          
+-------------------------------- CREATE TEMP TABLE FOR THOSE RECORDS NEEDS TO BE PROCESSED          
+----------------------------------------------------------------------------------------- 
+            
+     CREATE TABLE #TEMP_POLICY            
+     (            
+      ID INT IDENTITY(1,1),            
+      IMPORT_SERIAL_NO BIGINT,            
+      POLICY_SEQUENCE_NO INT NULL,          
+      END_SEQUENCE_NO INT,  
+      PROCESS_TYPE INT,  
+     )            
+          
+          
+          
+  INSERT INTO #TEMP_POLICY            
+     (            
+      POLICY_SEQUENCE_NO,             
+      IMPORT_SERIAL_NO,
+      END_SEQUENCE_NO  ,
+      PROCESS_TYPE
+        
+     )            
+     (          
+      SELECT   POLICY_SEQUENCE_NO,            
+			   IMPORT_SERIAL_NO,
+			   ENDORSEMENT_SEQUENTIAL_NO  ,
+			   PROCESS_TYPE                     
+      FROM MIG_IL_POLICY_DETAILS WITH(NOLOCK)            
+      WHERE IMPORT_REQUEST_ID = @IMPORT_REQUEST_ID AND HAS_ERRORS = 0           
+      )           
+               
+------------------------------------------------------------------------------------------          
+     
+          
+  ------------------------------------                  
+   -- GET MAX RECOUNT COUNT            
+   ------------------------------------       
+  SELECT @MAX_RECORD_COUNT = COUNT(ID)             
+    FROM   #TEMP_POLICY             
+          
+    
+   SELECT  CAST(AGENCY_CODE AS INT)AS AGENCY_CODE
+				 INTO #TempAgencyList
+				 FROM MNT_AGENCY_LIST 
+				 WHERE AGENCY_CODE NOT IN (SELECT REIN_COMAPANY_CODE FROM MNT_REIN_COMAPANY_LIST WITH(NOLOCK)) AND
+				       IS_ACTIVE='Y'
+
+   ------------------------------------                
+   -- GET IMPORT FILE NAME          
+   ------------------------------------             
+    IF(@MAX_RECORD_COUNT>0)          
+    BEGIN          
+              
+      SELECT  @IMPORT_FILE_NAME=SUBSTRING(ISNULL(DISPLAY_FILE_NAME,''),1,9)          
+      FROM MIG_IL_IMPORT_REQUEST_FILES WITH(NOLOCK)          
+      WHERE IMPORT_REQUEST_ID = @IMPORT_REQUEST_ID AND           
+            IMPORT_FILE_TYPE  = @IMPORT_FILE_TYPE          
+      
+    END               
+    ---------------------------------------------				             
+  WHILE(@COUNTER<=@MAX_RECORD_COUNT)            
+  BEGIN          
+    SET @ERROR_NO=0            
+          
+  SELECT @IMPORT_SERIAL_NO		  = IMPORT_SERIAL_NO,           
+         @LOOP_POLICY_SEQUANCE_NO = POLICY_SEQUENCE_NO,     
+		 @LOOP_END_SEQUANCE_NO    = END_SEQUENCE_NO ,
+		 @PROCESS_TYPE			  = PROCESS_TYPE  
+  FROM   #TEMP_POLICY (NOLOCK) WHERE ID   = @COUNTER               
+   
+   
+  IF @PROCESS_TYPE NOT IN(1,2,3,4,5,6)
+    SET @ERROR_NO=287
+   
+   --============================================        
+   -- VALIDAION FOR NEW POLICY 
+   --============================================          
+       
+          
+	SELECT            
+    @CUSTOMER_CODE  = CUSTOMER_CODE,          
+  --  @POLICY_NUMBER  = POLICY_NUMBER,          
+  --  @ENDORSEMENT_NUMBER = ENDORSEMENT_NUMBER,          
+	
+    @DIV_CODE  = DIVDEPTPC,          
+    @LOB_ID    = PRODUCT,          
+    @SUB_LOB_ID   = LINE_OF_BUSINESS,          
+    @TRANSACTION_TYPE = TRANSACTION_TYPE,          
+    @EFFECTIVE_DATE  = EFFECTIVE_DATE,          
+    @EXPIRY_DATE  = EXPIRATION_DATE,          
+    @BILLING_PLAN  = BILLING_PLAN,          
+    @DOWN_PAYMENT_MODE = DOWN_PAYMENT_MODE,          
+    @COINSURENCE_TYPE = CO_INSURANCE,          
+    @CSR    = CSRNAME,          
+    @BROKER    = [BROKER],          
+    @BILL_TYPE   = BILL_TYPE,        
+    @POLICY_LEVEL_COMMISSION=CAST(RTRIM(LTRIM(ISNULL(POLICY_LEVEL_COMMISSION,'0'))) AS DECIMAL(12,2)),        
+    @POLICY_LEVEL_COMMISSION_APPLIES=POLICY_LEVEL_COMMISSION_APPLIES  ,        
+    @POLICY_CURRENCY =POLICY_CURRENCY,  
+    @LOOP_POLICY_NUMBER=POLICY_NUMBER  ,
+    @UNDERWRITER       = UNDERWRITER    
+ FROM  MIG_IL_POLICY_DETAILS WITH (NOLOCK)          
+ WHERE  IMPORT_REQUEST_ID = @IMPORT_REQUEST_ID           
+ AND   IMPORT_SERIAL_NO = @IMPORT_SERIAL_NO           
+ 
+	
+   ----------------------------  VALIDATION OF ALREADY PROCESSED RECORD  -----------------------------------------  
+	IF EXISTS (SELECT 1 FROM MIG_IL_IMPORT_SUMMARY (NOLOCK) WHERE [FILE_NAME]=@IMPORT_FILE_NAME AND FILE_TYPE=@IMPORT_FILE_TYPE   
+                    AND POLICY_SEQUENTIAL= @LOOP_POLICY_SEQUANCE_NO  AND   
+                            ENDORSEMENT_SEQUENTIAL= @LOOP_END_SEQUANCE_NO AND  
+                            IS_ACTIVE='Y'   
+                     )            
+		 SET @ERROR_NO=66      -- This record already processed. 
+		    
+ IF(@ERROR_NO!=0  )
+ BEGIN 
+ 
+ IF(@PROCESS_TYPE=1)
+   BEGIN 
+    
+          
+   
+     IF NOT EXISTS (SELECT 1 FROM MNT_LOB_MASTER (NOLOCK) WHERE LOB_ID=@LOB_ID AND IS_ACTIVE='Y')          
+      SET @ERROR_NO=80      --LOB ID DOES NOT EXISTS          
+     ------------------------------------  VALIDATION OF SUB_LOB_ID                    
+         
+     ELSE IF NOT EXISTS (SELECT 1 FROM MNT_SUB_LOB_MASTER (NOLOCK) WHERE LOB_ID=@LOB_ID AND SUB_LOB_ID=@SUB_LOB_ID AND IS_ACTIVE='Y')          
+      SET @ERROR_NO=81      --SUBLOB ID DOES NOT EXISTS         
+    
+     ------------------------------------  VALIDATION OF  CSR          
+    ELSE IF NOT EXISTS (SELECT 1 FROM MNT_USER_LIST (NOLOCK) WHERE CARRIER_CSR_ID=@CSR AND IS_ACTIVE='Y')          
+    SET @ERROR_NO=82                  -- PROVIDED CSR DOES NOT EXISTS IN SYSTEM           
+    ELSE IF  EXISTS (SELECT 1 FROM POL_CUSTOMER_POLICY_LIST (NOLOCK) WHERE IL_POLICY_NUMBER = @LOOP_POLICY_NUMBER)          
+    SET @ERROR_NO=6                  --          
+     ------------------------------------  VALIDATION OF TRANSACTION TYPE          
+    ELSE IF (@TRANSACTION_TYPE NOT IN (12,13,14,15))          
+    SET @ERROR_NO=83                  -- WRONG TRANSACTION TYPE             
+    ------------------------------------  VALIDATION POLICY CURRENCY      
+    ELSE IF (@POLICY_CURRENCY!=2)          
+    SET @ERROR_NO=60                  -- INVALID POLICY CURRENCY             
+     ------------------------------------  VALIDATION OF COINSURENCE TYPE          
+    ELSE IF (@COINSURENCE_TYPE NOT IN (select LOOKUP_UNIQUE_ID from MNT_LOOKUP_VALUES where LOOKUP_ID=1360 AND IS_ACTIVE='Y'))          
+     SET @ERROR_NO=84                  -- WRONG COINSURENCE TYPE          
+     ------------------------------------  VALIDATION OF DIV_id        
+    ELSE IF @DIV_CODE IS NOT NULL 
+     BEGIN
+			 IF NOT EXISTS (SELECT 1 FROM MNT_DIV_LIST (NOLOCK) WHERE DIV_CODE=@DIV_CODE AND IS_ACTIVE='Y')  
+			 BEGIN
+			      IF NOT EXISTS (SELECT 1 FROM MNT_DIV_LIST (NOLOCK) WHERE DIV_CODE=CAST(@DIV_CODE AS INT) AND IS_ACTIVE='Y')
+			      SET  @ERROR_NO=85                  -- WRONG DIV CODE   
+			 
+			 END 
+				       
+			
+			 
+    END
+      ------------------------------------  VALIDATION OF BILLING PLAN          
+    ELSE  IF NOT EXISTS (SELECT 1 FROM ACT_INSTALL_PLAN_DETAIL (NOLOCK) WHERE IDEN_PLAN_ID=@BILLING_PLAN AND IS_ACTIVE='Y')    
+     SET @ERROR_NO=86          
+     ------------------------------------  VALIDATION OF DOWN PAYMNET MODE          
+    ELSE IF (@DOWN_PAYMENT_MODE  NOT IN (SELECT LOOKUP_UNIQUE_ID FROM MNT_LOOKUP_VALUES (NOLOCK) WHERE LOOKUP_ID=1303 AND IS_ACTIVE='Y'))          
+      SET @ERROR_NO=87  -- WRONG DOWN PAYMENT MODE          
+      -----------------------------------  VALIDATION OF BILL TYPE          
+   ELSE  IF (@BILL_TYPE  NOT IN (SELECT LOOKUP_UNIQUE_ID FROM MNT_LOOKUP_VALUES (NOLOCK) WHERE LOOKUP_ID=940 AND IS_ACTIVE='Y'))          
+       SET @ERROR_NO=88     -- WRONG BILL TYPE INFORMATION          
+   ELSE IF NOT EXISTS(SELECT 1 FROM MNT_USER_LIST WHERE [USER_ID]=@UNDERWRITER AND USER_TYPE_ID=13 )
+      SET @ERROR_NO=297     -- Invalid underwriter
+      -----------------------------------  VALIDATION OF BROKER          
+   --ELSE  IF NOT EXISTS (SELECT 1 FROM MNT_AGENCY_LIST (NOLOCK) WHERE AGENCY_CODE=@BROKER AND IS_ACTIVE='Y')          
+   --  SET @ERROR_NO=89      -- WRONG BROKER CODE          
+      ELSE  IF NOT EXISTS (SELECT 1 FROM CLT_CUSTOMER_LIST (NOLOCK) WHERE CUSTOMER_CODE=@CUSTOMER_CODE)          
+     SET @ERROR_NO=50      -- WRONG CUSTOMER CODE          
+      ELSE IF (RTRIM(LTRIM(@POLICY_LEVEL_COMMISSION_APPLIES))='Y')        
+		 BEGIN        
+			  IF (@POLICY_LEVEL_COMMISSION>100.00)        
+			  SET @ERROR_NO=58 -- COMPARE WITH 10000 BECAUSE SOURCE EXCEL FILE TREATS THIS FIELD AS DOUBLE      
+			END     
+	 ELSE IF NOT EXISTS(SELECT 1 FROM #TempAgencyList WHERE AGENCY_CODE =@BROKER)
+	  BEGIN
+				   SET @ERROR_NO=89      -- WRONG BROKER CODE     
+			
+	  END   
+	  
+  END
+  --============================================        
+  -- VALIDAION FOR POLICY CANCELLATION
+  --============================================                    
+ ELSE IF(@PROCESS_TYPE=2)
+ BEGIN
+ 
+ 
+   SELECT  @CANCELLATION_TYPE   = POLICY_CANCELLATION_TYPE      
+		  ,@CANCELLATION_OPTION = CANCELLATION_OPTION
+		  ,@CANCELLATION_REASON = CANCELLATION_REASON
+		  ,@ENDORSEMENT_TYPE	= ENDORSEMENT_TYPE  
+		  ,@CANCELLATION_EFFECTIVE_AM_PM = CANCELLATION_EFFECTIVE_AM_PM
+		  ,@CANCELLATION_EFFECTIVE_DATE  = CANCELLATION_EFFECTIVE_DATE
+		  ,@CANCELLATION_EFFECTIVE_HH	 = CANCELLATION_EFFECTIVE_HH
+		  ,@CANCELLATION_EFFECTIVE_MM	 = CANCELLATION_EFFECTIVE_MM
+   FROM   MIG_IL_POLICY_DETAILS WITH (NOLOCK)          
+   WHERE  IMPORT_REQUEST_ID     = @IMPORT_REQUEST_ID           
+   AND    IMPORT_SERIAL_NO      = @IMPORT_SERIAL_NO           
+ 
+  
+  
+  SELECT @CUSTOMER_ID       = CUSTOMER_ID,
+         @POLICY_ID         = POLICY_ID,
+         @POLICY_VERSION_ID = @POLICY_VERSION_ID
+  FROM MIG_IL_IMPORT_SUMMARY (NOLOCK) 
+  WHERE [FILE_NAME]= @IMPORT_FILE_NAME AND 
+		FILE_TYPE  = @IMPORT_FILE_TYPE AND   
+        POLICY_SEQUENTIAL = @LOOP_POLICY_SEQUANCE_NO  AND   
+        ENDORSEMENT_SEQUENTIAL = @LOOP_END_SEQUANCE_NO AND  
+        IS_ACTIVE='Y'  
+    
+    SELECT @POLICY_STAUS=POLICY_STATUS
+    FROM  POL_CUSTOMER_POLICY_LIST 
+    WHERE CUSTOMER_ID =@CUSTOMER_ID AND POLICY_ID=@POLICY_ID AND POLICY_VERSION_ID=@POLICY_VERSION_ID                        
+    -- WHETHER THIS RECORD IS PROCCESSED OR NOT IF NOT THEN SHOW ERROR
+	IF @CUSTOMER_ID IS NULL OR @CUSTOMER_ID=0  
+		SET @ERROR_NO=286 -- POLICY IS NOT CREATED FOR GIVEN POLICY SEQUENCE AND ENDORSEMENT SEQUENCE.
+    
+    ELSE
+      BEGIN
+      
+        SELECT @EXISTED_ENDORSEMENT_NO =isnull(MAX(ENDORSEMENT_NO),0)
+        FROM   POL_POLICY_ENDORSEMENTS WITH(NOLOCK)	
+        WHERE  CUSTOMER_ID = @CUSTOMER_ID AND
+               POLICY_ID   = @POLICY_ID 
+               
+            IF @POLICY_STAUS<>'NORMAL'
+				 SET @ERROR_NO=11 --POLICY DOES NOT EXISTS
+		
+		    ELSE IF(@ENDORSEMENT_NUMBER IS NULL OR @ENDORSEMENT_NUMBER='' OR  @ENDORSEMENT_NUMBER='0')
+	  			SET @ERROR_NO=306 -- ENDORSEMENT NUMBER CANNOT BE BLANK.
+	  			
+			ELSE IF(@CANCELLATION_EFFECTIVE_DATE IS NULL OR LEN(@CANCELLATION_EFFECTIVE_DATE)<8)
+	  			SET @ERROR_NO=288 -- INVALID CANCELLATION EFFECTIVE DATE.
+			 
+			ELSE IF(@CANCELLATION_EFFECTIVE_AM_PM NOT IN(0,1))
+	  			SET @ERROR_NO=289 -- INVALID CANCELLATION EFFECTIVE DATE AM/PM.
+		  
+			ELSE IF(@CANCELLATION_EFFECTIVE_HH NOT BETWEEN 0 AND 12)
+	  			SET @ERROR_NO=290 -- INVALID CANCELLATION EFFECTIVE HH SHOULD BE IN RANGE OF 0-12.
+	  			
+			ELSE IF(@CANCELLATION_EFFECTIVE_MM NOT BETWEEN 0 AND 60)
+	  			SET @ERROR_NO=291 -- INVALID CANCELLATION EFFECTIVE HH SHOULD BE IN RANGE OF 0-60.
+	  		ELSE IF(@ENDORSEMENT_NUMBER<=@EXISTED_ENDORSEMENT_NO)
+	  	        SET @ERROR_NO=40 --ENDORSEMENT NUMBER ALREADY EXISTS.	
+	  	       
+	  	    ELSE IF((@ENDORSEMENT_NUMBER-@EXISTED_ENDORSEMENT_NO)>1)
+	  	        SET @ERROR_NO=307 --PREVIOUS ENDORSEMENT IS MISSING.
+	  	       
+      END
+         
+         
+  
+ END
+  --============================================        
+  -- VALIDAION FOR POLICY ENDORSEMENT
+  --============================================                    
+ ELSE IF(@PROCESS_TYPE=3)
+ BEGIN
+ 
+ 
+ 
+ --14560
+ --TRANSACTION_TYPE=14
+ 
+  SELECT  
+		   @ENDORSEMENT_TYPE			 = ENDORSEMENT_TYPE  
+		  ,@ENDORSEMENT_EFFECTIVE_DATE   = ENDORSEMENT_EFFECTIVE_DATE
+		  ,@ENDORSEMENT_EXPIRY_DATE      = ENDORSEMENT_EXPIRY_DATE
+		  ,@ENDORSEMENT_NUMBER			 = ENDORSEMENT_NUMBER
+		  ,@COAPPLICANT_CODE			 = COAPPLICANT_CODE
+		  ,@TRANSACTION_TYPE             = TRANSACTION_TYPE
+   FROM   MIG_IL_POLICY_DETAILS WITH (NOLOCK)          
+   WHERE  IMPORT_REQUEST_ID				 = @IMPORT_REQUEST_ID           
+   AND    IMPORT_SERIAL_NO				 = @IMPORT_SERIAL_NO           
+ 
+  
+  
+  SELECT @CUSTOMER_ID          = CUSTOMER_ID,
+         @POLICY_ID            = POLICY_ID,
+         @POLICY_VERSION_ID    = @POLICY_VERSION_ID
+  FROM MIG_IL_IMPORT_SUMMARY (NOLOCK) 
+  WHERE [FILE_NAME]			   = @IMPORT_FILE_NAME AND 
+		FILE_TYPE  			   = @IMPORT_FILE_TYPE AND   
+        POLICY_SEQUENTIAL	   = @LOOP_POLICY_SEQUANCE_NO  AND   
+        ENDORSEMENT_SEQUENTIAL = @LOOP_END_SEQUANCE_NO AND  
+        IS_ACTIVE='Y' 
+    
+    SELECT @POLICY_STAUS=POLICY_STATUS,@EFFECTIVE_DATE=POLICY_EFFECTIVE_DATE,
+          @TRANSACTION_TYPE=TRANSACTION_TYPE
+    FROM  POL_CUSTOMER_POLICY_LIST 
+    WHERE CUSTOMER_ID =@CUSTOMER_ID AND POLICY_ID=@POLICY_ID AND POLICY_VERSION_ID=@POLICY_VERSION_ID   
+                         
+    -- WHETHER THIS RECORD IS PROCCESSED OR NOT IF NOT THEN SHOW ERROR
+	IF @CUSTOMER_ID IS NULL OR @CUSTOMER_ID=0  
+		SET @ERROR_NO=286 -- POLICY IS NOT CREATED FOR GIVEN POLICY SEQUENCE AND ENDORSEMENT SEQUENCE.
+    
+    ELSE
+      BEGIN
+      
+      
+      
+        SELECT @EXISTED_ENDORSEMENT_NO =isnull(MAX(ENDORSEMENT_NO),0)
+        FROM   POL_POLICY_ENDORSEMENTS WITH(NOLOCK)	
+        WHERE  CUSTOMER_ID = @CUSTOMER_ID AND
+               POLICY_ID   = @POLICY_ID 
+      
+            IF @POLICY_STAUS<>'NORMAL'
+				 SET @ERROR_NO=11 --POLICY DOES NOT EXISTS
+				 
+	    	ELSE IF(@ENDORSEMENT_NUMBER IS NULL OR @ENDORSEMENT_NUMBER='' OR  @ENDORSEMENT_NUMBER='0')
+	  			SET @ERROR_NO=306 -- ENDORSEMENT NUMBER CANNOT BE BLANK.
+	  			
+			ELSE IF(@ENDORSEMENT_EFFECTIVE_DATE IS NULL OR LEN(@ENDORSEMENT_EFFECTIVE_DATE)!=8)
+	  			SET @ERROR_NO=292 -- INVALID ENDORSEMENT EFFECTIVE DATE.
+	  			
+	  		ELSE IF(@ENDORSEMENT_EXPIRY_DATE IS NULL OR LEN(@ENDORSEMENT_EXPIRY_DATE)!=8)
+	  			SET @ERROR_NO=293 -- INVALID ENDORSEMENT EXPIRY DATE.	
+	  	  
+	  	   ELSE IF NOT EXISTS(SELECT * FROM MNT_LOOKUP_VALUES WHERE LOOKUP_ID=1235 and LOOKUP_UNIQUE_ID=@ENDORSEMENT_TYPE AND IS_ACTIVE='Y' )
+	  			SET @ERROR_NO=305 -- INVALID ENDORSEMENT TYPE.	 
+	  			
+	  	   ELSE IF(@ENDORSEMENT_NUMBER<=@EXISTED_ENDORSEMENT_NO)
+	  	        SET @ERROR_NO=40 --ENDORSEMENT NUMBER ALREADY EXISTS.	
+	  	       
+	  	   ELSE IF((@ENDORSEMENT_NUMBER-@EXISTED_ENDORSEMENT_NO)>1)
+	  	        SET @ERROR_NO=307 --PREVIOUS ENDORSEMENT IS MISSING.
+	  	       
+	  	   
+	  	    ELSE IF(@TRANSACTION_TYPE=14560) -- FOR MASTER POLICY COAPPLICANT IS MANDATORY
+	  	    BEGIN	
+	  	          	 
+	  	        IF(@COAPPLICANT_CODE IS NULL OR @COAPPLICANT_CODE='')
+	  			  SET @ERROR_NO=51 -- CO-APPLICANT DOES NOT EXISTS 	
+	  	          	      
+	  	        ELSE IF NOT EXISTS (SELECT 1  FROM CLT_APPLICANT_LIST CAL INNER JOIN
+	  							 POL_APPLICANT_LIST PAL ON CAL.APPLICANT_ID= PAL.APPLICANT_ID
+	  						     WHERE CAL.CONTACT_CODE=@COAPPLICANT_CODE AND PAL.CUSTOMER_ID=@CUSTOMER_ID AND PAL.POLICY_ID=@POLICY_ID AND PAL.POLICY_VERSION_ID =@POLICY_VERSION_ID
+	  						  )
+	  			  SET @ERROR_NO=51 -- CO-APPLICANT DOES NOT EXISTS 
+	  	        
+	  	    END
+		   
+
+      END
+  
+ END
+ 
+ END -- END OF IF(@ERROR_NO!=0 )
+               
+      IF(@ERROR_NO>0)            
+      BEGIN            
+                   
+      UPDATE MIG_IL_POLICY_DETAILS          
+      SET    HAS_ERRORS=1                  
+      WHERE  IMPORT_REQUEST_ID = @IMPORT_REQUEST_ID AND             
+       IMPORT_SERIAL_NO  = @IMPORT_SERIAL_NO             
+          
+          
+         EXEC  [PROC_MIG_IL_INSERT_IMPORT_ERROR_DETAILS]                             
+        @IMPORT_REQUEST_ID     = @IMPORT_REQUEST_ID,                  
+        @IMPORT_SERIAL_NO      = @IMPORT_SERIAL_NO  ,                      
+        @ERROR_SOURCE_FILE     = ''     ,                  
+        @ERROR_SOURCE_COLUMN   = ''     ,                  
+        @ERROR_SOURCE_COLUMN_VALUE= '' ,         
+		@ERROR_ROW_NUMBER      = @IMPORT_SERIAL_NO   ,                    
+        @ERROR_TYPES           = @ERROR_NO,               
+        @ACTUAL_RECORD_DATA    = '' ,                  
+        @ERROR_MODE            = 'VE',  -- VALIDATION ERROR                  
+        @ERROR_SOURCE_TYPE     = 'POLC'               
+    END          
+              
+          
+    SET @COUNTER+=1            
+  END          
+   
+   
+   	DROP TABLE #TempAgencyList		
+				       
+END TRY          
+BEGIN CATCH            
+             
+ SELECT             
+    @ERROR_NUMBER    = ERROR_NUMBER(),            
+    @ERROR_SEVERITY  = ERROR_SEVERITY(),            
+    @ERROR_STATE     = ERROR_STATE(),            
+    @ERROR_PROCEDURE = ERROR_PROCEDURE(),            
+    @ERROR_LINE   = ERROR_LINE(),            
+    @ERROR_MESSAGE   = ERROR_MESSAGE()            
+                 
+  -- CREATING LOG OF EXCEPTION             
+  EXEC [PROC_MIG_INSERT_ERROR_LOG]              
+  @IMPORT_REQUEST_ID    = @IMPORT_REQUEST_ID            
+ ,@IMPORT_SERIAL_NO  = 0            
+ ,@ERROR_NUMBER      = @ERROR_NUMBER            
+ ,@ERROR_SEVERITY    = @ERROR_SEVERITY            
+ ,@ERROR_STATE          = @ERROR_STATE            
+ ,@ERROR_PROCEDURE   = @ERROR_PROCEDURE            
+ ,@ERROR_LINE = @ERROR_LINE            
+ ,@ERROR_MESSAGE        = @ERROR_MESSAGE            
+ ,@INITIAL_LOAD_FLAG    = 'Y'            
+              
+             
+ END CATCH            
+           
+END          
+ 
+GO

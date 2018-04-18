@@ -1,0 +1,6 @@
+update MNT_Lookups set [Description]='286' where Category='taskSelection' and Lookupdesc='Task'
+update MNT_Lookups set [Description]='282' where Category='taskSelection' and Lookupdesc='Dairy'
+update MNT_Lookups set [Description]='284' where Category='taskSelection' and Lookupdesc='Escalation'
+update MNT_Lookups set [Description]='289' where Category='taskSelection' and Lookupdesc='Mandate'
+update MNT_Lookups set [Description]='292' where Category='taskSelection' and Lookupdesc='Payment'
+update MNT_Lookups set [Description]='283' where Category='taskSelection' and Lookupdesc='ReassignedDiary'

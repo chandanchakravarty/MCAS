@@ -1,0 +1,33 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Root>
+  <Master>
+    <Query Code="SELECT" Level="APP">Proc_GetKeysForProduct_APP</Query>
+    <Query Code="SELECT" Level="POLICY">Proc_GetKeysForProduct_POLICY</Query>
+    <Column Code="APP_EFFECTIVE_DATE" MapColumnn="APP_EFFECTIVE_DATE" TableAssociated="APP_LIST"
+			ColumnAssociated="APP_EFFECTIVE_DATE"></Column>
+    <Column Code="APP_YEAR" MapColumnn="APP_YEAR" TableAssociated="APP_LIST" ColumnAssociated="APP_EFFECTIVE_DATE"></Column>
+    <Column Code="STATE_ID" MapColumnn="STATE_ID" TableAssociated="APP_LIST" ColumnAssociated="STATE_ID"></Column>
+  </Master>
+  <Group Code="Default">
+    <Rule Action="Database" StartDate="1950-01-01" EndDate="3000-12-30" STATE_ID="22">
+      <Conditions></Conditions>
+    </Rule>
+  </Group>
+  <!-- Risk Dependent Rules -->
+  <Group Code="RiskDependent">
+    <Rule Action="Master" StartDate="1950-01-01" EndDate="3000-12-12" STATE_ID="14">
+      <Conditions>
+      </Conditions>
+    </Rule>
+  </Group>
+  <Group Code="LobDependent">
+    <Rule Action="Database" StartDate="1950-01-01" EndDate="2002-02-28">
+      <Conditions></Conditions>
+    </Rule>
+  </Group>
+  <Group Code="AppDependent">
+    <Rule Action="Database" StartDate="1950-01-01" EndDate="2002-02-28">
+      <Conditions></Conditions>
+    </Rule>
+  </Group>
+</Root>

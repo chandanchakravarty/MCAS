@@ -1,0 +1,207 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Root>
+  <PageTitle>
+    <Culture Code="en-US">Customer Details</Culture>
+    <Culture Code="pt-BR">Cliente Details</Culture>
+  </PageTitle>
+  <PageElement name="cmbCUSTOMER_TYPE" type="DDL" 
+               IsMandatory="Yes" 
+               IsReadOnly="No" 
+               IsDisabled="No"
+               IsDisplay="Yes" 
+               IsFormatingRequired="No" JsFunctionToFormat="" OnClickJSFunction=""
+               OnChangeJSFunction="OnCustomerTypeChange()">
+    
+    <Bindings>
+      <DataSource type="Proc" name="Proc_GetLookupValues" TextField="LOOKUP_VALUE_DESC" ValueField="LOOKUP_UNIQUE_ID" WhereClause="">
+        <Params name="@LookupCode" Value="CUSTYP" />
+        <Params name="@LANG_ID" Value="2" />
+      </DataSource>
+    </Bindings>
+    <rev Enabled="No" ExpKey=""></rev>
+    <Culture Code="en-US" Desc="Set Label and Message for English language">
+      <Caption>Type</Caption>
+      <rfvMessage>Please Enter value</rfvMessage>
+      <DefaultValue>14725</DefaultValue>
+      <revExpMessage></revExpMessage>
+    </Culture>
+    <Culture Code="pt-BR" Desc="Set Label and Message for Portuguese language">
+      <Caption>Type</Caption>
+      <rfvMessage>Please Enter value</rfvMessage>
+      <DefaultValue></DefaultValue>
+      <revExpMessage></revExpMessage>
+    </Culture>
+  </PageElement>
+  <PageElement name="txtCUSTOMER_ADDRESS" type="TextBox" Desc=""
+    IsMandatory="No"
+    IsReadOnly="No"
+    IsDisabled="No"
+    IsDisplay="Yes"
+    IsFormatingRequired="No" JsFunctionToFormat="" OnClickJSFunction=""
+    OnChangeJSFunction=""
+    >
+    <Style Position="relative" Top="0" Left="10" CssClass="midcolora" />
+    <rev Enabled="No" ExpKey="" />
+
+    <Culture Code="en-US" Desc="set Label and Message for English language">
+      <Caption>Customer Address</Caption>
+      <rfvMessage>Please enter Address</rfvMessage>
+      <DefaultValue></DefaultValue>
+      <revExpMessage></revExpMessage>
+    </Culture>
+    <Culture Code="pt-BR" Desc="set Label and Message for Portuguese language">
+      <Caption>Client Addesss</Caption>
+      <rfvMessage>Por Enter Address.</rfvMessage>
+      <DefaultValue></DefaultValue>
+      <revExpMessage></revExpMessage>
+    </Culture>
+  </PageElement>
+  <PageElement name="txtCUSTOMER_CITY" type="TextBox" Desc="">
+    <IsMandatory>Yes</IsMandatory>
+    <IsReadOnly>No</IsReadOnly>
+    <IsDisabled>No</IsDisabled>
+    <IsDisplay>Yes</IsDisplay>
+    <IsFormatingRequired>No</IsFormatingRequired>
+    <JsFunctionToFormat></JsFunctionToFormat>
+    <OnClickJSFunction></OnClickJSFunction>
+    <OnChangeJSFunction></OnChangeJSFunction>
+    <Style>
+      <Position>relative</Position>
+      <Top>20</Top>
+      <Left>50</Left>
+      <CssClass>midcolora</CssClass>
+    </Style>
+    <rev>
+      <revExpEnabled>No</revExpEnabled>
+      <revExpKey></revExpKey>
+      <revExpMessage></revExpMessage>
+    </rev>
+    <Culture Code="en-US" Desc="set Label and Message for English language">
+      <Caption>Customer City</Caption>
+      <rfvMessage>Please enter City</rfvMessage>
+      <DefaultValue></DefaultValue>
+      <revExpMessage></revExpMessage>
+    </Culture>
+    <Culture Code="pt-BR" Desc="set Label and Message for Portuguese language">
+      <Caption>Client Addesss</Caption>
+      <rfvMessage>Por Enter City.</rfvMessage>
+      <DefaultValue></DefaultValue>
+      <revExpMessage></revExpMessage>
+    </Culture>
+  </PageElement>
+  <PageElement name="txtCUSTOMER_FIRST_NAME" type="TextBox" Desc="">
+    <IsMandatory>No</IsMandatory>
+    <IsReadOnly>No</IsReadOnly>
+    <IsDisabled>No</IsDisabled>
+    <IsDisplay>Yes</IsDisplay>
+    <IsFormatingRequired>No</IsFormatingRequired>
+    <JsFunctionToFormat></JsFunctionToFormat>
+    <OnClickJSFunction></OnClickJSFunction>
+    <OnChangeJSFunction></OnChangeJSFunction>
+    <rev>
+      <revExpEnabled>Yes</revExpEnabled>
+      <revExpKey></revExpKey>
+    </rev>
+    <Culture Code="en-US" Desc="set Label and Message for English language">
+      <Caption>Customer First Name</Caption>
+      <rfvMessage>Please enter value</rfvMessage>
+      <DefaultValue></DefaultValue>
+      <revExpMessage></revExpMessage>
+    </Culture>
+    <Culture Code="pt-BR" Desc="set Label and Message for Portuguese language">
+      <Caption>Client First Nome</Caption>
+      <rfvMessage>Por Enter value.</rfvMessage>
+      <DefaultValue></DefaultValue>
+      <revExpMessage></revExpMessage>
+    </Culture>
+  </PageElement>
+  <PageElement name="txtCUSTOMER_MIDDLE_NAME" type="TextBox" Desc="">
+    <IsMandatory>Yes</IsMandatory>
+    <IsReadOnly>No</IsReadOnly>
+    <IsDisabled>No</IsDisabled>
+    <IsDisplay>Yes</IsDisplay>
+    <IsFormatingRequired>No</IsFormatingRequired>
+    <JsFunctionToFormat></JsFunctionToFormat>
+    <OnClickJSFunction></OnClickJSFunction>
+    <OnChangeJSFunction></OnChangeJSFunction>
+    <rev>
+      <revExpEnabled>Yes</revExpEnabled>
+      <revExpKey></revExpKey>
+    </rev>
+    <Culture Code="en-US" Desc="set Label and Message for English language">
+      <Caption>Customer Middle Name</Caption>
+      <rfvMessage>Please enter Middle Name</rfvMessage>
+      <DefaultValue></DefaultValue>
+      <revExpMessage></revExpMessage>
+    </Culture>
+    <Culture Code="pt-BR" Desc="set Label and Message for Portuguese language">
+      <Caption>Client middle Nome</Caption>
+      <rfvMessage>Por Enter middle Nome.</rfvMessage>
+      <DefaultValue></DefaultValue>
+      <revExpMessage></revExpMessage>
+    </Culture>
+  </PageElement>
+  <PageElement name="txtCUSTOMER_LAST_NAME" type="TextBox" Desc="">
+    <IsMandatory>No</IsMandatory>
+    <IsReadOnly>No</IsReadOnly>
+    <IsDisabled>No</IsDisabled>
+    <IsDisplay>Yes</IsDisplay>
+    <IsFormatingRequired>Yes</IsFormatingRequired>
+    <JsFunctionToFormat>formatLastName(this)</JsFunctionToFormat>
+    <OnClickJSFunction></OnClickJSFunction>
+    <OnChangeJSFunction></OnChangeJSFunction>
+    <rev>
+      <revExpEnabled>Yes</revExpEnabled>
+      <revExpKey>(^\d{7,8}$)|(^\d{5}[-]\d{3}$)</revExpKey>
+    </rev>
+    <Culture Code="en-US" Desc="set Label and Message for English language">
+      <Caption>Last Name</Caption>
+      <rfvMessage>Please enter value</rfvMessage>
+      <DefaultValue>LastName</DefaultValue>
+      <revExpMessage>not a valid Name</revExpMessage>
+    </Culture>
+    <Culture Code="pt-BR" Desc="set Label and Message for Portuguese language">
+      <Caption>Client Last Nome</Caption>
+      <rfvMessage>Por Enter value.</rfvMessage>
+      <DefaultValue>LNome</DefaultValue>
+      <revExpMessage></revExpMessage>
+    </Culture>
+  </PageElement>
+  <PageElement name="txtCUSTOMER_ZIP" type="TextBox" Desc=""
+               IsMandatory="No" 
+               IsReadOnly="No" 
+               IsDisabled="No"
+               IsDisplay="Yes" 
+               IsFormatingRequired="Yes" JsFunctionToFormat="" OnClickJSFunction=""
+               OnChangeJSFunction="OnCustomerTypeChange()"
+               >
+    <Style Position="relative" Top="0" Left="10" CssClass="midcolora" />
+    <rev Enabled="No" ExpKey="(^\d{7,8}$)|(^\d{5}[-]\d{3}$)" />
+    <csv Enabled="Yes" csvValidationFunction="ChkResult" />
+    <Culture Code="en-US" Desc="set Label and Message for English language">
+      <Caption>Zip Code</Caption>
+      <rfvMessage>Please enter Zip Code value</rfvMessage>
+      <DefaultValue>46001</DefaultValue>
+      <revExpMessage>Valid Zip Code</revExpMessage>
+      <csvMessage>Enter valid Zip for Custom validator</csvMessage>
+    </Culture>
+    <Culture Code="pt-BR" Desc="set Label and Message for Portuguese language">
+      <Caption>CEP Code</Caption>
+      <rfvMessage>Por Enter value.</rfvMessage>
+      <DefaultValue></DefaultValue>
+      <revExpMessage>Enter a Valid CEP</revExpMessage>
+      <csvMessage>Enter valid CEP for Custom validator</csvMessage>
+    </Culture>
+  </PageElement>
+  <PageElement name="btnAddNewApplication" type="CmsButton">
+    <IsDisabled>Yes</IsDisabled>
+    <IsDisplay>No</IsDisplay>
+    <OnClickJSFunction></OnClickJSFunction>
+    <Culture Code="en-US" Desc="Button Caption for English language">
+      <Caption>Add New Application</Caption>
+    </Culture>
+    <Culture Code="pt-BR" Desc="set Label and Message for Portuguese language">
+      <Caption>Add New Proposta</Caption>
+    </Culture>
+  </PageElement>
+</Root>

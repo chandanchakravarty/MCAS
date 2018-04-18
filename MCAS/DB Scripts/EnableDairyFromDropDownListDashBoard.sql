@@ -1,0 +1,1 @@
+update MNT_Lookups set IsActive='Y' where Lookupvalue=2 and Category='TaskSelection'

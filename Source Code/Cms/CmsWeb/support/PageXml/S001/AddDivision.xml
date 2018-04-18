@@ -1,0 +1,329 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Root>
+  <PageTitle>
+    <Culture Code="en-US"></Culture>
+    <Culture Code="zh-SG"></Culture>
+  </PageTitle>
+ 
+  <PageElement name="txtDIV_NAME" type="TextBox" Desc=""
+			IsMandatory="Yes"
+			IsReadOnly="No"
+			IsDisabled="No"
+			IsDisplay="Yes"
+			MaxLength="200"
+			MaxSize=""
+			IsFormatingRequired="No" JsFunctionToFormat="" OnClickJSFunction=""
+			OnChangeJSFunction="" >
+    <rev Enabled="No" ExpKey="" />
+	<Culture Code="en-US" Desc="set Label and Message for English language">
+      <Caption>Name</Caption>
+      <rfvMessage>Please enter the Name.</rfvMessage>
+      <DefaultValue></DefaultValue>
+      <revExpMessage></revExpMessage>
+    </Culture>
+    <Culture Code="zh-SG" Desc="set Label and Message for Singapore language">
+      <Caption>Name</Caption>
+      <rfvMessage>Please enter the Name.</rfvMessage>
+      <DefaultValue></DefaultValue>
+      <revExpMessage></revExpMessage>
+    </Culture>
+  </PageElement>
+
+  <PageElement name="cmbDIV_STATE" type="DDL" Desc=""
+			IsMandatory="No"
+			IsReadOnly="No"
+			IsDisabled="Yes"
+			IsDisplay="Yes"
+			MaxLength=""
+			MaxSize=""
+			IsFormatingRequired="No" JsFunctionToFormat="" OnClickJSFunction=""
+			OnChangeJSFunction="" >
+    <rev Enabled="No" ExpKey="" />
+	<Culture Code="en-US" Desc="set Label and Message for English language">
+      <Caption>State</Caption>
+      <rfvMessage></rfvMessage>
+      <DefaultValue></DefaultValue>
+      <revExpMessage></revExpMessage>
+    </Culture>
+    <Culture Code="zh-SG" Desc="set Label and Message for Singapore language">
+      <Caption>State</Caption>
+      <rfvMessage></rfvMessage>
+      <DefaultValue></DefaultValue>
+      <revExpMessage></revExpMessage>
+    </Culture>
+  </PageElement>
+  <PageElement name="cmbDIV_COUNTRY" type="DDL" Desc=""
+     IsMandatory="No"
+     IsReadOnly="No"
+     IsDisabled="No"
+     IsDisplay="Yes"
+     MaxLength=""
+     MaxSize=""
+     IsFormatingRequired="No" JsFunctionToFormat="" OnClickJSFunction=""
+     OnChangeJSFunction="" >
+    <rev Enabled="No" ExpKey="" />
+    <Culture Code="en-US" Desc="set Label and Message for English language">
+      <Caption>Country</Caption>
+      <rfvMessage></rfvMessage>
+      <DefaultValue>7</DefaultValue>
+      <revExpMessage></revExpMessage>
+    </Culture>
+    <Culture Code="zh-SG" Desc="set Label and Message for Singapore language">
+      <Caption>Country</Caption>
+      <rfvMessage></rfvMessage>
+      <DefaultValue>7</DefaultValue>
+      <revExpMessage></revExpMessage>
+    </Culture>
+  </PageElement>
+
+  <PageElement name="txtDIV_PHONE" type="TextBox" Desc=""
+			IsMandatory="No"
+			IsReadOnly="No"
+			IsDisabled="No"
+			IsDisplay="Yes"
+			MaxLength="12"
+			MaxSize=""
+			IsFormatingRequired="No" JsFunctionToFormat="" OnClickJSFunction=""
+			OnChangeJSFunction="" >
+  <rev Enabled="Yes" ExpKey="^((65-?)|(65))?((((\d{8}) ?)|(\d{4}-\d{4})))$" />
+  <Culture Code="en-US" Desc="set Label and Message for English language">
+    <Caption>Phone</Caption>
+    <rfvMessage></rfvMessage>
+    <DefaultValue></DefaultValue>
+    <revExpMessage>Phone number should be either in '##-########' or '####-####' format. </revExpMessage>
+  </Culture>
+  <Culture Code="zh-SG" Desc="set Label and Message for Singapore language">
+    <Caption>Phone</Caption>
+    <rfvMessage></rfvMessage>
+    <DefaultValue></DefaultValue>
+    <revExpMessage>Phone number should be either in '##-########' or '####-####' format. </revExpMessage>
+  </Culture>
+</PageElement>
+  
+  <PageElement name="txtDIV_ZIP" type="TextBox" Desc=""
+     IsMandatory="Yes"
+     IsReadOnly="No"
+     IsDisabled="No"
+     IsDisplay="Yes"
+     MaxLength="6"
+     MaxSize=""
+     IsFormatingRequired="No" JsFunctionToFormat="" OnClickJSFunction=""
+     OnChangeJSFunction="" >
+    <rev Enabled="Yes" ExpKey="^[0-9]{6}" />
+    <csv Enabled="Yes" ValidationFunction="ChkResult"  />
+    <Culture Code="en-US" Desc="set Label and Message for English language">
+      <Caption>Postal Code</Caption>
+      <rfvMessage>Please enter Postal Code.</rfvMessage>
+      <DefaultValue></DefaultValue>
+      <revExpMessage>Postal Code should be either in '######' format. </revExpMessage>
+    </Culture>
+    <Culture Code="zh-SG" Desc="set Label and Message for Singapore language">
+      <Caption>Postal Code</Caption>
+      <rfvMessage>Please enter Postal Code.</rfvMessage>
+      <DefaultValue></DefaultValue>
+      <revExpMessage>Postal Code should be either in '######' format. </revExpMessage>
+    </Culture>
+  </PageElement>
+  
+  <PageElement name="txtDIV_FAX" type="TextBox" Desc=""
+			IsMandatory="No"
+			IsReadOnly="No"
+			IsDisabled="No"
+			IsDisplay="Yes"
+			MaxLength="12"
+			MaxSize=""
+			IsFormatingRequired="No" JsFunctionToFormat="" OnClickJSFunction=""
+			OnChangeJSFunction="" >
+    <rev Enabled="Yes" ExpKey="^((65-?)|(65))?((((\d{8}) ?)|(\d{4}-\d{4})))$" />
+    <Culture Code="en-US" Desc="set Label and Message for English language">
+      <Caption>Fax</Caption>
+      <rfvMessage></rfvMessage>
+      <DefaultValue></DefaultValue>
+      <revExpMessage>Fax number should be either in '##-########' or '####-####' format. </revExpMessage>
+    </Culture>
+    <Culture Code="zh-SG" Desc="set Label and Message for Singapore language">
+      <Caption>Fax</Caption>
+      <rfvMessage></rfvMessage>
+      <DefaultValue></DefaultValue>
+      <revExpMessage>Phone number should be either in '##-########' or '####-####' format. </revExpMessage>
+    </Culture>
+  </PageElement>
+
+  <PageElement name="txtNAIC_CODE" type="TextBox" Desc=""
+			IsMandatory="No"
+			IsReadOnly="No"
+			IsDisabled="Yes"
+			IsDisplay="Yes"
+			MaxLength=""
+			MaxSize=""
+			IsFormatingRequired="No" JsFunctionToFormat="" OnClickJSFunction=""
+			OnChangeJSFunction="" >
+    <rev Enabled="No" ExpKey="" />
+	<Culture Code="en-US" Desc="set Label and Message for English language">
+      <Caption>NAIC Code</Caption>
+      <rfvMessage></rfvMessage>
+      <DefaultValue></DefaultValue>
+      <revExpMessage></revExpMessage>
+    </Culture>
+    <Culture Code="zh-SG" Desc="set Label and Message for Singapore language">
+      <Caption>NAIC Code</Caption>
+      <rfvMessage></rfvMessage>
+      <DefaultValue></DefaultValue>
+      <revExpMessage></revExpMessage>
+    </Culture>
+  </PageElement>
+  
+  <PageElement name="txtBRANCH_CNPJ" type="TextBox" Desc=""
+			IsMandatory="No"
+			IsReadOnly="No"
+			IsDisabled="Yes"
+			IsDisplay="Yes"
+			MaxLength=""
+			MaxSize=""
+			IsFormatingRequired="No" JsFunctionToFormat="" OnClickJSFunction=""
+			OnChangeJSFunction="" >
+    <rev Enabled="No" ExpKey="" />
+	<Culture Code="en-US" Desc="set Label and Message for English language">
+      <Caption>CNPJ</Caption>
+      <rfvMessage></rfvMessage>
+      <DefaultValue></DefaultValue>
+      <revExpMessage></revExpMessage>
+    </Culture>
+    <Culture Code="zh-SG" Desc="set Label and Message for Singapore language">
+      <Caption>CNPJ</Caption>
+      <rfvMessage></rfvMessage>
+      <DefaultValue></DefaultValue>
+      <revExpMessage></revExpMessage>
+    </Culture>
+  </PageElement>
+  
+  <PageElement name="txtREGIONAL_IDENTIFICATION" type="TextBox" Desc=""
+			IsMandatory="No"
+			IsReadOnly="No"
+			IsDisabled="Yes"
+			IsDisplay="Yes"
+			MaxLength=""
+			MaxSize=""
+			IsFormatingRequired="No" JsFunctionToFormat="" OnClickJSFunction=""
+			OnChangeJSFunction="" >
+    <rev Enabled="No" ExpKey="" />
+	<Culture Code="en-US" Desc="set Label and Message for English language">
+      <Caption>Regional Identification</Caption>
+      <rfvMessage></rfvMessage>
+      <DefaultValue></DefaultValue>
+      <revExpMessage></revExpMessage>
+    </Culture>
+    <Culture Code="zh-SG" Desc="set Label and Message for Singapore language">
+      <Caption>Regional Identification</Caption>
+      <rfvMessage></rfvMessage>
+      <DefaultValue></DefaultValue>
+      <revExpMessage></revExpMessage>
+    </Culture>
+  </PageElement>
+  
+  <PageElement name="txtREG_ID_ISSUE_DATE" type="TextBox" Desc=""
+			IsMandatory="No"
+			IsReadOnly="No"
+			IsDisabled="Yes"
+			IsDisplay="Yes"
+			MaxLength=""
+			MaxSize=""
+			IsFormatingRequired="No" JsFunctionToFormat="" OnClickJSFunction=""
+			OnChangeJSFunction="" >
+    <rev Enabled="No" ExpKey="" />
+	<Culture Code="en-US" Desc="set Label and Message for English language">
+      <Caption>Regional ID Issue Date</Caption>
+      <rfvMessage></rfvMessage>
+      <DefaultValue></DefaultValue>
+      <revExpMessage></revExpMessage>
+    </Culture>
+    <Culture Code="zh-SG" Desc="set Label and Message for Singapore language">
+      <Caption>Regional ID Issue Date</Caption>
+      <rfvMessage></rfvMessage>
+      <DefaultValue></DefaultValue>
+      <revExpMessage></revExpMessage>
+    </Culture>
+  </PageElement>
+
+  <PageElement name="txtDATE_OF_BIRTH" type="TextBox" Desc=""
+			IsMandatory="No"
+			IsReadOnly="No"
+			IsDisabled="No"
+			IsDisplay="Yes"
+			MaxLength=""
+			MaxSize=""
+			IsFormatingRequired="No" JsFunctionToFormat="" OnClickJSFunction=""
+			OnChangeJSFunction="" >
+    <rev Enabled="Yes" ExpKey="(0[1-9]|[1-9]|[12][0-9]|3[01])[- /.](0[1-9]|[1-9]|1[012])[- /.](19|20)\d\d" />
+    <csv Enabled="Yes" csvValidationFunction="ChkCreatedate"  />
+    <Culture Code="en-US" Desc="set Label and Message for English language">
+      <Caption>Creation Date</Caption>
+      <rfvMessage></rfvMessage>
+      <DefaultValue></DefaultValue>
+      <revExpMessage>Date should be in 'dd/mm/yyyy' format.</revExpMessage>
+      <csvMessage>Creation Date can not be a date in the future. </csvMessage>
+    </Culture>
+    <Culture Code="zh-SG" Desc="set Label and Message for Singapore language">
+      <Caption>Creation Date</Caption>
+      <rfvMessage></rfvMessage>
+      <DefaultValue></DefaultValue>
+      <revExpMessage>Date should be in 'dd/mm/yyyy' format.</revExpMessage>
+      <csvMessage>Creation Date can not be a date in the future. </csvMessage>
+    </Culture>
+  </PageElement>
+  
+  
+  <PageElement name="txtREG_ID_ISSUE" type="TextBox" Desc=""
+			IsMandatory="No"
+			IsReadOnly="No"
+			IsDisabled="Yes"
+			IsDisplay="Yes"
+			MaxLength=""
+			MaxSize=""
+			IsFormatingRequired="No" JsFunctionToFormat="" OnClickJSFunction=""
+			OnChangeJSFunction="" >
+    <rev Enabled="No" ExpKey="" />
+	<Culture Code="en-US" Desc="set Label and Message for English language">
+      <Caption>Regional Id Isuue</Caption>
+      <rfvMessage></rfvMessage>
+      <DefaultValue></DefaultValue>
+      <revExpMessage></revExpMessage>
+    </Culture>
+    <Culture Code="zh-SG" Desc="set Label and Message for Singapore language">
+      <Caption>Regional Id Isuue</Caption>
+      <rfvMessage></rfvMessage>
+      <DefaultValue></DefaultValue>
+      <revExpMessage></revExpMessage>
+    </Culture>
+  </PageElement>
+  
+  <PageElement name="txtBRANCH_CODE" type="TextBox" Desc=""
+			IsMandatory="No"
+			IsReadOnly="No"
+			IsDisabled="No"
+			IsDisplay="Yes"
+			MaxLength=""
+			MaxSize=""
+			IsFormatingRequired="No" JsFunctionToFormat="" OnClickJSFunction=""
+			OnChangeJSFunction="" >
+    <rev Enabled="No" ExpKey="" />
+	<Culture Code="en-US" Desc="set Label and Message for English language">
+      <Caption>Branch Code</Caption>
+      <rfvMessage></rfvMessage>
+      <DefaultValue></DefaultValue>
+      <revExpMessage></revExpMessage>
+    </Culture>
+    <Culture Code="zh-SG" Desc="set Label and Message for Singapore language">
+      <Caption>Branch Code</Caption>
+      <rfvMessage></rfvMessage>
+      <DefaultValue></DefaultValue>
+      <revExpMessage></revExpMessage>
+    </Culture>
+  </PageElement>
+
+  <PageElement name="hlkZipLookup" type="HyperLink" Desc="" IsMandatory="No" IsReadOnly="No" IsDisabled="Yes"  IsDisplay="No"
+            JsFunctionToFormat="" OnClickJSFunction=""  OnChangeJSFunction="">
+    <rev Enabled="No" ExpKey=""></rev>
+  </PageElement>
+  
+</Root>

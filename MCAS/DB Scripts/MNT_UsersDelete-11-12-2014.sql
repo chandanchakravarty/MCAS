@@ -1,0 +1,1 @@
+delete from MNT_Users where SNo >184

@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Motor>
+	<State STATE_ID="22" Name="Michigan">
+		<!-- added as per CID issue 875 commet by Pawan -->
+		<UmbrellaPolicy Value="1">
+			<Remove>
+				<Coverages></Coverages>
+				<CoverageLimit COV_ID="212" Desc="Bodily Injury Liability (Split Limit)">
+					<LIMIT_DEDUC LIMIT_DEDUC_ID="1422" Amount="" />
+					<LIMIT_DEDUC LIMIT_DEDUC_ID="1423" Amount="" />
+				</CoverageLimit>
+			</Remove>
+			<IsUnder25 Value="1">
+				<Remove>
+					<Coverages>
+						<Coverage ID="207" Code="BISPL" Desc="Bodily Injury Liability (Split Limit)" />
+						<Coverage ID="208" Code="PD" Desc="Property Damage Liability" />
+						<Coverage ID="212" Code="PUMSP" Desc="Uninsured Motorists (BI Split Limit)" />
+					</Coverages>
+					<CoverageLimit COV_ID="206" Desc="Single Limits Liability (CSL)">
+						<LIMIT_DEDUC LIMIT_DEDUC_ID="377" Amount="" />
+						<LIMIT_DEDUC LIMIT_DEDUC_ID="378" Amount="" />
+						<LIMIT_DEDUC LIMIT_DEDUC_ID="379" Amount="" />
+						<LIMIT_DEDUC LIMIT_DEDUC_ID="380" Amount="" />
+					</CoverageLimit>
+				</Remove>
+			</IsUnder25>
+		</UmbrellaPolicy>
+		<UmbrellaPolicy Value="0">
+			<Remove>
+				<Coverages></Coverages>
+				<CoverageLimit COV_ID="212" Desc="Bodily Injury Liability (Split Limit)">
+					<LIMIT_DEDUC LIMIT_DEDUC_ID="1395" Amount="" />
+					<LIMIT_DEDUC LIMIT_DEDUC_ID="1396" Amount="" />
+				</CoverageLimit>
+			</Remove>
+			<IsUnder25 Value="1">
+				<Remove>
+					<Coverages></Coverages>
+					<CoverageLimit></CoverageLimit>
+				</Remove>
+			</IsUnder25>
+		</UmbrellaPolicy>
+	</State>
+	<State STATE_ID="14" Name="Indiana">
+		<UmbrellaPolicy Value="0">
+			<Remove>
+				<Coverages></Coverages>
+				<CoverageLimit COV_ID="127" Desc="Bodily Injury Liability (Split Limit)">
+					<LIMIT_DEDUC LIMIT_DEDUC_ID="1381" Amount="" />
+					<LIMIT_DEDUC LIMIT_DEDUC_ID="1382" Amount="" />
+				</CoverageLimit>
+				<CoverageLimit COV_ID="132" Desc="Bodily Injury Liability (Split Limit)">
+					<LIMIT_DEDUC LIMIT_DEDUC_ID="202" Amount="" />
+					<LIMIT_DEDUC LIMIT_DEDUC_ID="203" Amount="" />
+				</CoverageLimit>
+				<CoverageLimit COV_ID="131" Desc="Bodily Injury Liability (Split Limit)">
+					<LIMIT_DEDUC LIMIT_DEDUC_ID="196" Amount="" />
+					<LIMIT_DEDUC LIMIT_DEDUC_ID="197" Amount="" />
+					<LIMIT_DEDUC LIMIT_DEDUC_ID="198" Amount="" />
+					<LIMIT_DEDUC LIMIT_DEDUC_ID="1383" Amount="" /> <!-- Itrack 5252 -->
+				</CoverageLimit>
+				<CoverageLimit COV_ID="126" Desc="Bodily Injury Liability (Split Limit)">
+					<LIMIT_DEDUC LIMIT_DEDUC_ID="1077" Amount="" />
+					<LIMIT_DEDUC LIMIT_DEDUC_ID="1078" Amount="" />
+					<LIMIT_DEDUC LIMIT_DEDUC_ID="1079" Amount="" />
+				</CoverageLimit>
+				<CoverageLimit COV_ID="133" Desc="Underinsured Motorists (CSL) (M-16)">
+					<LIMIT_DEDUC LIMIT_DEDUC_ID="206" Amount="" />
+					<LIMIT_DEDUC LIMIT_DEDUC_ID="207" Amount="" />
+					<LIMIT_DEDUC LIMIT_DEDUC_ID="208" Amount="" />
+				</CoverageLimit>	
+			</Remove>
+			<IsUnder25 Value="1">
+				<Remove>
+					<Coverages></Coverages>
+					<CoverageLimit></CoverageLimit>
+				</Remove>
+			</IsUnder25>
+		</UmbrellaPolicy>
+		<UmbrellaPolicy Value="1">
+			<Remove>
+				<Coverages></Coverages>
+				<CoverageLimit COV_ID="127" Desc="Bodily Injury Liability (Split Limit)">
+					<LIMIT_DEDUC LIMIT_DEDUC_ID="176" Amount="" />
+					<LIMIT_DEDUC LIMIT_DEDUC_ID="177" Amount="" />
+					<LIMIT_DEDUC LIMIT_DEDUC_ID="178" Amount="" />
+				</CoverageLimit>
+				<CoverageLimit COV_ID="132" Desc="Bodily Injury Liability (Split Limit)">
+					<LIMIT_DEDUC LIMIT_DEDUC_ID="199" Amount="" />
+					<LIMIT_DEDUC LIMIT_DEDUC_ID="200" Amount="" />
+					<LIMIT_DEDUC LIMIT_DEDUC_ID="201" Amount="" />
+					<LIMIT_DEDUC LIMIT_DEDUC_ID="1005" Amount="" />
+					<LIMIT_DEDUC LIMIT_DEDUC_ID="1420" Amount="" />
+					<LIMIT_DEDUC LIMIT_DEDUC_ID="1421" Amount="" />
+				</CoverageLimit>
+				<CoverageLimit COV_ID="131" Desc="Bodily Injury Liability (Split Limit)">
+					<LIMIT_DEDUC LIMIT_DEDUC_ID="194" Amount="" />
+					<LIMIT_DEDUC LIMIT_DEDUC_ID="195" Amount="" />
+					<LIMIT_DEDUC LIMIT_DEDUC_ID="1383" Amount="" />
+					<LIMIT_DEDUC LIMIT_DEDUC_ID="1004" Amount="" />
+				</CoverageLimit>
+				<CoverageLimit COV_ID="126" Desc="Bodily Injury Liability (Split Limit)">
+					<LIMIT_DEDUC LIMIT_DEDUC_ID="171" Amount="" />
+					<LIMIT_DEDUC LIMIT_DEDUC_ID="172" Amount="" />
+				</CoverageLimit>
+				<CoverageLimit COV_ID="133" Desc="Underinsured Motorists (CSL) (M-16)">
+					<LIMIT_DEDUC LIMIT_DEDUC_ID="1492" Amount="" />
+					<LIMIT_DEDUC LIMIT_DEDUC_ID="204" Amount="" />
+					<LIMIT_DEDUC LIMIT_DEDUC_ID="205" Amount="" />
+				</CoverageLimit>
+			</Remove>
+			<IsUnder25 Value="1">
+				<Remove>
+					<Coverages></Coverages>
+					<CoverageLimit></CoverageLimit>
+				</Remove>
+			</IsUnder25>
+		</UmbrellaPolicy>
+	</State>
+</Motor>

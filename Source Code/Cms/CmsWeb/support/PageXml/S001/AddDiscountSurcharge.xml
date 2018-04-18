@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Root>
+  <PageTitle>
+    <Culture Code="en-US">Additional Interest</Culture>
+    <Culture Code="zh-SG">Additional Interest</Culture>
+  </PageTitle>
+
+  <PageElement name="txtDISCOUNT_DESCRIPTION" type="TextBox" Desc=""
+                             IsMandatory="Yes"
+                             IsReadOnly="No"
+                             IsDisabled="No"
+                             IsDisplay="Yes"
+                             IsFormatingRequired="No"
+                             JsFunctionToFormat=""
+                             OnChangeJSFunction=""
+               >
+    <Style Position="relative" Top="0" Left="10" CssClass="midcolora" />
+    <rev Enabled="No" ExpKey="" />
+    <Culture Code="en-US" Desc="set Label and Message for English language">
+      <Caption>Discount Description</Caption>
+      <DefaultValue></DefaultValue>
+      <rfvMessage>Please enter Discount  Description.</rfvMessage>
+    </Culture>
+    <Culture Code="zh-SG" Desc="set Label and Message for Singapore language">
+      <Caption>Discount Description</Caption>
+      <DefaultValue></DefaultValue>
+      <rfvMessage>Please enter Discount  Description.</rfvMessage>
+    </Culture>
+  </PageElement>
+  
+  <PageElement name="txtEFFECTIVE_DATE" type="TextBox" Desc=""
+                             IsMandatory="Yes"
+                             IsReadOnly="No"
+                             IsDisabled="No"
+                             IsDisplay="Yes"
+                             IsFormatingRequired="No"
+                             JsFunctionToFormat=""
+                             OnChangeJSFunction=""
+               >
+    <Style Position="relative" Top="0" Left="10" CssClass="midcolora" />
+    <rev Enabled="Yes" ExpKey="(0[1-9]|[1-9]|[12][0-9]|3[01])[- /.](0[1-9]|[1-9]|1[012])[- /.](19|20)\d\d" />
+    <Culture Code="en-US" Desc="set Label and Message for English language">
+      <Caption>Effective From Date</Caption>
+      <rfvMessage>Please enter effective from date.</rfvMessage>
+      <revExpMessage>Date should be in 'dd/mm/yyyy' format.</revExpMessage>
+    </Culture>
+    <Culture Code="zh-SG" Desc="set Label and Message for Singapore language">
+      <Caption>Effective From Date</Caption>
+      <rfvMessage>Please enter effective from date.</rfvMessage>
+      <revExpMessage> Date should be in 'dd/mm/yyyy' format.</revExpMessage>
+    </Culture>
+  </PageElement>
+  
+  <PageElement name="txtFINAL_DATE" type="TextBox" Desc=""
+                  IsMandatory="Yes"
+                  IsReadOnly="No"
+                  IsDisabled="No"
+                  IsDisplay="Yes"
+                  IsFormatingRequired="No" JsFunctionToFormat="" OnClickJSFunction=""
+                  OnChangeJSFunction="" >
+    <rev Enabled="Yes" ExpKey="(0[1-9]|[1-9]|[12][0-9]|3[01])[- /.](0[1-9]|[1-9]|1[012])[- /.](19|20)\d\d" />
+    <csv Enabled="Yes" csvValidationFunction="ChkDate" />
+    <Culture Code="en-US" Desc="set Label and Message for English language">
+      <Caption>Effective To Date</Caption>
+      <rfvMessage>Please enter effective to date.</rfvMessage>
+      <DefaultValue></DefaultValue>
+      <revExpMessage>Date should be in 'dd/mm/yyyy' format.</revExpMessage>
+      <csvMessage>To date can not be less than from date.</csvMessage>
+    </Culture>
+    <Culture Code="zh-SG" Desc="set Label and Message for Singapore language">
+      <Caption>Effective To Date</Caption>
+      <rfvMessage></rfvMessage>
+      <DefaultValue></DefaultValue>
+      <revExpMessage>Date should be in 'dd/mm/yyyy' format.</revExpMessage>
+      <csvMessage>To date can not be less than from date.</csvMessage>
+    </Culture>
+  </PageElement>
+</Root>

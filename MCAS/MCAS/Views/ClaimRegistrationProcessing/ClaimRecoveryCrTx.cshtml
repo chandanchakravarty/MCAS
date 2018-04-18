@@ -1,0 +1,1434 @@
+﻿@using MCAS.Web.Objects.CommonHelper
+@using MCAS.Globalisation
+@using MCAS.Web.Objects.Resources.Common;
+@using MCAS.Web.Objects.Resources.ClaimRegProcPCNTX;
+@using MCAS.Web.Objects.Resources.ClaimRecoveryProcessing;
+@using System;
+@model MCAS.Web.Objects.ClaimObjectHelper.ClaimRecoveryCrTxModel
+@{
+    var mMCASQueryString = Html.MCASQueryString(Request.QueryString);
+    ViewBag.Title = "ClaimRecoveryCrTx";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var caller = mMCASQueryString["claimMode"] == null ? "" : Convert.ToString(mMCASQueryString["claimMode"]);
+    var policyid = mMCASQueryString["PolicyId"];
+    var pagemode = mMCASQueryString["mode"] == null ? "" : Convert.ToString(mMCASQueryString["mode"]);
+    var viewonly = mMCASQueryString["Viewmode"] == null ? "" : Convert.ToString(mMCASQueryString["Viewmode"]);
+    var accidentClaimIdNew = mMCASQueryString["AccidentClaimId"] == null ? "" : Convert.ToString(mMCASQueryString["AccidentClaimId"]);
+    var submenuval = HttpContext.Current.Session["ScreenNameDash"] == null ? "" : Convert.ToString(HttpContext.Current.Session["ScreenNameDash"]);
+    var SubMenu = !string.IsNullOrEmpty(submenuval) ? MenuListItem.ClaimTabs.GetClaimLabel(submenuval) : ClaimRecoveryCrTx.ResourceManager.GetString(MenuListItem.ClaimTabs.SubMenuString(@caller, @accidentClaimIdNew, @pagemode, "ClaimRecoveryEditor"));
+    string isEncryptedParams = System.Configuration.ConfigurationManager.AppSettings["EncryptQueryParams"].ToUpper();
+    var Display = TempData["DisplayDiv"] == null ? "none;" : (viewonly == "" ? "none;" : "block;");
+    var DonotDiableControl = pagemode == "Adj" ? "form-horizontal DonotDiableControl" : "form-horizontal";
+    var Viewmode = mMCASQueryString["Viewmode"] == null ? "" : Convert.ToString(mMCASQueryString["Viewmode"]);
+    var ClaimType1 = (Model.ClaimType == null || Model.ClaimType == 0) ? mMCASQueryString["ClaimType"] == null ? 0 : Convert.ToInt32(mMCASQueryString["ClaimType"]) : Model.ClaimType;
+    var Horgtype1 = Model.Horgtype == null ? "0" : Model.Horgtype;
+}
+<script src="@Url.Content("~/Scripts/jquery-2.1.0.min.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/Scripts/jquery.validate.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.min.js")" type="text/javascript"></script>
+<div class="dashboard-wrapper">
+    <div class="container">
+        <div class="page-title" id="reg">
+            <div class="col-lg-12" id="reg2" style="background-color: white; position: fixed;
+                z-index: 1;">
+                <h2>@ClaimRecoveryEditor.ResourceManager.GetString(MenuListItem.ClaimTabs.PreBreadCrumbString(@pagemode))</h2>
+                <ul class="breadcrumb">
+                    <li>@SubMenu</li>
+                    <li>@ClaimRecoveryEditor.Recovery</li>
+                </ul>
+            </div>
+            <div style="position: relative!important">
+                @Html.Action("_ClaimDeatailsPCNTX", "ClaimRegistrationProcessing", new { PolicyId = @policyid })
+            </div>
+        </div>
+        @{
+            object routes = new { PolicyId = @policyid, AccidentClaimId = @accidentClaimIdNew, claimMode = @caller, mode = @pagemode, Viewmode = @Viewmode, ClaimType = @ClaimType1, showhidebtn = "saverecord" };
+            if (isEncryptedParams.ToUpper() == "YES")
+            {
+                string res = RouteEncryptDecrypt.getRouteString(routes);
+                res = RouteEncryptDecrypt.Encrypt(res);
+                routes = new { Q = res };
+            }
+        }
+        <hr />
+        <div class="row" id="toprow">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <div class="panel panel-info">
+                    <div class="panel-heading clearfix">
+                        <i class="icon-check-sign"></i>
+                        <h3 class="panel-title">
+                            @ClaimRecoveryCrTx.NewClaimRecovery</h3>
+                    </div>
+                    <div class="panel-body">
+                        @Html.Partial("ClaimCrTxRecoveryList", Model.ClaimRecoveryModelCollection)
+                        <div>
+                            <br />
+                        </div>
+                        <div class="row">
+                            <div class="clearfix igr col-md-1 text-center">
+                                <a class="btn btn-info" id="Previous">@Common.Previous</a>
+                            </div>
+                            <div class="clearfix igr col-md-10 text-center">
+                            </div>
+                            @*<div class="clearfix igr col-md-1 text-center">
+                                <a class="btn btn-info" id="Next">@Common.Next</a>
+                            </div>*@
+                        </div>
+                        <br />
+                        @*                    <div class="row">
+                        <div class="col-lg-12 text-left">
+                            <button type="button" class="btn btn-info" id="addRecovery">
+                                @ClaimRecoveryCrTx.AddNewRecovery</button>
+                        </div>
+                    </div>
+                    <br />*@
+                        <hr style='font-weight: bold' />
+                        <div class="panel-body" id="ClaimRecoveryEditor"  style="display:@Display">
+                            @using (Html.BeginForm("ClaimRecoveryCrTx", "ClaimRegistrationProcessing", routes, FormMethod.Post, new { role = "form", @class = @DonotDiableControl, id = "ClaimRecoveryCrTxForm", name = "ClaimRecoveryCrTxForm" }))
+                            {
+@*@Html.ValidationSummary(true)*@
+                                @Html.HiddenFor(m => m.RecoveryId);
+                                @Html.HiddenFor(m => m.ClaimId);
+                                @Html.HiddenFor(m => m.ClaimType);
+                                @Html.HiddenFor(m => m.CreatedBy);
+                                @Html.HiddenFor(m => m.Hshowgrid);
+                                @Html.HiddenFor(m => m.ReadOnly); 
+                                @Html.HiddenFor(m => m.ViewMode); 
+                                <a id="reload" href='@Url.ActionEncoded("ClaimRecoveryCrTx", "ClaimRegistrationProcessing", new { PolicyId = @policyid, AccidentClaimId = @accidentClaimIdNew, claimMode = @caller, mode = @pagemode, RecoveryId = @Model.RecoveryId, Viewmode = @Model.ViewMode, ClaimID = @Model.ClaimId, ClaimType = @Model.ClaimType })' style="display:none">
+                                    Reload</a>
+                                <div style="color: Red; font-weight: bold;" class="has-error result1" id="error">
+                                    <p align="center">
+                                        @if (@ViewData["SuccessMsg"] != null)
+                                        {
+                                            @ViewData["SuccessMsg"]
+                                        }
+                                    </p>
+                                </div>
+                                <div class="panel panel-info" id="mainfieldsetReovery"  style="display:@Display">
+                                    <div class="panel-heading clearfix">
+                                        <i class="icon-check-sign"></i>
+                                        <h3 class="panel-title" id="header">
+                                            @ClaimRecoveryCrTx.ClaimRecovery</h3>
+                                    </div>
+                                    <div id="Togglediv" class="panel-body">
+                                        <fieldset id="fieldsetmlegend">
+                                            <legend id="mlegend">@ClaimRecoveryCrTx.ClaimRecovery</legend>
+                                            <fieldset class="PC">
+                                                <legend class="ExpCol ui-minusicon">@ClaimRecoveryCrTx.SORASCORAClaim</legend>
+                                                <div class="form-group">
+                                                    <div class="col-lg-6">
+                                                        <div class="form-group">
+                                                            <label class="col-sm-4 control-label">
+                                                                @ClaimRecoveryCrTx.Sora_Socra
+                                                            </label>
+                                                            <div class="col-sm-8">
+                                                                @Html.DropDownListFor(m => m.SORASOCRA, new List<SelectListItem>
+                                                                    {
+                                                                        new SelectListItem{ Text="[Select..]", Value = "1" },
+                                                                        new SelectListItem{ Text="Option 2", Value = "2" },
+                                                                        new SelectListItem{ Text="Option 3", Value = "3" },
+                                                                     }, new { @class = "col-lg-12 form-control" })
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </fieldset>
+                                            @*@for (int i = 0; i < Model.Reserve.ReserveDetails.Count; i++)
+                                    {
+                                     @Html.HiddenFor(m => m.Reserve.ReserveDetails[i].CompCode) 
+                                     @Html.HiddenFor(m => m.Reserve.ReserveDetails[i].ReserveDetailId)
+                                     @Html.HiddenFor(m => m.Reserve.ReserveDetails[i].ReserveId)
+                                     @Html.HiddenFor(m => m.Reserve.ReserveDetails[i].ClaimID)
+                                     @Html.HiddenFor(m => m.Reserve.ReserveDetails[i].AccidentClaimId)
+                                     var CurrentReserveId = Model.Reserve.ReserveDetails[i].CompDesc + "_O";
+
+                                        if (Model.Reserve.ReserveDetails[i].CompCode == "INVA")
+                                        {
+                                                <fieldset class = "TX PC">
+                                                <legend>@ClaimRecoveryCrTx.CostOfRepairs</legend>
+                                                <div class="form-group">
+                                                    <div class="col-xs-12" style="padding: 0;">
+                                                        <div class="col-lg-6">
+                                                            <div class="form-group">
+                                                                <label class="col-sm-4 control-label">
+                                                                    @ClaimRecoveryCrTx.InvoiceAmt
+                                                                </label>
+                                                                <div class="col-sm-8">
+                                                                    @Html.TextBoxFor(m => m.Reserve.ReserveDetails[i].CurrentReserve, new { @maxlength = "14",  @class = "form-control format Number", @id = @CurrentReserveId })
+                                                                </div>
+                                                                <label>
+                                                                </label>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-6">
+                                                        <div class="form-group">
+                                                            <label class="col-sm-4 control-label">
+                                                                @ClaimRecoveryCrTx.CrDrAmt
+                                                            </label>
+                                                            <div class="col-sm-8">
+                                                                @Html.TextBoxFor(m => m.CreditDebitNoteAmount, new { @maxlength = "14", @class = "form-control format Number NegativeAllow" })
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-6">
+                                                        <div class="form-group">
+                                                            <label class="col-sm-4 control-label">
+                                                                @ClaimRecoveryCrTx.CrDrNumber
+                                                            </label>
+                                                            <div class="col-sm-8">
+                                                                @Html.TextBoxFor(m => m.CreditDebitNoteNo, new { @maxlength = "100", @class = "form-control" })
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </fieldset>
+                                        }
+                                    }*@
+                                            <fieldset class="TX PC">
+                                                <legend class="ExpCol ui-minusicon">@ClaimRecoveryCrTx.CostOfRepairs</legend>
+                                                <div class="form-group">
+                                                    <div class="col-xs-12" style="padding: 0;">
+                                                        <div class="col-lg-6">
+                                                            <div class="form-group">
+                                                                <label class="col-sm-4 control-label">
+                                                                    @ClaimRecoveryCrTx.InvoiceAmt
+                                                                </label>
+                                                                <div class="col-sm-8">
+                                                                    @Html.TextBoxFor(m => m.InvoiceAmt, new { @maxlength = "14", @class = "form-control format Number NegativeAllow" })
+                                                                </div>
+                                                                <label>
+                                                                </label>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-6">
+                                                        <div class="form-group">
+                                                            <label class="col-sm-4 control-label">
+                                                                @ClaimRecoveryCrTx.CrDrAmt
+                                                            </label>
+                                                            <div class="col-sm-8">
+                                                                @Html.TextBoxFor(m => m.CreditDebitNoteAmount, new { @maxlength = "14", @class = "form-control format Number NegativeAllow" })
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-6">
+                                                        <div class="form-group">
+                                                            <label class="col-sm-4 control-label">
+                                                                @ClaimRecoveryCrTx.CrDrNumber
+                                                            </label>
+                                                            <div class="col-sm-8">
+                                                                @Html.TextBoxFor(m => m.CreditDebitNoteNo, new { @maxlength = "100", @class = "form-control" })
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </fieldset>
+                                            <fieldset class="TX PC">
+                                                <legend class="ExpCol ui-minusicon">@ClaimRecoveryCrTx.ClaimReceipts</legend>
+                                                <div class="form-group">
+                                                    <div class="col-lg-6">
+                                                        <div class="form-group">
+                                                            <label class="col-sm-4 control-label">
+                                                                @ClaimRecoveryCrTx.Insurer
+                                                            </label>
+                                                            <div class="col-sm-8">
+                                                                @Html.TextBoxFor(m => m.Insurer, new { @maxlength = "14", @class = "form-control format Number NegativeAllow" })
+                                                            </div>
+                                                            <label>
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-6">
+                                                        <div class="form-group">
+                                                            <label class="col-sm-4 control-label">
+                                                                @ClaimRecoveryCrTx.OwnerHirer
+                                                            </label>
+                                                            <div class="col-sm-8">
+                                                                @Html.TextBoxFor(m => m.OwnerHirer, new { @maxlength = "14", @class = "form-control format Number NegativeAllow" })
+                                                            </div>
+                                                            <label>
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-6">
+                                                        <div class="form-group">
+                                                            <label class="col-sm-4 control-label">
+                                                                @ClaimRecoveryCrTx.ThirdParty
+                                                            </label>
+                                                            <div class="col-sm-8">
+                                                                @Html.TextBoxFor(m => m.ThirdParty, new { @maxlength = "14", @class = "form-control format Number NegativeAllow" })
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-6">
+                                                        <div class="form-group">
+                                                            <label class="col-sm-4 control-label">
+                                                                @ClaimRecoveryCrTx.Contractor
+                                                            </label>
+                                                            <div class="col-sm-8">
+                                                                @Html.TextBoxFor(m => m.Contractor, new { @maxlength = "14", @class = "form-control format Number NegativeAllow" })
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </fieldset>
+                                            @*@for (int i = 0; i < Model.Reserve.ReserveDetails.Count; i++)
+                                            {
+                                     @Html.HiddenFor(m => m.Reserve.ReserveDetails[i].CompCode) 
+                                     @Html.HiddenFor(m => m.Reserve.ReserveDetails[i].ReserveDetailId)
+                                     @Html.HiddenFor(m => m.Reserve.ReserveDetails[i].ReserveId)
+                                     @Html.HiddenFor(m => m.Reserve.ReserveDetails[i].ClaimID)
+                                     @Html.HiddenFor(m => m.Reserve.ReserveDetails[i].AccidentClaimId)
+                                                var CurrentReserveId = Model.Reserve.ReserveDetails[i].CompDesc + "_O";
+                                                if (Model.Reserve.ReserveDetails[i].CompCode == "CELOR")
+                                                {
+                                                <fieldset class = "TX PC">
+                                                <legend>@ClaimRecoveryCrTx.ClaimExpensesClaimant</legend>
+                                                <div class="form-group">
+                                                    <div class="PC">
+                                                    @if (Model.Reserve.ReserveDetails[i + 2].CompCode == "CELOU")
+                                                    {
+                                                        <div class="col-lg-6 PC">
+                                                            <div class="form-group">
+                                                                <label class="col-sm-4 control-label">
+                                                                    @ClaimRecoveryCrTx.LOU
+                                                                </label>
+                                                                <div class="col-sm-8">
+                                                                    @Html.TextBoxFor(m => m.Reserve.ReserveDetails[i + 2].CurrentReserve, new { @maxlength = "14",  @class = "form-control format Number", @id = Model.Reserve.ReserveDetails[i + 2].CompDesc + "_O" })
+                                                                </div>
+                                                                <label>
+                                                                </label>
+                                                            </div>
+                                                        </div>
+                                                    }
+                                                        <div class="col-lg-6 PC">
+                                                            <div class="form-group">
+                                                                <label class="col-sm-4 control-label">
+                                                                    @ClaimRecoveryCrTx.Adjustments
+                                                                </label>
+                                                                <div class="col-sm-8">
+                                                                    @Html.TextBoxFor(m => m.Adjustment, new { @maxlength = "14", @class = "form-control format Number" })
+                                                                </div>
+                                                                <label>
+                                                                </label>
+                                                            </div>
+                                                        </div>
+                                                        @if (Model.Reserve.ReserveDetails[i + 3].CompCode == "CEME")
+                                                        {
+                                                        <div class="col-lg-6 PC">
+                                                            <div class="form-group">
+                                                                <label class="col-sm-4 control-label">
+                                                                    @ClaimRecoveryCrTx.MdclExpses
+                                                                </label>
+                                                                <div class="col-sm-8">
+                                                                    @Html.TextBoxFor(m => m.Reserve.ReserveDetails[i + 3].CurrentReserve, new { @maxlength = "14",  @class = "form-control format Number", @id = Model.Reserve.ReserveDetails[i + 3].CompDesc + "_O" })
+                                                                </div>
+                                                                <label>
+                                                                </label>
+                                                            </div>
+                                                        </div>
+                                                        }
+                                                        <div class="col-lg-6 PC">
+                                                            <div class="form-group">
+                                                                <label class="col-sm-4 control-label">
+                                                                    @ClaimRecoveryCrTx.Compensation
+                                                                </label>
+                                                                <div class="col-sm-8">
+                                                                    @Html.TextBoxFor(m => m.Compensation, new { @maxlength = "14", @class = "form-control format Number" })
+                                                                </div>
+                                                                <label>
+                                                                </label>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div>
+                                                     @if (Model.Reserve.ReserveDetails[i].CompCode == "CELOR")
+                                                     {
+                                                        <div class="col-lg-6 TX">
+                                                            <div class="form-group">
+                                                                <label class="col-sm-4 control-label">
+                                                                    @ClaimRecoveryCrTx.LOR
+                                                                </label>
+                                                                <div class="col-sm-8">
+                                                                    @Html.TextBoxFor(m => m.Reserve.ReserveDetails[i].CurrentReserve, new { @maxlength = "14",  @class = "form-control format Number", @id = @CurrentReserveId })
+                                                                </div>
+                                                                <label>
+                                                                </label>
+                                                            </div>
+                                                        </div>
+                                                     }
+                                                     @if (Model.Reserve.ReserveDetails[i + 4].CompCode == "OTH1S")
+                                                     {
+                                                        <div class="col-lg-6 TX PC">
+                                                            <div class="form-group">
+                                                                <label class="col-sm-4 control-label">
+                                                                    @ClaimRecoveryCrTx.Others1
+                                                                </label>
+                                                                <div class="col-sm-8">
+                                                                    @Html.TextBoxFor(m => m.Reserve.ReserveDetails[i + 4].CurrentReserve, new { @maxlength = "14", @class = "form-control format Number", @id = Model.Reserve.ReserveDetails[i + 4].CompDesc + "_O" })
+                                                                </div>
+                                                                <label>
+                                                                </label>
+                                                            </div>
+                                                        </div>
+                                                     }
+                                                    </div>
+                                                     @if (Model.Reserve.ReserveDetails[i + 1].CompCode == "CELOI")
+                                                     {
+                                                    <div class="col-lg-6 TX">
+                                                        <div class="form-group">
+                                                            <label class="col-sm-4 control-label">
+                                                                @ClaimRecoveryCrTx.LOI
+                                                            </label>
+                                                            <div class="col-sm-8">
+                                                                @Html.TextBoxFor(m => m.Reserve.ReserveDetails[i + 1].CurrentReserve, new { @maxlength = "14", @class = "form-control format Number", @id = Model.Reserve.ReserveDetails[i + 1].CompDesc + "_O" })
+                                                            </div>
+                                                            <label>
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                     }
+                                                </div>
+                                            </fieldset>
+                                                }
+                                                if (Model.Reserve.ReserveDetails[i].CompCode == "LF")
+                                                {
+                                                <fieldset class="TX PC">
+                                                <legend>@ClaimRecoveryCrTx.ClaimExpensesIncidentals</legend>
+                                                <div class="form-group">
+                                                 @if (Model.Reserve.ReserveDetails[i].CompCode == "LF")
+                                                 {
+                                                    <div class="col-lg-6 TX PC">
+                                                        <div class="form-group">
+                                                            <label class="col-sm-4 control-label">
+                                                                @ClaimRecoveryCrTx.LegalFee
+                                                            </label>
+                                                            <div class="col-sm-8">
+                                                                @Html.TextBoxFor(m => m.Reserve.ReserveDetails[i].CurrentReserve, new { @maxlength = "14",  @class = "form-control format Number", @id = @CurrentReserveId })
+                                                            </div>
+                                                            <label>
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                 }
+                                                  @if (Model.Reserve.ReserveDetails[i + 4].CompCode == "CR")
+                                                  {
+                                                    <div class="col-lg-6 PC">
+                                                        <div class="form-group">
+                                                            <label class="col-sm-4 control-label">
+                                                                @ClaimRecoveryCrTx.CrRental
+                                                            </label>
+                                                            <div class="col-sm-8">
+                                                                @Html.TextBoxFor(m => m.Reserve.ReserveDetails[i + 4].CurrentReserve, new { @maxlength = "14",  @class = "form-control format Number", @id = Model.Reserve.ReserveDetails[i + 4].CompDesc + "_O" })
+                                                            </div>
+                                                            <label>
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                  }
+                                                     @if (Model.Reserve.ReserveDetails[i + 1].CompCode == "CESF")
+                                                     {
+                                                    <div class="col-lg-6 TX PC">
+                                                        <div class="form-group">
+                                                            <label class="col-sm-4 control-label">
+                                                                @ClaimRecoveryCrTx.SurveyFee
+                                                            </label>
+                                                            <div class="col-sm-8">
+                                                                @Html.TextBoxFor(m => m.Reserve.ReserveDetails[i + 1].CurrentReserve, new { @maxlength = "14",  @class = "form-control format Number", @id = Model.Reserve.ReserveDetails[i + 1].CompDesc + "_O" })
+                                                            </div>
+                                                            <label>
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                     }
+                                                      @if (Model.Reserve.ReserveDetails[i + 5].CompCode == "CC")
+                                                      {
+                                                    <div class="col-lg-6 PC">
+                                                        <div class="form-group">
+                                                            <label class="col-sm-4 control-label">
+                                                                @ClaimRecoveryCrTx.CrtsyCr
+                                                            </label>
+                                                            <div class="col-sm-8">
+                                                                @Html.TextBoxFor(m => m.Reserve.ReserveDetails[i + 5].CurrentReserve, new { @maxlength = "14", @class = "form-control format Number", @id = Model.Reserve.ReserveDetails[i + 5].CompDesc + "_O" })
+                                                            </div>
+                                                            <label>
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                      }
+                                                    @if (Model.Reserve.ReserveDetails[i + 2].CompCode == "TPGIA")
+                                                    {
+                                                    <div class="col-lg-6 TX PC">
+                                                        <div class="form-group">
+                                                            <label class="col-sm-4 control-label">
+                                                                @ClaimRecoveryCrTx.TPGIAFee
+                                                            </label>
+                                                            <div class="col-sm-8">
+                                                                @Html.TextBoxFor(m => m.Reserve.ReserveDetails[i + 2].CurrentReserve, new { @maxlength = "14",  @class = "form-control format Number", @id = Model.Reserve.ReserveDetails[i + 2].CompDesc + "_O" })
+                                                            </div>
+                                                            <label>
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                    }
+                                                     @if (Model.Reserve.ReserveDetails[i + 6].CompCode == "OTH2S")
+                                                     {
+                                                    <div class="col-lg-6">
+                                                        <div class="form-group">
+                                                            <label class="col-sm-4 control-label">
+                                                                @ClaimRecoveryCrTx.Others2
+                                                            </label>
+                                                            <div class="col-sm-8">
+                                                                @Html.TextBoxFor(m => m.Reserve.ReserveDetails[i + 6].CurrentReserve, new { @maxlength = "14", @class = "form-control format Number", @id = Model.Reserve.ReserveDetails[i + 6].CompDesc + "_O" })
+                                                                
+                                                            </div>
+                                                            <label>
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                     }
+                                                    @if (Model.Reserve.ReserveDetails[i + 3].CompCode == "LTA")
+                                                    {
+                                                    <div class="col-lg-6 TX PC">
+                                                        <div class="form-group">
+                                                            <label class="col-sm-4 control-label">
+                                                                @ClaimRecoveryCrTx.LTAFee
+                                                            </label>
+                                                            <div class="col-sm-8">
+                                                                @Html.TextBoxFor(m => m.Reserve.ReserveDetails[i + 3].CurrentReserve, new { @maxlength = "14", @class = "form-control format Number", @id = Model.Reserve.ReserveDetails[i + 3].CompDesc + "_O" })
+
+                                                            </div>
+                                                            <label>
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                    }
+                                                    <div class="col-lg-6 PC">
+                                                        <div class="form-group">
+                                                            <label class="col-sm-4 control-label">
+                                                                @ClaimRecoveryCrTx.CDGECst
+                                                            </label>
+                                                            <div class="col-sm-8">
+                                                                @Html.TextBoxFor(m => m.CDGECost, new { @maxlength = "14", @class = "form-control format Number" })
+                                                            </div>
+                                                            <label>
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </fieldset>
+                                                }
+                                            }*@
+                                            <fieldset class="TX PC">
+                                                <legend class="ExpCol ui-minusicon">@ClaimRecoveryCrTx.ClaimExpensesClaimant</legend>
+                                                <div class="form-group">
+                                                    <div class="PC">
+                                                        <div class="col-lg-6 PC">
+                                                            <div class="form-group">
+                                                                <label class="col-sm-4 control-label">
+                                                                    @ClaimRecoveryCrTx.LOU
+                                                                </label>
+                                                                <div class="col-sm-8">
+                                                                    @Html.TextBoxFor(m => m.CELossofUse, new { @maxlength = "14", @class = "form-control format Number NegativeAllow" })
+                                                                </div>
+                                                                <label>
+                                                                </label>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-lg-6 PC">
+                                                            <div class="form-group">
+                                                                <label class="col-sm-4 control-label">
+                                                                    @ClaimRecoveryCrTx.Adjustments
+                                                                </label>
+                                                                <div class="col-sm-8">
+                                                                    @Html.TextBoxFor(m => m.Adjustment, new { @maxlength = "14", @class = "form-control format Number NegativeAllow" })
+                                                                </div>
+                                                                <label>
+                                                                </label>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-lg-6 PC">
+                                                            <div class="form-group">
+                                                                <label class="col-sm-4 control-label">
+                                                                    @ClaimRecoveryCrTx.MdclExpses
+                                                                </label>
+                                                                <div class="col-sm-8">
+                                                                    @Html.TextBoxFor(m => m.MedicalExpenses, new { @maxlength = "14", @class = "form-control format Number NegativeAllow" })
+                                                                </div>
+                                                                <label>
+                                                                </label>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-lg-6 PC">
+                                                            <div class="form-group">
+                                                                <label class="col-sm-4 control-label">
+                                                                    @ClaimRecoveryCrTx.Compensation
+                                                                </label>
+                                                                <div class="col-sm-8">
+                                                                    @Html.TextBoxFor(m => m.Compensation, new { @maxlength = "14", @class = "form-control format Number" })
+                                                                </div>
+                                                                <label>
+                                                                </label>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div>
+                                                        <div class="col-lg-6 TX">
+                                                            <div class="form-group">
+                                                                <label class="col-sm-4 control-label">
+                                                                    @ClaimRecoveryCrTx.LOR
+                                                                </label>
+                                                                <div class="col-sm-8">
+                                                                    @Html.TextBoxFor(m => m.LossofRental, new { @maxlength = "14", @class = "form-control format Number NegativeAllow" })
+                                                                </div>
+                                                                <label>
+                                                                </label>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-lg-6 TX PC">
+                                                            <div class="form-group">
+                                                                <label class="col-sm-4 control-label">
+                                                                    @ClaimRecoveryCrTx.Others1
+                                                                </label>
+                                                                <div class="col-sm-8">
+                                                                    @Html.TextBoxFor(m => m.Others1, new { @maxlength = "14", @class = "form-control format Number NegativeAllow" })
+                                                                </div>
+                                                                <label>
+                                                                </label>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-6 TX">
+                                                        <div class="form-group">
+                                                            <label class="col-sm-4 control-label">
+                                                                @ClaimRecoveryCrTx.LOI
+                                                            </label>
+                                                            <div class="col-sm-8">
+                                                                @Html.TextBoxFor(m => m.LossofIncome, new { @maxlength = "14", @class = "form-control format Number NegativeAllow" })
+                                                            </div>
+                                                            <label>
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </fieldset>
+@if(Model.Horgtype=="TX")
+                                            {
+                                            <fieldset class="TX">
+                                                <legend class="ExpCol ui-minusicon">@ClaimRecoveryCrTx.ClaimExpensesIncidentals</legend>
+                                                <div class="form-group">
+                                                    <div class="col-lg-6 TX">
+                                                        <div class="form-group">
+                                                            <label class="col-sm-4 control-label">
+                                                                @ClaimRecoveryCrTx.LegalFee
+                                                            </label>
+                                                            <div class="col-sm-8">
+                                                                @Html.TextBoxFor(m => m.LegalFee, new { @maxlength = "14", @class = "form-control format Number NegativeAllow" })
+                                                            </div>
+                                                            <label>
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-6 TX">
+                                                        <div class="form-group">
+                                                            <label class="col-sm-4 control-label">
+                                                                @ClaimRecoveryCrTx.LTAFee
+                                                            </label>
+                                                            <div class="col-sm-8">
+                                                                @Html.TextBoxFor(m => m.LTAFee, new { @maxlength = "14", @class = "form-control format Number NegativeAllow" })
+                                                            </div>
+                                                            <label>
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-6 TX">
+                                                        <div class="form-group">
+                                                            <label class="col-sm-4 control-label">
+                                                                @ClaimRecoveryCrTx.SurveyFee
+                                                            </label>
+                                                            <div class="col-sm-8">
+                                                                @Html.TextBoxFor(m => m.SurveyFee, new { @maxlength = "14", @class = "form-control format Number NegativeAllow" })
+                                                            </div>
+                                                            <label>
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-6 TX">
+                                                        <div class="form-group">
+                                                            <label class="col-sm-4 control-label">
+                                                                @ClaimRecoveryCrTx.Others2
+                                                            </label>
+                                                            <div class="col-sm-8">
+                                                                @Html.TextBoxFor(m => m.Others2, new { @maxlength = "14", @class = "form-control format Number NegativeAllow" })
+                                                            </div>
+                                                            <label>
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-6 TX">
+                                                        <div class="form-group">
+                                                            <label class="col-sm-4 control-label">
+                                                                @ClaimRecoveryCrTx.TPGIAFee
+                                                            </label>
+                                                            <div class="col-sm-8">
+                                                                @Html.TextBoxFor(m => m.TPGIAFee, new { @maxlength = "14", @class = "form-control format Number NegativeAllow" })
+                                                            </div>
+                                                            <label>
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </fieldset>
+}                                       
+     @if(Model.Horgtype=="PC")
+                                            { 
+                                            <fieldset class="PC">
+                                                <legend class="ExpCol ui-minusicon">@ClaimRecoveryCrTx.ClaimExpensesIncidentals</legend>
+                                                <div class="form-group">
+                                                    <div class="col-lg-6 PC">
+                                                        <div class="form-group">
+                                                            <label class="col-sm-4 control-label">
+                                                                @ClaimRecoveryCrTx.LegalFee
+                                                            </label>
+                                                            <div class="col-sm-8">
+                                                                @Html.TextBoxFor(m => m.LegalFee, new { @maxlength = "14", @class = "form-control format Number NegativeAllow" })
+                                                            </div>
+                                                            <label>
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-6 PC">
+                                                        <div class="form-group">
+                                                            <label class="col-sm-4 control-label">
+                                                                @ClaimRecoveryCrTx.CrRental
+                                                            </label>
+                                                            <div class="col-sm-8">
+                                                                @Html.TextBoxFor(m => m.CarRental, new { @maxlength = "14", @class = "form-control format Number NegativeAllow" })
+                                                            </div>
+                                                            <label>
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-6 PC">
+                                                        <div class="form-group">
+                                                            <label class="col-sm-4 control-label">
+                                                                @ClaimRecoveryCrTx.SurveyFee
+                                                            </label>
+                                                            <div class="col-sm-8">
+                                                                @Html.TextBoxFor(m => m.SurveyFee, new { @maxlength = "14", @class = "form-control format Number NegativeAllow" })
+                                                            </div>
+                                                            <label>
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-6 PC">
+                                                        <div class="form-group">
+                                                            <label class="col-sm-4 control-label">
+                                                                @ClaimRecoveryCrTx.CrtsyCr
+                                                            </label>
+                                                            <div class="col-sm-8">
+                                                                @Html.TextBoxFor(m => m.CarCourtesy, new { @maxlength = "14", @class = "form-control format Number NegativeAllow" })
+                                                            </div>
+                                                            <label>
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-6 PC">
+                                                        <div class="form-group">
+                                                            <label class="col-sm-4 control-label">
+                                                                @ClaimRecoveryCrTx.TPGIAFee
+                                                            </label>
+                                                            <div class="col-sm-8">
+                                                                @Html.TextBoxFor(m => m.TPGIAFee, new { @maxlength = "14", @class = "form-control format Number NegativeAllow" })
+                                                            </div>
+                                                            <label>
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-6 PC">
+                                                        <div class="form-group">
+                                                            <label class="col-sm-4 control-label">
+                                                                @ClaimRecoveryCrTx.Others2
+                                                            </label>
+                                                            <div class="col-sm-8">
+                                                                @Html.TextBoxFor(m => m.Others2, new { @maxlength = "14", @class = "form-control format Number NegativeAllow" })
+                                                            </div>
+                                                            <label>
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-6 PC">
+                                                        <div class="form-group">
+                                                            <label class="col-sm-4 control-label">
+                                                                @ClaimRecoveryCrTx.LTAFee
+                                                            </label>
+                                                            <div class="col-sm-8">
+                                                                @Html.TextBoxFor(m => m.LTAFee, new { @maxlength = "14", @class = "form-control format Number NegativeAllow" })
+                                                            </div>
+                                                            <label>
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-6 PC">
+                                                        <div class="form-group">
+                                                            <label class="col-sm-4 control-label">
+                                                                @ClaimRecoveryCrTx.CDGECst
+                                                            </label>
+                                                            <div class="col-sm-8">
+                                                                @Html.TextBoxFor(m => m.CDGECost, new { @maxlength = "14", @class = "form-control format Number" })
+                                                            </div>
+                                                            <label>
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </fieldset>
+                                            }
+                                                <fieldset class="TX">
+                                                <legend class="ExpCol ui-minusicon">@ClaimRecoveryCrTx.BreakdownofConfirmAmt</legend>
+                                                <div class="form-group">
+                                                @Html.Partial("../Shared/_ConfirmAmtBreakdownForTX", ((Model)))
+                                                </div>
+                                            </fieldset>
+                                            <fieldset class="PC">
+                                                <legend class="ExpCol ui-minusicon">@ClaimRecoveryCrTx.BreakdownofConfirmAmt</legend>
+                                                <div class="form-group">
+                                                @Html.Partial("../Shared/_ConfirmAmtBreakdownForPC", ((Model)))
+                                                </div>
+                                            </fieldset>
+                                            <fieldset class="TX">
+                                                <legend class="ExpCol ui-minusicon">@ClaimRecoveryCrTx.SORA</legend>
+                                                <div class="form-group">
+                                                    <div class="col-lg-6 TX">
+                                                        <div class="form-group">
+                                                            <label class="col-sm-4 control-label">
+                                                                @ClaimRecoveryCrTx.TCRecpt
+                                                            </label>
+                                                            <div class="col-sm-8">
+                                                                @Html.TextBoxFor(m => m.TPReceipt, new { @maxlength = "14", @class = "form-control format Number" })
+                                                            </div>
+                                                            <label>
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-6 TX">
+                                                        <div class="form-group">
+                                                            <label class="col-sm-4 control-label">
+                                                                @ClaimRecoveryCrTx.NCstRepairs
+                                                            </label>
+                                                            <div class="col-sm-8">
+                                                                @Html.TextBoxFor(m => m.NetCostofRepairs, new { @maxlength = "14", @class = "form-control format Number" })
+                                                            </div>
+                                                            <label>
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-6 TX">
+                                                        <div class="form-group">
+                                                            <label class="col-sm-4 control-label">
+                                                                @ClaimRecoveryCrTx.TClmExpensesClaimant
+                                                            </label>
+                                                            <div class="col-sm-8">
+                                                                @Html.TextBoxFor(m => m.TClmExpensesClaimant, new { @maxlength = "14", @class = "form-control format Number" })
+                                                            </div>
+                                                            <label>
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-6 TX">
+                                                        <div class="form-group">
+                                                            <label class="col-sm-4 control-label">
+                                                                @ClaimRecoveryCrTx.NtClmRecovery
+                                                            </label>
+                                                            <div class="col-sm-8">
+                                                                @Html.TextBoxFor(m => m.NetClaimRecovery, new { @maxlength = "14", @class = "form-control format Number" })
+                                                            </div>
+                                                            <label>
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-6 TX">
+                                                        <div class="form-group">
+                                                            <label class="col-sm-4 control-label">
+                                                                @ClaimRecoveryCrTx.TClmExpIncidental
+                                                            </label>
+                                                            <div class="col-sm-8">
+                                                                @Html.TextBoxFor(m => m.TClmExpensesIncidental, new { @maxlength = "14", @class = "form-control format Number" })
+                                                            </div>
+                                                            <label>
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-6 TX">
+                                                        <div class="form-group">
+                                                            <label class="col-sm-4 control-label">
+                                                                @ClaimRecoveryCrTx.PrftShrTxSora
+                                                            </label>
+                                                            <div class="col-sm-8">
+                                                                @Html.TextBoxFor(m => m.ProfitSharingForTaxi, new { @maxlength = "14", @class = "form-control format Number" })
+                                                            </div>
+                                                            <label>
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-6 TX">
+                                                        <div class="form-group">
+                                                            <label class="col-sm-4 control-label">
+                                                                @ClaimRecoveryCrTx.TtlClmExpnse
+                                                            </label>
+                                                            <div class="col-sm-8">
+                                                                @Html.TextBoxFor(m => m.TotalClaimExpenses, new { @maxlength = "14", @class = "form-control format Number" })
+                                                            </div>
+                                                            <label>
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-6">
+                                                        <div class="form-group">
+                                                            <label class="col-sm-4 control-label">
+                                                                @ClaimRecoveryCrTx.OverClmRecovery
+                                                            </label>
+                                                            <div class="col-sm-8">
+                                                                @Html.TextBoxFor(m => m.OverUnderClaimRecovery, new { @maxlength = "14", @class = "form-control format Number" })
+                                                            </div>
+                                                            <label>
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </fieldset>
+                                            <fieldset class="PC">
+                                                <legend class="ExpCol ui-minusicon">@ClaimRecoveryCrTx.SORA</legend>
+                                                <div class="form-group">
+                                                    <div class="col-lg-6 PC">
+                                                        <div class="form-group">
+                                                            <label class="col-sm-4 control-label">
+                                                                @ClaimRecoveryCrTx.NCstRepairs
+                                                            </label>
+                                                            <div class="col-sm-8">
+                                                                @Html.TextBoxFor(m => m.NetCostofRepairs, new { @maxlength = "14", @class = "form-control format Number", @id = "NetCostofRepairsPC" })
+                                                            </div>
+                                                            <label>
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-6 PC">
+                                                        <div class="form-group">
+                                                            <label class="col-sm-4 control-label">
+                                                                @ClaimRecoveryCrTx.TtlClmExpnse
+                                                            </label>
+                                                            <div class="col-sm-8">
+                                                                @Html.TextBoxFor(m => m.TotalClaimExpenses, new { @maxlength = "14", @class = "form-control format Number", @id = "TotalClaimExpensesPC" })
+                                                            </div>
+                                                            <label>
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-6 PC">
+                                                        <div class="form-group">
+                                                            <label class="col-sm-4 control-label">
+                                                                @ClaimRecoveryCrTx.TCRecpt
+                                                            </label>
+                                                            <div class="col-sm-8">
+                                                                @Html.TextBoxFor(m => m.TPReceipt, new { @maxlength = "14", @class = "form-control format Number", @id = "TPReceiptPC" })
+                                                            </div>
+                                                            <label>
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-6 PC">
+                                                        <div class="form-group">
+                                                            <label class="col-sm-4 control-label">
+                                                                @ClaimRecoveryCrTx.NtClmRecovery
+                                                            </label>
+                                                            <div class="col-sm-8">
+                                                                @Html.TextBoxFor(m => m.NetClaimRecovery, new { @maxlength = "14", @class = "form-control format Number", @id = "NetClaimRecoveryPC" })
+                                                            </div>
+                                                            <label>
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-6 PC">
+                                                        <div class="form-group">
+                                                            <label class="col-sm-4 control-label">
+                                                                @ClaimRecoveryCrTx.TClmExpensesClaimant
+                                                            </label>
+                                                            <div class="col-sm-8">
+                                                                @Html.TextBoxFor(m => m.TClmExpensesClaimant, new { @maxlength = "14", @class = "form-control format Number", @id = "TClmExpensesClaimantPC" })
+                                                            </div>
+                                                            <label>
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-6 PC">
+                                                        <div class="form-group">
+                                                            <label class="col-sm-4 control-label">
+                                                                @ClaimRecoveryCrTx.OverClmRecovery
+                                                            </label>
+                                                            <div class="col-sm-8">
+                                                                @Html.TextBoxFor(m => m.OverUnderClaimRecovery, new { @maxlength = "14", @class = "form-control format Number", @id = "OverUnderClaimRecoveryPC" })
+                                                            </div>
+                                                            <label>
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-6">
+                                                        <div class="form-group">
+                                                            <label class="col-sm-4 control-label">
+                                                                @ClaimRecoveryCrTx.TClmExpIncidental
+                                                            </label>
+                                                            <div class="col-sm-8">
+                                                                @Html.TextBoxFor(m => m.TClmExpensesIncidental, new { @maxlength = "14", @class = "form-control format Number" })
+                                                            </div>
+                                                            <label>
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </fieldset>
+                                            <fieldset class="TX">
+                                                <legend class="ExpCol ui-minusicon">@ClaimRecoveryCrTx.ProfitSharingforTLCases</legend>
+                                                <div class="form-group">
+                                                    <div class="col-lg-12">
+                                                        <div class="col-lg-6">
+                                                            <div class="form-group">
+                                                                <label class="col-sm-4 control-label" style="padding: 0;">
+                                                                    @ClaimRecoveryCrTx.SreNtClmRecovery
+                                                                </label>
+                                                                <div class="col-sm-8">
+                                                                    @Html.TextBoxFor(m => m.ShareNetClmRecovery, new { @maxlength = "14", @class = "form-control format Number" })
+                                                                </div>
+                                                                <label>
+                                                                </label>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-lg-6">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-12">
+                                                        <div class="col-lg-6">
+                                                            <div class="form-group">
+                                                                <label class="col-sm-4 control-label" style="padding: 0;">
+                                                                    @ClaimRecoveryCrTx.LCdgeAdmFee
+                                                                </label>
+                                                                <div class="col-sm-8">
+                                                                    @Html.TextBoxFor(m => m.LessCDGEAdminFee, new { @maxlength = "14", @class = "form-control format Number" })
+                                                                </div>
+                                                                <label>
+                                                                </label>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-lg-6">
+                                                            <div class="form-group">
+                                                                <label class="col-sm-4 control-label">
+                                                                    @ClaimRecoveryCrTx.CDGE1_3
+                                                                </label>
+                                                                <div class="col-sm-8">
+                                                                    @Html.TextBoxFor(m => m.CDGE1Or3, new { @maxlength = "14", @class = "form-control format Number" })
+                                                                </div>
+                                                                <label>
+                                                                </label>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-12">
+                                                        <div class="col-lg-6">
+                                                            <div class="form-group">
+                                                                <label class="col-sm-4 control-label" style="padding: 0;">
+                                                                    @ClaimRecoveryCrTx.ProfitSharingforTLCases
+                                                                </label>
+                                                                <div class="col-sm-8">
+                                                                    @Html.TextBoxFor(m => m.PrftShrTxTlCases, new { @maxlength = "14", @class = "form-control format Number" })
+                                                                </div>
+                                                                <label>
+                                                                </label>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-lg-6">
+                                                            <div class="form-group">
+                                                                <label class="col-sm-4 control-label">
+                                                                    @ClaimRecoveryCrTx.Taxi2_3
+                                                                </label>
+                                                                <div class="col-sm-8">
+                                                                    @Html.TextBoxFor(m => m.Taxi2Or3, new { @maxlength = "14", @class = "form-control format Number" })
+                                                                </div>
+                                                                <label>
+                                                                </label>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </fieldset>
+                                            <fieldset class="PC">
+                                                <legend class="ExpCol ui-minusicon">@ClaimRecoveryCrTx.SOCRA</legend>
+                                                <div class="form-group">
+                                                    <div class="col-lg-6">
+                                                        <div class="form-group">
+                                                            <label class="col-sm-4 control-label">
+                                                                @ClaimRecoveryCrTx.TPRecipt
+                                                            </label>
+                                                            <div class="col-sm-8">
+                                                                @Html.TextBoxFor(m => m.TPReceipt, new { @maxlength = "14", @class = "form-control format Number" })
+                                                            </div>
+                                                            <label>
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-6">
+                                                        <div class="form-group">
+                                                            <label class="col-sm-4 control-label">
+                                                                @ClaimRecoveryCrTx.NtclientRcpt
+                                                            </label>
+                                                            <div class="col-sm-8">
+                                                                @Html.TextBoxFor(m => m.NetClientReceipt, new { @maxlength = "14", @class = "form-control format Number" })
+                                                            </div>
+                                                            <label>
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-6">
+                                                        <div class="form-group">
+                                                            <label class="col-sm-4 control-label">
+                                                                @ClaimRecoveryCrTx.NtCDGEClmExpses
+                                                            </label>
+                                                            <div class="col-sm-8">
+                                                                @Html.TextBoxFor(m => m.NetCDGEClaimExpenses, new { @maxlength = "14", @class = "form-control format Number" })
+                                                            </div>
+                                                            <label>
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-6">
+                                                        <div class="form-group">
+                                                            <label class="col-sm-4 control-label">
+                                                                @ClaimRecoveryCrTx.Ovr_UndrClientRcvryScora
+                                                            </label>
+                                                            <div class="col-sm-8">
+                                                                @Html.TextBoxFor(m => m.OverUnderClientRecovery, new { @maxlength = "14", @class = "form-control format Number" })
+                                                            </div>
+                                                            <label>
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-6">
+                                                        <div class="form-group">
+                                                            <label class="col-sm-4 control-label">
+                                                                @ClaimRecoveryCrTx.ClaimableRecpt
+                                                            </label>
+                                                            <div class="col-sm-8">
+                                                                @Html.TextBoxFor(m => m.ClaimableReceipt, new { @maxlength = "14", @class = "form-control format Number" })
+                                                            </div>
+                                                            <label>
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-6">
+                                                        <div class="form-group">
+                                                            <label class="col-sm-4 control-label">
+                                                                @ClaimRecoveryCrTx.NtClientRecvry
+                                                            </label>
+                                                            <div class="col-sm-8">
+                                                                @Html.TextBoxFor(m => m.NetClientRecovery, new { @maxlength = "14", @class = "form-control format Number" })
+                                                            </div>
+                                                            <label>
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </fieldset>
+                                            <fieldset class="TX PC">
+                                                <legend></legend>
+                                                <div class="form-group">
+                                                    <div class="col-lg-6">
+                                                        <div class="form-group">
+                                                            <label class="col-sm-4 control-label">
+                                                                @ClaimRecoveryCrTx.GnrlRemarks
+                                                            </label>
+                                                            <div class="col-sm-8">
+                                                                @Html.TextAreaFor(m => m.GeneralRemarks, new { @maxlength = "1500", @class = "form-control alphanumeric" })
+                                                            </div>
+                                                            <label>
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-6">
+                                                        <div class="form-group">
+                                                            <label class="col-sm-4 control-label">
+                                                                @ClaimRecoveryCrTx.Sora_SocraSrlNo
+                                                            </label>
+                                                            <div class="col-sm-8">
+                                                                @Html.TextBoxFor(m => m.SORASerialNo, new { @maxlength = "100", @class = "form-control alphanumeric" })
+                                                            </div>
+                                                            <label>
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </fieldset>
+                                        </fieldset>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-lg-12 text-center">
+                                            <div class="form-group" id="DivSave1">
+                                                <input id="btnSave" class="btn btn-info" type="button" value="Save" />
+                                                <input id="btnReset" class="btn btn-info" type="button" value="Reset" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+            
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<style>
+    .CarOnly
+    {
+        display: none;
+    }
+</style>
+<script type="text/javascript">
+    var do_on_load = function () {
+        setTabActive('RecoveryEditor');
+
+        $(function () {
+            if ("@Horgtype1" == "TX") {
+                $('#NetCostofRepairs').val("-" + CurrencyFormat((parseFloat($('#InvoiceAmt').val().replace(/,/g, "")) + parseFloat($('#CreditDebitNoteAmount').val().replace(/,/g, "")))));
+                $('#TClmExpensesClaimant').val(CurrencyFormat((parseFloat($('#LossofRental').val().replace(/,/g, "")) + parseFloat($('#Others1').val().replace(/,/g, "")) + parseFloat($('#LossofIncome').val().replace(/,/g, "")))));
+                $('#TClmExpensesIncidental').val(CurrencyFormat((parseFloat($('#LegalFee').val().replace(/,/g, "")) + parseFloat($('#SurveyFee').val().replace(/,/g, "")) + parseFloat($('#TPGIAFee').val().replace(/,/g, "")) + parseFloat($('#Others2').val().replace(/,/g, "")) + parseFloat($('#LTAFee').val().replace(/,/g, "")))));
+                $('#TotalClaimExpenses').val("-" + CurrencyFormat((parseFloat($('#TClmExpensesClaimant').val().replace(/,/g, "")) + parseFloat($('#TClmExpensesIncidental').val().replace(/,/g, "")))));
+                //Net Claim Recovery
+                var NetClaimRecovery = (parseFloat($('#TPReceipt').val().replace(/,/g, "")) + parseFloat($('#TotalClaimExpenses').val().replace(/,/g, "")));
+                $('#NetClaimRecovery').val(("-" == NetClaimRecovery.toString().charAt(0) ? "-" : "") + CurrencyFormat(NetClaimRecovery));
+
+                var IsCdgeTotalLoss = parseFloat($('#InvoiceAmt').val().replace(/,/g, "")) >= "1" ? (parseFloat($('#InvoiceAmt').val().replace(/,/g, "")) <= 2 ? "Y" : "N") : "N";
+                $('#LessCDGEAdminFee').val(CurrencyFormat(IsCdgeTotalLoss == "Y" ? "-100" : "0"));
+                $('#ShareNetClmRecovery').val(CurrencyFormat(IsCdgeTotalLoss == "Y" ? $('#NetClaimRecovery').val() : "0"));
+                $('#Taxi2Or3').val(CurrencyFormat(IsCdgeTotalLoss == "N" ? "0" : (((parseFloat($('#ShareNetClmRecovery').val().replace(/,/g, "")) / 3) * 2) + parseFloat($('#LessCDGEAdminFee').val().replace(/,/g, "")))));
+                $('#ProfitSharingForTaxi').val("-" + CurrencyFormat(parseFloat($('#Taxi2Or3').val().replace(/,/g, ""))));
+                // Over Under Claim Recovery
+                var OverUnderClaimRecovery = (parseFloat($('#NetCostofRepairs').val().replace(/,/g, "")) + parseFloat($('#NetClaimRecovery').val().replace(/,/g, "")) + parseFloat($('#ProfitSharingForTaxi').val().replace(/,/g, "")));
+                $('#OverUnderClaimRecovery').val(("-" == OverUnderClaimRecovery.toString().charAt(0) ? "-" : "") + CurrencyFormat(OverUnderClaimRecovery));
+                $('#CDGE1Or3').val(CurrencyFormat((parseFloat($('#ShareNetClmRecovery').val().replace(/,/g, "")) - parseFloat($('#Taxi2Or3').val().replace(/,/g, ""))) + ("-" + parseFloat($('#LessCDGEAdminFee').val().replace(/,/g, "")))));
+            } else {
+                $('#NetCostofRepairs').val("-" + CurrencyFormat((parseFloat($('#InvoiceAmt').val().replace(/,/g, "")) + parseFloat($('#CreditDebitNoteAmount').val().replace(/,/g, "")))));
+
+            }
+        });
+
+
+        $('#CreditDebitNoteAmount,#ProfitSharingForTaxi').blur(function () {
+            $('#NetCostofRepairs').val("-" + CurrencyFormat((parseFloat($('#InvoiceAmt').val().replace(/,/g, "")) + parseFloat($('#CreditDebitNoteAmount').val().replace(/,/g, "")))));
+            var IsCdgeTotalLoss = parseFloat($('#InvoiceAmt').val().replace(/,/g, "")) >= "1" ? (parseFloat($('#InvoiceAmt').val().replace(/,/g, "")) <= 2 ? "Y" : "N") : "N";
+            $('#ShareNetClmRecovery').val(CurrencyFormat(IsCdgeTotalLoss == "Y" ? $('#NetClaimRecovery').val() : "0"));
+            $('#Taxi2Or3').val(CurrencyFormat(IsCdgeTotalLoss == "N" ? "0" : (((parseFloat($('#ShareNetClmRecovery').val().replace(/,/g, "")) / 3) * 2) + parseFloat($('#LessCDGEAdminFee').val().replace(/,/g, "")))));
+            $('#ProfitSharingForTaxi').val("-" + CurrencyFormat(parseFloat($('#Taxi2Or3').val().replace(/,/g, ""))));
+            // Over Under Claim Recovery
+            var OverUnderClaimRecovery = (parseFloat($('#NetCostofRepairs').val().replace(/,/g, "")) + parseFloat($('#NetClaimRecovery').val().replace(/,/g, "")) + parseFloat($('#ProfitSharingForTaxi').val().replace(/,/g, "")));
+            $('#OverUnderClaimRecovery').val(("-" == OverUnderClaimRecovery.toString().charAt(0) ? "-" : "") + CurrencyFormat(OverUnderClaimRecovery));
+        });
+
+        $('#Insurer,#OwnerHirer,#Contractor,#ThirdParty').blur(function () {
+            $('#TPReceipt').val(CurrencyFormat((parseFloat($('#Insurer').val().replace(/,/g, "")) + parseFloat($('#OwnerHirer').val().replace(/,/g, "")) + parseFloat($('#Contractor').val().replace(/,/g, "")) + parseFloat($('#ThirdParty').val().replace(/,/g, "")))));
+            var IsCdgeTotalLoss = parseFloat($('#InvoiceAmt').val().replace(/,/g, "")) >= "1" ? (parseFloat($('#InvoiceAmt').val().replace(/,/g, "")) <= 2 ? "Y" : "N") : "N";
+            var NetClaimRecovery = (parseFloat($('#TPReceipt').val().replace(/,/g, "")) + parseFloat($('#TotalClaimExpenses').val().replace(/,/g, "")));
+            $('#NetClaimRecovery').val(("-" == NetClaimRecovery.toString().charAt(0) ? "-" : "") + CurrencyFormat(NetClaimRecovery));
+            $('#ShareNetClmRecovery').val(CurrencyFormat(IsCdgeTotalLoss == "Y" ? $('#NetClaimRecovery').val() : "0"));
+            $('#Taxi2Or3').val(CurrencyFormat(IsCdgeTotalLoss == "N" ? "0" : (((parseFloat($('#ShareNetClmRecovery').val().replace(/,/g, "")) / 3) * 2) + parseFloat($('#LessCDGEAdminFee').val().replace(/,/g, "")))));
+            $('#ProfitSharingForTaxi').val("-" + CurrencyFormat(parseFloat($('#Taxi2Or3').val().replace(/,/g, ""))));
+            // Over Under Claim Recovery
+            var OverUnderClaimRecovery = (parseFloat($('#NetCostofRepairs').val().replace(/,/g, "")) + parseFloat($('#NetClaimRecovery').val().replace(/,/g, "")) + parseFloat($('#ProfitSharingForTaxi').val().replace(/,/g, "")));
+            $('#OverUnderClaimRecovery').val(("-" == OverUnderClaimRecovery.toString().charAt(0) ? "-" : "") + CurrencyFormat(OverUnderClaimRecovery));
+            $('#CDGE1Or3').val(CurrencyFormat((parseFloat($('#ShareNetClmRecovery').val().replace(/,/g, "")) - parseFloat($('#Taxi2Or3').val().replace(/,/g, ""))) + ("-" + parseFloat($('#LessCDGEAdminFee').val().replace(/,/g, "")))));
+        });
+
+        ("View" == '@viewonly') && ($("#mainfieldsetReovery :input").attr("readonly", "readonly") && $("#mainfieldsetReovery :input").attr("disabled", "disabled")) && ($('#btnReset').attr("disabled", "disabled"));
+
+        $(".ui-ebixgrid-view > table > tbody > tr > td > a").each(function () {
+            ("Select" == $(this).text()) && $(this).attr("href").getstringinbetween("status") == "Processed" && $(this).attr("disabled", !0);
+            ("View" == $(this).text()) && $(this).attr("href").getstringinbetween("status") == "" && $(this).attr("disabled", !0);
+            ("Edit" == $(this).text()) && $(this).attr("href").getstringinbetween("status") == "" && $(this).attr("disabled", !0);
+        });
+        //        .each(function () {
+        //            debugger;
+        //            ("208" == "@submenuval") && ("Select" == $(this).text() || "Edit" == $(this).text()) && $(this).attr("rec", $(this).attr("href")) && $(this).removeAttr("href");
+        //        })
+        //        .click(function () {
+        //            if ("208" == "@submenuval" && ("Select" == $(this).text() || "Edit" == $(this).text())) {
+        //                CreateDialogRecovery("For Recovery You Are Redirected To Claim Recovery Processing", "Ok", $(this).attr("rec").replace("mode=Adj", "mode=Recovery").replace("claimMode=Write", "claimMode=Recovery"))
+        //            }
+        //        });
+
+        $("#btnReset").click(function () { ClearForm("Togglediv"); });
+
+        $("#Togglediv legend").click(function (a) {
+            debugger;
+            $(this).hasClass("ExpCol") && ($(this).hasClass("ui-minusicon") ? $(this).addClass("ui-plusicon").removeClass("ui-minusicon") : $(this).addClass("ui-minusicon").removeClass("ui-plusicon"), $(this).next("div").toggle("slow"));
+        });
+
+
+        $("table.ui-ebixgrid-btable span").click(function () {
+            var a = $(this).context.id;
+            $("#ClaimRecoveryEditor,#mainfieldsetReovery,#DivSave1").css("display", "none");
+            $("table.ui-ebixgrid-btable span").each(function () {
+                $(this).hasClass("ui-icon-minus") && $(this).context.id != a && ($(this).addClass("ui-icon-plus").removeClass("ui-icon-minus"), $("#" + $(this).closest("tr").next("tr").attr("id")).hide());
+            });
+        });
+
+
+        '@ClaimType1' != '0' && ShowHideDiv("@Horgtype1");
+
+
+        $("#btnSave").click(function (a) {
+            FormatValue();
+            IsPageChanged() && $("#ClaimRecoveryCrTxForm").valid() && $("#ClaimRecoveryCrTxForm").submit();
+        });
+
+        SetHiddenSpan();
+        ExpandGridAfterPost($("#Hshowgrid").val());
+
+        $("table.ui-ebixgrid-btable span").click(function () {
+            var a = $(this).context.id;
+            $("table.ui-ebixgrid-btable span").each(function () {
+                if ($(this).hasClass("ui-icon-minus") || $(this).hasClass("ui-icon-plus")) {
+                    if (!a.beginsWith($(this).context.id)) {
+                        var spanid = $(this).context.id, id = spanid.slice(5, spanid.length);
+                        $('#' + id).hide();
+                        $('#' + spanid).removeClass('ui-icon-minus').addClass('ui-icon-plus');
+                    }
+                }
+            });
+        });
+        SetDivPost();
+    }
+
+    $(document).ready(do_on_load);
+    $(window).bind('page:change', do_on_load);
+
+    function CreateDialogRecovery(TexttoDisplay, okText, url) {
+        $("<div id='CreateDialog_id'></div>").text(TexttoDisplay).dialog({
+            modal: true,
+            title: 'CRIS+',
+            draggable: false,
+            buttons: [{
+                id: 'btnDialogeOK',
+                text: okText,
+                click: function () {
+                    $(this).dialog("close");
+                    window.location.href = url;
+                }
+            }]
+        }).height('auto').attr('id', 'dialogId');
+        $("#btnDialogeOK").closest("div").css("margin-right", "0%");
+    };
+
+    function FormatValue() {
+        $("input[type=text]").each(function () {
+            if ($(this).hasClass("format") && "" != $(this).val()) {
+                var a = $(this).context.id, b = $(this).val().replace(/,/g, "");
+                $("#" + a).val(b.replace("NaN", "0"))
+            }
+        });
+    };
+
+    function ExpandGridAfterPost(a) {
+        $("table.ui-ebixgrid-btable span").each(function () {
+            if ($(this).hasClass("ui-icon-minus") || $(this).hasClass("ui-icon-plus")) {
+                if (a.beginsWith($(this).context.id)) {
+                    var spanid = $(this).context.id, id = spanid.slice(5, spanid.length);
+                    $('#' + id).show();
+                    $('#' + spanid).removeClass('ui-icon-plus').addClass('ui-icon-minus');
+                }
+            }
+        });
+    };
+    function getQueryVariable(a) {
+        for (var c = "@MenuListItem.ClaimTabs.GetQueryStringVal()".replace(/amp;/ig, "").split("&"), b = 0; b < c.length; b++) {
+            var d = c[b].split("=");
+            if (d[0] == a) return d[1]
+        }
+    };
+    function SetHiddenSpan() {
+        var AccidentClaimId = getQueryVariable("AccidentClaimId"), RecoveryId = (null == getQueryVariable("RecoveryId")) ? "@Model.RecoveryId" : getQueryVariable("RecoveryId"), ClaimType = getQueryVariable("ClaimType");
+        $(".ui-ebixgrid-view > table > tbody > tr > td > a").each(function () {
+            $(this).attr("href") && $(this).attr("href").getstringinbetween("AccidentClaimId") == AccidentClaimId && $(this).attr("href").getstringinbetween("RecoveryId") == RecoveryId && $(this).attr("href").getstringinbetween("ClaimType") == ClaimType && $("#Hshowgrid").val("span_" + $(this).closest('tr')[0].id + "_s0");
+        });
+    }
+
+    function ShowHideDiv(e) {
+        $("#ClaimRecoveryEditor fieldset,#ClaimRecoveryEditor div").each(function () {
+            if ($(this).hasClass("TX") || $(this).hasClass("PC")) "TX" == e ? $(this).hasClass("TX") ? ($(this), $(this).show()) : $(this).hide() : $(this).hasClass("PC") ? $(this).show() : $(this).hide();
+        });
+        $("input[type=text]").each(function () {
+            var a = ["ClaimantName"]; -1 == $.inArray($(this).context.id, a) ? $(this).hasClass("format") && "" == $(this).val() && $(this).val("0.00") : ("" == $(this).val() || "0.00" == $(this).val()) && -1 < $.inArray($(this).context.id, a) && $(this).val("");
+        });
+    };
+
+    function ClearDropDown(a) {
+        for (var b = [], b = a.split(","), c = 0; b[c]; c++) $("#" + a).empty(), $("#" + a).append(new Option("[Select...]", ""));
+    };
+
+    function ClearForm(a) {
+        $("#error").hide();
+        $("#" + a).find(':input').each(function () {
+            switch (this.type) {
+                case 'text':
+                    $(this).val("0.00");
+                case 'textarea':
+                    $(this).val('');
+                    break;
+                case 'checkbox':
+                case 'radio':
+                    this.checked = false;
+            }
+        });
+    };
+
+    var guid = (function () {
+        function s4() {
+            return Math.floor((1 + Math.random()) * 0x10000).toString(16).substring(1);
+        }
+        return function () {
+            return s4() + s4() + '-' + s4() + '-' + s4() + '-' + s4() + '-' + s4() + s4() + s4();
+        };
+    })();
+
+
+
+    String.prototype.getstringinbetween = function (a) {
+        for (var e = this.split("&"), d = 0; d < e.length; d++) {
+            var b = e[d].split("=");
+            if (b[0] == a) return b[1]
+        };
+    };
+
+    String.prototype.contains = function (a) {
+        return -1 != this.indexOf(a)
+    };
+    String.prototype.beginsWith = function (string) {
+        return (this.indexOf(string) === 0);
+    };
+    $("body").delegate("a.btn.btn-xs.btn-info", "click", function () {
+        var sPageURL = $(this)[0].getAttribute("href");
+        if ('@isEncryptedParams' == "YES") {
+            $.ajax({
+                type: "POST",
+                url: '@Url.Action("GetEncryptedUrl", "ClaimRegistrationProcessing")',
+                data: {
+                    Url: sPageURL
+                },
+                success: function (data) {
+                    window.location.href = data;
+                }
+            });
+        }
+        else {
+            window.location.href = sPageURL;
+        }
+    });
+</script>

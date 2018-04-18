@@ -1,0 +1,415 @@
+﻿@model IEnumerable<MCAS.Web.Objects.MastersHelper.DeductibleModel>
+@using MCAS.Web.Objects.CommonHelper
+@using MCAS.Globalisation
+@{
+    ViewBag.Title = "DeductibleIndex";
+    var mMCASQueryString = Html.MCASQueryString(Request.QueryString);
+    Layout = "~/Views/Shared/_SystemAdminLayout.cshtml";
+    @Html.Hidden("oldgroup", 1)
+    var dis = Model == null ? "none;" : "inline;";
+    var pageMode = mMCASQueryString["pageMode"] == null ? "" : mMCASQueryString["pageMode"];
+    var OrgCatName = TempData["OrganizationName"] == null ? "" : Convert.ToString(TempData["OrganizationName"]);
+    string[] str = OrgCatName.Split('~');
+    string[] d1 = str.Where(x => !string.IsNullOrEmpty(x)).ToArray();
+    var Topid = TempData["TopId"] == null ? "" : Convert.ToString(TempData["TopId"]);
+    string[] Topid1 = Topid.Split('~');
+    string[] Topid2 = Topid1.Where(x => !string.IsNullOrEmpty(x)).ToArray();
+    var DeductID = TempData["DeductibleId"] == null ? "" : Convert.ToString(TempData["DeductibleId"]);
+    SecurityPermissions myPemissions = (SecurityPermissions)ViewData["UserPermissions"];
+    var category1 = TempData["orgCategory"] == null ? "" : Convert.ToString(TempData["orgCategory"]);
+    var categoryName = TempData["orgCategoryname"] == null ? "" : Convert.ToString(TempData["orgCategoryname"]);
+    System.Resources.ResourceManager PageResource = (new MCAS.Web.Objects.MastersHelper.TransactionModel()).GetResourceManager(Convert.ToString(ViewData["PageResource"]));
+}
+<link href="@Url.Content("~/Content/themes/base/jquery.ui.all.css")" rel="stylesheet" type="text/css" />
+<style type="text/css">
+    .ui-button-icon-primary.ui-icon.ui-icon-closethick
+    {
+        margin: -7px 0 0 -7px;
+    }
+    div.ui-dialog.ui-widget.ui-widget-content.ui-corner-all.ui-front.alert.ui-draggable, div.ui-dialog.ui-widget.ui-widget-content.ui-corner-all.alert.ui-draggable
+    {
+        top: 130px !important;
+    }
+</style>
+<script src="@Url.Content("~/Scripts/jquery-2.1.0.min.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/Scripts/jquery.validate.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/Scripts/jquery.unobtrusive-ajax.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.min.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/Scripts/globalize/globalize.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/Scripts/globalize/cultures/globalize.culture.en-GB.js")" type="text/javascript"></script>
+<div class="dashboard-wrapper">
+    <div class="PaymentDialogue" style="overflow: hidden;">
+    </div>
+    <div class="container">
+        <!-- Page title start -->
+        <div class="row page-title">
+            <div class="col-lg-12">
+                <h2>@MCAS.Web.Objects.Resources.Common.Common.SystemAdmin</h2>
+                <ul class="breadcrumb">
+                    <li>@PageResource.GetString("DeductibleVal") </li>
+                </ul>
+            </div>
+        </div>
+        <!-- Page title end -->
+        <!-- Row start for sub navigation -->
+        <hr />
+        <!-- Row End -->
+        <!-- Row start -->
+        <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <div class="panel panel-info">
+                    <div class="panel-heading clearfix">
+                        <i class="icon-check-sign"></i>
+                        <h3 class="panel-title">
+                            @PageResource.GetString("DeductibleVal")</h3>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            <div class="panel panel-info">
+                                <div class="panel-sub-heading">
+                                    <span class="text-danger">*</span>@PageResource.GetString("SearchScreen")
+                                </div>
+                                <div class="panel-body" id="mainfieldset">
+                                    @using (Html.BeginForm("DeductibleIndex", "Masters", FormMethod.Post, new { role = "form", @class = "form-horizontal", id = "DeductibleIndex", name = "DeductibleIndex" }))
+                                    {
+                             
+                                        <input type="hidden" id="Hselect" />
+                                        <input type="hidden" id="Hgetval" />
+                                        <div class="row">
+                                            <div class="col-lg-6">
+                                                <div class="form-group">
+                                                    <label class="col-sm-4">@PageResource.GetString("OrgCategory")</label>
+                                                    <div class="col-sm-6">
+                                                        <select name="ddlCategory" id="ddlCategory" value='@ViewBag.orgCategory' class="col-lg-12 form-control">
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-6">
+                                                <div class="form-group">
+                                                    <label class="col-sm-4">@PageResource.GetString("OrgCategoryName")</label>
+                                                    <div class="col-sm-6">
+                                                        <div id="DivMulti">
+                                                            <select name="listOrgName" value='@ViewBag.OrgCategoryName' class="form-control" id="listOrgName">
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                            
+                                        <div class="row">
+                                            <div style="text-align: center" class="col-lg-12 center-block">
+                                                <button id="btnsubmit" type="submit" class="btn btn-info">
+                                                    @PageResource.GetString("Search")</button>
+                                                &nbsp;&nbsp;&nbsp;&nbsp;
+                                                @if (@myPemissions.Write)
+                                                {
+                                                    @Html.EncodedActionLink(@PageResource.GetString("AddNew"), "DeductibleEditor", "Masters", new { pageMode = "Addnew" }, new { @class = "btn btn-info" })  
+                                
+                                                }
+                                            </div>
+                                        </div>    
+                            
+                            
+                            
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Row End -->
+                    <!-- Row Start -->
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class="col-lg-12 text-center">
+                                <h4 class="text-info">
+                                    @PageResource.GetString("SearchResults")</h4>
+                                <hr />
+                            </div>
+                            <div class="col-lg-12">
+                                <div class="table-responsive">
+                                    <div class="row-fluid">
+                                        <div class="dataTables_wrapper" id="Diary_wrapper" role="grid">
+                                            <table id="tableDiarySrc" cellspacing="0" width="100%" class="table table-striped table-hover display">
+                                                <thead>
+                                                    <tr>
+                                                        <th style="width: 26%; padding-left: 9px; padding-left: 9px">
+                                                            @PageResource.GetString("OrgCategory")
+                                                        </th>
+                                                        <th style="width: 15%; padding-left: 9px; padding-left: 9px">
+                                                            @PageResource.GetString("OrgCategoryName")
+                                                        </th>
+                                                        <th style="width: 15%; padding-left: 9px; padding-left: 9px">
+                                                            @PageResource.GetString("DeductibleAmt")
+                                                        </th>
+                                                        <th style="width: 15%; padding-left: 9px; padding-left: 9px">
+                                                            @PageResource.GetString("EffectiveFrom")
+                                                        </th>
+                                                        <th style="width: 15%; padding-left: 9px; padding-left: 9px">
+                                                            @PageResource.GetString("EffectiveTo")
+                                                        </th>
+                                                        <th style="width: 14%">
+                                                            @PageResource.GetString("Select")
+                                                        </th>
+                                                        @* @if (@myPemissions.Write)
+                                {
+                                <th style="width:20%">
+                                   Select
+                                 </th>
+                                }*@
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    @{
+                                                        int trid = 1;
+                                                        int rowmatch = 0;
+                                                        int rowmatch1 = -1;
+                                                        var display = "";
+                                                        var OrgCat = "";
+                                                        var Effectiveto = "";
+                                                        var deduct = "";
+                                                        TempData["DeductibleId"] = "";
+
+                                                        foreach (var item in Model)
+                                                        {
+                                                            TempData["DeductibleId"] = item.DeductibleId;
+                                                            deduct = item.DeductibleId.ToString();
+                                                            rowmatch += 1;
+                                                            rowmatch1 += 1;
+                                                            if (item.OrgCategory == "BU")
+                                                            {
+                                                                OrgCat = "Bus";
+                                                            }
+                                                            else if (item.OrgCategory == "TR")
+                                                            {
+                                                                OrgCat = "Train";
+                                                            }
+                                                            else if (item.OrgCategory == "TX")
+                                                            {
+                                                                OrgCat = "Taxi";
+                                                            }
+                                                            else if (item.OrgCategory == "PC")
+                                                            {
+                                                                OrgCat = "Private Cars";
+                                                            }
+                                                            else if (item.OrgCategory == "PB")
+                                                            {
+                                                                OrgCat = "Private Bus";
+                                                            }
+                                                            else if (item.OrgCategory == "RV")
+                                                            {
+                                                                OrgCat = "Rental Vehicles";
+                                                            }
+                                                            if (item.EffectiveTo == null)
+                                                            {
+                                                                Effectiveto = "";
+                                                            }
+                                                            else
+                                                            {
+                                                                Effectiveto = @item.EffectiveTo.Value.ToShortDateString();
+                                                            }
+                                                            var Tdays = 0.00;
+                                                            if (Effectiveto != "")
+                                                            {
+                                                                Tdays = (Convert.ToDateTime(Effectiveto).Date - DateTime.Now.Date).TotalDays;
+                                                            }
+                                                            else
+                                                            {
+                                                                Tdays = (Convert.ToDateTime("01/01/2050").Date - DateTime.Now.Date).TotalDays;
+                                                            }
+                                                            var colour = "";
+                                                            var fclour = "black";
+                                                            if (Math.Round(Tdays) < 0)
+                                                            {
+                                                                colour = "red;";
+                                                                fclour = "#FFFFFF !important";
+                                                            }
+                                                            else if (Math.Round(Tdays) <= 30)
+                                                            {
+                                                                colour = "yellow;";
+                                                                fclour = "black";
+                                                            }
+                                                        <tr group='@(trid)' style="display:@display;">
+                                                            <td style="color:@fclour;background-color:@colour">
+                                                                @OrgCat
+                                                            </td>
+                                                            <td style="color:@fclour;background-color:@colour">
+                                                                @Html.DisplayFor(modelItem => item.OrgCategoryName)
+                                                            </td>
+                                                            <td class="format" style="color:@fclour;background-color:@colour">
+                                                                @Html.DisplayFor(modelItem => item.DeductibleAmt)
+                                                            </td>
+                                                            <td style="color:@fclour;background-color:@colour">
+                                                                @item.EffectiveFrom.Value.ToShortDateString()
+                                                            </td>
+                                                            <td style="color:@fclour;background-color:@colour">
+                                                                @Effectiveto
+                                                            </td>
+                                                            <td style="color:@fclour;background-color:@colour">
+                                                                <a class="btn btn-xs btn-info"  mid='@item.DeductibleId'>@PageResource.GetString("History")</a>
+                                                                @if (@myPemissions.Write && Topid2.Contains(Convert.ToString(item.DeductibleId)))
+                                                                {
+                                                                    @Html.EncodedActionLink(@PageResource.GetString("Edit"), "DeductibleEditor", new { DeductibleId = item.DeductibleId, pageMode = "Edit", category = @category1, categoryname = @categoryName }, new { @class = "btn btn-xs btn-warning" })
+                                                                }
+                                                            </td>
+                                                        </tr>
+                                     
+                                                        }}
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+
+    $(document).ready(function () {
+        loadOrgCategory();
+        $("#ddlCategory").change(function () {
+            var items = "<option value=\"\">[Select...]<\/option>";
+            var CategoryType = ($(this).val());
+            CategoryType == "" ? $("#DivMulti").hide() : $("#DivMulti").show();
+            if (CategoryType != null) {
+                $.ajax({
+                    type: "POST",
+                    url: '@Url.Action("GetCategoryList", "Masters")',
+                    data: {
+                        cat: CategoryType,
+                        pageMode: "@pageMode",
+                        UniqueId: guid()
+                    },
+                    success: function (a) {
+                        $("#listOrgName").empty();
+                        $.each(a, function (index, item) {
+                            if (item.orgCode == '@ViewBag.OrgCategoryName')
+                                $("#listOrgName").append("<option value='" + item.orgCode + "' selected=selected>" + item.orgName + "</option>");
+                            else
+                                $("#listOrgName").append("<option value='" + item.orgCode + "'>" + item.orgName + "</option>");
+                        });
+                    }
+                });
+            };
+        });
+
+    });
+
+
+    $("#tableDiarySrc a").click(function (event) {
+    if(void 0 !== $(this).attr("mid")){
+        var id = this.id, uuid = guid(), nuuid = "#" + uuid;
+        var str = '<div id="' + uuid + '" class="uid1" title="Deductible History" style="overflow: hidden;"></div>';
+        $(str).appendTo(".PaymentDialogue")
+        InitializeDialog($(nuuid), $(this).attr("mid"));
+        event.preventDefault();
+        $(nuuid).dialog("open");
+        $('div.ui-dialog.ui-widget.ui-widget-content.ui-corner-all.ui-front.alert.ui-draggable').css("top", "130px !important");
+        $('div.ui-dialog.ui-widget.ui-widget-content.ui-corner-all.alert.ui-draggable').css("top", "130px !important");
+        return false;
+       };
+       
+    });
+
+    function loadOrgCategory() {
+        $.ajax({
+            url: '@(Url.Action("FillOrganizationCategory", "Masters"))',
+            cache: false,
+            success: function (data) {
+                $("#ddlCategory").empty();
+                $.each(data, function (index, optiondata) {
+                    if (optiondata.LookupValue == '@ViewBag.orgCategory')
+                        $("#ddlCategory").append("<option value='" + optiondata.LookupValue + "' selected=selected>" + optiondata.LookupDesc + "</option>");
+                    else
+                        $("#ddlCategory").append("<option value='" + optiondata.LookupValue + "'>" + optiondata.LookupDesc + "</option>");
+                });
+            },
+            error: function (reponse) {
+                alert("error : " + reponse);
+            }
+        });
+    }
+
+    function InitializeDialog($element,a) {
+        $element.dialog({
+            width: "900",
+            resizable: false,
+            draggable: true,
+            show: { effect: 'drop', direction: "up" },
+            title: "@PageResource.GetString("DeductibleHistory")",
+            model: true,
+            show: 'slide',
+            dialogClass: 'alert',
+            closeOnEscape: true,
+            open: function (event, ui) {
+                var path = '@Url.Content("~/Masters/ViewDeductibleHistory")' + "?Cedantid=" + a + "&Tablename=MNT_Deductible&uid=" + guid();
+                $element.load(path);
+            },
+            position: {
+                my: "center",
+                at: "center",
+                of: window
+            },
+            close: function () {
+                $element.dialog('destroy').remove();
+            }
+
+        });
+
+    };
+    var guid = (function () {
+        function s4() {
+            return Math.floor((1 + Math.random()) * 0x10000)
+               .toString(16)
+               .substring(1);
+        }
+        return function () {
+            return s4() + s4() + '-' + s4() + '-' + s4() + '-' +
+           s4() + '-' + s4() + s4() + s4();
+        };
+    })();
+    function getQueryVariable(a) {
+        for (var e = "@MenuListItem.ClaimTabs.GetQueryStringVal()".replace(/amp;/ig, "").split("&"), d = 0; d < e.length; d++) {
+            var b = e[d].split("=");
+            if (b[0] == a) return b[1]
+        }
+    };
+
+    
+
+
+</script>
+<script type="text/javascript">
+    if (('@ViewBag.orgCategory' != null) && ('@ViewBag.OrgCategoryName' != null)) {
+        var items = "<option value=\"\">[Select...]<\/option>";
+        var orgCat = '@ViewBag.orgCategory';
+        var orgName = '@ViewBag.OrgCategoryName';
+        $.ajax({
+            type: "POST",
+            url: '@Url.Action("GetCategoryList", "Masters")',
+            data: {
+                cat: orgCat,
+                pageMode: "@pageMode",
+                UniqueId: guid()
+            },
+            success: function (a) {
+                $.each(a, function (index, item) {
+                    if (item.orgCode == orgName) {
+                        items += "<option selected=selected value='" + item.orgCode + "'>" + item.orgName + "</option>";
+                    }
+                    else {
+                        items += "<option value='" + item.orgCode + "'>" + item.orgName + "</option>";
+                    }
+                });
+                $("#listOrgName").html(items);
+            }
+        });
+
+    };
+</script>

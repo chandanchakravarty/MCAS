@@ -1,0 +1,186 @@
+﻿@model MCAS.Web.Objects.MastersHelper.VehicleMakeModel
+@using MCAS.Web.Objects.CommonHelper
+@using MCAS.Web.Objects.Resources.Masters;
+@using MCAS.Web.Objects.Resources.Common;
+@using MCAS.Globalisation
+@{
+    //ViewBag.Title = "Vehicle Make Master";
+    ViewBag.Title = VehicleMaster.Title;
+    var mMCASQueryString = Html.MCASQueryString(Request.QueryString);
+    Layout = "~/Views/Shared/_SystemAdminLayout.cshtml";
+    var pageMode = mMCASQueryString["pageMode"];
+    var btndisplay = "yes";
+    if (pageMode == "View")
+    {
+        btndisplay = "none";
+    }
+
+    SecurityPermissions myPemissions = (SecurityPermissions)ViewData["UserPermissions"];
+    var MakeCode = Model.MakeCode == null ? "" : Model.MakeCode;
+    var VehicleMakeCode = Model.MakeName == null ? "" : Model.MakeName;
+    var dis = TempData["notice"] == "" ? null : MakeCode == "" ? "none;" : "Block";
+}
+<script src='@Url.Content("~/Scripts/jquery-2.1.0.min.js")' type="text/javascript"></script>
+<script src='@Url.Content("~/Scripts/jquery.validate.min.js")' type="text/javascript"></script>
+<script src='@Url.Content("~/Scripts/jquery.validate.unobtrusive.min.js")' type="text/javascript"></script>
+<div class="dashboard-wrapper">
+    <div class="container">
+        <!-- Page title start -->
+        <div class="row page-title">
+            <div class="col-lg-12">
+                <h2>
+                    @Common.SystemAdmin</h2>
+                <ul class="breadcrumb">
+                    <li>@VehicleMaster.VehicleMakeDetails</li>
+                </ul>
+            </div>
+        </div>
+        <hr />
+        <!-- Page title end -->
+        <form class="form-horizontal" action='@Url.Action("VehicleMaster", "Masters")' role="form" id="VehicleMasterform" method="post">
+        <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <div class="panel panel-info">
+                    <div class="panel-heading clearfix">
+                        <i class="icon-check-sign"></i>
+                        <h3 class="panel-title">
+                            @VehicleMaster.VehicleMakeDetails</h3>
+                    </div>
+                    <div style="color: Red; font-weight: bold;" class="has-error" id="error">
+                        <p align="center">
+                            @if (TempData["notice"] != null)
+                            {
+                                @TempData["notice"]
+                            }
+                        </p>
+                    </div>
+                    <div class="panel-body">
+                        @Html.HiddenFor(m => m.TranId)
+                        @Html.ValidationSummary(true)
+                        <div class="row top-buffer">
+                            @*<div style="display:@dis" class="clearfix igr col-md-12">
+                                    <div class="col-md-3">
+                                        <label for="inputVehicleMakeCode">
+                                        Vehicle Make Code </label>
+                                    </div>
+                                    <div class="col-md-3">
+                                         <b>@Html.DisplayFor(m => m.MakeCode, new { id = "inputVehicleMakeCode", @class = "col-lg-12 form-control" })</b>
+                                            @Html.HiddenFor(m => m.MakeCode)
+
+                                                                                 
+                                     </div>
+                                </div>*@
+                            <div class="col-lg-6">
+                                <div style="display:@dis" class="form-group">
+                                    <div class="col-sm-5">
+                                        <label for="inputUserId">
+                                          @VehicleMaster.VehicleMakeCode&nbsp;<span class="text-danger">*</span></label>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <b>@Html.DisplayFor(m => m.MakeCode, new { id = "inputVehicleMakeCode", @class = "col-lg-12 form-control" })</b>
+                                        @Html.HiddenFor(m => m.MakeCode)
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row top-buffer">
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                    <div class="col-sm-5">
+                                        <label for="inputUserId">
+                                          @VehicleMaster.VehicleMakeName&nbsp;<span class="text-danger">*</span></label>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        @Html.TextBoxFor(m => m.MakeName, new { @maxlength = "100", id = "MakeName", @class = "col-lg-12 form-control" })
+                                        @Html.ValidationMessageFor(m => m.MakeName)
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                    <div class="col-sm-4">
+                                        <label for="inputIsActive">
+                                            @Common.Status&nbsp;<span class="text-danger">*</span></label>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        @Html.DropDownListFor(m => m.Status, new SelectList(Model.Statuslist, "Lookup_value", "Lookup_desc", "Active"), new { id = "ddlStatus", @class = "col-lg-12 form-control" })
+                                        @Html.ValidationMessageFor(m => m.Status)
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row top-buffer">
+                        </div>
+                        <div class="row top-buffer">
+                        </div>
+                        <div class="row top-buffer">
+                        </div>
+                        <div class="row top-buffer">
+                            <div class="clearfix igr col-md-12 text-center">
+                                @if (@myPemissions.Write)
+                                {
+                                    <button id="btnSave" style="display:@btndisplay" class="btn btn-primary btn-info">
+                                        @Common.Save</button>
+                                }
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                @Html.ActionLink(Common.Back, "VehicleIndex", null, new { @class = "btn btn-info" })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </form>
+        <div class="panel">
+            @Html.Partial("~/Views/Shared/_TimeStamp.cshtml", Model)
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+
+    $(function () {
+        $(document).on("focus", ":input", function () {
+            $(this).attr("autocomplete", "off")
+        });
+
+
+
+        if ('@pageMode' == 'View') {
+            $('#VehicleMasterform').find('input, textarea, button, select').attr('disabled', 'disabled');
+        }
+
+        $("#MakeName").blur(function (event) {
+            var vehiclemake = $.trim($("#MakeName").val());
+            $.ajax({
+                type: "POST",
+                url: '@Url.Action("CheckVehicleMakeName", "Masters")',
+                data: {
+                    VMake: vehiclemake,
+                    Vcode: '@VehicleMakeCode'
+                },
+                success: function (a) {
+                    if (a == true && (getQueryVariable("pageMode") != "Edit")) {
+                        alert("@Html.Raw(VehicleMaster.MsgDuplicatevehiclemakename)");
+                        $("#btnSave").attr("disabled", "disabled");
+                    }
+                    else if (($("#MakeName").val() != '@VehicleMakeCode') && a == true) {
+                        alert("@Html.Raw(VehicleMaster.MsgDuplicatevehiclemakename)");
+                        $("#btnSave").attr("disabled", "disabled");
+                    }
+                    else {
+                        $("#btnSave").removeAttr("disabled");
+                    }
+
+                }
+            });
+        });
+
+        function getQueryVariable(a) {
+            for (var e = "@MenuListItem.ClaimTabs.GetQueryStringVal()".replace(/amp;/ig, "").split("&"), d = 0; d < e.length; d++) {
+                var b = e[d].split("=");
+                if (b[0] == a) return b[1]
+            }
+        };
+
+    })
+</script>

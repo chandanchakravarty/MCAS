@@ -1,0 +1,27 @@
+﻿@model MCAS.Web.Objects.MastersHelper.AdjusterModel
+@{
+    ViewBag.Title = "AdjusterMaster";
+    Layout = "~/Views/Shared/_SystemAdminLayout.cshtml";
+}
+
+@using (Html.BeginForm("Search","Adjuster"))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary()
+
+    <fieldset>
+        <legend>Search Adjuster</legend>
+        <ol>
+            <li>
+                @Html.LabelFor(m => m.AdjusterCode)
+                @Html.TextBoxFor(m=>m.AdjusterCode)
+            </li>
+            <li>
+                @Html.LabelFor(m => m.AdjusterName)
+                @Html.PasswordFor(m => m.AdjusterName)
+            </li>
+            
+        </ol>
+        <input type="submit" value="Search" />
+    </fieldset>
+}

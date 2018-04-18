@@ -1,0 +1,1 @@
+EXEC sp_rename 'MNT_Menus.IsExists', 'IsActive', 'COLUMN'

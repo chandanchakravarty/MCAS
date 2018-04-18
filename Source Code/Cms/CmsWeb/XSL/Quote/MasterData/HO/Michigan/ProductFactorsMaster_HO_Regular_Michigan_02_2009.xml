@@ -1,0 +1,2125 @@
+<PRODUCTMASTER>
+	<PRODUCT ID="HO-P" DESC="Home Owners-Premium" FILENAME="HO-P.xml">
+		<FACTOR ID="PREMIUM" NAME="Premier Base Premium Groups">
+			<NODE ID="PREMIUMTERRITORY" NAME="Territory">
+				<ATTRIBUTES Form_Code="HO-2" Base_premium="525"/>				
+				<ATTRIBUTES Form_Code="HO-3" Base_premium="512"/>
+				<ATTRIBUTES Form_Code="HO-5" Base_premium="589"/>
+				<ATTRIBUTES Form_Code="HO-4 CO I" Base_premium="123"/>
+				<ATTRIBUTES Form_Code="HO-4 CO II" Base_premium="164"/>
+				<ATTRIBUTES Form_Code="HO-6 CO I" Base_premium="131"/>
+				<ATTRIBUTES Form_Code="HO-6 CO II" Base_premium="147"/>
+			</NODE>
+		</FACTOR>
+		<FACTOR ID="RECOUPMENT" NAME="Property Expense Recoupment Charge">
+			<NODE ID="HOME_PROPERTY_INS" NAME="Home property Insurance">
+				<ATTRIBUTES TERM="12" FACTOR="9" />
+				<ATTRIBUTES TERM="6" FACTOR="5" />
+			</NODE>
+		</FACTOR>
+		<FACTOR ID="INSURANCESCORECREDIT" NAME="Insurance Score Credit">
+			<NODE ID="CREDIT" NAME="Credit">
+				<ATTRIBUTES MINSCORE="0" MAXSCORE="599" FACTOR="1.00" CREDIT="0" />
+				<ATTRIBUTES MINSCORE="600" MAXSCORE="650" FACTOR="0.90" CREDIT="10" />
+				<ATTRIBUTES MINSCORE="651" MAXSCORE="700" FACTOR="0.75" CREDIT="25" />
+				<ATTRIBUTES MINSCORE="701" MAXSCORE="750" FACTOR="0.61" CREDIT="39" />
+				<ATTRIBUTES MINSCORE="751" MAXSCORE="999999" FACTOR="0.57" CREDIT="43" />
+				<ATTRIBUTES MINSCORE="N" FACTOR="0.85" CREDIT="15" />
+			</NODE>
+		</FACTOR>
+		<FACTOR ID="BASE" NAME="Base Coverage">
+			<NODE ID="COVERAGE1" NAME="Coverage-Group 1" GROUP="CG1" MAXVALUE="500">
+				<ATTRIBUTES CovA="10" Factor="0.819" />
+				<ATTRIBUTES CovA="11" Factor="0.820" />
+				<ATTRIBUTES CovA="12" Factor="0.821" />
+				<ATTRIBUTES CovA="13" Factor="0.822" />
+				<ATTRIBUTES CovA="14" Factor="0.823" />
+				<ATTRIBUTES CovA="15" Factor="0.824" />
+				<ATTRIBUTES CovA="16" Factor="0.825" />
+				<ATTRIBUTES CovA="17" Factor="0.826" />
+				<ATTRIBUTES CovA="18" Factor="0.827" />
+				<ATTRIBUTES CovA="19" Factor="0.828" />
+				<ATTRIBUTES CovA="20" Factor="0.830" />
+				<ATTRIBUTES CovA="21" Factor="0.831" />
+				<ATTRIBUTES CovA="22" Factor="0.832" />
+				<ATTRIBUTES CovA="23" Factor="0.833" />
+				<ATTRIBUTES CovA="24" Factor="0.834" />
+				<ATTRIBUTES CovA="25" Factor="0.835" />
+				<ATTRIBUTES CovA="26" Factor="0.844" />
+				<ATTRIBUTES CovA="27" Factor="0.854" />
+				<ATTRIBUTES CovA="28" Factor="0.863" />
+				<ATTRIBUTES CovA="29" Factor="0.873" />
+				<ATTRIBUTES CovA="30" Factor="0.882" />
+				<ATTRIBUTES CovA="31" Factor="0.887" />
+				<ATTRIBUTES CovA="32" Factor="0.893" />
+				<ATTRIBUTES CovA="33" Factor="0.898" />
+				<ATTRIBUTES CovA="34" Factor="0.903" />
+				<ATTRIBUTES CovA="35" Factor="0.908" />
+				<ATTRIBUTES CovA="36" Factor="0.915" />
+				<ATTRIBUTES CovA="37" Factor="0.921" />
+				<ATTRIBUTES CovA="38" Factor="0.927" />
+				<ATTRIBUTES CovA="39" Factor="0.933" />
+				<ATTRIBUTES CovA="40" Factor="1.000" />
+				<ATTRIBUTES CovA="41" Factor="1.005" />
+				<ATTRIBUTES CovA="42" Factor="1.010" />
+				<ATTRIBUTES CovA="43" Factor="1.015" />
+				<ATTRIBUTES CovA="44" Factor="1.020" />
+				<ATTRIBUTES CovA="45" Factor="1.025" />
+				<ATTRIBUTES CovA="46" Factor="1.030" />
+				<ATTRIBUTES CovA="47" Factor="1.035" />
+				<ATTRIBUTES CovA="48" Factor="1.040" />
+				<ATTRIBUTES CovA="49" Factor="1.045" />
+				<ATTRIBUTES CovA="50" Factor="1.050" />
+				<ATTRIBUTES CovA="51" Factor="1.060" />
+				<ATTRIBUTES CovA="52" Factor="1.070" />
+				<ATTRIBUTES CovA="53" Factor="1.080" />
+				<ATTRIBUTES CovA="54" Factor="1.090" />
+				<ATTRIBUTES CovA="55" Factor="1.100" />
+				<ATTRIBUTES CovA="56" Factor="1.110" />
+				<ATTRIBUTES CovA="57" Factor="1.120" />
+				<ATTRIBUTES CovA="58" Factor="1.130" />
+				<ATTRIBUTES CovA="59" Factor="1.140" />
+				<ATTRIBUTES CovA="60" Factor="1.150" />
+				<ATTRIBUTES CovA="61" Factor="1.160" />
+				<ATTRIBUTES CovA="62" Factor="1.170" />
+				<ATTRIBUTES CovA="63" Factor="1.180" />
+				<ATTRIBUTES CovA="64" Factor="1.190" />
+				<ATTRIBUTES CovA="65" Factor="1.200" />
+				<ATTRIBUTES CovA="66" Factor="1.210" />
+				<ATTRIBUTES CovA="67" Factor="1.220" />
+				<ATTRIBUTES CovA="68" Factor="1.230" />
+				<ATTRIBUTES CovA="69" Factor="1.240" />
+				<ATTRIBUTES CovA="70" Factor="1.250" />
+				<ATTRIBUTES CovA="71" Factor="1.260" />
+				<ATTRIBUTES CovA="72" Factor="1.270" />
+				<ATTRIBUTES CovA="73" Factor="1.280" />
+				<ATTRIBUTES CovA="74" Factor="1.290" />
+				<ATTRIBUTES CovA="75" Factor="1.300" />
+				<ATTRIBUTES CovA="76" Factor="1.310" />
+				<ATTRIBUTES CovA="77" Factor="1.320" />
+				<ATTRIBUTES CovA="78" Factor="1.330" />
+				<ATTRIBUTES CovA="79" Factor="1.340" />
+				<ATTRIBUTES CovA="80" Factor="1.350" />
+				<ATTRIBUTES CovA="81" Factor="1.360" />
+				<ATTRIBUTES CovA="82" Factor="1.370" />
+				<ATTRIBUTES CovA="83" Factor="1.380" />
+				<ATTRIBUTES CovA="84" Factor="1.390" />
+				<ATTRIBUTES CovA="85" Factor="1.400" />
+				<ATTRIBUTES CovA="86" Factor="1.410" />
+				<ATTRIBUTES CovA="87" Factor="1.420" />
+				<ATTRIBUTES CovA="88" Factor="1.430" />
+				<ATTRIBUTES CovA="89" Factor="1.440" />
+				<ATTRIBUTES CovA="90" Factor="1.450" />
+				<ATTRIBUTES CovA="91" Factor="1.455" />
+				<ATTRIBUTES CovA="92" Factor="1.460" />
+				<ATTRIBUTES CovA="93" Factor="1.465" />
+				<ATTRIBUTES CovA="94" Factor="1.470" />
+				<ATTRIBUTES CovA="95" Factor="1.475" />
+				<ATTRIBUTES CovA="96" Factor="1.480" />
+				<ATTRIBUTES CovA="97" Factor="1.485" />
+				<ATTRIBUTES CovA="98" Factor="1.490" />
+				<ATTRIBUTES CovA="99" Factor="1.495" />
+				<ATTRIBUTES CovA="100" Factor="1.500" />
+				<ATTRIBUTES CovA="101" Factor="1.510" />
+				<ATTRIBUTES CovA="102" Factor="1.520" />
+				<ATTRIBUTES CovA="103" Factor="1.530" />
+				<ATTRIBUTES CovA="104" Factor="1.540" />
+				<ATTRIBUTES CovA="105" Factor="1.550" />
+				<ATTRIBUTES CovA="106" Factor="1.560" />
+				<ATTRIBUTES CovA="107" Factor="1.570" />
+				<ATTRIBUTES CovA="108" Factor="1.580" />
+				<ATTRIBUTES CovA="109" Factor="1.590" />
+				<ATTRIBUTES CovA="110" Factor="1.600" />
+				<ATTRIBUTES CovA="111" Factor="1.609" />
+				<ATTRIBUTES CovA="112" Factor="1.617" />
+				<ATTRIBUTES CovA="113" Factor="1.626" />
+				<ATTRIBUTES CovA="114" Factor="1.634" />
+				<ATTRIBUTES CovA="115" Factor="1.642" />
+				<ATTRIBUTES CovA="116" Factor="1.651" />
+				<ATTRIBUTES CovA="117" Factor="1.659" />
+				<ATTRIBUTES CovA="118" Factor="1.668" />
+				<ATTRIBUTES CovA="119" Factor="1.676" />
+				<ATTRIBUTES CovA="120" Factor="1.685" />
+				<ATTRIBUTES CovA="121" Factor="1.700" />
+				<ATTRIBUTES CovA="122" Factor="1.715" />
+				<ATTRIBUTES CovA="123" Factor="1.730" />
+				<ATTRIBUTES CovA="124" Factor="1.745" />
+				<ATTRIBUTES CovA="125" Factor="1.760" />
+				<ATTRIBUTES CovA="126" Factor="1.762" />
+				<ATTRIBUTES CovA="127" Factor="1.763" />
+				<ATTRIBUTES CovA="128" Factor="1.765" />
+				<ATTRIBUTES CovA="129" Factor="1.766" />
+				<ATTRIBUTES CovA="130" Factor="1.768" />
+				<ATTRIBUTES CovA="131" Factor="1.770" />
+				<ATTRIBUTES CovA="132" Factor="1.771" />
+				<ATTRIBUTES CovA="133" Factor="1.773" />
+				<ATTRIBUTES CovA="134" Factor="1.774" />
+				<ATTRIBUTES CovA="135" Factor="1.776" />
+				<ATTRIBUTES CovA="136" Factor="1.778" />
+				<ATTRIBUTES CovA="137" Factor="1.779" />
+				<ATTRIBUTES CovA="138" Factor="1.781" />
+				<ATTRIBUTES CovA="139" Factor="1.782" />
+				<ATTRIBUTES CovA="140" Factor="1.784" />
+				<ATTRIBUTES CovA="141" Factor="1.786" />
+				<ATTRIBUTES CovA="142" Factor="1.787" />
+				<ATTRIBUTES CovA="143" Factor="1.789" />
+				<ATTRIBUTES CovA="144" Factor="1.790" />
+				<ATTRIBUTES CovA="145" Factor="1.792" />
+				<ATTRIBUTES CovA="146" Factor="1.794" />
+				<ATTRIBUTES CovA="147" Factor="1.795" />
+				<ATTRIBUTES CovA="148" Factor="1.797" />
+				<ATTRIBUTES CovA="149" Factor="1.798" />
+				<ATTRIBUTES CovA="150" Factor="1.800" />
+				<ATTRIBUTES CovA="151" Factor="1.812" />
+				<ATTRIBUTES CovA="152" Factor="1.823" />
+				<ATTRIBUTES CovA="153" Factor="1.835" />
+				<ATTRIBUTES CovA="154" Factor="1.846" />
+				<ATTRIBUTES CovA="155" Factor="1.858" />
+				<ATTRIBUTES CovA="156" Factor="1.870" />
+				<ATTRIBUTES CovA="157" Factor="1.881" />
+				<ATTRIBUTES CovA="158" Factor="1.893" />
+				<ATTRIBUTES CovA="159" Factor="1.904" />
+				<ATTRIBUTES CovA="160" Factor="1.916" />
+				<ATTRIBUTES CovA="161" Factor="1.928" />
+				<ATTRIBUTES CovA="162" Factor="1.939" />
+				<ATTRIBUTES CovA="163" Factor="1.951" />
+				<ATTRIBUTES CovA="164" Factor="1.962" />
+				<ATTRIBUTES CovA="165" Factor="1.974" />
+				<ATTRIBUTES CovA="166" Factor="1.986" />
+				<ATTRIBUTES CovA="167" Factor="1.997" />
+				<ATTRIBUTES CovA="168" Factor="2.009" />
+				<ATTRIBUTES CovA="169" Factor="2.020" />
+				<ATTRIBUTES CovA="170" Factor="2.032" />
+				<ATTRIBUTES CovA="171" Factor="2.044" />
+				<ATTRIBUTES CovA="172" Factor="2.055" />
+				<ATTRIBUTES CovA="173" Factor="2.067" />
+				<ATTRIBUTES CovA="174" Factor="2.078" />
+				<ATTRIBUTES CovA="175" Factor="2.090" />
+				<ATTRIBUTES CovA="176" Factor="2.102" />
+				<ATTRIBUTES CovA="177" Factor="2.113" />
+				<ATTRIBUTES CovA="178" Factor="2.125" />
+				<ATTRIBUTES CovA="179" Factor="2.136" />
+				<ATTRIBUTES CovA="180" Factor="2.150" />
+				<ATTRIBUTES CovA="181" Factor="2.162" />
+				<ATTRIBUTES CovA="182" Factor="2.174" />
+				<ATTRIBUTES CovA="183" Factor="2.186" />
+				<ATTRIBUTES CovA="184" Factor="2.199" />
+				<ATTRIBUTES CovA="185" Factor="2.211" />
+				<ATTRIBUTES CovA="186" Factor="2.223" />
+				<ATTRIBUTES CovA="187" Factor="2.235" />
+				<ATTRIBUTES CovA="188" Factor="2.247" />
+				<ATTRIBUTES CovA="189" Factor="2.259" />
+				<ATTRIBUTES CovA="190" Factor="2.271" />
+				<ATTRIBUTES CovA="191" Factor="2.283" />
+				<ATTRIBUTES CovA="192" Factor="2.295" />
+				<ATTRIBUTES CovA="193" Factor="2.308" />
+				<ATTRIBUTES CovA="194" Factor="2.320" />
+				<ATTRIBUTES CovA="195" Factor="2.332" />
+				<ATTRIBUTES CovA="196" Factor="2.344" />
+				<ATTRIBUTES CovA="197" Factor="2.356" />
+				<ATTRIBUTES CovA="198" Factor="2.368" />
+				<ATTRIBUTES CovA="199" Factor="2.380" />
+				<ATTRIBUTES CovA="200" Factor="2.392" />
+				<ATTRIBUTES CovA="201" Factor="2.405" />
+				<ATTRIBUTES CovA="202" Factor="2.417" />
+				<ATTRIBUTES CovA="203" Factor="2.429" />
+				<ATTRIBUTES CovA="204" Factor="2.441" />
+				<ATTRIBUTES CovA="205" Factor="2.453" />
+				<ATTRIBUTES CovA="206" Factor="2.465" />
+				<ATTRIBUTES CovA="207" Factor="2.477" />
+				<ATTRIBUTES CovA="208" Factor="2.489" />
+				<ATTRIBUTES CovA="209" Factor="2.502" />
+				<ATTRIBUTES CovA="210" Factor="2.514" />
+				<ATTRIBUTES CovA="211" Factor="2.526" />
+				<ATTRIBUTES CovA="212" Factor="2.538" />
+				<ATTRIBUTES CovA="213" Factor="2.550" />
+				<ATTRIBUTES CovA="214" Factor="2.562" />
+				<ATTRIBUTES CovA="215" Factor="2.574" />
+				<ATTRIBUTES CovA="216" Factor="2.586" />
+				<ATTRIBUTES CovA="217" Factor="2.599" />
+				<ATTRIBUTES CovA="218" Factor="2.611" />
+				<ATTRIBUTES CovA="219" Factor="2.623" />
+				<ATTRIBUTES CovA="220" Factor="2.635" />
+				<ATTRIBUTES CovA="221" Factor="2.650" />
+				<ATTRIBUTES CovA="222" Factor="2.665" />
+				<ATTRIBUTES CovA="223" Factor="2.681" />
+				<ATTRIBUTES CovA="224" Factor="2.696" />
+				<ATTRIBUTES CovA="225" Factor="2.711" />
+				<ATTRIBUTES CovA="226" Factor="2.726" />
+				<ATTRIBUTES CovA="227" Factor="2.741" />
+				<ATTRIBUTES CovA="228" Factor="2.756" />
+				<ATTRIBUTES CovA="229" Factor="2.772" />
+				<ATTRIBUTES CovA="230" Factor="2.787" />
+				<ATTRIBUTES CovA="231" Factor="2.802" />
+				<ATTRIBUTES CovA="232" Factor="2.817" />
+				<ATTRIBUTES CovA="233" Factor="2.832" />
+				<ATTRIBUTES CovA="234" Factor="2.848" />
+				<ATTRIBUTES CovA="235" Factor="2.863" />
+				<ATTRIBUTES CovA="236" Factor="2.878" />
+				<ATTRIBUTES CovA="237" Factor="2.893" />
+				<ATTRIBUTES CovA="238" Factor="2.908" />
+				<ATTRIBUTES CovA="239" Factor="2.924" />
+				<ATTRIBUTES CovA="240" Factor="2.939" />
+				<ATTRIBUTES CovA="241" Factor="2.954" />
+				<ATTRIBUTES CovA="242" Factor="2.969" />
+				<ATTRIBUTES CovA="243" Factor="2.984" />
+				<ATTRIBUTES CovA="244" Factor="2.999" />
+				<ATTRIBUTES CovA="245" Factor="3.015" />
+				<ATTRIBUTES CovA="246" Factor="3.030" />
+				<ATTRIBUTES CovA="247" Factor="3.045" />
+				<ATTRIBUTES CovA="248" Factor="3.060" />
+				<ATTRIBUTES CovA="249" Factor="3.075" />
+				<ATTRIBUTES CovA="250" Factor="3.091" />
+				<ATTRIBUTES CovA="251" Factor="3.106" />
+				<ATTRIBUTES CovA="252" Factor="3.121" />
+				<ATTRIBUTES CovA="253" Factor="3.136" />
+				<ATTRIBUTES CovA="254" Factor="3.151" />
+				<ATTRIBUTES CovA="255" Factor="3.167" />
+				<ATTRIBUTES CovA="256" Factor="3.182" />
+				<ATTRIBUTES CovA="257" Factor="3.197" />
+				<ATTRIBUTES CovA="258" Factor="3.212" />
+				<ATTRIBUTES CovA="259" Factor="3.277" />
+				<ATTRIBUTES CovA="260" Factor="3.242" />
+				<ATTRIBUTES CovA="261" Factor="3.258" />
+				<ATTRIBUTES CovA="262" Factor="3.273" />
+				<ATTRIBUTES CovA="263" Factor="3.288" />
+				<ATTRIBUTES CovA="264" Factor="3.303" />
+				<ATTRIBUTES CovA="265" Factor="3.318" />
+				<ATTRIBUTES CovA="266" Factor="3.334" />
+				<ATTRIBUTES CovA="267" Factor="3.349" />
+				<ATTRIBUTES CovA="268" Factor="3.364" />
+				<ATTRIBUTES CovA="269" Factor="3.379" />
+				<ATTRIBUTES CovA="270" Factor="3.394" />
+				<ATTRIBUTES CovA="271" Factor="3.410" />
+				<ATTRIBUTES CovA="272" Factor="3.425" />
+				<ATTRIBUTES CovA="273" Factor="3.440" />
+				<ATTRIBUTES CovA="274" Factor="3.455" />
+				<ATTRIBUTES CovA="275" Factor="3.470" />
+				<ATTRIBUTES CovA="276" Factor="3.486" />
+				<ATTRIBUTES CovA="277" Factor="3.501" />
+				<ATTRIBUTES CovA="278" Factor="3.516" />
+				<ATTRIBUTES CovA="279" Factor="3.531" />
+				<ATTRIBUTES CovA="280" Factor="3.546" />
+				<ATTRIBUTES CovA="281" Factor="3.561" />
+				<ATTRIBUTES CovA="282" Factor="3.577" />
+				<ATTRIBUTES CovA="283" Factor="3.592" />
+				<ATTRIBUTES CovA="284" Factor="3.607" />
+				<ATTRIBUTES CovA="285" Factor="3.622" />
+				<ATTRIBUTES CovA="286" Factor="3.637" />
+				<ATTRIBUTES CovA="287" Factor="3.653" />
+				<ATTRIBUTES CovA="288" Factor="3.668" />
+				<ATTRIBUTES CovA="289" Factor="3.683" />
+				<ATTRIBUTES CovA="290" Factor="3.698" />
+				<ATTRIBUTES CovA="291" Factor="3.713" />
+				<ATTRIBUTES CovA="292" Factor="3.729" />
+				<ATTRIBUTES CovA="293" Factor="3.744" />
+				<ATTRIBUTES CovA="294" Factor="3.759" />
+				<ATTRIBUTES CovA="295" Factor="3.774" />
+				<ATTRIBUTES CovA="296" Factor="3.789" />
+				<ATTRIBUTES CovA="297" Factor="3.804" />
+				<ATTRIBUTES CovA="298" Factor="3.820" />
+				<ATTRIBUTES CovA="299" Factor="3.835" />
+				<ATTRIBUTES CovA="300" Factor="3.850" />
+				<ATTRIBUTES CovA="301" Factor="3.882" />
+				<ATTRIBUTES CovA="302" Factor="3.914" />
+				<ATTRIBUTES CovA="303" Factor="3.946" />
+				<ATTRIBUTES CovA="304" Factor="3.978" />
+				<ATTRIBUTES CovA="305" Factor="4.010" />
+				<ATTRIBUTES CovA="306" Factor="4.042" />
+				<ATTRIBUTES CovA="307" Factor="4.075" />
+				<ATTRIBUTES CovA="308" Factor="4.107" />
+				<ATTRIBUTES CovA="309" Factor="4.139" />
+				<ATTRIBUTES CovA="310" Factor="4.171" />
+				<ATTRIBUTES CovA="311" Factor="4.203" />
+				<ATTRIBUTES CovA="312" Factor="4.235" />
+				<ATTRIBUTES CovA="313" Factor="4.267" />
+				<ATTRIBUTES CovA="314" Factor="4.299" />
+				<ATTRIBUTES CovA="315" Factor="4.331" />
+				<ATTRIBUTES CovA="316" Factor="4.363" />
+				<ATTRIBUTES CovA="317" Factor="4.395" />
+				<ATTRIBUTES CovA="318" Factor="4.427" />
+				<ATTRIBUTES CovA="319" Factor="4.460" />
+				<ATTRIBUTES CovA="320" Factor="4.492" />
+				<ATTRIBUTES CovA="321" Factor="4.524" />
+				<ATTRIBUTES CovA="322" Factor="4.556" />
+				<ATTRIBUTES CovA="323" Factor="4.588" />
+				<ATTRIBUTES CovA="324" Factor="4.620" />
+				<ATTRIBUTES CovA="325" Factor="4.652" />
+				<ATTRIBUTES CovA="326" Factor="4.667" />
+				<ATTRIBUTES CovA="327" Factor="4.682" />
+				<ATTRIBUTES CovA="328" Factor="4.697" />
+				<ATTRIBUTES CovA="329" Factor="4.712" />
+				<ATTRIBUTES CovA="330" Factor="4.727" />
+				<ATTRIBUTES CovA="331" Factor="4.742" />
+				<ATTRIBUTES CovA="332" Factor="4.757" />
+				<ATTRIBUTES CovA="333" Factor="4.772" />
+				<ATTRIBUTES CovA="334" Factor="4.787" />
+				<ATTRIBUTES CovA="335" Factor="4.802" />
+				<ATTRIBUTES CovA="336" Factor="4.817" />
+				<ATTRIBUTES CovA="337" Factor="4.832" />
+				<ATTRIBUTES CovA="338" Factor="4.847" />
+				<ATTRIBUTES CovA="339" Factor="4.862" />
+				<ATTRIBUTES CovA="340" Factor="4.877" />
+				<ATTRIBUTES CovA="341" Factor="4.892" />
+				<ATTRIBUTES CovA="342" Factor="4.907" />
+				<ATTRIBUTES CovA="343" Factor="4.922" />
+				<ATTRIBUTES CovA="344" Factor="4.937" />
+				<ATTRIBUTES CovA="345" Factor="4.952" />
+				<ATTRIBUTES CovA="346" Factor="4.967" />
+				<ATTRIBUTES CovA="347" Factor="4.982" />
+				<ATTRIBUTES CovA="348" Factor="4.997" />
+				<ATTRIBUTES CovA="349" Factor="5.012" />
+				<ATTRIBUTES CovA="350" Factor="5.027" />
+				<ATTRIBUTES CovA="351" Factor="5.042" />
+				<ATTRIBUTES CovA="352" Factor="5.057" />
+				<ATTRIBUTES CovA="353" Factor="5.072" />
+				<ATTRIBUTES CovA="354" Factor="5.087" />
+				<ATTRIBUTES CovA="355" Factor="5.102" />
+				<ATTRIBUTES CovA="356" Factor="5.117" />
+				<ATTRIBUTES CovA="357" Factor="5.132" />
+				<ATTRIBUTES CovA="358" Factor="5.147" />
+				<ATTRIBUTES CovA="359" Factor="5.162" />
+				<ATTRIBUTES CovA="360" Factor="5.177" />
+				<ATTRIBUTES CovA="361" Factor="5.192" />
+				<ATTRIBUTES CovA="362" Factor="5.207" />
+				<ATTRIBUTES CovA="363" Factor="5.222" />
+				<ATTRIBUTES CovA="364" Factor="5.237" />
+				<ATTRIBUTES CovA="365" Factor="5.252" />
+				<ATTRIBUTES CovA="366" Factor="5.267" />
+				<ATTRIBUTES CovA="367" Factor="5.282" />
+				<ATTRIBUTES CovA="368" Factor="5.297" />
+				<ATTRIBUTES CovA="369" Factor="5.312" />
+				<ATTRIBUTES CovA="370" Factor="5.327" />
+				<ATTRIBUTES CovA="371" Factor="5.342" />
+				<ATTRIBUTES CovA="372" Factor="5.357" />
+				<ATTRIBUTES CovA="373" Factor="5.372" />
+				<ATTRIBUTES CovA="374" Factor="5.387" />
+				<ATTRIBUTES CovA="375" Factor="5.402" />
+				<ATTRIBUTES CovA="376" Factor="5.417" />
+				<ATTRIBUTES CovA="377" Factor="5.432" />
+				<ATTRIBUTES CovA="378" Factor="5.447" />
+				<ATTRIBUTES CovA="379" Factor="5.462" />
+				<ATTRIBUTES CovA="380" Factor="5.477" />
+				<ATTRIBUTES CovA="381" Factor="5.492" />
+				<ATTRIBUTES CovA="382" Factor="5.507" />
+				<ATTRIBUTES CovA="383" Factor="5.522" />
+				<ATTRIBUTES CovA="384" Factor="5.537" />
+				<ATTRIBUTES CovA="385" Factor="5.552" />
+				<ATTRIBUTES CovA="386" Factor="5.567" />
+				<ATTRIBUTES CovA="387" Factor="5.582" />
+				<ATTRIBUTES CovA="388" Factor="5.597" />
+				<ATTRIBUTES CovA="389" Factor="5.612" />
+				<ATTRIBUTES CovA="390" Factor="5.627" />
+				<ATTRIBUTES CovA="391" Factor="5.684" />
+				<ATTRIBUTES CovA="392" Factor="5.742" />
+				<ATTRIBUTES CovA="393" Factor="5.799" />
+				<ATTRIBUTES CovA="394" Factor="5.856" />
+				<ATTRIBUTES CovA="395" Factor="5.913" />
+				<ATTRIBUTES CovA="396" Factor="5.971" />
+				<ATTRIBUTES CovA="397" Factor="6.028" />
+				<ATTRIBUTES CovA="398" Factor="6.085" />
+				<ATTRIBUTES CovA="399" Factor="6.143" />
+				<ATTRIBUTES CovA="400" Factor="6.200" />
+				<ATTRIBUTES CovA="401" Factor="6.217" />
+				<ATTRIBUTES CovA="402" Factor="6.234" />
+				<ATTRIBUTES CovA="403" Factor="6.250" />
+				<ATTRIBUTES CovA="404" Factor="6.267" />
+				<ATTRIBUTES CovA="405" Factor="6.284" />
+				<ATTRIBUTES CovA="406" Factor="6.301" />
+				<ATTRIBUTES CovA="407" Factor="6.317" />
+				<ATTRIBUTES CovA="408" Factor="6.334" />
+				<ATTRIBUTES CovA="409" Factor="6.351" />
+				<ATTRIBUTES CovA="410" Factor="6.368" />
+				<ATTRIBUTES CovA="411" Factor="6.384" />
+				<ATTRIBUTES CovA="412" Factor="6.401" />
+				<ATTRIBUTES CovA="413" Factor="6.418" />
+				<ATTRIBUTES CovA="414" Factor="6.435" />
+				<ATTRIBUTES CovA="415" Factor="6.451" />
+				<ATTRIBUTES CovA="416" Factor="6.468" />
+				<ATTRIBUTES CovA="417" Factor="6.485" />
+				<ATTRIBUTES CovA="418" Factor="6.502" />
+				<ATTRIBUTES CovA="419" Factor="6.518" />
+				<ATTRIBUTES CovA="420" Factor="6.535" />
+				<ATTRIBUTES CovA="421" Factor="6.552" />
+				<ATTRIBUTES CovA="422" Factor="6.569" />
+				<ATTRIBUTES CovA="423" Factor="6.585" />
+				<ATTRIBUTES CovA="424" Factor="6.602" />
+				<ATTRIBUTES CovA="425" Factor="6.619" />
+				<ATTRIBUTES CovA="426" Factor="6.636" />
+				<ATTRIBUTES CovA="427" Factor="6.652" />
+				<ATTRIBUTES CovA="428" Factor="6.669" />
+				<ATTRIBUTES CovA="429" Factor="6.686" />
+				<ATTRIBUTES CovA="430" Factor="6.703" />
+				<ATTRIBUTES CovA="431" Factor="6.719" />
+				<ATTRIBUTES CovA="432" Factor="6.736" />
+				<ATTRIBUTES CovA="433" Factor="6.753" />
+				<ATTRIBUTES CovA="434" Factor="6.770" />
+				<ATTRIBUTES CovA="435" Factor="6.786" />
+				<ATTRIBUTES CovA="436" Factor="6.803" />
+				<ATTRIBUTES CovA="437" Factor="6.820" />
+				<ATTRIBUTES CovA="438" Factor="6.837" />
+				<ATTRIBUTES CovA="439" Factor="6.853" />
+				<ATTRIBUTES CovA="440" Factor="6.870" />
+				<ATTRIBUTES CovA="441" Factor="6.887" />
+				<ATTRIBUTES CovA="442" Factor="6.904" />
+				<ATTRIBUTES CovA="443" Factor="6.920" />
+				<ATTRIBUTES CovA="444" Factor="6.937" />
+				<ATTRIBUTES CovA="445" Factor="6.954" />
+				<ATTRIBUTES CovA="446" Factor="6.971" />
+				<ATTRIBUTES CovA="447" Factor="6.987" />
+				<ATTRIBUTES CovA="448" Factor="7.004" />
+				<ATTRIBUTES CovA="449" Factor="7.021" />
+				<ATTRIBUTES CovA="450" Factor="7.038" />
+				<ATTRIBUTES CovA="451" Factor="7.054" />
+				<ATTRIBUTES CovA="452" Factor="7.071" />
+				<ATTRIBUTES CovA="453" Factor="7.088" />
+				<ATTRIBUTES CovA="454" Factor="7.105" />
+				<ATTRIBUTES CovA="455" Factor="7.121" />
+				<ATTRIBUTES CovA="456" Factor="7.138" />
+				<ATTRIBUTES CovA="457" Factor="7.155" />
+				<ATTRIBUTES CovA="458" Factor="7.172" />
+				<ATTRIBUTES CovA="459" Factor="7.188" />
+				<ATTRIBUTES CovA="460" Factor="7.205" />
+				<ATTRIBUTES CovA="461" Factor="7.222" />
+				<ATTRIBUTES CovA="462" Factor="7.239" />
+				<ATTRIBUTES CovA="463" Factor="7.255" />
+				<ATTRIBUTES CovA="464" Factor="7.272" />
+				<ATTRIBUTES CovA="465" Factor="7.289" />
+				<ATTRIBUTES CovA="466" Factor="7.306" />
+				<ATTRIBUTES CovA="467" Factor="7.322" />
+				<ATTRIBUTES CovA="468" Factor="7.339" />
+				<ATTRIBUTES CovA="469" Factor="7.356" />
+				<ATTRIBUTES CovA="470" Factor="7.373" />
+				<ATTRIBUTES CovA="471" Factor="7.389" />
+				<ATTRIBUTES CovA="472" Factor="7.406" />
+				<ATTRIBUTES CovA="473" Factor="7.423" />
+				<ATTRIBUTES CovA="474" Factor="7.440" />
+				<ATTRIBUTES CovA="475" Factor="7.456" />
+				<ATTRIBUTES CovA="476" Factor="7.473" />
+				<ATTRIBUTES CovA="477" Factor="7.490" />
+				<ATTRIBUTES CovA="478" Factor="7.507" />
+				<ATTRIBUTES CovA="479" Factor="7.523" />
+				<ATTRIBUTES CovA="480" Factor="7.540" />
+				<ATTRIBUTES CovA="481" Factor="7.557" />
+				<ATTRIBUTES CovA="482" Factor="7.574" />
+				<ATTRIBUTES CovA="483" Factor="7.590" />
+				<ATTRIBUTES CovA="484" Factor="7.607" />
+				<ATTRIBUTES CovA="485" Factor="7.624" />
+				<ATTRIBUTES CovA="486" Factor="7.641" />
+				<ATTRIBUTES CovA="487" Factor="7.657" />
+				<ATTRIBUTES CovA="488" Factor="7.674" />
+				<ATTRIBUTES CovA="489" Factor="7.691" />
+				<ATTRIBUTES CovA="490" Factor="7.708" />
+				<ATTRIBUTES CovA="491" Factor="7.724" />
+				<ATTRIBUTES CovA="492" Factor="7.741" />
+				<ATTRIBUTES CovA="493" Factor="7.758" />
+				<ATTRIBUTES CovA="494" Factor="7.775" />
+				<ATTRIBUTES CovA="495" Factor="7.791" />
+				<ATTRIBUTES CovA="496" Factor="7.808" />
+				<ATTRIBUTES CovA="497" Factor="7.825" />
+				<ATTRIBUTES CovA="498" Factor="7.842" />
+				<ATTRIBUTES CovA="499" Factor="7.858" />
+				<ATTRIBUTES CovA="500" Factor="7.875" />
+				<ATTRIBUTES CovA="ADDITIONAL" AMOUNT="1" Factor="0.0177" />
+			</NODE>
+			<NODE ID="COVERAGE2" NAME="Coverage-Group 2" GROUP="CG2" MAXVALUE="500">
+				<ATTRIBUTES CovA="10" Factor="0.872" />
+				<ATTRIBUTES CovA="11" Factor="0.873" />
+				<ATTRIBUTES CovA="12" Factor="0.874" />
+				<ATTRIBUTES CovA="13" Factor="0.875" />
+				<ATTRIBUTES CovA="14" Factor="0.876" />
+				<ATTRIBUTES CovA="15" Factor="0.877" />
+				<ATTRIBUTES CovA="16" Factor="0.878" />
+				<ATTRIBUTES CovA="17" Factor="0.879" />
+				<ATTRIBUTES CovA="18" Factor="0.880" />
+				<ATTRIBUTES CovA="19" Factor="0.881" />
+				<ATTRIBUTES CovA="20" Factor="0.882" />
+				<ATTRIBUTES CovA="21" Factor="0.883" />
+				<ATTRIBUTES CovA="22" Factor="0.884" />
+				<ATTRIBUTES CovA="23" Factor="0.885" />
+				<ATTRIBUTES CovA="24" Factor="0.886" />
+				<ATTRIBUTES CovA="25" Factor="0.887" />
+				<ATTRIBUTES CovA="26" Factor="0.900" />
+				<ATTRIBUTES CovA="27" Factor="0.912" />
+				<ATTRIBUTES CovA="28" Factor="0.924" />
+				<ATTRIBUTES CovA="29" Factor="0.936" />
+				<ATTRIBUTES CovA="30" Factor="0.949" />
+				<ATTRIBUTES CovA="31" Factor="0.954" />
+				<ATTRIBUTES CovA="32" Factor="0.959" />
+				<ATTRIBUTES CovA="33" Factor="0.964" />
+				<ATTRIBUTES CovA="34" Factor="0.969" />
+				<ATTRIBUTES CovA="35" Factor="0.974" />
+				<ATTRIBUTES CovA="36" Factor="0.979" />
+				<ATTRIBUTES CovA="37" Factor="0.984" />
+				<ATTRIBUTES CovA="38" Factor="0.989" />
+				<ATTRIBUTES CovA="39" Factor="0.995" />
+				<ATTRIBUTES CovA="40" Factor="1.000" />
+				<ATTRIBUTES CovA="41" Factor="1.006" />
+				<ATTRIBUTES CovA="42" Factor="1.011" />
+				<ATTRIBUTES CovA="43" Factor="1.017" />
+				<ATTRIBUTES CovA="44" Factor="1.022" />
+				<ATTRIBUTES CovA="45" Factor="1.028" />
+				<ATTRIBUTES CovA="46" Factor="1.033" />
+				<ATTRIBUTES CovA="47" Factor="1.039" />
+				<ATTRIBUTES CovA="48" Factor="1.044" />
+				<ATTRIBUTES CovA="49" Factor="1.050" />
+				<ATTRIBUTES CovA="50" Factor="1.055" />
+				<ATTRIBUTES CovA="51" Factor="1.060" />
+				<ATTRIBUTES CovA="52" Factor="1.064" />
+				<ATTRIBUTES CovA="53" Factor="1.069" />
+				<ATTRIBUTES CovA="54" Factor="1.073" />
+				<ATTRIBUTES CovA="55" Factor="1.078" />
+				<ATTRIBUTES CovA="56" Factor="1.082" />
+				<ATTRIBUTES CovA="57" Factor="1.087" />
+				<ATTRIBUTES CovA="58" Factor="1.091" />
+				<ATTRIBUTES CovA="59" Factor="1.095" />
+				<ATTRIBUTES CovA="60" Factor="1.100" />
+				<ATTRIBUTES CovA="61" Factor="1.110" />
+				<ATTRIBUTES CovA="62" Factor="1.120" />
+				<ATTRIBUTES CovA="63" Factor="1.130" />
+				<ATTRIBUTES CovA="64" Factor="1.140" />
+				<ATTRIBUTES CovA="65" Factor="1.150" />
+				<ATTRIBUTES CovA="66" Factor="1.160" />
+				<ATTRIBUTES CovA="67" Factor="1.170" />
+				<ATTRIBUTES CovA="68" Factor="1.180" />
+				<ATTRIBUTES CovA="69" Factor="1.190" />
+				<ATTRIBUTES CovA="70" Factor="1.200" />
+				<ATTRIBUTES CovA="71" Factor="1.213" />
+				<ATTRIBUTES CovA="72" Factor="1.225" />
+				<ATTRIBUTES CovA="73" Factor="1.238" />
+				<ATTRIBUTES CovA="74" Factor="1.250" />
+				<ATTRIBUTES CovA="75" Factor="1.263" />
+				<ATTRIBUTES CovA="76" Factor="1.275" />
+				<ATTRIBUTES CovA="77" Factor="1.288" />
+				<ATTRIBUTES CovA="78" Factor="1.300" />
+				<ATTRIBUTES CovA="79" Factor="1.313" />
+				<ATTRIBUTES CovA="80" Factor="1.325" />
+				<ATTRIBUTES CovA="81" Factor="1.338" />
+				<ATTRIBUTES CovA="82" Factor="1.350" />
+				<ATTRIBUTES CovA="83" Factor="1.363" />
+				<ATTRIBUTES CovA="84" Factor="1.375" />
+				<ATTRIBUTES CovA="85" Factor="1.388" />
+				<ATTRIBUTES CovA="86" Factor="1.400" />
+				<ATTRIBUTES CovA="87" Factor="1.413" />
+				<ATTRIBUTES CovA="88" Factor="1.425" />
+				<ATTRIBUTES CovA="89" Factor="1.438" />
+				<ATTRIBUTES CovA="90" Factor="1.450" />
+				<ATTRIBUTES CovA="91" Factor="1.453" />
+				<ATTRIBUTES CovA="92" Factor="1.455" />
+				<ATTRIBUTES CovA="93" Factor="1.458" />
+				<ATTRIBUTES CovA="94" Factor="1.460" />
+				<ATTRIBUTES CovA="95" Factor="1.463" />
+				<ATTRIBUTES CovA="96" Factor="1.465" />
+				<ATTRIBUTES CovA="97" Factor="1.468" />
+				<ATTRIBUTES CovA="98" Factor="1.470" />
+				<ATTRIBUTES CovA="99" Factor="1.473" />
+				<ATTRIBUTES CovA="100" Factor="1.475" />
+				<ATTRIBUTES CovA="101" Factor="1.488" />
+				<ATTRIBUTES CovA="102" Factor="1.500" />
+				<ATTRIBUTES CovA="103" Factor="1.513" />
+				<ATTRIBUTES CovA="104" Factor="1.525" />
+				<ATTRIBUTES CovA="105" Factor="1.538" />
+				<ATTRIBUTES CovA="106" Factor="1.550" />
+				<ATTRIBUTES CovA="107" Factor="1.563" />
+				<ATTRIBUTES CovA="108" Factor="1.575" />
+				<ATTRIBUTES CovA="109" Factor="1.588" />
+				<ATTRIBUTES CovA="110" Factor="1.600" />
+				<ATTRIBUTES CovA="111" Factor="1.610" />
+				<ATTRIBUTES CovA="112" Factor="1.619" />
+				<ATTRIBUTES CovA="113" Factor="1.629" />
+				<ATTRIBUTES CovA="114" Factor="1.638" />
+				<ATTRIBUTES CovA="115" Factor="1.648" />
+				<ATTRIBUTES CovA="116" Factor="1.657" />
+				<ATTRIBUTES CovA="117" Factor="1.667" />
+				<ATTRIBUTES CovA="118" Factor="1.676" />
+				<ATTRIBUTES CovA="119" Factor="1.686" />
+				<ATTRIBUTES CovA="120" Factor="1.695" />
+				<ATTRIBUTES CovA="121" Factor="1.710" />
+				<ATTRIBUTES CovA="122" Factor="1.724" />
+				<ATTRIBUTES CovA="123" Factor="1.739" />
+				<ATTRIBUTES CovA="124" Factor="1.753" />
+				<ATTRIBUTES CovA="125" Factor="1.768" />
+				<ATTRIBUTES CovA="126" Factor="1.775" />
+				<ATTRIBUTES CovA="127" Factor="1.781" />
+				<ATTRIBUTES CovA="128" Factor="1.788" />
+				<ATTRIBUTES CovA="129" Factor="1.795" />
+				<ATTRIBUTES CovA="130" Factor="1.801" />
+				<ATTRIBUTES CovA="131" Factor="1.808" />
+				<ATTRIBUTES CovA="132" Factor="1.815" />
+				<ATTRIBUTES CovA="133" Factor="1.821" />
+				<ATTRIBUTES CovA="134" Factor="1.828" />
+				<ATTRIBUTES CovA="135" Factor="1.835" />
+				<ATTRIBUTES CovA="136" Factor="1.841" />
+				<ATTRIBUTES CovA="137" Factor="1.848" />
+				<ATTRIBUTES CovA="138" Factor="1.855" />
+				<ATTRIBUTES CovA="139" Factor="1.862" />
+				<ATTRIBUTES CovA="140" Factor="1.868" />
+				<ATTRIBUTES CovA="141" Factor="1.875" />
+				<ATTRIBUTES CovA="142" Factor="1.882" />
+				<ATTRIBUTES CovA="143" Factor="1.888" />
+				<ATTRIBUTES CovA="144" Factor="1.895" />
+				<ATTRIBUTES CovA="145" Factor="1.902" />
+				<ATTRIBUTES CovA="146" Factor="1.908" />
+				<ATTRIBUTES CovA="147" Factor="1.915" />
+				<ATTRIBUTES CovA="148" Factor="1.922" />
+				<ATTRIBUTES CovA="149" Factor="1.928" />
+				<ATTRIBUTES CovA="150" Factor="1.935" />
+				<ATTRIBUTES CovA="151" Factor="1.949" />
+				<ATTRIBUTES CovA="152" Factor="1.964" />
+				<ATTRIBUTES CovA="153" Factor="1.978" />
+				<ATTRIBUTES CovA="154" Factor="1.993" />
+				<ATTRIBUTES CovA="155" Factor="2.007" />
+				<ATTRIBUTES CovA="156" Factor="2.022" />
+				<ATTRIBUTES CovA="157" Factor="2.036" />
+				<ATTRIBUTES CovA="158" Factor="2.051" />
+				<ATTRIBUTES CovA="159" Factor="2.065" />
+				<ATTRIBUTES CovA="160" Factor="2.080" />
+				<ATTRIBUTES CovA="161" Factor="2.094" />
+				<ATTRIBUTES CovA="162" Factor="2.109" />
+				<ATTRIBUTES CovA="163" Factor="2.123" />
+				<ATTRIBUTES CovA="164" Factor="2.138" />
+				<ATTRIBUTES CovA="165" Factor="2.152" />
+				<ATTRIBUTES CovA="166" Factor="2.167" />
+				<ATTRIBUTES CovA="167" Factor="2.181" />
+				<ATTRIBUTES CovA="168" Factor="2.196" />
+				<ATTRIBUTES CovA="169" Factor="2.210" />
+				<ATTRIBUTES CovA="170" Factor="2.225" />
+				<ATTRIBUTES CovA="171" Factor="2.239" />
+				<ATTRIBUTES CovA="172" Factor="2.254" />
+				<ATTRIBUTES CovA="173" Factor="2.268" />
+				<ATTRIBUTES CovA="174" Factor="2.283" />
+				<ATTRIBUTES CovA="175" Factor="2.297" />
+				<ATTRIBUTES CovA="176" Factor="2.317" />
+				<ATTRIBUTES CovA="177" Factor="2.338" />
+				<ATTRIBUTES CovA="178" Factor="2.358" />
+				<ATTRIBUTES CovA="179" Factor="2.378" />
+				<ATTRIBUTES CovA="180" Factor="2.399" />
+				<ATTRIBUTES CovA="181" Factor="2.419" />
+				<ATTRIBUTES CovA="182" Factor="2.439" />
+				<ATTRIBUTES CovA="183" Factor="2.460" />
+				<ATTRIBUTES CovA="184" Factor="2.480" />
+				<ATTRIBUTES CovA="185" Factor="2.500" />
+				<ATTRIBUTES CovA="186" Factor="2.521" />
+				<ATTRIBUTES CovA="187" Factor="2.541" />
+				<ATTRIBUTES CovA="188" Factor="2.561" />
+				<ATTRIBUTES CovA="189" Factor="2.581" />
+				<ATTRIBUTES CovA="190" Factor="2.602" />
+				<ATTRIBUTES CovA="191" Factor="2.622" />
+				<ATTRIBUTES CovA="192" Factor="2.642" />
+				<ATTRIBUTES CovA="193" Factor="2.663" />
+				<ATTRIBUTES CovA="194" Factor="2.683" />
+				<ATTRIBUTES CovA="195" Factor="2.703" />
+				<ATTRIBUTES CovA="196" Factor="2.724" />
+				<ATTRIBUTES CovA="197" Factor="2.744" />
+				<ATTRIBUTES CovA="198" Factor="2.764" />
+				<ATTRIBUTES CovA="199" Factor="2.785" />
+				<ATTRIBUTES CovA="200" Factor="2.805" />
+				<ATTRIBUTES CovA="201" Factor="2.821" />
+				<ATTRIBUTES CovA="202" Factor="2.836" />
+				<ATTRIBUTES CovA="203" Factor="2.852" />
+				<ATTRIBUTES CovA="204" Factor="2.867" />
+				<ATTRIBUTES CovA="205" Factor="2.883" />
+				<ATTRIBUTES CovA="206" Factor="2.899" />
+				<ATTRIBUTES CovA="207" Factor="2.914" />
+				<ATTRIBUTES CovA="208" Factor="2.930" />
+				<ATTRIBUTES CovA="209" Factor="2.945" />
+				<ATTRIBUTES CovA="210" Factor="2.961" />
+				<ATTRIBUTES CovA="211" Factor="2.977" />
+				<ATTRIBUTES CovA="212" Factor="2.992" />
+				<ATTRIBUTES CovA="213" Factor="3.008" />
+				<ATTRIBUTES CovA="214" Factor="3.023" />
+				<ATTRIBUTES CovA="215" Factor="3.039" />
+				<ATTRIBUTES CovA="216" Factor="3.055" />
+				<ATTRIBUTES CovA="217" Factor="3.070" />
+				<ATTRIBUTES CovA="218" Factor="3.086" />
+				<ATTRIBUTES CovA="219" Factor="3.101" />
+				<ATTRIBUTES CovA="220" Factor="3.117" />
+				<ATTRIBUTES CovA="221" Factor="3.133" />
+				<ATTRIBUTES CovA="222" Factor="3.148" />
+				<ATTRIBUTES CovA="223" Factor="3.164" />
+				<ATTRIBUTES CovA="224" Factor="3.179" />
+				<ATTRIBUTES CovA="225" Factor="3.195" />
+				<ATTRIBUTES CovA="226" Factor="3.210" />
+				<ATTRIBUTES CovA="227" Factor="3.225" />
+				<ATTRIBUTES CovA="228" Factor="3.241" />
+				<ATTRIBUTES CovA="229" Factor="3.256" />
+				<ATTRIBUTES CovA="230" Factor="3.271" />
+				<ATTRIBUTES CovA="231" Factor="3.286" />
+				<ATTRIBUTES CovA="232" Factor="3.301" />
+				<ATTRIBUTES CovA="233" Factor="3.317" />
+				<ATTRIBUTES CovA="234" Factor="3.332" />
+				<ATTRIBUTES CovA="235" Factor="3.347" />
+				<ATTRIBUTES CovA="236" Factor="3.362" />
+				<ATTRIBUTES CovA="237" Factor="3.377" />
+				<ATTRIBUTES CovA="238" Factor="3.393" />
+				<ATTRIBUTES CovA="239" Factor="3.408" />
+				<ATTRIBUTES CovA="240" Factor="3.423" />
+				<ATTRIBUTES CovA="241" Factor="3.438" />
+				<ATTRIBUTES CovA="242" Factor="3.453" />
+				<ATTRIBUTES CovA="243" Factor="3.469" />
+				<ATTRIBUTES CovA="244" Factor="3.484" />
+				<ATTRIBUTES CovA="245" Factor="3.499" />
+				<ATTRIBUTES CovA="246" Factor="3.514" />
+				<ATTRIBUTES CovA="247" Factor="3.529" />
+				<ATTRIBUTES CovA="248" Factor="3.545" />
+				<ATTRIBUTES CovA="249" Factor="3.560" />
+				<ATTRIBUTES CovA="250" Factor="3.575" />
+				<ATTRIBUTES CovA="251" Factor="3.592" />
+				<ATTRIBUTES CovA="252" Factor="3.609" />
+				<ATTRIBUTES CovA="253" Factor="3.625" />
+				<ATTRIBUTES CovA="254" Factor="3.642" />
+				<ATTRIBUTES CovA="255" Factor="3.659" />
+				<ATTRIBUTES CovA="256" Factor="3.676" />
+				<ATTRIBUTES CovA="257" Factor="3.693" />
+				<ATTRIBUTES CovA="258" Factor="3.709" />
+				<ATTRIBUTES CovA="259" Factor="3.726" />
+				<ATTRIBUTES CovA="260" Factor="3.743" />
+				<ATTRIBUTES CovA="261" Factor="3.760" />
+				<ATTRIBUTES CovA="262" Factor="3.777" />
+				<ATTRIBUTES CovA="263" Factor="3.793" />
+				<ATTRIBUTES CovA="264" Factor="3.810" />
+				<ATTRIBUTES CovA="265" Factor="3.827" />
+				<ATTRIBUTES CovA="266" Factor="3.844" />
+				<ATTRIBUTES CovA="267" Factor="3.861" />
+				<ATTRIBUTES CovA="268" Factor="3.877" />
+				<ATTRIBUTES CovA="269" Factor="3.894" />
+				<ATTRIBUTES CovA="270" Factor="3.911" />
+				<ATTRIBUTES CovA="271" Factor="3.928" />
+				<ATTRIBUTES CovA="272" Factor="3.945" />
+				<ATTRIBUTES CovA="273" Factor="3.961" />
+				<ATTRIBUTES CovA="274" Factor="3.978" />
+				<ATTRIBUTES CovA="275" Factor="3.995" />
+				<ATTRIBUTES CovA="276" Factor="4.012" />
+				<ATTRIBUTES CovA="277" Factor="4.029" />
+				<ATTRIBUTES CovA="278" Factor="4.045" />
+				<ATTRIBUTES CovA="279" Factor="4.062" />
+				<ATTRIBUTES CovA="280" Factor="4.079" />
+				<ATTRIBUTES CovA="281" Factor="4.096" />
+				<ATTRIBUTES CovA="282" Factor="4.113" />
+				<ATTRIBUTES CovA="283" Factor="4.129" />
+				<ATTRIBUTES CovA="284" Factor="4.146" />
+				<ATTRIBUTES CovA="285" Factor="4.163" />
+				<ATTRIBUTES CovA="286" Factor="4.180" />
+				<ATTRIBUTES CovA="287" Factor="4.197" />
+				<ATTRIBUTES CovA="288" Factor="4.213" />
+				<ATTRIBUTES CovA="289" Factor="4.230" />
+				<ATTRIBUTES CovA="290" Factor="4.247" />
+				<ATTRIBUTES CovA="291" Factor="4.264" />
+				<ATTRIBUTES CovA="292" Factor="4.281" />
+				<ATTRIBUTES CovA="293" Factor="4.297" />
+				<ATTRIBUTES CovA="294" Factor="4.314" />
+				<ATTRIBUTES CovA="295" Factor="4.331" />
+				<ATTRIBUTES CovA="296" Factor="4.348" />
+				<ATTRIBUTES CovA="297" Factor="4.365" />
+				<ATTRIBUTES CovA="298" Factor="4.381" />
+				<ATTRIBUTES CovA="299" Factor="4.398" />
+				<ATTRIBUTES CovA="300" Factor="4.415" />
+				<ATTRIBUTES CovA="301" Factor="4.446" />
+				<ATTRIBUTES CovA="302" Factor="4.477" />
+				<ATTRIBUTES CovA="303" Factor="4.509" />
+				<ATTRIBUTES CovA="304" Factor="4.540" />
+				<ATTRIBUTES CovA="305" Factor="4.571" />
+				<ATTRIBUTES CovA="306" Factor="4.602" />
+				<ATTRIBUTES CovA="307" Factor="4.633" />
+				<ATTRIBUTES CovA="308" Factor="4.665" />
+				<ATTRIBUTES CovA="309" Factor="4.696" />
+				<ATTRIBUTES CovA="310" Factor="4.727" />
+				<ATTRIBUTES CovA="311" Factor="4.758" />
+				<ATTRIBUTES CovA="312" Factor="4.789" />
+				<ATTRIBUTES CovA="313" Factor="4.821" />
+				<ATTRIBUTES CovA="314" Factor="4.852" />
+				<ATTRIBUTES CovA="315" Factor="4.883" />
+				<ATTRIBUTES CovA="316" Factor="4.914" />
+				<ATTRIBUTES CovA="317" Factor="4.945" />
+				<ATTRIBUTES CovA="318" Factor="4.977" />
+				<ATTRIBUTES CovA="319" Factor="5.008" />
+				<ATTRIBUTES CovA="320" Factor="5.039" />
+				<ATTRIBUTES CovA="321" Factor="5.070" />
+				<ATTRIBUTES CovA="322" Factor="5.101" />
+				<ATTRIBUTES CovA="323" Factor="5.133" />
+				<ATTRIBUTES CovA="324" Factor="5.164" />
+				<ATTRIBUTES CovA="325" Factor="5.195" />
+				<ATTRIBUTES CovA="326" Factor="5.213" />
+				<ATTRIBUTES CovA="327" Factor="5.231" />
+				<ATTRIBUTES CovA="328" Factor="5.249" />
+				<ATTRIBUTES CovA="329" Factor="5.267" />
+				<ATTRIBUTES CovA="330" Factor="5.285" />
+				<ATTRIBUTES CovA="331" Factor="5.303" />
+				<ATTRIBUTES CovA="332" Factor="5.321" />
+				<ATTRIBUTES CovA="333" Factor="5.339" />
+				<ATTRIBUTES CovA="334" Factor="5.357" />
+				<ATTRIBUTES CovA="335" Factor="5.375" />
+				<ATTRIBUTES CovA="336" Factor="5.393" />
+				<ATTRIBUTES CovA="337" Factor="5.411" />
+				<ATTRIBUTES CovA="338" Factor="5.429" />
+				<ATTRIBUTES CovA="339" Factor="5.447" />
+				<ATTRIBUTES CovA="340" Factor="5.465" />
+				<ATTRIBUTES CovA="341" Factor="5.483" />
+				<ATTRIBUTES CovA="342" Factor="5.501" />
+				<ATTRIBUTES CovA="343" Factor="5.519" />
+				<ATTRIBUTES CovA="344" Factor="5.537" />
+				<ATTRIBUTES CovA="345" Factor="5.555" />
+				<ATTRIBUTES CovA="346" Factor="5.573" />
+				<ATTRIBUTES CovA="347" Factor="5.591" />
+				<ATTRIBUTES CovA="348" Factor="5.609" />
+				<ATTRIBUTES CovA="349" Factor="5.627" />
+				<ATTRIBUTES CovA="350" Factor="5.645" />
+				<ATTRIBUTES CovA="351" Factor="5.663" />
+				<ATTRIBUTES CovA="352" Factor="5.681" />
+				<ATTRIBUTES CovA="353" Factor="5.699" />
+				<ATTRIBUTES CovA="354" Factor="5.717" />
+				<ATTRIBUTES CovA="355" Factor="5.735" />
+				<ATTRIBUTES CovA="356" Factor="5.753" />
+				<ATTRIBUTES CovA="357" Factor="5.771" />
+				<ATTRIBUTES CovA="358" Factor="5.789" />
+				<ATTRIBUTES CovA="359" Factor="5.807" />
+				<ATTRIBUTES CovA="360" Factor="5.825" />
+				<ATTRIBUTES CovA="361" Factor="5.843" />
+				<ATTRIBUTES CovA="362" Factor="5.861" />
+				<ATTRIBUTES CovA="363" Factor="5.879" />
+				<ATTRIBUTES CovA="364" Factor="5.897" />
+				<ATTRIBUTES CovA="365" Factor="5.915" />
+				<ATTRIBUTES CovA="366" Factor="5.933" />
+				<ATTRIBUTES CovA="367" Factor="5.951" />
+				<ATTRIBUTES CovA="368" Factor="5.969" />
+				<ATTRIBUTES CovA="369" Factor="5.987" />
+				<ATTRIBUTES CovA="370" Factor="6.005" />
+				<ATTRIBUTES CovA="371" Factor="6.023" />
+				<ATTRIBUTES CovA="372" Factor="6.041" />
+				<ATTRIBUTES CovA="373" Factor="6.059" />
+				<ATTRIBUTES CovA="374" Factor="6.077" />
+				<ATTRIBUTES CovA="375" Factor="6.095" />
+				<ATTRIBUTES CovA="376" Factor="6.113" />
+				<ATTRIBUTES CovA="377" Factor="6.131" />
+				<ATTRIBUTES CovA="378" Factor="6.149" />
+				<ATTRIBUTES CovA="379" Factor="6.167" />
+				<ATTRIBUTES CovA="380" Factor="6.185" />
+				<ATTRIBUTES CovA="381" Factor="6.203" />
+				<ATTRIBUTES CovA="382" Factor="6.221" />
+				<ATTRIBUTES CovA="383" Factor="6.239" />
+				<ATTRIBUTES CovA="384" Factor="6.257" />
+				<ATTRIBUTES CovA="385" Factor="6.275" />
+				<ATTRIBUTES CovA="386" Factor="6.293" />
+				<ATTRIBUTES CovA="387" Factor="6.311" />
+				<ATTRIBUTES CovA="388" Factor="6.329" />
+				<ATTRIBUTES CovA="389" Factor="6.347" />
+				<ATTRIBUTES CovA="390" Factor="6.365" />
+				<ATTRIBUTES CovA="391" Factor="3.425" />
+				<ATTRIBUTES CovA="392" Factor="3.484" />
+				<ATTRIBUTES CovA="393" Factor="6.544" />
+				<ATTRIBUTES CovA="394" Factor="6.603" />
+				<ATTRIBUTES CovA="395" Factor="6.663" />
+				<ATTRIBUTES CovA="396" Factor="6.722" />
+				<ATTRIBUTES CovA="397" Factor="6.782" />
+				<ATTRIBUTES CovA="398" Factor="6.841" />
+				<ATTRIBUTES CovA="399" Factor="6.900" />
+				<ATTRIBUTES CovA="400" Factor="6.960" />
+				<ATTRIBUTES CovA="401" Factor="6.680" />
+				<ATTRIBUTES CovA="402" Factor="7.001" />
+				<ATTRIBUTES CovA="403" Factor="7.021" />
+				<ATTRIBUTES CovA="404" Factor="7.042" />
+				<ATTRIBUTES CovA="405" Factor="7.062" />
+				<ATTRIBUTES CovA="406" Factor="7.082" />
+				<ATTRIBUTES CovA="407" Factor="7.103" />
+				<ATTRIBUTES CovA="408" Factor="7.123" />
+				<ATTRIBUTES CovA="409" Factor="7.144" />
+				<ATTRIBUTES CovA="410" Factor="7.164" />
+				<ATTRIBUTES CovA="411" Factor="7.184" />
+				<ATTRIBUTES CovA="412" Factor="7.205" />
+				<ATTRIBUTES CovA="413" Factor="7.225" />
+				<ATTRIBUTES CovA="414" Factor="7.246" />
+				<ATTRIBUTES CovA="415" Factor="7.266" />
+				<ATTRIBUTES CovA="416" Factor="7.286" />
+				<ATTRIBUTES CovA="417" Factor="7.307" />
+				<ATTRIBUTES CovA="418" Factor="7.327" />
+				<ATTRIBUTES CovA="419" Factor="7.348" />
+				<ATTRIBUTES CovA="420" Factor="7.368" />
+				<ATTRIBUTES CovA="421" Factor="7.388" />
+				<ATTRIBUTES CovA="422" Factor="7.409" />
+				<ATTRIBUTES CovA="423" Factor="7.429" />
+				<ATTRIBUTES CovA="424" Factor="7.450" />
+				<ATTRIBUTES CovA="425" Factor="7.470" />
+				<ATTRIBUTES CovA="426" Factor="7.490" />
+				<ATTRIBUTES CovA="427" Factor="7.511" />
+				<ATTRIBUTES CovA="428" Factor="7.531" />
+				<ATTRIBUTES CovA="429" Factor="7.552" />
+				<ATTRIBUTES CovA="430" Factor="7.572" />
+				<ATTRIBUTES CovA="431" Factor="7.592" />
+				<ATTRIBUTES CovA="432" Factor="7.613" />
+				<ATTRIBUTES CovA="433" Factor="7.633" />
+				<ATTRIBUTES CovA="434" Factor="7.654" />
+				<ATTRIBUTES CovA="435" Factor="7.674" />
+				<ATTRIBUTES CovA="436" Factor="7.694" />
+				<ATTRIBUTES CovA="437" Factor="7.715" />
+				<ATTRIBUTES CovA="438" Factor="7.735" />
+				<ATTRIBUTES CovA="439" Factor="7.756" />
+				<ATTRIBUTES CovA="440" Factor="7.776" />
+				<ATTRIBUTES CovA="441" Factor="7.796" />
+				<ATTRIBUTES CovA="442" Factor="7.817" />
+				<ATTRIBUTES CovA="443" Factor="7.837" />
+				<ATTRIBUTES CovA="444" Factor="7.858" />
+				<ATTRIBUTES CovA="445" Factor="7.878" />
+				<ATTRIBUTES CovA="446" Factor="7.898" />
+				<ATTRIBUTES CovA="447" Factor="7.919" />
+				<ATTRIBUTES CovA="448" Factor="7.939" />
+				<ATTRIBUTES CovA="449" Factor="7.960" />
+				<ATTRIBUTES CovA="450" Factor="7.980" />
+				<ATTRIBUTES CovA="451" Factor="8.000" />
+				<ATTRIBUTES CovA="452" Factor="8.021" />
+				<ATTRIBUTES CovA="453" Factor="8.041" />
+				<ATTRIBUTES CovA="454" Factor="8.062" />
+				<ATTRIBUTES CovA="455" Factor="8.082" />
+				<ATTRIBUTES CovA="456" Factor="8.102" />
+				<ATTRIBUTES CovA="457" Factor="8.123" />
+				<ATTRIBUTES CovA="458" Factor="8.143" />
+				<ATTRIBUTES CovA="459" Factor="8.164" />
+				<ATTRIBUTES CovA="460" Factor="8.184" />
+				<ATTRIBUTES CovA="461" Factor="8.204" />
+				<ATTRIBUTES CovA="462" Factor="8.225" />
+				<ATTRIBUTES CovA="463" Factor="8.245" />
+				<ATTRIBUTES CovA="464" Factor="8.266" />
+				<ATTRIBUTES CovA="465" Factor="8.286" />
+				<ATTRIBUTES CovA="466" Factor="8.306" />
+				<ATTRIBUTES CovA="467" Factor="8.327" />
+				<ATTRIBUTES CovA="468" Factor="8.347" />
+				<ATTRIBUTES CovA="469" Factor="8.368" />
+				<ATTRIBUTES CovA="470" Factor="8.388" />
+				<ATTRIBUTES CovA="471" Factor="8.408" />
+				<ATTRIBUTES CovA="472" Factor="8.429" />
+				<ATTRIBUTES CovA="473" Factor="8.449" />
+				<ATTRIBUTES CovA="474" Factor="8.470" />
+				<ATTRIBUTES CovA="475" Factor="8.490" />
+				<ATTRIBUTES CovA="476" Factor="8.510" />
+				<ATTRIBUTES CovA="477" Factor="8.531" />
+				<ATTRIBUTES CovA="478" Factor="8.551" />
+				<ATTRIBUTES CovA="479" Factor="8.572" />
+				<ATTRIBUTES CovA="480" Factor="8.592" />
+				<ATTRIBUTES CovA="481" Factor="8.612" />
+				<ATTRIBUTES CovA="482" Factor="8.633" />
+				<ATTRIBUTES CovA="483" Factor="8.653" />
+				<ATTRIBUTES CovA="484" Factor="8.674" />
+				<ATTRIBUTES CovA="485" Factor="8.694" />
+				<ATTRIBUTES CovA="486" Factor="8.714" />
+				<ATTRIBUTES CovA="487" Factor="8.735" />
+				<ATTRIBUTES CovA="488" Factor="8.755" />
+				<ATTRIBUTES CovA="489" Factor="8.776" />
+				<ATTRIBUTES CovA="490" Factor="8.796" />
+				<ATTRIBUTES CovA="491" Factor="8.816" />
+				<ATTRIBUTES CovA="492" Factor="8.837" />
+				<ATTRIBUTES CovA="493" Factor="8.857" />
+				<ATTRIBUTES CovA="494" Factor="8.878" />
+				<ATTRIBUTES CovA="495" Factor="8.898" />
+				<ATTRIBUTES CovA="496" Factor="8.918" />
+				<ATTRIBUTES CovA="497" Factor="8.939" />
+				<ATTRIBUTES CovA="498" Factor="8.959" />
+				<ATTRIBUTES CovA="499" Factor="8.980" />
+				<ATTRIBUTES CovA="500" Factor="9.000" />
+				<ATTRIBUTES CovA="ADDITIONAL" AMOUNT="1" Factor="0.0212" />
+			</NODE>
+			<NODE ID="COVERAGE3" NAME="Coverage-Group 3" GROUP="CG3" MAXVALUE="100">
+				<ATTRIBUTES CovC="10" Factor="1.000" />
+				<ATTRIBUTES CovC="11" Factor="1.054" />
+				<ATTRIBUTES CovC="12" Factor="1.100" />
+				<ATTRIBUTES CovC="13" Factor="1.136" />
+				<ATTRIBUTES CovC="14" Factor="1.205" />
+				<ATTRIBUTES CovC="15" Factor="1.238" />
+				<ATTRIBUTES CovC="16" Factor="1.269" />
+				<ATTRIBUTES CovC="17" Factor="1.298" />
+				<ATTRIBUTES CovC="18" Factor="1.346" />
+				<ATTRIBUTES CovC="19" Factor="1.394" />
+				<ATTRIBUTES CovC="20" Factor="1.442" />
+				<ATTRIBUTES CovC="21" Factor="1.490" />
+				<ATTRIBUTES CovC="22" Factor="1.538" />
+				<ATTRIBUTES CovC="23" Factor="1.586" />
+				<ATTRIBUTES CovC="24" Factor="1.634" />
+				<ATTRIBUTES CovC="25" Factor="1.682" />
+				<ATTRIBUTES CovC="26" Factor="1.730" />
+				<ATTRIBUTES CovC="27" Factor="1.778" />
+				<ATTRIBUTES CovC="28" Factor="1.826" />
+				<ATTRIBUTES CovC="29" Factor="1.874" />
+				<ATTRIBUTES CovC="30" Factor="1.922" />
+				<ATTRIBUTES CovC="31" Factor="1.970" />
+				<ATTRIBUTES CovC="32" Factor="2.018" />
+				<ATTRIBUTES CovC="33" Factor="2.066" />
+				<ATTRIBUTES CovC="34" Factor="2.114" />
+				<ATTRIBUTES CovC="35" Factor="2.162" />
+				<ATTRIBUTES CovC="36" Factor="2.210" />
+				<ATTRIBUTES CovC="37" Factor="2.258" />
+				<ATTRIBUTES CovC="38" Factor="2.306" />
+				<ATTRIBUTES CovC="39" Factor="2.354" />
+				<ATTRIBUTES CovC="40" Factor="2.402" />
+				<ATTRIBUTES CovC="41" Factor="2.450" />
+				<ATTRIBUTES CovC="42" Factor="2.498" />
+				<ATTRIBUTES CovC="43" Factor="2.546" />
+				<ATTRIBUTES CovC="44" Factor="2.594" />
+				<ATTRIBUTES CovC="45" Factor="2.642" />
+				<ATTRIBUTES CovC="46" Factor="2.690" />
+				<ATTRIBUTES CovC="47" Factor="2.738" />
+				<ATTRIBUTES CovC="48" Factor="2.786" />
+				<ATTRIBUTES CovC="49" Factor="2.834" />
+				<ATTRIBUTES CovC="50" Factor="2.882" />
+				<ATTRIBUTES CovC="51" Factor="2.930" />
+				<ATTRIBUTES CovC="52" Factor="2.978" />
+				<ATTRIBUTES CovC="53" Factor="3.026" />
+				<ATTRIBUTES CovC="54" Factor="3.074" />
+				<ATTRIBUTES CovC="55" Factor="3.112" />
+				<ATTRIBUTES CovC="56" Factor="3.170" />
+				<ATTRIBUTES CovC="57" Factor="3.218" />
+				<ATTRIBUTES CovC="58" Factor="3.266" />
+				<ATTRIBUTES CovC="59" Factor="3.314" />
+				<ATTRIBUTES CovC="60" Factor="3.362" />
+				<ATTRIBUTES CovC="61" Factor="3.410" />
+				<ATTRIBUTES CovC="62" Factor="3.458" />
+				<ATTRIBUTES CovC="63" Factor="3.506" />
+				<ATTRIBUTES CovC="64" Factor="3.554" />
+				<ATTRIBUTES CovC="65" Factor="3.602" />
+				<ATTRIBUTES CovC="66" Factor="3.650" />
+				<ATTRIBUTES CovC="67" Factor="3.698" />
+				<ATTRIBUTES CovC="68" Factor="3.746" />
+				<ATTRIBUTES CovC="69" Factor="3.794" />
+				<ATTRIBUTES CovC="70" Factor="3.842" />
+				<ATTRIBUTES CovC="71" Factor="3.890" />
+				<ATTRIBUTES CovC="72" Factor="3.938" />
+				<ATTRIBUTES CovC="73" Factor="3.986" />
+				<ATTRIBUTES CovC="74" Factor="4.034" />
+				<ATTRIBUTES CovC="75" Factor="4.082" />
+				<ATTRIBUTES CovC="76" Factor="4.130" />
+				<ATTRIBUTES CovC="77" Factor="4.178" />
+				<ATTRIBUTES CovC="78" Factor="4.226" />
+				<ATTRIBUTES CovC="79" Factor="4.274" />
+				<ATTRIBUTES CovC="80" Factor="4.322" />
+				<ATTRIBUTES CovC="81" Factor="4.370" />
+				<ATTRIBUTES CovC="82" Factor="4.418" />
+				<ATTRIBUTES CovC="83" Factor="4.466" />
+				<ATTRIBUTES CovC="84" Factor="4.514" />
+				<ATTRIBUTES CovC="85" Factor="4.562" />
+				<ATTRIBUTES CovC="86" Factor="4.610" />
+				<ATTRIBUTES CovC="87" Factor="4.658" />
+				<ATTRIBUTES CovC="88" Factor="4.706" />
+				<ATTRIBUTES CovC="89" Factor="4.754" />
+				<ATTRIBUTES CovC="90" Factor="4.802" />
+				<ATTRIBUTES CovC="91" Factor="4.850" />
+				<ATTRIBUTES CovC="92" Factor="4.898" />
+				<ATTRIBUTES CovC="93" Factor="4.946" />
+				<ATTRIBUTES CovC="94" Factor="4.994" />
+				<ATTRIBUTES CovC="95" Factor="5.042" />
+				<ATTRIBUTES CovC="96" Factor="5.090" />
+				<ATTRIBUTES CovC="97" Factor="5.138" />
+				<ATTRIBUTES CovC="98" Factor="5.186" />
+				<ATTRIBUTES CovC="99" Factor="5.234" />
+				<ATTRIBUTES CovC="100" Factor="5.282" />
+				<ATTRIBUTES CovC="ADDITIONAL" AMOUNT="1" Factor="0.048" />
+			</NODE>
+			<NODE ID="COVERAGE4" NAME="Coverage-Group 4 For HO-6" GROUP="CG4" MAXVALUE="200">
+				<ATTRIBUTES CovC="15" Factor="0.872" />
+				<ATTRIBUTES CovC="16" Factor="0.888" />
+				<ATTRIBUTES CovC="17" Factor="0.904" />
+				<ATTRIBUTES CovC="18" Factor="0.921" />
+				<ATTRIBUTES CovC="19" Factor="0.937" />
+				<ATTRIBUTES CovC="20" Factor="0.953" />
+				<ATTRIBUTES CovC="21" Factor="0.962" />
+				<ATTRIBUTES CovC="22" Factor="0.972" />
+				<ATTRIBUTES CovC="23" Factor="0.981" />
+				<ATTRIBUTES CovC="24" Factor="0.991" />
+				<ATTRIBUTES CovC="25" Factor="1.000" />
+				<ATTRIBUTES CovC="26" Factor="1.012" />
+				<ATTRIBUTES CovC="27" Factor="1.023" />
+				<ATTRIBUTES CovC="28" Factor="1.035" />
+				<ATTRIBUTES CovC="29" Factor="1.046" />
+				<ATTRIBUTES CovC="30" Factor="1.058" />
+				<ATTRIBUTES CovC="31" Factor="1.077" />
+				<ATTRIBUTES CovC="32" Factor="1.095" />
+				<ATTRIBUTES CovC="33" Factor="1.114" />
+				<ATTRIBUTES CovC="34" Factor="1.132" />
+				<ATTRIBUTES CovC="35" Factor="1.151" />
+				<ATTRIBUTES CovC="36" Factor="1.163" />
+				<ATTRIBUTES CovC="37" Factor="1.174" />
+				<ATTRIBUTES CovC="38" Factor="1.186" />
+				<ATTRIBUTES CovC="39" Factor="1.197" />
+				<ATTRIBUTES CovC="40" Factor="1.209" />
+				<ATTRIBUTES CovC="41" Factor="1.232" />
+				<ATTRIBUTES CovC="42" Factor="1.256" />
+				<ATTRIBUTES CovC="43" Factor="1.279" />
+				<ATTRIBUTES CovC="44" Factor="1.303" />
+				<ATTRIBUTES CovC="45" Factor="1.326" />
+				<ATTRIBUTES CovC="46" Factor="1.349" />
+				<ATTRIBUTES CovC="47" Factor="1.372" />
+				<ATTRIBUTES CovC="48" Factor="1.396" />
+				<ATTRIBUTES CovC="49" Factor="1.419" />
+				<ATTRIBUTES CovC="50" Factor="1.442" />
+				<ATTRIBUTES CovC="51" Factor="1.465" />
+				<ATTRIBUTES CovC="52" Factor="1.488" />
+				<ATTRIBUTES CovC="53" Factor="1.512" />
+				<ATTRIBUTES CovC="54" Factor="1.535" />
+				<ATTRIBUTES CovC="55" Factor="1.558" />
+				<ATTRIBUTES CovC="56" Factor="1.581" />
+				<ATTRIBUTES CovC="57" Factor="1.604" />
+				<ATTRIBUTES CovC="58" Factor="1.628" />
+				<ATTRIBUTES CovC="59" Factor="1.651" />
+				<ATTRIBUTES CovC="60" Factor="1.674" />
+				<ATTRIBUTES CovC="61" Factor="1.697" />
+				<ATTRIBUTES CovC="62" Factor="1.721" />
+				<ATTRIBUTES CovC="63" Factor="1.744" />
+				<ATTRIBUTES CovC="64" Factor="1.768" />
+				<ATTRIBUTES CovC="65" Factor="1.791" />
+				<ATTRIBUTES CovC="66" Factor="1.814" />
+				<ATTRIBUTES CovC="67" Factor="1.837" />
+				<ATTRIBUTES CovC="68" Factor="1.861" />
+				<ATTRIBUTES CovC="69" Factor="1.884" />
+				<ATTRIBUTES CovC="70" Factor="1.907" />
+				<ATTRIBUTES CovC="71" Factor="1.930" />
+				<ATTRIBUTES CovC="72" Factor="1.953" />
+				<ATTRIBUTES CovC="73" Factor="1.977" />
+				<ATTRIBUTES CovC="74" Factor="2.200" />
+				<ATTRIBUTES CovC="75" Factor="2.023" />
+				<ATTRIBUTES CovC="76" Factor="2.046" />
+				<ATTRIBUTES CovC="77" Factor="2.070" />
+				<ATTRIBUTES CovC="78" Factor="2.093" />
+				<ATTRIBUTES CovC="79" Factor="2.117" />
+				<ATTRIBUTES CovC="80" Factor="2.140" />
+				<ATTRIBUTES CovC="81" Factor="2.186" />
+				<ATTRIBUTES CovC="82" Factor="2.233" />
+				<ATTRIBUTES CovC="83" Factor="2.279" />
+				<ATTRIBUTES CovC="84" Factor="2.326" />
+				<ATTRIBUTES CovC="85" Factor="2.372" />
+				<ATTRIBUTES CovC="86" Factor="2.402" />
+				<ATTRIBUTES CovC="87" Factor="2.432" />
+				<ATTRIBUTES CovC="88" Factor="2.463" />
+				<ATTRIBUTES CovC="89" Factor="2.493" />
+				<ATTRIBUTES CovC="90" Factor="2.523" />
+				<ATTRIBUTES CovC="91" Factor="2.558" />
+				<ATTRIBUTES CovC="92" Factor="2.593" />
+				<ATTRIBUTES CovC="93" Factor="2.628" />
+				<ATTRIBUTES CovC="94" Factor="2.663" />
+				<ATTRIBUTES CovC="95" Factor="2.698" />
+				<ATTRIBUTES CovC="96" Factor="2.744" />
+				<ATTRIBUTES CovC="97" Factor="2.791" />
+				<ATTRIBUTES CovC="98" Factor="2.837" />
+				<ATTRIBUTES CovC="99" Factor="2.884" />
+				<ATTRIBUTES CovC="100" Factor="2.930" />
+				<ATTRIBUTES CovC="101" Factor="2.970" />
+				<ATTRIBUTES CovC="102" Factor="3.010" />
+				<ATTRIBUTES CovC="103" Factor="3.050" />
+				<ATTRIBUTES CovC="104" Factor="3.090" />
+				<ATTRIBUTES CovC="105" Factor="3.130" />
+				<ATTRIBUTES CovC="106" Factor="3.170" />
+				<ATTRIBUTES CovC="107" Factor="3.210" />
+				<ATTRIBUTES CovC="108" Factor="3.250" />
+				<ATTRIBUTES CovC="109" Factor="3.290" />
+				<ATTRIBUTES CovC="110" Factor="3.330" />
+				<ATTRIBUTES CovC="111" Factor="3.370" />
+				<ATTRIBUTES CovC="112" Factor="3.410" />
+				<ATTRIBUTES CovC="113" Factor="3.450" />
+				<ATTRIBUTES CovC="114" Factor="3.490" />
+				<ATTRIBUTES CovC="115" Factor="3.530" />
+				<ATTRIBUTES CovC="116" Factor="3.570" />
+				<ATTRIBUTES CovC="117" Factor="3.610" />
+				<ATTRIBUTES CovC="118" Factor="3.650" />
+				<ATTRIBUTES CovC="119" Factor="3.690" />
+				<ATTRIBUTES CovC="120" Factor="3.730" />
+				<ATTRIBUTES CovC="121" Factor="3.770" />
+				<ATTRIBUTES CovC="122" Factor="3.810" />
+				<ATTRIBUTES CovC="123" Factor="3.850" />
+				<ATTRIBUTES CovC="124" Factor="3.890" />
+				<ATTRIBUTES CovC="125" Factor="3.930" />
+				<ATTRIBUTES CovC="126" Factor="3.953" />
+				<ATTRIBUTES CovC="127" Factor="3.976" />
+				<ATTRIBUTES CovC="128" Factor="3.998" />
+				<ATTRIBUTES CovC="129" Factor="4.021" />
+				<ATTRIBUTES CovC="130" Factor="4.044" />
+				<ATTRIBUTES CovC="131" Factor="4.067" />
+				<ATTRIBUTES CovC="132" Factor="4.090" />
+				<ATTRIBUTES CovC="133" Factor="4.112" />
+				<ATTRIBUTES CovC="134" Factor="4.135" />
+				<ATTRIBUTES CovC="135" Factor="4.158" />
+				<ATTRIBUTES CovC="136" Factor="4.181" />
+				<ATTRIBUTES CovC="137" Factor="4.204" />
+				<ATTRIBUTES CovC="138" Factor="4.227" />
+				<ATTRIBUTES CovC="139" Factor="4.250" />
+				<ATTRIBUTES CovC="140" Factor="4.272" />
+				<ATTRIBUTES CovC="141" Factor="4.295" />
+				<ATTRIBUTES CovC="142" Factor="4.318" />
+				<ATTRIBUTES CovC="143" Factor="4.341" />
+				<ATTRIBUTES CovC="144" Factor="4.364" />
+				<ATTRIBUTES CovC="145" Factor="4.386" />
+				<ATTRIBUTES CovC="146" Factor="4.409" />
+				<ATTRIBUTES CovC="147" Factor="4.432" />
+				<ATTRIBUTES CovC="148" Factor="4.455" />
+				<ATTRIBUTES CovC="149" Factor="4.478" />
+				<ATTRIBUTES CovC="150" Factor="4.500" />
+				<ATTRIBUTES CovC="151" Factor="4.523" />
+				<ATTRIBUTES CovC="152" Factor="4.546" />
+				<ATTRIBUTES CovC="153" Factor="4.569" />
+				<ATTRIBUTES CovC="154" Factor="4.592" />
+				<ATTRIBUTES CovC="155" Factor="4.614" />
+				<ATTRIBUTES CovC="156" Factor="4.637" />
+				<ATTRIBUTES CovC="157" Factor="4.660" />
+				<ATTRIBUTES CovC="158" Factor="4.683" />
+				<ATTRIBUTES CovC="159" Factor="4.706" />
+				<ATTRIBUTES CovC="160" Factor="4.728" />
+				<ATTRIBUTES CovC="161" Factor="4.751" />
+				<ATTRIBUTES CovC="162" Factor="4.774" />
+				<ATTRIBUTES CovC="163" Factor="4.797" />
+				<ATTRIBUTES CovC="164" Factor="4.820" />
+				<ATTRIBUTES CovC="165" Factor="4.842" />
+				<ATTRIBUTES CovC="166" Factor="4.865" />
+				<ATTRIBUTES CovC="167" Factor="4.888" />
+				<ATTRIBUTES CovC="168" Factor="4.911" />
+				<ATTRIBUTES CovC="169" Factor="4.934" />
+				<ATTRIBUTES CovC="170" Factor="4.956" />
+				<ATTRIBUTES CovC="171" Factor="4.979" />
+				<ATTRIBUTES CovC="172" Factor="5.002" />
+				<ATTRIBUTES CovC="173" Factor="5.025" />
+				<ATTRIBUTES CovC="174" Factor="5.048" />
+				<ATTRIBUTES CovC="175" Factor="5.070" />
+				<ATTRIBUTES CovC="176" Factor="5.093" />
+				<ATTRIBUTES CovC="177" Factor="5.116" />
+				<ATTRIBUTES CovC="178" Factor="5.139" />
+				<ATTRIBUTES CovC="179" Factor="5.162" />
+				<ATTRIBUTES CovC="180" Factor="5.184" />
+				<ATTRIBUTES CovC="181" Factor="5.207" />
+				<ATTRIBUTES CovC="182" Factor="5.230" />
+				<ATTRIBUTES CovC="183" Factor="5.253" />
+				<ATTRIBUTES CovC="184" Factor="5.276" />
+				<ATTRIBUTES CovC="185" Factor="5.298" />
+				<ATTRIBUTES CovC="186" Factor="5.321" />
+				<ATTRIBUTES CovC="187" Factor="5.344" />
+				<ATTRIBUTES CovC="188" Factor="5.367" />
+				<ATTRIBUTES CovC="189" Factor="5.390" />
+				<ATTRIBUTES CovC="190" Factor="5.412" />
+				<ATTRIBUTES CovC="191" Factor="5.435" />
+				<ATTRIBUTES CovC="192" Factor="5.458" />
+				<ATTRIBUTES CovC="193" Factor="5.480" />
+				<ATTRIBUTES CovC="194" Factor="5.503" />
+				<ATTRIBUTES CovC="195" Factor="5.526" />
+				<ATTRIBUTES CovC="196" Factor="5.548" />
+				<ATTRIBUTES CovC="197" Factor="5.571" />
+				<ATTRIBUTES CovC="198" Factor="5.594" />
+				<ATTRIBUTES CovC="199" Factor="5.617" />
+				<ATTRIBUTES CovC="200" Factor="5.640" />
+				<ATTRIBUTES CovC="ADDITIONAL" AMOUNT="1" Factor="0.0228" />
+			</NODE>
+		</FACTOR>
+		<FACTOR ID="DEDUCTIBLE" NAME="Deductibles">
+			<NODE ID="OPTIONALDEDUCTIBLE" NAME="Optional Deductibles">
+				<ATTRIBUTES AMOUNT="100" FACTOR="1.59" />
+				<ATTRIBUTES AMOUNT="150" FACTOR="1.32" />
+				<ATTRIBUTES AMOUNT="250" FACTOR="1.24" />
+				<ATTRIBUTES AMOUNT="500" FACTOR="1.00" />
+				<ATTRIBUTES AMOUNT="750" FACTOR="0.94" />
+				<ATTRIBUTES AMOUNT="1000" FACTOR="0.88" />
+				<ATTRIBUTES AMOUNT="2500" FACTOR="0.82" />
+				<ATTRIBUTES AMOUNT="5000" FACTOR="0.75" />
+			</NODE>
+			<NODE ID="INSURANCESCOREDISCOUNT" NAME="Insurance Score Discount">
+				<ATTRIBUTES MINSCORE="0" MAXSCORE="599"   FACTOR="1.00"  />
+				<ATTRIBUTES MINSCORE="600" MAXSCORE="650" FACTOR="0.90"  />
+				<ATTRIBUTES MINSCORE="651" MAXSCORE="700" FACTOR="0.75" />
+				<ATTRIBUTES MINSCORE="701" MAXSCORE="750" FACTOR="0.61"  />
+				<ATTRIBUTES MINSCORE="751" MAXSCORE="9999999" FACTOR="0.57" />
+				<ATTRIBUTES MINSCORE="N" FACTOR="0.85" />
+			</NODE>
+		</FACTOR>
+		<FACTOR ID="CREDITS" NAME="Credits" MAXCREDITFACTOR="0.5">
+			<NODE ID="AOHCREDIT" NAME="Age of Home Credit" MAXAGEOFHOME="20">
+				<ATTRIBUTES AGE="0" FACTOR="0.75" CREDIT="25" />
+				<ATTRIBUTES AGE="1" FACTOR="0.76" CREDIT="24" />
+				<ATTRIBUTES AGE="2" FACTOR="0.77" CREDIT="23" />
+				<ATTRIBUTES AGE="3" FACTOR="0.78" CREDIT="22" />
+				<ATTRIBUTES AGE="4" FACTOR="0.79" CREDIT="21" />
+				<ATTRIBUTES AGE="5" FACTOR="0.80" CREDIT="20" />
+				<ATTRIBUTES AGE="6" FACTOR="0.82" CREDIT="18" />
+				<ATTRIBUTES AGE="7" FACTOR="0.84" CREDIT="16" />
+				<ATTRIBUTES AGE="8" FACTOR="0.86" CREDIT="14" />
+				<ATTRIBUTES AGE="9" FACTOR="0.88" CREDIT="12" />
+				<ATTRIBUTES AGE="10" FACTOR="0.90" CREDIT="10" />
+				<ATTRIBUTES AGE="11" FACTOR="0.91" CREDIT="9" />
+				<ATTRIBUTES AGE="12" FACTOR="0.92" CREDIT="8" />
+				<ATTRIBUTES AGE="13" FACTOR="0.93" CREDIT="7" />
+				<ATTRIBUTES AGE="14" FACTOR="0.94" CREDIT="6" />
+				<ATTRIBUTES AGE="15" FACTOR="0.95" CREDIT="5" />
+				<ATTRIBUTES AGE="16" FACTOR="0.96" CREDIT="4" />
+				<ATTRIBUTES AGE="17" FACTOR="0.97" CREDIT="3" />
+				<ATTRIBUTES AGE="18" FACTOR="0.98" CREDIT="2" />
+				<ATTRIBUTES AGE="19" FACTOR="0.99" CREDIT="1" />
+				<ATTRIBUTES AGE="20" FACTOR="0.99" CREDIT="1" />
+			</NODE>
+			<NODE ID="PROTECTIVEDEVICES" NAME="Protective Devices" MAXCREDIT="15" MIN_N0_OF_ALARMS_FOR_CREDIT="1">
+				<ATTRIBUTES ID="CSBF" DESC="Central Stations Burglary  &amp; Fire Alarm Station" FACTOR="0.85"
+					CREDIT="15.00" />
+				<ATTRIBUTES ID="CSF" DESC="Central Stations Fire" FACTOR="0.90" CREDIT="10.00" />
+				<ATTRIBUTES ID="CSB" DESC="Central Stations Burglary" FACTOR="0.95" CREDIT="5.00" />
+				<ATTRIBUTES ID="DFP" DESC="Direct to Fire and Police" FACTOR="0.90" CREDIT="10.00" />
+				<ATTRIBUTES ID="DF" DESC="Direct to Fire" FACTOR="0.95" CREDIT="5.00" />
+				<ATTRIBUTES ID="DP" DESC="Direct to Police" FACTOR="0.95" CREDIT="5.00" />
+				<ATTRIBUTES ID="LFLG" DESC="Local Fire or Local Gas Alarm" FACTOR="0.98" CREDIT="2.00" />
+				<ATTRIBUTES ID="LFA" DESC="Two or more Local Fire Alarms" FACTOR="0.96" CREDIT="4.00" />
+			</NODE>
+			<NODE ID="DWELLINGUNDERCONSTRUCTION" NAME="Dwelling under construction">
+				<ATTRIBUTES FACTOR="0.70" CREDIT="30" />
+			</NODE>
+			<NODE ID="MATURITY" NAME="Experience or Maturity Credit" MINAGE="12775">
+				<ATTRIBUTES MINAGE="19711" MAXAGE="43800" FACTOR="0.85" CREDIT="15" />
+				<ATTRIBUTES MINAGE="16061" MAXAGE="19710" FACTOR="0.90" CREDIT="10" />
+				<ATTRIBUTES MINAGE="12775" MAXAGE="16060" FACTOR="0.95" CREDIT="5" />
+			</NODE>
+			<NODE ID="MULTIPOLICY" NAME="Multi-Policy or Auto/Home Credit">
+				<ATTRIBUTES FACTOR="0.80" CREDIT="20" POLICY_TYPE="HO-4" MINIMUM_COVG_LIMIT="15000" />
+				<ATTRIBUTES FACTOR="0.80" CREDIT="20" POLICY_TYPE="HO-2" MINIMUM_COVG_LIMIT="0" />
+				<ATTRIBUTES FACTOR="0.80" CREDIT="20" POLICY_TYPE="HO-3" MINIMUM_COVG_LIMIT="0" />
+				<ATTRIBUTES FACTOR="0.80" CREDIT="20" POLICY_TYPE="HO-5" MINIMUM_COVG_LIMIT="0" />
+				<ATTRIBUTES FACTOR="0.80" CREDIT="20" POLICY_TYPE="HO-6" MINIMUM_COVG_LIMIT="0" />
+			</NODE>
+			<NODE ID="VALUEDCUSTOMER_WITHOUT_CLAIMS" NAME="Valued Customer Renewal Discount- Without claims">
+				<ATTRIBUTES FACTOR="0.94" CREDIT="6" />
+			</NODE>
+			<NODE ID="VALUEDCUSTOMER_WITH_CLAIMS" NAME="Valued Customer Renewal Discount- With claims">
+				<ATTRIBUTES FACTOR="0.98" CREDIT="2" />
+			</NODE>
+		</FACTOR>
+		<FACTOR ID="SURCHARGE" NAME="Surcharge">
+			<!--<NODE ID="NEWBUSINESSPRIORLOSS" NAME="New Business Prior Losses Surcharge (30%)">
+				<ATTRIBUTES FACTOR="1.30" SURCHARGE="30" />
+			   </NODE>-->
+			<NODE ID="WOODSTOVE" NAME="Woodstove or Woodburner Surcharge (30%)">
+				<ATTRIBUTES FACTOR="1.30" SURCHARGE="30" />
+			</NODE>
+			<NODE ID="SPECIFICBREEDOFDOGS" NAME="Specific Breed of Dogs (25%) per animal">
+				<ATTRIBUTES FACTOR="0.25" SURCHARGE="25" />
+			</NODE>
+		</FACTOR>
+		<FACTOR ID="OPTIONALSECTIONCOVG" NAME="Option Section 1 Coverages">
+			<NODE ID="REPLACEMENT_COST_PERSONAL_PROPERTY_HO34" NAME="HO-34 Replacement Cost Personal Property (10% or Min $35)">
+				<ATTRIBUTES FORM="HO-2" MONTHS="12" FACTOR="0.10" MINIMUM_PREMIUM="35.00" MAXIMUM_PREMIUM="" />
+				<ATTRIBUTES FORM="HO-2" MONTHS="6" FACTOR="0.10" MINIMUM_PREMIUM="18.00" MAXIMUM_PREMIUM="" />
+				<ATTRIBUTES FORM="HO-4" MONTHS="12" FACTOR="0.25" MINIMUM_PREMIUM="35.00" MAXIMUM_PREMIUM="" />
+				<ATTRIBUTES FORM="HO-4" MONTHS="6" FACTOR="0.25" MINIMUM_PREMIUM="18.00" MAXIMUM_PREMIUM="" />
+				<ATTRIBUTES FORM="HO-3" MONTHS="12" FACTOR="0.10" MINIMUM_PREMIUM="35.00" MAXIMUM_PREMIUM="" />
+				<ATTRIBUTES FORM="HO-3" MONTHS="6" FACTOR="0.10" MINIMUM_PREMIUM="18.00" MAXIMUM_PREMIUM="" />
+				<ATTRIBUTES FORM="HO-5" MONTHS="12" FACTOR="0.10" MINIMUM_PREMIUM="35.00" MAXIMUM_PREMIUM="" />
+				<ATTRIBUTES FORM="HO-5" MONTHS="6" FACTOR="0.10" MINIMUM_PREMIUM="18.00" MAXIMUM_PREMIUM="" />
+				<ATTRIBUTES FORM="HO-6" MONTHS="12" FACTOR="0.10" MINIMUM_PREMIUM="35.00" MAXIMUM_PREMIUM="" />
+				<ATTRIBUTES FORM="HO-6" MONTHS="6" FACTOR="0.10" MINIMUM_PREMIUM="18.00" MAXIMUM_PREMIUM="" />
+			</NODE>
+			<NODE ID="REPLACEMENT_COST_PERSONAL_PROPERTY_HO20" NAME="HO-20 Preferred Plus Coverage">
+				<ATTRIBUTES MONTHS="12" COST="5" />
+				<ATTRIBUTES MONTHS="6" COST="3" />
+			</NODE>
+			<NODE ID="REPLACEMENT_COST_PERSONAL_PROPERTY_HO21" NAME="HO-21 Preferred Plus (V.I.P) Coverage">
+				<ATTRIBUTES MONTHS="12" COST="15" />
+				<ATTRIBUTES MONTHS="6" COST="8" />
+			</NODE>
+			<NODE ID="REPLACEMENT_COST_PERSONAL_PROPERTY_HO23" NAME="HO-23 Preferred Plus (V.I.P) Coverage">
+				<ATTRIBUTES MONTHS="12" COST="20" />
+				<ATTRIBUTES MONTHS="6" COST="10" />
+			</NODE>
+			<NODE ID="PREMIER_COVERAGE_HO25" NAME="HO-25 Premier (V.I.P) Coverage">
+				<ATTRIBUTES MONTHS="12" COST="30" />
+				<ATTRIBUTES MONTHS="6" COST="15" />
+			</NODE>
+			<NODE ID="REPLACEMENT_COST_PERSONAL_PROPERTY_HO11" NAME="HO-11 Expanded Replacement Coverage A &amp; B up to 125%">
+				<ATTRIBUTES MONTHS="12" COST="15" />
+				<ATTRIBUTES MONTHS="6" COST="8" />
+			</NODE>
+			<NODE ID="REPLACEMENT_COST_PERSONAL_PROPERTY_HO96" NAME="HO-96 Increased Fire Dept. Service Charge">
+				<ATTRIBUTES LIMITS="500.00" MONTHS="12" COST="0" />
+				<ATTRIBUTES LIMITS="500.00" MONTHS="6" COST="0" />
+				<ATTRIBUTES LIMITS="750.00" MONTHS="12" COST="4" />
+				<ATTRIBUTES LIMITS="750.00" MONTHS="6" COST="2" />
+				<ATTRIBUTES LIMITS="1000.00" MONTHS="12" COST="8" />
+				<ATTRIBUTES LIMITS="1000.00" MONTHS="6" COST="4" />
+			</NODE>
+			<NODE ID="BUSINESS_PROPERTY_INCREASED_LIMITS_HO312" NAME="HO-312 Business Property Increased Limits">
+				<ATTRIBUTES COST="25" INCREASEDAMOUNT="2500" MAXADDITIONALAMOUNT="10000" />
+			</NODE>
+			<NODE ID="OTHER_STRUCTURE_INCREASED_LIMITS_HO48" NAME="HO-48 Other Structure Increased Limits">
+				<ATTRIBUTES COST="3.00" INCREASEDAMOUNT="1000.00" MAXADDITIONALAMOUNT="" />
+			</NODE>
+			<NODE ID="OTHER_STRUCTURE_RENTED_TO_OTHERS_HO40" NAME="HO-40 Other Structure Rented to Others">
+				<ATTRIBUTES COST="5.00" INCREASEDAMOUNT="1000.00" MAXADDITIONALAMOUNT="" />
+			</NODE>
+			<NODE ID="OTHER_STRUCTURE_WITH_INCIDENTAL_HO42" NAME="HO-42 Other Structure with incidental business coverage readded">
+				<ATTRIBUTES COST="3" INCREASEDAMOUNT="1000" MAXADDITIONALAMOUNT="" RATEPERVAL_HO42="1000" />
+			</NODE>
+			<NODE ID="PERSONAL_PROPERTY_COVERAGE_C" NAME="Personal property coverage C increased limit">
+				<ATTRIBUTES FORM="HO-2" COST="1.00" INCREASEDAMOUNT="1000.00" MAXADDITIONALAMOUNT="" />
+				<ATTRIBUTES FORM="HO-3" COST="1.00" INCREASEDAMOUNT="1000.00" MAXADDITIONALAMOUNT="" />
+				<ATTRIBUTES FORM="HO-5" COST="1.10" INCREASEDAMOUNT="1000.00" MAXADDITIONALAMOUNT="" />
+				<ATTRIBUTES FORM="HO-50" COST="7.00" INCREASEDAMOUNT="1000.00" MAXADDITIONALAMOUNT="" />
+				<ATTRIBUTES FORM="HO-51" COST="4.00" INCREASEDAMOUNT="1000.00" MAXADDITIONALAMOUNT="" />
+			</NODE>
+			<NODE ID="ADDITIONAL_BULDING_PROPERTY" NAME="Additional Bulding Property">
+				<ATTRIBUTES FORM="OTHERS" COST="2.00"  INCREASEDAMOUNT="1000.00" MAXADDITIONALAMOUNT="" />
+				<ATTRIBUTES FORM="HO-66" COST="2.20"  INCREASEDAMOUNT="1000.00" MAXADDITIONALAMOUNT="" />
+			</NODE>
+			<NODE ID="ADDITIONAL_LIVING_EXPENSE" NAME="Additional Living Expense">
+				<ATTRIBUTES COST="3.00" INCREASEDAMOUNT="1000.00" MAXADDITIONALAMOUNT="" />
+			</NODE>
+			<NODE ID="BUILDING_ADDITIONS_AND_ALTERATIONS_HO51" NAME="HO-51 Building Additions &amp; Alterations for HO-4">
+				<ATTRIBUTES COST="4.00" INCREASEDAMOUNT="1000.00" MAXADDITIONALAMOUNT="" />
+			</NODE>
+			<NODE ID="INCREASED_CREDIT_CARD" NAME="HO-53 Increased Credit Card (Minimum $500 Included in Policy)">
+				<ATTRIBUTES COST="0" LIMIT="500" />
+				<ATTRIBUTES COST="3.00" LIMIT="1000" />
+				<ATTRIBUTES COST="5.00" LIMIT="2500" />
+			</NODE>
+			<NODE ID="INCREASED_SPECIAL_LIMITS" NAME="HO-65 or(HO-211 for HO-5) Coverage C Increased Special Limits of Liability">
+				<ATTRIBUTES ID="A" DESC="Unscheduled Jwellary" COST="9" INCREMENT_AMOUNT="500" MAX_INCREMENT_AMOUNT="5000" MAX_COST="72"/>
+				<ATTRIBUTES ID="B" DESC="Money" COST="6" INCREMENT_AMOUNT="100" MAX_INCREMENT_AMOUNT="1000" />
+				<ATTRIBUTES ID="C" DESC="Securities" COST="4" INCREMENT_AMOUNT="100" MAX_INCREMENT_AMOUNT="2000" />
+				<ATTRIBUTES ID="D" DESC="Silverware, Goldware" COST="3" INCREMENT_AMOUNT="500" MAX_INCREMENT_AMOUNT="10000" />
+				<ATTRIBUTES ID="E" DESC="Firearms" COST="3" INCREMENT_AMOUNT="100" MAX_INCREMENT_AMOUNT="6000" />
+			</NODE>
+			<NODE ID="LAW_COVERAGE" NAME="HO-277 Ordinance and Law Coverage Forms HO-2, 3 and 5 Only">
+				<ATTRIBUTES CHARGE="0.10" MINIMUM="25.00" />
+			</NODE>
+			<NODE ID="WATER_BACKUP" NAME="HO-327 Water Back-Up and Sump Pump Overflow. Not available in flood hazard Areas (Minimum $250 Deductible)">
+				<ATTRIBUTES COST="11" INCREMENTAL_AMOUNT="1000" MAXIMUM_ADDITIONAL_AMOUNT="10000" />
+			</NODE>
+			<NODE ID="HO_32_UNIT_OWNER" NAME="HO-32 Unit Owners Coverage A Special Coverage">
+				<ATTRIBUTES ID="1" CHARGE=".20" MIN="5" RATE_PER_VALUE="1000"  />
+			</NODE>
+			<NODE ID="HO_33_CONDO_UNIT" NAME="HO-33 Condo-Unit Owners Rental to Others">
+				<ATTRIBUTES DESC="Under 2 Months" OPTIONS="1" MINMONTH="0" MAXMONTH="2" FACTOR="0.10" CREDIT="10"
+					MINAMOUNT="10.00" />
+				<ATTRIBUTES DESC="2 to 6 Months" OPTIONS="2" MINMONTH="2" MAXMONTH="6" FACTOR="0.40" CREDIT="40"
+					MINAMOUNT="25.00" />
+			</NODE>
+			<NODE ID="HO_35_LOSS_ASSESSMENT" NAME="HO-35 Loss Assessment Coverage"> <!-- $.50 per $1000-->
+				<ATTRIBUTES RATE="0.50" RATE_PER_VALUE="1000" MAXAMOUNT="25000" />
+			</NODE>
+			<NODE ID="EARTHQUAKE" NAME="HO-315 Earthquake" RATE_PER_VALUE="1000">
+				<ATTRIBUTES ID="1" FORM="HO-2" ZONE="1" FRAME="0.27" MASONRY="0.86" APPLYTO="CovA" />
+				<ATTRIBUTES ID="2" FORM="HO-3" ZONE="1" FRAME="0.27" MASONRY="0.86" APPLYTO="CovA" />
+				<ATTRIBUTES ID="3" FORM="HO-5" ZONE="1" FRAME="0.18" MASONRY="0.57" APPLYTO="CovA" />
+				<ATTRIBUTES ID="4" FORM="HO-4" ZONE="1" FRAME="0.18" MASONRY="0.57" APPLYTO="CovC" />
+				<ATTRIBUTES ID="5" FORM="HO-6" ZONE="1" FRAME="0.18" MASONRY="0.57" APPLYTO="CovC" />
+				<ATTRIBUTES ID="6" FORM="Additional Cov C" ZONE="1" FRAME="0.18" MASONRY="0.57" APPLYTO="CovC" />
+				<ATTRIBUTES ID="7" FORM="Additional Cov D" ZONE="1" FRAME="0.18" MASONRY="0.57" APPLYTO="CovD" />
+			</NODE>
+			<NODE ID="FRAUD_EXPENSE" NAME="HO-455 Identity Fraud Expense  Coverage($15000 with a $250 deductible)">
+				<ATTRIBUTES RATE="25" COVERAGE="15000" DEDUCTIBLE="250" />
+			</NODE>
+			<NODE ID="SPECIFIC_STRUC_AWAY" NAME="HO-490 Specific Structures (Away from Premises)">
+				<ATTRIBUTES RATE="4" PER_EACH_ADDITION_OF="1000" />
+			</NODE>
+			<NODE ID="OTHER_STRUC_REPAIR" NAME="HO-489 Other Structures(Repair Cost Coverage)">
+				<ATTRIBUTES RATE="4" PER_EACH_ADDITION_OF="1000" />
+			</NODE>
+			<NODE ID="ACV_LOSS_SETTLEMENT" NAME="ACV Loss Settlement Windstorm or Hail Losses to Roof Surfacting (HO 04 93)">
+				<ATTRIBUTES FORM="HO-2" CREDIT="2" FACTOR=".98"/> 
+				<ATTRIBUTES FORM="HO-3" CREDIT="2" FACTOR=".98"/> 
+				<ATTRIBUTES FORM="HO-5" CREDIT="2" FACTOR=".98"/>
+			</NODE>
+		</FACTOR>
+		<FACTOR ID="PROPRTYFEE" NAME="Fees">
+			<NODE ID="PFEE" NAME="Fees">
+				<ATTRIBUTES TERMMONTHS="12" FEES="9" />
+				<ATTRIBUTES TERMMONTHS="6" FEES="5" />
+			</NODE>
+		</FACTOR>
+		<FACTOR ID="OPTIONALLIABILITYCOVG" NAME="Section II Optional Liability Coverages">
+			<NODE ID="LIABLITY_LIMIT" NAME="LIABLITY LIMIT.">
+				<ATTRIBUTES LIMIT_100_THOUSAND="100000.00" />
+				<ATTRIBUTES LIMIT_300_THOUSAND="300000.00" />
+				<ATTRIBUTES LIMIT_500_THOUSAND="500000.00" />
+			</NODE>
+			<NODE ID="MED_PAY_LIMIT" NAME="MEDICAL PAYMENT LIMIT">
+				<ATTRIBUTES RATE_PERVAL_MEDPAY="1000" />
+			</NODE>
+			<NODE ID="COVERAGE_E_AND_F" NAME="Liability Coverages." PRIMARY_RES_EMP_NO="2">
+			</NODE>
+			<NODE ID="PRIMARY_RESIDENCE" NAME="Described Primary residence (1 or 2 Family)" FOR_EACH_ADDITION="3"
+				PRIMARY_RES_EMP_NO="2">
+				<ATTRIBUTES LIABILITY_LIMIT="100000.00" LIABILITY_LIMIT_GP="0" />
+				<ATTRIBUTES LIABILITY_LIMIT="300000.00" LIABILITY_LIMIT_GP="15" />
+				<ATTRIBUTES LIABILITY_LIMIT="500000.00" LIABILITY_LIMIT_GP="25" />
+			</NODE>
+			<NODE ID="DESCRIBED_PRIMARY_RESIDENCE" NAME="Described Primary residence(1 or 2 Family)"
+				FOR_EACH_ADDITION="3" PRIMARY_RES_EMP_NO="2">
+				<ATTRIBUTES LIABILITY_LIMIT="100000.00" LIABILITY_LIMIT_GP="Included" />
+				<ATTRIBUTES LIABILITY_LIMIT="300000.00" LIABILITY_LIMIT_GP="15" />
+				<ATTRIBUTES LIABILITY_LIMIT="500000.00" LIABILITY_LIMIT_GP="25" />
+			</NODE>
+			<NODE ID="RESIDENCE_EMPLOYEES" NAME="Residence Employees (Over 2)" FOR_EACH_ADDITION="1"
+				PRIMARY_RES_EMP_NO="2">
+				<ATTRIBUTES LIABILITY_LIMIT="100000.00" LIABILITY_LIMIT_GP="5" />
+				<ATTRIBUTES LIABILITY_LIMIT="300000.00" LIABILITY_LIMIT_GP="7" />
+				<ATTRIBUTES LIABILITY_LIMIT="500000.00" LIABILITY_LIMIT_GP="9" />
+			</NODE>
+			<NODE ID="ADD_PREMISES_OCC_INSURED" NAME="Additional Premises-Occupied By Insured" FOR_EACH_ADDITION="1">
+				<ATTRIBUTES LIABILITY_LIMIT="100000.00" LIABILITY_LIMIT_GP="5" />
+				<ATTRIBUTES LIABILITY_LIMIT="300000.00" LIABILITY_LIMIT_GP="7" />
+				<ATTRIBUTES LIABILITY_LIMIT="500000.00" LIABILITY_LIMIT_GP="9" />
+			</NODE>
+			<NODE ID="ADD_PREMISES_RENTED_AT_PREMISES" NAME="HO-40: Additional Premises Rented to others at Residence Premises"
+				FOR_EACH_ADDITION="1">
+				<ATTRIBUTES LIABILITY_LIMIT="100000.00" LIABILITY_LIMIT_GP="10" />
+				<ATTRIBUTES LIABILITY_LIMIT="300000.00" LIABILITY_LIMIT_GP="13" />
+				<ATTRIBUTES LIABILITY_LIMIT="500000.00" LIABILITY_LIMIT_GP="15" />
+			</NODE>
+			<NODE ID="ADD_PREMISES_RENTED_OUTSIDE_PREMISES1" NAME="HO-70: Additional Premises Rented to others at other locations Other Location (1 Family)"
+				FOR_EACH_ADDITION="1">
+				<ATTRIBUTES LIABILITY_LIMIT="100000.00" LIABILITY_LIMIT_GP="10" />
+				<ATTRIBUTES LIABILITY_LIMIT="300000.00" LIABILITY_LIMIT_GP="13" />
+				<ATTRIBUTES LIABILITY_LIMIT="500000.00" LIABILITY_LIMIT_GP="15" />
+			</NODE>
+			<NODE ID="ADD_PREMISES_RENTED_OUTSIDE_PREMISES2" NAME="HO-70: Additional Premises Rented to others at other locations Other Location (2 Family)"
+				FOR_EACH_ADDITION="1">
+				<ATTRIBUTES LIABILITY_LIMIT="100000.00" LIABILITY_LIMIT_GP="16" />
+				<ATTRIBUTES LIABILITY_LIMIT="300000.00" LIABILITY_LIMIT_GP="21" />
+				<ATTRIBUTES LIABILITY_LIMIT="500000.00" LIABILITY_LIMIT_GP="24" />
+			</NODE>
+			<NODE ID="INCIDENTAL_OFCE_ON_PREMISES" NAME="HO-42: Incidental Office, Private School or Studio on Premises (coverage C-60% Minimum)"
+				FOR_EACH_ADDITION="5">
+				<ATTRIBUTES LIABILITY_LIMIT="100000.00" LIABILITY_LIMIT_GP="19" />
+				<ATTRIBUTES LIABILITY_LIMIT="300000.00" LIABILITY_LIMIT_GP="25" />
+				<ATTRIBUTES LIABILITY_LIMIT="500000.00" LIABILITY_LIMIT_GP="28" />
+			</NODE>
+			<NODE ID="INCIDENTAL_OFCE_ON_INSTRUCTN" NAME="HO-42: If Instruction Only(No minimum C required)"
+				FOR_EACH_ADDITION="1">
+				<ATTRIBUTES LIABILITY_LIMIT="100000.00" LIABILITY_LIMIT_GP="15" />
+				<ATTRIBUTES LIABILITY_LIMIT="300000.00" LIABILITY_LIMIT_GP="17" />
+				<ATTRIBUTES LIABILITY_LIMIT="500000.00" LIABILITY_LIMIT_GP="20" />
+			</NODE>
+			<NODE ID="OFF_PREMISES" NAME="HO-43:Off Premises" FOR_EACH_ADDITION="3">
+				<ATTRIBUTES LIABILITY_LIMIT="100000.00" LIABILITY_LIMIT_GP="18" />
+				<ATTRIBUTES LIABILITY_LIMIT="300000.00" LIABILITY_LIMIT_GP="24" />
+				<ATTRIBUTES LIABILITY_LIMIT="500000.00" LIABILITY_LIMIT_GP="27" />
+			</NODE>
+			<!-- Added by Neeraj Singh on 17/10/2006-->
+			<NODE ID="WATERBED_LIABILITY" NAME="Forms HO-4 6 Use HO-200" FOR_EACH_ADDITION="">
+				<ATTRIBUTES LIABILITY_LIMIT="100000.00" LIABILITY_LIMIT_GP="15" />
+				<ATTRIBUTES LIABILITY_LIMIT="300000.00" LIABILITY_LIMIT_GP="20" />
+				<ATTRIBUTES LIABILITY_LIMIT="500000.00" LIABILITY_LIMIT_GP="23" />
+			</NODE>
+			<NODE ID="OFF_PERSUITS" NAME="HO-43:Off Persuits" FOR_EACH_ADDITION="1">
+				<ATTRIBUTES LIABILITY_LIMIT="100000.00" LIABILITY_LIMIT_GP="20" />
+				<ATTRIBUTES LIABILITY_LIMIT="300000.00" LIABILITY_LIMIT_GP="24" />
+				<ATTRIBUTES LIABILITY_LIMIT="500000.00" LIABILITY_LIMIT_GP="28" />
+			</NODE>
+			<NODE ID="CLASSA" NAME="HO-71: Business Pursuits - Class A - Clerical Office,Salesmen,Collectors,Messengers(No Installation,Demo)"
+				FOR_EACH_ADDITION="1">
+				<ATTRIBUTES LIABILITY_LIMIT="100000.00" LIABILITY_LIMIT_GP="4" />
+				<ATTRIBUTES LIABILITY_LIMIT="300000.00" LIABILITY_LIMIT_GP="5" />
+				<ATTRIBUTES LIABILITY_LIMIT="500000.00" LIABILITY_LIMIT_GP="6" />
+			</NODE>
+			<NODE ID="CLASSB" NAME="HO-71:Business Pursuits - Class B - Salesmen,Collectors,Messengers(IncludeS Installation,Demos or Service)"
+				FOR_EACH_ADDITION="1">
+				<ATTRIBUTES LIABILITY_LIMIT="100000.00" LIABILITY_LIMIT_GP="6" />
+				<ATTRIBUTES LIABILITY_LIMIT="300000.00" LIABILITY_LIMIT_GP="8" />
+				<ATTRIBUTES LIABILITY_LIMIT="500000.00" LIABILITY_LIMIT_GP="9" />
+			</NODE>
+			<NODE ID="CLASSC" NAME="HO-71:Business Pursuits - Class C - Teachers,Athletic,Lab,Manual Training"
+				FOR_EACH_ADDITION="2">
+				<ATTRIBUTES LIABILITY_LIMIT="100000.00" LIABILITY_LIMIT_GP="11" />
+				<ATTRIBUTES LIABILITY_LIMIT="300000.00" LIABILITY_LIMIT_GP="15" />
+				<ATTRIBUTES LIABILITY_LIMIT="500000.00" LIABILITY_LIMIT_GP="16" />
+			</NODE>
+			<NODE ID="CLASSD" NAME="HO-71:Business Pursuits - Class D - Teachers No Other Classification"
+				FOR_EACH_ADDITION="1">
+				<ATTRIBUTES LIABILITY_LIMIT="100000.00" LIABILITY_LIMIT_GP="5" />
+				<ATTRIBUTES LIABILITY_LIMIT="300000.00" LIABILITY_LIMIT_GP="7" />
+				<ATTRIBUTES LIABILITY_LIMIT="500000.00" LIABILITY_LIMIT_GP="8" />
+			</NODE>
+			<NODE ID="INCIDENTAL_FARMING_RESIDENCE" NAME="HO-72:Farm Liability - Incidental Farming-Residence Premises"
+				FOR_EACH_ADDITION="3">
+				<ATTRIBUTES LIABILITY_LIMIT="100000.00" LIABILITY_LIMIT_GP="40" />
+				<ATTRIBUTES LIABILITY_LIMIT="300000.00" LIABILITY_LIMIT_GP="53" />
+				<ATTRIBUTES LIABILITY_LIMIT="500000.00" LIABILITY_LIMIT_GP="60" />
+			</NODE>
+			<NODE ID="OPERATED_BY_INSURED" NAME="HO-73:Farm Liability - Owned and Operated by Insured or Insured Employee,Per Location"
+				FOR_EACH_ADDITION="3">
+				<ATTRIBUTES LIABILITY_LIMIT="100000.00" LIABILITY_LIMIT_GP="50" />
+				<ATTRIBUTES LIABILITY_LIMIT="300000.00" LIABILITY_LIMIT_GP="67" />
+				<ATTRIBUTES LIABILITY_LIMIT="500000.00" LIABILITY_LIMIT_GP="75" />
+			</NODE>
+			<NODE ID="RENTED_TO_OTHERS" NAME="HO-73:Farm Liability - Owned by Insured and Rented to Others Per Location"
+				FOR_EACH_ADDITION="3">
+				<ATTRIBUTES LIABILITY_LIMIT="100000.00" LIABILITY_LIMIT_GP="40" />
+				<ATTRIBUTES LIABILITY_LIMIT="300000.00" LIABILITY_LIMIT_GP="53" />
+				<ATTRIBUTES LIABILITY_LIMIT="500000.00" LIABILITY_LIMIT_GP="60" />
+			</NODE>
+			<NODE ID="PERSONAL_INJURY_COVERAGE" NAME="HO-82: Personal Injury Coverage Limit same as Sec II - "
+				FOR_EACH_ADDITION="0">
+				<ATTRIBUTES LIABILITY_LIMIT="100000.00" LIABILITY_LIMIT_GP="12" />
+				<ATTRIBUTES LIABILITY_LIMIT="300000.00" LIABILITY_LIMIT_GP="15" />
+				<ATTRIBUTES LIABILITY_LIMIT="500000.00" LIABILITY_LIMIT_GP="20" />
+			</NODE>
+			<NODE ID="INSURE_PRIMARY" NAME="Seasonal Credit - with Primary" CREDIT="15">
+				<ATTRIBUTES LIABILITY_LIMIT="100000.00" GROUP="15" />
+				<ATTRIBUTES LIABILITY_LIMIT="300000.00" GROUP="15" />
+				<ATTRIBUTES LIABILITY_LIMIT="500000.00" GROUP="15" />
+			</NODE>
+			<NODE ID="INSURE_NON_PRIMARY" NAME="Seasonal Credit - without Primary" CREDIT="2">
+				<ATTRIBUTES LIABILITY_LIMIT="100000.00" GROUP="2" />
+				<ATTRIBUTES LIABILITY_LIMIT="300000.00" GROUP="2" />
+				<ATTRIBUTES LIABILITY_LIMIT="500000.00" GROUP="2" />
+			</NODE>			
+		</FACTOR>
+		<FACTOR ID="ENDORSEMENTS" NAME="Inland Marine -Scheduled personal property rates">
+			<NODE ID="RATE_PERVAL_INLAND_MARINE" NAME="Rate Per Value (100) for inland marine ">
+				<ATTRIBUTES RATE_PERVAL_IM="100" />
+			</NODE>
+			<NODE ID="BICYCLES" NAME="Bicycles(HO-900)">
+				<ATTRIBUTES DED_AMT="0" DED_GROUP="10.00" />
+				<ATTRIBUTES DED_AMT="100" DED_GROUP="9.50" />
+				<ATTRIBUTES DED_AMT="250" DED_GROUP="9.00" />
+				<ATTRIBUTES DED_AMT="500" DED_GROUP="8.00" />
+				<ATTRIBUTES DED_AMT="750" DED_GROUP="7.80" />
+				<ATTRIBUTES DED_AMT="1000" DED_GROUP="7.50" />
+				<ATTRIBUTES DED_AMT="2500" DED_GROUP="7.00" />
+			</NODE>
+			<NODE ID="CAMERA" NAME="Cameras(Non-Professional)">
+				<ATTRIBUTES DED_AMT="0" DED_GROUP="1.55" />
+				<ATTRIBUTES DED_AMT="100" DED_GROUP="1.47" />
+				<ATTRIBUTES DED_AMT="250" DED_GROUP="1.40" />
+				<ATTRIBUTES DED_AMT="500" DED_GROUP="1.24" />
+				<ATTRIBUTES DED_AMT="750" DED_GROUP="1.21" />
+				<ATTRIBUTES DED_AMT="1000" DED_GROUP="1.16" />
+				<ATTRIBUTES DED_AMT="2500" DED_GROUP="1.09" />
+			</NODE>
+			<NODE ID="CAMERA_PROF" NAME="Cameras(Professional Use)" DED_AMT="100" >
+				<ATTRIBUTES SLAB="1" AMOUNT_LO="0" AMOUNT_UP="5000" RATE_PER_HUNDRED="2.40" />
+				<ATTRIBUTES SLAB="2" AMOUNT_LO="5001" AMOUNT_UP="10000" RATE_PER_HUNDRED="1.95" />
+				<ATTRIBUTES SLAB="3" AMOUNT_LO="10001" AMOUNT_UP="999999999999" RATE_PER_HUNDRED="1.55" />
+			</NODE>
+			<NODE ID="CELLULAR" NAME="HO-900:CELLULAR Phones">
+				<ATTRIBUTES DED_AMT="0" DED_GROUP="6.00" />
+			</NODE>
+			<NODE ID="FURS" NAME="Furs">
+				<ATTRIBUTES DED_AMT="0" DED_GROUP="0.35" />
+				<ATTRIBUTES DED_AMT="100" DED_GROUP="0.33" />
+				<ATTRIBUTES DED_AMT="250" DED_GROUP="0.32" />
+				<ATTRIBUTES DED_AMT="500" DED_GROUP="0.28" />
+				<ATTRIBUTES DED_AMT="750" DED_GROUP="0.27" />
+				<ATTRIBUTES DED_AMT="1000" DED_GROUP="0.26" />
+				<ATTRIBUTES DED_AMT="2500" DED_GROUP="0.25" />
+			</NODE>
+			<NODE ID="GOLFEQUIP" NAME="Golf Equipment">
+				<ATTRIBUTES DED_AMT="0" DED_GROUP="1.30" />
+				<ATTRIBUTES DED_AMT="100" DED_GROUP="0.24" />
+				<ATTRIBUTES DED_AMT="250" DED_GROUP="1.17" />
+				<ATTRIBUTES DED_AMT="500" DED_GROUP="1.04" />
+				<ATTRIBUTES DED_AMT="750" DED_GROUP="1.01" />
+				<ATTRIBUTES DED_AMT="1000" DED_GROUP="0.98" />
+				<ATTRIBUTES DED_AMT="2500" DED_GROUP="0.91" />
+			</NODE>
+			<NODE ID="GUNS" NAME="Guns">
+				<ATTRIBUTES DED_AMT="0" DED_GROUP="2.00" />
+				<ATTRIBUTES DED_AMT="100" DED_GROUP="1.90" />
+				<ATTRIBUTES DED_AMT="250" DED_GROUP="1.80" />
+				<ATTRIBUTES DED_AMT="500" DED_GROUP="1.60" />
+				<ATTRIBUTES DED_AMT="750" DED_GROUP="1.56" />
+				<ATTRIBUTES DED_AMT="1000" DED_GROUP="1.50" />
+				<ATTRIBUTES DED_AMT="2500" DED_GROUP="1.40" />
+			</NODE>
+			<NODE ID="JEWELERY" NAME="Jewelry">
+				<ATTRIBUTES DED_AMT="0" DED_GROUP="1.15" />
+				<ATTRIBUTES DED_AMT="100" DED_GROUP="1.09" />
+				<ATTRIBUTES DED_AMT="250" DED_GROUP="1.04" />
+				<ATTRIBUTES DED_AMT="500" DED_GROUP="0.92" />
+				<ATTRIBUTES DED_AMT="750" DED_GROUP="0.90" />
+				<ATTRIBUTES DED_AMT="1000" DED_GROUP="0.86" />
+				<ATTRIBUTES DED_AMT="2500" DED_GROUP="0.81" />
+			</NODE>
+			<NODE ID="MUSICAL" NAME="Musical(Non-Professional)">
+				<ATTRIBUTES DED_AMT="0" DED_GROUP="0.70" />
+				<ATTRIBUTES DED_AMT="100" DED_GROUP="0.67" />
+				<ATTRIBUTES DED_AMT="250" DED_GROUP="0.63" />
+				<ATTRIBUTES DED_AMT="500" DED_GROUP="0.56" />
+				<ATTRIBUTES DED_AMT="750" DED_GROUP="0.55" />
+				<ATTRIBUTES DED_AMT="1000" DED_GROUP="0.53" />
+				<ATTRIBUTES DED_AMT="2500" DED_GROUP="0.49" />
+			</NODE>
+			<NODE ID="MUSICAL_PROF" NAME="MUSICAL(Used for Remuneration)" DED_AMT="100" >
+				<ATTRIBUTES SLAB="1" AMOUNT_LO="0" AMOUNT_UP="5000" RATE_PER_HUNDRED="2.50" />
+				<ATTRIBUTES SLAB="2" AMOUNT_LO="5001" AMOUNT_UP="99999999999999999" RATE_PER_HUNDRED="2.00" />
+			</NODE>
+			<NODE ID="PC" NAME="Personal Computers(HO-214)">
+				<ATTRIBUTES DED_AMT="100" DED_GROUP="0.70" />
+			</NODE>
+			<NODE ID="PC_LAPTOP" NAME="Personal Computers(HO-214)">
+				<ATTRIBUTES DED_AMT="100" DED_GROUP="2.50" />
+			</NODE>
+			<NODE ID="SILVER" NAME="Silver">
+				<ATTRIBUTES DED_AMT="0" DED_GROUP="0.50" />
+				<ATTRIBUTES DED_AMT="100" DED_GROUP="0.48" />
+				<ATTRIBUTES DED_AMT="250" DED_GROUP="0.45" />
+				<ATTRIBUTES DED_AMT="500" DED_GROUP="0.40" />
+				<ATTRIBUTES DED_AMT="750" DED_GROUP="0.39" />
+				<ATTRIBUTES DED_AMT="1000" DED_GROUP="0.38" />
+				<ATTRIBUTES DED_AMT="2500" DED_GROUP="0.35" />
+			</NODE>
+			<NODE ID="STAMPS" NAME="Stamps">
+				<ATTRIBUTES DED_AMT="0" DED_GROUP="0.70" />
+				<ATTRIBUTES DED_AMT="100" DED_GROUP="0.67" />
+				<ATTRIBUTES DED_AMT="250" DED_GROUP="0.63" />
+				<ATTRIBUTES DED_AMT="500" DED_GROUP="0.56" />
+				<ATTRIBUTES DED_AMT="750" DED_GROUP="0.55" />
+				<ATTRIBUTES DED_AMT="1000" DED_GROUP="0.53" />
+				<ATTRIBUTES DED_AMT="2500" DED_GROUP="0.49" />
+			</NODE>
+			<NODE ID="COINS" NAME="Rare Coins">
+				<ATTRIBUTES DED_AMT="0" DED_GROUP="1.80" />
+				<ATTRIBUTES DED_AMT="100" DED_GROUP="1.71" />
+				<ATTRIBUTES DED_AMT="250" DED_GROUP="1.62" />
+				<ATTRIBUTES DED_AMT="500" DED_GROUP="1.44" />
+				<ATTRIBUTES DED_AMT="750" DED_GROUP="1.40" />
+				<ATTRIBUTES DED_AMT="1000" DED_GROUP="1.35" />
+				<ATTRIBUTES DED_AMT="2500" DED_GROUP="1.26" />
+			</NODE>
+			<NODE ID="FINEARTSWITHOUTBREAKAGE" NAME="Fine Arts without breakage">
+				<ATTRIBUTES DED_AMT="0" DED_GROUP="0.20" />
+				<ATTRIBUTES DED_AMT="100" DED_GROUP="0.19" />
+				<ATTRIBUTES DED_AMT="250" DED_GROUP="0.18" />
+				<ATTRIBUTES DED_AMT="500" DED_GROUP="0.16" />
+				<ATTRIBUTES DED_AMT="750" DED_GROUP="0.16" />
+				<ATTRIBUTES DED_AMT="1000" DED_GROUP="0.15" />
+				<ATTRIBUTES DED_AMT="2500" DED_GROUP="0.14" />
+			</NODE>
+			<NODE ID="FINEARTSWITHBREAKAGE" NAME="Fine Arts With breakage">
+				<ATTRIBUTES DED_AMT="0" DED_GROUP="0.35" />
+				<ATTRIBUTES DED_AMT="100" DED_GROUP="0.34" />
+				<ATTRIBUTES DED_AMT="250" DED_GROUP="0.33" />
+				<ATTRIBUTES DED_AMT="500" DED_GROUP="0.31" />
+				<ATTRIBUTES DED_AMT="750" DED_GROUP="0.31" />
+				<ATTRIBUTES DED_AMT="1000" DED_GROUP="0.30" />
+				<ATTRIBUTES DED_AMT="2500" DED_GROUP="0.29" />
+			</NODE>
+			<NODE ID="HANDICAP_ELECTRONICS" NAME="Handicap Electronics">
+				<ATTRIBUTES DED_AMT="100" DED_GROUP="1.38" />
+			</NODE>
+			<NODE ID="HEARING_AIDS" NAME="Hearing Aids">
+				<ATTRIBUTES DED_AMT="100" DED_GROUP="3.52" />
+			</NODE>
+			<NODE ID="INSULIN_PUMPS" NAME="Insulin Pumps">
+				<ATTRIBUTES DED_AMT="100" DED_GROUP="1.55" />
+			</NODE>
+			<NODE ID="AMWAY" NAME="Mart Kay - Amway">
+				<ATTRIBUTES DED_AMT="100" DED_GROUP="1.38" />
+			</NODE>
+			<NODE ID="SALESMAN_SUPPLY" NAME="Salesman Supply">
+				<ATTRIBUTES DED_AMT="50" DED_GROUP="1.50" />
+			</NODE>
+			<NODE ID="SCUBA_DIVING" NAME="Scuba Diving">
+				<ATTRIBUTES DED_AMT="100" DED_GROUP="1.50" />
+			</NODE>
+			<NODE ID="SNOW_SKY" NAME="Snow Skies">
+				<ATTRIBUTES DED_AMT="0" DED_GROUP="1.50" />
+			</NODE>
+			<NODE ID="TACK_SADDLE" NAME="Tack Saddle">
+				<ATTRIBUTES DED_AMT="100" DED_GROUP="1.38" />
+			</NODE>
+			<NODE ID="TOOLS_AT_PREMISIS" NAME="Tools at Premisis">
+				<ATTRIBUTES DED_AMT="50" DED_GROUP="1.38" />
+				<ATTRIBUTES DED_AMT="100" DED_GROUP="1.03" />
+			</NODE>
+			<NODE ID="TOOLS_AT_BSNS_LOCN" NAME="Tools at Business Location">
+				<ATTRIBUTES DED_AMT="100" DED_GROUP="2.00" />
+			</NODE>
+			<NODE ID="TRACTORS" NAME="Tractors">
+				<ATTRIBUTES DED_AMT="100" DED_GROUP="1.38" />
+				<ATTRIBUTES DED_AMT="250" DED_GROUP="1.17" />
+				<ATTRIBUTES DED_AMT="500" DED_GROUP="1.05" />
+			</NODE>
+			<NODE ID="TRAIN_COLLECTION" NAME="Train Collection">
+				<ATTRIBUTES DED_AMT="0" DED_GROUP="1.50" />
+				<ATTRIBUTES DED_AMT="100" DED_GROUP="1.05" />
+			</NODE>
+			<NODE ID="WHEELCHAIR" NAME="Wheelchair">
+				<ATTRIBUTES DED_AMT="100" DED_GROUP="1.38" />
+			</NODE>
+		</FACTOR>
+		<FACTOR ID="TERRITORY" NAME="TERRITORY">
+			<NODE ID="TERRITORYRELATIVITY" NAME="Territory Relativity">
+				<ATTRIBUTES TID="1"		RELATIVITY="1.00" />
+				<ATTRIBUTES TID="2"		RELATIVITY="1.64" />
+				<ATTRIBUTES TID="3"		RELATIVITY="1.16" />
+				<ATTRIBUTES TID="4"		RELATIVITY="0.90" />
+				<ATTRIBUTES TID="5"		RELATIVITY="1.10" />
+				<ATTRIBUTES TID="6"		RELATIVITY="1.10" />
+				<ATTRIBUTES TID="7"		RELATIVITY="0.86" />
+				<ATTRIBUTES TID="8"		RELATIVITY="0.95" />
+				<ATTRIBUTES TID="9"		RELATIVITY="1.10" />
+				<ATTRIBUTES TID="10"	RELATIVITY="1.05" />
+				<ATTRIBUTES TID="11"	RELATIVITY="1.10" />
+				<ATTRIBUTES TID="12"	RELATIVITY="0.90" />
+				<ATTRIBUTES TID="13"	RELATIVITY="1.16" />
+				<ATTRIBUTES TID="14"	RELATIVITY="0.79" />
+				<ATTRIBUTES TID="15"	RELATIVITY="0.81" />
+				<ATTRIBUTES TID="16"	RELATIVITY="0.95" />
+				<ATTRIBUTES TID="17"	RELATIVITY="0.90" />
+				<ATTRIBUTES TID="18"	RELATIVITY="1.30" />
+				<ATTRIBUTES TID="19"	RELATIVITY="1.06" />
+				<ATTRIBUTES TID="20"	RELATIVITY="1.00" />
+				<ATTRIBUTES TID="21"	RELATIVITY="0.90" />
+				<ATTRIBUTES TID="22"	RELATIVITY="1.00" />
+				<ATTRIBUTES TID="23"	RELATIVITY="1.00" />
+				<ATTRIBUTES TID="24"	RELATIVITY="1.00" />
+				<ATTRIBUTES TID="25"	RELATIVITY="0.95" />
+				<ATTRIBUTES TID="26"	RELATIVITY="0.95" />												
+				<ATTRIBUTES TID="27"	RELATIVITY="0.95" />
+				<ATTRIBUTES TID="28"	RELATIVITY="1.00" />
+				<ATTRIBUTES TID="29"	RELATIVITY="1.00" />
+				<ATTRIBUTES TID="30"	RELATIVITY="0.90" />
+				<ATTRIBUTES TID="31"	RELATIVITY="1.00" />
+				<ATTRIBUTES TID="32"	RELATIVITY="1.00" />				
+				<ATTRIBUTES TID="33"	RELATIVITY="1.00" />
+				<ATTRIBUTES TID="34"	RELATIVITY="1.00" />
+				<ATTRIBUTES TID="35"	RELATIVITY="0.95" />
+				<ATTRIBUTES TID="36"	RELATIVITY="0.95" />
+				<ATTRIBUTES TID="37"	RELATIVITY="0.85" />
+				<ATTRIBUTES TID="38"	RELATIVITY="0.81" />
+				<ATTRIBUTES TID="40"	RELATIVITY="1.16" />
+				<ATTRIBUTES TID="41"	RELATIVITY="0.95" />
+				<ATTRIBUTES TID="42"	RELATIVITY="0.95" />
+				<ATTRIBUTES TID="43"	RELATIVITY="0.90" />				
+				<ATTRIBUTES TID="44"	RELATIVITY="0.95" />				
+				<ATTRIBUTES TID="45"	RELATIVITY="1.00" />
+				<ATTRIBUTES TID="46"	RELATIVITY="1.00" />
+				<ATTRIBUTES TID="47"	RELATIVITY="1.00" />
+				<ATTRIBUTES TID="48"	RELATIVITY="1.00" />
+				<ATTRIBUTES TID="49"	RELATIVITY="1.00" />
+				<ATTRIBUTES TID="50"	RELATIVITY="1.10" />
+				<ATTRIBUTES TID="51"	RELATIVITY="1.00" />
+				<ATTRIBUTES TID="53"	RELATIVITY="1.00" />								
+				<ATTRIBUTES TID="54"	RELATIVITY="1.10" />								
+				<ATTRIBUTES TID="55"	RELATIVITY="0.95" />
+				<ATTRIBUTES TID="56"	RELATIVITY="1.00" />				
+				<ATTRIBUTES TID="57"	RELATIVITY="1.00" />				
+				<ATTRIBUTES TID="58"	RELATIVITY="0.90" />
+				<ATTRIBUTES TID="59"	RELATIVITY="0.90" />
+				<ATTRIBUTES TID="60"	RELATIVITY="1.00" />
+				<ATTRIBUTES TID="61"	RELATIVITY="1.00" />
+				<ATTRIBUTES TID="62"	RELATIVITY="1.00" />
+				<ATTRIBUTES TID="63"	RELATIVITY="1.00" />	
+			</NODE>
+		</FACTOR>
+		<FACTOR ID="FORMGROUP" NAME="Grouping by forms">
+			<NODE ID="FORMGROUPING" NAME="Form Grouping">
+				<ATTRIBUTES FORMID="01F" GROUPID="1" />
+				<ATTRIBUTES FORMID="02F" GROUPID="1" />
+				<ATTRIBUTES FORMID="01M" GROUPID="2" />
+				<ATTRIBUTES FORMID="02M" GROUPID="2" />
+				<ATTRIBUTES FORMID="03F" GROUPID="3" />
+				<ATTRIBUTES FORMID="03M" GROUPID="4" />
+				<ATTRIBUTES FORMID="04F" GROUPID="5" />
+				<ATTRIBUTES FORMID="05F" GROUPID="5" />
+				<ATTRIBUTES FORMID="06F" GROUPID="5" />
+				<ATTRIBUTES FORMID="04M" GROUPID="5" />
+				<ATTRIBUTES FORMID="05M" GROUPID="5" />
+				<ATTRIBUTES FORMID="06M" GROUPID="5" />
+				<ATTRIBUTES FORMID="07M" GROUPID="5" />
+				<ATTRIBUTES FORMID="08M" GROUPID="5" />
+				<ATTRIBUTES FORMID="07F" GROUPID="6" />
+				<ATTRIBUTES FORMID="08F" GROUPID="6" />
+				<ATTRIBUTES FORMID="09F" GROUPID="7" />
+				<ATTRIBUTES FORMID="09M" GROUPID="8" />
+				<ATTRIBUTES FORMID="10F" GROUPID="9" />
+				<ATTRIBUTES FORMID="10M" GROUPID="10" />
+			</NODE>
+			<NODE ID="FORMPROTCLASSRELATIVITY" NAME="Form Protection Class Relativity">
+				<ATTRIBUTES FORMID="01F" RELATIVITY="1.72" />
+				<ATTRIBUTES FORMID="02F" RELATIVITY="1.72" />
+				<ATTRIBUTES FORMID="01M" RELATIVITY="1.64" />
+				<ATTRIBUTES FORMID="02M" RELATIVITY="1.64" />
+				<ATTRIBUTES FORMID="03F" RELATIVITY="1.00" />
+				<ATTRIBUTES FORMID="03M" RELATIVITY="1.00" />
+				<ATTRIBUTES FORMID="04F" RELATIVITY="1.00" />
+				<ATTRIBUTES FORMID="05F" RELATIVITY="1.00" />
+				<ATTRIBUTES FORMID="06F" RELATIVITY="1.00" />
+				<ATTRIBUTES FORMID="04M" RELATIVITY="1.00" />
+				<ATTRIBUTES FORMID="05M" RELATIVITY="1.00" />
+				<ATTRIBUTES FORMID="06M" RELATIVITY="1.00" />
+				<ATTRIBUTES FORMID="07M" RELATIVITY="1.00" />
+				<ATTRIBUTES FORMID="08M" RELATIVITY="1.00" />
+				<ATTRIBUTES FORMID="07F" RELATIVITY="1.02" />
+				<ATTRIBUTES FORMID="08F" RELATIVITY="1.02" />
+				<ATTRIBUTES FORMID="09F" RELATIVITY="1.44" />
+				<ATTRIBUTES FORMID="09M" RELATIVITY="1.27" />
+				<ATTRIBUTES FORMID="10F" RELATIVITY="1.66" />
+				<ATTRIBUTES FORMID="10M" RELATIVITY="1.43" />
+			</NODE>
+			<NODE ID="GROUPCYCLE" NAME="GROUP RECURSION CYCLE" MAXGROUP="10">
+				<ATTRIBUTES TERRITORY="1"		CYCLE="0" />
+				<ATTRIBUTES TERRITORY="2"		CYCLE="0" />
+				<ATTRIBUTES TERRITORY="3"		CYCLE="0" />
+				<ATTRIBUTES TERRITORY="4"		CYCLE="0" />
+				<ATTRIBUTES TERRITORY="5"		CYCLE="0" />
+				<ATTRIBUTES TERRITORY="6"		CYCLE="0" />
+				<ATTRIBUTES TERRITORY="7"		CYCLE="0" />
+				<ATTRIBUTES TERRITORY="8"		CYCLE="0" />
+				<ATTRIBUTES TERRITORY="9"		CYCLE="0" />
+				<ATTRIBUTES TERRITORY="10"		CYCLE="0" />
+				<ATTRIBUTES TERRITORY="11"		CYCLE="0" />
+				<ATTRIBUTES TERRITORY="12"		CYCLE="0" />
+				<ATTRIBUTES TERRITORY="13"		CYCLE="0" />
+				<ATTRIBUTES TERRITORY="14"		CYCLE="0" />
+				<ATTRIBUTES TERRITORY="15"		CYCLE="0" />
+				<ATTRIBUTES TERRITORY="16"		CYCLE="0" />
+				<ATTRIBUTES TERRITORY="17"		CYCLE="0" />
+				<ATTRIBUTES TERRITORY="18"		CYCLE="0" />
+				<ATTRIBUTES TERRITORY="19"		CYCLE="0" />
+				<ATTRIBUTES TERRITORY="20"		CYCLE="0" />
+				<ATTRIBUTES TERRITORY="21"		CYCLE="0" />
+				<ATTRIBUTES TERRITORY="22"		CYCLE="0" />
+				<ATTRIBUTES TERRITORY="23"		CYCLE="0" />
+				<ATTRIBUTES TERRITORY="24"		CYCLE="0" />
+				<ATTRIBUTES TERRITORY="25"		CYCLE="0" />
+				<ATTRIBUTES TERRITORY="26"		CYCLE="0" />
+				<ATTRIBUTES TERRITORY="27"		CYCLE="0" />
+				<ATTRIBUTES TERRITORY="28"		CYCLE="0" />
+				<ATTRIBUTES TERRITORY="29"		CYCLE="0" />
+				<ATTRIBUTES TERRITORY="30"		CYCLE="0" />
+				<ATTRIBUTES TERRITORY="31"		CYCLE="0" />
+				<ATTRIBUTES TERRITORY="32"		CYCLE="0" />
+				<ATTRIBUTES TERRITORY="33"		CYCLE="0" />
+				<ATTRIBUTES TERRITORY="34"		CYCLE="0" />
+				<ATTRIBUTES TERRITORY="35"		CYCLE="0" />
+				<ATTRIBUTES TERRITORY="36"		CYCLE="0" />
+				<ATTRIBUTES TERRITORY="37"		CYCLE="0" />
+				<ATTRIBUTES TERRITORY="38"		CYCLE="0" />
+				<ATTRIBUTES TERRITORY="40"		CYCLE="0" />
+				<ATTRIBUTES TERRITORY="41"		CYCLE="0" />
+				<ATTRIBUTES TERRITORY="42"		CYCLE="0" />
+				<ATTRIBUTES TERRITORY="43"		CYCLE="0" />
+				<ATTRIBUTES TERRITORY="44"		CYCLE="0" />
+				<ATTRIBUTES TERRITORY="45"		CYCLE="0" />
+				<ATTRIBUTES TERRITORY="46"		CYCLE="0" />
+				<ATTRIBUTES TERRITORY="47"		CYCLE="0" />
+				<ATTRIBUTES TERRITORY="48"		CYCLE="0" />
+				<ATTRIBUTES TERRITORY="49"		CYCLE="0" />
+				<ATTRIBUTES TERRITORY="50"		CYCLE="0" />
+				<ATTRIBUTES TERRITORY="51"		CYCLE="0" />
+				<ATTRIBUTES TERRITORY="53"		CYCLE="0" />
+				<ATTRIBUTES TERRITORY="54"		CYCLE="0" />
+				<ATTRIBUTES TERRITORY="55"		CYCLE="0" />
+				<ATTRIBUTES TERRITORY="56"		CYCLE="0" />
+				<ATTRIBUTES TERRITORY="57"		CYCLE="0" />
+				<ATTRIBUTES TERRITORY="58"		CYCLE="0" />
+				<ATTRIBUTES TERRITORY="59"		CYCLE="0" />
+				<ATTRIBUTES TERRITORY="60"		CYCLE="0" />
+				<ATTRIBUTES TERRITORY="61"		CYCLE="0" />
+				<ATTRIBUTES TERRITORY="62"		CYCLE="0" />
+				<ATTRIBUTES TERRITORY="63"		CYCLE="0" />
+			</NODE>
+		</FACTOR>
+		<FACTOR ID="COVERAGE_GROUP" NAME="Base Coverage">
+			<NODE ID="COVERAGEGROUP" NAME="Coverage-Group ">
+				<ATTRIBUTES FORMTYPE="HO-2" FORMGROUP="1" COVERAGEGROUP="CG1" />
+				<ATTRIBUTES FORMTYPE="HO-2" FORMGROUP="2" COVERAGEGROUP="CG1" />
+				<ATTRIBUTES FORMTYPE="HO-2" FORMGROUP="3" COVERAGEGROUP="CG1" />
+				<ATTRIBUTES FORMTYPE="HO-2" FORMGROUP="4" COVERAGEGROUP="CG1" />
+				<ATTRIBUTES FORMTYPE="HO-2" FORMGROUP="5" COVERAGEGROUP="CG1" />
+				<ATTRIBUTES FORMTYPE="HO-2" FORMGROUP="6" COVERAGEGROUP="CG2" />
+				<ATTRIBUTES FORMTYPE="HO-2" FORMGROUP="7" COVERAGEGROUP="CG2" />
+				<ATTRIBUTES FORMTYPE="HO-2" FORMGROUP="8" COVERAGEGROUP="CG1" />
+				<ATTRIBUTES FORMTYPE="HO-2" FORMGROUP="9" COVERAGEGROUP="CG2" />
+				<ATTRIBUTES FORMTYPE="HO-2" FORMGROUP="10" COVERAGEGROUP="CG1" />
+				<ATTRIBUTES FORMTYPE="HO-3" FORMGROUP="1" COVERAGEGROUP="CG1" />
+				<ATTRIBUTES FORMTYPE="HO-3" FORMGROUP="2" COVERAGEGROUP="CG1" />
+				<ATTRIBUTES FORMTYPE="HO-3" FORMGROUP="3" COVERAGEGROUP="CG1" />
+				<ATTRIBUTES FORMTYPE="HO-3" FORMGROUP="4" COVERAGEGROUP="CG1" />
+				<ATTRIBUTES FORMTYPE="HO-3" FORMGROUP="5" COVERAGEGROUP="CG1" />
+				<ATTRIBUTES FORMTYPE="HO-3" FORMGROUP="6" COVERAGEGROUP="CG2" />
+				<ATTRIBUTES FORMTYPE="HO-3" FORMGROUP="7" COVERAGEGROUP="CG2" />
+				<ATTRIBUTES FORMTYPE="HO-3" FORMGROUP="8" COVERAGEGROUP="CG1" />
+				<ATTRIBUTES FORMTYPE="HO-3" FORMGROUP="9" COVERAGEGROUP="CG2" />
+				<ATTRIBUTES FORMTYPE="HO-3" FORMGROUP="10" COVERAGEGROUP="CG1" />
+				<ATTRIBUTES FORMTYPE="HO-4" FORMGROUP="1" COVERAGEGROUP="CG3" />
+				<ATTRIBUTES FORMTYPE="HO-4" FORMGROUP="2" COVERAGEGROUP="CG3" />
+				<ATTRIBUTES FORMTYPE="HO-4" FORMGROUP="3" COVERAGEGROUP="CG3" />
+				<ATTRIBUTES FORMTYPE="HO-4" FORMGROUP="4" COVERAGEGROUP="CG3" />
+				<ATTRIBUTES FORMTYPE="HO-4" FORMGROUP="5" COVERAGEGROUP="CG3" />
+				<ATTRIBUTES FORMTYPE="HO-4" FORMGROUP="6" COVERAGEGROUP="CG3" />
+				<ATTRIBUTES FORMTYPE="HO-4" FORMGROUP="7" COVERAGEGROUP="CG3" />
+				<ATTRIBUTES FORMTYPE="HO-4" FORMGROUP="8" COVERAGEGROUP="CG3" />
+				<ATTRIBUTES FORMTYPE="HO-4" FORMGROUP="9" COVERAGEGROUP="CG3" />
+				<ATTRIBUTES FORMTYPE="HO-4" FORMGROUP="10" COVERAGEGROUP="CG3" />
+				<ATTRIBUTES FORMTYPE="HO-5" FORMGROUP="1" COVERAGEGROUP="CG1" />
+				<ATTRIBUTES FORMTYPE="HO-5" FORMGROUP="2" COVERAGEGROUP="CG1" />
+				<ATTRIBUTES FORMTYPE="HO-5" FORMGROUP="3" COVERAGEGROUP="CG1" />
+				<ATTRIBUTES FORMTYPE="HO-5" FORMGROUP="4" COVERAGEGROUP="CG1" />
+				<ATTRIBUTES FORMTYPE="HO-5" FORMGROUP="5" COVERAGEGROUP="CG1" />
+				<ATTRIBUTES FORMTYPE="HO-5" FORMGROUP="6" COVERAGEGROUP="CG2" />
+				<ATTRIBUTES FORMTYPE="HO-5" FORMGROUP="7" COVERAGEGROUP="CG2" />
+				<ATTRIBUTES FORMTYPE="HO-5" FORMGROUP="8" COVERAGEGROUP="CG1" />
+				<ATTRIBUTES FORMTYPE="HO-5" FORMGROUP="9" COVERAGEGROUP="CG2" />
+				<ATTRIBUTES FORMTYPE="HO-5" FORMGROUP="10" COVERAGEGROUP="CG1" />
+				<ATTRIBUTES FORMTYPE="HO-6" FORMGROUP="1" COVERAGEGROUP="CG4" />
+				<ATTRIBUTES FORMTYPE="HO-6" FORMGROUP="2" COVERAGEGROUP="CG4" />
+				<ATTRIBUTES FORMTYPE="HO-6" FORMGROUP="3" COVERAGEGROUP="CG4" />
+				<ATTRIBUTES FORMTYPE="HO-6" FORMGROUP="4" COVERAGEGROUP="CG4" />
+				<ATTRIBUTES FORMTYPE="HO-6" FORMGROUP="5" COVERAGEGROUP="CG4" />
+				<ATTRIBUTES FORMTYPE="HO-6" FORMGROUP="6" COVERAGEGROUP="CG4" />
+				<ATTRIBUTES FORMTYPE="HO-6" FORMGROUP="7" COVERAGEGROUP="CG4" />
+				<ATTRIBUTES FORMTYPE="HO-6" FORMGROUP="8" COVERAGEGROUP="CG4" />
+				<ATTRIBUTES FORMTYPE="HO-6" FORMGROUP="9" COVERAGEGROUP="CG4" />
+				<ATTRIBUTES FORMTYPE="HO-6" FORMGROUP="10" COVERAGEGROUP="CG4" />
+			</NODE>
+		</FACTOR>
+		<FACTOR ID="NOOFDWELLINGUNITS" NAME="NO OF DWELLING UNITS">
+			<NODE ID="NOOFUNITS" NAME="NO OF UNITS">
+				<ATTRIBUTES NO_OF_UNITS_LESS_THAN="4" />
+				<ATTRIBUTES NO_OF_UNITS_GREATER_THAN="5" />
+			</NODE>
+		</FACTOR>
+		<FACTOR ID="TERMFACTOR" NAME="TERM FACTOR FOR POLICY">
+			<NODE ID="TERM_FACTOR" NAME="TERM FACTOR FOR POLICY IN MONTHS" MAXTERM="12">
+				<ATTRIBUTES TERM="MAXTERM" FACTOR="1" MONTH="12" />
+				<ATTRIBUTES TERM="MAXTERM_HALF" FACTOR="0.5" MONTH="6" />
+			</NODE>
+		</FACTOR>
+		<!-- Repair Cost -->
+		<FACTOR ID="REPAIR_COST_FACTOR" NAME="Repair Cost Factor">
+			<NODE ID="REPAIR_COST" NAME="Repair Cost Factor">
+				<ATTRIBUTES FACTOR="1.30" />
+			</NODE>
+		</FACTOR>
+		<!-- Replacement Cost 1.00 if 100%; 1.12 if at 90-99%; or 1.20 if 80-89%-->
+		<FACTOR ID="REPLACEMENT_COST_FACTOR" NAME="Replacement Cost Factor">
+			<NODE ID="REPLACEMENT_COST" NAME="Replacement Cost">
+				<ATTRIBUTES LOWER_PERCENTAGE_LIMIT="0" UPPER_PERCENTAGE_LIMIT="99" FACTOR="1.18" />
+				<ATTRIBUTES LOWER_PERCENTAGE_LIMIT="100" UPPER_PERCENTAGE_LIMIT="999" FACTOR="1.00" /> <!-- 999 JUST TO CHECK THE UPPER LIMIT. NORMALLY IT WILL NOT CROSS 100 -->
+			</NODE>
+		</FACTOR>
+		<!-- Minimum Home Premium -->
+		<FACTOR ID="MINIMUM_HOME_PREMIUM" NAME="Minimum Home Premium">
+			<NODE ID="MINIMUM_PREMIUM" NAME="Minimum Premium">
+				<ATTRIBUTES MINIMUM_VALUE="50" />
+			</NODE>
+		</FACTOR>
+		<FACTOR ID="RENTERS_DELUX_ENDORSEMENT" NAME="Delux Coverage">
+			<NODE ID="DELUX_ENDORSEMENT" NAME="Delux Endorsement Coverage" MIN_LIMIT="25000">
+				<ATTRIBUTES FACTOR="1.15"/>
+			</NODE>
+		</FACTOR>
+		
+		<FACTOR ID="COVERAGE_A" NAME=" COVERAGE A FOR HO-4 AND HO-6">
+			<NODE ID="COVERAGE_A_PERCENT" NAME="COVERAGE A PERCENT" MIN_LIMIT="2000">
+				<ATTRIBUTES FACTOR="0.1"/>
+			</NODE>
+		</FACTOR>
+		<FACTOR ID="LOSS_DISCOUNT_SURCHARGE" NAME="Loss Free Renewal Discount and Loss Surcharge">
+			<NODE ID="LFRDLS" NAME="Loss Factors">
+				<ATTRIBUTES YEARFROM="0" YEARTO="2" LOSSLO="0" LOSSUP="0" FACTOR="1.00" CREDIT="" />
+				<ATTRIBUTES YEARFROM="0" YEARTO="2" LOSSLO="1" LOSSUP="1" FACTOR="1.10"  CREDIT="10" />
+				<ATTRIBUTES YEARFROM="0" YEARTO="2" LOSSLO="2" LOSSUP="2" FACTOR="1.25"  CREDIT="25" />
+				<ATTRIBUTES YEARFROM="0" YEARTO="2" LOSSLO="3" LOSSUP="3" FACTOR="1.50"  CREDIT="50" />
+				<ATTRIBUTES YEARFROM="0" YEARTO="2" LOSSLO="4" LOSSUP="999999999" FACTOR="1.75"  CREDIT="75" />
+				<ATTRIBUTES YEARFROM="3" YEARTO="9999" LOSSLO="0" LOSSUP="0" FACTOR="0.94"  CREDIT="6" />
+				<ATTRIBUTES YEARFROM="3" YEARTO="9999" LOSSLO="1" LOSSUP="1" FACTOR="1.00"  CREDIT="" />
+				<ATTRIBUTES YEARFROM="3" YEARTO="9999" LOSSLO="2" LOSSUP="2" FACTOR="1.25"  CREDIT="25" />
+				<ATTRIBUTES YEARFROM="3" YEARTO="9999" LOSSLO="3" LOSSUP="3" FACTOR="1.50"  CREDIT="50" />
+				<ATTRIBUTES YEARFROM="3" YEARTO="9999" LOSSLO="4" LOSSUP="999999999" FACTOR="1.75"  CREDIT="75" />
+			</NODE>
+		</FACTOR>		
+		<FACTOR ID="PROT_DISCOUNT" NAME="Suburban Protection Class Rating Discount">
+			<NODE ID="SUB_PROT_DISCOUNT" NAME="">
+				<ATTRIBUTES PROTCLASS="8B" CREDIT="7" FACTOR=".93"/>
+				<ATTRIBUTES PROTCLASS="9"  CREDIT="7" FACTOR=".93"/>
+			</NODE>
+		</FACTOR>
+	</PRODUCT>
+</PRODUCTMASTER>

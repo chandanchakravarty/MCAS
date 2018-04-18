@@ -1,0 +1,191 @@
+﻿@model IEnumerable<MCAS.Web.Objects.MastersHelper.GSTModel>
+@using MCAS.Web.Objects.CommonHelper
+@using MCAS.Web.Objects.Resources.ClaimMasters;
+@using MCAS.Web.Objects.Resources.Common;
+@using MCAS.Globalisation
+@{
+    //ViewBag.Title = "GSTIndex";
+    ViewBag.Title = GSTIndex.Title;
+    Layout = "~/Views/Shared/_SystemAdminLayout.cshtml";
+    @Html.Hidden("oldgroup", 1)
+    SecurityPermissions myPemissions = (MCAS.Web.Objects.CommonHelper.SecurityPermissions)ViewData["UserPermissions"];
+}
+<script src='@Url.Content("~/Scripts/jquery-2.1.0.min.js")' type="text/javascript"></script>
+<script src='@Url.Content("~/Scripts/jquery.validate.min.js")' type="text/javascript"></script>
+<script src='@Url.Content("~/Scripts/jquery.validate.unobtrusive.min.js")' type="text/javascript"></script>
+<div class="dashboard-wrapper">
+    <!-- Bootstrap Container Start -->
+    <div class="container">
+        <!-- Page title start -->
+        <div class="row page-title">
+            <div class="col-lg-12">
+                <h2>
+                    @Common.SystemAdmin</h2>
+                <ul class="breadcrumb">
+                    <li>@GSTIndex.GSTSetting</li>
+                </ul>
+            </div>
+        </div>
+        <!-- Page title end -->
+        <hr>
+        <!-- Row start -->
+        <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <div class="panel panel-info">
+                    <div class="panel-heading clearfix">
+                        <i class="icon-check-sign"></i>
+                        <h3 class="panel-title">
+                            @GSTIndex.GSTSetting
+                        </h3>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            <div class="panel panel-info">
+                                <div class="panel-sub-heading">
+                                    <span class="text-danger">*</span> Search Screen
+                                </div>
+                                <div class="panel-body">
+                                    @using (Html.BeginForm("GSTIndex", "ClaimMasters", FormMethod.Post, new { role = "form", @class = "form-horizontal" }))
+                                    {
+                                        <div class="row">
+                                            <div class="col-lg-6">
+                                                <div class="form-group">
+                                                    <label class="col-sm-4" for="ddlGst">
+                                                        @GSTIndex.GSTDescription
+                                                    </label>
+                                                    <div class="col-sm-6">
+                                                        <select name="ddlGst" id="ddlGst" class="col-lg-12 form-control">
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row top-buffer">
+                                        </div>
+                                        <div class="row top-buffer">
+                                        </div> 
+                                        <div class="row">
+                                            <div class="col-lg-12 text-center">
+                                                @*<button type="submit" class="btn btn-primary">
+                                        Back</button>*@
+                                                <button type="submit" class="btn btn-info">
+                                                    @Common.Search</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                @if (@myPemissions.Write)
+                                                {
+                                                    @Html.ActionLink(Common.AddNew, "GSTEditor", "ClaimMasters",new{}, new { @class = "btn btn-info" })
+                                                }
+                                            </div>
+                                        </div>
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Row End -->
+                    <!-- Row Start -->
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class="col-lg-12 text-center">
+                                <h4 class="text-info">
+                                    @Common.SearchResults</h4>
+                                <hr>
+                            </div>
+                            <div class="col-lg-12">
+                                <div class="table-responsive">
+                                    <div class="row-fluid">
+                                        <div class="dataTables_wrapper" id="Diary_wrapper" role="grid">
+                                            <table cellspacing="0" width="100%" id="tableDiarySrc" class="table table-striped table-hover display">
+                                                <thead>
+                                                    <tr>
+                                                        <th style="width: 10%; padding-left: 9px">
+                                                            @GSTIndex.GSTType
+                                                        </th>
+                                                        <th style="width: 30%; padding-left: 9px">
+                                                            @GSTIndex.GSTDescription
+                                                        </th>
+                                                        <th style="width: 15%; padding-left: 9px">
+                                                            @GSTIndex.EffectiveDateFrom
+                                                        </th>
+                                                        <th style="width: 15%; padding-left: 9px">
+                                                            @GSTIndex.EffectiveDateTo
+                                                        </th>
+                                                        <th style="width: 10%; padding-left: 9px">
+                                                            @GSTIndex.Rate
+                                                        </th>
+                                                        <th style="width: 20%;">
+                                                            <span class="block text-right">@Common.Select</span>
+                                                        </th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    @{
+                                                        int trid = 1;
+                                                        var display = "";
+
+                                                        foreach (var item in Model)
+                                                        {
+                                                        <tr group='@(trid)' style="display:@display;">
+                                                            <td>
+                                                                @Html.DisplayFor(modelItem => item.GSTType)
+                                                            </td>
+                                                            <td>@Html.DisplayFor(modelItem => item.GSTDescrpition)
+                                                            </td>
+                                                            @*<td>@Html.DisplayFor(modelItem => item.EffectiveDateFrom)</td>*@
+                                                            <td>@item.EffectiveDateFrom.Value.ToShortDateString()
+                                                            </td>
+                                                            @*<td>@Html.DisplayFor(modelItem => item.EffectiveDateTo)</td>*@
+                                                            <td>@item.EffectiveDateTo.Value.ToShortDateString()
+                                                            </td>
+                                                            <td format="">@Html.DisplayFor(modelItem => item.Rate)
+                                                            </td>
+                                                            <td>
+                                                                @if (@Model.FirstOrDefault().UserPermissions.Write)
+                                                                {
+                                                                    @Html.EncodedActionLink(Common.Edit, "GSTEditor", new { id = item.Id, pageMode = "Edit" }, new { @class = "btn btn-xs btn-warning" })
+                                                                }
+                                                                @Html.EncodedActionLink(Common.View, "GSTEditor", new { id = item.Id, pageMode = "View" }, new { @class = "btn btn-xs btn-info" })
+                                                            </td>
+                                                        </tr>
+                                
+                                                        }}
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Row End -->
+                </div>
+                <!-- Bootstrap Container End -->
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    $(document).ready(function () {
+        loadGstList();
+    });
+
+
+    function loadGstList() {
+        $.ajax({
+            url: '@(Url.Action("FillGstList"))',
+            cache: false,
+            success: function (data) {
+                $("#ddlGst").empty();
+                $.each(data, function (index, optiondata) {
+                    if (optiondata.GSTType == '@ViewBag.gsttype')
+                        $("#ddlGst").append("<option value='" + optiondata.GSTType + "' selected=selected>" + optiondata.GSTDescrpition + "</option>");
+                    else
+                        $("#ddlGst").append("<option value='" + optiondata.GSTType + "'>" + optiondata.GSTDescrpition + "</option>");
+                });
+            },
+            error: function (reponse) {
+                alert("error : " + reponse);
+            }
+        });
+    }
+    
+</script>

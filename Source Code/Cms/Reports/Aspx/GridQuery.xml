@@ -1,0 +1,100 @@
+﻿<GridQuery>
+  <SelectTables>
+    <Table TableID="1">
+      <Name>MNT_USER_LIST</Name>
+    </Table>
+    <Table TableID="2">
+      <Name>MNT_USER_TYPES</Name>
+    </Table>
+  </SelectTables>
+  
+  <FromClause>
+    <From>
+      <TableID>1</TableID>
+    </From>
+    <Joins>
+      <Join>
+        <JoinType>InnerJoin</JoinType>
+        <LeftTable>1</LeftTable>
+        <RightTable>2</RightTable>
+        <JoinConditions>
+          <Condition>
+            <Operand1>
+              <TableID>1</TableID>
+              <ColumnName>USER_TYPE_ID</ColumnName>
+            </Operand1>
+            <Operator>Comparison.Equals</Operator>
+            <Operand2>
+              <TableID>2</TableID>
+              <ColumnName>USER_TYPE_ID</ColumnName>
+            </Operand2>
+          </Condition>
+        </JoinConditions>
+      </Join>
+    </Joins>
+  </FromClause>
+
+  <SelectColumns>
+    <Column>
+      <TableID>2</TableID>
+      <ColumnName>USER_TYPE_DESC</ColumnName>
+      <ColumnHeading>User Type</ColumnHeading>
+      <Sortable></Sortable>
+      <Searchable></Searchable>
+    </Column>
+
+    <Column>
+      <TableID>1</TableID>
+      <ColumnName>USER_FNAME</ColumnName>
+      <ColumnHeading>First Name</ColumnHeading>
+      <Sortable></Sortable>
+      <Searchable></Searchable>
+    </Column>
+
+    <Column>
+      <TableID>1</TableID>
+      <ColumnName>USER_LNAME</ColumnName>
+      <ColumnHeading>Last Name</ColumnHeading>
+      <Sortable></Sortable>
+      <Searchable></Searchable>
+    </Column>
+
+    <Column>
+      <TableID>1</TableID>
+      <ColumnName>USER_LOGIN_ID</ColumnName>
+      <ColumnHeading>LoginID</ColumnHeading>
+      <Sortable></Sortable>
+      <Searchable></Searchable>
+    </Column>
+
+  </SelectColumns>
+
+  <WhereClause>
+    <Condition>
+      <Operand1>
+        <TableID>1</TableID>
+        <ColumnName>USER_SYSTEM_ID</ColumnName>
+      </Operand1>
+      <Operator>Comparison.Equals</Operator>
+      <Operand2>
+        w001
+      </Operand2>
+    </Condition>
+  </WhereClause>
+
+  <OrderBy>
+    <Column>
+      <TableID>1</TableID>
+      <ColumnName>USER_FNAME</ColumnName>
+      <SortOrder>ASC</SortOrder>  
+    </Column>
+
+    <Column>
+      <TableID>1</TableID>
+      <ColumnName>USER_LNAME</ColumnName>
+      <SortOrder>ASC</SortOrder>
+    </Column>
+    
+  </OrderBy>
+
+</GridQuery>

@@ -1,0 +1,555 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Root>
+
+  <PageTitle>
+    <Culture Code="en-US">Co-Applicant Details</Culture>
+    <Culture Code="pt-BR">Co-Applicant Details</Culture>
+    <Culture Code="zh-SG">Co-Applicant Details</Culture>
+  </PageTitle>
+  <ElementsLayout Caption_Width="18" Element_Width="82">TOPBOTTOM</ElementsLayout>
+  <PageElement name="txtZIP_CODE" type="TextBox" Desc=""
+      IsMandatory="Yes"
+      IsReadOnly="No"
+      IsDisabled="No"
+      IsDisplay="Yes"
+      IsFormatingRequired="No" JsFunctionToFormat="" OnClickJSFunction=""
+      OnChangeJSFunction="" >
+    <Style Position="relative" Top="0" Left="10" CssClass="midcolora" ParentTableCell="ttdCO_APPLI_BUSINESS_PHONE"/>
+    <rev Enabled="No" ExpKey="" />
+    <Culture Code="en-US" Desc="set Label and Message for English language">
+      <Caption>Zip Code</Caption>
+      <rfvMessage>Please enter Zip Code</rfvMessage>
+      <DefaultValue></DefaultValue>
+    </Culture>
+    <Culture Code="zh-SG" Desc="set Label and Message for Singapore language">
+      <Caption>Zip Code</Caption>
+      <rfvMessage>Please enter Zip Code</rfvMessage>
+      <DefaultValue></DefaultValue>
+    </Culture>
+  </PageElement>
+  <PageElement name="txtFIRST_NAME" type="TextBox" Desc=""
+        IsMandatory="Yes"
+        IsReadOnly="No"
+        IsDisabled="No"
+        IsDisplay="Yes"
+        MaxLength="20"
+        IsFormatingRequired="No" JsFunctionToFormat="" OnClickJSFunction=""
+        OnChangeJSFunction="" >
+    <Style Position="relative" Top="0" Left="10" CssClass="midcolora" />
+    <Culture Code="en-US" Desc="set Label and Message for English language">
+      <Caption>First Name</Caption>
+      <DefaultValue></DefaultValue>
+      <rfvMessage>Please enter First Name</rfvMessage>
+      <revExpMessage></revExpMessage>
+    </Culture>
+    <Culture Code="zh-SG" Desc="set Label and Message for Singapore language">
+      <Caption>First Name</Caption>
+      <DefaultValue></DefaultValue>
+      <rfvMessage>Please enter First Name</rfvMessage>
+      <revExpMessage></revExpMessage>
+    </Culture>
+  </PageElement>
+  <PageElement name="txtLAST_NAME" type="TextBox" Desc=""
+       IsMandatory="Yes"
+       IsReadOnly="No"
+       IsDisabled="No"
+       IsDisplay="Yes"
+       MaxLength="20"
+       IsFormatingRequired="No" JsFunctionToFormat="" OnClickJSFunction=""
+       OnChangeJSFunction="" >
+    <Style Position="relative" Top="0" Left="10" CssClass="midcolora" />
+    <Culture Code="en-US" Desc="set Label and Message for English language">
+      <Caption>Last Name</Caption>
+      <DefaultValue></DefaultValue>
+      <rfvMessage>Please enter Last Name</rfvMessage>
+      <revExpMessage></revExpMessage>
+    </Culture>
+    <Culture Code="zh-SG" Desc="set Label and Message for Singapore language">
+      <Caption>Last Name</Caption>
+      <DefaultValue></DefaultValue>
+      <rfvMessage>Please enter Last Name</rfvMessage>
+      <revExpMessage></revExpMessage>
+    </Culture>
+  </PageElement>
+
+  <PageElement name="txtCO_APPL_DOB" type="TextBox" Desc=""
+         IsMandatory="Yes"
+         IsReadOnly="No"
+         IsDisabled="No"
+         IsDisplay="Yes"
+         IsFormatingRequired="No" JsFunctionToFormat="" OnClickJSFunction=""
+         OnChangeJSFunction="" >
+    <Style Position="relative" Top="0" Left="10" CssClass="midcolora" ParentTableCell="ttdZIP_CODE"/>
+    <rev Display="Dynamic" Enabled="Yes" ExpKey="(0[1-9]|[1-9]|1[012])[- /.](0[1-9]|[1-9]|[12][0-9]|3[01])[- /.](19|20)\d\d"/>
+    <Culture Code="en-US" Desc="set Label and Message for English language">
+      <DefaultValue></DefaultValue>
+      <revExpMessage>Date should be in 'dd/mm/yyyy' format. </revExpMessage>
+      <rfvMessage>Please enter Date of Birth</rfvMessage>
+    </Culture>
+    <Culture Code="zh-SG" Desc="set Label and Message for Singapore language">
+      <DefaultValue></DefaultValue>
+      <revExpMessage>Date should be in 'dd/mm/yyyy' format. </revExpMessage>
+      <rfvMessage>Please enter Date of Birth</rfvMessage>
+    </Culture>
+  </PageElement>
+
+
+  <PageElement name="txtADDRESS2" type="TextBox" Desc=""
+         IsMandatory="No"
+         IsReadOnly="No"
+         IsDisabled="No"
+         IsDisplay="Yes"
+         IsFormatingRequired="No" JsFunctionToFormat="" OnClickJSFunction=""
+         OnChangeJSFunction="" >
+    <Style Position="relative" Top="0" Left="10" CssClass="midcolora" ParentTableCell="ttdCOUNTRY"/>
+    <rev Enabled="No" ExpKey="" />
+    <Culture Code="en-US" Desc="set Label and Message for English language">
+      <Caption>Address2</Caption>
+      <DefaultValue></DefaultValue>
+    </Culture>
+    <Culture Code="zh-SG" Desc="set Label and Message for Singapore language">
+      <Caption>Address2</Caption>
+      <DefaultValue></DefaultValue>
+    </Culture>
+  </PageElement>
+
+
+  <PageElement name="txtADDRESS1" type="TextBox" Desc=""
+       IsMandatory="Yes"
+       IsReadOnly="No"
+       IsDisabled="No"
+       IsDisplay="Yes"
+       IsFormatingRequired="No" JsFunctionToFormat="" OnClickJSFunction=""
+       OnChangeJSFunction="" >
+    <Style Position="relative" Top="0" Left="10" CssClass="midcolora" ParentTableCell="ttdCITY"/>
+    <rev Enabled="No" ExpKey="" />
+    <Culture Code="en-US" Desc="set Label and Message for English language">
+      <Caption>Address1</Caption>
+      <rfvMessage>Please enter Address</rfvMessage>
+      <DefaultValue></DefaultValue>
+    </Culture>
+    <Culture Code="zh-SG" Desc="set Label and Message for Singapore language">
+      <Caption>Address1</Caption>
+      <rfvMessage>Please enter Address</rfvMessage>
+      <DefaultValue></DefaultValue>
+    </Culture>
+  </PageElement>
+
+
+  <PageElement name="cmbCO_APPL_MARITAL_STATUS" type="DDL" Desc=""
+     IsMandatory="Yes"
+     IsReadOnly="No"
+     IsDisabled="No"
+     IsDisplay="Yes"
+     IsFormatingRequired="No" JsFunctionToFormat="" OnClickJSFunction=""
+     OnChangeJSFunction="" >
+    <Style Position="relative" Top="0" Left="10" CssClass="midcolora" ParentTableCell="ttdADDRESS1"/>
+    <rev Enabled="No" ExpKey="" />
+    <Culture Code="en-US" Desc="set Label and Message for English language">
+      <Caption>Marital Status </Caption>
+      <rfvMessage>Please select Marital Status</rfvMessage>
+      <DefaultValue></DefaultValue>
+    </Culture>
+    <Culture Code="zh-SG" Desc="set Label and Message for Singapore language">
+      <Caption>Marital Status </Caption>
+      <rfvMessage>Please select Marital Status</rfvMessage>
+      <DefaultValue></DefaultValue>
+    </Culture>
+  </PageElement>
+  <PageElement name="cmbCO_APPL_GENDER" type="DDL" Desc=""
+     IsMandatory="Yes"
+     IsReadOnly="No"
+     IsDisabled="No"
+     IsDisplay="Yes"
+     IsFormatingRequired="No" JsFunctionToFormat="" OnClickJSFunction=""
+     OnChangeJSFunction="" >
+    <Style Position="relative" Top="0" Left="10" CssClass="midcolora" ParentTableCell="ttdADDRESS2"/>
+    <rev Enabled="No" ExpKey="" />
+    <Culture Code="en-US" Desc="set Label and Message for English language">
+      <Caption>Gender</Caption>
+      <rfvMessage>Please select Gender</rfvMessage>
+      <DefaultValue></DefaultValue>
+    </Culture>
+    <Culture Code="zh-SG" Desc="set Label and Message for Singapore language">
+      <Caption>Gender</Caption>
+      <rfvMessage>Please select Gender</rfvMessage>
+      <DefaultValue></DefaultValue>
+    </Culture>
+  </PageElement>
+
+  <PageElement name="cmbSTATE" type="DDL" Desc=""
+     IsMandatory="Yes"
+     IsReadOnly="No"
+     IsDisabled="No"
+     IsDisplay="Yes"
+     IsFormatingRequired="No" JsFunctionToFormat="" OnClickJSFunction=""
+     OnChangeJSFunction="" >
+    <Style Position="relative" Top="0" Left="10" CssClass="midcolora" ParentTableCell="ttdPHONE"/>
+    <rev Enabled="No" ExpKey="" />
+    <Culture Code="en-US" Desc="set Label and Message for English language">
+      <Caption>State</Caption>
+      <rfvMessage>Please select State</rfvMessage>
+      <DefaultValue></DefaultValue>
+    </Culture>
+    <Culture Code="zh-SG" Desc="set Label and Message for Singapore language">
+      <Caption>State</Caption>
+      <rfvMessage>Please select State</rfvMessage>
+      <DefaultValue></DefaultValue>
+    </Culture>
+  </PageElement>
+
+  <PageElement name="hlkZipLookup" type="HyperLink" Desc="" IsMandatory="No" IsReadOnly="No" IsDisabled="Yes"  IsDisplay="No"
+          JsFunctionToFormat="" OnClickJSFunction=""  OnChangeJSFunction="">
+    <rev Enabled="No" ExpKey=""></rev>
+  </PageElement>
+
+
+  <PageElement name="ttrREGIONAL_IDENTIFICATION" type="TR" Desc="" IsMandatory="No" IsReadOnly="No" IsDisabled="Yes"  IsDisplay="No"
+					 JsFunctionToFormat="" OnClickJSFunction=""  OnChangeJSFunction="">
+  
+  </PageElement>
+
+  <PageElement name="ttrCO_APPL_RELATIONSHIP" type="TR" Desc="" IsMandatory="No" IsReadOnly="No" IsDisabled="No"  IsDisplay="Yes"
+					 JsFunctionToFormat="" OnClickJSFunction=""  OnChangeJSFunction="">
+   
+  </PageElement>
+
+  <PageElement name="ttrACCOUNT_INFORMATION" type="TR" Desc="" IsMandatory="No" IsReadOnly="No" IsDisabled="No"  IsDisplay="No"
+          JsFunctionToFormat="" OnClickJSFunction=""  OnChangeJSFunction="">
+   
+  </PageElement>
+  <PageElement name="ttrSUFFIX" type="TR" Desc="" IsMandatory="No" IsReadOnly="No" IsDisabled="No"  IsDisplay="Yes"
+          JsFunctionToFormat="" OnClickJSFunction=""  OnChangeJSFunction="">
+    
+  </PageElement>
+  <PageElement name="hlkTITLE" type="ANCHOR" Desc="" IsMandatory="No" IsReadOnly="No" IsDisabled="Yes"  IsDisplay="No"
+					 JsFunctionToFormat="" OnClickJSFunction=""  OnChangeJSFunction="">
+   
+  </PageElement>
+  <PageElement name="ttrREMARKS" type="TR" Desc="" IsMandatory="No" IsReadOnly="No" IsDisabled="Yes"  IsDisplay="No"
+					 JsFunctionToFormat="" OnClickJSFunction=""  OnChangeJSFunction="">
+
+  </PageElement>
+  <PageElement name="txtDISTRICT" type="TextBox" Desc=""
+          IsMandatory="No"
+          IsReadOnly="No"
+          IsDisabled="Yes"
+          IsDisplay="No"
+          IsFormatingRequired="No" JsFunctionToFormat="" OnClickJSFunction=""
+          OnChangeJSFunction="" >
+    <Style Position="relative" Top="0" Left="10" CssClass="midcolora" />
+    <rev Enabled="No" ExpKey="" />
+    <Culture Code="en-US" Desc="set Label and Message for English language">
+      <Caption>District</Caption>
+      <DefaultValue></DefaultValue>
+    </Culture>
+    <Culture Code="zh-SG" Desc="set Label and Message for Singapore language">
+      <Caption>District</Caption>
+      <DefaultValue></DefaultValue>
+    </Culture>
+  </PageElement>
+  <PageElement name="txtCITY" type="TextBox" Desc=""
+       IsMandatory="No"
+       IsReadOnly="No"
+       IsDisabled="No"
+       IsDisplay="Yes"
+       IsFormatingRequired="No" JsFunctionToFormat="" OnClickJSFunction=""
+       OnChangeJSFunction="">
+    <Style Position="relative" Top="0" Left="10" CssClass="midcolora" ParentTableCell="ttdSTATE" />
+    <rev Enabled="No" ExpKey="" />
+    <Culture Code="en-US" Desc="set Label and Message for English language">
+      <Caption>City</Caption>
+      <DefaultValue></DefaultValue>
+    </Culture>
+    <Culture Code="zh-SG" Desc="set Label and Message for Singapore language">
+      <Caption>City</Caption>
+      <DefaultValue></DefaultValue>
+    </Culture>
+  </PageElement>
+  <PageElement name="btnPullCustomerAddress" type="CmsButton" Desc=""
+       IsMandatory="No"
+       IsReadOnly="No"
+       IsDisabled="No"
+       IsDisplay="Yes"
+       IsFormatingRequired="No" JsFunctionToFormat="" OnClickJSFunction=""
+       OnChangeJSFunction="" >
+    <Style Position="relative" Top="0" Left="10" CssClass="midcolora" ParentTableCell="ttdDISTRICT"/>
+    <Culture Code="en-US" Desc="set Label and Message for English language">
+      <Caption>Pull Customer Address</Caption>
+      <DefaultValue></DefaultValue>
+    </Culture>
+    <Culture Code="zh-SG" Desc="set Label and Message for Singapore language">
+      <Caption>Pull Customer Address</Caption>
+      <DefaultValue></DefaultValue>
+    </Culture>
+  </PageElement>
+  <PageElement name="txtNUMBER" type="TextBox" Desc=""
+         IsMandatory="No"
+         IsReadOnly="No"
+         IsDisabled="Yes"
+         IsDisplay="No"
+         IsFormatingRequired="No" JsFunctionToFormat="" OnClickJSFunction=""
+         OnChangeJSFunction="" >
+    <Style Position="relative" Top="0" Left="10" CssClass="midcolora" />
+    <rev Enabled="No" ExpKey="" />
+    <Culture Code="en-US" Desc="set Label and Message for English language">
+      <Caption>Number</Caption>
+      <DefaultValue></DefaultValue>
+    </Culture>
+    <Culture Code="zh-SG" Desc="set Label and Message for Singapore language">
+      <Caption>Number</Caption>
+      <DefaultValue></DefaultValue>
+    </Culture>
+  </PageElement>
+
+  <PageElement name="cmbCOUNTRY" type="DDL" Desc=""
+               IsMandatory="No"
+               IsReadOnly="No"
+               IsDisabled="No"
+               IsDisplay="Yes"
+               IsFormatingRequired="No" JsFunctionToFormat="" OnClickJSFunction=""
+               OnChangeJSFunction="" >
+    <Style Position="relative" Top="0" Left="10" CssClass="midcolora"  ParentTableCell="ttdCPF_CNPJ"/>
+    <rev Enabled="No"/>
+    <Culture Code="en-US" Desc="set Label and Message for English language">
+      <Caption>Country</Caption>
+      <DefaultValue>7</DefaultValue>
+    </Culture>
+    <Culture Code="zh-SG" Desc="set Label and Message for Singapore language">
+      <Caption>Country</Caption>
+      <DefaultValue>7</DefaultValue>
+    </Culture>
+  </PageElement>
+
+  <PageElement name="cmbTITLE" type="DDL" Desc=""
+               IsMandatory="No"
+               IsReadOnly="No"
+               IsDisabled="No"
+               IsDisplay="Yes"
+               IsFormatingRequired="No" JsFunctionToFormat="" OnClickJSFunction=""
+               OnChangeJSFunction="" >
+    <Style Position="relative" Top="0" Left="10" CssClass="midcolora"  ParentTableCell="ttdAPPLICANT_TYPE"/>
+    <rev Enabled="No"/>
+    <Culture Code="en-US" Desc="set Label and Message for English language">
+      <Caption>Title</Caption>
+      <DefaultValue></DefaultValue>
+    </Culture>
+    <Culture Code="zh-SG" Desc="set Label and Message for Singapore language">
+      <Caption>Title</Caption>
+      <DefaultValue></DefaultValue>
+    </Culture>
+  </PageElement>
+  <PageElement name="txtPHONE" type="TextBox" Desc=""
+				IsMandatory="No"
+				IsReadOnly="No"
+				IsDisabled="No"
+				IsDisplay="Yes"
+				IsFormatingRequired="No" JsFunctionToFormat="" OnClickJSFunction=""
+				OnChangeJSFunction="" >
+    <Style Position="relative" Top="0" Left="10" CssClass="midcolora" ParentTableCell="ttdEXT"/>
+    <rev Enabled="No" ExpKey="" />
+    <Culture Code="en-US" Desc="set Label and Message for English language">
+      <Caption>Home Phone</Caption>
+      <DefaultValue></DefaultValue>
+    </Culture>
+    <Culture Code="zh-SG" Desc="set Label and Message for Singapore language">
+      <Caption>Home Phone</Caption>
+      <DefaultValue></DefaultValue>
+    </Culture>
+  </PageElement>
+  <PageElement name="txtCO_APPLI_BUSINESS_PHONE" type="TextBox" Desc=""
+				IsMandatory="No"
+				IsReadOnly="No"
+				IsDisabled="No"
+				IsDisplay="No"
+				IsFormatingRequired="No" JsFunctionToFormat="" OnClickJSFunction=""
+				OnChangeJSFunction="" >
+    <Style Position="relative" Top="0" Left="10" CssClass="midcolora" />
+    <rev Enabled="No" ExpKey="" />
+    <Culture Code="en-US" Desc="set Label and Message for English language">
+      <Caption>Business Phone</Caption>
+      <DefaultValue></DefaultValue>
+    </Culture>
+    <Culture Code="zh-SG" Desc="set Label and Message for Singapore language">
+      <Caption>Business Phone</Caption>
+      <DefaultValue></DefaultValue>
+    </Culture>
+  </PageElement>
+  <PageElement name="txtEXT" type="TextBox" Desc=""
+				IsMandatory="No"
+				IsReadOnly="No"
+				IsDisabled="No"
+				IsDisplay="No"
+				IsFormatingRequired="No" JsFunctionToFormat="" OnClickJSFunction=""
+				OnChangeJSFunction="" >
+    <Style Position="relative" Top="0" Left="10" CssClass="midcolora" />
+    <rev Enabled="No" ExpKey="" />
+    <Culture Code="en-US" Desc="set Label and Message for English language">
+      <Caption>Extension</Caption>
+      <DefaultValue></DefaultValue>
+    </Culture>
+    <Culture Code="zh-SG" Desc="set Label and Message for Singapore language">
+      <Caption>Extension</Caption>
+      <DefaultValue></DefaultValue>
+    </Culture>
+  </PageElement>
+  <PageElement name="txtMOBILE" type="TextBox" Desc=""
+				IsMandatory="No"
+				IsReadOnly="No"
+				IsDisabled="No"
+				IsDisplay="Yes"
+				IsFormatingRequired="No" JsFunctionToFormat="" OnClickJSFunction=""
+				OnChangeJSFunction="" >
+    <Style Position="relative" Top="0" Left="10" CssClass="midcolora" ParentTableCell="ttdFAX"/>
+    <rev Enabled="No" ExpKey="" />
+    <Culture Code="en-US" Desc="set Label and Message for English language">
+      <Caption>Mobile Phone</Caption>
+      <DefaultValue></DefaultValue>
+    </Culture>
+    <Culture Code="zh-SG" Desc="set Label and Message for Singapore language">
+      <Caption>Mobile Phone</Caption>
+      <DefaultValue></DefaultValue>
+    </Culture>
+  </PageElement>
+
+  <PageElement name="txtEMAIL" type="TextBox" Desc=""
+       IsMandatory="No"
+       IsReadOnly="No"
+       IsDisabled="No"
+       IsDisplay="Yes"
+       IsFormatingRequired="No" JsFunctionToFormat="" OnClickJSFunction=""
+       OnChangeJSFunction="" >
+    <Style Position="relative" Top="0" Left="10" CssClass="midcolora" ParentTableCell="ttdMOBILE"/>
+    <rev Enabled="No" ExpKey="" />
+    <Culture Code="en-US" Desc="set Label and Message for English language">
+      <Caption>Email Address</Caption>
+      <DefaultValue></DefaultValue>
+    </Culture>
+    <Culture Code="zh-SG" Desc="set Label and Message for Singapore language">
+      <Caption>Email Address</Caption>
+      <DefaultValue></DefaultValue>
+    </Culture>
+  </PageElement>
+
+  <PageElement name="txtFAX" type="TextBox" Desc=""
+       IsMandatory="No"
+       IsReadOnly="No"
+       IsDisabled="No"
+       IsDisplay="No"
+       IsFormatingRequired="No" JsFunctionToFormat="" OnClickJSFunction=""
+       OnChangeJSFunction="" >
+    <Style Position="relative" Top="0" Left="10" CssClass="midcolora"/>
+    <rev Enabled="No" ExpKey="" />
+    <Culture Code="en-US" Desc="set Label and Message for English language">
+      <Caption>Fax Number </Caption>
+      <DefaultValue></DefaultValue>
+    </Culture>
+    <Culture Code="zh-SG" Desc="set Label and Message for Singapore language">
+      <Caption>Fax Number</Caption>
+      <DefaultValue></DefaultValue>
+    </Culture>
+  </PageElement>
+
+  <PageElement name="cmbAPPLICANT_TYPE" type="DDL" Desc=""
+       IsMandatory="No"
+       IsReadOnly="No"
+       IsDisabled="No"
+       IsDisplay="No"
+       IsFormatingRequired="No" JsFunctionToFormat="" OnClickJSFunction=""
+       OnChangeJSFunction="" >
+    <Style Position="relative" Top="0" Left="10" CssClass="midcolora"/>
+    <rev Enabled="No" ExpKey="" />
+    <Culture Code="en-US" Desc="set Label and Message for English language">
+      <Caption>Type</Caption>
+      <DefaultValue>11110</DefaultValue>
+      <rfvMessage>Please Select Type</rfvMessage>
+    </Culture>
+    <Culture Code="zh-SG" Desc="set Label and Message for Singapore language">
+      <Caption>Type</Caption>
+      <DefaultValue>11110</DefaultValue>
+      <rfvMessage>Please Select Type</rfvMessage>
+    </Culture>
+  </PageElement>
+  <PageElement name="txtCONTACT_CODE" type="TextBox" Desc=""
+        IsMandatory="No"
+        IsReadOnly="No"
+        IsDisabled="No"
+        IsDisplay="No"
+        IsFormatingRequired="No" JsFunctionToFormat="" OnClickJSFunction=""
+        OnChangeJSFunction="" >
+    <Style Position="relative" Top="0" Left="10" CssClass="midcolora"/>
+    <rev Enabled="No" ExpKey="" />
+    <Culture Code="en-US" Desc="set Label and Message for English language">
+      <Caption>Co-ApplicantCode</Caption>
+      <DefaultValue></DefaultValue>
+      <rfvMessage></rfvMessage>
+    </Culture>
+    <Culture Code="zh-SG" Desc="set Label and Message for Singapore language">
+      <Caption>Co-ApplicantCode</Caption>
+      <DefaultValue></DefaultValue>
+      <rfvMessage></rfvMessage>
+    </Culture>
+  </PageElement>
+
+  <PageElement name="txtCPF_CNPJ" type="TextBox" Desc=""
+       IsMandatory="No"
+       IsReadOnly="No"
+       IsDisabled="No"
+       IsDisplay="Yes"
+       IsFormatingRequired="No" JsFunctionToFormat="" OnClickJSFunction=""
+       OnChangeJSFunction="" >
+    <Style Position="relative" Top="0" Left="10" CssClass="midcolora" ParentTableCell="ttdCONTACT_CODE"/>
+    <rev Enabled="No" ExpKey="" />
+    <Culture Code="en-US" Desc="set Label and Message for English language">
+      <Caption>Social Security Number</Caption>
+      <DefaultValue></DefaultValue>
+    </Culture>
+    <Culture Code="zh-SG" Desc="set Label and Message for Singapore language">
+      <Caption>Social Security Number</Caption>
+      <DefaultValue></DefaultValue>
+    </Culture>
+  </PageElement>
+  
+     
+
+ <PageElement name="txtSUFFIX" type="TextBox" Desc=""
+         IsMandatory="No"
+         IsReadOnly="No"
+         IsDisabled="No"
+         IsDisplay="Yes"
+         IsFormatingRequired="No" JsFunctionToFormat="" OnClickJSFunction=""
+         OnChangeJSFunction="" >
+    <Style Position="relative" Top="0" Left="10" CssClass="midcolora" ParentTableCell="ttdTITLE"/>
+    <rev Enabled="No" ExpKey="" />
+    <Culture Code="en-US" Desc="set Label and Message for English language">
+      <Caption>Suffix</Caption>
+      <DefaultValue></DefaultValue>
+    </Culture>
+    <Culture Code="zh-SG" Desc="set Label and Message for Singapore language">
+      <Caption>Suffix</Caption>
+      <DefaultValue></DefaultValue>
+    </Culture>
+  </PageElement>
+  <PageElement name="cmbCO_APPL_RELATIONSHIP" type="DDL" Desc=""
+   IsMandatory="No"
+   IsReadOnly="No"
+   IsDisabled="No"
+   IsDisplay="Yes"
+   IsFormatingRequired="No" JsFunctionToFormat="" OnClickJSFunction=""
+   OnChangeJSFunction="" >
+  <Style Position="relative" Top="0" Left="10" CssClass="midcolora" ParentTableCell="ttdNUMBER" />
+  <rev Enabled="No" ExpKey="" />
+  <Culture Code="en-US" Desc="set Label and Message for English language">
+    <Caption>Relationship to Insured</Caption>
+    <rfvMessage></rfvMessage>
+    <DefaultValue></DefaultValue>
+  </Culture>
+  <Culture Code="zh-SG" Desc="set Label and Message for Singapore language">
+    <Caption>Relationship to Insured</Caption>
+    <rfvMessage></rfvMessage>
+    <DefaultValue></DefaultValue>
+  </Culture>
+</PageElement>
+
+
+</Root>

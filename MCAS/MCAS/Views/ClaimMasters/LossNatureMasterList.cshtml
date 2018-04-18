@@ -1,0 +1,338 @@
+﻿@model IEnumerable<MCAS.Web.Objects.MastersHelper.LossNatureListItems>
+@using MCAS.Web.Objects.CommonHelper
+@{
+    ViewBag.Title = "LossNatureMasterList";
+    Layout = "~/Views/Shared/_SystemAdminLayout.cshtml";
+    @Html.Hidden("oldgroup", 1)
+    SecurityPermissions myPemissions = (SecurityPermissions)ViewData["UserPermissions"];
+}
+
+<script src='@Url.Content("~/Scripts/jquery-2.1.0.min.js")' type="text/javascript"></script>
+
+<div class="dashboard-wrapper">
+    <!-- Bootstrap Container Start -->
+    <div class="container">
+        <!-- Page title start -->
+        <div class="row page-title">
+            <div class="col-lg-12">
+                <h2>
+                    System Admin</h2>
+                <ul class="breadcrumb">
+                    <li>Nature of Loss</li>
+                </ul>
+            </div>
+        </div>
+        <!-- Page title end -->
+        <hr>
+        <!-- Row start -->
+        <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <div class="panel panel-info">
+                    <div class="panel-heading clearfix">
+                        <i class="icon-check-sign"></i>
+                        <h3 class="panel-title">
+                            Nature of Loss</h3>
+                    </div>
+                    <div class="panel-sub-heading">
+                        <span class="text-danger">*</span> Search Screen
+                    </div>
+                    <div class="panel-body">
+                        @using (Html.BeginForm("LossNatureMasterList", "ClaimMasters", FormMethod.Post, new { role = "form", @class = "form-horizontal" }))
+                        {
+                            <div class="row">
+                               
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label class="col-sm-6 control-label" for="ddlMainClassCode">
+                                            Main Class Description</label>
+                                        <div class="col-sm-6">
+                                            <select name="ddlMainClassCode" id="ddlMainClassCode" class="col-lg-12 form-control"></select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label class="col-sm-3 control-label" for="ddlLossType">
+                                            Loss Nature</label>
+                                        <div class="col-sm-6">
+                                            <select name="ddlLossType" id="ddlLossType" class="col-lg-12 form-control"></select>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label class="col-sm-6 control-label" for="ddlSubClass">
+                                            Sub Class Description</label>
+                                        <div class="col-sm-6">
+                                            <select name="ddlSubClass" id="ddlSubClass" class="col-lg-12 form-control"></select>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="row top-buffer"></div>
+                             <div class="row top-buffer"></div> 
+                            <div class="row top-buffer">
+                                <div class="col-lg-12 text-center">
+                                    @*<button type="submit" class="btn btn-primary">
+                                        Back</button>*@
+                                        <button type="submit" class="btn btn-info">Search</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                        
+                                        @if (@myPemissions.Write)
+                                         {
+                                            @Html.ActionLink("Add New", "LossNatureMasterEditor", "ClaimMasters", new { @class = "btn btn-info" })
+                                         }
+                                </div>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Row End -->
+        <!-- Row Start -->
+        <div class="row">
+            <div class="col-lg-12 text-center">
+                <h4 class="text-info">
+                    Search Results</h4>
+                <hr>
+            </div>
+            <div class="col-lg-12">
+                <div class="table-responsive">
+                    <table width="100%" class="table table-striped table-hover">
+                        <thead>
+                            <tr>
+                                
+                                <th style="width:15%;">
+                                   Loss Nature Code
+                                </th>
+                                <th style="width: 30%;">
+                                 Loss Nature Description
+                                </th>
+                                <th style="width:15%;">
+                                    Main Class Description
+                                </th>
+                                <th  style="width:30%;">
+                                    Sub Class Description
+                                </th>
+                                <th style="width: 10%;">
+                                    <span class="block text-right">Select</span>
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @{
+                                int trid = 1;
+                                int rowmatch = 0;
+                                var display = "";
+                                var usrstatus = "";
+                                var strNote = "";
+                                var strNote1 = "";
+                                foreach (var item in Model)
+                                {
+                                    rowmatch += 1;
+                                                                       
+                                    
+                                <tr group='@(trid)' style="display:@display;">
+                                    
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.LossNatureCode)
+                                    </td>
+                                    <td>
+                                         @Html.DisplayFor(modelItem => item.LossNatureDescription)
+                                        
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.ProductDisplayName)
+                                    </td>
+                                    <td>
+                                     @Html.DisplayFor(modelItem => item.SubClassCode)
+                                        
+                                    </td>
+                                    <td>
+                                     @if (@myPemissions.Write)
+                                     {
+                                        @Html.ActionLink("Edit", "LossNatureMasterEditor", new { TranId = item.TranId, pageMode = "Edit" }, new { @class = "btn btn-xs btn-warning" }) 
+                                     }
+                                     @if (@myPemissions.Read)
+                                     {
+                                        @Html.ActionLink("View", "LossNatureMasterEditor", new { TranId = item.TranId, pageMode = "View" }, new { @class = "btn btn-xs btn-info" })    
+                                      }
+                                    </td>
+                                </tr>
+                                    if (rowmatch > 9)
+                                    {
+                                        rowmatch = 0;
+                                        trid += 1;
+                                        display = "none";
+                                    }
+                                }}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            @{
+                decimal count = (decimal)Model.Count() / 10;
+                int totalcount = (int)Math.Ceiling(count);
+            
+                <div class="col-lg-12 text-center">
+                <ul class="pagination no-margin">
+                    <li id="liprevious" onclick="Pagination('liprevious');"><a href="#">«</a> </li>
+                        @for (int j = 0; j < totalcount; j++)
+                        {
+                            if (j == 0)
+                            { 
+                            <li id="li@(j + 1)" class="active" onclick="Pagination('li@(j + 1)');"><a href="#">@(j + 1)</a>
+                            </li>
+                            }
+                            else
+                            {
+                                if (j > 4)
+                                {
+                            <li id="li@(j + 1)" style="display: none;" onclick="Pagination('li@(j + 1)');" ><a href="#">@(j + 1)</a></li>
+                                }
+                                else
+                                { 
+                            <li id="li@(j + 1)" onclick="Pagination('li@(j + 1)');" ><a href="#">@(j + 1)</a></li>
+                                }
+                            }
+                        }
+                        <li id="linext" onclick="Pagination('linext');"><a href="#">»</a> </li>
+                </ul>
+            </div>
+                
+            <div class="col-lg-12">
+                &nbsp;</div>
+                }
+        </div>
+        <!-- Row End -->
+    </div>
+    <!-- Bootstrap Container End -->
+</div>
+
+<script type="text/javascript">
+
+function Pagination(id) {
+     var totalcount = Math.ceil(parseFloat(@Model.Count() / 10));
+        if (id == "linext") {
+            id = "li" + (parseInt($("#oldgroup").val())==totalcount ? totalcount :(parseInt($("#oldgroup").val())+ 1 ));
+        }
+        if (id == "liprevious") {
+            id = "li" + (parseInt($("#oldgroup").val()) == 1 ? 1 : (parseInt($("#oldgroup").val()) - 1));
+        }
+        var oldgroup_id = $("#oldgroup").val();
+        var tabid_id = id.replace("li", "");
+        $("#oldgroup").val(tabid_id);
+        $("table tr[group=" + oldgroup_id + "]").css("display", "none");
+        $("table tr[group=" + tabid_id + "]").css("display", "");
+         $('.active').removeClass();
+        $('#'+id).addClass("active");
+
+         if(totalcount>0)
+        {
+          for(i=1;i<=totalcount;i++)
+                    {
+                     $("#li"+i).css("display", "none");
+                    }
+            if(tabid_id>1)
+            {
+                   
+                   if(parseFloat( tabid_id)+2 <= parseFloat(totalcount))
+                   {
+                        for(i=parseFloat( tabid_id==2?3:tabid_id)-2;i<= parseFloat( tabid_id==2?3:tabid_id)+2;i++)
+                        {
+                            if(i<=totalcount)
+                            {
+                             $("#li"+i).css("display", "");
+                            }
+                        }
+                    }
+                    else
+                    {
+                        for(i=parseFloat( totalcount)-4;i<= parseFloat( totalcount);i++)
+                        {
+                           
+                             $("#li"+i).css("display", "");
+                        }
+                    }
+            }
+             else
+            {
+           for(i=parseFloat(1);i<= parseFloat( 5);i++)
+                        {
+                             $("#li"+i).css("display", "");
+                        }
+            }
+        }
+
+    }
+</script>
+
+<script type="text/javascript">
+
+    $(document).ready(function () {
+        loadProducts();
+        loadLossType();
+        loadSubClass();
+    });
+
+    function loadProducts() {
+        $.ajax({
+            url: '@(Url.Action("FillProducts"))',
+            cache: false,
+            success: function (data) {
+                $("#ddlMainClassCode").empty();
+                $.each(data, function (index, optiondata) {
+                    if (optiondata.ProductCode == '@ViewBag.mainclass')
+                        $("#ddlMainClassCode").append("<option value='" + optiondata.ProductCode + "' selected=selected>" + optiondata.ProductDisplayName + "</option>");
+                    else
+                        $("#ddlMainClassCode").append("<option value='" + optiondata.ProductCode + "'>" + optiondata.ProductDisplayName + "</option>");
+                });
+            },
+            error: function (reponse) {
+                alert("error : " + reponse);
+            }
+        });
+    }
+
+    function loadSubClass() {
+        $.ajax({
+            url: '@(Url.Action("FillSubClassProducts"))',
+            cache: false,
+            success: function (data) {
+                $("#ddlSubClass").empty();
+                $.each(data, function (index, optiondata) {
+                    if (optiondata.ClassCode == '@ViewBag.subclass')
+                        $("#ddlSubClass").append("<option value='" + optiondata.ClassCode + "' selected=selected>" + optiondata.ClassDescrption + "</option>");
+                    else
+                        $("#ddlSubClass").append("<option value='" + optiondata.ClassCode + "'>" + optiondata.ClassDescrption + "</option>");
+                });
+            },
+            error: function (reponse) {
+                alert("error : " + reponse);
+            }
+        });
+    }
+
+
+
+    function loadLossType() {
+        $.ajax({
+            url: '@(Url.Action("FillLossType"))',
+            cache: false,
+            success: function (data) {
+                $("#ddlLossType").empty();
+                $.each(data, function (index, optiondata) {
+                    if (optiondata.LossTypeCode == '@ViewBag.lossnature')
+                        $("#ddlLossType").append("<option value='" + optiondata.LossTypeCode + "' selected=selected>" + optiondata.LossTypeName + "</option>");
+                    else
+                        $("#ddlLossType").append("<option value='" + optiondata.LossTypeCode + "'>" + optiondata.LossTypeName + "</option>");
+                });
+            },
+            error: function (reponse) {
+                alert("error : " + reponse);
+            }
+        });
+    }
+</script>

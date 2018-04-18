@@ -1,0 +1,37 @@
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[PROC_GET_MIG_IL_COMMIT_POLICY_DETAILS]') AND type in (N'P', N'PC'))
+DROP PROCEDURE [dbo].[PROC_GET_MIG_IL_COMMIT_POLICY_DETAILS]
+GO
+
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+-- =============================================            
+-- AUTHER:  <Pradeep Kr. Kushwaha>            
+-- Create date: <16-NOV-2011>            
+-- Description: <GET INITIAL COMMIYED POLICY DETAILS DATA  >            
+-- DROP proc [PROC_GET_MIG_IL_COMMIT_POLICY_DETAILS]   
+-- ============================================= 
+CREATE PROCEDURE [DBO].[PROC_GET_MIG_IL_COMMIT_POLICY_DETAILS]         
+ 
+AS                                      
+BEGIN                               
+          
+ SET NOCOUNT ON;     
+ 
+ SELECT TOP 5 PCPL.CUSTOMER_ID,PCPL.POLICY_ID,PCPL.POLICY_VERSION_ID,PPP.PROCESS_ID,PCPL.CREATED_BY
+ FROM POL_CUSTOMER_POLICY_LIST PCPL WITH(NOLOCK)INNER JOIN 
+	  POL_POLICY_PROCESS PPP WITH(NOLOCK) ON 
+	  PCPL.CUSTOMER_ID			=	PPP.CUSTOMER_ID			AND 
+	  PCPL.POLICY_ID			=	PPP.POLICY_ID			AND 
+	  PCPL.POLICY_VERSION_ID	=	PPP.NEW_POLICY_VERSION_ID
+ WHERE 
+	  PCPL.FROM_AS400			=	'I'						AND
+	  PPP.PROCESS_STATUS		=	'COMPLETE'				AND
+	  PCPL.IL_DOCUMENT_GENERATED=	0
+	  
+ 
+ END  
+ GO

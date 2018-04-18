@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Root>
+
+  <PageCalledFor TypeID="">
+
+    <HeaderString>
+      <value Culture="en-US">User Information</value>
+      <value Culture="zh-SG">User Information</value>
+      <value Culture="pt-BR">User Information</value>
+    </HeaderString>
+
+    <SearchColumnHeadings>
+      <value Culture="en-US">Name^User Type^Supervisor^Carrier User</value>
+      <value Culture="zh-SG">Name^User Type^Supervisor^Carrier User</value>
+      <value Culture="pt-BR">Name^User Type^Supervisor^Carrier User</value>
+    </SearchColumnHeadings>
+
+    <DisplayColumnHeadings>
+      <value Culture="en-US">Name^User Type^Supervisor^Carrier User</value>
+      <value Culture="zh-SG">Name^User Type^Supervisor^Carrier User</value>
+      <value Culture="pt-BR">Name^User Type^Supervisor^Carrier User</value>
+    </DisplayColumnHeadings>
+
+    <SearchMessage>
+      <value Culture="en-US">Please select the Search Option,enter Search Criteria,and click on the Search button^Please select the Search Option, enter Search Criteria, and click on the Search button</value>
+      <value Culture="zh-SG">Please select the Search Option,enter Search Criteria,and click on the Search button^Please select the Search Option, enter Search Criteria, and click on the Search button</value>
+      <value Culture="pt-BR">Please select the Search Option,enter Search Criteria,and click on the Search button^Please select the Search Option, enter Search Criteria, and click on the Search button</value>
+    </SearchMessage>
+
+    <FilterLabel>
+      <value Culture="en-US">Include Inactive</value>
+      <value Culture="zh-SG">Include Inactive</value>
+      <value Culture="pt-BR">Include Inactive</value>
+    </FilterLabel>
+
+    <SearchColumnNames>
+      <value>usrList.USER_FNAME^ISNULL(USRTYP_M.USER_TYPE_DESC,usrTYP.USER_TYPE_DESC)^ISNULL(YESNOM.VALUE_DESC,YESNO.VALUE_DESC)^ISNULL(MLVS.LOOKUP_VALUE_DESC,MLV.LOOKUP_VALUE_DESC)</value>
+    </SearchColumnNames>
+
+    <SearchColumnType>
+      <value>T^T^T^T</value>
+    </SearchColumnType>
+
+    <DisplayColumnNumbers>
+      <value>7^4^20^29</value>
+    </DisplayColumnNumbers>
+
+    <DisplayColumnNames>
+      <value>USER_FNAME^USER_TYPE_DESC^USER_SPR^LIC_BRICS_USER_DESC</value>
+    </DisplayColumnNames>
+
+    <DisplayTextLength>
+      <value>10^50^30^10</value>
+    </DisplayTextLength>
+
+    <DisplayColumnPercent>
+      <value>40^30^15^15</value>
+    </DisplayColumnPercent>
+
+    <FetchColumns>
+      <value>7^4^20^29</value>
+    </FetchColumns>
+
+    <ColumnTypes>
+      <value>B^B^B^B</value>
+    </ColumnTypes>
+
+    <FilterColumnName>
+      <value>usrlist.IS_ACTIVE</value>
+    </FilterColumnName>
+
+    <SelectClause>
+      <value>
+        usrList.USER_ID ,usrlist.USER_LOGIN_ID,ISNULL(USRTYP_M.USER_TYPE_DESC,usrTYP.USER_TYPE_DESC) AS USER_TYPE_DESC,'' as USER_PWD,usrList.USER_TITLE,usrList.USER_FNAME,usrList.USER_LNAME,usrList.USER_INITIALS,usrList.USER_ADD1,usrList.USER_ADD2,usrList.USER_CITY,usrList.USER_STATE,usrList.USER_ZIP,usrList.USER_PHONE,usrList.USER_EXT,usrList.USER_FAX,usrList.USER_MOBILE,usrList.USER_EMAIL,ISNULL(YESNOM.VALUE_DESC,YESNO.VALUE_DESC) As USER_SPR,usrList.USER_MGR_ID,Convert(varchar(5),usrList.USER_DEF_DIV_ID)+'_'+Convert(varchar(5),usrList.USER_DEF_DEPT_ID)+'_'+Convert(varchar(5),usrList.USER_DEF_PC_ID) as Default_Hierarchy,usrList.IS_ACTIVE,usrList.USER_TIME_ZONE,usrList.USER_COLOR_SCHEME,usrList.USER_SYSTEM_ID,usrList.COUNTRY as USER_COUNTRY,usrList.LIC_BRICS_USER,isnull(MLVS.LOOKUP_VALUE_DESC,MLV.LOOKUP_VALUE_DESC) AS LIC_BRICS_USER_DESC
+      </value>	
+    </SelectClause>
+
+    <FromClause>
+      <value>MNT_USER_LIST usrList (NOLOCK) LEFT JOIN MNT_USER_TYPES USRTYP ON USRLIST.USER_TYPE_ID = USRTYP.USER_TYPE_ID  LEFT OUTER JOIN MNT_USER_TYPES_MULTILINGUAL AS USRTYP_M ON USRLIST.USER_TYPE_ID =USRTYP_M.USER_TYPE_ID AND USRTYP_M.LANG_ID=3  LEFT OUTER JOIN MNT_LOOKUP_VALUES MLV ON usrList.LIC_BRICS_USER = MLV.LOOKUP_UNIQUE_ID LEFT OUTER JOIN MNT_LOOKUP_VALUES_MULTILINGUAL MLVS ON usrList.LIC_BRICS_USER = MLVS.LOOKUP_UNIQUE_ID and MLVS.LANG_ID=3 LEFT OUTER JOIN MNT_YESNO  YESNO (NOLOCK) ON YESNO.VALUE_CODE=usrList.USER_SPR LEFT OUTER JOIN MNT_YESNO_MULTILINGUAL YESNOM (NOLOCK) ON YESNO.VALUE_CODE=YESNOM.VALUE_CODE AND YESNOM.LANG_ID=3</value>
+    </FromClause>
+
+    <WhereClause>
+      <value>(usrList.USER_SYSTEM_ID = 'S001' or usrList.USER_SYSTEM_ID = 'SUAT') and ISNULL(USRTYP.IS_ACTIVE,'Y')='Y'</value>
+    </WhereClause>
+  
+    
+    <PrimaryColumns>
+      <value>1</value>
+    </PrimaryColumns>
+
+    <PrimaryColumnsName>
+      <value>USER_ID</value>
+    </PrimaryColumnsName>
+
+    <OrderByClause>
+      <value>USER_FNAME asc</value>
+    </OrderByClause>
+
+    <AllowDBLClick>
+      <value>true</value>
+    </AllowDBLClick>
+
+    <ExtraButtons>
+      <value>1^Add New^0^addRecord</value>
+    </ExtraButtons>
+
+    <RequireQuery>
+      <value>Y</value>
+    </RequireQuery>
+
+    <QueryStringColumns>
+      <value>USER_ID^USER_LOGIN_ID</value>
+    </QueryStringColumns>
+
+    <DefaultSearch>
+      <value>Y</value>
+    </DefaultSearch>
+
+    <FilterValue>
+      <value>Y</value>
+    </FilterValue>
+
+  </PageCalledFor>
+
+</Root>

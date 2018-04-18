@@ -1,0 +1,127 @@
+﻿@model MCAS.Web.Objects.MastersHelper.ClaimExpenseModel
+@using MCAS.Web.Objects.CommonHelper
+@using MCAS.Web.Objects.Resources.ClaimMasters;
+@using MCAS.Web.Objects.Resources.Common
+@using MCAS.Globalisation
+@{
+    //ViewBag.Title = "ClaimExpenseEditor";
+    ViewBag.Title = ClaimExpenseEditor.Title;
+    var mMCASQueryString = Html.MCASQueryString(Request.QueryString);
+    Layout = "~/Views/Shared/_SystemAdminLayout.cshtml";
+    var pageMode = mMCASQueryString["pageMode"];
+    var btndisplay = "yes";
+    if (pageMode == "View")
+    {
+        btndisplay = "none";
+    }
+
+    SecurityPermissions myPemissions = (SecurityPermissions)ViewData["UserPermissions"];
+    var ExpenseCode = Model.ClaimExpenseCode;
+    var dis = TempData["display"] == "" ? null : ExpenseCode == null ? "none;" : "Block";
+       
+}
+<script src='@Url.Content("~/Scripts/jquery-2.1.0.min.js")' type="text/javascript"></script>
+<script src='@Url.Content("~/Scripts/jquery.validate.min.js")' type="text/javascript"></script>
+<script src='@Url.Content("~/Scripts/jquery.validate.unobtrusive.min.js")' type="text/javascript"></script>
+<div class="dashboard-wrapper">
+    <div class="container">
+        <div class="row page-title">
+            <div class="col-lg-12">
+                <h2>
+                    @Common.SystemAdmin</h2>
+                <ul class="breadcrumb">
+                    <li>@ClaimExpenseEditor.ClaimExpenseMasterDetails </li>
+                </ul>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <div class="panel panel-info">
+                    <div class="panel-heading clearfix">
+                        <i class="icon-check-sign"></i>
+                        <h3 class="panel-title">
+                            @ClaimExpenseEditor.ClaimExpenseMasterDetails</h3>
+                    </div>
+                    <div style="color: Red; font-weight: bold;" class="has-error" id="error">
+                        <p align="center">
+                            @if (TempData["notice"] != null)
+                            {
+                                @TempData["notice"]
+                            }
+                        </p>
+                    </div>
+                    <div id="t2">
+                        <div class="panel-body">
+                            @using (Html.BeginForm("ClaimExpenseEditor", "ClaimMasters", FormMethod.Post, new { role = "form", @class = "form-horizontal", id = "ClaimExpenseform", name = "ClaimExpenseform" }))
+                            {
+                                @Html.ValidationSummary(true)
+                                @Html.HiddenFor(m => m.Id)
+                         
+                         
+                                <div style="display:@dis" class="row top-buffer">
+                                    <div class="clearfix igr col-md-12">
+                                        <div class="col-md-3">
+                                            <label for="inputVehicleMakeCode">
+                                                @ClaimExpenseEditor.ClaimsExpenseCode</label>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <b>@Html.DisplayFor(m => m.ClaimExpenseCode, new { id = "inputClaimExpenseCode", @class = "form-control" })</b>
+                                            @Html.HiddenFor(m => m.ClaimExpenseCode)
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row top-buffer">
+                                    <div class="clearfix igr col-md-12">
+                                        <div class="col-md-3">
+                                            <label for="inputVehicleMakeCode">
+                                                @ClaimExpenseEditor.ClaimsExpenseDescription &nbsp;<span class="text-danger">*</span>
+                                            </label>
+                                        </div>
+                                        <div class="col-md-3">
+                                            @Html.TextAreaFor(m => m.ClaimExpenseDesc, new { @maxlength = "50", id = "ClaimExpenseDesc", @class = "form-control" })
+                                            @Html.ValidationMessageFor(m => m.ClaimExpenseDesc)<br />
+                                        </div>
+                                    </div>
+                                </div> 
+                        
+
+                        
+                                <div class="row top-buffer">
+                                    <div class="clearfix igr col-md-12 text-center">
+                                        @if (@myPemissions.Write)
+                                        {
+                                            <button style="display:@btndisplay" id="btnSave" class="btn btn-info">
+                                                @Common.Save</button>
+                                        }
+                                        &nbsp;&nbsp;&nbsp;&nbsp;
+                                        @Html.ActionLink(Common.Back, "ClaimExpenseIndex", null, new { @class = "btn btn-info" })&nbsp;&nbsp;&nbsp;&nbsp;
+                                    </div>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="panel">
+            @Html.Partial("~/Views/Shared/_TimeStamp.cshtml", Model)
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    $(function () {
+        $(document).on("focus", ":input", function () {
+            $(this).attr("autocomplete", "off")
+        });
+        function getQueryVariable(a) {
+            for (var e = "@MenuListItem.ClaimTabs.GetQueryStringVal()".replace(/amp;/ig, "").split("&"), d = 0; d < e.length; d++) {
+                var b = e[d].split("=");
+                if (b[0] == a) return b[1]
+            }
+        };
+        if ('@pageMode' == 'View') {
+            $('#t2').find('input, textarea, button, select').attr('disabled', 'disabled');
+
+        }
+    });
+</script>

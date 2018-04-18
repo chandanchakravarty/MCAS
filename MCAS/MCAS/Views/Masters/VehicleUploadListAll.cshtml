@@ -1,0 +1,443 @@
+﻿@using MCAS.Web.Objects.MastersHelper;
+@model MCAS.Web.Objects.MastersHelper.VehicleUploadModel
+@using MCAS.Web.Objects.CommonHelper
+@using MCAS.Globalisation
+@{
+    Layout = "~/Views/Shared/_SystemAdminLayout.cshtml";
+    var mMCASQueryString = Html.MCASQueryString(Request.QueryString);
+    var vehId = TempData["ID"] == null ? "" : Convert.ToString(TempData["ID"]);
+    var pageMode = mMCASQueryString["pageMode"];
+    var btndisplay = pageMode == "View" ? "none" : "inline";
+    var ViewMode = mMCASQueryString["VMode"];
+    SecurityPermissions myPemissions = (SecurityPermissions)ViewData["UserPermissions"];
+    var Hselect1 = Model.Hselect == null ? "1" : Model.Hselect;
+    var Vehiclemake = TempData["Vehiclemake"] == null ? "" : Convert.ToString(TempData["Vehiclemake"]);
+    var VehicleModel = TempData["VehicleModel"] == null ? "" : Convert.ToString(TempData["VehicleModel"]);
+    var VMake = Model.Hgetval == null ? "" : Model.Hgetval;
+    var VModel = Model.Hgetval1 == null ? "" : Model.Hgetval1;
+    var isSelected = Model.VehicleClassCode == null ? "" : Model.VehicleClassCode;
+    System.Resources.ResourceManager PageResource = (new TransactionModel()).GetResourceManager(Model.Resource);
+}
+<link href="@Url.Content("~/Content/themes/base/jquery.ui.all.css")" rel="stylesheet" type="text/css" />
+<script src='@Url.Content("~/Scripts/jquery-1.8.0.js")' type="text/javascript"></script>
+<script src='@Url.Content("~/Scripts/jquery-ui-1.8.23.js")' type="text/javascript"></script>
+<div class="dashboard-wrapper">
+    <div class="container">
+        <div class="row page-title">
+            <div class="col-lg-12">
+                <h2>
+                    @MCAS.Web.Objects.Resources.Common.Common.SystemAdmin</h2>
+                <ul class="breadcrumb">
+                    <li>@PageResource.GetString("UploadMainMenu") / @PageResource.GetString("VehicleListingDetails")</li>
+                    </ul>
+            </div>
+        </div>
+        <hr />
+        <div class="row" id="VMUpload">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <div class="panel panel-info">
+                    <div class="panel-heading clearfix">
+                        <i class="icon-check-sign"></i>
+                        <h3 class="panel-title">
+                            @PageResource.GetString("VehicleListingDetails")</h3>
+                    </div>
+                    <div style="color: Red; font-weight: bold;" class="has-error">
+                        <p align="center" id="ShowMessage">
+                        </p>
+                    </div>
+                    <div style="color: Red; font-weight: bold;" class="has-error" id="error">
+                        <p align="center">
+                            @if (TempData["result"] != null)
+                            {
+                                @TempData["result"]
+                            }
+                        </p>
+                    </div>
+                    <br />
+                    <div class="panel-body" id="mainfieldset">
+                        @using (Html.BeginForm("VehicleUploadListAll", "Masters", FormMethod.Post, new { role = "form", @class = "form-horizontal", id = "Vehicleform", name = "Vehicleform" }))
+                        {     
+                            @Html.ValidationSummary(true)
+                            @Html.HiddenFor(m => m.VehicleMasterId)  
+                            @Html.HiddenFor(m => m.Hgetval) 
+                            @Html.HiddenFor(m => m.Hgetval1) 
+                            @Html.HiddenFor(m => m.Hselect)  
+                            <div class="row top-buffer">
+                                <div class="clearfix igr col-md-12">
+                                    <div class="col-sm-2">
+                                        <label for="inputBusNo">@PageResource.GetString("VehicleRegNo")<span class="text-danger">*</span></label>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        @Html.TextBoxFor(m => m.BusNo, new { @len = "8", @class = "col-lg-12 form-control" })
+                                        @Html.ValidationMessageFor(m => m.BusNo)
+                                    </div>
+                                    <div class="col-sm-2">
+                                        <label for="inputChasisNo">
+                                            @PageResource.GetString("ChassisNo") &nbsp;<span class="text-danger">*</span>
+                                        </label>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        @Html.TextBoxFor(m => m.ChasisNo, new { @len = "20", @class = "col-lg-12 form-control" })
+                                        @Html.ValidationMessageFor(m => m.ChasisNo)
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row top-buffer">
+                                <div class="clearfix igr col-md-12">
+                                    <div class="col-sm-2">
+                                        <label for="inputDepartment">
+                                            @PageResource.GetString("VechileClass")</label>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        @Html.DropDownListFor(m => m.VehicleClassCode, new SelectList(Model.VehicleClasslist, "VehicleClassCode", "VehicleClassDesc"), new { id = "VehicleClassCode", @class = "col-lg-12 form-control" })
+                                    </div>
+                                    <div class="col-sm-2">
+                                        <label for="inputMake">
+                                            @PageResource.GetString("Make")</label>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <div style="display: block;" id="DivMulti">
+                                            <select class="form-control" id="listOrgName">
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                                              
+                            <div class="row top-buffer">
+                                <div class="clearfix igr col-md-12">
+                                    <div class="col-sm-2">
+                                        <label for="inputModel">
+                                            @PageResource.GetString("Model")</label>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <div style="display: block;" id="DivMulti1">
+                                            <select class="form-control" id="listOrgName1">
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-2">
+                                        <label for="inputType">
+                                            @PageResource.GetString("Type")</label>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        @Html.TextBoxFor(m => m.Type, new { @class = "col-lg-12 form-control", @maxlength = "100" })
+                                        @Html.ValidationMessageFor(m => m.Type)
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row top-buffer">
+                                <div class="clearfix igr col-md-12">
+                                    <div class="col-sm-2">
+                                        <label for="inputAircon">
+                                            @PageResource.GetString("Aircon")</label>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        @Html.TextBoxFor(m => m.Aircon, new { @class = "col-lg-12 form-control", @maxlength = "100" })
+                                        @Html.ValidationMessageFor(m => m.Aircon)
+                                    </div>
+                                    <div class="col-sm-2">
+                                        <label for="inputAxle">
+                                            @PageResource.GetString("Axle")</label>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        @Html.TextBoxFor(m => m.Axle, new { @class = "col-lg-12 form-control", @maxlength = "100" })
+                                        @Html.ValidationMessageFor(m => m.Axle)
+                                    </div>
+                                </div>
+                            </div>
+                            <br />
+                                        
+                            <div class="row top-buffer">
+                                <div class=" clearfix igr col-md-12 text-center">
+                                    @if (@myPemissions.Write)
+                                    {
+                                        <button id="btnSave" style="display:@btndisplay" class="btn btn-info">
+                                            @PageResource.GetString("Save")</button>
+                                    }
+                                    &nbsp;&nbsp;
+                                    @Html.ActionLink(@PageResource.GetString("Back"), "VehicleListingMaster", null, new { @class = "btn btn-info" })
+                                </div>
+                            </div>
+       
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="panel">
+            @Html.Partial("~/Views/Shared/_TimeStamp.cshtml", Model)
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    var do_on_load = function () {
+        $(document).on("focus", ":input", function () {
+            $(this).attr("autocomplete", "off")
+        });
+
+        $("#listOrgName").change(function () {
+            $("#listOrgName1").empty();
+            var items2 = "";
+            var CategoryName = ($(this).val());
+            //alert(CategoryName);
+            $("#Hgetval").val("");
+            $("#Hgetval1").val("");
+
+            if (CategoryName == "") {
+                $("#DivMulti1").hide();
+            }
+            else {
+                $("#DivMulti1").show();
+            }
+
+            if (CategoryName != -1) {
+                //$("#Hgetval1").val("");
+                $("#Hgetval").val(CategoryName);
+            }
+            if (CategoryName != null && CategoryName != "" && CategoryName != -1) {
+                $.ajax({
+                    type: "POST",
+                    //url: 'Url.Action("GetModelList", "Masters")',
+                    url: '@Url.Action("GetModelListBasedOnMakeAndClass", "Masters")',
+                    data: {
+                        cat: CategoryName, classCode: $("#VehicleClassCode").val()
+                    },
+                    success: function (c) {
+                        $.each(c, function (index, item) {
+                            items2 += "<option value='" + item.ModelCode + "'>" + item.ModelName + "</option>";
+                        });
+                        $("#listOrgName1").html(items2);
+                        $("#listOrgName1 option[value='-1']").attr('selected', true);
+                    }
+                });
+            }
+
+        });
+
+        $("#listOrgName1").change(function () {
+            var CategoryName = ($(this).val());
+            $("#Hgetval1").val("");
+            if (CategoryName != -1) {
+                $("#Hgetval1").val(CategoryName);
+            }
+        });
+
+        $("#Reset").click(function () {
+            $("#BusNo,#ChasisNo,#Make,#Model,#Type,#Aircon,#Axle").val("");
+            $("#ShowMessage").text('');
+        });
+
+        $("#VehicleClassCode").change(function () {
+            //            var items1 = "<option value=\"-1\">[Select...]<\/option>";
+            //            var items2 = "<option value=\"-1\">[Select...]<\/option>";
+            $("#listOrgName").empty();
+            $("#listOrgName1").empty();
+            $("#Hgetval").val("");
+            $("#Hgetval1").val("");
+
+            var items1 = "";
+            var items2 = "";
+            var CategoryType = ($(this).val());
+            //alert(CategoryType);
+            if (CategoryType == "") {
+                $("#DivMulti").hide();
+                //$("#DivMulti1").hide();
+            }
+            else {
+                $("#DivMulti").show();
+                //$("#DivMulti1").show();
+            }
+
+            //            if (CategoryType == -1) {
+            //                $("#Hgetval").val("");
+            //                //$("#Hgetval1").val("");
+            //            }
+
+            if (CategoryType != null && CategoryType != "" && CategoryType != -1) {
+                $.ajax({
+                    type: "POST",
+                    url: '@Url.Action("GetMakeAndModelList", "Masters")',
+                    data: {
+                        cat: CategoryType
+                    },
+                    success: function (a) {
+                        var set = "";
+                        $.each(a, function (index, item) {
+                            items1 += "<option value='" + item.MakeCode + "'>" + item.MakeName + "</option>";
+                        });
+
+                        $("#listOrgName").html(items1);
+                        $("#listOrgName option[value='-1']").attr('selected', true);
+                    }
+                });
+            };
+
+        });
+
+
+
+        if ('@Model.VehicleClassCode' !== "" && '@Hselect1' == '1') {
+            $("#listOrgName").empty();
+            // $("#listOrgName").append(new Option("[Select...]", "-1"));
+            $("#listOrgName1").empty();
+            // $("#listOrgName1").append(new Option("[Select...]", ""));
+            var CategoryType = '@Model.VehicleClassCode';
+            if (CategoryType != null) {
+                var OrgName = "";
+                $.ajax({
+                    type: "POST",
+                    url: '@Url.Action("MakeAndModelListBasedonClass", "Masters")',
+                    data: {
+                        cat: CategoryType
+                    },
+                    success: function (a) {
+                        $.each(a, function (index, optiondata) {
+                            if (optiondata.MakeCode == '@TempData["Vehiclemake"]') {
+                                OrgName = "1";
+                                $("#listOrgName").append("<option value='" + optiondata.MakeCode + "' selected=selected>" + optiondata.MakeName + "</option>");
+
+                            } else {
+
+                                $("#listOrgName").append("<option value='" + optiondata.MakeCode + "' >" + optiondata.MakeName + "</option>");
+                            }
+                        });
+
+                        if (OrgName != "1") {
+                            $("#listOrgName option[value='-1']").attr('selected', true);
+
+                        }
+
+                    }
+                });
+                //                var OrgName1 = "";
+                //                $.ajax({
+                //                    type: "POST",
+                //                    url: '@Url.Action("ModelListBasedonClass", "Masters")',
+                //                    data: {
+                //                        cat: CategoryType
+                //                    },
+                //                    success: function (b) {
+                //                        $.each(b, function (index, optiondata) {
+                //                            if (optiondata.ModelCode == '@TempData["VehicleModel"]') {
+                //                                OrgName1 = "1";
+                //                                $("#listOrgName1").append("<option value='" + optiondata.ModelCode + "' selected=selected>" + optiondata.ModelName + "</option>");
+                //                            }
+                //                            else {
+                //                                $("#listOrgName1").append("<option value='" + optiondata.ModelCode + "' >" + optiondata.ModelName + "</option>");
+
+                //                            }
+                //                        });
+
+                //                        if (OrgName1 != "1") {
+                //                            $("#listOrgName1 option[value='-1']").attr('selected', true);
+
+                //                        }
+                //                    }
+                //                });
+            };
+
+            $("#DivMulti").show();
+            //$("#DivMulti1").show();
+        };
+
+        if ('@TempData["Vehiclemake"]' != null && '@TempData["Vehiclemake"]' != "") {
+            var CategoryType = '@TempData["Vehiclemake"]';
+            var OrgName1 = "";
+            $.ajax({
+                type: "POST",
+                url: '@Url.Action("GetModelListBasedOnMakeAndClass", "Masters")',
+                data: {
+                    cat: CategoryType, classCode: $("#VehicleClassCode").val()                    
+                },
+                success: function (b) {
+                    $.each(b, function (index, optiondata) {
+                        if (optiondata.ModelCode == '@TempData["VehicleModel"]') {
+                            OrgName1 = "1";
+                            $("#listOrgName1").append("<option value='" + optiondata.ModelCode + "' selected=selected>" + optiondata.ModelName + "</option>");
+                        }
+                        else {
+                            $("#listOrgName1").append("<option value='" + optiondata.ModelCode + "' >" + optiondata.ModelName + "</option>");
+
+                        }
+                    });
+
+                    if (OrgName1 != "1") {
+                        $("#listOrgName1 option[value='-1']").attr('selected', true);
+
+                    }
+                }
+            });
+
+            $("#DivMulti1").show();
+        }
+
+        "@pageMode" == "View" && $("#VMUpload input,select ").attr('disabled', 'disabled').attr('readonly', 'readonly')
+        var VehicleClass = "";
+        $('#VehicleClassCode option:selected').each(function () {
+            if ($(this).attr("selected", "selected")) {
+                VehicleClass = "1";
+                return false;
+            }
+        });
+        if (VehicleClass != "1") {
+            $("#VehicleClassCode option[value='-1']").attr('selected', true);
+
+        }
+
+    };
+    $(document).ready(do_on_load);
+    $(window).bind("page:change", do_on_load);
+
+    if ('@Hselect1' != '1') {
+        for (var arr = [], arr = $("#Hselect").val().split("~"), k = 0, curr; curr = arr[k]; k++) {
+            var a1 = curr.split("***")[0], a2 = curr.split("***")[1], a3 = curr.split("***")[2];
+            $("#" + a1).empty();
+            for (var i = 0; i < a2.split("**").length; i += 2) {
+                $("#" + a1).append(new Option(a2.split("**")[i + 1], a2.split("**")[i]));
+            }
+            $("#" + a1).val(a3);
+            $("#DivMulti").show();
+            $("#DivMulti1").show();
+        };
+    };
+    function retaindrop() {
+        var status = "";
+        $("#mainfieldset select").each(function () {
+            status = $(this).context.id + "***" + dropval($(this).context.id) + "***" + $(this).val() + "~" + status
+        });
+        $("#Hselect").val("");
+        $("#Hselect").val(status.substring(0, status.length - 1));
+    };
+    function dropval(a) {
+        var sasa = "";
+        var len = $("#" + a).children('option').length;
+        for (var i = 0; i < len; i++) {
+            sasa = sasa + "**" + $("#" + a)[0].options[i].value + "**" + $("#" + a)[0].options[i].text;
+        }
+        return sasa.substring(2, sasa.length);
+    };
+    function getQueryVariable(a) {
+        for (var e = "@MenuListItem.ClaimTabs.GetQueryStringVal()".replace(/amp;/ig, "").split("&"), d = 0; d < e.length; d++) {
+            var b = e[d].split("=");
+            if (b[0] == a) return b[1]
+        }
+    };
+    var guid = (function () {
+        function s4() {
+            return Math.floor((1 + Math.random()) * 0x10000).toString(16).substring(1);
+        }
+        return function () {
+            return s4() + s4() + '-' + s4() + '-' + s4() + '-' + s4() + '-' + s4() + s4() + s4();
+        };
+    })();
+    String.prototype.getstringinbetween = function (a) {
+        for (var e = this.split("&"), d = 0; d < e.length; d++) {
+            var b = e[d].split("=");
+            if (b[0] == a) return b[1]
+        };
+    };
+    String.prototype.contains = function (a) {
+        return -1 != this.indexOf(a)
+    };
+</script>

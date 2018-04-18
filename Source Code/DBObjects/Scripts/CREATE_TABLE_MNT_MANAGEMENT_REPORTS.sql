@@ -1,0 +1,29 @@
+/****** Object:  Table [dbo].[MNT_MANAGEMENT_REPORTS]    Script Date: 08/30/2011 15:13:14 ******/
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[MNT_MANAGEMENT_REPORTS]') AND type in (N'U'))
+DROP TABLE [dbo].[MNT_MANAGEMENT_REPORTS]
+GO
+/****** Object:  Table [dbo].[MNT_MANAGEMENT_REPORTS]    Script Date: 08/30/2011 15:13:14 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+SET ANSI_PADDING ON
+GO
+
+CREATE TABLE [dbo].[MNT_MANAGEMENT_REPORTS](
+	[REPORT_ID] [int]  NULL,
+	[RDL_NAME] [nvarchar](200)  NULL,
+	[REPORT_TYPE_ID] [int] NULL,
+	[RDL_SHORT_NAME] [nvarchar](40)  NULL,
+	[GROUP_ID] [int]  NULL,
+	
+) ON [PRIMARY]
+
+GO
+
+SET ANSI_PADDING OFF
+GO
+
+

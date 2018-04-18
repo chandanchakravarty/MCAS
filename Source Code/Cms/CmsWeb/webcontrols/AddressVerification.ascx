@@ -1,0 +1,1 @@
+<%@ Control Language="c#" AutoEventWireup="false" Codebehind="AddressVerification.ascx.cs" Inherits="Cms.CmsWeb.webcontrols.AddressVerification" TargetSchema="http://schemas.microsoft.com/intellisense/ie5"%>

@@ -1,0 +1,22 @@
+﻿<!--	Product Master XML for Auto -->
+<!--	Name : praveer panghal -->
+<!--	Date : 14 sep 2010  -->
+<PRODUCTMASTER>
+  <PRODUCT ID="AUTO-RATES" DESC="Private Passenger Auto Rates" FILENAME="AUTO-Rates.xml">
+
+    <!--Good Student Discount -->
+    <FACTOR ID="GOODSTUDENT" NAME="Good Student Discount">
+      <NODE ID="GOODSTUDENTDISCOUNT" NAME="Good Student/Good Driver Discount">
+        <!--<ATTRIBUTES FACTOR="0.95" CREDIT="8" />-->
+        <ATTRIBUTES FACTOR="0" CREDIT="0" />
+      </NODE>
+    </FACTOR>
+     <!--Premier Driver Discount  Safe driver Renewal Discount--> 
+    <FACTOR ID="DRIVERDISCOUNT" NAME="Driver Discount">
+      <NODE ID="DRIVERDISC" NAME="Premier Driver Discount">
+        <!--<ATTRIBUTES SAFEDRIVERFACTOR="0.92" SAFEDRIVERCREDIT="8" PREMIERDRIVERFACTOR="0.95" PREMIERDRIVERCREDIT="5"></ATTRIBUTES>-->
+        <ATTRIBUTES SAFEDRIVERFACTOR="0" SAFEDRIVERCREDIT="0" PREMIERDRIVERFACTOR="0" PREMIERDRIVERCREDIT=""></ATTRIBUTES>
+      </NODE>
+    </FACTOR>
+  </PRODUCT>
+</PRODUCTMASTER>

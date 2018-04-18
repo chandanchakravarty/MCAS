@@ -1,0 +1,209 @@
+﻿@model MCAS.Web.Objects.MastersHelper.CountryModel
+@using MCAS.Web.Objects.CommonHelper
+@using MCAS.Globalisation
+@{
+    ViewBag.Title = "CountryEditor";
+    Layout = "~/Views/Shared/_SystemAdminLayout.cshtml";
+    var mMCASQueryString = Html.MCASQueryString(Request.QueryString);
+    var pageMode = mMCASQueryString["pageMode"] == null ? "0" : mMCASQueryString["pageMode"];
+    var btndisplay = "yes";
+    if (pageMode == "View")
+    {
+        btndisplay = "none";
+    }
+
+    SecurityPermissions myPemissions = (SecurityPermissions)ViewData["UserPermissions"];
+    System.Resources.ResourceManager PageResource = (new MCAS.Web.Objects.MastersHelper.TransactionModel()).GetResourceManager(Model.Resource);
+}
+<script src='@Url.Content("~/Scripts/jquery-2.1.0.min.js")' type="text/javascript"></script>
+<script src='@Url.Content("~/Scripts/jquery.validate.min.js")' type="text/javascript"></script>
+<script src='@Url.Content("~/Scripts/jquery.validate.unobtrusive.min.js")' type="text/javascript"></script>
+<div class="dashboard-wrapper">
+    <div class="container">
+        <div class="row page-title">
+            <div class="col-lg-12">
+             <h2>
+                    @MCAS.Web.Objects.Resources.Common.Common.SystemAdmin</h2>
+                <ul class="breadcrumb">
+                    <li>@PageResource.GetString("CountryMasterDetails")</li>
+                </ul>
+                
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <div class="panel panel-info">
+                    <div class="panel-heading clearfix">
+                        <i class="icon-check-sign"></i>
+                        <h3 class="panel-title">@PageResource.GetString("CountryMasterDetails")</h3>
+                    </div>
+                    <div style="color: Red; font-weight: bold;" class="has-error" id="error">
+                        <p align="center">
+                            @if (TempData["notice"] != null)
+                            {
+                                @TempData["notice"]
+                            }
+                        </p>
+                    </div>
+                    <div style="color: Red; font-weight: bold;" class="has-error" id="divSuccess1">
+                        <p align="center">
+                            @if (TempData["claimclose"] != null)
+                            {
+                                @TempData["claimclose"]
+                            }
+                        </p>
+                    </div>
+                    <div id="t2">
+                        <div class="panel-body">
+                            @using (Html.BeginForm("CountryEditor", "CountryMaster", FormMethod.Post, new { role = "form", @class = "form-horizontal", id = "CountryEditor", name = "CountryEditor" }))
+                            {
+                                @Html.ValidationSummary(true)
+                                @Html.HiddenFor(m => m.Countryid)
+
+                                <div style="display: block;" class="row top-buffer">
+                                    <div class="clearfix igr col-md-12">
+                                        <div class="col-md-2">
+                                            <label for="inputCountry">
+                                                @PageResource.GetString("CountryName") &nbsp;<span class="text-danger">*</span></label>
+                                        </div>
+                                        <div class="col-md-3">
+                                            @Html.TextBoxFor(m => m.CountryName, new { id = "CountryName", @class = "form-control", @maxlength = 30 })
+                                            @Html.ValidationMessageFor(m => m.CountryName)
+                                        </div>
+                                        <div style="padding-right: 0px" class="col-md-2">
+                                            <label for="inputCountryName">
+                                                @PageResource.GetString("CountryCode") &nbsp;<span class="text-danger">*</span></label>
+                                        </div>
+                                        <div class="col-md-3">
+                                            @Html.TextBoxFor(m => m.CountryShortCode, new { id = "CountryShortCode", @maxlength = 4, @class = "form-control" })
+                                            @Html.ValidationMessageFor(m => m.CountryShortCode)
+                                        </div>
+                                    </div>
+                                </div>
+                         
+@*<div class="row top-buffer">
+                                <div class="clearfix igr col-md-9">
+                                    <div class="col-md-4">
+                                        <label for="inputCountry">
+                                            Country Name &nbsp;<span class="text-danger">*</span></label>
+                                    </div>
+                                    <div class="col-md-5">
+                                        @Html.TextBoxFor(m => m.CountryName, new { id = "CountryName", @class = "form-control", @maxlength = 30 })
+                                        @Html.ValidationMessageFor(m => m.CountryName)
+                                        </div>
+                                </div>
+                            </div>*@
+                         
+@*<div class="row top-buffer">
+                                <div class="clearfix igr col-md-9">
+                                    <div class="col-md-4">
+                                        <label for="inputCountryName">
+                                            Country Short Code &nbsp;<span class="text-danger">*</span></label>
+                                    </div>
+                                    <div class="col-md-5">
+                                       
+                                        </div>
+                                </div>
+                            </div>*@
+                         
+                         
+                                <div class="row top-buffer">
+                                </div>
+                                <div class="row top-buffer">
+                                </div> 
+                         
+                                               
+                                <div class="row top-buffer">
+                                    <div class="clearfix igr col-md-12 text-center">
+                                        @if (@myPemissions.Write)
+                                        {
+                                            <button style="display:@btndisplay" id="btnSave" class="btn btn-info">
+                                               @PageResource.GetString("Save")</button>
+                                        }
+                                        &nbsp;&nbsp;&nbsp;&nbsp;
+                                        @Html.ActionLink(@PageResource.GetString("Back"), "CountryIndex", null, new { @class = "btn btn-info" })&nbsp;&nbsp;&nbsp;&nbsp;
+                                    </div>
+                                </div>
+                               
+                            
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+         <div class="panel">
+            @Html.Partial("~/Views/Shared/_TimeStamp.cshtml", Model)
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    $(function () {
+        $(document).on("focus", ":input", function () {
+            $(this).attr("autocomplete", "off")
+        });
+        $("#CountryName").blur(function (event) {
+            var Country = $.trim($("#CountryName").val());
+            $.ajax({
+                type: "POST",
+                url: '@Url.Action("CheckCountryName", "CountryMaster")',
+                data: {
+                    CountryName: Country,
+                    CountryN: '@Model.CountryName'
+                },
+                success: function (a) {
+                    if (a == true && (getQueryVariable("pageMode") != "Edit") && ($("#CountryName").val() != '@Model.CountryName')) {
+                        alert("Duplicate Country Name.");
+                        $("#CountryName").val("");
+                    }
+//                    else if (($("#CountryName").val() != '@Model.CountryName') && a == true) {
+//                        alert("Duplicate Country Name.");
+//                        $("#CountryName").val("");
+//                    }
+                    else {
+                        $("#btnSave").removeAttr("disabled");
+                    }
+
+                }
+            });
+        });
+
+        $("#CountryShortCode").blur(function (event) {
+            var code = $.trim($("#CountryShortCode").val());
+            $.ajax({
+                type: "POST",
+                url: '@Url.Action("CountryCodeExists", "CountryMaster")',
+                data: {
+                    CountryCode: code,
+                    CountrySC: '@Model.CountryShortCode'
+                },
+                success: function (a) {
+                    if (a == true && (getQueryVariable("pageMode") != "Edit") && ($("#CountryShortCode").val() != '@Model.CountryShortCode')) {
+                        alert("Duplicate Country Short Code.");
+                        $("#CountryShortCode").val("");
+                    }
+//                    else if (($("#CountryShortCode").val() != '@Model.CountryShortCode') && a == true) {
+//                        alert("Duplicate Country Short Code.");
+//                        $("#CountryShortCode").val("");
+//                    }
+                    else {
+                        $("#btnSave").removeAttr("disabled");
+                    }
+
+                }
+            });
+        });
+        function getQueryVariable(a) {
+            for (var e = "@MenuListItem.ClaimTabs.GetQueryStringVal()".replace(/amp;/ig, "").split("&"), d = 0; d < e.length; d++) {
+                var b = e[d].split("=");
+                if (b[0] == a) return b[1]
+            }
+        };
+        if ('@pageMode' == 'View') {
+            $('#t2').find('input, textarea, button, select').attr('disabled', 'disabled');
+
+        }
+
+    });
+    
+</script>

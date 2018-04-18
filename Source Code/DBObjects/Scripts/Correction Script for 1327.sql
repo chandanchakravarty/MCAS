@@ -1,0 +1,32 @@
+---Correction  for itrack-1327
+
+if exists(select * from MNT_LOOKUP_VALUES_MULTILINGUAL where LOOKUP_UNIQUE_ID=14902)
+begin
+update MNT_LOOKUP_VALUES_MULTILINGUAL
+set LOOKUP_VALUE_DESC='Cosseguro e Resseguro'
+where LOOKUP_UNIQUE_ID=14902
+end
+
+If Exists(Select * from TRANSACTIONTYPELIST_MULTILINGUAL  where TRANS_TYPE_ID='405')
+BEGIN
+Update TRANSACTIONTYPELIST_MULTILINGUAL
+set TRANS_TYPE_NAME='Recebimento de Cosseguro Adicionado com Sucesso' where TRANS_TYPE_ID=405
+END
+
+
+If Exists(Select * from TRANSACTIONTYPELIST_MULTILINGUAL  where TRANS_TYPE_ID='404')
+BEGIN
+Update TRANSACTIONTYPELIST_MULTILINGUAL
+set  TRANS_TYPE_NAME='Número de Apólice Líder inválido' where TRANS_TYPE_ID=404
+END
+
+
+
+IF Exists(select * from TRANSACTIONTYPELIST_MULTILINGUAL where TRANS_TYPE_ID=408)
+Begin
+Update TRANSACTIONTYPELIST_MULTILINGUAL
+set  TRANS_TYPE_NAME='Boleto já Pagos' where TRANS_TYPE_ID=408
+End
+
+
+

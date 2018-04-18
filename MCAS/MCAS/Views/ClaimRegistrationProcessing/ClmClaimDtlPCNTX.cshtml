@@ -1,0 +1,1336 @@
+﻿@using MCAS.Web.Objects.CommonHelper
+@using MCAS.Globalisation
+@using MCAS.Web.Objects.Resources.ClaimProcessing;
+@using MCAS.Web.Objects.Resources.ClaimRegProcPCNTX;
+@using MCAS.Web.Objects.Resources.Common;
+@using System;
+@model MCAS.Web.Objects.ClaimObjectHelper.ClaimForCRTXInfoModel
+@{
+    ViewBag.Title = "ClmClaimDtlPCNTX";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var mMCASQueryString = Html.MCASQueryString(Request.QueryString);
+    var dis = (TempData["hidedrop"] != null || TempData["DisplayDiv"] != null) ? "block;" : "none;";
+    //var dis = mMCASQueryString["Viewmode"] == null ? "none" : "block";
+    var mhead = TempData["headerval"] == null ? "" : Convert.ToString(TempData["headerval"]);
+    var pagemode = mMCASQueryString["mode"] == null ? "" : Convert.ToString(mMCASQueryString["mode"]);
+    var caller = mMCASQueryString["claimMode"] == null ? "" : Convert.ToString(mMCASQueryString["claimMode"]);
+    var policyid = mMCASQueryString["PolicyId"] == null || mMCASQueryString["PolicyId"] == "" ? "0" : mMCASQueryString["PolicyId"];
+    var accidentClaimIdNew = mMCASQueryString["AccidentClaimId"] == null ? "" : Convert.ToString(mMCASQueryString["AccidentClaimId"]);
+    var claimId = Model.ClaimID == null ? "0" : Convert.ToString(Model.ClaimID);
+    string isEncryptedParams = System.Configuration.ConfigurationManager.AppSettings["EncryptQueryParams"].ToUpper();
+    var Createddate1 = Model.CreatedDate != null ? Model.CreatedDate.Value.ToString(System.Configuration.ConfigurationManager.AppSettings["DateFormat"]) : DateTime.Now.ToString(System.Configuration.ConfigurationManager.AppSettings["DateFormat"]);
+    var createby = Convert.ToString(HttpContext.Current.Session["LoggedInUserName"]);
+    var createddate = DateTime.Now.ToString(System.Configuration.ConfigurationManager.AppSettings["DateFormat"]);
+    //Model.ClaimType = (null == Model.ClaimType || 0 == Model.ClaimType) ? (null == mMCASQueryString["ClaimType"]) ? 0 : Convert.ToInt32(mMCASQueryString["ClaimType"]) : Model.ClaimType;
+    Model.ClaimType = 4;
+    var submenuid = HttpContext.Current.Session["ScreenNameDash"] == null ? "" : Convert.ToString(HttpContext.Current.Session["ScreenNameDash"]);
+    var SubMenu = !string.IsNullOrEmpty(submenuid) ? MenuListItem.ClaimTabs.GetClaimLabel(submenuid) : ClaimInfo.ResourceManager.GetString(MenuListItem.ClaimTabs.SubMenuString(@caller, @accidentClaimIdNew, @pagemode, "ClmClaimDtlPCNTX"));
+    string GetClaimNo = Model.GetClaimNo(Model.ClaimType, accidentClaimIdNew);
+}
+<style>
+    .OnlyCar
+    {
+        display: none;
+    }
+   @* .OnlyTaxi
+    {
+        display: none;
+    }*@
+</style>
+<script src="@Url.Content("~/Scripts/jquery-2.1.0.min.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/Scripts/jquery.validate.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.min.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/Scripts/conditional-validation.js")" type="text/javascript"></script>
+<style>
+    .error
+    {
+        color: Red !important;
+        font-weight: bold;
+    }
+</style>
+<div class="dashboard-wrapper">
+    <div class="ConfirmAmtDialogue" style="overflow: hidden;">
+    </div>
+    <div class="container">
+        <div class="page-title" id="reg">
+            <div class="col-lg-12" id="reg2" style="background-color: white; position: fixed;
+                z-index: 1;">
+                <h2>@ClaimInfo.ResourceManager.GetString(MenuListItem.ClaimTabs.PreBreadCrumbString(@pagemode))</h2>
+                <ul class="breadcrumb">
+                    <li>@SubMenu</li>
+                    <li>@ClaimEditor.Claim</li>
+                </ul>
+            </div>
+            <div style="position: relative!important">
+                @Html.Action("_ClaimDeatailsPCNTX", "ClaimRegistrationProcessing", new { PolicyId = @policyid, AccidentDetailId = @accidentClaimIdNew, ClaimId = @claimId })
+            </div>
+        </div>
+        <hr />
+        @{
+            object routes = new { ClaimId = claimId, PolicyId = policyid, AccidentClaimId = accidentClaimIdNew, claimMode = caller, mode = pagemode, ClaimType = Model.ClaimType };
+            if (isEncryptedParams.ToUpper() == "YES")
+            {
+                string res = RouteEncryptDecrypt.getRouteString(routes);
+                res = RouteEncryptDecrypt.Encrypt(res);
+                routes = new { Q = res };
+            }
+        }
+        @using (Html.BeginForm("ClmClaimDtlPCNTX", "ClaimRegistrationProcessing", routes, FormMethod.Post, new { role = "form", @class = "form-horizontal", id = "claimentryform", name = "claimentryform" }))
+        {
+            <div class="panel panel-info" id="toprow">
+                <div class="panel-heading clearfix">
+                    <i class="icon-check-sign"></i>
+                    <h3 class="panel-title">
+                        @NewClaimCrTx.NewClaimEntry
+                    </h3>
+                </div>
+                <div class="panel-body">
+                    @Html.Partial("ClaimCrTxEditorList", Model.ClaimsCollection)
+                    <div>
+                        <br />
+                    </div>
+                    <div class="row">
+                        <div class="clearfix igr col-md-1 text-center">
+                            <a class="btn btn-info" id="Previous">@Common.Previous</a>
+                        </div>
+                        <div class="clearfix igr col-md-10 text-center">
+                        </div>
+                        <div class="clearfix igr col-md-1 text-center">
+                            <a class="btn btn-info" id="Next">@Common.Next</a>
+                        </div>
+                    </div>
+                    <br />
+                    <div class="row">
+                        <div class="col-lg-12 text-left">
+                            @Html.EncodedActionLink(NewClaimCrTx.AddNewClaim, "ClmClaimDtlPCNTX", "ClaimRegistrationProcessing", new { PolicyId = 0, AccidentClaimId = accidentClaimIdNew, claimMode = "Write", Viewmode = "AddNewClaim", mode = "Write" }, new { @id = "AddNewClaim", @class = "btn btn-info" })
+                        </div>
+                    </div>
+                    <br />
+                </div>
+            </div>
+            <div class="panel panel-info" id="mainfieldset" style="display:@dis">
+                <div class="panel-heading clearfix">
+                    <i class="icon-check-sign"></i>
+                    <h3 class="panel-title" id="header">
+                        @NewClaimCrTx.ClaimEntry</h3>
+                </div>
+                <div class="panel-body">
+                    @Html.ValidationSummary(true)
+                    @Html.HiddenFor(m => m.ClaimID)
+                    @Html.HiddenFor(m => m.AccidentClaimId)
+                    @Html.HiddenFor(m => m.OrganizationType)
+                    @Html.HiddenFor(m => m.Prop1)
+                    @Html.HiddenFor(m => m.Hshowgrid)
+                    @Html.HiddenFor(m => m.ViewMode)
+                    <div style="color: Red!important; font-weight: bold;" class="has-error" id="error">
+                        <p style="text-align: center;">
+                            @if (@ViewData["SuccessMsg"] != null)
+                            {
+                                @ViewData["SuccessMsg"]
+                            }
+                        </p>
+                    </div>
+                    <div id="t2">
+                        <fieldset id="fieldsetmlegend">
+                            <legend id="mlegend">@NewClaimCrTx.RecoveryClaim</legend>
+                            <fieldset>
+                                <legend>@NewClaimCrTx.CdgeOperationInformation</legend>
+                                <div class="form-group">
+                                    <div class="col-lg-6">
+                                        <div class="form-group">
+                                            <label class="col-sm-4 control-label">
+                                                @NewClaimCrTx.InvoiceNo
+                                            </label>
+                                            <div class="col-sm-8">
+                                                @Html.TextBoxFor(m => m.InvoiceNo, new { @maxlength = "100", @class = "form-control alphanumeric" })
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="form-group">
+                                            <label class="col-sm-4 control-label">
+                                                @NewClaimCrTx.JobNo
+                                            </label>
+                                            <div class="col-sm-8">
+                                                @Html.TextBoxFor(m => m.JobNo, new { @maxlength = "100", @class = "form-control alphanumeric" })
+                                            </div>
+                                            <label class="col-sm-4  control-label">
+                                            </label>
+                                            <div class="col-sm-8">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <br />
+                                <div class="form-group">
+                                    <div class="col-lg-6">
+                                        <div class="form-group">
+                                            <label class="col-sm-4 control-label">
+                                                @NewClaimCrTx.CustomerCode
+                                            </label>
+                                            <div class="col-sm-8">
+                                                @Html.TextBoxFor(m => m.CustomerCode, new { @maxlength = "100", @class = "form-control alphanumeric" })
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="form-group">
+                                            <label class="col-sm-4 control-label">
+                                                @NewClaimCrTx.BusinessArea
+                                            </label>
+                                            <div class="col-sm-8">
+                                                @Html.TextBoxFor(m => m.BusinessArea, new { @maxlength = "100", @class = "form-control alphanumeric" })
+                                            </div>
+                                            <label class="col-sm-4  control-label">
+                                            </label>
+                                            <div class="col-sm-8">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </fieldset>
+                            <fieldset>
+                                <legend>@NewClaimCrTx.TPInformation</legend>
+                                <div class="form-group">
+                                    <div class="col-lg-6">
+                                        <div class="form-group">
+                                            <label class="col-sm-4 control-label">
+                                                @NewClaimCrTx.TPVehicleNo &nbsp;<span class="text-danger">*</span>
+                                            </label>
+                                            <div class="col-sm-8">
+                                                @Html.TextBoxFor(m => m.TPVehicleNo, new { @maxlength = "250", @class = "form-control alphanumeric" })
+                                                @Html.ValidationMessageFor(m => m.TPVehicleNo)
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="form-group">
+                                            <label class="col-sm-4 control-label">
+                                                @NewClaimCrTx.LawerRef
+                                            </label>
+                                            <div class="col-sm-8">
+                                                @Html.TextBoxFor(m => m.LawerRef, new { @maxlength = "100", @class = "form-control alphanumeric" })
+                                            </div>
+                                            <label class="col-sm-4  control-label">
+                                            </label>
+                                            <div class="col-sm-8">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <br />
+                                <div class="form-group">
+                                    <div class="col-lg-6">
+                                        <div class="form-group">
+                                            <label class="col-sm-4 control-label">
+                                                @NewClaimCrTx.TPInsurer
+                                            </label>
+                                            <div class="col-sm-8">
+                                                @Html.DropDownListFor(m => m.TPInsurer, new SelectList(Model.TPInsurerList, "CedantId", "CedantCode", "[Select...]"), new { @class = "form-control" })
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="form-group">
+                                            <label class="col-sm-4 control-label">
+                                                @NewClaimCrTx.OwnLawyer
+                                            </label>
+                                            <div class="col-sm-8">
+                                                @Html.TextBoxFor(m => m.OwnLawyer, new { @maxlength = "250", @class = "form-control alphanumeric" })
+                                            </div>
+                                            <label class="col-sm-4  control-label">
+                                            </label>
+                                            <div class="col-sm-8">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <br />
+                                <div class="form-group">
+                                    <div class="col-lg-6">
+                                        <div class="form-group">
+                                            <label class="col-sm-4 control-label">
+                                                @NewClaimCrTx.TPRef
+                                            </label>
+                                            <div class="col-sm-8">
+                                                @Html.TextBoxFor(m => m.TPRef, new { @maxlength = "100", @class = "form-control alphanumeric" })
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="form-group">
+                                            <label class="col-sm-4 control-label">
+                                                @NewClaimCrTx.LawyerDate
+                                            </label>
+                                            <div class="col-sm-8">
+                                                @Html.TextBoxFor(m => m.LawyerDate, "{0:d}", new { id = "DateToLawyer", @class = "form-control datepicker validateDateFormare" })
+                                            </div>
+                                            <label class="col-sm-4  control-label">
+                                            </label>
+                                            <div class="col-sm-8">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <br />
+                                <div class="form-group">
+                                    <div class="col-lg-6">
+                                        <div class="form-group">
+                                            <label class="col-sm-4 control-label">
+                                                @NewClaimCrTx.LawyerGIADRM
+                                            </label>
+                                            <div class="col-sm-8">
+                                                @Html.DropDownListFor(m => m.LawyerGIADRM, new List<SelectListItem>
+                                            {
+                                                new SelectListItem{ Text="[Select..]", Value = "" },
+                                                new SelectListItem{ Text="Lawyer", Value = "2" },
+                                                new SelectListItem{ Text="GIA DRM", Value = "3" },
+                                                //new SelectListItem{ Text="Option 4", Value = "4" },
+                                             }, new { @class = "form-control DonotDiableControl" })
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="form-group">
+                                            <label class="col-sm-4 control-label">
+                                                @NewClaimCrTx.DateToGIADRM
+                                            </label>
+                                            <div class="col-sm-8">
+                                                @Html.TextBoxFor(m => m.DateToGIADRM, "{0:d}", new { id = "DateToGIADRM", @maxlength = "250", @class = "form-control datepicker validateDateFormare" })
+                                                @Html.ValidationMessageFor(m => m.DateToGIADRM)
+                                            </div>
+                                            <label class="col-sm-4  control-label">
+                                            </label>
+                                            <div class="col-sm-8">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </fieldset>
+                            <fieldset>
+                                <legend>@NewClaimCrTx.ClaimInformation</legend>
+                                <div class="form-group" style="margin-bottom: 0px;">
+                                    <div class="col-lg-6">
+                                        <div class="form-group">
+                                            <label class="col-sm-4 control-label">
+                                                @NewClaimCrTx.ClaimType&nbsp;<span class="text-danger">*</span>
+                                            </label>
+                                            <div class="col-sm-8">
+                                                <!--mark-->
+                                                @Html.DropDownListFor(m => m.ClaimType, new SelectList(Model.ClaimTypeList, "Lookup_value", "Lookup_desc", "[Select...]"), new { @class = "form-control" })
+                                                @Html.ValidationMessageFor(m => m.ClaimType)
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="form-group">
+                                            <label class="col-sm-4 control-label">
+                                                @NewClaimCrTx.ClaimStatus
+                                            </label>
+                                            <div class="col-sm-8">
+                                                @Html.DropDownListFor(m => m.ClaimantStatus, new SelectList(Model.ClaimantStatusList, "Id", "Text", "[Select...]"), new { @class = "form-control DonotDiableControl" })
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group ">
+                                    @*<div class="col-lg-6 OnlyTaxi" style="margin-top: 30px;">
+                                    <div class="form-group margin: 50px 0 0 0;">
+                                        @if ((Convert.ToString(Session["OrganisationType"]).ToLower() == "tx"))
+                                        { 
+                                            <label class="col-sm-4 control-label">
+                                                @NewClaimCrTx.NatureOfAcc &nbsp;<span class="text-danger">*</span>
+                                            </label>
+                                            <div class="col-sm-8">
+                                                @Html.DropDownListFor(m => m.NatureOfAcc, new SelectList(Model.NatureAccList, "Id", "Text", "[Select...]"), new { @class = "form-control DonotDiableControl" })
+                                                @Html.ValidationMessageFor(m => m.NatureOfAcc)
+                                            </div>
+                                        }
+                                        @if ((Convert.ToString(Session["OrganisationType"]).ToLower() == "pc"))
+                                        {
+                                            @Html.HiddenFor(m => m.NatureOfAcc, new { @Value = "1" })
+                                        }
+                                        <label class="col-sm-4  control-label">
+                                        </label>
+                                        <div class="col-sm-8">
+                                        </div>
+                                    </div>
+                                </div>*@
+                                    @if ((Convert.ToString(Session["OrganisationType"]).ToLower() == "tx"))
+                                    { 
+                                        <div class="col-lg-6 OnlyTaxi" style="margin-top: 30px;">
+                                            <div class="form-group margin: 50px 0 0 0;">
+                                                <label class="col-sm-4 control-label">
+                                                    @NewClaimCrTx.NatureOfAcc
+                                                </label>
+                                                <div class="col-sm-8">
+                                                    @Html.DropDownListFor(m => m.NatureOfAcc, new SelectList(Model.NatureAccList, "Id", "Text", "[Select...]"), new { @class = "form-control DonotDiableControl" })
+                                                </div>
+                                                <label class="col-sm-4  control-label">
+                                                </label>
+                                                <div class="col-sm-8">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    }
+                                    @if ((Convert.ToString(Session["OrganisationType"]).ToLower() == "pc"))
+                                    {
+                                        @Html.HiddenFor(m => m.NatureOfAcc, new { @Value = "1" })
+                                    }
+                                    @if ((Convert.ToString(Session["OrganisationType"]).ToLower() == "pc"))
+                                    {
+                                        <div class="col-lg-6" style="margin-top: 30px;">
+                                            <div class="form-group  margin: 50px 0 0 0; ">
+                                                <label class="col-sm-4 control-label">
+                                                    @NewClaimCrTx.CaseTypeL1
+                                                </label>
+                                                <div class="col-sm-8">
+                                                    @Html.DropDownListFor(m => m.CaseTypeL1, new List<SelectListItem>
+                                            {
+                                                new SelectListItem{ Text="[Select..]", Value = "" },
+                                                new SelectListItem{ Text="Option 1", Value = "2" },
+                                                new SelectListItem{ Text="Option 2", Value = "3" },
+                                                  new SelectListItem{ Text="Option 3", Value = "4" },
+                                             }, new { @class = "form-control DonotDiableControl" })
+                                                </div>
+                                                <label class="col-sm-4  control-label">
+                                                </label>
+                                                <div class="col-sm-8">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6" style="margin-top: 30px;">
+                                            <div class="form-group">
+                                                <label class="col-sm-4 control-label">
+                                                    @NewClaimCrTx.CaseTypeL2
+                                                </label>
+                                                <div class="col-sm-8">
+                                                    <!--mark-->
+                                                    @Html.DropDownListFor(m => m.CaseTypeL2, new List<SelectListItem>
+                                            {
+                                                new SelectListItem{ Text="[Select..]", Value = "" },
+                                                new SelectListItem{ Text="Option 1", Value = "2" },
+                                                new SelectListItem{ Text="Option 2", Value = "3" },
+                                                new SelectListItem{ Text="Option 3", Value = "4" },
+                                             }, new { @class = "form-control DonotDiableControl" })
+                                                </div>
+                                                <label class="col-sm-4  control-label">
+                                                </label>
+                                                <div class="col-sm-8">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    }
+                                    <div class="col-lg-6" style="margin-top: 30px;">
+                                        <div class="form-group">
+                                            <label class="col-sm-4 control-label">
+                                                @NewClaimCrTx.FileReceivedDate
+                                            </label>
+                                            <div class="col-sm-8">
+                                                @Html.TextBoxFor(m => m.FileReceivedDate, "{0:d}", new { id = "FileReceivedDate", @class = "form-control datepicker validateDateFormare" })
+                                                @Html.ValidationMessageFor(m => m.FileReceivedDate)
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <br />
+                                <div class="form-group">
+                                    <div class="col-lg-6">
+                                        <div class="form-group">
+                                            <label class="col-sm-4 control-label">
+                                                @NewClaimCrTx.Collisiontype
+                                            </label>
+                                            <div class="col-sm-8">
+                                                @Html.DropDownListFor(m => m.Collisiontype, new SelectList(Model.CollisionTypeList, "Id", "Text", "[Select...]"), new { @class = "form-control DonotDiableControl" })
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="form-group">
+                                            <label class="col-sm-4 control-label">
+                                                @NewClaimCrTx.ClaimDate
+                                            </label>
+                                            <div class="col-sm-8">
+                                                @Html.TextBoxFor(m => m.ClaimDate, "{0:d}", new { id = "ClaimDate", @class = "form-control datepicker validateDateFormare" })
+                                                @Html.ValidationMessageFor(m => m.ClaimDate)
+                                            </div>
+                                            <label class="col-sm-4  control-label">
+                                            </label>
+                                            <div class="col-sm-8">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <br />
+                                <div class="form-group">
+                                    <div class="col-lg-6">
+                                        <div class="form-group">
+                                            <label class="col-sm-4 control-label">
+                                                @NewClaimCrTx.OurSurveyorApp
+                                            </label>
+                                            <div class="col-sm-8">
+                                                @Html.DropDownListFor(m => m.OurSurveyorApp, new SelectList(Model.list, "AdjusterId", "AdjusterName", "[----Select----]"), new { @class = "form-control DonotDiableControl" })
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="form-group">
+                                            <label class="col-sm-4 control-label">
+                                                @NewClaimCrTx.CDGEStatus
+                                            </label>
+                                            <div class="col-sm-8">
+                                                @Html.DropDownListFor(m => m.CDGEStatus, new SelectList(Model.CDGEStatusList, "Id", "Text", "[Select...]"), new { @class = "form-control DonotDiableControl" })
+                                            </div>
+                                            <label class="col-sm-4  control-label">
+                                            </label>
+                                            <div class="col-sm-8">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <br />
+                                <div class="form-group">
+                                    <div class="col-lg-6">
+                                        <div class="form-group">
+                                            <label class="col-sm-4 control-label">
+                                                @NewClaimCrTx.NoOfDaysForRepairs
+                                            </label>
+                                            <div class="col-sm-8">
+                                                @Html.TextBoxFor(m => m.NoOfDaysForRepairs, new { @maxlength = "9", @class = "form-control Number" })
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="form-group">
+                                            <label class="col-sm-4 control-label">
+                                                @NewClaimCrTx.FollowUpDate
+                                            </label>
+                                            <div class="col-sm-8">
+                                                @Html.TextBoxFor(m => m.FollowUpDate, "{0:d}", new { id = "FollowUpDate", @class = "form-control datepicker validateDateFormare" })
+                                            </div>
+                                            <label class="col-sm-4  control-label">
+                                            </label>
+                                            <div class="col-sm-8">
+                                            </div>
+                                            <label class="col-sm-4  control-label">
+                                            </label>
+                                            <div class="col-sm-8">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <br />
+                                <br />
+                                <div class="form-group">
+                                    <div class="col-lg-6">
+                                        <div class="form-group">
+                                            <label class="col-sm-4 control-label">
+                                                @NewClaimCrTx.DateOfSurvey
+                                            </label>
+                                            <div class="col-sm-8">
+                                                @Html.TextBoxFor(m => m.DateOfSurvey, "{0:d}", new { id = "DateOfSurvey", @class = "form-control datepicker validateDateFormare" })
+                                                @Html.ValidationMessageFor(m => m.DateOfSurvey)
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="form-group">
+                                            <label class="col-sm-4 control-label">
+                                                @NewClaimCrTx.AdminSupport&nbsp;<span class="text-danger">*</span>
+                                            </label>
+                                            <div class="col-sm-8">
+                                                @Html.DropDownListFor(m => m.AdminSupport, new SelectList(Model.AdminSupportList, "TranId", "ClaimOfficerName", "Select"), new { @class = "form-control" })
+                                                @Html.ValidationMessageFor(m => m.AdminSupport)
+                                            </div>
+                                            <label class="col-sm-4  control-label">
+                                            </label>
+                                            <div class="col-sm-8">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <br />
+                                <div class="form-group">
+                                    <div class="col-lg-6">
+                                        <div class="form-group">
+                                            <label class="col-sm-4 control-label">
+                                                @NewClaimCrTx.DriversLiability
+                                            </label>
+                                            <div class="col-sm-8">
+                                                @Html.TextBoxFor(m => m.DriversLiability, new { @class = "form-control alphanumeric", @maxlength = "3" })
+                                                @Html.ValidationMessageFor(m => m.DriversLiability)
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="form-group">
+                                            <label class="col-sm-4 control-label">
+                                                @NewClaimCrTx.OfficeInCharge&nbsp;<span class="text-danger">*</span>
+                                            </label>
+                                            <div class="col-sm-8">
+                                                @Html.DropDownListFor(m => m.OfficeInCharge, new SelectList(Model.ClaimOfficerList, "TranId", "ClaimOfficerName", "Select"), new { @class = "form-control" })
+                                                @Html.ValidationMessageFor(m => m.OfficeInCharge)
+                                            </div>
+                                            <label class="col-sm-4  control-label">
+                                            </label>
+                                            <div class="col-sm-8">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <br />
+                                <br />
+                                <div class="form-group">
+                                    <div class="col-lg-6">
+                                        <div class="form-group">
+                                            <label class="col-sm-4 control-label">
+                                                @NewClaimCrTx.CaseStatus&nbsp;<span id="spanCaseStatus" class="text-danger OnlyCar">*</span>
+                                            </label>
+                                            <div class="col-sm-8">
+                                                @Html.DropDownListFor(m => m.CaseStatus, new SelectList(Model.CaseStatusList, "Id", "Text", "0"), new { @class = "form-control" })
+                                                @Html.ValidationMessageFor(m => m.CaseStatus)
+                                                @Html.Hidden("hCaseStatus")
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="form-group">
+                                            <label class="col-sm-4 control-label">
+                                                @NewClaimCrTx.SettledBy
+                                            </label>
+                                            <div class="col-sm-8">
+                                                @Html.DropDownListFor(m => m.SettledBy, new SelectList(Model.ClaimOfficerList, "TranId", "ClaimOfficerName", "Select"), new { @class = "form-control" })
+                                                @Html.ValidationMessageFor(m => m.SettledBy)
+                                            </div>
+                                            <label class="col-sm-4  control-label">
+                                            </label>
+                                            <div class="col-sm-8">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <br />
+                                <div class="form-group">
+                                    <div class="col-lg-6">
+                                        <div class="form-group">
+                                            <label class="col-sm-4 control-label">
+                                                @NewClaimCrTx.InvoiceDate
+                                            </label>
+                                            <div class="col-sm-8">
+                                                @Html.TextBoxFor(m => m.InvoiceDate, "{0:d}", new { id = "InvoiceDate", @class = "form-control datepicker validateDateFormare" })
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="form-group">
+                                            <label class="col-sm-4 control-label">
+                                                @NewClaimCrTx.InvoiceAmt
+                                            </label>
+                                            <div class="col-sm-8">
+                                                @Html.TextBoxFor(m => m.InvoiceAmt, new { @maxlength = "15", @class = "form-control format Number" })
+                                                @Html.ValidationMessageFor(m => m.InvoiceAmt)
+                                            </div>
+                                            <label class="col-sm-4  control-label">
+                                            </label>
+                                            <div class="col-sm-8">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <br />
+                                <div class="form-group" style="margin-bottom: 0;">
+                                    <div class="col-lg-6">
+                                        <div class="form-group">
+                                            <label class="col-sm-4 control-label">
+                                                @NewClaimCrTx.GST
+                                            </label>
+                                            <div class="col-sm-8">
+                                                @Html.TextBoxFor(m => m.GST, new { @maxlength = "3", @class = "form-control Number" })
+                                                @Html.ValidationMessageFor(m => m.GST)
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="form-group">
+                                            <label class="col-sm-4 control-label">
+                                                @NewClaimCrTx.ClaimAmt
+                                            </label>
+                                            <div class="col-sm-8">
+                                                @Html.TextBoxFor(m => m.ClaimAmt, new { id = "ClaimAmt", @maxlength = "15", @class = "form-control format Number" })
+                                                @Html.ValidationMessageFor(m => m.ClaimAmt)
+                                            </div>
+                                            <label class="col-sm-4  control-label">
+                                            </label>
+                                            <div class="col-sm-8">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-lg-6 OnlyTaxi" style="margin-top: 30px;">
+                                        <div class="form-group">
+                                            <label class="col-sm-4 control-label">
+                                                @NewClaimCrTx.WsActRcvr
+                                            </label>
+                                            <div class="col-sm-8">
+                                                @Html.TextBoxFor(m => m.WsActRcvr, new { id = "WsActRcvr", @readOnly = true, @class = "form-control alphanumeric" })
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6 OnlyCar" style="margin-top: 30px;">
+                                        <div class="form-group">
+                                            <label class="col-sm-4 control-label">
+                                                @NewClaimCrTx.ExcessAmt
+                                            </label>
+                                            <div class="col-sm-8">
+                                                @Html.TextBoxFor(m => m.ExcessAmt, new { @maxlength = "50", @class = "form-control format Number" })
+                                            </div>
+                                            <label class="col-sm-4  control-label">
+                                            </label>
+                                            <div class="col-sm-8">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6" style="margin-top: 30px;">
+                                        <div class="form-group">
+                                            <label class="col-sm-4 control-label">
+                                                @NewClaimCrTx.ActualAmt
+                                            </label>
+                                            <div class="col-sm-8">
+                                                @Html.TextBoxFor(m => m.ActualAmt, new { @maxlength = "15", @class = "form-control format Number" })
+                                            </div>
+                                            <label class="col-sm-4  control-label">
+                                            </label>
+                                            <div class="col-sm-8">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <br />
+                                <div class="form-group">
+                                    <div class="col-lg-6">
+                                        <div class="form-group">
+                                            <label class="col-sm-4 control-label">
+                                                @NewClaimCrTx.ConfirmDate
+                                            </label>
+                                            <div class="col-sm-8">
+                                                @Html.TextBoxFor(m => m.ConfirmDate, "{0:d}", new { id = "ConfirmDate", @class = "form-control datepicker validateDateFormare" })
+                                                @Html.ValidationMessageFor(m => m.ConfirmDate)
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="form-group">
+                                            <label class="col-sm-4 control-label">
+                                                @NewClaimCrTx.ConfirmAmt
+                                            </label>
+                                            <div class="col-sm-8">
+                                                <div class="col-sm-10" style="padding: 0px; margin: 0px;">
+                                                    @Html.TextBoxFor(m => m.ConfirmAmt, new { @maxlength = "15", @class = "form-control format Number", @readonly = "readonly" })
+                                                </div>
+                                                <div class="col-sm-2">
+                                                    @*<a href="@Url.Action("ConfirmAmountDtl", "ClaimMasters", new { PolicyId = @policyid, AccidentDetailId = @accidentClaimIdNew, ClaimId = @claimId })" class="btn btn-info btn-sm" data-toggle="modal" data-target="#notedetailModal"><span class="glyphicon glyphicon-plus-sign">
+                                                    </span></a>*@ <a href="#" class="btn btn-info btn-sm" id="confirmamtdialog"><span
+                                                        class="glyphicon glyphicon-plus-sign"></span></a>
+                                                </div>
+                                            </div>
+                                            <label class="col-sm-4  control-label">
+                                            </label>
+                                            <div class="col-sm-8">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <br />
+                                <div class="form-group">
+                                    <div class="col-lg-6">
+                                        <div class="form-group">
+                                            <label class="col-sm-4 control-label">
+                                                @NewClaimCrTx.FinalSettleDate
+                                            </label>
+                                            <div class="col-sm-8">
+                                                @Html.TextBoxFor(m => m.FinalSettleDate, "{0:d}", new { id = "FinalSettleDate", @class = "form-control datepicker validateDateFormare" })
+                                                @Html.ValidationMessageFor(m => m.FinalSettleDate)
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="form-group">
+                                            <label class="col-sm-4 control-label">
+                                                @NewClaimCrTx.SettledAmt
+                                            </label>
+                                            <div class="col-sm-8">
+                                                @Html.TextBoxFor(m => m.SettledAmt, new { id = "SettledAmt", @maxlength = "15", @class = "form-control format Number" })
+                                                @Html.ValidationMessageFor(m => m.SettledAmt)
+                                            </div>
+                                            <label class="col-sm-4  control-label">
+                                            </label>
+                                            <div class="col-sm-8">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <br />
+                                <div class="form-group">
+                                    <div class="col-lg-6">
+                                        <div class="form-group">
+                                            <label class="col-sm-4 control-label">
+                                                @NewClaimCrTx.TimeBarDate
+                                            </label>
+                                            <div class="col-sm-8">
+                                                @Html.TextBoxFor(m => m.TimeBarDate, "{0:d}", new { id = "TimeBarDate", @class = "form-control datepicker validateDateFormare" })
+                                                @Html.ValidationMessageFor(m => m.TimeBarDate)
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="form-group">
+                                            <label class="col-sm-4 control-label">
+                                                @NewClaimCrTx.PaymentDetails
+                                            </label>
+                                            <div class="col-sm-8">
+                                                @Html.TextBoxFor(m => m.PaymentDetails, new { @maxlength = "100", @class = "form-control alphanumeric" })
+                                                @Html.ValidationMessageFor(m => m.PaymentDetails)
+                                            </div>
+                                            <label class="col-sm-4  control-label">
+                                            </label>
+                                            <div class="col-sm-8">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <br />
+                                <div class="form-group">
+                                    <div class="col-lg-6">
+                                        <div class="form-group">
+                                            <label class="col-sm-4 control-label">
+                                                @NewClaimCrTx.FileArchievedRef
+                                            </label>
+                                            <div class="col-sm-8">
+                                                @Html.TextBoxFor(m => m.FileArchievedRef, new { @maxlength = "100", @class = "form-control alphanumeric" })
+                                                @Html.ValidationMessageFor(m => m.FileArchievedRef)
+                                            </div>
+                                            <label class="col-sm-4  control-label">
+                                            </label>
+                                            <div class="col-sm-8">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6 OnlyCar">
+                                        <div class="form-group DivHide" id="chkDetail">
+                                            <label class="col-sm-4 control-label">
+                                                @NewClaimCrTx.ChequeDetails
+                                            </label>
+                                            <div class="col-sm-8">
+                                                @Html.TextBoxFor(m => m.ChequeDetails, new { @maxlength = "250", @class = "form-control alphanumeric" })
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </fieldset>
+                            <fieldset>
+                                <legend>@NewClaimCrTx.Severity</legend>
+                                <div class="form-group">
+                                    <div class="col-lg-6">
+                                        <div class="form-group">
+                                            <label class="col-sm-4 control-label">
+                                                @NewClaimCrTx.WriteIssued
+                                            </label>
+                                            <div class="col-sm-8">
+                                                @Html.TextBoxFor(m => m.WriteIssued, "{0:d}", new { id = "WriteIssued", @class = "form-control datepicker validateDateFormare" })
+                                                @Html.ValidationMessageFor(m => m.WriteIssued)
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="form-group">
+                                            <label class="col-sm-4 control-label">
+                                                @NewClaimCrTx.WriteNo
+                                            </label>
+                                            <div class="col-sm-8">
+                                                @Html.TextBoxFor(m => m.WriteNo, new { @maxlength = "100", @class = "form-control alphanumeric" })
+                                                @Html.ValidationMessageFor(m => m.WriteNo)
+                                            </div>
+                                            <label class="col-sm-4  control-label">
+                                            </label>
+                                            <div class="col-sm-8">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </fieldset>
+                            <fieldset class="OnlyCar">
+                                <legend>@NewClaimCrTx.ContractorInformation</legend>
+                                <div class="form-group">
+                                    <div class="col-lg-6 OnlyCar">
+                                        <div class="form-group">
+                                            <label class="col-sm-4 control-label">
+                                                @NewClaimCrTx.ContractorInvoiceNo
+                                            </label>
+                                            <div class="col-sm-8">
+                                                @Html.TextBoxFor(m => m.ContractorInvoiceNo, new { @maxlength = "100", @class = "form-control alphanumeric" })
+                                                @Html.ValidationMessageFor(m => m.ContractorInvoiceNo)
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6 OnlyCar">
+                                        <div class="form-group">
+                                            <label class="col-sm-4 control-label">
+                                                @NewClaimCrTx.Sharellocation
+                                            </label>
+                                            <div class="col-sm-8">
+                                                @Html.DropDownListFor(m => m.Sharellocation, new List<SelectListItem>
+                                            {
+                                                new SelectListItem{ Text="[Select..]", Value = "" },
+                                                new SelectListItem{ Text="Option 1", Value = "2" },
+                                                new SelectListItem{ Text="Option 2", Value = "3" },
+                                                  new SelectListItem{ Text="Option 3", Value = "3" },
+                                             }, new { @class = "col-lg-12 form-control" })
+                                            </div>
+                                            <label class="col-sm-4  control-label">
+                                            </label>
+                                            <div class="col-sm-8">
+                                            </div>
+                                            <label class="col-sm-4  control-label">
+                                            </label>
+                                            <div class="col-sm-8">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <br />
+                                <div class="form-group">
+                                    <div class="col-lg-6 OnlyCar">
+                                        <div class="form-group">
+                                            <label class="col-sm-4 control-label">
+                                                @NewClaimCrTx.WSONo
+                                            </label>
+                                            <div class="col-sm-8">
+                                                @Html.TextBoxFor(m => m.WSONo, new { @maxlength = "100", @class = "form-control alphanumeric" })
+                                                @Html.ValidationMessageFor(m => m.WSONo)
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6 OnlyCar">
+                                        <div class="form-group">
+                                            <label class="col-sm-4 control-label">
+                                                @NewClaimCrTx.WsoInvoiceAmt
+                                            </label>
+                                            <div class="col-sm-8">
+                                                @Html.TextBoxFor(m => m.WsoInvoiceAmt, new { @maxlength = "15", @class = "form-control format Number" })
+                                                @Html.ValidationMessageFor(m => m.WsoInvoiceAmt)
+                                            </div>
+                                            <label class="col-sm-4  control-label">
+                                            </label>
+                                            <div class="col-sm-8">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <br />
+                                <div class="form-group">
+                                    <div class="col-lg-6 OnlyCar">
+                                        <div class="form-group">
+                                            <label class="col-sm-4 control-label">
+                                                @NewClaimCrTx.WsoCnNo
+                                            </label>
+                                            <div class="col-sm-8">
+                                                @Html.TextBoxFor(m => m.WsoCnNo, new { @maxlength = "100", @class = "form-control alphanumeric" })
+                                                @Html.ValidationMessageFor(m => m.WsoCnNo)
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="form-group OnlyCar">
+                                            <label class="col-sm-4 control-label">
+                                                @NewClaimCrTx.WsoCNAmt
+                                            </label>
+                                            <div class="col-sm-8">
+                                                @Html.TextBoxFor(m => m.WsoCNAmt, new { @maxlength = "15", @class = "form-control format Number" })
+                                                @Html.ValidationMessageFor(m => m.WsoCNAmt)
+                                            </div>
+                                            <label class="col-sm-4  control-label">
+                                            </label>
+                                            <div class="col-sm-8">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </fieldset>
+                            <fieldset>
+                                <legend>@NewClaimCrTx.RecordCreation</legend>
+                                <div class="form-group">
+                                    <div class="col-lg-6">
+                                        <div class="form-group">
+                                            <label class="col-sm-4 control-label">
+                                                @NewClaimCrTx.CreatedBy
+                                            </label>
+                                            <div class="col-sm-8">
+                                                @Html.TextBoxFor(m => m.CreatedBy, new { @maxlength = "250", @class = "form-control alphanumeric", @readonly = "readonly" })
+                                                @Html.ValidationMessageFor(m => m.CreatedBy)
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="form-group">
+                                            <label class="col-sm-4 control-label">
+                                                @NewClaimCrTx.CreatedDate
+                                            </label>
+                                            <div class="col-sm-8">
+                                                @Html.TextBoxFor(m => m.CreatedDate, "{0:d}", new { id = "CreatedDate", @class = "form-control datepicker validateDateFormare", @readonly = "readonly" })
+                                                @Html.ValidationMessageFor(m => m.CreatedDate)
+                                            </div>
+                                            <label class="col-sm-4  control-label">
+                                            </label>
+                                            <div class="col-sm-8">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <br />
+                                <div class="form-group">
+                                    <div class="col-lg-6">
+                                        <div class="form-group">
+                                            <label class="col-sm-4 control-label">
+                                                @NewClaimCrTx.ReopenedDate
+                                            </label>
+                                            <div class="col-sm-8">
+                                                @Html.TextBoxFor(m => m.ReopenedDate, "{0:d}", new { id = "ReopenedDate", @class = "form-control datepicker validateDateFormare" })
+                                                @Html.ValidationMessageFor(m => m.ReopenedDate)
+                                            </div>
+                                            <label class="col-sm-4  control-label">
+                                            </label>
+                                            <div class="col-sm-8">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="form-group">
+                                            <label class="col-sm-4 control-label">
+                                                @NewClaimCrTx.RecordReopenedReason
+                                            </label>
+                                            <div class="col-sm-8">
+                                                @Html.TextBoxFor(m => m.RecordReopenedReason, new { @maxlength = "250", @class = "form-control" })
+                                                @Html.ValidationMessageFor(m => m.RecordReopenedReason)
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <br />
+                            </fieldset>
+                            <fieldset>
+                                <legend>@NewClaimCrTx.CancellationOfRecord</legend>
+                                <div class="form-group">
+                                    <div class="col-lg-6">
+                                        <div class="form-group">
+                                            <label class="col-sm-4 control-label">
+                                                @NewClaimCrTx.RecordCancellationDate
+                                            </label>
+                                            <div class="col-sm-8">
+                                                @*@Html.TextBoxFor(m => m.RecordCancellationDate, "{0:d}", new { id = "RecordCancellationDate", @maxlength = "250", @class = "form-control alphanumeric" })*@
+                                                @Html.TextBoxFor(m => m.RecordCancellationDate, "{0:d}", new { id = "RecordCancellationDate", @class = "form-control datepicker validateDateFormare" })
+                                                @Html.ValidationMessageFor(m => m.RecordCancellationDate)
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="form-group">
+                                            <label class="col-sm-4 control-label">
+                                                @NewClaimCrTx.RecordCancellationReason
+                                            </label>
+                                            <div class="col-sm-8">
+                                                @Html.TextBoxFor(m => m.RecordCancellationReason, new { @maxlength = "250", @class = "form-control alphanumeric" })
+                                                @Html.ValidationMessageFor(m => m.RecordCancellationReason)
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </fieldset>
+                        </fieldset>
+                    </div>
+                    <label>
+                    </label>
+                    <div class="row">
+                        <div class="clearfix igr col-md-1 text-center">
+                            <a class="btn btn-info" id="Previous">@Common.Previous</a>
+                        </div>
+                        <div class="col-lg-10 text-center">
+                            <div class="form-group" id="DivSave1">
+                                <input id="btnSave" class="btn btn-info" type="button" value="Save" />
+                                <input id="btnReset" class="btn btn-info" type="button" value="Reset" />
+                            </div>
+                        </div>
+                        <div class="clearfix igr col-md-1 text-center">
+                            <a class="btn btn-info" id="Next">@Common.Next</a>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <fieldset>
+                            <div class="form-group">
+                                <div class="col-lg-12">
+                                    @Html.Partial("~/Views/Shared/_TimeStamp.cshtml", Model)
+                                </div>
+                            </div>
+                        </fieldset>
+                    </div>
+                    <div class="modal fade" id="notedetailModal" tabindex="-1" role="dialog" aria-labelledby="">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div> 
+        }
+    </div>
+</div>
+<script type="text/javascript">
+
+    var do_on_load = function () {
+
+        setTabActive('ClaimTab');
+        SetDivPost();
+        var Org = "";
+        Org = '@Session["OrganisationType"]'.toString().toLowerCase();
+        if (Org == "pc") {
+            $(".OnlyCar").css("display", "block");
+            $(".OnlyTaxi").css("display", "none");
+            $("#hCaseStatus").val("true");
+        }
+
+
+        $.validator.unobtrusive.adapters.add("notequalto", ["other"], function (b) {
+            b.rules.notEqualTo = "#" + b.params.other;
+            b.message && (b.messages.notEqualTo = b.message)
+        });
+        $.validator.addMethod("notEqualTo", function (b, e, g) {
+            return this.optional(e) || b != $(g).val()
+        }, "");
+
+
+        $("#DateToLawyer,#DateToGIADRM,#FileReceivedDate,#ClaimDate,#FollowUpDate,#DateOfSurvey,#InvoiceDate,#ConfirmDate,#FinalSettleDate,#TimeBarDate,#CreatedDate,#ReopenedDate,#RecordCancellationDate,#WriteIssued").datepicker({
+            dateFormat: "dd/mm/yy",
+            showStatus: true,
+            showWeeks: true,
+            currentText: 'Now',
+            autoSize: true,
+            gotoCurrent: true,
+            showAnim: 'blind',
+            highlightWeek: true,
+            changeMonth: !0,
+            changeYear: !0,
+            yearRange: "1951:2050",
+            onSelect: function () {
+                $(this).valid()
+            }
+        });
+
+
+        $("input[type=text]").each(function () {
+            $(this).hasClass("datepicker") && 10 < $(this).val().length && $(this).val($(this).val().substring(0, 10));
+            if (void 0 !== $(this).attr("data-val-date") && "The field " == $(this).attr("data-val-date").substring(0, 10)) {
+                var e = $(this).attr("data-val-date").substring(10, $(this).attr("data-val-date").length).replace("must be a date.", "must be in 'dd/mm/yyyy' format.");
+                $(this).removeAttr("data-val-date");
+                $(this).attr("data-val-date", e)
+            }
+        });
+
+        //        for (var arr = ["l1", "l2", "l3", "l4"], i = 0, curr; curr = arr[i]; i++) $("#" + curr + "div").is(":visible") && $("#" + curr + "img").attr("src", '@Url.Content("~/Images/icon_minus.png")');
+        $("#btnReset").click(function () {
+            ClearForm("t2");
+            $("#ClaimantStatus").val("1");
+            $("#ClaimantStatus option[value='4']").prop('disabled', 'disabled');
+
+        });
+
+        $("#ClaimType").val("4");
+        $("#ClaimType").attr("disabled", "disabled");
+
+        $("#ClaimantStatus").val("1");
+        $("#ClaimantStatus option[value='4']").prop('disabled', 'disabled');
+
+        $("#btnSave").click(function () {
+            if (IsPageChanged()) {
+                var c = $("#claimentryform").valid();
+                if ("#ClaimType" != "0") {
+                    $("#ClaimRecordNo").val("@GetClaimNo");
+                }
+                IsPageChanged() && c && $("#claimentryform").submit()
+            }
+        });
+
+
+
+        $("#ClaimAmt,#SettledAmt").change(function () {
+            var input1 = $("#ClaimAmt").val(),
+                   input2 = $("#SettledAmt").val(),
+                   input3 = $("#WsActRcvr");
+            var val1 = (isNaN(parseInt(input1.replace(/\,/g, '')))) ? 0 : parseInt(input1.replace(/\,/g, ''));
+            var val2 = (isNaN(parseInt(input2.replace(/\,/g, '')))) ? 0 : parseInt(input2.replace(/\,/g, ''));
+            if (input1 == 0 || input1 == "" || input2 == 0 || input2 == "") {
+                input3.val(0.00);
+            }
+            else {
+                input3.val((val2 / val1) * 100);
+            }
+        });
+
+
+
+        SetHiddenSpan();
+        ExpandGridAfterPost($("#Hshowgrid").val());
+
+        if ('@mhead' != "") {
+            $("#mlegend").text('@mhead');
+            $("h3#header").text("@Html.Raw(NewClaimCrTx.NewClaimEntry)");
+            $("#ctype").hide();
+        };
+
+
+        if (("@Model.ClaimType" != "0") && '@mMCASQueryString["Viewmode"]' == "AddNewClaim") {
+            $("#mainfieldset").show("slow");
+        };
+
+
+        $("#confirmamtdialog").click(function (event) {
+            var a = guid(), b = "#" + a;
+            $('<div id="' + a + '" title="Reserve History" style="overflow: hidden;"></div>').appendTo(".ConfirmAmtDialogue");
+            InitializeDialog($(b), "4", '@claimId');
+            event.preventDefault();
+            $(b).dialog("open");
+            return !1
+        });
+    };
+
+    $(document).ready(do_on_load);
+    $(window).bind('page:change', do_on_load);
+
+    function InitializeDialog($element, a, f) {
+        $element.dialog({
+            width: "900",
+            resizable: false,
+            draggable: true,
+            show: { effect: 'drop', direction: "up" },
+            title: "Breakdown of Confirm Amount",
+            model: true,
+            show: 'slide',
+            dialogClass: 'alert',
+            closeOnEscape: true,
+            open: function (event, ui) {
+                var path = '@Url.Content("~/ClaimRegistrationProcessing/ConfirmAmountDtl")' + "?ClaimID=" + f + "&AccidentClaimId=" + '@accidentClaimIdNew' + "&uid=" + guid();
+                $element.load(path);
+            },
+            position: {
+                my: "center",
+                at: "center",
+                of: window
+            },
+            buttons: {
+                "Save": function () {
+                    '@Session["OrganisationType"]'.toString().toLowerCase() == "pc" ? $('#ConfirmAmt').val($('#TotalPC').val()) : $('#ConfirmAmt').val($('#Total').val());
+                    SetConfirmAmt();
+                    $(this).dialog("close");
+                },
+                "Cancel": function () {
+                    '@Session["OrganisationType"]'.toString().toLowerCase() == "pc" ? $('#ConfirmAmt').val($('#TotalPC').val()) : $('#ConfirmAmt').val($('#Total').val());
+                    SetConfirmAmt();
+                    $(this).dialog("close");
+                }
+            },
+            close: function () {
+                '@Session["OrganisationType"]'.toString().toLowerCase() == "pc" ? $('#ConfirmAmt').val($('#TotalPC').val()) : $('#ConfirmAmt').val($('#Total').val());
+                SetConfirmAmt();
+                $element.dialog('destroy').remove();
+            }
+
+        }).css('max-height', '500px').css('overflow-y', 'scroll');
+    };
+
+
+    function SetConfirmAmt() {
+        var data = $('#ConfirmAmtDtlform').serialize();
+        $.ajax({
+            type: "POST",
+            url: '@Url.Action("ConfirmAmtBreakdowndetails", "ClaimRegistrationProcessing")',
+            data: data,
+            dataType: "html",
+            success: function (data) {
+
+            },
+            error: function (data) {
+                alert("error : " + data);
+                $('#Result').hide();
+                $("#ajaxSpinnerImage").hide();
+            }
+        });
+    }
+
+    function ExpandGridAfterPost(a) {
+        $("table.ui-ebixgrid-btable span").each(function () {
+            if ($(this).hasClass("ui-icon-minus") || $(this).hasClass("ui-icon-plus")) {
+                if (a.beginsWith($(this).context.id)) {
+                    var spanid = $(this).context.id, id = spanid.slice(5, spanid.length);
+                    $('#' + id).show();
+                    $('#' + spanid).removeClass('ui-icon-plus').addClass('ui-icon-minus');
+                }
+            }
+        });
+    };
+
+    function SetHiddenSpan() {
+        var AccidentClaimId = '@mMCASQueryString["AccidentClaimId"]', ClaimID = (null == '@mMCASQueryString["ClaimID"]') ? "@Model.ClaimID" : '@mMCASQueryString["ClaimID"]', ClaimType = '@mMCASQueryString["ClaimType"]';
+        $(".ui-ebixgrid-view > table > tbody > tr > td > a").each(function () {
+            $(this).attr("href") && $(this).attr("href").getstringinbetween("AccidentClaimId") == AccidentClaimId && $(this).attr("href").getstringinbetween("ClaimID") == ClaimID && $(this).attr("href").getstringinbetween("ClaimType") == ClaimType && $("#Hshowgrid").val("span_" + $(this).closest('tr')[0].id + "_s0");
+        });
+    }
+
+
+    function ClearForm(a) {
+        $("#error").hide();
+        $("#" + a).find(":input:not([id=CreatedBy]):not([id=ClaimType1]):not([id=CreatedDate])").each(function () {
+            switch (this.type) {
+                case "text":
+                    $(this).val($(this).hasClass("format") ? "0.00" : "");
+                    break;
+                case "textarea":
+                    $(this).val("");
+                    break;
+                case "checkbox":
+                case "radio":
+                    this.checked = !1
+            }
+        });
+        $("#" + a).find("select").each(function () {
+            $(this).prop("selectedIndex", 0)
+        });
+        "t2" == a && $("#iftant1,#iftant2").hide();
+        $("span.field-validation-error").removeClass("field-validation-error").addClass("field-validation-valid")
+    };
+
+    function MobileNumberLengthCheck(ControlId, Msg) {
+        if ($.trim($("#" + ControlId).val()).length < 4 || $.trim($("#" + ControlId).val()).length > 15) {
+            alert(Msg, ControlId);
+            return false;
+        }
+    };
+    var guid = (function () {
+        function s4() {
+            return Math.floor((1 + Math.random()) * 0x10000).toString(16).substring(1);
+        }
+        return function () {
+            return s4() + s4() + '-' + s4() + '-' + s4() + '-' + s4() + '-' + s4() + s4() + s4();
+        };
+    })();
+
+
+    String.prototype.beginsWith = function (string) {
+        return (this.indexOf(string) === 0);
+    };
+    String.prototype.getstringinbetween = function (a) {
+        for (var e = this.split("&"), d = 0; d < e.length; d++) {
+            var b = e[d].split("=");
+            if (b[0] == a) return b[1]
+        };
+    };
+
+</script>

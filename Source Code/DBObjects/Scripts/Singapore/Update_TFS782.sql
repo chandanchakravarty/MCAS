@@ -1,0 +1,1 @@
+update MNT_COUNTRY_LIST set IS_ACTIVE = 'N' where COUNTRY_ID in (1,2,3,4,5,6)

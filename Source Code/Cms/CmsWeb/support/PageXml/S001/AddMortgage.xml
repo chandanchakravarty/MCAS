@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Root>
+  <PageTitle>
+    <Culture Code="en-US">Additional Interest</Culture>
+    <Culture Code="zh-SG">Additional Interest</Culture>
+  </PageTitle>
+
+  <PageElement name="cmbHOLDER_COUNTRY" type="DDL" Desc=""
+                             IsMandatory="Yes"
+                             IsReadOnly="No"
+                             IsDisabled="No"
+                             IsDisplay="Yes"
+                             IsFormatingRequired="No"
+                             JsFunctionToFormat=""
+                             OnChangeJSFunction=""
+               >
+    <Style Position="relative" Top="0" Left="10" CssClass="midcolora" />
+    <rev Enabled="No" ExpKey="" />
+    <Culture Code="en-US" Desc="set Label and Message for English language">
+      <Caption>Country</Caption>
+      <DefaultValue>7</DefaultValue>
+      <rfvMessage>Please select Country</rfvMessage>
+    </Culture>
+    <Culture Code="zh-SG" Desc="set Label and Message for Singapore language">
+      <Caption>Country</Caption>
+      <DefaultValue>7</DefaultValue>
+      <rfvMessage>Please select Country</rfvMessage>
+    </Culture>
+  </PageElement>
+  <PageElement name="txtHOLDER_NAME" type="TextBox" Desc=""
+                             IsMandatory="Yes"
+                             IsReadOnly="No"
+                             IsDisabled="No"
+                             IsDisplay="Yes"
+                             IsFormatingRequired="No"
+                             JsFunctionToFormat=""
+                             OnChangeJSFunction=""
+                             MaxLength="200"
+               >
+    <Style Position="relative" Top="0" Left="10" CssClass="midcolora" />
+    <rev Enabled="No" ExpKey="" />
+    <Culture Code="en-US" Desc="set Label and Message for English language">
+      <Caption>Name</Caption>
+      <DefaultValue></DefaultValue>
+      <rfvMessage>Please enter Name</rfvMessage>
+    </Culture>
+    <Culture Code="zh-SG" Desc="set Label and Message for Singapore language">
+      <Caption>Name</Caption>
+      <DefaultValue></DefaultValue>
+      <rfvMessage>Please enter Name</rfvMessage>
+    </Culture>
+  </PageElement>
+  
+
+  <PageElement name="cmbHOLDER_STATE" type="DDL" Desc=""
+                             IsMandatory="No"
+                             IsReadOnly="No"
+                             IsDisabled="Yes"
+                             IsDisplay="Yes"
+                             IsFormatingRequired="No"
+                             JsFunctionToFormat=""
+                             OnChangeJSFunction=""
+               >
+    <Style Position="relative" Top="0" Left="10" CssClass="midcolora" />
+    <rev Enabled="No" ExpKey="" />
+    <Culture Code="en-US" Desc="set Label and Message for English language">
+      <Caption>State</Caption>
+      <DefaultValue></DefaultValue>
+      <rfvMessage></rfvMessage>
+      <revExpMessage></revExpMessage>
+    </Culture>
+    <Culture Code="zh-SG" Desc="set Label and Message for Singapore language">
+      <Caption>State</Caption>
+      <DefaultValue></DefaultValue>
+      <rfvMessage></rfvMessage>
+    </Culture>
+  </PageElement>
+
+  <PageElement name="txtHOLDER_CITY" type="TextBox" Desc=""
+                               IsMandatory="No"
+                               IsReadOnly="No"
+                               IsDisabled="Yes"
+                               IsDisplay="Yes"
+                               IsFormatingRequired="No"
+                               JsFunctionToFormat=""
+                               OnChangeJSFunction=""
+               >
+    <Style Position="relative" Top="0" Left="10" CssClass="midcolora" />
+    <rev Enabled="No" ExpKey="" />
+    <Culture Code="en-US" Desc="set Label and Message for English language">
+      <Caption>City</Caption>
+      <DefaultValue></DefaultValue>
+      <rfvMessage></rfvMessage>
+      <revExpMessage></revExpMessage>
+    </Culture>
+    <Culture Code="zh-SG" Desc="set Label and Message for Singapore language">
+      <Caption>City</Caption>
+      <DefaultValue></DefaultValue>
+      <rfvMessage></rfvMessage>
+    </Culture>
+  </PageElement>
+  
+  <PageElement name="hlkZipLookup" type="HyperLink" Desc=""
+                                IsMandatory="No"
+                                IsReadOnly="No"
+                                IsDisabled="Yes"
+                                IsDisplay="No"
+                                IsFormatingRequired="No"
+                                JsFunctionToFormat=""
+                                OnChangeJSFunction=""
+               >
+    <Style Position="relative" Top="0" Left="10" CssClass="midcolora" />
+    <rev Enabled="No" ExpKey="" />
+  </PageElement>
+
+  <PageElement name="txtHOLDER_ZIP" type="TextBox" Desc=""
+    IsMandatory="Yes"
+    IsReadOnly="No"
+    IsDisabled="No"
+    IsDisplay="Yes"
+    MaxLength="6"
+    MaxSize=""
+    IsFormatingRequired="No" JsFunctionToFormat="" OnClickJSFunction=""
+    OnChangeJSFunction="" >
+    <rev Enabled="Yes" ExpKey="^[0-9]{6}" />
+    <Culture Code="en-US" Desc="set Label and Message for English language">
+      <Caption>Postal Code</Caption>
+      <rfvMessage>Please enter Postal Code. </rfvMessage>
+      <DefaultValue></DefaultValue>
+      <revExpMessage>Postal Code should be in '######' format. </revExpMessage>
+    </Culture>
+    <Culture Code="zh-SG" Desc="set Label and Message for Singapore language">
+      <Caption>Postal Code</Caption>
+      <rfvMessage>Please enter Postal Code.</rfvMessage>
+      <DefaultValue></DefaultValue>
+      <revExpMessage>Postal Code should be in '######' format. </revExpMessage>
+    </Culture>
+  </PageElement>
+  
+  <PageElement name="txtHOLDER_MAIN_PHONE_NO" type="TextBox" Desc=""
+               IsMandatory="No"
+               IsReadOnly="No"
+               IsDisabled="No"
+               IsDisplay="Yes"
+                MaxLength="11"
+                MaxSize=""
+                IsFormatingRequired="No" JsFunctionToFormat="" OnClickJSFunction=""
+                OnChangeJSFunction="" >
+    <rev Enabled="Yes" ExpKey="^((65-?)|(65))?((((\d{8})?)|(\d{4}-\d{4})))$" />
+    <Style Position="relative" Top="0" Left="10" CssClass="midcolora" />
+    <Culture Code="en-US" Desc="set Label and Message for English language">
+      <Caption>Phone No</Caption>
+      <rfvMessage></rfvMessage>
+      <DefaultValue></DefaultValue>
+      <revExpMessage>Phone number should be either in '##-########' or '####-####' format. </revExpMessage>
+    </Culture>
+    <Culture Code="zh-SG" Desc="set Label and Message for Singapore language">
+      <Caption>Phone No</Caption>
+      <rfvMessage></rfvMessage>
+      <DefaultValue></DefaultValue>
+      <revExpMessage>Phone number should either be in '##-########' or '####-####' format. </revExpMessage>
+    </Culture>
+  </PageElement>
+  <PageElement name="txtHOLDER_FAX" type="TextBox" Desc=""
+                IsMandatory="No"
+               IsReadOnly="No"
+               IsDisabled="No"
+               IsDisplay="Yes"
+                MaxLength="12"
+                MaxSize=""
+                IsFormatingRequired="No" JsFunctionToFormat="" OnClickJSFunction=""
+                OnChangeJSFunction="" >
+    <rev Enabled="Yes" ExpKey="^((65-?)|(65))?((((\d{8})?)|(\d{4}-\d{4})))$" />
+    <Style Position="relative" Top="0" Left="10" CssClass="midcolora" />
+    <Culture Code="en-US" Desc="set Label and Message for English language">
+      <Caption>Fax</Caption>
+      <rfvMessage></rfvMessage>
+      <DefaultValue></DefaultValue>
+      <revExpMessage>Fax number should be either in '##-########' or '####-####' format. </revExpMessage>
+    </Culture>
+    <Culture Code="zh-SG" Desc="set Label and Message for Singapore language">
+      <Caption>Fax</Caption>
+      <rfvMessage></rfvMessage>
+      <DefaultValue></DefaultValue>
+      <revExpMessage>Fax number should be either in '##-########' or '####-####' format. </revExpMessage>
+    </Culture>
+  </PageElement>
+  <PageElement name="txtHOLDER_MOBILE" type="TextBox" Desc=""
+                 IsMandatory="No"
+                IsReadOnly="No"
+                IsDisabled="No"
+                IsDisplay="Yes"
+                 MaxLength="11"
+                 MaxSize=""
+                 IsFormatingRequired="No" JsFunctionToFormat="" OnClickJSFunction=""
+                 OnChangeJSFunction="" >
+    <rev Enabled="Yes" ExpKey="^((65-?)|(65))?((((\d{8})?)|(\d{4}-\d{4})))$" />
+    <Style Position="relative" Top="0" Left="10" CssClass="midcolora" />
+    <Culture Code="en-US" Desc="set Label and Message for English language">
+      <Caption>Mobile No</Caption>
+      <rfvMessage></rfvMessage>
+      <DefaultValue></DefaultValue>
+      <revExpMessage>Mobile number should be either in '##-########' or '####-####' format. </revExpMessage>
+    </Culture>
+    <Culture Code="zh-SG" Desc="set Label and Message for Singapore language">
+      <Caption>Mobile No</Caption>
+      <rfvMessage></rfvMessage>
+      <DefaultValue></DefaultValue>
+      <revExpMessage>Mobile number should be either in '##-########' or '####-####' format. </revExpMessage>
+    </Culture>
+  </PageElement>
+
+</Root>

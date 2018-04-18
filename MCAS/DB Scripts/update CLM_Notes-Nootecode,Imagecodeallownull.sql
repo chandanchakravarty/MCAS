@@ -1,0 +1,14 @@
+IF EXISTS (SELECT * FROM INFORMATION_SCHEMA.COLUMNS where table_name = 'CLM_Notes' and column_name = 'NoteCode')
+BEGIN 
+ALTER TABLE CLM_Notes 
+ALTER COLUMN NoteCode NVARCHAR(100) NULL
+END
+
+
+
+
+IF EXISTS (SELECT * FROM INFORMATION_SCHEMA.COLUMNS where table_name = 'CLM_Notes' and column_name = 'ImageCode') 
+BEGIN 
+ALTER TABLE CLM_Notes 
+ALTER COLUMN ImageCode NVARCHAR(50) NULL
+END

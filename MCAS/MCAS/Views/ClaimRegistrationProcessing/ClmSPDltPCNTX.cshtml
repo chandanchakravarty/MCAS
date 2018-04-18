@@ -1,0 +1,586 @@
+﻿@using MCAS.Globalisation;
+@using MCAS.Web.Objects.CommonHelper;
+@using MCAS.Web.Objects.Resources.ClaimRegProcPCNTX;
+@using MCAS.Web.Objects.Resources.Common;
+@model MCAS.Web.Objects.ClaimObjectHelper.ServiceProviderModel
+@{
+    ViewBag.Title = "Service Provider";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<link href="@Url.Content("~/Content/jquery-ui.css")" rel="Stylesheet" media="screen" />
+<style type="text/css">
+    .form-horizontal .control-label
+    {
+        text-align: left;
+    }
+    input[type=text]:not(#EmailAddress):not(#EmailAddress2nd):not(#AppointedDate), textarea
+    {
+        text-transform: capitalize;
+    }
+    #AppointedDate
+    {
+        text-transform: uppercase;
+    }
+    .m_title
+    {
+        text-transform: capitalize;
+    }
+</style>
+@{
+    string baseUrl = Request.Url.Scheme + "://" + Request.Url.Authority + Request.ApplicationPath;
+    if (baseUrl.EndsWith("/"))
+    {
+        baseUrl = baseUrl.Substring(0, baseUrl.Length - 1);
+    }
+    baseUrl = baseUrl + "/";
+}
+<script type="text/javascript">
+    window.ClaimObj = {};
+    (function (cr) {
+
+    } (window.ClaimObj));
+    var BaseURL = '@baseUrl';
+    var ServiceProviderId = '@ViewBag.ServiceProviderId';
+    var AccidentClaimId = '@ViewBag.AccidentClaimId';
+    var PolicyId = '@ViewBag.PolicyId';
+    var ActDone = '@ViewBag.ActDone';
+    var Viewmode = '@ViewBag.Viewmode';
+    var AddInsurer = '@ServiceProviderCrTx.AddInsurer';
+    var AddSurveyor = '@ServiceProviderCrTx.AddSurveyor';
+    var AddLawyer = '@ServiceProviderCrTx.AddLawyer';
+    var AddWorkshop = '@ServiceProviderCrTx.AddWorkshop';
+    var ClaimIdReq = '@ServiceProviderClienError.ClaimTypeId';
+    var TPVehNoReq = '@ServiceProviderClienError.TPVehicleNo';
+    var PartyTypeIdReq = '@ServiceProviderClienError.PartyTypeId';
+    var ServiceProviderOptionReq = '@ServiceProviderClienError.ServiceProviderOption';
+    var CompanyNameIdReq = '@ServiceProviderClienError.CompanyNameId';
+    var Address1Req = '@ServiceProviderClienError.Address1';
+    var CountryIdReq = '@ServiceProviderClienError.CountryId';
+    var ReferenceReq = '@ServiceProviderClienError.Reference';
+    var StatusIdReq = '@ServiceProviderClienError.StatusId';
+</script>
+<script src="@Url.Content("~/Scripts/jquery-2.1.0.min.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/Scripts/jquery-ui-1.8.20.min.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/Scripts/angular.min.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/Scripts/App.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/Scripts/jquery.validate.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.min.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/Scripts/jquery.unobtrusive-ajax.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/Scripts/globalize/globalize.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/Scripts/globalize/cultures/globalize.culture.en-GB.js")" type="text/javascript"></script>
+<style>
+    .minimise
+    {
+        text-align: right;
+    }
+    .errorList
+    {
+        color: Red;
+    }
+    .successMsgDiv
+    {
+        color: red;
+        text-align: center;
+        font-size: 13px;
+        font-weight: bold;
+    }
+    .errorMsgSP
+    {
+        color: red;
+        font-weight: bold;
+        font-size: 12px;
+    }
+</style>
+<script src="@Url.Content("~/Bindings/Model/ServiceProviderModel.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/Bindings/ViewModel/ServiceProviderViewModel.js")" type="text/javascript"></script>
+<link href="@Url.Content("~/Content/font-awesome-4.6.3/css/font-awesome.min.css")" rel="Stylesheet" media="screen" />
+<div class="dashboard-wrapper" ng-app="ClaimApplication">
+    <div class="container" ng-controller="ServiceProviderViewModel" ng-cloak>
+        <div class="page-title" id="reg">
+            @*<div class="col-lg-12" id="reg2" style="background-color: white; position: fixed;
+                z-index: 1;">
+                <h2>
+                    @ServiceProviderCrTx.ClaimsRegistration</h2>
+                <ul class="breadcrumb">
+                    <li>Incomplete Claims Registration</li>
+                    <li>Service Provider</li>
+                </ul>
+            </div>*@
+            <div style="position: relative!important">
+                @Html.Action("_ClaimDeatailsPCNTX", "ClaimRegistrationProcessing")
+            </div>
+        </div>
+        <div ng-show="MsgList.length>0">
+            <div class="minimise">
+                <i class="fa" ng-class="{'fa-arrow-up':minimise,'fa-arrow-down':!minimise}" aria-hidden="true"
+                    ng-click="changeMsgDiv()"></i>
+            </div>
+            @*<ul class="errorList">
+                <li ng-repeat="x in MsgList">{{x}}</li>
+            </ul>*@
+        </div>
+        <div ng-show="SuccessMsg!=''">
+            <div class="successMsgDiv">
+                {{SuccessMsg}}
+            </div>
+        </div>
+        <hr />
+        <div class="row" id="toprow">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <div class="panel panel-info" id="mainfieldset">
+                    <div class="panel-body" id="ServiceProviderEditor">
+                        <form class="form-horizontal ng-pristine ng-valid" id="ServiceProviderform" name="ServiceProviderform"
+                        role="form" novalidate="novalidate">
+                        <div class="panel panel-info" id="toprow">
+                            <div class="panel-heading clearfix">
+                                <i class="icon-check-sign"></i>
+                                <h3 class="panel-title">
+                                    @ServiceProviderCrTx.NewServiceProviderEntry
+                                </h3>
+                            </div>
+                            <div class="panel-body">
+                                @Html.Partial("ServiceProviderPCNTXList", Model.ServiceProviderCollection)
+                                <div>
+                                    <br />
+                                </div>
+                                <div class="row">
+                                    <div class="clearfix igr col-md-1 text-center">
+                                        <a class="btn btn-info" id="Previous">@Common.Previous</a>
+                                    </div>
+                                    <div class="clearfix igr col-md-10 text-center">
+                                    </div>
+                                    <div class="clearfix igr col-md-1 text-center">
+                                        <a class="btn btn-info" id="Next">@Common.Next</a>
+                                    </div>
+                                </div>
+                                <br />
+                            </div>
+                        </div>
+                        <div class="panel panel-info" id="mainfieldset" ng-show="addServiceProvider == 1">
+                            <div class="panel-heading clearfix">
+                                <i class="icon-check-sign"></i>
+                                <h3 class="panel-title" id="header">
+                                    @ServiceProviderCrTx.ServiceProviderEntry</h3>
+                            </div>
+                            <div class="panel-body">
+                                <div style="color: Red; font-weight: bold;" class="has-error result1" id="error">
+                                    <p align="center">
+                                        @if (@ViewData["SuccessMsg"] != null)
+                                        {
+                                            @ViewData["SuccessMsg"]
+                                        }
+                                    </p>
+                                </div>
+                                <fieldset>
+                                    <legend></legend>
+                                    <div class="form-group">
+                                        <div class="col-lg-6">
+                                            <div class="form-group">
+                                                <label class="col-sm-3 control-label" for="ClaimTypeId">
+                                                    @ServiceProviderCrTx.ClaimType&nbsp;<span class="text-danger">*</span>
+                                                </label>
+                                                <div class="col-sm-8">
+                                                    <select disabled="disabled" class="form-control" id="ClaimTypeId" name="ClaimTypeId"
+                                                        ng-model="createServiceProvider.ClaimTypeId" ng-options="x.Id as x.Text for x in ClaimTypeList">
+                                                    </select>
+                                                    <span class="errorMsgSP">{{ClaimTypeIdError}}</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <div class="form-group">
+                                                <label class="col-sm-3 control-label" for="TPVehNo">
+                                                    @ServiceProviderCrTx.TPVehicleNo&nbsp;<span class="text-danger">*</span>
+                                                </label>
+                                                <div class="col-sm-8">
+                                                    <select class="form-control" id="TPVehNo" name="TPVehNo" ng-model="createServiceProvider.TPVehNo"
+                                                        ng-options="x.Id as x.Text for x in TPVehicleNoList" required>
+                                                        <option value="" selected="selected">[Select...]</option>
+                                                    </select>
+                                                    <span class="errorMsgSP">{{TPVehNoError}}</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="col-lg-6">
+                                            <div class="form-group">
+                                                <label class="col-sm-3 control-label" for="PartyTypeId">
+                                                    @ServiceProviderCrTx.PartyType&nbsp;<span class="text-danger">*</span>
+                                                </label>
+                                                <div class="col-sm-8">
+                                                    <select class="form-control" id="PartyTypeId" name="PartyTypeId" ng-model="createServiceProvider.PartyTypeId"
+                                                        ng-options="x.Id as x.Text for x in PartyTypeList">
+                                                        <option value="" selected="selected">[Select...]</option>
+                                                    </select>
+                                                    <span class="errorMsgSP">{{PartyTypeIdError}}</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <div class="form-group">
+                                                <label class="col-sm-4 control-label" for="ServiceProviderOption">
+                                                    @ServiceProviderCrTx.ServiceProviderType&nbsp;<span class="text-danger">*</span>
+                                                </label>
+                                                <div class="col-sm-8">
+                                                    <div class="RadioButton" style="margin-right: 20px;" ng-repeat="x in ServiceProviderOptionList">
+                                                        <label>
+                                                            <input id="ServiceProviderOption" name="ServiceProviderOption" type="radio" value="{{x.Value}}"
+                                                                ng-model="createServiceProvider.ServiceProviderOption" />
+                                                            {{x.Text}}
+                                                        </label>
+                                                        <span class="errorMsgSP">{{ServiceProviderOptionError}}</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </fieldset>
+                                <fieldset>
+                                    <legend id="addPartyType">Insurer</legend>
+                                    <div class="form-group">
+                                        <div class="col-lg-6">
+                                            <div class="form-group">
+                                                <label class="col-sm-3 control-label" for="CompanyNameId">
+                                                    @ServiceProviderCrTx.CompanyName&nbsp;<span class="text-danger">*</span>
+                                                </label>
+                                                <div class="col-sm-8">
+                                                    <select class="form-control" id="CompanyNameId" name="CompanyNameId" ng-model="createServiceProvider.CompanyNameId"
+                                                        ng-options="x.Id as x.Text for x in CompanyNameList">
+                                                        <option value="" selected="selected">[Select...]</option>
+                                                    </select>
+                                                    <span class="errorMsgSP">{{CompanyNameIdError}}</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <div class="form-group">
+                                                <label class="col-sm-3 control-label" for="ContactPersonName">
+                                                    @ServiceProviderCrTx.ContactName1
+                                                </label>
+                                                <div class="col-sm-8">
+                                                    <input class="form-control empty1" id="ContactPersonName" name="ContactPersonName"
+                                                        type="text" ng-model="createServiceProvider.ContactPersonName" maxlength="250" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="col-lg-6">
+                                            <div class="form-group">
+                                                <label class="col-sm-3 control-label" for="Address1">
+                                                    @ServiceProviderCrTx.Address1&nbsp;<span class="text-danger">*</span>
+                                                </label>
+                                                <div class="col-sm-8">
+                                                    <textarea class="form-control empty1" cols="20" data-val="true" data-val-required="Claimant's Address1 is required."
+                                                        id="Address1" maxlength="100" name="Address1" rows="2" ng-model="createServiceProvider.Address1"
+                                                        required></textarea>
+                                                    <span class="errorMsgSP">{{Address1Error}}</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <div class="form-group">
+                                                <label class="col-sm-3 control-label" for="OfficeNo">
+                                                    @ServiceProviderCrTx.OfficeNo
+                                                </label>
+                                                <div class="col-sm-8">
+                                                    <input class="form-control Number" id="OfficeNo" name="OfficeNo" type="text" ng-model="createServiceProvider.OfficeNo"
+                                                        maxlength="15" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="col-lg-6">
+                                            <div class="form-group">
+                                                <label class="col-sm-3 control-label" for="Address2">
+                                                    @ServiceProviderCrTx.Address2
+                                                </label>
+                                                <div class="col-sm-8">
+                                                    <textarea class="form-control empty1" cols="20" id="Address2" maxlength="100" name="Address2"
+                                                        rows="2" ng-model="createServiceProvider.Address2"></textarea>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <div class="form-group">
+                                                <label class="col-sm-3 control-label" for="Mobile">
+                                                    @ServiceProviderCrTx.MobileNo
+                                                </label>
+                                                <div class="col-sm-8">
+                                                    <input class="form-control Number empty1" id="Mobile" maxlength="15" name="Mobile"
+                                                        type="text" ng-model="createServiceProvider.Mobile" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="col-lg-6">
+                                            <div class="form-group">
+                                                <label class="col-sm-3 control-label" for="Address3">
+                                                    @ServiceProviderCrTx.Address3
+                                                </label>
+                                                <div class="col-sm-8">
+                                                    <textarea class="form-control empty1" cols="20" id="Address3" maxlength="100" name="Address3"
+                                                        rows="2" ng-model="createServiceProvider.Address3"></textarea>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <div class="form-group">
+                                                <label class="col-sm-3 control-label" for="Fax">
+                                                    @ServiceProviderCrTx.FaxNo
+                                                </label>
+                                                <div class="col-sm-8">
+                                                    <input class="form-control Number empty1" id="Fax" maxlength="15" name="Fax" type="text"
+                                                        ng-model="createServiceProvider.Fax" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="col-lg-6">
+                                            <div class="form-group">
+                                                <label class="col-sm-3 control-label" for="CountryId">
+                                                    @ServiceProviderCrTx.Country&nbsp;<span class="text-danger">*</span>
+                                                </label>
+                                                <div class="col-sm-8">
+                                                    <select class="form-control" id="CountryId" name="CountryId" ng-model="createServiceProvider.CountryId"
+                                                        ng-options="x.CountryShortCode as x.CountryName for x in UserCountryList">
+                                                        <option value="" selected="selected">[Select...]</option>
+                                                    </select>
+                                                    <span class="errorMsgSP">{{CountryIdError}}</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <div class="form-group">
+                                                <label class="col-sm-3 control-label" for="EmailAddress">
+                                                    @ServiceProviderCrTx.EmailAddress
+                                                </label>
+                                                <div class="col-sm-8">
+                                                    <input class="form-control empty1" id="EmailAddress" maxlength="100" name="EmailAddress"
+                                                        type="text" ng-model="createServiceProvider.EmailAddress" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="col-lg-6">
+                                            <div class="form-group">
+                                                <label class="col-sm-3 control-label" for="PostalCode">
+                                                    @ServiceProviderCrTx.PostalCode
+                                                </label>
+                                                <div class="col-sm-8">
+                                                    <input class="form-control Number empty1" id="PostalCode" maxlength="15" name="PostalCode"
+                                                        type="text" ng-model="createServiceProvider.PostalCode" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <div class="form-group">
+                                                <label class="col-sm-3 control-label" for="ContactPersonName2nd">
+                                                    @ServiceProviderCrTx.ContactName2
+                                                </label>
+                                                <div class="col-sm-8">
+                                                    <input class="form-control empty1" id="ContactPersonName2nd" maxlength="250" name="ContactPersonName2nd"
+                                                        type="text" ng-model="createServiceProvider.ContactPersonName2nd" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="col-lg-6">
+                                            <div class="form-group">
+                                                <label class="col-sm-3 control-label" for="AppointedDate">
+                                                    @ServiceProviderCrTx.AppointmentDate
+                                                </label>
+                                                <div class="col-sm-8">
+                                                    <input class="form-control datepicker empty11" id="AppointedDate" maxlength="15" name="AppointedDate"
+                                                        type="text" size="10" value="" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <div class="form-group">
+                                                <label class="col-sm-3 control-label" for="OfficeNo2nd">
+                                                    @ServiceProviderCrTx.OfficeNo2
+                                                </label>
+                                                <div class="col-sm-8">
+                                                    <input class="form-control Number empty1" id="OfficeNo2nd" maxlength="15" name="OfficeNo2nd"
+                                                        type="text" ng-model="createServiceProvider.OfficeNo2nd">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="col-lg-6">
+                                            <div class="form-group">
+                                                <label class="col-sm-3 control-label" for="VehNo">
+                                                    @ServiceProviderCrTx.VehicleNo
+                                                </label>
+                                                <div class="col-sm-8">
+                                                    <input class="form-control " id="VehNo" maxlength="15" name="VehNo" type="text" ng-model="createServiceProvider.VehNo" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <div class="form-group">
+                                                <label class="col-sm-3 control-label" for="Mobile2nd">
+                                                    @ServiceProviderCrTx.MobileNo2
+                                                </label>
+                                                <div class="col-sm-8">
+                                                    <input class="form-control Number empty1" id="Mobile2nd" maxlength="15" name="Mobile2nd"
+                                                        type="text" ng-model="createServiceProvider.Mobile2nd" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="col-lg-6">
+                                            <div class="form-group">
+                                                <label class="col-sm-3 control-label" for="Reference">
+                                                    @ServiceProviderCrTx.ReferenceNo&nbsp;<span class="text-danger">*</span>
+                                                </label>
+                                                <div class="col-sm-8">
+                                                    <input class="form-control empty1" id="Reference" maxlength="150" name="Reference"
+                                                        type="text" ng-model="createServiceProvider.Reference" />
+                                                    <span class="errorMsgSP">{{ReferenceError}}</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <div class="form-group">
+                                                <label class="col-sm-3 control-label" for="Fax2nd">
+                                                    @ServiceProviderCrTx.FaxNo2
+                                                </label>
+                                                <div class="col-sm-8">
+                                                    <input class="form-control Number empty1" id="Fax2nd" maxlength="15" name="Fax2nd"
+                                                        type="text" ng-model="createServiceProvider.Fax2nd" required />
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="col-lg-6">
+                                            <div class="form-group">
+                                                <label class="col-sm-3 control-label" for="StatusId">
+                                                    @ServiceProviderCrTx.Status&nbsp;<span class="text-danger">*</span>
+                                                </label>
+                                                <div class="col-sm-8">
+                                                    <select class="form-control empty1" id="StatusId" name="StatusId" ng-model="createServiceProvider.StatusId"
+                                                        ng-options="x.Lookup_value as x.Lookup_desc for x in StatusList" required>
+                                                        <option value="" selected="selected">[Select...]</option>
+                                                    </select>
+                                                    <span class="errorMsgSP">{{StatusIdError}}</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <div class="form-group">
+                                                <label class="col-sm-3 control-label" for="EmailAddress2nd">
+                                                    @ServiceProviderCrTx.EmailAddress2
+                                                </label>
+                                                <div class="col-sm-8">
+                                                    <input class="form-control empty1" id="EmailAddress2nd" maxlength="100" name="EmailAddress2nd"
+                                                        type="text" ng-model="createServiceProvider.EmailAddress2nd" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="col-lg-6">
+                                            <div class="form-group">
+                                                <label class="col-sm-3 control-label" for="Remarks">
+                                                    @ServiceProviderCrTx.Remarks
+                                                </label>
+                                                <div class="col-sm-8">
+                                                    <textarea class="form-control empty1" cols="20" id="Remarks" maxlength="800" name="Remarks"
+                                                        rows="2" ng-model="createServiceProvider.Remarks"></textarea>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <div class="form-group">
+                                                <label class="col-sm-3 control-label">
+                                                </label>
+                                                <div class="col-sm-8">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </fieldset>
+                                <div class="form-group">
+                                    <div class="col-lg-1">
+                                        <div class="form-group" style="padding-left: 20px;">
+                                            <a class="btn btn-info" id="Previous">Previous</a>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-10 text-center">
+                                        <div class="form-group" id="DivSave">
+                                            <button class="btn btn-info" type="button" id="btnSave" tabindex="12" ng-click="saveServiceProvider()">
+                                                Save</button>
+                                            <a type="button" class="btn btn-info" id="btnReset" href="#" tabindex="13" ng-click="resetServiceProvider()">
+                                                Reset</a>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-1">
+                                        <div class="form-group">
+                                            <a class="btn btn-info" id="Next">Next</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <fieldset>
+                                    <legend></legend>
+                                    <div class="form-group">
+                                        <div class="col-lg-12">
+                                            @Html.Partial("~/Views/Shared/_TimeStampSP.cshtml", Model)
+                                        </div>
+                                    </div>
+                                </fieldset>
+                            </div>
+                        </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    setTabActive('SPTab');
+    var do_on_load = function () {
+        SetDivPost();
+
+        $(".datepicker").datepicker({
+            dateFormat: "dd/mm/yy",
+            showStatus: true,
+            showWeeks: true,
+            currentText: 'Now',
+            autoSize: true,
+            gotoCurrent: true,
+            showAnim: 'blind',
+            highlightWeek: true,
+            changeMonth: !0,
+            changeYear: !0,
+            yearRange: "1951:2050",
+            onSelect: function () {
+                $(this).valid()
+            }
+        });
+
+        $("input[type=text]").each(function () {
+            $(this).hasClass("datepicker") && 10 < $(this).val().length && $(this).val($(this).val().substring(0, 10));
+            if (void 0 !== $(this).attr("data-val-date") && "The field " == $(this).attr("data-val-date").substring(0, 10)) {
+                var e = $(this).attr("data-val-date").substring(10, $(this).attr("data-val-date").length).replace("must be a date.", "must be in 'dd/mm/yyyy' format.");
+                $(this).removeAttr("data-val-date");
+                $(this).attr("data-val-date", e)
+            }
+        });
+    };
+
+
+    $(document).ready(do_on_load);
+    $(window).bind('page:change', do_on_load);
+</script>

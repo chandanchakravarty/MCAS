@@ -1,0 +1,55 @@
+﻿@model MCAS.Web.Objects.MastersHelper.CountryModel
+
+@{
+    ViewBag.Title = "Create";
+   
+}
+<div class="dashboard-wrapper"> 
+<h2>Create</h2>
+
+<div style="color:Red;" class="has-error" id="error">
+<p align="center">
+@if (TempData["notice"] != null) {
+  <p>@TempData["notice"]</p>
+}
+</p>
+</div>
+
+<div class="container">
+    <form class="form-horizontal" action='@Url.Action("Create", "CountryMaster")' role="form" id="losstypeform" method="post">
+    
+    <div class="row">
+        <div class="clearfix igr col-md-12">
+            <div class="col-md-2">
+                <label for="inputLossTypeCode">Country Code</label>
+            </div>
+            <div class="col-md-3">
+                @Html.TextBoxFor(m => m.CountryCode, new { @maxlength = "7" })<br />
+                 @Html.ValidationMessageFor(m => m.CountryCode, null, new { @class = "has-error" })<br />
+               
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="clearfix igr col-md-12">
+            <div class="col-md-2">
+                <label for="inputLossTypeName">Country Name</label>
+            </div>
+            <div class="col-md-3">
+                @Html.TextBoxFor(m => m.CountryName)<br />
+                @Html.ValidationMessageFor(m => m.CountryName, null, new { @class = "has-error" })<br />
+               
+            </div>
+        </div>
+    </div>
+    
+    <div class="row">
+        <div class="clearfix igr col-md-12">
+           <button class="btn btn-primary btn-large">Save</button>
+           @Html.ActionLink("Cancel", "Index", null, new { @class = "btn btn-primary btn-large" })
+           @*<button type="button" class="btn btn-primary btn-large" onclick="onclickcancel();">Cancel</button>*@
+        </div>
+    </div>
+    </form>
+</div>
+</div>

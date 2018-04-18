@@ -1,0 +1,686 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<quickQuote>
+	<policy>
+		<PolicyTerm>
+			<Term Code="6">6 Months</Term>
+		</PolicyTerm>
+		<liabilityCoverages>
+			<BI>
+				<CoverageLimit></CoverageLimit>
+				<CoverageLimit>No Coverage</CoverageLimit>
+				<CoverageLimit>25/50,000</CoverageLimit>
+				<CoverageLimit>50/100,000</CoverageLimit>
+				<CoverageLimit>100/300,000</CoverageLimit>
+				<CoverageLimit>250/500,000</CoverageLimit>
+				<CoverageLimit>300/500,000</CoverageLimit>
+			</BI>
+			<PD>
+				<CoverageLimit></CoverageLimit>
+				<CoverageLimit>No Coverage</CoverageLimit>
+				<CoverageLimit>25,000</CoverageLimit>
+				<CoverageLimit>50,000</CoverageLimit>
+				<CoverageLimit>100,000</CoverageLimit>
+			</PD>
+			<CSL>
+				<CoverageLimit></CoverageLimit>
+				<CoverageLimit>No Coverage</CoverageLimit>
+				<CoverageLimit>50,000</CoverageLimit>
+				<CoverageLimit>100,000</CoverageLimit>
+				<CoverageLimit>250,000</CoverageLimit>
+				<CoverageLimit>300,000</CoverageLimit>
+				<CoverageLimit>500,000</CoverageLimit>
+			</CSL>
+			<PIP USE="PERSONAL">
+				<CoverageLimit Code="No Coverage" DED="">No Coverage</CoverageLimit>
+				<CoverageLimit Code="EXCESSWAGE" DED="300">Excess Wage</CoverageLimit>
+				<CoverageLimit Code="EXCESSMEDICAL" DED="300">Excess Medical</CoverageLimit>
+				<CoverageLimit Code="EXCESSBOTH" DED="300">Excess Wage/Medical</CoverageLimit>
+				<CoverageLimit Code="FULL" DED="">Full Medical &amp; Full Wage Loss</CoverageLimit>
+			</PIP>
+			<PIP USE="COMMERCIAL">
+				<CoverageLimit Code="No Coverage" DED="">No Coverage</CoverageLimit>
+				<CoverageLimit Code="FULLMEDICALFULLWAGELOSS" DED="">Full Medical &amp; Full Wage Loss</CoverageLimit>
+				<CoverageLimit Code="FULLMEDICALEXCESSWAGEWORKCOMP" DED="300">Full Medical, Excess Wage &amp;/or Work Comp</CoverageLimit>
+				<CoverageLimit Code="EXCESSMEDICALFULLWAGELOSS" DED="300">Excess Medical &amp; Full Wage Loss</CoverageLimit>
+				<CoverageLimit Code="EXCESSMEDICALEXCESSWAGELOSSWORKCOMP" DED="300">Excess Medical &amp; Excess Wage Loss &amp;/Or Work Comp</CoverageLimit>
+			</PIP>
+			<MEDPM>
+				<CoverageLimit>No Coverage</CoverageLimit>
+				<CoverageLimit>2,000</CoverageLimit>
+				<CoverageLimit>5,000</CoverageLimit>
+				<CoverageLimit>7,500</CoverageLimit>
+				<CoverageLimit>10,000</CoverageLimit>
+			</MEDPM>
+		</liabilityCoverages>
+		<UnInsuredUnderInsuredMotorists>
+			<UMUIMType state="INDIANA">
+				<Type>No Coverage</Type>
+				<Type>BI Only</Type>
+				<Type>BI/PD $0 Deductible</Type>
+				<Type>BI/PD $300 Deductible</Type>
+			</UMUIMType>
+			<UMUIMType state="MICHIGAN">
+				<Type>No Coverage</Type>
+				<Type>Uninsured Motorists</Type>
+			</UMUIMType>
+			<UMSplit>
+				<CoverageLimit></CoverageLimit>
+				<CoverageLimit>25/50,000</CoverageLimit>
+				<CoverageLimit>50/100,000</CoverageLimit>
+				<CoverageLimit>100/300,000</CoverageLimit>
+				<CoverageLimit>250/500,000</CoverageLimit>
+				<CoverageLimit>300/500,000</CoverageLimit>
+			</UMSplit>
+			<UMCSL>
+				<CoverageLimit></CoverageLimit>
+				<CoverageLimit>50,000</CoverageLimit>
+				<CoverageLimit>100,000</CoverageLimit>
+				<CoverageLimit>250,000</CoverageLimit>
+				<CoverageLimit>300,000</CoverageLimit>
+				<CoverageLimit>500,000</CoverageLimit>
+			</UMCSL>
+			<PDLimit>
+				<CoverageLimit></CoverageLimit>
+				<CoverageLimit>25,000</CoverageLimit>
+				<CoverageLimit>50,000</CoverageLimit>
+				<CoverageLimit>100,000</CoverageLimit>
+			</PDLimit>
+		</UnInsuredUnderInsuredMotorists>
+		<SeatBelt>
+			<value>Yes</value>
+			<value>No</value>
+		</SeatBelt>
+		<PriorLapse>
+			<value></value>
+			<value>Yes</value>
+			<value>No</value>
+		</PriorLapse>
+		<PriorLimit>
+			<CoverageLimit CODE="CSL" UT_VALUE="50000">50,000</CoverageLimit>
+			<CoverageLimit CODE="CSL" UT_VALUE="100000">100,000</CoverageLimit>
+			<CoverageLimit CODE="CSL" UT_VALUE="250000">250,000</CoverageLimit>
+			<CoverageLimit CODE="CSL" UT_VALUE="300000">300,000</CoverageLimit>
+			<CoverageLimit CODE="CSL" UT_VALUE="500000">500,000</CoverageLimit>
+			<CoverageLimit CODE="BI" UT_VALUE="25">25/50,000</CoverageLimit>
+			<CoverageLimit CODE="BI" UT_VALUE="50">50/100,000</CoverageLimit>
+			<CoverageLimit CODE="BI" UT_VALUE="100">100/300,000</CoverageLimit>
+			<CoverageLimit CODE="BI" UT_VALUE="250">250/500,000</CoverageLimit>
+			<CoverageLimit CODE="BI" UT_VALUE="300">300/500,000</CoverageLimit>
+		</PriorLimit>
+	</policy>
+	<vehicle>
+		<VehicleTypeUse>
+			<Type>Commercial</Type>
+			<Type>Personal</Type>
+		</VehicleTypeUse>
+		<vehicleType USE="COMMERCIAL" POLICYTYPE="NEW">
+			<Type Code="LHI" RatingCode="I">Local Haul - Intermittent</Type>
+			<Type Code="LH" RatingCode="L">Local Haul</Type>
+			<Type Code="TR" RatingCode="O">Trailer</Type>
+			<Type Code="LHA" RatingCode="">Long Haul</Type>
+		</vehicleType>
+		<vehicleType USE="COMMERCIAL" POLICYTYPE="RENEW">
+			<Type Code="LHI" RatingCode="I">Local Haul - Intermittent</Type>
+			<Type Code="LH" RatingCode="L">Local Haul</Type>
+			<Type Code="TR" RatingCode="O">Trailer</Type>
+			<Type Code="LHA" RatingCode="">Long Haul</Type>
+		</vehicleType>
+		<vehicleType USE="PERSONAL" POLICYTYPE="NEW">
+			<DATE START="01/01/2003" END="01/01/9999">
+				<Type Code="PP">Private Passenger Auto</Type>
+				<Type Code="CTT">Camper and Travel Trailer</Type>
+				<Type Code="TR">Utility Trailer</Type>
+				<Type Code="CV">Customized Van or Truck</Type>
+				<Type Code="MH">Motor home, Truck or Van Campers</Type>
+			</DATE>
+			<DATE START="01/01/1900" END="12/31/2002">
+				<Type Code="PP">Private Passenger Auto</Type>
+				<Type Code="CTT">Camper and Travel Trailer</Type>
+				<Type Code="TR">Utility Trailer</Type>
+				<Type Code="CV">Customized Van or Truck</Type>
+				<Type Code="MH">Motor home, Truck or Van Campers</Type>
+				<Type Code="CLC">Classic Car</Type>
+				<Type Code="ANC">Antique Car</Type>
+			</DATE>
+		</vehicleType>
+		<vehicleType USE="PERSONAL" POLICYTYPE="RENEW">
+			<Type Code="PP">Private Passenger Auto</Type>
+			<Type Code="CV">Customized Van or Truck</Type>
+			<Type Code="MH">Motorhome</Type>
+			<Type Code="TR">Trailer</Type>
+		</vehicleType>
+		<VehicleClass state="MICHIGAN" USE="PERSONAL">
+			<Class Code=""></Class>
+			<Class Code="1A">1A Principal - Age 25-29</Class>
+			<Class Code="1B">1B Principal - Age 30-34</Class>
+			<Class Code="1C">1C Principal - Age 35-44</Class>
+			<Class Code="1D">1D Principal - Age 45-49</Class>
+			<Class Code="1E">1E Principal - Age 50-69</Class>
+			<Class Code="1F">1F Principal - Age 70+</Class>
+			<Class Code="2A">2A Occasional Driver - Age 21-24</Class>
+			<Class Code="2B">2B Occasional Driver - Age 18-20</Class>
+			<Class Code="2C">2C Occasional Driver - Age 16-17</Class>
+			<Class Code="3A">3A Principal Male Operator - Age 21-24</Class>
+			<Class Code="3B">3B Principal Male Operator - Age 18-20</Class>
+			<Class Code="3C">3C Principal Male Operator - Age 16-17</Class>
+			<Class Code="4A">4A Principal Female Operator - Age 21-24</Class>
+			<Class Code="4B">4B Principal Female Operator - Age 18-20</Class>
+			<Class Code="4C">4C Principal Female Operator - Age 16-17</Class>
+			<Class Code="5C">5C Youthful Driver College/Military</Class>
+			<Class Code="PA">PA Principal - Age 25-29</Class>
+			<Class Code="PB">PB Principal - Age 30-34</Class>
+			<Class Code="PC">PC Principal - Age 35-44</Class>
+			<Class Code="PD">PD Principal - Age 45-49</Class>
+			<Class Code="PE">PE Principal - Age 50-69</Class>
+			<Class Code="PF">PF Principal - Age 70+</Class>
+			<Class Code="6A">6A Principal Female Operator - Age 21-24</Class>
+			<Class Code="6B">6B Principal Female Operator - Age 18-20</Class>
+			<Class Code="6C">6C Principal Female Operator - Age 16-17</Class>
+		</VehicleClass>
+		<VehicleClass state="INDIANA" USE="PERSONAL">
+			<DATE START="06/1/2008" END="01/01/9999">
+				<Class Code=""></Class>
+				<Class Code="1A">1A Principal - Age 25-29</Class>
+				<Class Code="1B">1B Principal - Age 30-34</Class>
+				<Class Code="1C">1C Principal - Age 35-39</Class>
+				<Class Code="1D">1D Principal - Age 40-44</Class>
+				<Class Code="1E">1E Principal - Age 45-49</Class>
+				<Class Code="1F">1F Principal - Age 50-54</Class>
+				<Class Code="1G">1G Principal - Age 55-59</Class>
+				<Class Code="1H">1H Principal - Age 60-64</Class>
+				<Class Code="1I">1I Principal - Age 65-69</Class>
+				<Class Code="1J">1J Principal - Age 70-74</Class>
+				<Class Code="1K">1K Principal - Age 75+</Class>
+				<Class Code="2A">2A Occasional Male Driver - Age 21-24</Class>
+				<Class Code="2B">2B Occasional Male Driver - Age 18-20</Class>
+				<Class Code="2C">2C Occasional Male Driver - Age 16-17</Class>
+				<Class Code="3A">3A Principal Male Operator - Age 21-24</Class>
+				<Class Code="3B">3B Principal Male Operator - Age 18-20</Class>
+				<Class Code="3C">3C Principal Male Operator - Age 16-17</Class>
+				<Class Code="4A">4A Principal Female Operator - Age 21-24</Class>
+				<Class Code="4B">4B Principal Female Operator - Age 18-20</Class>
+				<Class Code="4C">4C Principal Female Operator - Age 16-17</Class>
+				<Class Code="5C">5C Youthful Driver College/Military</Class>
+				<Class Code="PA">PA Principal - Age 25-29</Class>
+				<Class Code="PB">PB Principal - Age 30-34</Class>
+				<Class Code="PC">PC Principal - Age 35-39</Class>
+				<Class Code="PD">PD Principal - Age 40-44</Class>
+				<Class Code="PE">PE Principal - Age 45-49</Class>
+				<Class Code="PF">PF Principal - Age 50-54</Class>
+				<Class Code="PG">PG Principal - Age 55-59</Class>
+				<Class Code="PH">PH Principal - Age 60-64</Class>
+				<Class Code="PI">PI Principal - Age 65-69</Class>
+				<Class Code="PJ">PJ Principal - Age 70-74</Class>
+				<Class Code="PK">PK Principal - Age 75+</Class>
+				<Class Code="6A">6A Occasional Female Operator - Age 21-24</Class>
+				<Class Code="6B">6B Occasional Female Operator - Age 18-20</Class>
+				<Class Code="6C">6C Occasional Female Operator - Age 16-17</Class>
+			</DATE>
+			<DATE START="01/01/1900" END="05/31/2008">
+				<Class Code=""></Class>
+				<Class Code="1A">1A Principal - Age 25-29</Class>
+				<Class Code="1B">1B Principal - Age 30-34</Class>
+				<Class Code="1C">1C Principal - Age 35-44</Class>
+				<Class Code="1D">1D Principal - Age 45-49</Class>
+				<Class Code="1E">1E Principal - Age 50-69</Class>
+				<Class Code="1F">1F Principal - Age 70+</Class>
+				<Class Code="2A">2A Occasional Male Driver - Age 21-24</Class>
+				<Class Code="2B">2B Occasional Male Driver - Age 18-20</Class>
+				<Class Code="2C">2C Occasional Male Driver - Age 16-17</Class>
+				<Class Code="3A">3A Principal Male Operator - Age 21-24</Class>
+				<Class Code="3B">3B Principal Male Operator - Age 18-20</Class>
+				<Class Code="3C">3C Principal Male Operator - Age 16-17</Class>
+				<Class Code="4A">4A Principal Female Operator - Age 21-24</Class>
+				<Class Code="4B">4B Principal Female Operator - Age 18-20</Class>
+				<Class Code="4C">4C Principal Female Operator - Age 16-17</Class>
+				<Class Code="5C">5C Youthful Driver College/Military</Class>
+				<Class Code="PA">PA Principal - Age 25-29</Class>
+				<Class Code="PB">PB Principal - Age 30-34</Class>
+				<Class Code="PC">PC Principal - Age 35-44</Class>
+				<Class Code="PD">PD Principal - Age 45-49</Class>
+				<Class Code="PE">PE Principal - Age 50-69</Class>
+				<Class Code="PF">PF Principal - Age 70+</Class>
+				<Class Code="6A">6A Principal Female Operator - Age 21-24</Class>
+				<Class Code="6B">6B Principal Female Operator - Age 18-20</Class>
+				<Class Code="6C">6C Principal Female Operator - Age 16-17</Class>
+			</DATE>
+		</VehicleClass>
+		<VehicleClass state="INDIANA" USE="COMMERCIAL">
+			<Class Code=""></Class>
+			<Class Code="CA5" VALUE_CODE="CDCA1">CA5 Apron, Coat, Linen and Towel Supply</Class>
+			<Class Code="CA5" VALUE_CODE="CDCA2">CA5 Bakeries - trucks operated from Retail Store</Class>
+			<Class Code="CA4" VALUE_CODE="CDCA3">CA4 Bakeries - All Others</Class>
+			<Class Code="CA5" VALUE_CODE="CDCA4">CA5 Building or Construction/General Contractors</Class>
+			<Class Code="CA8" VALUE_CODE="CDCA5">CA8 Carpenters - Load Capacity over 2,000 pounds</Class>
+			<Class Code="CA6" VALUE_CODE="CDCA6">CA6 Carpenters - Load Capacity under 2.000 pounds</Class>
+			<Class Code="CA5" VALUE_CODE="CDCA7">CA5 Cleaners or Dryers</Class>
+			<Class Code="CA5" VALUE_CODE="CDCA8">CA5 Construction - General Contractors</Class>
+			<Class Code="CA8" VALUE_CODE="CDCA9">CA8 Electricians - Load Capacity over 2,000 pounds</Class>
+			<Class Code="CA6" VALUE_CODE="CDCA10">CA6 Electricians - Load Capacity under 2.000 pounds</Class>
+			<Class Code="CA8" VALUE_CODE="CDCA11">CA8 Farmers - Load Capacity over 2,000 pounds</Class>
+			<Class Code="CA6" VALUE_CODE="CDCA12">CA6 Farmers - Load Capacity under 2.000 pounds</Class>
+			<Class Code="CA4" VALUE_CODE="CDCA13">CA4 Feed Dealers</Class>
+			<Class Code="CA5" VALUE_CODE="CDCA14">CA5 Grocers -  trucks operated from Retail Store</Class>
+			<Class Code="CA5" VALUE_CODE="CDCA15">CA5 Horse Vans - Transport Owners Horses</Class>
+			<Class Code="CA8" VALUE_CODE="CDCA16">CA8 Household Furniture Install and Repair - Load Capacity over 2,000 pounds</Class>
+			<Class Code="CA6" VALUE_CODE="CDCA17">CA6 Household Furniture Install and Repair - Load Capacity under 2.000 pounds</Class>
+			<Class Code="CA8" VALUE_CODE="CDCA18">CA8 Interior Decorators - Load Capacity over 2,000 pounds</Class>
+			<Class Code="CA6" VALUE_CODE="CDCA19">CA6 Interior Decorators - Load Capacity under 2.000 pounds</Class>
+			<Class Code="CA5" VALUE_CODE="CDCA20">CA5 Landscaping</Class>
+			<Class Code="CA5" VALUE_CODE="CDCA21">CA5 Laundries</Class>
+			<Class Code="CA5" VALUE_CODE="CDCA22">CA5 Mail and Parcel Post - Load Capacity under 2,000 pounds</Class>
+			<Class Code="CA8" VALUE_CODE="CDCA23">CA8 Masons  - Load Capacity over 2,000 pounds</Class>
+			<Class Code="CA6" VALUE_CODE="CDCA24">CA6 Masons  - Load Capacity under 2.000 pounds</Class>
+			<Class Code="CA5" VALUE_CODE="CDCA25">CA5 Meat Dealers or Packers -  trucks operated from Retail Store</Class>
+			<Class Code="CA8" VALUE_CODE="CDCA26">CA8 Painters   - Load Capacity over 2,000 pounds</Class>
+			<Class Code="CA6" VALUE_CODE="CDCA27">CA6 Painters   - Load Capacity under 2.000 pounds</Class>
+			<Class Code="CA8" VALUE_CODE="CDCA28">CA8 Paperhangers   - Load Capacity over 2,000 pounds</Class>
+			<Class Code="CA6" VALUE_CODE="CDCA29">CA6 Paperhangers   - Load Capacity under 2.000 pounds</Class>
+			<Class Code="CA8" VALUE_CODE="CDCA30">CA8 Plasterers    - Load Capacity over 2,000 pounds</Class>
+			<Class Code="CA6" VALUE_CODE="CDCA31">CA6 Plasterers    - Load Capacity under 2.000 pounds</Class>
+			<Class Code="CA8" VALUE_CODE="CDCA32">CA8 Plumbers     - Load Capacity over 2,000 pounds</Class>
+			<Class Code="CA6" VALUE_CODE="CDCA33">CA6 Plumbers     - Load Capacity under 2.000 pounds</Class>
+			<Class Code="CA8" VALUE_CODE="CDCA34">CA8 Radio and Television Repair  - Load Capacity over 2,000 pounds</Class>
+			<Class Code="CA6" VALUE_CODE="CDCA35">CA6 Radio and Television Repair  - Load Capacity under 2.000 pounds</Class>
+			<Class Code="CA8" VALUE_CODE="CDCA36">CA8 Repair and Service Contractors  - Load Capacity over 2,000 pounds</Class>
+			<Class Code="CA6" VALUE_CODE="CDCA37">CA6 Repair and Service Contractors  - Load Capacity under 2.000 pounds</Class>
+			<Class Code="CA5" VALUE_CODE="CDCA38">CA5 Retail Delivery (NOC)</Class>
+			<Class Code="CA8" VALUE_CODE="CDCA39">CA8 Roofers -  Load Capacity over 2,000 pounds</Class>
+			<Class Code="CA6" VALUE_CODE="CDCA40">CA6 Roofers -  Load Capacity under 2.000 pounds</Class>
+		</VehicleClass>
+		<VehicleClass state="MICHIGAN" USE="COMMERCIAL">
+			<Class Code=""></Class>
+			<Class Code="CA5" VALUE_CODE="CDCA1">CA5 Apron, Coat, Linen and Towel Supply</Class>
+			<Class Code="CA5" VALUE_CODE="CDCA2">CA5 Bakeries - trucks operated from Retail Store</Class>
+			<Class Code="CA4" VALUE_CODE="CDCA3">CA4 Bakeries - All Others</Class>
+			<Class Code="CA5" VALUE_CODE="CDCA4">CA5 Building or Construction/General Contractors</Class>
+			<Class Code="CA8" VALUE_CODE="CDCA5">CA8 Carpenters - Load Capacity over 2,000 pounds</Class>
+			<Class Code="CA6" VALUE_CODE="CDCA6">CA6 Carpenters - Load Capacity under 2.000 pounds</Class>
+			<Class Code="CA5" VALUE_CODE="CDCA7">CA5 Cleaners or Dryers</Class>
+			<Class Code="CA5" VALUE_CODE="CDCA8">CA5 Construction - General Contractors</Class>
+			<Class Code="CA8" VALUE_CODE="CDCA9">CA8 Electricians - Load Capacity over 2,000 pounds</Class>
+			<Class Code="CA6" VALUE_CODE="CDCA10">CA6 Electricians - Load Capacity under 2.000 pounds</Class>
+			<Class Code="CA8" VALUE_CODE="CDCA11">CA8 Farmers - Load Capacity over 2,000 pounds</Class>
+			<Class Code="CA6" VALUE_CODE="CDCA12">CA6 Farmers - Load Capacity under 2.000 pounds</Class>
+			<Class Code="CA4" VALUE_CODE="CDCA13">CA4 Feed Dealers</Class>
+			<Class Code="CA5" VALUE_CODE="CDCA14">CA5 Grocers -  trucks operated from Retail Store</Class>
+			<Class Code="CA5" VALUE_CODE="CDCA15">CA5 Horse Vans - Transport Owners Horses</Class>
+			<Class Code="CA8" VALUE_CODE="CDCA16">CA8 Household Furniture Install and Repair - Load Capacity over 2,000 pounds</Class>
+			<Class Code="CA6" VALUE_CODE="CDCA17">CA6 Household Furniture Install and Repair - Load Capacity under 2.000 pounds</Class>
+			<Class Code="CA8" VALUE_CODE="CDCA18">CA8 Interior Decorators - Load Capacity over 2,000 pounds</Class>
+			<Class Code="CA6" VALUE_CODE="CDCA19">CA6 Interior Decorators - Load Capacity under 2.000 pounds</Class>
+			<Class Code="CA5" VALUE_CODE="CDCA20">CA5 Landscaping</Class>
+			<Class Code="CA5" VALUE_CODE="CDCA21">CA5 Laundries</Class>
+			<Class Code="CA5" VALUE_CODE="CDCA22">CA5 Mail and Parcel Post - Load Capacity under 2,000 pounds</Class>
+			<Class Code="CA8" VALUE_CODE="CDCA23">CA8 Masons  - Load Capacity over 2,000 pounds</Class>
+			<Class Code="CA6" VALUE_CODE="CDCA24">CA6 Masons  - Load Capacity under 2.000 pounds</Class>
+			<Class Code="CA5" VALUE_CODE="CDCA25">CA5 Meat Dealers or Packers -  trucks operated from Retail Store</Class>
+			<Class Code="CA8" VALUE_CODE="CDCA26">CA8 Painters   - Load Capacity over 2,000 pounds</Class>
+			<Class Code="CA6" VALUE_CODE="CDCA27">CA6 Painters   - Load Capacity under 2.000 pounds</Class>
+			<Class Code="CA8" VALUE_CODE="CDCA28">CA8 Paperhangers   - Load Capacity over 2,000 pounds</Class>
+			<Class Code="CA6" VALUE_CODE="CDCA29">CA6 Paperhangers   - Load Capacity under 2.000 pounds</Class>
+			<Class Code="CA8" VALUE_CODE="CDCA30">CA8 Plasterers    - Load Capacity over 2,000 pounds</Class>
+			<Class Code="CA6" VALUE_CODE="CDCA31">CA6 Plasterers    - Load Capacity under 2.000 pounds</Class>
+			<Class Code="CA8" VALUE_CODE="CDCA32">CA8 Plumbers     - Load Capacity over 2,000 pounds</Class>
+			<Class Code="CA6" VALUE_CODE="CDCA33">CA6 Plumbers     - Load Capacity under 2.000 pounds</Class>
+			<Class Code="CA8" VALUE_CODE="CDCA34">CA8 Radio and Television Repair  - Load Capacity over 2,000 pounds</Class>
+			<Class Code="CA6" VALUE_CODE="CDCA35">CA6 Radio and Television Repair  - Load Capacity under 2.000 pounds</Class>
+			<Class Code="CA8" VALUE_CODE="CDCA36">CA8 Repair and Service Contractors  - Load Capacity over 2,000 pounds</Class>
+			<Class Code="CA6" VALUE_CODE="CDCA37">CA6 Repair and Service Contractors  - Load Capacity under 2.000 pounds</Class>
+			<Class Code="CA5" VALUE_CODE="CDCA38">CA5 Retail Delivery (NOC)</Class>
+			<Class Code="CA8" VALUE_CODE="CDCA39">CA8 Roofers -  Load Capacity over 2,000 pounds</Class>
+			<Class Code="CA6" VALUE_CODE="CDCA40">CA6 Roofers -  Load Capacity under 2.000 pounds</Class>
+		</VehicleClass>
+		<!--<vehicleType POLICYTYPE="NEW">
+			<Type Code="PP">Private Passenger Auto</Type>
+			<Type Code="CV">Customized Van or Truck</Type>
+			<Type Code="MHO">Motor Home - Owned</Type>
+			<Type Code="MHR">Motor Home - Rented</Type>
+			<Type Code="URH">Trailer</Type>
+		</vehicleType>
+		<vehicleType POLICYTYPE="RENEW">
+			<Type Code="PP">Private Passenger Auto</Type>
+			<Type Code="CV">Customized Van or Truck</Type>
+			<Type Code="MHO">Motor Home - Owned</Type>
+			<Type Code="MHR">Motor Home - Rented</Type>
+			<Type Code="URH">Trailer</Type>
+			<Type Code="CA">Classic Auto</Type>
+			<Type Code="AA">Antique Auto</Type>
+			<Type Code="SA">Stated Auto</Type>
+		</vehicleType>-->
+		<vehicleUse>
+			<use Code="B" RatingCode="B">Business</use>
+			<use Code="CBU" RatingCode="C">Corp/Partner Ownership w/Business use</use>
+			<use Code="CPW" RatingCode="W">Corp/Partner Ownership w/over 25 miles to work</use>
+			<use Code="CPU" RatingCode="O">Corp/Partner Ownership w/pleasure less than 11 miles</use>
+			<use Code="WS" RatingCode="O">Drive to Work/School</use>
+			<use Code="PM" RatingCode="P">Pleasure</use>
+			<use Code="SP" RatingCode="B">Snowplow</use>
+			<!--<use Code="PM" RatingCode="P">Pleasure/Work 0-10 miles</use>-->
+			<!--<use Code="SP" RatingCode="B">Snowplow</use>-->
+			<!--<use Code="WS" RatingCode="O">Work/School 11-25 miles</use>-->
+			<!--<use Code="WSO" RatingCode="W">Work/School over 25 miles</use>-->
+		</vehicleUse>
+		<CarPool>
+			<Value>Yes</Value>
+			<Value>No</Value>
+		</CarPool>
+		<Snowplow>
+			<Value Code="FT" RatingCode="B">Full Time</Value>
+			<Value Code="INWI" RatingCode="B">Incidental with Income</Value>
+			<Value Code="INWOI" RatingCode="B">Incidental without Income</Value>
+		</Snowplow>
+		<Coverages>
+			<ComprehensiveDeductible state="INDIANA" USE="COMMERCIAL">
+				<CoverageLimit></CoverageLimit>
+				<CoverageLimit>100</CoverageLimit>
+				<CoverageLimit>150</CoverageLimit>
+				<CoverageLimit>250</CoverageLimit>
+				<CoverageLimit>500</CoverageLimit>
+				<CoverageLimit>1000</CoverageLimit>
+			</ComprehensiveDeductible>
+			<ComprehensiveDeductible state="INDIANA" USE="PERSONALCTT">
+				<DATE START="01/01/1950" END="12/31/2000">
+					<CoverageLimit></CoverageLimit>
+					<CoverageLimit>50</CoverageLimit>
+					<CoverageLimit>100</CoverageLimit>
+					<CoverageLimit>150</CoverageLimit>
+					<CoverageLimit>200</CoverageLimit>
+					<CoverageLimit>250</CoverageLimit>
+					<CoverageLimit>500</CoverageLimit>
+					<CoverageLimit>1000</CoverageLimit>
+					<CoverageLimit>2000</CoverageLimit>
+				</DATE>
+				<DATE START="01/01/2001" END="01/01/9999">
+					<CoverageLimit></CoverageLimit>
+					<CoverageLimit>100</CoverageLimit>
+					<CoverageLimit>150</CoverageLimit>
+					<CoverageLimit>200</CoverageLimit>
+					<CoverageLimit>250</CoverageLimit>
+					<CoverageLimit>500</CoverageLimit>
+					<CoverageLimit>1000</CoverageLimit>
+					<CoverageLimit>2000</CoverageLimit>
+				</DATE>
+			</ComprehensiveDeductible>
+			<ComprehensiveDeductible state="INDIANA" USE="PERSONAL">
+				<CoverageLimit></CoverageLimit>
+				<CoverageLimit>100</CoverageLimit>
+				<CoverageLimit>150</CoverageLimit>
+				<CoverageLimit>200</CoverageLimit>
+				<CoverageLimit>250</CoverageLimit>
+				<CoverageLimit>500</CoverageLimit>
+				<CoverageLimit>1000</CoverageLimit>
+				<CoverageLimit>2000</CoverageLimit>
+			</ComprehensiveDeductible>
+			<ComprehensiveDeductible state="MICHIGAN" USE="PERSONALCTT">
+				<DATE START="01/01/1950" END="12/31/2000">
+					<CoverageLimit></CoverageLimit>
+					<CoverageLimit>50</CoverageLimit>
+					<CoverageLimit>100</CoverageLimit>
+					<CoverageLimit>150</CoverageLimit>
+					<CoverageLimit>200</CoverageLimit>
+					<CoverageLimit>250</CoverageLimit>
+					<CoverageLimit>500</CoverageLimit>
+					<CoverageLimit>1000</CoverageLimit>
+					<CoverageLimit>2000</CoverageLimit>
+				</DATE>
+				<DATE START="01/01/2001" END="01/01/9999">
+					<CoverageLimit></CoverageLimit>
+					<CoverageLimit>100</CoverageLimit>
+					<CoverageLimit>150</CoverageLimit>
+					<CoverageLimit>200</CoverageLimit>
+					<CoverageLimit>250</CoverageLimit>
+					<CoverageLimit>500</CoverageLimit>
+					<CoverageLimit>1000</CoverageLimit>
+					<CoverageLimit>2000</CoverageLimit>
+				</DATE>
+			</ComprehensiveDeductible>
+			<ComprehensiveDeductible state="MICHIGAN" USE="PERSONAL">
+				<CoverageLimit></CoverageLimit>
+				<!--<CoverageLimit>50</CoverageLimit>-->
+				<CoverageLimit>100</CoverageLimit>
+				<CoverageLimit>150</CoverageLimit>
+				<CoverageLimit>200</CoverageLimit>
+				<CoverageLimit>250</CoverageLimit>
+				<CoverageLimit>500</CoverageLimit>
+				<CoverageLimit>1000</CoverageLimit>
+				<CoverageLimit>2000</CoverageLimit>
+			</ComprehensiveDeductible>
+			<ComprehensiveDeductible state="MICHIGAN" USE="COMMERCIAL">
+				<CoverageLimit></CoverageLimit>
+				<!--<CoverageLimit>50</CoverageLimit>-->
+				<CoverageLimit>100</CoverageLimit>
+				<CoverageLimit>150</CoverageLimit>
+				<!--<CoverageLimit>200</CoverageLimit>-->
+				<CoverageLimit>250</CoverageLimit>
+				<CoverageLimit>500</CoverageLimit>
+				<CoverageLimit>1000</CoverageLimit>
+				<CoverageLimit>2000</CoverageLimit>
+			</ComprehensiveDeductible>
+			<CollisionDeductible state="INDIANA" USE="COMMERCIAL">
+				<CoverageLimit></CoverageLimit>
+				<CoverageLimit>200</CoverageLimit>
+				<CoverageLimit>250</CoverageLimit>
+				<CoverageLimit>500</CoverageLimit>
+				<CoverageLimit>750</CoverageLimit>
+				<CoverageLimit>1000</CoverageLimit>
+			</CollisionDeductible>
+			<CollisionDeductible state="INDIANA" USE="PERSONALCTT">
+				<DATE START="01/01/1950" END="12/31/2000">
+					<CoverageLimit></CoverageLimit>
+					<CoverageLimit>50</CoverageLimit>
+					<CoverageLimit>100</CoverageLimit>
+					<CoverageLimit>150</CoverageLimit>
+					<CoverageLimit>200</CoverageLimit>
+					<CoverageLimit>250</CoverageLimit>
+					<CoverageLimit>500</CoverageLimit>
+					<CoverageLimit>750</CoverageLimit>
+					<CoverageLimit>1000</CoverageLimit>
+					<CoverageLimit>2000</CoverageLimit>
+				</DATE>
+				<DATE START="01/01/2001" END="01/01/9999">
+					<CoverageLimit></CoverageLimit>
+					<CoverageLimit>100</CoverageLimit>
+					<CoverageLimit>150</CoverageLimit>
+					<CoverageLimit>200</CoverageLimit>
+					<CoverageLimit>250</CoverageLimit>
+					<CoverageLimit>500</CoverageLimit>
+					<CoverageLimit>750</CoverageLimit>
+					<CoverageLimit>1000</CoverageLimit>
+					<CoverageLimit>2000</CoverageLimit>
+				</DATE>
+			</CollisionDeductible>
+			<CollisionDeductible state="INDIANA" USE="PERSONAL">
+				<CoverageLimit></CoverageLimit>
+				<CoverageLimit>100</CoverageLimit>
+				<CoverageLimit>150</CoverageLimit>
+				<CoverageLimit>200</CoverageLimit>
+				<CoverageLimit>250</CoverageLimit>
+				<CoverageLimit>500</CoverageLimit>
+				<CoverageLimit>750</CoverageLimit>
+				<CoverageLimit>1000</CoverageLimit>
+				<CoverageLimit>2000</CoverageLimit>
+			</CollisionDeductible>
+			<CollisionDeductible state="MICHIGAN" USE="PERSONAL">
+				<CoverageLimit></CoverageLimit>
+				<CoverageLimit>100 Broad</CoverageLimit>
+				<CoverageLimit>150 Broad</CoverageLimit>
+				<CoverageLimit>200 Broad</CoverageLimit>
+				<CoverageLimit>250 Broad</CoverageLimit>
+				<CoverageLimit>500 Broad</CoverageLimit>
+				<CoverageLimit>750 Broad</CoverageLimit>
+				<CoverageLimit>1000 Broad</CoverageLimit>
+				<CoverageLimit>2000 Broad</CoverageLimit>
+				<CoverageLimit>400 Regular</CoverageLimit>
+				<CoverageLimit>500 Regular</CoverageLimit>
+				<CoverageLimit>Limited</CoverageLimit>
+			</CollisionDeductible>
+			<CollisionDeductible state="MICHIGAN" USE="COMMERCIAL">
+				<CoverageLimit></CoverageLimit>
+				<!--<CoverageLimit>100 Broad</CoverageLimit>-->
+				<!--<CoverageLimit>150 Broad</CoverageLimit>-->
+				<CoverageLimit>200 Broad</CoverageLimit>
+				<CoverageLimit>250 Broad</CoverageLimit>
+				<CoverageLimit>500 Broad</CoverageLimit>
+				<CoverageLimit>750 Broad</CoverageLimit>
+				<CoverageLimit>1000 Broad</CoverageLimit>
+				<CoverageLimit>2000 Broad</CoverageLimit>
+				<CoverageLimit>400 Regular</CoverageLimit>
+				<CoverageLimit>500 Regular</CoverageLimit>
+				<CoverageLimit>Limited</CoverageLimit>
+			</CollisionDeductible>
+			<RoadService state="MICHIGAN">
+				<DATE START="07/01/2009" END="01/01/9999">
+					<CoverageLimit></CoverageLimit>
+					<CoverageLimit>50</CoverageLimit>
+					<CoverageLimit>75</CoverageLimit>
+					<CoverageLimit>100</CoverageLimit>
+				</DATE>
+				<DATE START="01/01/1900" END="06/30/2009">
+					<CoverageLimit></CoverageLimit>
+					<CoverageLimit>50</CoverageLimit>
+					<CoverageLimit>75</CoverageLimit>
+				</DATE>
+			</RoadService>
+			<RoadService state="INDIANA">
+				<DATE START="06/01/2008" END="01/01/9999">
+					<CoverageLimit></CoverageLimit>
+					<CoverageLimit>50</CoverageLimit>
+					<CoverageLimit>75</CoverageLimit>
+					<CoverageLimit>100</CoverageLimit>
+				</DATE>
+				<DATE START="01/01/1900" END="05/31/2008">
+					<CoverageLimit></CoverageLimit>
+					<CoverageLimit>50</CoverageLimit>
+					<CoverageLimit>75</CoverageLimit>
+				</DATE>
+			</RoadService>
+			<RentalReimbursement>
+				<CoverageLimit></CoverageLimit>
+				<CoverageLimit>20/600</CoverageLimit>
+				<CoverageLimit>30/900</CoverageLimit>
+				<CoverageLimit>50/1500</CoverageLimit>
+				<CoverageLimit>75/2250</CoverageLimit>
+				<CoverageLimit>100/3000</CoverageLimit>
+			</RentalReimbursement>
+			<LoanLeaseGap>
+				<GAP Code=""></GAP>
+				<GAP Code="LOAN">Loan Gap</GAP>
+				<GAP Code="LEASE">Lease Gap</GAP>
+			</LoanLeaseGap>
+			<AirBagDiscount>
+				<!--<AirBag Code=""></AirBag>
+				<AirBag Code="C">Driver Side</AirBag>
+				<AirBag Code="D">Both Side</AirBag>
+				<AirBag Code="B">Both w/Side Impact</AirBag> : Modified 7 march 2006-->
+				<AirBag Code=""></AirBag>
+				<AirBag Code="C">Driver</AirBag>
+				<AirBag Code="D">Both</AirBag>
+				<AirBag Code="B">Both w/side(curtain)</AirBag>
+			</AirBagDiscount>
+			<MultiCarDiscount>
+				<Discount Code="NA" Value="False">Not applicable</Discount>
+				<Discount Code="OCTP" Value="True">Other car on this policy</Discount>
+				<Discount Code="OPWW" Value="True">Other Policy with Wolverine</Discount>
+			</MultiCarDiscount>
+			<ExtraEquipment>
+				<ComprehensiveDeductible state="MICHIGAN">
+					<Deductible></Deductible>
+					<Deductible>50</Deductible>
+					<Deductible>100</Deductible>
+					<Deductible>150</Deductible>
+					<Deductible>200</Deductible>
+					<Deductible>250</Deductible>
+					<Deductible>500</Deductible>
+					<Deductible>1000</Deductible>
+					<Deductible>2000</Deductible>
+				</ComprehensiveDeductible>
+				<CollisionTypeDed state="MICHIGAN">
+					<Deductible></Deductible>
+					<Deductible>100 Broad</Deductible>
+					<Deductible>150 Broad</Deductible>
+					<Deductible>200 Broad</Deductible>
+					<Deductible>250 Broad</Deductible>
+					<Deductible>500 Broad</Deductible>
+					<Deductible>750 Broad</Deductible>
+					<Deductible>1000 Broad</Deductible>
+					<Deductible>2000 Broad</Deductible>
+					<Deductible>400 Regular</Deductible>
+					<Deductible>500 Regular</Deductible>
+					<Deductible>Limited</Deductible>
+				</CollisionTypeDed>
+				<ComprehensiveDeductible state="INDIANA">
+					<Deductible></Deductible>
+					<Deductible>50</Deductible>
+					<Deductible>100</Deductible>
+					<Deductible>150</Deductible>
+					<Deductible>200</Deductible>
+					<Deductible>250</Deductible>
+					<Deductible>500</Deductible>
+					<Deductible>1000</Deductible>
+					<Deductible>2000</Deductible>
+				</ComprehensiveDeductible>
+				<CollisionTypeDed state="INDIANA">
+					<Deductible></Deductible>
+					<Deductible>50</Deductible>
+					<Deductible>100</Deductible>
+					<Deductible>150</Deductible>
+					<Deductible>200</Deductible>
+					<Deductible>250</Deductible>
+					<Deductible>500</Deductible>
+					<Deductible>750</Deductible>
+					<Deductible>1000</Deductible>
+					<Deductible>2000</Deductible>
+				</CollisionTypeDed>
+			</ExtraEquipment>
+		</Coverages>
+	</vehicle>
+	<driver>
+		<DriverGender>
+			<Gender>Male</Gender>
+			<Gender>Female</Gender>
+		</DriverGender>
+		<DriverMeritalStatus>
+			<MeritalStatus Code="D">Divorced</MeritalStatus>
+			<MeritalStatus Code="M">Married</MeritalStatus>
+			<MeritalStatus Code="P">Separated</MeritalStatus>
+			<MeritalStatus Code="S">Single</MeritalStatus>
+			<MeritalStatus Code="W">Widowed</MeritalStatus>
+		</DriverMeritalStatus>
+		<VehicleAssignedAsOperator TYPE="YOUTH">
+			<Operator Code="NR^NR" RatingCode="NR">Not Rated</Operator>
+			<Operator Code="YONPA^OCCASIONAL" RatingCode="OCCASIONAL">Youthful Occasional - Points Not Applied</Operator>
+			<Operator Code="YOPA^OCCASIONAL" RatingCode="OCCASIONAL">Youthful Occasional - Points Applied</Operator>
+			<Operator Code="YPNPA^PRINCIPAL" RatingCode="PRINCIPAL">Youthful Principal - Points Not Applied</Operator>
+			<Operator Code="YPPA^PRINCIPAL" RatingCode="PRINCIPAL">Youthful Principal - Points Applied</Operator>
+		</VehicleAssignedAsOperator>
+		<VehicleAssignedAsOperator TYPE="NOTYOUTH">
+			<Operator Code="NR^NR" RatingCode="NR">Not Rated</Operator>
+			<Operator Code="OMPA^OCCASIONAL" RatingCode="OCCASIONAL">Occasional - Points Not Applied</Operator>
+			<Operator Code="OPA^OCCASIONAL" RatingCode="OCCASIONAL">Occasional - Points Applied</Operator>
+			<Operator Code="PNPA^PRINCIPAL" RatingCode="PRINCIPAL">Principal - Points Not Applied</Operator>
+			<Operator Code="PPA^PRINCIPAL" RatingCode="PRINCIPAL">Principal - Points Applied</Operator>
+		</VehicleAssignedAsOperator>
+		<DriverIncome POLICYTYPE="NEW">
+			<Income Code="HIGH">$9000 or more</Income>
+			<Income Code="LOW">less than $9000</Income>
+		</DriverIncome>
+		<DriverIncome POLICYTYPE="RENEW">
+			<Income Code="HIGH">$9000 or more</Income>
+			<Income Code="LOW">less than $9000</Income>
+			<Income Code="RETIRED">Retired</Income>
+		</DriverIncome>
+		<DriverNoOfDependents>
+			<Dependents Code="NDEP">None</Dependents>
+			<Dependents Code="1MORE">1 or more</Dependents>
+		</DriverNoOfDependents>
+		<SafeDriver>
+			<value>No</value>
+			<value>Yes</value>
+		</SafeDriver>
+		<SuspendedComp>
+			<value>No</value>
+			<value>Yes</value>
+		</SuspendedComp>
+	</driver>
+</quickQuote>

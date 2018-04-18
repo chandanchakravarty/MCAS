@@ -1,0 +1,266 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<rule_collection>
+  <rule_collection_details>
+    <collection_code>EBX1001</collection_code>
+    <collection_version>12.25</collection_version>
+    <locked>false</locked>
+    <collection_effective_date>07/20/2011</collection_effective_date>
+    <collection_expiration_date>07/20/2011</collection_expiration_date>
+    <collection_country>1</collection_country>
+    <collection_state>
+      <state_cd>75</state_cd>
+      <state_cd>77</state_cd>
+      <state_cd>64</state_cd>
+    </collection_state>
+    <collection_product>1</collection_product>
+    <collection_lob>
+      <lob_id>18</lob_id>
+    </collection_lob>
+    <collection_sublob>
+      <sub_lob_id>7</sub_lob_id>
+      <sub_lob_id>1</sub_lob_id>
+      <sub_lob_id>2</sub_lob_id>
+      <sub_lob_id>6</sub_lob_id>
+    </collection_sublob>
+    <quoteapppolicy>
+      <Application>true</Application>
+      <Policy>true</Policy>
+      <Quote>true</Quote>
+    </quoteapppolicy>
+  </rule_collection_details>
+
+  <rules>
+
+    <rule ruleid="1" ruletype="Defined" rulecategory="Refer" rulepriority="High" rulestatus="Active" effectivefrom="" effectivetill=""
+          basepath="ROOT/POLICY" SectionID="">
+      <if>
+        <conditionexpressions>
+          <expression expid="1" datatype ="string">
+            <operand1 qualifier="All" type="Input">PROXY_SIGN_OBTAINED</operand1>
+            <operator>Equals</operator>
+            <operand2 qualifier="None" type="Constant">0</operand2>
+          </expression>
+        </conditionexpressions>
+        <then>
+          <action type="ShowMessage">
+            <message_id>1</message_id>
+          </action>
+          <action type="SetVariable">
+            <variable></variable>
+            <value></value>
+          </action>
+        </then>
+      </if>
+      <else>
+        <then>
+          <action type="ShowMessage">
+            <message_id></message_id>
+          </action>
+          <action type="SetVariable">
+            <variable></variable>
+            <value></value>
+          </action>
+        </then>
+      </else>
+    </rule>
+
+    <rule ruleid="2" ruletype="Defined" rulecategory="Refer" rulepriority="High" rulestatus="Active" effectivefrom="" effectivetill=""
+         basepath="ROOT/RISKS/RISK" SectionID="">
+      <if>
+        <conditionexpressions>
+          <expression expid="1" datatype ="string">
+            <operand1 qualifier="All" type="Input">CATEGORY</operand1>
+            <operator>Equals</operator>
+            <operand2 qualifier="None" type="Constant">14749</operand2>
+          </expression>
+        </conditionexpressions>
+        <then>
+          <action type="ShowMessage">
+            <message_id>2</message_id>
+          </action>
+          <action type="SetVariable">
+            <variable></variable>
+            <value></value>
+          </action>
+        </then>
+      </if>
+      <else>
+        <then>
+          <action type="ShowMessage">
+            <message_id></message_id>
+          </action>
+          <action type="SetVariable">
+            <variable></variable>
+            <value></value>
+          </action>
+        </then>
+      </else>
+    </rule>
+
+    <rule ruleid="3" ruletype="Defined" rulecategory="Refer" rulepriority="High" rulestatus="Active" effectivefrom="" effectivetill=""
+         basepath="ROOT/RISKS/RISK" SectionID="">
+      <if>
+        <conditionexpressions>
+          <expression expid="1" datatype ="double">
+            <operand1 qualifier="Sum" type="Input">COVERAGES/COVERAGE/WRITTEN_PREMIUM</operand1>
+            <operator>GreaterThan</operator>
+            <operand2 qualifier="None" type="Constant">150</operand2>
+          </expression>
+        </conditionexpressions>
+        <then>
+          <action type="ShowMessage">
+            <message_id>3</message_id>
+          </action>
+          <action type="SetVariable">
+            <variable></variable>
+            <value></value>
+          </action>
+        </then>
+      </if>
+      <else>
+        <then>
+          <action type="ShowMessage">
+            <message_id></message_id>
+          </action>
+          <action type="SetVariable">
+            <variable></variable>
+            <value></value>
+          </action>
+        </then>
+      </else>
+    </rule>
+
+    <rule ruleid="4" ruletype="Defined" rulecategory="Refer" rulepriority="High" rulestatus="Active" effectivefrom="" effectivetill=""
+           basepath="ROOT/RISKS/RISK" SectionID="">
+      <if>
+        <conditionexpressions>
+          <expression expid="1" datatype ="double">
+            <operand1 qualifier="Count" type="Input">COVERAGES/COVERAGE/COVERAGE_CODE_ID</operand1>
+            <operator>GreaterThan</operator>
+            <operand2 qualifier="None" type="Constant">2</operand2>
+          </expression>
+        </conditionexpressions>
+        <then>
+          <action type="ShowMessage">
+            <message_id>4</message_id>
+          </action>
+          <action type="SetVariable">
+            <variable></variable>
+            <value></value>
+          </action>
+        </then>
+      </if>
+      <else>
+        <then>
+          <action type="ShowMessage">
+            <message_id></message_id>
+          </action>
+          <action type="SetVariable">
+            <variable></variable>
+            <value></value>
+          </action>
+        </then>
+      </else>
+    </rule>
+
+    <rule ruleid="5" ruletype="Defined" rulecategory="Reject" rulepriority="High" rulestatus="Active" effectivefrom="" effectivetill=""
+          basepath="ROOT/RISKS/RISK" SectionID="">
+      <if>
+        <conditionexpressions>
+          <expression expid="1" datatype ="double">
+            <operand1 qualifier="Any" type="Input">COVERAGES/COVERAGE/LIMIT_1</operand1>
+            <operator>GreaterThan</operator>
+            <operand2 qualifier="None" type="Constant">100</operand2>
+          </expression>
+        </conditionexpressions>
+        <then>
+          <action type="ShowMessage">
+            <message_id>5</message_id>
+          </action>
+          <action type="SetVariable">
+            <variable></variable>
+            <value></value>
+          </action>
+        </then>
+      </if>
+      <else>
+        <then>
+          <action type="ShowMessage">
+            <message_id></message_id>
+          </action>
+          <action type="SetVariable">
+            <variable></variable>
+            <value></value>
+          </action>
+        </then>
+      </else>
+    </rule>
+
+    <rule ruleid="6" ruletype="Defined" rulecategory="Mandatory" rulepriority="High" rulestatus="Active" effectivefrom="" effectivetill=""
+          basepath="ROOT/RISKS/RISK" SectionID="">
+      <if>
+        <conditionexpressions>
+          <expression expid="1" datatype ="string">
+            <operand1 qualifier="Any" type="Input">TICKET_NUMBER</operand1>
+            <operator>Equals</operator>
+            <operand2 qualifier="None" type="Constant"></operand2>
+          </expression>
+        </conditionexpressions>
+        <then>
+          <action type="ShowMessage">
+            <message_id>6</message_id>
+          </action>
+          <action type="SetVariable">
+            <variable></variable>
+            <value></value>
+          </action>
+        </then>
+      </if>
+      <else>
+        <then>
+          <action type="ShowMessage">
+            <message_id></message_id>
+          </action>
+          <action type="SetVariable">
+            <variable></variable>
+            <value></value>
+          </action>
+        </then>
+      </else>
+    </rule>
+
+
+    <rule ruleid="7" ruletype="Defined" rulecategory="Refer" rulepriority="High" rulestatus="Active" effectivefrom="" effectivetill=""
+          basepath="ROOT" SectionID="">
+      <if>
+        <conditionexpressions>
+          <expression expid="1" datatype ="double">
+            <operand1 qualifier="Sum" type="Input">REMUNERATIONS/REMUNERATION/AMOUNT</operand1>
+            <operator>GreaterThan</operator>
+            <operand2 qualifier="Sum" type="Input">RISKS/RISK/COVERAGES/COVERAGE/WRITTEN_PREMIUM</operand2>
+          </expression>
+        </conditionexpressions>
+        <then>
+          <action type="ShowMessage">
+            <message_id>1</message_id>
+          </action>
+          <action type="SetVariable">
+            <variable></variable>
+            <value></value>
+          </action>
+        </then>
+      </if>
+      <else>
+        <then>
+          <action type="ShowMessage">
+            <message_id></message_id>
+          </action>
+          <action type="SetVariable">
+            <variable></variable>
+            <value></value>
+          </action>
+        </then>
+      </else>
+    </rule>
+  </rules>
+</rule_collection>

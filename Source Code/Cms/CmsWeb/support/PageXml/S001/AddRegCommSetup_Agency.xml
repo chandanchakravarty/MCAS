@@ -1,0 +1,120 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Root>
+  <PageTitle>
+    <Culture Code="en-US">Regular Commission Setup - Agency</Culture>
+    <Culture Code="zh-SG">Regular Commission Setup - Agency</Culture>
+  </PageTitle>
+
+ <PageElement name="cmbCOUNTRY_ID" type="DDL" Desc=""
+                   IsMandatory="Yes"
+                   IsReadOnly="No"
+                   IsDisabled="No"
+                   IsDisplay="Yes"
+                   IsFormatingRequired="No" 
+                   JsFunctionToFormat="" 
+                   OnChangeJSFunction=""
+                  
+               >
+    <Style Position="relative" Top="0" Left="10" CssClass="midcolora" />
+    <rev Enabled="No" ExpKey="" />
+    <Culture Code="en-US" Desc="set Label and Message for English language">
+      <Caption>Country</Caption>
+      <DefaultValue>7</DefaultValue>
+      <rfvMessage>Please select Country</rfvMessage>
+    </Culture>
+    <Culture Code="zh-SG" Desc="set Label and Message for Singapore language">
+      <Caption>Country</Caption>
+      <DefaultValue>7</DefaultValue>
+      <rfvMessage>Please select Country</rfvMessage>
+    </Culture>
+  </PageElement>
+  
+  <PageElement name="cmbSTATE_ID" type="DDL" Desc=""
+                   IsMandatory="No"
+                   IsReadOnly="No"
+                   IsDisabled="Yes"
+                   IsDisplay="Yes"
+                   IsFormatingRequired="No" JsFunctionToFormat="" OnClickJSFunction=""
+                   OnChangeJSFunction="" >
+    <cpv Enabled="No"/>
+    <Culture Code="en-US" Desc="set Label and Message for English language">
+      <Caption>State</Caption>
+        <rfvMessage></rfvMessage>
+       </Culture>
+    <Culture Code="zh-SG" Desc="set Label and Message for Singapore language">
+      <Caption>State</Caption>
+     <rfvMessage></rfvMessage>
+    </Culture>
+    </PageElement>
+
+
+  <PageElement name="cmbSUB_LOB_ID" type="DDL" Desc=""
+                  IsMandatory="No"
+                  IsReadOnly="No"
+                  IsDisabled="Yes"
+                  IsDisplay="Yes"
+                  IsFormatingRequired="No"
+                  JsFunctionToFormat=""
+                  OnChangeJSFunction=""
+                  
+               >
+    <Style Position="relative" Top="0" Left="10" CssClass="midcolora" />
+    <rev Enabled="No" ExpKey="" />
+    <Culture Code="en-US" Desc="set Label and Message for English language">
+      <Caption></Caption>
+      <DefaultValue></DefaultValue>
+      <rfvMessage></rfvMessage>
+    </Culture>
+    <Culture Code="zh-SG" Desc="set Label and Message for Singapore language">
+      <Caption>Product Class</Caption>
+      <DefaultValue></DefaultValue>
+      <rfvMessage></rfvMessage>
+    </Culture>
+  </PageElement>
+
+  
+  <PageElement name="txtEFFECTIVE_FROM_DATE" type="TextBox" Desc=""
+                   IsMandatory="Yes"
+                   IsReadOnly="No"
+                   IsDisabled="No"
+                   IsDisplay="Yes"
+                   IsFormatingRequired="No" JsFunctionToFormat="" OnClickJSFunction=""
+                   OnChangeJSFunction="" >
+    <rev Enabled="Yes" ExpKey="(0[1-9]|[1-9]|[12][0-9]|3[01])[- /.](0[1-9]|[1-9]|1[012])[- /.](19|20)\d\d" />
+    <Culture Code="en-US" Desc="set Label and Message for English language">
+      <Caption>Effective From Date</Caption>
+      <rfvMessage>Please enter effective from date.</rfvMessage>
+      <revExpMessage>Please enter valid date in 'dd/mm/yyyy' format. </revExpMessage>
+    </Culture>
+    <Culture Code="zh-SG" Desc="set Label and Message for Singapore language">
+      <Caption>Effective From Date</Caption>
+      <rfvMessage>Please enter effective from date.</rfvMessage>
+      <revExpMessage>Please enter valid date in 'dd/mm/yyyy' format. </revExpMessage>
+    </Culture>
+  </PageElement>
+  
+  <PageElement name="txtEFFECTIVE_TO_DATE" type="TextBox" Desc=""
+                   IsMandatory="Yes"
+                   IsReadOnly="No"
+                   IsDisabled="No"
+                   IsDisplay="Yes"
+                   IsFormatingRequired="No" JsFunctionToFormat="" OnClickJSFunction=""
+                   OnChangeJSFunction="" >
+    <rev Enabled="Yes" ExpKey="(0[1-9]|[1-9]|[12][0-9]|3[01])[- /.](0[1-9]|[1-9]|1[012])[- /.](19|20)\d\d" />
+    <csv Enabled="Yes" csvValidationFunction="ChkCreatedate" />
+    <Culture Code="en-US" Desc="set Label and Message for English language">
+      <Caption>Effective To Date</Caption>
+      <rfvMessage>Please enter effective to date.</rfvMessage>
+      <DefaultValue></DefaultValue>
+      <revExpMessage>Please enter valid date in 'dd/mm/yyyy' format. </revExpMessage>
+      <csvMessage>Effective to date must be greater than Effective from date</csvMessage>
+    </Culture>
+    <Culture Code="zh-SG" Desc="set Label and Message for Singapore language">
+      <Caption>Effective To Date</Caption>
+      <rfvMessage>Please enter effective to date.</rfvMessage>
+      <DefaultValue></DefaultValue>
+      <revExpMessage>Please enter valid date in 'dd/mm/yyyy' format. </revExpMessage>
+      <csvMessage>Effective to date must be greater than Effective from date</csvMessage>
+    </Culture>
+  </PageElement>
+</Root>

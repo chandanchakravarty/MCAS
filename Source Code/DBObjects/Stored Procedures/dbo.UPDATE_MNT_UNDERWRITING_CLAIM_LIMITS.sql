@@ -1,0 +1,53 @@
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[UPDATE_MNT_UNDERWRITING_CLAIM_LIMITS]') AND type in (N'P', N'PC'))
+DROP PROCEDURE [dbo].UPDATE_MNT_UNDERWRITING_CLAIM_LIMITS
+GO
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+-- =============================================
+-- Author:		<Author Name>
+-- Create date:         <Create Date>
+-- Description:	<Description>
+-- =============================================
+
+CREATE PROCEDURE [dbo].UPDATE_MNT_UNDERWRITING_CLAIM_LIMITS
+    @ASSIGN_ID int,
+    @USER_ID int,
+    @COUNTRY_ID int,
+    @LOB_ID int,
+    @PML_LIMIT decimal,
+    @PREMIUM_APPROVAL_LIMIT decimal,
+    @CLAIM_RESERVE_LIMIT decimal,
+    @CLAIM_REOPEN int,
+    @CLAIM_SETTLMENT_LIMIT decimal,
+    @MODIFIED_BY int,
+    @LAST_UPDATED_DATETIME datetime
+AS
+
+BEGIN
+UPDATE [MNT_UNDERWRITING_CLAIM_LIMITS]
+
+SET
+
+    ASSIGN_ID = @ASSIGN_ID,
+    USER_ID = @USER_ID,
+    COUNTRY_ID = @COUNTRY_ID,
+    LOB_ID = @LOB_ID,
+    PML_LIMIT = @PML_LIMIT,
+    PREMIUM_APPROVAL_LIMIT = @PREMIUM_APPROVAL_LIMIT,
+    CLAIM_RESERVE_LIMIT = @CLAIM_RESERVE_LIMIT,
+    CLAIM_REOPEN = @CLAIM_REOPEN,
+    CLAIM_SETTLMENT_LIMIT = @CLAIM_SETTLMENT_LIMIT,
+    MODIFIED_BY = @MODIFIED_BY,
+    LAST_UPDATED_DATETIME = @LAST_UPDATED_DATETIME
+
+
+Where  
+
+  ASSIGN_ID = @ASSIGN_ID
+
+END
+
+GO

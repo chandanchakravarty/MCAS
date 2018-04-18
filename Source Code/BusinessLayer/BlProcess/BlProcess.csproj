@@ -1,0 +1,146 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{B2D73A76-3F66-4283-9CC5-18AA570F28F1}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>BlProcess</RootNamespace>
+    <AssemblyName>BlProcess</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="AcordPDF">
+      <HintPath>..\..\Cms\bin\AcordPDF.dll</HintPath>
+    </Reference>
+    <Reference Include="BlGeneratePdf, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Cms\bin\BlGeneratePdf.dll</HintPath>
+    </Reference>
+    <Reference Include="EAWXmlToPDFParser">
+      <HintPath>..\..\Cms\bin\EAWXmlToPDFParser.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="ClsAddIntPdfXML.cs" />
+    <Compile Include="ClsAutoIdPdfXML.cs" />
+    <Compile Include="ClsAutoPDFXML.cs" />
+    <Compile Include="ClsBoatPdfXML.cs" />
+    <Compile Include="ClsCancellationProcess.cs" />
+    <Compile Include="ClsCancNoticePdfXML.cs" />
+    <Compile Include="ClsCheckPdfXml.cs" />
+    <Compile Include="ClsCommonPdf.cs" />
+    <Compile Include="ClsCommonPdfXML.cs" />
+    <Compile Include="ClsCorrectiveUserProcess.cs" />
+    <Compile Include="ClsCustAgencyPaymentsPdfXML.cs" />
+    <Compile Include="ClsEndOfDayProcess.cs" />
+    <Compile Include="ClsEndorsmentProcess.cs" />
+    <Compile Include="ClsForm1099PdfXml.cs" />
+    <Compile Include="ClsGenerateCancNotice.cs" />
+    <Compile Include="ClsHomePdfXML.cs" />
+    <Compile Include="ClsHomePdfXMLs.cs" />
+    <Compile Include="clsMotorCyclePdfXml.cs" />
+    <Compile Include="ClsNewBusinessProcess.cs" />
+    <Compile Include="ClsNonRenewProcess.cs" />
+    <Compile Include="ClsNotices.cs" />
+    <Compile Include="ClsNRenNoticePdfXML.cs" />
+    <Compile Include="ClsPolicyProcess.cs" />
+    <Compile Include="ClsPremNotPdfXML.cs" />
+    <Compile Include="clsprocess.cs" />
+    <Compile Include="ClsProductPdfXml.cs" />
+    <Compile Include="ClsRedwPdfXML.cs" />
+    <Compile Include="ClsReinsNoticePdfXML.cs" />
+    <Compile Include="ClsReinstatementProcess.cs" />
+    <Compile Include="ClsRenewalProcess.cs" />
+    <Compile Include="ClsRescindProcess.cs" />
+    <Compile Include="ClsRewriteProcess.cs" />
+    <Compile Include="ClsRollbackAfterCommit.cs" />
+    <Compile Include="ClsUmbLetterPdfXML.cs" />
+    <Compile Include="clsUmbrellaPdfXml.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Cms\CmsWeb\CmsWeb.csproj">
+      <Project>{06AA12E1-165D-491A-9124-6A4C73740E0E}</Project>
+      <Name>CmsWeb</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\DataLayer\DataLayer.csproj">
+      <Project>{A7B69366-3DA6-4CB3-84F3-25C88559EF12}</Project>
+      <Name>DataLayer</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\exceptionpublisher\exceptionpublisher.csproj">
+      <Project>{276362EA-FE60-484F-A729-19248E75D239}</Project>
+      <Name>exceptionpublisher</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Model\Model.csproj">
+      <Project>{8BED9EF7-4F80-4195-87FC-62CE73BC3672}</Project>
+      <Name>Model</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\BlAccount\BlAccount.csproj">
+      <Project>{B69C8E73-4B43-4FA6-8F9F-1E7173C169C8}</Project>
+      <Name>BlAccount</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Blapplication\Blapplication.csproj">
+      <Project>{2D13EE8A-85AD-41F3-AB14-7A4DD0717C09}</Project>
+      <Name>Blapplication</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\BlBoleto\BlBoleto.csproj">
+      <Project>{A0D395B6-287D-4359-ABB5-D3A3F0075331}</Project>
+      <Name>BlBoleto</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\BlClient\BlClient.csproj">
+      <Project>{96CD5C36-ED0F-406E-8A1D-5AD1EFAA6B20}</Project>
+      <Name>BlClient</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\BlCommon\BlCommon.csproj">
+      <Project>{9C17273B-F9AA-4DCE-B344-4BFD098134AA}</Project>
+      <Name>BlCommon</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Blquote\Blquote.csproj">
+      <Project>{AD4AED11-6EBB-4B1E-ACFB-606EBA23CED3}</Project>
+      <Name>Blquote</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

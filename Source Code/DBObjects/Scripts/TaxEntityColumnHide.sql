@@ -1,0 +1,6 @@
+IF  EXISTS (select * from MNT_MENU_LIST WHERE MENU_ID=36 AND PARENT_ID=13)
+ BEGIN  
+     update  MNT_MENU_LIST  SET IS_ACTIVE='N' where MENU_ID=36 and PARENT_ID=13 
+   
+ END
+ go

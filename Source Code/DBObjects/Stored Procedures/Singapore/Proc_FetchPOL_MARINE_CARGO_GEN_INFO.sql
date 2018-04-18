@@ -1,0 +1,11 @@
+CREATE PROC dbo.Proc_FetchPOL_MARINE_CARGO_GEN_INFO               
+@CUSTOMER_ID INT,  
+@POLICY_ID INT,  
+@POLICY_VERSION_ID INT                
+AS                
+BEGIN                
+SELECT            
+*                
+FROM POL_MARINE_CARGO_GEN_INFO                 
+WHERE  POLICY_ID=@POLICY_ID AND CUSTOMER_ID=@CUSTOMER_ID AND POLICY_VERSION_ID=@POLICY_VERSION_ID  
+END  

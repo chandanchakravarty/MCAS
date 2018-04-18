@@ -1,0 +1,448 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Root>
+  <PageTitle>
+    <Culture Code="en-US">Premises Info</Culture>
+    <Culture Code="zh-SG">Premises Info</Culture>
+    <Culture Code="pt-BR">Premises Info</Culture>
+  </PageTitle>
+  <ElementsLayout></ElementsLayout>
+    
+      
+  <!-- Add Premises LOCATION  <add key="RegExpZip" value="^[0-9]{5}-[0-9]{4}|[0-9]{5}" /> -->
+
+  <PageElement name="txtOCC_AREA" type="TextBox" Desc=""
+     IsMandatory="No"
+     IsReadOnly="No"
+     IsDisabled="No"
+     IsDisplay="Yes"
+     MaxLength="12"
+     MaxSize="8"
+     IsFormatingRequired="" JsFunctionToFormat="" OnClickJSFunction=""
+     OnChangeJSFunction="" >
+    <rev Enabled="Yes" ExpKey="^((\d*)|(\d*\.\d*))$" />
+    <Culture Code="en-US" Desc="set Label and Message for English language">
+      <Caption></Caption>
+      <rfvMessage></rfvMessage>
+      <DefaultValue></DefaultValue>
+      <revExpMessage>Please enter decimal value of occupied area</revExpMessage>
+    </Culture>
+    <Culture Code="zh-SG" Desc="set Label and Message for Singapore language">
+      <Caption></Caption>
+      <rfvMessage></rfvMessage>
+      <DefaultValue></DefaultValue>
+      <revExpMessage>Please enter decimal value of occupied area</revExpMessage>
+    </Culture>
+    <Culture Code="pt-BR" Desc="set Label and Message for Brazil language">
+      <Caption></Caption>
+      <rfvMessage></rfvMessage>
+      <DefaultValue></DefaultValue>
+      <revExpMessage>Please enter decimal value of occupied area</revExpMessage>
+    </Culture>
+  </PageElement>
+
+  <PageElement name="txtOPEN_AREA" type="TextBox" Desc=""
+     IsMandatory="No"
+     IsReadOnly="No"
+     IsDisabled="No"
+     IsDisplay="Yes"
+     MaxLength="12"
+     MaxSize="8"
+     IsFormatingRequired="" JsFunctionToFormat="" OnClickJSFunction=""
+     OnChangeJSFunction="" >
+    <rev Enabled="Yes" ExpKey="^((\d*)|(\d*\.\d*))$" />
+    <Culture Code="en-US" Desc="set Label and Message for English language">
+      <Caption></Caption>
+      <rfvMessage></rfvMessage>
+      <DefaultValue></DefaultValue>
+      <revExpMessage>Please enter decimal value of open area</revExpMessage>
+    </Culture>
+    <Culture Code="zh-SG" Desc="set Label and Message for Singapore language">
+      <Caption></Caption>
+      <rfvMessage></rfvMessage>
+      <DefaultValue></DefaultValue>
+      <revExpMessage>Please enter decimal value of open area</revExpMessage>
+    </Culture>
+    <Culture Code="pt-BR" Desc="set Label and Message for Brazil language">
+      <Caption></Caption>
+      <rfvMessage></rfvMessage>
+      <DefaultValue></DefaultValue>
+      <revExpMessage>Please enter decimal value of open area</revExpMessage>
+    </Culture>
+  </PageElement>
+
+  <PageElement name="txtTOT_AREA" type="TextBox" Desc=""
+     IsMandatory="No"
+     IsReadOnly="No"
+     IsDisabled="No"
+     IsDisplay="Yes"
+     MaxLength="12"
+     MaxSize="8"
+     IsFormatingRequired="" JsFunctionToFormat="" OnClickJSFunction=""
+     OnChangeJSFunction="" >
+    <rev Enabled="Yes" ExpKey="^((\d*)|(\d*\.\d*))$" />
+    <Culture Code="en-US" Desc="set Label and Message for English language">
+      <Caption></Caption>
+      <rfvMessage></rfvMessage>
+      <DefaultValue></DefaultValue>
+      <revExpMessage>Please enter decimal value of total area</revExpMessage>
+    </Culture>
+    <Culture Code="zh-SG" Desc="set Label and Message for Singapore language">
+      <Caption></Caption>
+      <rfvMessage></rfvMessage>
+      <DefaultValue></DefaultValue>
+      <revExpMessage>Please enter decimal value of total area</revExpMessage>
+    </Culture>
+    <Culture Code="pt-BR" Desc="set Label and Message for Brazil language">
+      <Caption></Caption>
+      <rfvMessage></rfvMessage>
+      <DefaultValue></DefaultValue>
+      <revExpMessage>Please enter decimal value of total area</revExpMessage>
+    </Culture>
+  </PageElement>
+  
+  <PageElement name="txtZIP" type="TextBox" Desc=""
+				 IsMandatory="Yes"
+				 IsReadOnly="No"
+				 IsDisabled="No"
+				 IsDisplay="Yes"
+         MaxLength="10"
+				 IsFormatingRequired="No" JsFunctionToFormat="" OnClickJSFunction=""
+				 OnChangeJSFunction=""
+               >
+    <Style Position="relative" Top="0" Left="10" CssClass="" />
+    <rev Enabled="Yes" ExpKey="^[0-9]{5}-[0-9]{4}|[0-9]{5}" />
+    <csv Enabled="No" csvValidationFunction="" />
+    <Culture Code="en-US" Desc="set Label and Message for English language">
+      <Caption></Caption>
+      <rfvMessage></rfvMessage>
+      <DefaultValue></DefaultValue>
+      <revExpMessage>Please enter valid zip code</revExpMessage>
+      <csvMessage></csvMessage>
+    </Culture>
+    <Culture Code="zh-SG" Desc="set Label and Message for English language">
+      <Caption></Caption>
+      <rfvMessage></rfvMessage>
+      <DefaultValue></DefaultValue>
+      <revExpMessage>Please enter valid zip code</revExpMessage>
+      <csvMessage></csvMessage>
+    </Culture>
+  </PageElement>
+  
+  <PageElement name="cmbSTATE" type="DDL" Desc=""
+              IsMandatory="No"
+              IsReadOnly="No"
+              IsDisabled="No"
+              IsDisplay="Yes"
+              MaxSize="200"
+              IsFormatingRequired="No" JsFunctionToFormat="" OnClickJSFunction=""
+              OnChangeJSFunction=""
+               >
+  
+
+  <Style Position="relative" Top="0" Left="10" CssClass="midcolora" />
+  <rev Enabled="No" ExpKey="" />
+  <csv Enabled="No" csvValidationFunction="" />
+  <Culture Code="zh-SG" Desc="Set Label and Message for English language">
+    <Caption></Caption>
+    <rfvMessage></rfvMessage>
+    <DefaultValue></DefaultValue>
+    <revExpMessage></revExpMessage>
+  </Culture>
+
+  <Culture Code="en-US" Desc="Set Label and Message for English language">
+    <Caption></Caption>
+    <rfvMessage></rfvMessage>
+    <DefaultValue></DefaultValue>
+    <revExpMessage></revExpMessage>
+  </Culture>
+</PageElement>
+
+
+  <PageElement name="cmbINTEREST" type="DDL" Desc=""
+                IsMandatory="No"
+                IsReadOnly="No"
+                IsDisabled="No"
+                IsDisplay="Yes"
+                MaxSize="200"
+                IsFormatingRequired="No" JsFunctionToFormat="" OnClickJSFunction=""
+                OnChangeJSFunction=""
+               >
+    <Bindings>
+      <DataSource type="Proc" name="Proc_GetLookupValues" TextField="LOOKUP_VALUE_DESC" ValueField="LOOKUP_UNIQUE_ID" WhereClause="">
+        <Params name="@LookupCode" Value="INTST" />
+      </DataSource>
+    </Bindings>
+
+    <Style Position="relative" Top="0" Left="10" CssClass="midcolora" />
+    <rev Enabled="No" ExpKey="" />
+    <csv Enabled="No" csvValidationFunction="" />
+    <Culture Code="zh-SG" Desc="Set Label and Message for English language">
+      <Caption></Caption>
+      <rfvMessage></rfvMessage>
+      <DefaultValue></DefaultValue>
+      <revExpMessage></revExpMessage>
+    </Culture>
+
+    <Culture Code="en-US" Desc="Set Label and Message for English language">
+      <Caption></Caption>
+      <rfvMessage></rfvMessage>
+      <DefaultValue></DefaultValue>
+      <revExpMessage></revExpMessage>
+    </Culture>
+  </PageElement>
+  
+  
+  <PageElement name="cmbAREA_LEASED" type="DDL" Desc=""
+               IsMandatory="No"
+               IsReadOnly="No"
+               IsDisabled="No"
+               IsDisplay="Yes"
+               MaxSize="200"
+               IsFormatingRequired="No" JsFunctionToFormat="" OnClickJSFunction=""
+               OnChangeJSFunction=""
+               >
+    <Bindings>
+      <DataSource type="Proc" name="Proc_GetLookupValues" TextField="LOOKUP_VALUE_DESC" ValueField="LOOKUP_UNIQUE_ID" WhereClause="">
+        <Params name="@LookupCode" Value="YES_NO" />
+      </DataSource>
+    </Bindings>
+
+    <Style Position="relative" Top="0" Left="10" CssClass="midcolora" />
+    <rev Enabled="No" ExpKey="" />
+    <csv Enabled="No" csvValidationFunction="" />
+    <Culture Code="zh-SG" Desc="Set Label and Message for English language">
+      <Caption></Caption>
+      <rfvMessage></rfvMessage>
+      <DefaultValue></DefaultValue>
+      <revExpMessage></revExpMessage>
+    </Culture>
+
+    <Culture Code="en-US" Desc="Set Label and Message for English language">
+      <Caption></Caption>
+      <rfvMessage></rfvMessage>
+      <DefaultValue></DefaultValue>
+      <revExpMessage></revExpMessage>
+    </Culture>
+  </PageElement>
+
+  
+
+  <PageElement name="cmbCITY_LMT" type="DDL" Desc=""
+                IsMandatory="No"
+                IsReadOnly="No"
+                IsDisabled="No"
+                IsDisplay="Yes"
+                MaxSize="200"
+                IsFormatingRequired="No" JsFunctionToFormat="" OnClickJSFunction=""
+                OnChangeJSFunction=""
+               >
+      <Bindings>
+      <DataSource type="Proc" name="Proc_GetLookupValues" TextField="LOOKUP_VALUE_DESC" ValueField="LOOKUP_UNIQUE_ID" WhereClause="">
+        <Params name="@LookupCode" Value="YES_NO" />
+      </DataSource>
+    </Bindings>
+
+    <Style Position="relative" Top="0" Left="10" CssClass="midcolora" />
+    <rev Enabled="No" ExpKey="" />
+    <csv Enabled="No" csvValidationFunction="" />
+    <Culture Code="zh-SG" Desc="Set Label and Message for English language">
+      <Caption></Caption>
+      <rfvMessage></rfvMessage>
+      <DefaultValue></DefaultValue>
+      <revExpMessage></revExpMessage>
+    </Culture>
+
+    <Culture Code="en-US" Desc="Set Label and Message for English language">
+      <Caption></Caption>
+      <rfvMessage></rfvMessage>
+      <DefaultValue></DefaultValue>
+      <revExpMessage></revExpMessage>
+    </Culture>
+  </PageElement>
+
+  
+  
+  <!-- TextBox controls-->
+  <PageElement name="txtBLDNG_ID" type="TextBox" Desc=""
+     IsMandatory="No"
+     IsReadOnly="No"
+     IsDisabled="No"
+     IsDisplay="Yes"
+     MaxLength="8"
+     MaxSize=""
+     IsFormatingRequired="" JsFunctionToFormat="" OnClickJSFunction=""
+     OnChangeJSFunction="" >
+    <rev  Enabled="Yes" ExpKey="^\d+$" />
+    <Culture Code="en-US" Desc="set Label and Message for English language">
+      <Caption></Caption>
+      <rfvMessage></rfvMessage>
+      <DefaultValue></DefaultValue>
+      <revExpMessage>Please enter numeric value of building</revExpMessage>
+    </Culture>
+    <Culture Code="zh-SG" Desc="set Label and Message for Singapore language">
+      <Caption></Caption>
+      <rfvMessage></rfvMessage>
+      <DefaultValue></DefaultValue>
+      <revExpMessage>Please enter numeric value of building</revExpMessage>
+    </Culture>
+    <Culture Code="pt-BR" Desc="set Label and Message for Brazil language">
+      <Caption></Caption>
+      <rfvMessage></rfvMessage>
+      <DefaultValue></DefaultValue>
+      <revExpMessage>Please enter numeric value of building</revExpMessage>
+    </Culture>
+  </PageElement>
+
+  <PageElement name="txtFL_TM_EMP" type="TextBox" Desc=""
+     IsMandatory="No"
+     IsReadOnly="No"
+     IsDisabled="No"
+     IsDisplay="Yes"
+     MaxLength="8"
+     MaxSize="8"
+     IsFormatingRequired="" JsFunctionToFormat="" OnClickJSFunction=""
+     OnChangeJSFunction="" >
+    <rev Enabled="Yes" ExpKey="^\d+$" />
+    <Culture Code="en-US" Desc="set Label and Message for English language">
+      <Caption></Caption>
+      <rfvMessage></rfvMessage>
+      <DefaultValue></DefaultValue>
+      <revExpMessage>Please enter numeric value of full time employees</revExpMessage>
+    </Culture>
+    <Culture Code="zh-SG" Desc="set Label and Message for Singapore language">
+      <Caption></Caption>
+      <rfvMessage></rfvMessage>
+      <DefaultValue></DefaultValue>
+      <revExpMessage>Please enter numeric value of full time employees</revExpMessage>
+    </Culture>
+    <Culture Code="pt-BR" Desc="set Label and Message for Brazil language">
+      <Caption></Caption>
+      <rfvMessage></rfvMessage>
+      <DefaultValue></DefaultValue>
+      <revExpMessage>Please enter numeric value of full time employees</revExpMessage>
+    </Culture>
+  </PageElement>
+
+  <PageElement name="txtPT_TM_EMP" type="TextBox" Desc=""
+     IsMandatory="No"
+     IsReadOnly="No"
+     IsDisabled="No"
+     IsDisplay="Yes"
+     MaxLength="8"
+     MaxSize="8"
+     IsFormatingRequired="" JsFunctionToFormat="" OnClickJSFunction=""
+     OnChangeJSFunction="" >
+    <rev Enabled="Yes" ExpKey="^\d+$" />
+    <Culture Code="en-US" Desc="set Label and Message for English language">
+      <Caption></Caption>
+      <rfvMessage></rfvMessage>
+      <DefaultValue></DefaultValue>
+      <revExpMessage>Please enter numeric value of part time employees</revExpMessage>
+    </Culture>
+    <Culture Code="zh-SG" Desc="set Label and Message for Singapore language">
+      <Caption></Caption>
+      <rfvMessage></rfvMessage>
+      <DefaultValue></DefaultValue>
+      <revExpMessage>Please enter numeric value of part time employees</revExpMessage>
+    </Culture>
+    <Culture Code="pt-BR" Desc="set Label and Message for Brazil language">
+      <Caption></Caption>
+      <rfvMessage></rfvMessage>
+      <DefaultValue></DefaultValue>
+      <revExpMessage>Please enter numeric value of part time employees</revExpMessage>
+    </Culture>
+  </PageElement>
+  <PageElement name="txtSTREET_ADDR" type="TextBox" Desc=""
+     IsMandatory="No"
+     IsReadOnly="No"
+     IsDisabled="No"
+     IsDisplay="Yes"
+     MaxLength=""
+     MaxSize=""
+     IsFormatingRequired="" JsFunctionToFormat="" OnClickJSFunction=""
+     OnChangeJSFunction="" >
+    <rev Enabled="No" ExpKey="" />
+    <Culture Code="en-US" Desc="set Label and Message for English language">
+      <Caption></Caption>
+      <rfvMessage></rfvMessage>
+      <DefaultValue></DefaultValue>
+      <revExpMessage></revExpMessage>
+    </Culture>
+    <Culture Code="zh-SG" Desc="set Label and Message for Singapore language">
+      <Caption></Caption>
+      <rfvMessage></rfvMessage>
+      <DefaultValue></DefaultValue>
+      <revExpMessage></revExpMessage>
+    </Culture>
+    <Culture Code="pt-BR" Desc="set Label and Message for Brazil language">
+      <Caption></Caption>
+      <rfvMessage></rfvMessage>
+      <DefaultValue></DefaultValue>
+      <revExpMessage></revExpMessage>
+    </Culture>
+  </PageElement>
+  <PageElement name="txtCITY" type="TextBox" Desc=""
+     IsMandatory="No"
+     IsReadOnly="No"
+     IsDisabled="No"
+     IsDisplay="Yes"
+     MaxLength=""
+     MaxSize=""
+     IsFormatingRequired="" JsFunctionToFormat="" OnClickJSFunction=""
+     OnChangeJSFunction="" >
+    <rev Enabled="No" ExpKey="" />
+    <Culture Code="en-US" Desc="set Label and Message for English language">
+      <Caption></Caption>
+      <rfvMessage></rfvMessage>
+      <DefaultValue></DefaultValue>
+      <revExpMessage></revExpMessage>
+    </Culture>
+    <Culture Code="zh-SG" Desc="set Label and Message for Singapore language">
+      <Caption></Caption>
+      <rfvMessage></rfvMessage>
+      <DefaultValue></DefaultValue>
+      <revExpMessage></revExpMessage>
+    </Culture>
+    <Culture Code="pt-BR" Desc="set Label and Message for Brazil language">
+      <Caption></Caption>
+      <rfvMessage></rfvMessage>
+      <DefaultValue></DefaultValue>
+      <revExpMessage></revExpMessage>
+    </Culture>
+  </PageElement>
+  <PageElement name="txtANN_REVENUE" type="TextBox" Desc=""
+     IsMandatory="No"
+     IsReadOnly="No"
+     IsDisabled="No"
+     IsDisplay="Yes"
+     MaxLength="10"
+     MaxSize=""
+     IsFormatingRequired="" JsFunctionToFormat="" OnClickJSFunction=""
+     OnChangeJSFunction="" >
+    <rev Enabled="No" ExpKey="" />
+    <Culture Code="en-US" Desc="set Label and Message for English language">
+      <Caption></Caption>
+      <rfvMessage></rfvMessage>
+      <DefaultValue></DefaultValue>
+      <revExpMessage></revExpMessage>
+    </Culture>
+    <Culture Code="zh-SG" Desc="set Label and Message for Singapore language">
+      <Caption></Caption>
+      <rfvMessage></rfvMessage>
+      <DefaultValue></DefaultValue>
+      <revExpMessage></revExpMessage>
+    </Culture>
+    <Culture Code="pt-BR" Desc="set Label and Message for Brazil language">
+      <Caption></Caption>
+      <rfvMessage></rfvMessage>
+      <DefaultValue></DefaultValue>
+      <revExpMessage></revExpMessage>
+    </Culture>
+  </PageElement>
+ 
+  
+  <!-- Add Premises  ends-->
+  
+    
+
+</Root>

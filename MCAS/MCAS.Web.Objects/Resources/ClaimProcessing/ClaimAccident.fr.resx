@@ -1,0 +1,441 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="BackToListAction" xml:space="preserve">
+    <value>Retour à la liste</value>
+  </data>
+  <data name="CreateAction" xml:space="preserve">
+    <value>créer</value>
+  </data>
+  <data name="DeleteConfirmMessage" xml:space="preserve">
+    <value>Êtes-vous sûr de vouloir supprimer ce ?</value>
+  </data>
+  <data name="DeleteAction" xml:space="preserve">
+    <value>Effacer</value>
+  </data>
+  <data name="EditAction" xml:space="preserve">
+    <value>Sauvegarder</value>
+  </data>
+  <data name="ListActionCreate" xml:space="preserve">
+    <value>Créer nouveau</value>
+  </data>
+  <data name="ListActionEdit" xml:space="preserve">
+    <value>Modifier</value>
+  </data>
+  <data name="ListActionDetails" xml:space="preserve">
+    <value>détails</value>
+  </data>
+  <data name="ListActionDelete" xml:space="preserve">
+    <value>Effacer</value>
+  </data>
+  <data name="ClaimAdjustments" xml:space="preserve">
+    <value>Ajustements de réclamation</value>
+  </data>
+  <data name="ClaimEnquiry" xml:space="preserve">
+    <value>demande revendication</value>
+  </data>
+  <data name="ClaimPaymentProcessing" xml:space="preserve">
+    <value>Revendication Payment Processing</value>
+  </data>
+  <data name="ClaimRecoveryProcessing" xml:space="preserve">
+    <value>Traitement revendication Recovery</value>
+  </data>
+  <data name="NewClaimRegistration" xml:space="preserve">
+    <value>Nouvelle revendication inscription</value>
+  </data>
+  <data name="Accident" xml:space="preserve">
+    <value>accident</value>
+  </data>
+  <data name="ClaimPayment" xml:space="preserve">
+    <value>réclamer le paiement</value>
+  </data>
+  <data name="ClaimsRecovery" xml:space="preserve">
+    <value>Récupération revendications</value>
+  </data>
+  <data name="ClaimsRegistration" xml:space="preserve">
+    <value>revendications inscription</value>
+  </data>
+  <data name="AccidentDate" xml:space="preserve">
+    <value>date de l'accident</value>
+  </data>
+  <data name="AccidentLoc" xml:space="preserve">
+    <value>Lieu de l'accident</value>
+  </data>
+  <data name="AccidentTime" xml:space="preserve">
+    <value>Temps accident</value>
+  </data>
+  <data name="BusServiceNo" xml:space="preserve">
+    <value>Service Bus n</value>
+  </data>
+  <data name="ClaimNo" xml:space="preserve">
+    <value>Aucune revendication</value>
+  </data>
+  <data name="Createdby" xml:space="preserve">
+    <value>créé Par</value>
+  </data>
+  <data name="CreatedDate" xml:space="preserve">
+    <value>date de création</value>
+  </data>
+  <data name="Damages" xml:space="preserve">
+    <value>dégâts</value>
+  </data>
+  <data name="DateJoined" xml:space="preserve">
+    <value>Date d'inscription</value>
+  </data>
+  <data name="DateofFinding" xml:space="preserve">
+    <value>Date de constatation finale</value>
+  </data>
+  <data name="DateResigned" xml:space="preserve">
+    <value>Date de Résigné</value>
+  </data>
+  <data name="DriverEmployeeNo" xml:space="preserve">
+    <value>Code Bus capitaine</value>
+  </data>
+  <data name="DriverName" xml:space="preserve">
+    <value>Nom Bus capitaine</value>
+  </data>
+  <data name="DriverNRICNo" xml:space="preserve">
+    <value>Aucune NRIC</value>
+  </data>
+  <data name="DutyIO" xml:space="preserve">
+    <value>Duty IO</value>
+  </data>
+  <data name="Facts" xml:space="preserve">
+    <value>Rapport de l'assuré</value>
+  </data>
+  <data name="FinalLiability" xml:space="preserve">
+    <value>responsabilité finale</value>
+  </data>
+  <data name="Interchange" xml:space="preserve">
+    <value>Interchange</value>
+  </data>
+  <data name="IPNo" xml:space="preserve">
+    <value>No. IP</value>
+  </data>
+  <data name="IsRecoveryBI" xml:space="preserve">
+    <value>Recouvrable de l'assureur ( BI )</value>
+  </data>
+  <data name="IsRecoveryOD" xml:space="preserve">
+    <value>Recouvrable ( OD )</value>
+  </data>
+  <data name="Make" xml:space="preserve">
+    <value>Faire</value>
+  </data>
+  <data name="ModelNo" xml:space="preserve">
+    <value>modèle</value>
+  </data>
+  <data name="ModifiedBy" xml:space="preserve">
+    <value>modifié par</value>
+  </data>
+  <data name="ModifiedDate" xml:space="preserve">
+    <value>date de modification</value>
+  </data>
+  <data name="ODStatus" xml:space="preserve">
+    <value>Tous propre dommage</value>
+  </data>
+  <data name="OperatingHours" xml:space="preserve">
+    <value>Heures d'exploitation</value>
+  </data>
+  <data name="Organization" xml:space="preserve">
+    <value>organisation</value>
+  </data>
+  <data name="ReportedDate" xml:space="preserve">
+    <value>Dates signalés</value>
+  </data>
+  <data name="Results" xml:space="preserve">
+    <value>Finale concluant de IO</value>
+  </data>
+  <data name="TPClaimentStatus" xml:space="preserve">
+    <value>Tout dommage matériel / blessures corporelles</value>
+  </data>
+  <data name="VehicleNo" xml:space="preserve">
+    <value>véhicule Aucune</value>
+  </data>
+  <data name="IncompleteClaimRegistration" xml:space="preserve">
+    <value>Les demandes incomplètes inscription</value>
+  </data>
+  <data name="AccidentDetails" xml:space="preserve">
+    <value>Détails accident</value>
+  </data>
+  <data name="ClaimAccidentEntry" xml:space="preserve">
+    <value>Entrée revendication Accident</value>
+  </data>
+  <data name="CVAccidentTime" xml:space="preserve">
+    <value>Temps accident ne peut pas être supérieur à l'heure actuelle.</value>
+  </data>
+  <data name="Driver" xml:space="preserve">
+    <value>conducteur</value>
+  </data>
+  <data name="InitialFindings" xml:space="preserve">
+    <value>premiers résultats</value>
+  </data>
+  <data name="lblAccidentDate" xml:space="preserve">
+    <value>date de l'accident</value>
+  </data>
+  <data name="lblDateOfFinding" xml:space="preserve">
+    <value>Date des conclusions</value>
+  </data>
+  <data name="lblReportedDate" xml:space="preserve">
+    <value>date du rapport</value>
+  </data>
+  <data name="MsgAccidentClaimCanceled" xml:space="preserve">
+    <value>Accident réclamation a été annulé .</value>
+  </data>
+  <data name="MsgBeforeComplete" xml:space="preserve">
+    <value>Please valeurs d'entrée pour l'écran d'accident et en créer une revendication de la Première avant de cliquer sur le bouton Terminer .</value>
+  </data>
+  <data name="MsgBusCaptainCode" xml:space="preserve">
+    <value>S'il vous plaît entrer correcte Bus Code de capitaine</value>
+  </data>
+  <data name="MsgConfirmCancel" xml:space="preserve">
+    <value>Voulez-vous annuler cette déclaration d'accident ?</value>
+  </data>
+  <data name="MsgConfirmComplete" xml:space="preserve">
+    <value>Procédez pour terminer cette revendication?</value>
+  </data>
+  <data name="MsgDate" xml:space="preserve">
+    <value>ne peut pas être supérieur à la date actuelle</value>
+  </data>
+  <data name="MsgDateFormat" xml:space="preserve">
+    <value>La date doit être dans '/ aaaa jj / mm ' le format .</value>
+  </data>
+  <data name="MsgDateOfFinding" xml:space="preserve">
+    <value>Date des conclusions ne peut pas être inférieure à l'accident Date .</value>
+  </data>
+  <data name="MsgHourFormat" xml:space="preserve">
+    <value>S'il vous plaît entrer le format d'horloge de 24 heures correcte</value>
+  </data>
+  <data name="MsgMobileNo" xml:space="preserve">
+    <value>Mobile Pas doit être au format approprié.</value>
+  </data>
+  <data name="MsgReportedDate" xml:space="preserve">
+    <value>Date du rapport ne peut pas être inférieure à Accident date .</value>
+  </data>
+  <data name="MsgVehicleNumber" xml:space="preserve">
+    <value>S'il vous plaît entrer le numéro de bon véhicule</value>
+  </data>
+  <data name="RFVAccidentDate" xml:space="preserve">
+    <value>Date de l'accident est nécessaire .</value>
+  </data>
+  <data name="RFVAccidentTime" xml:space="preserve">
+    <value>Temps accident est nécessaire .</value>
+  </data>
+  <data name="RFVBusServiceNumber" xml:space="preserve">
+    <value>Nombre Service Bus est nécessaire .</value>
+  </data>
+  <data name="RFVOD" xml:space="preserve">
+    <value>OD est nécessaire.</value>
+  </data>
+  <data name="RFVOrganization" xml:space="preserve">
+    <value>Organisation est nécessaire .</value>
+  </data>
+  <data name="RFVPDBI" xml:space="preserve">
+    <value>PD / BI est nécessaire .</value>
+  </data>
+  <data name="RFVReportedDate" xml:space="preserve">
+    <value>Date du rapport est nécessaire .</value>
+  </data>
+  <data name="Vehicle" xml:space="preserve">
+    <value>véhicule</value>
+  </data>
+  <data name="CollisionType" xml:space="preserve">
+    <value>Type de collision</value>
+  </data>
+  <data name="InitialLiability" xml:space="preserve">
+    <value>responsabilité initiale</value>
+  </data>
+  <data name="District" xml:space="preserve">
+    <value>District</value>
+  </data>
+  <data name="Fatal" xml:space="preserve">
+    <value>Fatal</value>
+  </data>
+  <data name="MinorInjury" xml:space="preserve">
+    <value>Blessure mineure</value>
+  </data>
+  <data name="RoadName" xml:space="preserve">
+    <value>Nom de la route</value>
+  </data>
+  <data name="SeriousInjury" xml:space="preserve">
+    <value>Blessure grave</value>
+  </data>
+  <data name="RFVInputDate" xml:space="preserve">
+    <value>Entrée date est nécessaire.</value>
+  </data>
+  <data name="Address1" xml:space="preserve">
+    <value>Adresse 1</value>
+  </data>
+  <data name="Address2" xml:space="preserve">
+    <value>Adresse 2</value>
+  </data>
+  <data name="Address3" xml:space="preserve">
+    <value>Adresse 3</value>
+  </data>
+  <data name="AnyRecoveryClaim" xml:space="preserve">
+    <value>Toute revendication de récupération</value>
+  </data>
+  <data name="CDGEClaimRef" xml:space="preserve">
+    <value>CDGE réclamation Ref</value>
+  </data>
+  <data name="ContactNo" xml:space="preserve">
+    <value>contact Aucune</value>
+  </data>
+  <data name="Country" xml:space="preserve">
+    <value>Pays</value>
+  </data>
+  <data name="DriverType" xml:space="preserve">
+    <value>Type de pilote</value>
+  </data>
+  <data name="EmailAddress" xml:space="preserve">
+    <value>Adresse e-mail</value>
+  </data>
+  <data name="FaxNo" xml:space="preserve">
+    <value>Fax</value>
+  </data>
+  <data name="Gender" xml:space="preserve">
+    <value>Le genre</value>
+  </data>
+  <data name="InputDate" xml:space="preserve">
+    <value>entrée date</value>
+  </data>
+  <data name="Name" xml:space="preserve">
+    <value>prénom</value>
+  </data>
+  <data name="NRICPPNo" xml:space="preserve">
+    <value>NRIC / PP Non</value>
+  </data>
+  <data name="OwnerName" xml:space="preserve">
+    <value>Le nom du propriétaire</value>
+  </data>
+  <data name="OwnInsurer" xml:space="preserve">
+    <value>Own assureur</value>
+  </data>
+  <data name="PostalCode" xml:space="preserve">
+    <value>code postal</value>
+  </data>
+  <data name="ReportedDate2" xml:space="preserve">
+    <value>date du rapport</value>
+  </data>
+  <data name="Hirer" xml:space="preserve">
+    <value>loueur</value>
+  </data>
+  <data name="Owner" xml:space="preserve">
+    <value>Propriétaire</value>
+  </data>
+</root>

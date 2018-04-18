@@ -1,0 +1,466 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="PolicyInfo.master.cs"
+    Inherits="Cms.Policies.Aspx.PolicyInfo" %>
+    <%@ Register TagPrefix="UC" TagName="TreeView" Src="/cms/cmsweb/webcontrols/TreeView.ascx" %>
+    <%@ Register TagPrefix="webcontrol" TagName="Menu" Src="/cms/cmsweb/webcontrols/menu.ascx" %>
+    
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title></title>
+    <%--<link rel="stylesheet" type="text/css" href="/cms/cmsweb/css/css1.css">--%>
+    <link href="/cms/cmsweb/images/DemoImages/ea.css" rel="stylesheet" type="text/css" />
+    <%--<link rel="stylesheet" href="/cms/cmsweb/images/DemoImages/screen.css" />--%>
+    <link rel="stylesheet" href="/cms/cmsweb/images/DemoImages/slide.css" type="text/css"  media="screen" />
+    <script src="/cms/cmsweb/images/DemoImages/js/jquery-1.3.2.min.js" type="text/javascript"></script>
+    <!-- Sliding effect -->
+    <script src="/cms/cmsweb/images/DemoImages/js/slide.js" type="text/javascript"></script>
+    <style type="text/css" >
+ 
+    body {
+	    margin-left: 0px;
+	    margin-top: 0px;
+	    
+    }
+    
+
+    #ctl00_treeview1_TreeView1 td div {
+    height: 20px !important
+    }
+
+ 
+    </style>
+        <SCRIPT src="/cms/cmsweb/scripts/xmldom.js"></SCRIPT>
+		<script src="/cms/cmsweb/scripts/common.js"></script>
+		<script src="/cms/cmsweb/scripts/form.js"></script>
+    <script type="text/javascript" language="javascript">
+
+      /*  function SetMenu() {
+            //disable App/Policy Menu added By Pravesh on 3 dec 08 as sesion values are being set to blank on this page
+            top.topframe.disableMenus("1", "ALL");
+            top.topframe.disableMenu("1,0");
+            top.topframe.disableMenu("1,1");
+            top.topframe.disableMenu("1,1,1");
+            top.topframe.disableMenu("1,1,2");
+            // end here Added by Pravesh
+            //Disable party,reserve and activities menu at this page
+            top.topframe.disableMenu('2,2,0');
+            top.topframe.disableMenu('2,2,1');
+            top.topframe.disableMenu('2,2,2');
+            top.topframe.disableMenu('2,2,3');
+            //Disable customer and policy menus at this page
+            top.topframe.disableMenu('2,2,4');
+            top.topframe.disableMenu('2,2,5');
+            top.topframe.disableMenu('2,2,6');
+            top.topframe.disableMenu('2,2,7');
+        }*/
+             
+
+        function OnTreeClick(evt) {
+
+            var src = window.event != window.undefined ? window.event.srcElement : evt.target;
+            var nodeClick = src.tagName.toLowerCase();
+            if (nodeClick) {
+                var nodeText = src.innerText;
+                var nodeValue = GetNodeValue(src);
+                //alert("Text: " + nodeText + ",” + Value: " + nodeValue);
+                GetPageOpen(nodeValue);
+                return false;
+            }
+            //return false; //uncomment this if you do not want postback on node click
+        }
+        function GetNodeValue(node) {
+            //node value
+            var nodeValue = "";
+            var nodePath = node.href.substring(node.href.indexOf(',') + 2, node.href.length - 2);
+            var nodeValues = nodePath.split("\\");
+            if (nodeValues.length > 1)
+                nodeValue = nodeValues[nodeValues.length - 1];
+            else
+                nodeValue = nodeValues[0].substr(1); return nodeValue;
+        }
+
+
+        function GetPageOpen(NodeValue) {
+
+            var Customer_id = document.getElementById('ctl00_hidCUSTOMER_ID').value;
+            var Policy_id = document.getElementById('ctl00_hidPOLICY_ID').value;
+            var Policy_version_id = document.getElementById('ctl00_hidPOLICY_VERSION_ID').value;
+            var CalledFrom = 'TreeViewNavigation'
+            var Policy_Lob = document.getElementById('ctl00_hidLOB_ID').value;
+
+
+
+            if (NodeValue.indexOf('AddRemunerationDetails.aspx') != -1) {
+                NodeValue += '&CALLEDFROM=' + CalledFrom + '&POLICY_LOB=' + Policy_Lob + '&CUSTOMER_ID=' + Customer_id +
+                    '&POLICY_ID=' + Policy_id + '&APP_ID=' + Policy_id + '&POLICY_VERSION_ID=' + Policy_version_id +
+                    '&APP_VERSION_ID=' + Policy_version_id + '&';
+            } else {
+                NodeValue += '?CALLEDFROM=' + CalledFrom + '&POLICY_LOB=' + Policy_Lob + '&CUSTOMER_ID=' + Customer_id +
+            '&POLICY_ID=' + Policy_id + '&APP_ID=' + Policy_id + '&POLICY_VERSION_ID=' + Policy_version_id +
+            '&APP_VERSION_ID=' + Policy_version_id + '&';
+
+            }
+            var Cntrl = document.getElementById('ctl00_iframPage'); //masterPage Id
+            Cntrl.src = NodeValue; //'PolicyGeneralInfo.aspx?CALLEDFROM=InCLT'
+        }
+        function Init() {
+            $(document).ready(function () {
+
+                var height = screen.height;
+                document.getElementById('blueCurvediv')
+                document.getElementById('ctl00_iframPage').style.height = 2000; //document.body.offsetHeight; // -20    //'410px';//.className = "Rightiframe2";
+                //document.getElementById('ctl00_iframPage').style.height = document.body.offsetHeight - 20;   //'410px';//.className = "Rightiframe2";
+                document.getElementById('mainDiv').style.height = height-250;
+
+            });
+
+            var Val = document.getElementById('ctl00_hidCALLED_FROM').value;
+            var Path = document.getElementById('ctl00_hidOpenPath').value;
+            
+            if (Val == 'ABCD') {
+                //var TreeElement = document.getElementById('ctl00_treeview1_TreeView1_2')
+                GetPageOpen(Path);
+             }else if(Val == 'POL')
+                GetPageOpen('/Cms/Policies/Aspx/PolicyGeneralInfo.aspx');
+
+         }
+         function toppanelclick() {
+             $("div#panel").slideUp("slow");
+          }
+
+    </script>
+   
+</head>
+<body onload="Init();">
+
+    <form id="form1" runat="server">
+   <%-- <webcontrol:Menu id="bottomMenu" runat="server"></webcontrol:Menu>--%>
+<div id="toppanel" onclick="toppanelclick()" >
+	<div id="panel">
+		<div class="content clearfix">
+			<%--<div class="left">
+				<h1>Welcome to ACI</h1> 
+				<!-- <h2>Sliding login panel Demo with jQuery</h2>-->		
+				<p class="grey">American Collectors Insurance is the nation's leading provider of collector vehicle and collectibles insurance.</p>
+			</div>
+			<div class="left">
+				<!-- Login Form -->
+				<form class="clearfix" action="#" method="post">
+					<h1>Member Login</h1>
+					<label class="grey" for="log">Username:</label>
+					<input class="field" type="text" name="log" id="log" value="" size="23" />
+					<label class="grey" for="pwd">Password:</label>
+					<input class="field" type="password" name="pwd" id="pwd" size="23" />
+	            	<label><input name="rememberme" id="rememberme" type="checkbox" checked="checked" value="forever" /> &nbsp;Remember me</label>
+        			<div class="clear"></div>
+					<input type="submit" name="submit" value="Login" class="bt_login" />
+					<a class="lost-pwd" href="retrieve.html">Lost your password?</a>
+				</form>
+			</div>
+			<div class="left right">			
+				<!-- Register Form -->
+				
+					<h2>Not a member yet? Sign Up!</h2>				
+					<label class="grey" for="signup">Username:</label>
+					<input class="field" type="text" name="signup" id="signup" value="" size="23" />
+					<label class="grey" for="email">Email:</label>
+					<input class="field" type="text" name="email" id="email" size="23" />
+					<label>A password will be e-mailed to you.</label>
+					<form action="agency_portal_01.html"><input type="submit" name="submit" value="Register" class="bt_register" />
+				</form>
+			</div>--%>
+		</div>
+</div> <!-- /login -->	
+
+	<!-- The tab on top -->	
+	<%--<div class="tab">
+		<ul class="login">
+		  <li class="left">&nbsp;</li>
+			<li class="pulltabtxt"></li>
+			<li class="sep"></li>
+            <li class="sep"></li>
+			<%--<li id="toggle">
+			<%--	<a id="open" class="open" href="#">Open Panel</a>--%>
+		    <%--<a id="close" style="display: none;" class="close" href="#">Close Panel</a>		
+            </li>
+       
+			<li class="right">&nbsp;</li>
+		</ul> 
+	</div> <!-- / top -->--%>
+	
+</div> <!--panel --> 
+
+<!-- Panel -->
+    <table width="100%" >  
+        <tr>
+            <td rowspan="2" style="vertical-align:top;width:20%;overflow:auto;" id="tdTreeView">
+            <table style="margin-top:9px;" width="100%">
+            <%--<tr>
+                <td runat="server" visible="true" height="22" background="/Cms/CmsWeb/images1/toparrow.png" align = "center" style="font-size:12px;font-weight:bold;color:#FFFFFF; background-repeat:no-repeat;">
+                               <asp:Label id="Label1" runat="server">Pending Application</asp:Label>
+                        </td>
+                
+               
+            </tr> --%>
+            <tr>
+                <td>
+                    <table width="190">
+                        <tr>
+                <td id="Td1" runat="server" visible="true" height="22" background="/Cms/CmsWeb/images1/toparrow.png" style="text-align:center; font-size:12px;font-weight:bold;color:#FFFFFF; background-repeat:no-repeat;">
+                               <asp:Label id="Label2" runat="server">Pending Application</asp:Label>
+                        </td>
+                
+                
+            </tr>
+                    </table>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <uc:TreeView id="treeview1" runat="server"></uc:TreeView>
+                </td>
+            </tr>
+            </table>
+                        
+                </td>
+            <td style="width:80%" valign="top">
+
+            <table width="100%" border="0" cellspacing="1" cellpadding="0">
+            <tr>
+                <td colspan="3">
+                    <webcontrol:Menu id="bottomMenu" runat="server"></webcontrol:Menu>
+                </td>
+                
+            </tr>
+                <tr>
+                    <td width="43%">
+                        <table width="100%" border="0" cellspacing="0" cellpadding="0" style="margin-top:1px;">      
+                          <tr>
+                            <td width="5" background="images/BG.jpg">
+                                <img src="/Cms/CmsWeb/images/DemoImages/left.jpg" width="5" />
+                            </td>
+                            <td valign="top" background="/Cms/CmsWeb/images/DemoImages/bg.jpg">
+                                <table width="100%" border="0" align="center" cellpadding="3" cellspacing="0">        
+                                    <tr>
+                                        <td>
+                                            <table  cellpadding="1" cellspacing="0">
+                                                <%--<tr>
+                                                    <td height="2" align="left" valign="top" ></td>
+                                                </tr>--%>
+                                                <tr>
+                                                    <td align="left" valign="top" style="font-size:10px;font-weight:bold;color:#000000;">Customer Name:</td>
+                                                    <td style="font-size:10px;color:#000000;">
+                                                        <asp:HyperLink ID="hlkCUSTOMER_NAME" runat="server" style="text-decoration:none;">
+                                                            <asp:Label runat="server" ID="lblCUSTOMER_NAME"  ></asp:Label>
+                                                        </asp:HyperLink>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td align="left" valign="top" style="font-size:10px;font-weight:bold;color:#000000;">Customer Type:</td>
+                                                    <td style="font-size:10px;color:#000000;"
+                                                        <asp:Label runat="server" ID="lblCUSTOMER_TYPE"  ></asp:Label>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td align="left" valign="top" style="font-size:10px;font-weight:bold;color:#000000;">Address:</td>
+                                                    <td style="font-size:10px;color:#000000;">
+                                                        <asp:Label runat="server" ID="lblCUSTOMER_ADDRESS"  ></asp:Label>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td align="left" valign="top" style="font-size:10px;font-weight:bold;color:#000000;">City State Zip:</td>
+                                                    <td style="font-size:10px;color:#000000;">
+                                                        <asp:Label runat="server" ID="lblCityStateZip"  ></asp:Label>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td align="left" valign="top" style="font-size:10px;font-weight:bold;color:#000000;">Phone:</td>
+                                                    <td style="font-size:10px;color:#000000;">
+                                                        <asp:Label runat="server" ID="lblCUSTOMER_PHONE"  ></asp:Label>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td align="left" valign="top" style="font-size:10px;font-weight:bold;color:#000000;">Email:</td>
+                                                    <td style="font-size:10px;color:#000000;">
+                                                        <asp:Label runat="server" ID="lblCUSTOMER_EMAIL"  ></asp:Label>
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </td>
+                                        <td valign="top">
+                                            <table>
+                                                <tr>
+                                                    <td>
+                                                        <asp:HyperLink id="hlkCustomerAssistant" runat="server" style="border:0;">
+                                                            <img src="/Cms/CmsWeb/images/DemoImages/icon1.jpg" width="23" height="23" align="absmiddle" alt="Customer Assistant" style="border:0;" />
+                                                        </asp:HyperLink>
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </td>
+                                    </tr>
+                                </table>                                        
+                           </td>
+                            <td width="5" valign="top">
+                                <img src="/Cms/CmsWeb/images/DemoImages/right.jpg" width="5" />
+                            </td>
+                          </tr>
+                        </table>
+                    </td>
+                   
+                    <td width="43%">
+                        <table width="100%" border="0" cellspacing="0" cellpadding="0" style="margin-top:1px;">      
+                          <tr>
+                            <td width="5" background="images/BG.jpg">
+                                <img src="/Cms/CmsWeb/images/DemoImages/left.jpg" width="5" />
+                            </td>
+                            <td valign="top" background="/Cms/CmsWeb/images/DemoImages/bg.jpg">
+                                <table width="95%" border="0" align="center" cellpadding="2" cellspacing="0">        
+                                    <tr>
+                                        <%--<td align="center" valign="middle" style="font-size:10px;font-weight:bold;color:#00a1e8;">                                       
+                                        </td>--%>
+                                        <td align="left" valign="top" style="font-size:10px;font-weight:bold;color:#000000;">Policy #:</td>
+                                        <td style="font-size:10px;color:#000000;"><asp:Label runat= "server" ID="lblPOLICY_NO"></asp:Label></td>
+                                        <td align="left" valign="top" style="font-size:10px;font-weight:bold;color:#000000;">Ver #:</td>
+                                        <td style="font-size:10px;color:#000000;"><asp:Label runat= "server" ID="lblPOL_VERSION_ID"></asp:Label></td>
+                                    </tr>
+                                    <tr>
+                                        <td align="left" valign="top" style="font-size:10px;font-weight:bold;color:#000000;">Eff Date:</td>
+                                        <td style="font-size:10px;color:#000000;"><asp:Label runat= "server" ID="lblEFF_DATE"></asp:Label></td>
+                                        <td align="left" valign="top" style="font-size:10px;font-weight:bold;color:#000000;">Exp Date:</td>
+                                        <td style="font-size:10px;color:#000000;"><asp:Label runat= "server" ID="lblEXP_DATE"></asp:Label></td>
+                                    </tr>
+                                    <tr>
+                                        <td align="left" valign="top" style="font-size:10px;font-weight:bold;color:#000000;">Product:</td>
+                                        <td style="font-size:10px;color:#000000;"><asp:Label runat= "server" ID="lblLOB"></asp:Label></td>
+                                        <td align="left" valign="top" style="font-size:10px;font-weight:bold;color:#000000;">Status:</td>
+                                        <td style="font-size:10px;color:#000000;"><asp:Label runat= "server" ID="lblStatus"></asp:Label></td>
+                                    </tr>
+                                    <tr>
+                                        <td align="left" valign="top" style="font-size:10px;font-weight:bold;color:#000000;">Agency:</td>
+                                        <td style="font-size:10px;color:#000000;"><asp:Label runat= "server" ID="lblAgency"></asp:Label></td>
+                                        <td align="left" valign="top" style="font-size:10px;font-weight:bold;color:#000000;">Policy Currency:</td>
+                                        <td style="font-size:10px;color:#000000;"><asp:Label runat= "server" ID="lblPOL_CURRENCY"></asp:Label></td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="4">
+                                            <table width="100%">
+                                                <tr>
+                                                    <td valign="top" align="center" style="font-size:10px;font-weight:bold;color:#000000;">
+                                                        <img src="/Cms/CmsWeb/images/quote.gif" width="20" height="20" alt="Rate" />
+                                                    </td>
+                                                    <td align="center" style="font-size:10px;color:#000000;">
+                                                        <img src="/Cms/CmsWeb/images/TransactionLog4.png" width="20" height="20" alt="Transaction Log" />
+                                                    </td>
+                                                    <td align="center" valign="top" style="font-size:10px;font-weight:bold;color:#000000;">
+                                                        <img src="/Cms/CmsWeb/images/PolicyStatus.gif" width="20" height="20" alt="Policy Status" />
+                                                    </td>
+                                                    <td align="center" style="font-size:10px;color:#000000;">
+                                                        <img src="/Cms/CmsWeb/images/TabCheckRed.gif" width="15" height="15" alt="Submit" />
+                                                    </td>
+                                                    <td align="center" style="font-size:10px;color:#000000;">
+                                                        <img src="/Cms/CmsWeb/images/AccountEnquiry2.png" width="20" height="20" alt="Account Enquiry" />
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </td>
+                                    </tr>
+
+                                </table>                                        
+                           </td>
+                            <td width="5" valign="top">
+                                <img src="/Cms/CmsWeb/images/DemoImages/right.jpg" width="5" />
+                            </td>
+                          </tr>
+                        </table>
+                    </td>
+
+                    <td width="14%">
+                        <table width="100%" border="0" cellspacing="0" cellpadding="0" style="margin-top:1px;">      
+                          <tr>
+                            <td width="5" background="images/BG.jpg">
+                                <img src="/Cms/CmsWeb/images/DemoImages/left.jpg" width="5" />
+                            </td>
+                            <td valign="top" background="/Cms/CmsWeb/images/DemoImages/bg.jpg">
+                                <table width="95%" border="0" align="center" cellpadding="2" cellspacing="0">    
+                                    <tr>
+                                        <td style="font-size:10px;color:#000000; text-align:center;">Rules Verification</td>
+                                    </tr>    
+                                    <tr>
+                                    <td align="center" valign="middle" style="font-size:10px;font-weight:bold;color:#00a1e8;">
+            
+                                        <div >
+                <a id="open" class="open" style="font-size:15px;text-decoration:none;" href="#">
+                <table border="0" cellpadding="0" CELLSPACING="0>               
+                    <tr>
+                     <a id="A1" class="open" style="font-size:15px;text-decoration:none;" href="#">
+                        <%--<td id="tdYield" runat="server" visible="false" width="98" height="75" background="/Cms/CmsWeb/images1/yieldsign.png" style="text-align:center; cursor:pointer">
+                               <asp:Label id="lblYieldError" runat="server">25</asp:Label><br /><br />
+                        </td>--%>
+                        <td id="tdStop" runat="server" visible="true" width="74" height="75" background="/Cms/CmsWeb/images1/stopsign.png" style="text-align:center; cursor:pointer">
+                               <asp:Label id="lblStopError" runat="server" style="font-size:20px;font-weight:bold;color:#00a1e8;">25</asp:Label>
+                        </td>
+                    </a> 
+                    </tr>
+                      
+                </table>
+                
+              </div>
+                                        </td>
+                                    </tr>
+                                </table>                                        
+                           </td>
+                            <td width="5" valign="top">
+                                <img src="/Cms/CmsWeb/images/DemoImages/right.jpg" width="5" />
+                            </td>
+                          </tr>
+                        </table>
+                    </td>
+                </tr>
+
+             <tr>
+            <td colspan="3">
+
+            <%--Content Palce HOlder--%>
+                 <asp:ContentPlaceHolder ID="CntPlaceStuff" runat="server">                 
+                </asp:ContentPlaceHolder>
+                
+                <div id="mainDiv" style="margin-left: 0px;margin-top: 0px;width:100%; overflow:scroll">
+                    <div class="blueCurvediv" style="margin-left: 2px;margin-top: 0px; margin-right:2px">
+               
+                        <iframe runat="server" id="iframPage" src=""  width="98%" frameborder="0"  style="margin-top:5px;"
+                            scrolling="no"  ></iframe>
+
+                
+                    </div>
+                </div>
+                
+                 <%-- <asp:ScriptManager runat="server" ID="ScriptManager">
+                    </asp:ScriptManager>
+                    <asp:UpdatePanel runat="server" ID="UpdatePanel">
+                        <ContentTemplate>
+                            <asp:PlaceHolder runat="server" ID="aspPlaceHOlder">--%>
+                
+                <%--  </asp:PlaceHolder>
+                        </ContentTemplate>
+                    </asp:UpdatePanel>--%>
+                  
+
+                </td>
+        </tr>
+            </table>
+            </td>
+                   
+                </tr>
+            </table>
+        
+    <input type="hidden" runat="server" id="hidCUSTOMER_ID" />
+    <input type="hidden" runat="server" id="hidPOLICY_ID" />
+    <input type="hidden" runat="server" id="hidPOLICY_VERSION_ID" />
+    <input type="hidden" runat="server" id="hidLOB_ID" />
+    <input type="hidden" runat="server" id="hidLob_String" />
+    <input type="hidden" runat="server" id="hidCALLED_FROM" />
+    <input type="hidden" runat="server" id="hidOpenPath" />
+    </form>
+</body>
+</html>

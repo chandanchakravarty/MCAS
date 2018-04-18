@@ -1,0 +1,35 @@
+
+/****** Object:  StoredProcedure [dbo].[Proc_Get_MIG_IL_VEHICLE_DETAIL]    Script Date: 08/28/2014 11:22:36 ******/
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[Proc_Get_MIG_IL_VEHICLE_DETAIL]') AND type in (N'P', N'PC'))
+DROP PROCEDURE [dbo].[Proc_Get_MIG_IL_VEHICLE_DETAIL]
+GO
+
+/****** Object:  StoredProcedure [dbo].[Proc_Get_MIG_IL_VEHICLE_DETAIL]    Script Date: 08/28/2014 11:22:36 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+
+
+
+CREATE PROCEDURE [dbo].[Proc_Get_MIG_IL_VEHICLE_DETAIL] @UPLOAD_FILE_ID INT = null
+AS
+SET FMTONLY OFF;
+SELECT [UPLOAD_FILE_ID]
+      ,[UPLOAD_SERIAL_NO]
+      ,[VEHICLE_REGISTRATION_NO]
+      ,[VEHICLE_MAKE]
+      ,[VEHICLE_MODEL]
+      ,[VEHICLE_CLASS]
+      ,[MODEL_DESCRIPTION]
+      ,[BUS_CAPTAIN]
+      ,[IMPORT_ACTION]
+      ,[FileName]
+  FROM [MIG_IL_VEHICLE_DETAIL]
+where UPLOAD_FILE_ID=@UPLOAD_FILE_ID
+
+GO
+
+

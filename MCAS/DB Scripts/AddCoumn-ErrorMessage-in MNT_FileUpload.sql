@@ -1,0 +1,4 @@
+IF NOT EXISTS(SELECT TOP 1 1 FROM INFORMATION_SCHEMA.COLUMNS WHERE [TABLE_NAME] = 'MNT_FileUpload' AND [COLUMN_NAME] = 'ErrorMessage')
+BEGIN
+ALTER TABLE [dbo].[MNT_FileUpload] ADD [ErrorMessage] [nvarchar](max) NULL
+END

@@ -1,0 +1,92 @@
+﻿<GridQuery>
+	<SelectTables>
+		<Table TableID="1">
+			<Name>VW_Premium_Refund_Check</Name>
+		</Table>
+	</SelectTables>
+
+	<FromClause>
+		<From>
+			<TableID>1</TableID>
+		</From>
+	</FromClause>
+
+	<SelectColumns>
+
+		<Column ColID ="1">
+			<TableID>1</TableID>
+			<ColumnName>CUSTOMER_NAME</ColumnName>
+			<ColumnHeading>Insured Name</ColumnHeading>
+			<Sortable></Sortable>
+			<Searchable>Yes</Searchable>
+		</Column>
+
+		<Column ColID ="2">
+			<TableID>1</TableID>
+			<ColumnName>POLICY_NUMBER</ColumnName>
+			<ColumnHeading>Policy Number</ColumnHeading>
+			<Sortable></Sortable>
+			<Searchable>Yes</Searchable>
+			<Multilingual>Yes</Multilingual>
+		</Column>
+
+		<Column ColID="3">
+			<TableID>1</TableID>
+			<ColumnName>POLICY_DISP_VERSION_ID</ColumnName>
+			<ColumnHeading>Policy Version</ColumnHeading>
+			<Sortable></Sortable>
+			<Searchable></Searchable>
+		</Column>
+
+		<Column ColID="4">
+			<TableID>1</TableID>
+			<ColumnName>PAYMENT_DATE</ColumnName>
+			<ColumnHeading>Date of Last Payment</ColumnHeading>
+			<Sortable></Sortable>
+			<Searchable>Yes</Searchable>
+		</Column>
+
+		<Column ColID="5">
+			<TableID>1</TableID>
+			<ColumnName>SOURCE_TRAN_DATE</ColumnName>
+			<ColumnHeading>Effective Date of Premium Transaction</ColumnHeading>
+			<Sortable></Sortable>
+			<Searchable>Yes</Searchable>
+		</Column>
+
+		<Column ColID="6">
+			<TableID>1</TableID>
+			<ColumnName>REFUND_AMOUNT</ColumnName>
+			<ColumnHeading>Refund Amount</ColumnHeading>
+			<Sortable></Sortable>
+			<Searchable>Yes</Searchable>
+		</Column>
+
+		<Column ColID="7">
+			<TableID>1</TableID>
+			<ColumnName>CANCELLATION_TYPE</ColumnName>
+			<ColumnHeading>Cancellation Type</ColumnHeading>
+			<Sortable></Sortable>
+			<Searchable></Searchable>
+		</Column>
+
+		<Column ColID="8">
+			<TableID>1</TableID>
+			<ColumnName>IS_OVERPAYMENT</ColumnName>
+			<ColumnHeading>Overpayment</ColumnHeading>
+			<Sortable></Sortable>
+			<Searchable></Searchable>
+		</Column>
+
+	</SelectColumns>
+
+
+	<OrderBy>
+		<Column>
+			<TableID>1</TableID>
+			<ColumnName>CUSTOMER_NAME</ColumnName>
+			<SortOrder>ASC</SortOrder>
+		</Column>
+	</OrderBy>
+
+</GridQuery>

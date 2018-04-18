@@ -1,0 +1,3 @@
+
+
+update MNT_COUNTRY_LIST set IS_ACTIVE='Y'

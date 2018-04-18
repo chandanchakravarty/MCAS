@@ -1,0 +1,543 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="Action" xml:space="preserve">
+    <value>Action</value>
+  </data>
+  <data name="AddNew" xml:space="preserve">
+    <value>ajouter de nouveaux</value>
+  </data>
+  <data name="Aircon" xml:space="preserve">
+    <value>Air climatisé</value>
+  </data>
+  <data name="Axle" xml:space="preserve">
+    <value>essieux</value>
+  </data>
+  <data name="BackToListAction" xml:space="preserve">
+    <value>Retour à la liste</value>
+  </data>
+  <data name="CreateAction" xml:space="preserve">
+    <value>créer</value>
+  </data>
+  <data name="CreatePageTitle" xml:space="preserve">
+    <value>créer [[EntityName]]</value>
+  </data>
+  <data name="CreateValidationSummaryMessage" xml:space="preserve">
+    <value>Erreur de création [[EntityName]]</value>
+  </data>
+  <data name="DeleteAction" xml:space="preserve">
+    <value>Supprimer</value>
+  </data>
+  <data name="DeleteConfirmMessage" xml:space="preserve">
+    <value>êtes-vous sûr de vouloir supprimer cette ?</value>
+  </data>
+  <data name="DeletePageTitle" xml:space="preserve">
+    <value>Supprimer [[EntityName]]</value>
+  </data>
+  <data name="DetailsPageTitle" xml:space="preserve">
+    <value>[ [EntityName]] Détails</value>
+  </data>
+  <data name="Edit" xml:space="preserve">
+    <value>éditer</value>
+  </data>
+  <data name="EditAction" xml:space="preserve">
+    <value>Modifier l'action</value>
+  </data>
+  <data name="EditPageTitle" xml:space="preserve">
+    <value>édition [[EntityName]]</value>
+  </data>
+  <data name="EditValidationSummaryMessage" xml:space="preserve">
+    <value>erreur de mise à jour [[EntityName]]</value>
+  </data>
+  <data name="LabelAircon" xml:space="preserve">
+    <value>[[Aircon]]</value>
+  </data>
+  <data name="LabelAxle" xml:space="preserve">
+    <value>[[Axe]]</value>
+  </data>
+  <data name="LabelBusNo" xml:space="preserve">
+    <value>[[BusNo]]</value>
+  </data>
+  <data name="LabelChasisNo" xml:space="preserve">
+    <value>[[ChasisNo]]</value>
+  </data>
+  <data name="LabelCreatedBy" xml:space="preserve">
+    <value>[ [CreatedBy]]</value>
+  </data>
+  <data name="LabelCreatedOn" xml:space="preserve">
+    <value>[[CreatedOn]]</value>
+  </data>
+  <data name="LabelCultureCode" xml:space="preserve">
+    <value>[[CultureCode]]</value>
+  </data>
+  <data name="LabelHgetval" xml:space="preserve">
+    <value>[[Hgetval]]</value>
+  </data>
+  <data name="LabelHgetval1" xml:space="preserve">
+    <value>[[Hgetval1]]</value>
+  </data>
+  <data name="LabelHselect" xml:space="preserve">
+    <value>[[HCochez]]</value>
+  </data>
+  <data name="LabelinputFileName" xml:space="preserve">
+    <value>[[InputFileName]]</value>
+  </data>
+  <data name="LabelinputFileRefNo" xml:space="preserve">
+    <value>[[inputFileRefNo]]</value>
+  </data>
+  <data name="LabelinputUploadDate" xml:space="preserve">
+    <value>[[inputUploadDate ]]</value>
+  </data>
+  <data name="LabelLangId" xml:space="preserve">
+    <value>[[LANGID]]</value>
+  </data>
+  <data name="LabellistscreenId" xml:space="preserve">
+    <value>[[listscreenId]]</value>
+  </data>
+  <data name="LabelMake" xml:space="preserve">
+    <value>[[Make]]</value>
+  </data>
+  <data name="LabelModel" xml:space="preserve">
+    <value>[[Modèle]]</value>
+  </data>
+  <data name="LabelModelDescription" xml:space="preserve">
+    <value>[[MODELEDescription]]</value>
+  </data>
+  <data name="LabelModifiedBy" xml:space="preserve">
+    <value>[[ModifiedBy]]</value>
+  </data>
+  <data name="LabelModifiedOn" xml:space="preserve">
+    <value>[[ModifiedOn]]</value>
+  </data>
+  <data name="LabelReadOnly" xml:space="preserve">
+    <value>[[ReadOnly]] </value>
+  </data>
+  <data name="LabelscreenId" xml:space="preserve">
+    <value>[[screenId]]</value>
+  </data>
+  <data name="LabelStatus" xml:space="preserve">
+    <value>[[État]]</value>
+  </data>
+  <data name="LabelTotalRecords" xml:space="preserve">
+    <value>[[TotalRecords]]</value>
+  </data>
+  <data name="LabelTraining" xml:space="preserve">
+    <value>[[Formation]]</value>
+  </data>
+  <data name="LabelType" xml:space="preserve">
+    <value>[[type]]</value>
+  </data>
+  <data name="LabelUploadedDate" xml:space="preserve">
+    <value>[[UploadedDate]]</value>
+  </data>
+  <data name="LabelUploadedFailed" xml:space="preserve">
+    <value>[[UploadedFailed]]</value>
+  </data>
+  <data name="LabelUploadFileId" xml:space="preserve">
+    <value>[[UploadFileId]]</value>
+  </data>
+  <data name="LabelUploadFileName" xml:space="preserve">
+    <value>[ [UploadNomFichier]]</value>
+  </data>
+  <data name="LabelUploadFileRefNo" xml:space="preserve">
+    <value>[[UploadFileRefNo]]</value>
+  </data>
+  <data name="LabelUploadPath" xml:space="preserve">
+    <value>[[UploadPath]]</value>
+  </data>
+  <data name="LabelUplodedSuccess" xml:space="preserve">
+    <value>[[UplodedSuccess]]</value>
+  </data>
+  <data name="LabelVehicleClassCode" xml:space="preserve">
+    <value>[[VehicleClassCode]]</value>
+  </data>
+  <data name="LabelVehicleMasterId" xml:space="preserve">
+    <value>[[VehicleMasterId]]</value>
+  </data>
+  <data name="LabelViewMode" xml:space="preserve">
+    <value>[[ViewMode]]</value>
+  </data>
+  <data name="ListActionCreate" xml:space="preserve">
+    <value>Créer</value>
+  </data>
+  <data name="ListActionDelete" xml:space="preserve">
+    <value>Supprimer</value>
+  </data>
+  <data name="ListActionDetails" xml:space="preserve">
+    <value>Détails</value>
+  </data>
+  <data name="ListActionEdit" xml:space="preserve">
+    <value>éditer</value>
+  </data>
+  <data name="ListPageTitle" xml:space="preserve">
+    <value>[[EntityName]] Liste</value>
+  </data>
+  <data name="ModelDescription" xml:space="preserve">
+    <value>Châssis n °</value>
+  </data>
+  <data name="ModelName" xml:space="preserve">
+    <value>[[ModelName]]</value>
+  </data>
+  <data name="Type" xml:space="preserve">
+    <value>le type</value>
+  </data>
+  <data name="ValidationMessageAircon" xml:space="preserve">
+    <value>[[Aircon]] requis</value>
+  </data>
+  <data name="ValidationMessageAxle" xml:space="preserve">
+    <value>[[Axe]] requis</value>
+  </data>
+  <data name="ValidationMessageBusNo" xml:space="preserve">
+    <value>[[BusNo]] requis</value>
+  </data>
+  <data name="ValidationMessageChasisNo" xml:space="preserve">
+    <value>[[ChasisNo]] requis</value>
+  </data>
+  <data name="ValidationMessageCreatedBy" xml:space="preserve">
+    <value>[[CreatedBy ]] requis</value>
+  </data>
+  <data name="ValidationMessageCreatedOn" xml:space="preserve">
+    <value>[[CreatedOn]] requis</value>
+  </data>
+  <data name="ValidationMessageCultureCode" xml:space="preserve">
+    <value>[[CultureCode]] requis</value>
+  </data>
+  <data name="ValidationMessageHgetval" xml:space="preserve">
+    <value>[[Hgetval]] requis</value>
+  </data>
+  <data name="ValidationMessageHgetval1" xml:space="preserve">
+    <value>[[Hgetval1]] requis</value>
+  </data>
+  <data name="ValidationMessageHselect" xml:space="preserve">
+    <value>[[HCochez]] requis</value>
+  </data>
+  <data name="ValidationMessageinputFileName" xml:space="preserve">
+    <value>[[InputFileName]] requis</value>
+  </data>
+  <data name="ValidationMessageinputFileRefNo" xml:space="preserve">
+    <value>[[inputFileRefNo] ] requis</value>
+  </data>
+  <data name="ValidationMessageinputUploadDate" xml:space="preserve">
+    <value>[[inputUploadDate]] requis</value>
+  </data>
+  <data name="ValidationMessageLangId" xml:space="preserve">
+    <value>[[LANGID]] requis</value>
+  </data>
+  <data name="ValidationMessagelistscreenId" xml:space="preserve">
+    <value>[[listscreenId]] requis</value>
+  </data>
+  <data name="ValidationMessageMake" xml:space="preserve">
+    <value>[[Make]] requis</value>
+  </data>
+  <data name="ValidationMessageModel" xml:space="preserve">
+    <value>[[Modèle]] requis</value>
+  </data>
+  <data name="ValidationMessageModelDescription" xml:space="preserve">
+    <value>[[MODELEDescription]] requis</value>
+  </data>
+  <data name="ValidationMessageModifiedBy" xml:space="preserve">
+    <value>[[ModifiedBy]] nécessaire</value>
+  </data>
+  <data name="ValidationMessageModifiedOn" xml:space="preserve">
+    <value>[[ModifiedOn]] requis</value>
+  </data>
+  <data name="ValidationMessageReadOnly" xml:space="preserve">
+    <value>[[ReadOnly]] requis</value>
+  </data>
+  <data name="ValidationMessagescreenId" xml:space="preserve">
+    <value>[[screenId]] requis</value>
+  </data>
+  <data name="ValidationMessageStatus" xml:space="preserve">
+    <value>[[État]] requis</value>
+  </data>
+  <data name="ValidationMessageTotalRecords" xml:space="preserve">
+    <value>[[TotalRecords]] requis</value>
+  </data>
+  <data name="ValidationMessageTraining" xml:space="preserve">
+    <value>[[Formation]] requis</value>
+  </data>
+  <data name="ValidationMessageType" xml:space="preserve">
+    <value>[[type]] requis </value>
+  </data>
+  <data name="ValidationMessageUploadedDate" xml:space="preserve">
+    <value>[[UploadedDate]] requis</value>
+  </data>
+  <data name="ValidationMessageUploadedFailed" xml:space="preserve">
+    <value>[[UploadedFailed]] requis</value>
+  </data>
+  <data name="ValidationMessageUploadFileId" xml:space="preserve">
+    <value>[[UploadFileId]] requis</value>
+  </data>
+  <data name="ValidationMessageUploadFileName" xml:space="preserve">
+    <value>[[UploadNomFichier]] requis</value>
+  </data>
+  <data name="ValidationMessageUploadFileRefNo" xml:space="preserve">
+    <value>[[UploadFileRefNo]] requis</value>
+  </data>
+  <data name="ValidationMessageUploadPath" xml:space="preserve">
+    <value>[[UploadPath]] requis</value>
+  </data>
+  <data name="ValidationMessageUplodedSuccess" xml:space="preserve">
+    <value>[[UplodedSuccess]] requis</value>
+  </data>
+  <data name="ValidationMessageVehicleClassCode" xml:space="preserve">
+    <value>[[VehicleClassCode]] requis</value>
+  </data>
+  <data name="ValidationMessageVehicleMasterId" xml:space="preserve">
+    <value>[[VehicleMasterId]] requis</value>
+  </data>
+  <data name="ValidationMessageVehicleRegNo" xml:space="preserve">
+    <value>[[VehicleRegNo]] requis</value>
+  </data>
+  <data name="ValidationMessageViewMode" xml:space="preserve">
+    <value>[[ViewMode]] requis</value>
+  </data>
+  <data name="VehicleClassCode" xml:space="preserve">
+    <value>classe de véhicule</value>
+  </data>
+  <data name="VehicleMakeCode" xml:space="preserve">
+    <value>marque</value>
+  </data>
+  <data name="VehicleModelCode" xml:space="preserve">
+    <value>modèle</value>
+  </data>
+  <data name="VehicleRegNo" xml:space="preserve">
+    <value>bus n °</value>
+  </data>
+  <data name="View" xml:space="preserve">
+    <value>vue</value>
+  </data>
+  <data name="SystemAdmin" xml:space="preserve">
+    <value>administrateur système</value>
+  </data>
+  <data name="UploadMainMenu" xml:space="preserve">
+    <value>Télécharge Menu principal</value>
+  </data>
+  <data name="VehicleListingUpload" xml:space="preserve">
+    <value>Liste des voitures de chargement</value>
+  </data>
+  <data name="BusCaptainListing" xml:space="preserve">
+    <value>Bus capitaine Annonce</value>
+  </data>
+  <data name="VehicleListingMasters" xml:space="preserve">
+    <value>Liste de véhicules Masters</value>
+  </data>
+  <data name="UploadFile" xml:space="preserve">
+    <value>télécharger le fichier</value>
+  </data>
+  <data name="SelectFiletoUpload" xml:space="preserve">
+    <value>sélectionnez Fichier à télécharger</value>
+  </data>
+  <data name="Uploadfileisrequired" xml:space="preserve">
+    <value>télécharger le fichier est nécessaire.</value>
+  </data>
+  <data name="SelectVehicleClassToValidate" xml:space="preserve">
+    <value>Sélectionner une classe de véhicules à valider</value>
+  </data>
+  <data name="Vehicleclassisrequired" xml:space="preserve">
+    <value>la classe de véhicule est nécessaire.</value>
+  </data>
+  <data name="Enquiryon" xml:space="preserve">
+    <value>enquête sur</value>
+  </data>
+  <data name="Upload" xml:space="preserve">
+    <value>Upload</value>
+  </data>
+  <data name="UploadFileRefNo" xml:space="preserve">
+    <value>Télécharge Ref No</value>
+  </data>
+  <data name="Status" xml:space="preserve">
+    <value>l'état de chargement</value>
+  </data>
+  <data name="UploadedDate" xml:space="preserve">
+    <value>télécharger à partir de la date</value>
+  </data>
+  <data name="PROCESSED_DATE" xml:space="preserve">
+    <value>Télécharges à ce jour</value>
+  </data>
+  <data name="Clear" xml:space="preserve">
+    <value>clair</value>
+  </data>
+  <data name="Search" xml:space="preserve">
+    <value>Recherche</value>
+  </data>
+  <data name="UploadedDateTIme" xml:space="preserve">
+    <value>Posté date et heure</value>
+  </data>
+  <data name="TotalRecords" xml:space="preserve">
+    <value>nombre total d'enregistrements</value>
+  </data>
+  <data name="SuccessRecords" xml:space="preserve">
+    <value>Succès</value>
+  </data>
+  <data name="FailedRecords" xml:space="preserve">
+    <value>Fiches échoué</value>
+  </data>
+  <data name="Statu" xml:space="preserve">
+    <value>Statut</value>
+  </data>
+  <data name="LOGFile" xml:space="preserve">
+    <value>le fichier journal</value>
+  </data>
+  <data name="Download" xml:space="preserve">
+    <value>télécharger</value>
+  </data>
+  <data name="SearchResults" xml:space="preserve">
+    <value>Résultats de la recherche </value>
+  </data>
+  <data name="EnquiryonVehicleListingMaster" xml:space="preserve">
+    <value>Demande de renseignements sur Liste des voitures de maître</value>
+  </data>
+  <data name="Vlmaster" xml:space="preserve">
+    <value>le véhicule Master</value>
+  </data>
+  <data name="BusCaptainListingMaster" xml:space="preserve">
+    <value>Bus capitaine Annonce Maître</value>
+  </data>
+  <data name="BusCaptainUpload" xml:space="preserve">
+    <value>Bus capitaine chargement</value>
+  </data>
+  <data name="ChassisNo" xml:space="preserve">
+    <value>Châssis Non</value>
+  </data>
+  <data name="Vehicle" xml:space="preserve">
+    <value>véhicules</value>
+  </data>
+  <data name="Class" xml:space="preserve">
+    <value>classe</value>
+  </data>
+  <data name="Make" xml:space="preserve">
+    <value>Marque</value>
+  </data>
+  <data name="Model" xml:space="preserve">
+    <value>Modèle </value>
+  </data>
+  <data name="Back" xml:space="preserve">
+    <value>Retour</value>
+  </data>
+  <data name="Save" xml:space="preserve">
+    <value>Sauvegarder</value>
+  </data>
+  <data name="VechileClass" xml:space="preserve">
+    <value>vechile classe</value>
+  </data>
+  <data name="VehicleListingDetails" xml:space="preserve">
+    <value>Liste des voitures de Détails</value>
+  </data>
+</root>

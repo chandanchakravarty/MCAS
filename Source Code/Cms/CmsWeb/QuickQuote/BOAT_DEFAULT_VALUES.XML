@@ -1,0 +1,439 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<quickQuote>
+	<policy>
+		<PolicyTerm>
+			<Lob Code="BOAT">
+				<Term Code="12">1 Year</Term>
+			</Lob>
+			<Lob Code="HOME">
+				<Term Code="12">1 Year</Term>
+				<Term Code="6">6 Months</Term>
+			</Lob>
+		</PolicyTerm>
+		<pLiab Code="BOATHOMEDISC0">
+			<CoverageLimit>No Coverage</CoverageLimit>
+			<CoverageLimit>25000</CoverageLimit>
+			<CoverageLimit>50000</CoverageLimit>
+			<CoverageLimit>100000</CoverageLimit>
+			<CoverageLimit>300000</CoverageLimit>
+			<CoverageLimit>500000</CoverageLimit>
+		</pLiab>
+		<pLiab Code="BOATHOMEDISC15">
+			<CoverageLimit>100000</CoverageLimit>
+			<CoverageLimit>300000</CoverageLimit>
+			<CoverageLimit>500000</CoverageLimit>
+		</pLiab>
+		<MedPm LIMIT="25000">
+			<CoverageLimit>No Coverage</CoverageLimit>
+			<CoverageLimit>1000/25000</CoverageLimit>
+			<CoverageLimit>2000/25000</CoverageLimit>
+			<CoverageLimit>3000/25000</CoverageLimit>
+			<CoverageLimit>4000/25000</CoverageLimit>
+			<CoverageLimit>5000/25000</CoverageLimit>
+		</MedPm>
+		<pLiab Code="JETSKI">
+			<ToRevoke>
+				<CoverageLimit>25000</CoverageLimit>
+				<CoverageLimit>50000</CoverageLimit>
+			</ToRevoke>
+			<ToGrant>
+				<CoverageLimit>100000</CoverageLimit>
+			</ToGrant>
+		</pLiab>
+		<UninsuredBoaters>
+			<DATE START="03/01/2006" END="01/01/9999">
+				<CoverageLimit>No Coverage</CoverageLimit>
+				<CoverageLimit>50000</CoverageLimit>
+				<CoverageLimit>75000</CoverageLimit>
+				<CoverageLimit>100000</CoverageLimit>
+			</DATE>
+			<DATE START="01/01/1900" END="02/28/2006">
+				<CoverageLimit>10000</CoverageLimit>
+			</DATE>
+		</UninsuredBoaters>
+		<UnAttach>
+			<CoverageLimit>$1500</CoverageLimit>
+			<CoverageLimit>$2000</CoverageLimit>
+			<CoverageLimit>$2500</CoverageLimit>
+			<CoverageLimit>$3000</CoverageLimit>
+			<CoverageLimit>$3500</CoverageLimit>
+			<CoverageLimit>$4000</CoverageLimit>
+			<CoverageLimit>$4500</CoverageLimit>
+			<CoverageLimit>$5000</CoverageLimit>
+		</UnAttach>
+		<SchMiscItems>
+			<Items Code="DPSD">Depth Sounder</Items>
+			<Items Code="GPS">GPS System</Items>
+			<Items Code="LNS">Loran Navigation System</Items>
+			<Items Code="STSR">Ship to Shore</Items>
+			<Items Code="SSC">Shore Station</Items>
+			<Items Code="Others">Others</Items>
+		</SchMiscItems>
+		<SchMiscDed>
+			<Ded>None</Ded>
+			<Ded>$25</Ded>
+			<Ded>$50</Ded>
+			<Ded>$100</Ded>
+		</SchMiscDed>
+		<SchMiscElectronic>
+			<Type Code="N">No</Type>
+			<Type Code="Y">Yes</Type>
+		</SchMiscElectronic>
+	</policy>
+	<boat>
+		<boatType>
+			<!--NEW BOATS-->
+			<Type Code="CN" BoatStyle="O">Canoe</Type>
+			<Type Code="I" BoatStyle="I">Inboard</Type>
+			<Type Code="IO" BoatStyle="IO">Inboard/Outboard</Type>
+			<Type Code="JDO" BoatStyle="O">Jet Drive Outboards</Type>
+			<Type Code="JS" BoatStyle="JS">Jet Ski</Type>
+			<Type Code="PWT" BoatStyle="JS">Jetski (w/liftbar)</Type>
+			<Type Code="JT" BoatStyle="T">Jetski Trailer</Type>
+			<Type Code="MJB" BoatStyle="IO">Mini Jet Boat</Type>
+			<Type Code="OWM" BoatStyle="O">Outboard</Type>
+			<Type Code="PDB" BoatStyle="O">Paddleboat</Type>
+			<Type Code="PO" BoatStyle="O">Pontoon Outboard</Type>
+			<Type Code="RB" BoatStyle="O">Rowboat</Type>
+			<Type Code="S" BoatStyle="S">Sailboat</Type>
+			<Type Code="SWOB" BoatStyle="S">Sailboat w/outboard</Type>
+			<Type Code="TRAI" BoatStyle="T">Trailer</Type>
+			<Type Code="W" BoatStyle="IO">Waverunner</Type>
+			<Type Code="WRT" BoatStyle="T">WaveRunner Trailer</Type>
+			<!--Code="PIO" BoatStyle="IO">Pontoon Inboard/Outboard : Removed 18 Sep 2007-->
+		</boatType>
+		<Waters>
+			<Type Code="G">Great Lakes</Type>
+			<Type Code="I">Inland Waters</Type>
+		</Waters>
+		<CoverageBasis>
+			<Type Code="ANA">Not Applicable</Type>
+			<Type Code="ACV">Actual Cash Value</Type>
+			<Type Code="AGV">Agreed Value</Type>
+		</CoverageBasis>
+		<Deductible Code="OTH">
+			<DATE START="03/01/2006" END="01/01/9999">
+				<Ded>$100</Ded>
+				<Ded>$250</Ded>
+				<Ded>$500</Ded>
+				<Ded>$1000</Ded>
+				<Ded>$2500</Ded>
+			</DATE>
+			<DATE START="01/01/1900" END="02/28/2006">
+				<Ded>1%-100</Ded>
+				<Ded>2%-200</Ded>
+				<Ded>5%-500</Ded>
+			</DATE>
+		</Deductible>
+		<Deductible Code="JS">
+			<DATE START="03/01/2006" END="01/01/9999">
+				<Ded>$250</Ded>
+				<Ded>$500</Ded>
+			</DATE>
+			<DATE START="01/01/1900" END="02/28/2006">
+				<Ded>$250</Ded>
+				<Ded>$500</Ded>
+			</DATE>
+		</Deductible>
+		<Construction>
+			<Type Code="ALUM">Aluminum</Type>
+			<Type Code="F">Fiberglass</Type>
+			<Type Code="R">Rubber</Type>
+			<Type Code="STEEL">Steel</Type>
+			<Type Code="W">Wood</Type>
+		</Construction>
+		<OptionalCoverage Code="OP900">
+			<DATE START="03/01/2006" END="01/01/9999">
+				<Limit>50000</Limit>
+			</DATE>
+			<DATE START="01/01/1900" END="02/28/2006">
+				<Limit>10000</Limit>
+			</DATE>
+		</OptionalCoverage>
+		<ContyOfOperation state="INDIANA">
+			<County Code="INALLCNTY" TerrCode="1">IN-All Counties</County>
+		</ContyOfOperation>
+		<ContyOfOperation state="MICHIGAN">
+			<County Code="OTHERMI" TerrCode="1">MI Terr I-All other</County>
+			<County Code="MICOUNTIES" TerrCode="2">MI Terr II-Counties of Macomb,Oakland,St. Clair,Wayne</County>
+		</ContyOfOperation>
+		<ContyOfOperation state="WISCONSIN">
+			<County Code="WIALLCNTY" TerrCode="1">WI Terr I-All of Wisconsin Except County of Kenosha</County>
+			<County Code="WIKENCNTY" TerrCode="2">WI Terr II-Wisconsin County of Kenosha</County>
+		</ContyOfOperation>
+	</boat>
+	<driver>
+		<DriverGender>
+			<Gender>Male</Gender>
+			<Gender>Female</Gender>
+		</DriverGender>
+		<DriverMeritalStatus>
+			<!--<MeritalStatus>Single</MeritalStatus>
+			<MeritalStatus>Married</MeritalStatus>-->
+			<MeritalStatus Code="D">Divorced</MeritalStatus>
+			<MeritalStatus Code="M">Married</MeritalStatus>
+			<MeritalStatus Code="P">Separated</MeritalStatus>
+			<MeritalStatus Code="S">Single</MeritalStatus>
+			<MeritalStatus Code="W">Widowed</MeritalStatus>
+		</DriverMeritalStatus>
+		<VehicleAssignedAsOperator>
+			<Operator>Principal</Operator>
+			<Operator>Occasional</Operator>
+		</VehicleAssignedAsOperator>
+		<!--select '<violation mvrpoints="' + LTRIM(RTRIM(STR(MVR_POINTS))) + '" sdpoints="' + LTRIM(RTRIM(STR(SD_POINTS))) + '">' + Case Len(VIOLATION_CODE) WHEN 3 THEN VIOLATION_CODE WHEN 2 THEN '0' + VIOLATION_CODE  WHEN 1 THEN '00' + VIOLATION_CODE ELSE '000' END +  ' :' + LTRIM(RTRIM(STR(MVR_POINTS))) + '    :' + LTRIM(RTRIM(STR(SD_POINTS))) + '    : ' + LTRIM(RTRIM(violation_des)) + '</violation>' from MNT_VIOLATIONS where lob=4 and state=49 and is_Active='Y' And Violation_Des <> ' None' ORDER BY CAST(VIOLATION_CODE AS NUMERIC)-->
+		<violations state="INDIANA">
+			<violation mvrpoints="0" sdpoints="0"></violation>
+			<violation mvrpoints="0" sdpoints="0">001 :0    :0    : No valid license</violation>
+			<violation mvrpoints="4" sdpoints="8">002 :4    :8    : Never a valid license</violation>
+			<violation mvrpoints="4" sdpoints="2">003 :4    :2    : Learner permit violation</violation>
+			<violation mvrpoints="4" sdpoints="2">004 :4    :2    : Driver Education permit violation</violation>
+			<violation mvrpoints="4" sdpoints="2">005 :4    :2    : Temporary Motorcycle learner permit violation</violation>
+			<violation mvrpoints="4" sdpoints="2">006 :4    :2    : Motorcycle learner permit violation</violation>
+			<violation mvrpoints="4" sdpoints="0">007 :4    :0    : Improper Motorcycle license endorsement</violation>
+			<violation mvrpoints="6" sdpoints="8">008 :6    :8    : Violation of DL restriction</violation>
+			<violation mvrpoints="8" sdpoints="8">009 :8    :8    : Unlawful use of license</violation>
+			<violation mvrpoints="4" sdpoints="8">010 :4    :8    : Allow unlicensed individual operate vehicle</violation>
+			<violation mvrpoints="4" sdpoints="8">011 :4    :8    : Allow unlawful use of vehicle</violation>
+			<violation mvrpoints="8" sdpoints="8">012 :8    :8    : Driving while suspended</violation>
+			<violation mvrpoints="0" sdpoints="8">013 :0    :8    : OWI - MC learner permit</violation>
+			<violation mvrpoints="8" sdpoints="8">014 :8    :8    : Unlawful license use-alcohol</violation>
+			<violation mvrpoints="8" sdpoints="8">015 :8    :8    : Violation of financial responsibility restr</violation>
+			<violation mvrpoints="4" sdpoints="2">016 :4    :2    : Disregard traffic officer</violation>
+			<violation mvrpoints="4" sdpoints="2">017 :4    :2    : Disregard traffic control dev</violation>
+			<violation mvrpoints="4" sdpoints="2">018 :4    :2    : Disregard traffic signal</violation>
+			<violation mvrpoints="8" sdpoints="8">019 :8    :8    : PDO accident-fail to stop</violation>
+			<violation mvrpoints="8" sdpoints="8">020 :8    :8    : Excess PD accident-fail to stop</violation>
+			<violation mvrpoints="8" sdpoints="8">021 :8    :8    : Inj accident-fail to stop</violation>
+			<violation mvrpoints="8" sdpoints="8">022 :8    :8    : Leave scene - vehicle accident</violation>
+			<violation mvrpoints="8" sdpoints="8">023 :8    :8    : Leave scene - exc vehicle accident</violation>
+			<violation mvrpoints="8" sdpoints="8">024 :8    :8    : Accident - fail to give info</violation>
+			<violation mvrpoints="8" sdpoints="8">025 :8    :8    : Leave scene - parked vehicle</violation>
+			<violation mvrpoints="8" sdpoints="8">026 :8    :8    : Leave scene - personal prop</violation>
+			<violation mvrpoints="8" sdpoints="8">027 :8    :8    : Criminal reckless with vehicle</violation>
+			<violation mvrpoints="8" sdpoints="8">028 :8    :8    : Criminal mischief with vehicle</violation>
+			<violation mvrpoints="6" sdpoints="8">029 :6    :8    : Reckless driving</violation>
+			<violation mvrpoints="8" sdpoints="8">030 :8    :8    : Reckless driving-damage</violation>
+			<violation mvrpoints="4" sdpoints="2">031 :4    :2    : Failure to dim lights</violation>
+			<violation mvrpoints="2" sdpoints="2">032 :2    :2    : Speeding, speed not indicated</violation>
+			<violation mvrpoints="2" sdpoints="2">032 :2    :2    : Speeding, 1-15 mph</violation>
+			<violation mvrpoints="4" sdpoints="3">032 :4    :3    : Speeding, 16-25 mph</violation>
+			<violation mvrpoints="6" sdpoints="8">032 :6    :8    : Speeding, 26+ mph</violation>
+			<violation mvrpoints="2" sdpoints="2">033 :2    :2    : Minimum speed/improper lane</violation>
+			<violation mvrpoints="4" sdpoints="2">034 :4    :2    : Unsafe speed on bridge</violation>
+			<violation mvrpoints="4" sdpoints="2">035 :4    :2    : Driving wrong side of road</violation>
+			<violation mvrpoints="4" sdpoints="2">036 :4    :2    : Truck in restricted lane</violation>
+			<violation mvrpoints="4" sdpoints="2">037 :4    :2    : Driving left of center</violation>
+			<violation mvrpoints="4" sdpoints="2">038 :4    :2    : Improper passing</violation>
+			<violation mvrpoints="4" sdpoints="2">039 :4    :2    : Improper passing to left</violation>
+			<violation mvrpoints="4" sdpoints="2">040 :4    :2    : Improper passing to right</violation>
+			<violation mvrpoints="4" sdpoints="2">041 :4    :2    : Left center-obstruct view</violation>
+			<violation mvrpoints="4" sdpoints="2">042 :4    :2    : Passing in no passing zone</violation>
+			<violation mvrpoints="4" sdpoints="2">043 :4    :2    : Wrong way on one-way road</violation>
+			<violation mvrpoints="4" sdpoints="2">044 :4    :2    : Unsafe lane movement</violation>
+			<violation mvrpoints="4" sdpoints="2">045 :4    :2    : Improper use - center lane</violation>
+			<violation mvrpoints="6" sdpoints="2">046 :6    :2    : Following too closely</violation>
+			<violation mvrpoints="6" sdpoints="2">047 :6    :2    : Truck follow too closely</violation>
+			<violation mvrpoints="4" sdpoints="2">048 :4    :2    : Road entrance/exit violation</violation>
+			<violation mvrpoints="4" sdpoints="2">049 :4    :2    : Improper turn at intersection</violation>
+			<violation mvrpoints="4" sdpoints="2">050 :4    :2    : Improper u-turn</violation>
+			<violation mvrpoints="4" sdpoints="2">051 :4    :2    : Unsafe start from park</violation>
+			<violation mvrpoints="2" sdpoints="2">052 :2    :2    : Failure to signal</violation>
+			<violation mvrpoints="2" sdpoints="2">053 :2    :2    : Improper hand signal</violation>
+			<violation mvrpoints="6" sdpoints="2">054 :6    :2    : Failure to yield row</violation>
+			<violation mvrpoints="6" sdpoints="2">055 :6    :2    : Disobedience of yield sign</violation>
+			<violation mvrpoints="6" sdpoints="2">056 :6    :2    : Fail to yield to emergency vehicle</violation>
+			<violation mvrpoints="6" sdpoints="2">057 :6    :2    : Fail to avoid pedestrian</violation>
+			<violation mvrpoints="6" sdpoints="2">058 :6    :2    : Fail to stop-train signal</violation>
+			<violation mvrpoints="6" sdpoints="2">059 :6    :2    : Ignore Rail Road crossing stop sign</violation>
+			<violation mvrpoints="8" sdpoints="2">060 :8    :2    : Failure to stop - Rail Road crossing</violation>
+			<violation mvrpoints="6" sdpoints="2">061 :6    :2    : Disregard stop/yield sign</violation>
+			<violation mvrpoints="2" sdpoints="2">062 :2    :2    : Improper parking</violation>
+			<violation mvrpoints="6" sdpoints="2">063 :6    :2    : Improper pass school bus</violation>
+			<violation mvrpoints="8" sdpoints="8">064 :8    :8    : Speed contest on road</violation>
+			<violation mvrpoints="0" sdpoints="8">064 :0    :8    : Operating as Hazard to Others - Life</violation>
+			<violation mvrpoints="0" sdpoints="8">065 :0    :8    : Operating as Hazard to Others</violation>
+			<violation mvrpoints="2" sdpoints="2">067 :2    :2    : Fail to use headlights</violation>
+			<violation mvrpoints="2" sdpoints="0">068 :2    :0    : Improper headlights</violation>
+			<violation mvrpoints="2" sdpoints="0">069 :2    :0    : Improper tail lights</violation>
+			<violation mvrpoints="2" sdpoints="0">070 :2    :0    : No brake or signal lights</violation>
+			<violation mvrpoints="2" sdpoints="2">071 :2    :2    : Improper lights/reflectors</violation>
+			<violation mvrpoints="2" sdpoints="2">072 :2    :2    : No required lights/reflect</violation>
+			<violation mvrpoints="2" sdpoints="2">073 :2    :2    : Projecting load violation</violation>
+			<violation mvrpoints="2" sdpoints="2">074 :2    :2    : Light restriction violation</violation>
+			<violation mvrpoints="4" sdpoints="2">075 :4    :2    : Improper brakes</violation>
+			<violation mvrpoints="4" sdpoints="2">076 :4    :2    : Improper trailer brakes</violation>
+			<violation mvrpoints="4" sdpoints="2">077 :4    :2    : Inadequate brakes</violation>
+			<violation mvrpoints="2" sdpoints="0">078 :2    :0    : No or inadequate muffler</violation>
+			<violation mvrpoints="2" sdpoints="2">079 :2    :2    : Improper bumper height</violation>
+			<violation mvrpoints="2" sdpoints="2">080 :2    :2    : Improper emergency devices</violation>
+			<violation mvrpoints="4" sdpoints="2">081 :4    :2    : Depriving Motorcycle of full lane</violation>
+			<violation mvrpoints="2" sdpoints="2">082 :2    :2    : Motorcycle headlights not lighted</violation>
+			<violation mvrpoints="4" sdpoints="2">083 :4    :2    : More than two Motorcycle abreast</violation>
+			<violation mvrpoints="4" sdpoints="2">084 :4    :2    : Improper Motorcycle passing</violation>
+			<violation mvrpoints="4" sdpoints="2">085 :4    :2    : Improper parcel on Motorcycle</violation>
+			<violation mvrpoints="2" sdpoints="2">086 :2    :2    : Improper Motorcycle headgear</violation>
+			<violation mvrpoints="2" sdpoints="2">087 :2    :2    : Improper Motorcycle equipment</violation>
+			<violation mvrpoints="2" sdpoints="2">088 :2    :2    : Violation slow vehicle light red</violation>
+			<violation mvrpoints="4" sdpoints="0">089 :4    :0    : Child restraint violation</violation>
+			<violation mvrpoints="8" sdpoints="0">090 :8    :0    : Operating per SE</violation>
+			<violation mvrpoints="8" sdpoints="8">091 :8    :8    : Operating while intoxicated</violation>
+			<violation mvrpoints="8" sdpoints="8">092 :8    :8    : OWI - unspecified</violation>
+			<violation mvrpoints="8" sdpoints="8">093 :8    :8    : Prior OWI within 5 years</violation>
+			<violation mvrpoints="8" sdpoints="8">094 :8    :8    : OWI resulting in injury</violation>
+			<violation mvrpoints="8" sdpoints="8">095 :8    :8    : OWI resulting in death</violation>
+			<violation mvrpoints="4" sdpoints="8">096 :4    :8    : Violation of probationary license</violation>
+			<violation mvrpoints="8" sdpoints="2">097 :8    :2    : Operating as HTV</violation>
+			<violation mvrpoints="6" sdpoints="2">100 :6    :2    : School bus-speed 1-15 mph</violation>
+			<violation mvrpoints="6" sdpoints="2">100 :6    :2    : School bus-speed not indicated</violation>
+			<violation mvrpoints="8" sdpoints="3">100 :8    :3    : School bus-speed 16-25 mph</violation>
+			<violation mvrpoints="8" sdpoints="2">101 :8    :2    : School bus-fail stop at Railroad</violation>
+			<violation mvrpoints="4" sdpoints="2">102 :4    :2    : School bus-improper stop</violation>
+			<violation mvrpoints="4" sdpoints="2">103 :4    :2    : School bus-no stop arm signal</violation>
+			<violation mvrpoints="4" sdpoints="2">104 :4    :2    : School bus-no direct signal</violation>
+			<violation mvrpoints="4" sdpoints="2">105 :4    :2    : School bus-no warn lights</violation>
+			<violation mvrpoints="4" sdpoints="2">106 :4    :2    : School bus-no flash lights</violation>
+			<violation mvrpoints="8" sdpoints="8">107 :8    :8    : Involuntary manslaughter</violation>
+			<violation mvrpoints="8" sdpoints="8">108 :8    :8    : Reckless homicide</violation>
+			<violation mvrpoints="0" sdpoints="8">109 :0    :8    : Operating while intoxicated/non-mem st</violation>
+			<violation mvrpoints="0" sdpoints="8">110 :0    :8    : Drive while susp/non-mem st</violation>
+			<violation mvrpoints="0" sdpoints="8">111 :0    :8    : Leaving scene/non-mem st</violation>
+			<violation mvrpoints="0" sdpoints="2">112 :0    :2    : Failure duty/non-mem st</violation>
+			<violation mvrpoints="0" sdpoints="0">113 :0    :0    : Seat belt violation</violation>
+			<violation mvrpoints="0" sdpoints="8">114 :0    :8    : Reckless homicide/non-mem st</violation>
+			<violation mvrpoints="0" sdpoints="8">115 :0    :8    : Implied consent/non-mem st</violation>
+			<violation mvrpoints="0" sdpoints="8">116 :0    :8    : Court imposed</violation>
+			<violation mvrpoints="0" sdpoints="8">117 :0    :8    : Probable cause - refusal</violation>
+			<violation mvrpoints="0" sdpoints="8">118 :0    :8    : Probable cause - failure</violation>
+			<violation mvrpoints="2" sdpoints="2">119 :2    :2    : Out-of-state violation</violation>
+			<violation mvrpoints="0" sdpoints="0">120 :0    :0    : Non-pointable violation</violation>
+			<violation mvrpoints="0" sdpoints="2">121 :0    :2    : Local ordinance</violation>
+			<violation mvrpoints="0" sdpoints="0">122 :0    :0    : Equipment violation</violation>
+			<violation mvrpoints="0" sdpoints="2">123 :0    :2    : Failure of duty</violation>
+			<violation mvrpoints="0" sdpoints="2">124 :0    :2    : Traffic conviction</violation>
+			<violation mvrpoints="0" sdpoints="8">125 :0    :8    : Habitual traffic offender</violation>
+			<violation mvrpoints="0" sdpoints="8">126 :0    :8    : Juvenile delinquency</violation>
+			<violation mvrpoints="0" sdpoints="8">997 :0    :8    : Accum pts-evid financial resp</violation>
+			<violation mvrpoints="0" sdpoints="8">998 :0    :8    : Other moving violation led suspended/revoked/financial responsibility</violation>
+		</violations>
+		<violations state="MICHIGAN">
+			<violation mvrpoints="0" sdpoints="0"></violation>
+			<violation mvrpoints="2" sdpoints="2">001 :2    :2    : Speed - No amount given</violation>
+			<violation mvrpoints="2" sdpoints="2">002 :2    :2    : Speed 1-10 over limit</violation>
+			<violation mvrpoints="3" sdpoints="2">003 :3    :2    : Speed 11-15 over limit</violation>
+			<violation mvrpoints="4" sdpoints="3">004 :4    :3    : Speed 16-25 over</violation>
+			<violation mvrpoints="4" sdpoints="8">005 :4    :8    : Speed 26 and over</violation>
+			<violation mvrpoints="0" sdpoints="2">006 :0    :2    : Lmt/Acc Speed 1-5 over</violation>
+			<violation mvrpoints="1" sdpoints="2">007 :1    :2    : Lmt/Acc Speed 6-10 over</violation>
+			<violation mvrpoints="2" sdpoints="2">008 :2    :2    : Lmt/Acc Speed 11-15 over</violation>
+			<violation mvrpoints="3" sdpoints="3">009 :3    :3    : Lmt/Acc Speed 16-25 over</violation>
+			<violation mvrpoints="4" sdpoints="8">010 :4    :8    : Lmt/Acc Speed 26 and over</violation>
+			<violation mvrpoints="2" sdpoints="2">011 :2    :2    : Disobey traffic control device</violation>
+			<violation mvrpoints="2" sdpoints="2">012 :2    :2    : Disobey police officer signal</violation>
+			<violation mvrpoints="2" sdpoints="0">013 :2    :0    : Drive while license expire</violation>
+			<violation mvrpoints="2" sdpoints="2">014 :2    :2    : Drove CMV during out of service order</violation>
+			<violation mvrpoints="2" sdpoints="2">015 :2    :2    : Drove CMV while disqualified</violation>
+			<violation mvrpoints="2" sdpoints="2">016 :2    :2    : Drove moped sidewalk/highway</violation>
+			<violation mvrpoints="2" sdpoints="8">017 :2    :8    : Drove while license suspended</violation>
+			<violation mvrpoints="2" sdpoints="2">018 :2    :2    : Drove without due care or caution</violation>
+			<violation mvrpoints="2" sdpoints="0">019 :2    :0    : Drove without proper license</violation>
+			<violation mvrpoints="2" sdpoints="8">020 :2    :8    : Drove while suspended/revoked</violation>
+			<violation mvrpoints="2" sdpoints="0">021 :2    :0    : Drove without corrective lens</violation>
+			<violation mvrpoints="2" sdpoints="2">022 :2    :2    : Drove left of center</violation>
+			<violation mvrpoints="2" sdpoints="8">023 :2    :8    : Drove unlicensed or not valid</violation>
+			<violation mvrpoints="2" sdpoints="2">024 :2    :2    : Drove wrong way one-way street</violation>
+			<violation mvrpoints="2" sdpoints="2">025 :2    :2    : Failed to submit truck weight</violation>
+			<violation mvrpoints="2" sdpoints="2">026 :2    :2    : Failed to yield</violation>
+			<violation mvrpoints="2" sdpoints="2">027 :2    :2    : Failed to yield to emergency vehicle</violation>
+			<violation mvrpoints="2" sdpoints="2">028 :2    :2    : Failed to yield to handicapped/blind</violation>
+			<violation mvrpoints="2" sdpoints="2">029 :2    :2    : Failed to yield to pedestrian</violation>
+			<violation mvrpoints="2" sdpoints="2">030 :2    :2    : Failed to signal or observe</violation>
+			<violation mvrpoints="2" sdpoints="2">031 :2    :2    : Failed to stop leaving alley</violation>
+			<violation mvrpoints="2" sdpoints="2">032 :2    :2    : Failed to stop within assured clear distance ahead</violation>
+			<violation mvrpoints="2" sdpoints="2">033 :2    :2    : Failed to drive minimum speed</violation>
+			<violation mvrpoints="2" sdpoints="2">034 :2    :2    : Followed too closely</violation>
+			<violation mvrpoints="2" sdpoints="2">035 :2    :2    : Illegal entrance/exit x-way</violation>
+			<violation mvrpoints="2" sdpoints="2">036 :2    :2    : Improper load or towing</violation>
+			<violation mvrpoints="2" sdpoints="2">037 :2    :2    : Improper turn</violation>
+			<violation mvrpoints="2" sdpoints="2">038 :2    :2    : Improper use of lights</violation>
+			<violation mvrpoints="2" sdpoints="2">039 :2    :2    : Improper operation - emergency equipment</violation>
+			<violation mvrpoints="2" sdpoints="2">040 :2    :2    : Improper operation - emergency vehicle</violation>
+			<violation mvrpoints="2" sdpoints="2">041 :2    :2    : Improper operation - school bus</violation>
+			<violation mvrpoints="2" sdpoints="2">042 :2    :2    : Interfere with fire apparatus</violation>
+			<violation mvrpoints="2" sdpoints="2">043 :2    :2    : Motorcycle/moped > 2 abreast</violation>
+			<violation mvrpoints="2" sdpoints="2">044 :2    :2    : Improper crossing divided highway</violation>
+			<violation mvrpoints="2" sdpoints="2">045 :2    :2    : Improper lane use</violation>
+			<violation mvrpoints="2" sdpoints="2">046 :2    :2    : Interfered with traffic</violation>
+			<violation mvrpoints="2" sdpoints="0">047 :2    :0    : Obstructed vision or control</violation>
+			<violation mvrpoints="2" sdpoints="2">048 :2    :2    : Open intoxicants in vehicle - Driver</violation>
+			<violation mvrpoints="2" sdpoints="2">049 :2    :2    : Open intoxicants in vehicle - Passenger</violation>
+			<violation mvrpoints="2" sdpoints="8">050 :2    :8    : Person under 21 refused breath test</violation>
+			<violation mvrpoints="2" sdpoints="8">051 :2    :8    : Person under 21 transfer/possess - driver</violation>
+			<violation mvrpoints="2" sdpoints="8">052 :2    :8    : Person under 21 transfer/possess - passenger</violation>
+			<violation mvrpoints="2" sdpoints="8">053 :2    :8    : Preliminary breath test refusal-CMV</violation>
+			<violation mvrpoints="2" sdpoints="2">054 :2    :2    : Prohibited turn</violation>
+			<violation mvrpoints="2" sdpoints="8">055 :2    :8    : UDAA w/o intent (joyriding)</violation>
+			<violation mvrpoints="2" sdpoints="8">056 :2    :8    : Violation restricted license</violation>
+			<violation mvrpoints="2" sdpoints="8">057 :2    :8    : Violation license restrictions</violation>
+			<violation mvrpoints="2" sdpoints="2">058 :2    :2    : Violation instruction permit</violation>
+			<violation mvrpoints="2" sdpoints="8">059 :2    :8    : Violation financial responsibility law</violation>
+			<violation mvrpoints="2" sdpoints="2">060 :2    :2    : Violation of basic speed law</violation>
+			<violation mvrpoints="3" sdpoints="8">061 :3    :8    : Careless driving</violation>
+			<violation mvrpoints="3" sdpoints="2">062 :3    :2    : Disobey traffic signal</violation>
+			<violation mvrpoints="3" sdpoints="2">063 :3    :2    : Disobey school crossing guard</violation>
+			<violation mvrpoints="3" sdpoints="2">064 :3    :2    : Disobeyed stop sign</violation>
+			<violation mvrpoints="3" sdpoints="2">065 :3    :2    : Fail stop at Rail Road crossing</violation>
+			<violation mvrpoints="3" sdpoints="2">066 :3    :2    : Fail stop for school bus</violation>
+			<violation mvrpoints="3" sdpoints="2">067 :3    :2    : Improper passing</violation>
+			<violation mvrpoints="4" sdpoints="8">068 :4    :8    : Combined impaired/controlled substance</violation>
+			<violation mvrpoints="4" sdpoints="8">069 :4    :8    : Drag racing</violation>
+			<violation mvrpoints="4" sdpoints="8">070 :4    :8    : Operated while impaired</violation>
+			<violation mvrpoints="4" sdpoints="8">071 :4    :8    : Operated impaired by controlled substance</violation>
+			<violation mvrpoints="4" sdpoints="8">072 :4    :8    : Person under 21 with BAC (11/94)</violation>
+			<violation mvrpoints="6" sdpoints="8">073 :6    :8    : CDL - manufactured/distribution controlled substance</violation>
+			<violation mvrpoints="6" sdpoints="8">074 :6    :8    : Combined operating under influence blood alcohol .10</violation>
+			<violation mvrpoints="6" sdpoints="8">075 :6    :8    : Combined operating under influence controlled substance</violation>
+			<violation mvrpoints="6" sdpoints="8">076 :6    :8    : Fail to stop - Property Damage Accident</violation>
+			<violation mvrpoints="6" sdpoints="8">077 :6    :8    : Felonious driving</violation>
+			<violation mvrpoints="6" sdpoints="8">078 :6    :8    : Felony with auto used</violation>
+			<violation mvrpoints="6" sdpoints="8">079 :6    :8    : Felony-fleeing/eluding officer</violation>
+			<violation mvrpoints="6" sdpoints="8">080 :6    :8    : Felony with auto used misdemeanor</violation>
+			<violation mvrpoints="6" sdpoints="8">081 :6    :8    : Felony fail stop personal injury accident</violation>
+			<violation mvrpoints="6" sdpoints="8">082 :6    :8    : Gave false info - PD accident</violation>
+			<violation mvrpoints="6" sdpoints="8">083 :6    :8    : Gave false info - PI accident</violation>
+			<violation mvrpoints="6" sdpoints="8">084 :6    :8    : Manslaughter</violation>
+			<violation mvrpoints="6" sdpoints="8">085 :6    :8    : Misdemeanor - fail stop PI accident</violation>
+			<violation mvrpoints="6" sdpoints="8">086 :6    :8    : Misdemeanor - flee/eluding officer</violation>
+			<violation mvrpoints="6" sdpoints="8">087 :6    :8    : Murder, auto used</violation>
+			<violation mvrpoints="6" sdpoints="8">088 :6    :8    : Negligent homicide</violation>
+			<violation mvrpoints="6" sdpoints="8">089 :6    :8    : Operating under influence liquor causing serious injury</violation>
+			<violation mvrpoints="6" sdpoints="8">090 :6    :8    : Operating under influence liquor</violation>
+			<violation mvrpoints="6" sdpoints="8">091 :6    :8    : Operating under influence liquor causing death</violation>
+			<violation mvrpoints="6" sdpoints="8">092 :6    :8    : Operating under influence of controlled substance causing death</violation>
+			<violation mvrpoints="6" sdpoints="8">093 :6    :8    : Operating under influence of controlled substance causing serious injury</violation>
+			<violation mvrpoints="6" sdpoints="8">094 :6    :8    : Reckless driving</violation>
+			<violation mvrpoints="6" sdpoints="8">095 :6    :8    : Unlawful driving away auto</violation>
+			<violation mvrpoints="6" sdpoints="8">096 :6    :8    : Unlawful blood alcohol (.10)</violation>
+			<violation mvrpoints="0" sdpoints="8">097 :0    :8    : Alter driver license</violation>
+			<violation mvrpoints="0" sdpoints="8">098 :0    :8    : Alter/forge vehicle doc 138</violation>
+			<violation mvrpoints="0" sdpoints="8">099 :0    :8    : Drug Crime (eff. 9-1-94)</violation>
+			<violation mvrpoints="0" sdpoints="0">100 :0    :0    : Fail display valid license</violation>
+			<violation mvrpoints="0" sdpoints="8">101 :0    :8    : False info/fraud obtaining license</violation>
+			<violation mvrpoints="0" sdpoints="8">102 :0    :8    : Gave false info to officer</violation>
+			<violation mvrpoints="0" sdpoints="8">103 :0    :8    : Malicious destruction</violation>
+			<violation mvrpoints="0" sdpoints="0">104 :0    :0    : No proof of insurance</violation>
+			<violation mvrpoints="0" sdpoints="8">105 :0    :8    : Operate commercial motor vehicle with BAC .04-.07%</violation>
+			<violation mvrpoints="0" sdpoints="8">106 :0    :8    : Perjury under vehicle code</violation>
+			<violation mvrpoints="0" sdpoints="8">107 :0    :8    : Under 21 purchase possess/liquor</violation>
+			<violation mvrpoints="0" sdpoints="8">108 :0    :8    : Under 21 use fraud ID purchase liquor</violation>
+			<violation mvrpoints="0" sdpoints="8">109 :0    :8    : Theft of motor vehicle fuel</violation>
+			<violation mvrpoints="0" sdpoints="2">110 :0    :2    : Unlawful display of license</violation>
+			<violation mvrpoints="0" sdpoints="8">111 :0    :8    : Energy > 59 mph under former</violation>
+			<violation mvrpoints="0" sdpoints="2">112 :0    :2    : Energy Speed 1 - 10 mph over</violation>
+			<violation mvrpoints="0" sdpoints="2">113 :0    :2    : Energy Speed 11 - 15 mph over</violation>
+			<violation mvrpoints="0" sdpoints="3">114 :0    :3    : Energy Speed over 15 mph over</violation>
+		</violations>
+		<violations state="WISCONSIN">
+			<violation mvrpoints="0" sdpoints="0"></violation>
+		</violations>
+	</driver>
+</quickQuote>

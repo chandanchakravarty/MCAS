@@ -1,0 +1,128 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Root>
+  <PageTitle>
+    <Culture Code="en-US">Add Claim Adjuster</Culture>
+    <Culture Code="zh-SG">Add Claim Adjuster</Culture>
+    <Culture Code="pt-BR">Add Claim Adjuster</Culture>
+  </PageTitle> 
+
+  <PageElement name="trRow7" type="TR" Desc="Table Row"
+			IsMandatory="No"
+			IsReadOnly="No"
+			IsDisabled="No"
+			IsDisplay="No"
+			MaxLength=""
+			MaxSize=""
+			IsFormatingRequired="" JsFunctionToFormat="" OnClickJSFunction=""
+			OnChangeJSFunction="" >
+    <rev Enabled="No" ExpKey="" />
+    <Culture Code="en-US" Desc="set Label and Message for English language">
+      <Caption></Caption>
+      <rfvMessage></rfvMessage>
+      <DefaultValue></DefaultValue>
+      <revExpMessage></revExpMessage>
+    </Culture>
+    <Culture Code="pt-BR" Desc="set Label and Message for English language">
+      <Caption></Caption>
+      <rfvMessage></rfvMessage>
+      <DefaultValue></DefaultValue>
+      <revExpMessage></revExpMessage>
+    </Culture>
+    <Culture Code="zh-SG" Desc="set Label and Message for Singapore language">
+      <Caption></Caption>
+      <rfvMessage></rfvMessage>
+      <DefaultValue></DefaultValue>
+      <revExpMessage></revExpMessage>
+    </Culture>
+  </PageElement>
+  
+  <PageElement name="trRow8" type="TR" Desc="Table Row"
+			IsMandatory="No"
+			IsReadOnly="No"
+			IsDisabled="No"
+			IsDisplay="No"
+			MaxLength=""
+			MaxSize=""
+			IsFormatingRequired="" JsFunctionToFormat="" OnClickJSFunction=""
+			OnChangeJSFunction="" >
+    <rev Enabled="No" ExpKey="" />
+    <Culture Code="en-US" Desc="set Label and Message for English language">
+      <Caption></Caption>
+      <rfvMessage></rfvMessage>
+      <DefaultValue></DefaultValue>
+      <revExpMessage></revExpMessage>
+    </Culture>
+    <Culture Code="pt-BR" Desc="set Label and Message for English language">
+      <Caption></Caption>
+      <rfvMessage></rfvMessage>
+      <DefaultValue></DefaultValue>
+      <revExpMessage></revExpMessage>
+    </Culture>
+    <Culture Code="zh-SG" Desc="set Label and Message for Singapore language">
+      <Caption></Caption>
+      <rfvMessage></rfvMessage>
+      <DefaultValue></DefaultValue>
+      <revExpMessage></revExpMessage>
+    </Culture>
+  </PageElement>
+
+  <PageElement name="txtSUB_ADJUSTER_ZIP" type="TextBox" Desc=""
+     IsMandatory="Yes"
+     IsReadOnly="No"
+     IsDisabled="No"
+     IsDisplay="Yes"
+     MaxLength=""
+     MaxSize=""
+     IsFormatingRequired="Yes" JsFunctionToFormat="this.value=FormatZipCode(this.value);ValidatorOnChange();" OnClickJSFunction=""
+     OnChangeJSFunction="" >
+    <rev Enabled="Yes" ExpKey="(^\d{7,8}$)|(^\d{5}[-]\d{3}$)" />
+    <Culture Code="en-US" Desc="set Label and Message for English language">
+      <Caption>Zip Code</Caption>
+      <rfvMessage>Please Enter Zip Code.</rfvMessage>
+      <DefaultValue></DefaultValue>
+      <revExpMessage>Zip code should be either in  '#######' or '#####-###' format.</revExpMessage>
+    </Culture>
+    <Culture Code="zh-SG" Desc="set Label and Message for Singapore language">
+      <Caption>Zip Code</Caption>
+      <rfvMessage>Please Enter Zip Code.</rfvMessage>
+      <DefaultValue></DefaultValue>
+      <revExpMessage>Zip code should be either in  '#######' or '#####-###' format.</revExpMessage>
+    </Culture>
+    <Culture Code="pt-BR" Desc="set Label and Message for Brazil language">
+      <Caption>CEP</Caption>
+      <rfvMessage>Insira o CEP.</rfvMessage>
+      <DefaultValue></DefaultValue>
+      <revExpMessage>O CEP deve ser em formato '#######' or '#####-###' .</revExpMessage>
+    </Culture>
+  </PageElement>
+
+  <PageElement name="txtSA_ZIPCODE" type="TextBox" Desc=""
+     IsMandatory="Yes"
+     IsReadOnly="No"
+     IsDisabled="No"
+     IsDisplay="Yes"
+     MaxLength=""
+     MaxSize=""
+     IsFormatingRequired="No" JsFunctionToFormat="this.value=FormatZipCode(this.value);ValidatorOnChange();"  OnClickJSFunction=""
+     OnChangeJSFunction="" >
+    <rev Enabled="Yes" ExpKey="^[0-9]{5}-[0-9]{4}|[0-9]{5}" />
+    <Culture Code="en-US" Desc="set Label and Message for English language">
+      <Caption>Zip</Caption>
+      <rfvMessage>Please Enter Zip Code.</rfvMessage>
+      <DefaultValue></DefaultValue>
+      <revExpMessage>Zip code should be either in '#####' or #####-#### format.</revExpMessage>
+    </Culture>
+    <Culture Code="zh-SG" Desc="set Label and Message for Singapore language">
+      <Caption>Zip</Caption>
+      <rfvMessage>Please Enter Zip Code.</rfvMessage>
+      <DefaultValue></DefaultValue>
+      <revExpMessage>Zip code should be either in '#####' or #####-#### format.</revExpMessage>
+    </Culture>
+    <Culture Code="pt-BR" Desc="set Label and Message for Brazil language">
+      <Caption>CEP</Caption>
+      <rfvMessage>Insira o CEP.</rfvMessage>
+      <DefaultValue></DefaultValue>
+      <revExpMessage>O CEP deve ser em formato '#####' or #####-####.</revExpMessage>
+    </Culture>
+  </PageElement>
+</Root>

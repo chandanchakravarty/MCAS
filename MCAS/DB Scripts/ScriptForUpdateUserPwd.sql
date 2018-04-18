@@ -1,0 +1,1 @@
+ update [dbo].[MNT_Users] set loginpassword = NULL where userid not in ('pravesh')

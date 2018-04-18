@@ -1,0 +1,640 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Root>
+	<Master>
+		<Query Code="SELECT">Proc_GetKeysForCancellation</Query>
+		<Column Code="APP_EFFECTIVE_DATE" MapColumnn="APP_EFFECTIVE_DATE"></Column>
+		<Column Code="STATE_ID" MapColumnn="STATE_ID"></Column>
+		<Column Code="CANC_TYPE" MapColumnn="CANC_TYPE"></Column>
+		<Column Code="CANC_OPT" MapColumnn="CANC_OPT"></Column>
+		<Column Code="PMT_RCD" MapColumnn="PMT_RCD"></Column>
+		<Column Code="BILL_TYPE" MapColumnn="BILL_TYPE"></Column>
+		<Column Code="PROCESS_PAYMENT_CODE" MapColumnn="PROCESS_PAYMENT_CODE"></Column>
+		<Column Code="ACT_UPDP" MapColumnn=""></Column>
+		<Column Code="ACT_RETP" MapColumnn=""></Column>
+	</Master>
+	<!-- Cancellation after New Business NO Payment Recieved-->
+	<Group Code="NBS-NPT" CodeID="25">
+		<Rule Action="Master" StartDate="1950-01-01" EndDate="3000-12-30">
+			<!-- Cancellation Type -->
+			<Conditions>
+				<!-- Non Pay DB -->
+				<Condition Operand1="$CANC_TYPE" Operator="==" Operand2="11969" OperandType="Double">
+					<SubConditions>
+						<!-- Cancellation Option ProRata -->
+						<SubCondition Operand1="$CANC_OPT" Operator="==" Operand2="11994" OperandType="Double">
+							<ToSet Key="ACT_UPDP" Value="CHAG"></ToSet>
+							<ToSet Key="ACT_RETP" Value="NA"></ToSet>
+						</SubCondition>
+					</SubConditions>
+				</Condition>
+				<!-- NSF/ Replace -->
+				<Condition Operand1="$CANC_TYPE" Operator="==" Operand2="11992" OperandType="Double">
+					<SubConditions>
+						<!-- Cancellation Option Pro-Rata -->
+						<SubCondition Operand1="$CANC_OPT" Operator="==" Operand2="11994" OperandType="Double">
+							<ToSet Key="ACT_UPDP" Value="WOFF"></ToSet>
+							<ToSet Key="ACT_RETP" Value="NA"></ToSet>
+						</SubCondition>
+					</SubConditions>
+				</Condition>
+				<!-- NSF/ No replacement -->
+				<Condition Operand1="$CANC_TYPE" Operator="==" Operand2="11993" OperandType="Double">
+					<SubConditions>
+						<!-- Cancellation Option Pro-Rata -->
+						<SubCondition Operand1="$CANC_OPT" Operator="==" Operand2="11994" OperandType="Double">
+							<ToSet Key="ACT_UPDP" Value="WOFF"></ToSet>
+							<ToSet Key="ACT_RETP" Value="NA"></ToSet>
+						</SubCondition>
+					</SubConditions>
+				</Condition>
+				<!-- Company Request -->
+				<Condition Operand1="$CANC_TYPE" Operator="==" Operand2="11990" OperandType="Double">
+					<SubConditions>
+						<!-- Cancellation Option Pro-Rata -->
+						<SubCondition Operand1="$CANC_OPT" Operator="==" Operand2="11994" OperandType="Double">
+							<ToSet Key="ACT_UPDP" Value="CHAG"></ToSet>
+							<ToSet Key="ACT_RETP" Value="NA"></ToSet>
+						</SubCondition>
+					</SubConditions>
+				</Condition>				
+				<!-- Non Renewal -->
+				<Condition Operand1="$CANC_TYPE" Operator="==" Operand2="11991" OperandType="Double">
+					<SubConditions>
+						<!-- Cancellation Option Pro-Rata -->
+						<SubCondition Operand1="$CANC_OPT" Operator="==" Operand2="11994" OperandType="Double">
+							<ToSet Key="ACT_UPDP" Value="CHAG"></ToSet>
+							<ToSet Key="ACT_RETP" Value="NA"></ToSet>
+						</SubCondition>
+					</SubConditions>
+				</Condition>		
+				<!-- Insured Request -->
+				<Condition Operand1="$CANC_TYPE" Operator="==" Operand2="11989" OperandType="Double">
+					<SubConditions>
+						<!-- Cancellation Option Pro-Rata -->
+						<SubCondition Operand1="$CANC_OPT" Operator="==" Operand2="11994" OperandType="Double">
+							<ToSet Key="ACT_UPDP" Value="BLINS"></ToSet>
+							<ToSet Key="ACT_RETP" Value="NA"></ToSet>
+						</SubCondition>
+						<!-- Cancellation Option Flat -->
+						<SubCondition Operand1="$CANC_OPT" Operator="==" Operand2="11995" OperandType="Double">
+							<ToSet Key="ACT_UPDP" Value="BILNS"></ToSet>
+							<ToSet Key="ACT_RETP" Value="NA"></ToSet>
+						</SubCondition>
+					</SubConditions>
+				</Condition>
+				<!-- Agent Request -->
+				<Condition Operand1="$CANC_TYPE" Operator="==" Operand2="11987" OperandType="Double">
+					<SubConditions>
+						<!-- Cancellation Option Pro-Rata -->
+						<SubCondition Operand1="$CANC_OPT" Operator="==" Operand2="11994" OperandType="Double">
+							<ToSet Key="ACT_UPDP" Value="BLINS"></ToSet>
+							<ToSet Key="ACT_RETP" Value="NA"></ToSet>
+						</SubCondition>
+						<!-- Cancellation Option Flat -->
+						<SubCondition Operand1="$CANC_OPT" Operator="==" Operand2="11995" OperandType="Double">
+							<ToSet Key="ACT_UPDP" Value="BILNS"></ToSet>
+							<ToSet Key="ACT_RETP" Value="NA"></ToSet>
+						</SubCondition>
+					</SubConditions>
+				</Condition>
+				<!-- Cancel & Rewrite -->
+				<Condition Operand1="$CANC_TYPE" Operator="==" Operand2="11988" OperandType="Double">
+					<SubConditions>
+						<!-- Cancellation Option Pro-Rata -->
+						<SubCondition Operand1="$CANC_OPT" Operator="==" Operand2="11994" OperandType="Double">
+							<ToSet Key="ACT_UPDP" Value="BILNS"></ToSet>
+							<ToSet Key="ACT_RETP" Value="NA"></ToSet>
+						</SubCondition>
+						<!-- Cancellation Option Flat -->
+						<SubCondition Operand1="$CANC_OPT" Operator="==" Operand2="11995" OperandType="Double">
+							<ToSet Key="ACT_UPDP" Value="BILNS"></ToSet>
+							<ToSet Key="ACT_RETP" Value="NA"></ToSet>
+						</SubCondition>
+					</SubConditions>
+				</Condition>
+				<!-- Cancel & Reinstate -->
+				<Condition Operand1="$CANC_TYPE" Operator="==" Operand2="11971" OperandType="Double">
+					<SubConditions>
+						<!-- Cancellation Option Pro-Rata -->
+						<SubCondition Operand1="$CANC_OPT" Operator="==" Operand2="11994" OperandType="Double">
+							<ToSet Key="ACT_UPDP" Value="CFG"></ToSet>
+							<ToSet Key="ACT_RETP" Value="NA"></ToSet>
+						</SubCondition>
+						<!-- Cancellation Option Flat -->
+						<SubCondition Operand1="$CANC_OPT" Operator="==" Operand2="11995" OperandType="Double">
+							<ToSet Key="ACT_UPDP" Value="CFG"></ToSet>
+							<ToSet Key="ACT_RETP" Value="NA"></ToSet>
+						</SubCondition>
+					</SubConditions>
+				</Condition>
+				<!-- Rescind -->
+				<Condition Operand1="$CANC_TYPE" Operator="==" Operand2="11970" OperandType="Double">
+					<SubConditions>
+						<!-- Cancellation Option Pro-Rata -->
+						<SubCondition Operand1="$CANC_OPT" Operator="==" Operand2="11994" OperandType="Double">
+							<ToSet Key="ACT_UPDP" Value="BLINS"></ToSet>
+							<ToSet Key="ACT_RETP" Value="NA"></ToSet>
+						</SubCondition>
+						<!-- Cancellation Option Flat -->
+						<SubCondition Operand1="$CANC_OPT" Operator="==" Operand2="11995" OperandType="Double">
+							<ToSet Key="ACT_UPDP" Value="BILNS"></ToSet>
+							<ToSet Key="ACT_RETP" Value="NA"></ToSet>
+						</SubCondition>
+					</SubConditions>
+				</Condition>
+			</Conditions>
+		</Rule>
+	</Group>
+	<!-- Cancellation after New Business Payment Recieved-->
+	<Group Code="NBS-PTRCD" CodeID="25">
+		<Rule Action="Master" StartDate="1950-01-01" EndDate="3000-12-30">
+			<!-- Cancellation Type -->
+			<Conditions>
+				<!-- Non Pay DB -->
+				<Condition Operand1="$CANC_TYPE" Operator="==" Operand2="11969" OperandType="Double">
+					<SubConditions>
+						<!-- Cancellation Option Equity -->
+						<SubCondition Operand1="$CANC_OPT" Operator="==" Operand2="11996" OperandType="Double">
+							<ToSet Key="ACT_UPDP" Value="WOFF"></ToSet>
+							<ToSet Key="ACT_RETP" Value="NA"></ToSet>
+						</SubCondition>
+					</SubConditions>
+				</Condition>
+				<!-- NSF/ Replace -->
+				<Condition Operand1="$CANC_TYPE" Operator="==" Operand2="11992" OperandType="Double">
+					<SubConditions>
+						<!-- Cancellation Option Pro-Rata -->
+						<SubCondition Operand1="$CANC_OPT" Operator="==" Operand2="11994" OperandType="Double">
+							<ToSet Key="ACT_UPDP" Value="WOFF"></ToSet>
+							<ToSet Key="ACT_RETP" Value="RFD"></ToSet>
+						</SubCondition>
+					</SubConditions>
+				</Condition>
+				<!-- NSF/No Replacement -->
+				<Condition Operand1="$CANC_TYPE" Operator="==" Operand2="11993" OperandType="Double">
+					<SubConditions>
+						<!-- Cancellation Option Pro-Rata -->
+						<SubCondition Operand1="$CANC_OPT" Operator="==" Operand2="11994" OperandType="Double">
+							<ToSet Key="ACT_UPDP" Value="WOFF"></ToSet>
+							<ToSet Key="ACT_RETP" Value="RFD"></ToSet>
+						</SubCondition>
+					</SubConditions>
+				</Condition>
+				<!-- Company Request -->
+				<Condition Operand1="$CANC_TYPE" Operator="==" Operand2="11990" OperandType="Double">
+					<SubConditions>
+						<!-- Cancellation Option Pro-Rata -->
+						<SubCondition Operand1="$CANC_OPT" Operator="==" Operand2="11994" OperandType="Double">
+							<ToSet Key="ACT_UPDP" Value="BLINS"></ToSet>
+							<ToSet Key="ACT_RETP" Value="RFD"></ToSet>
+						</SubCondition>
+					</SubConditions>
+				</Condition>
+				<!-- Non Renewal -->
+				<Condition Operand1="$CANC_TYPE" Operator="==" Operand2="11991" OperandType="Double">
+					<SubConditions>
+						<!-- Cancellation Option Pro-Rata -->
+						<SubCondition Operand1="$CANC_OPT" Operator="==" Operand2="11994" OperandType="Double">
+							<ToSet Key="ACT_UPDP" Value="BLINS"></ToSet>
+							<ToSet Key="ACT_RETP" Value="RFD"></ToSet>
+						</SubCondition>
+					</SubConditions>
+				</Condition>
+				<!-- Insured Request -->
+				<Condition Operand1="$CANC_TYPE" Operator="==" Operand2="11989" OperandType="Double">
+					<SubConditions>
+						<!-- Cancellation Option Pro-Rata -->
+						<SubCondition Operand1="$CANC_OPT" Operator="==" Operand2="11994" OperandType="Double">
+							<ToSet Key="ACT_UPDP" Value="BLINS"></ToSet>
+							<ToSet Key="ACT_RETP" Value="RFD"></ToSet>
+						</SubCondition>
+						<!-- Cancellation Option Flat -->
+						<SubCondition Operand1="$CANC_OPT" Operator="==" Operand2="11995" OperandType="Double">
+							<ToSet Key="ACT_UPDP" Value="BILNS"></ToSet>
+							<ToSet Key="ACT_RETP" Value="RFD"></ToSet>
+						</SubCondition>
+					</SubConditions>
+				</Condition>
+				<!-- Agent Request -->
+				<Condition Operand1="$CANC_TYPE" Operator="==" Operand2="11987" OperandType="Double">
+					<SubConditions>
+						<!-- Cancellation Option Pro-Rata -->
+						<SubCondition Operand1="$CANC_OPT" Operator="==" Operand2="11994" OperandType="Double">
+							<ToSet Key="ACT_UPDP" Value="BLINS"></ToSet>
+							<ToSet Key="ACT_RETP" Value="RFD"></ToSet>
+						</SubCondition>
+						<!-- Cancellation Option Flat -->
+						<SubCondition Operand1="$CANC_OPT" Operator="==" Operand2="11995" OperandType="Double">
+							<ToSet Key="ACT_UPDP" Value="BILNS"></ToSet>
+							<ToSet Key="ACT_RETP" Value="RFD"></ToSet>
+						</SubCondition>
+					</SubConditions>
+				</Condition>
+				<!-- Cancel & Rewrite -->
+				<Condition Operand1="$CANC_TYPE" Operator="==" Operand2="11988" OperandType="Double">
+					<SubConditions>
+						<!-- Cancellation Option Pro-Rata -->
+						<SubCondition Operand1="$CANC_OPT" Operator="==" Operand2="11994" OperandType="Double">
+							<ToSet Key="ACT_UPDP" Value="BLINS"></ToSet>
+							<ToSet Key="ACT_RETP" Value="CFG"></ToSet>
+						</SubCondition>
+						<!-- Cancellation Option Flat -->
+						<SubCondition Operand1="$CANC_OPT" Operator="==" Operand2="11995" OperandType="Double">
+							<ToSet Key="ACT_UPDP" Value="BILNS"></ToSet>
+							<ToSet Key="ACT_RETP" Value="CFG"></ToSet>
+						</SubCondition>
+					</SubConditions>
+				</Condition>
+				<!-- Cancel & Reinstate -->
+				<Condition Operand1="$CANC_TYPE" Operator="==" Operand2="11971" OperandType="Double">
+					<SubConditions>
+						<!-- Cancellation Option Pro-Rata -->
+						<SubCondition Operand1="$CANC_OPT" Operator="==" Operand2="11994" OperandType="Double">
+							<ToSet Key="ACT_UPDP" Value="CFG"></ToSet>
+							<ToSet Key="ACT_RETP" Value="CFG"></ToSet>
+						</SubCondition>
+						<!-- Cancellation Option Flat -->
+						<SubCondition Operand1="$CANC_OPT" Operator="==" Operand2="11995" OperandType="Double">
+							<ToSet Key="ACT_UPDP" Value="CFG"></ToSet>
+							<ToSet Key="ACT_RETP" Value="CFG"></ToSet>
+						</SubCondition>
+					</SubConditions>
+				</Condition>
+				<!-- Rescind -->
+				<Condition Operand1="$CANC_TYPE" Operator="==" Operand2="11970" OperandType="Double">
+					<SubConditions>
+						<!-- Cancellation Option Pro-Rata -->
+						<SubCondition Operand1="$CANC_OPT" Operator="==" Operand2="11994" OperandType="Double">
+							<ToSet Key="ACT_UPDP" Value="BLINS"></ToSet>
+							<ToSet Key="ACT_RETP" Value="RFD"></ToSet>
+						</SubCondition>
+						<!-- Cancellation Option Flat -->
+						<SubCondition Operand1="$CANC_OPT" Operator="==" Operand2="11995" OperandType="Double">
+							<ToSet Key="ACT_UPDP" Value="BILNS"></ToSet>
+							<ToSet Key="ACT_RETP" Value="RFD"></ToSet>
+						</SubCondition>
+					</SubConditions>
+				</Condition>
+			</Conditions>
+		</Rule>
+	</Group>
+	<!-- Cancellation after Renewal NO Payment Recieved-->
+	<Group Code="REN-NPT" CodeID="18">
+		<Rule Action="Master" StartDate="1950-01-01" EndDate="3000-12-30">
+			<!-- Cancellation Type -->
+			<Conditions>
+				<!-- Non Pay DB -->
+				<Condition Operand1="$CANC_TYPE" Operator="==" Operand2="11969" OperandType="Double">
+					<SubConditions>
+						<!-- Cancellation Option Flat -->
+						<SubCondition Operand1="$CANC_OPT" Operator="==" Operand2="11995" OperandType="Double">
+							<ToSet Key="ACT_UPDP" Value="WOFF"></ToSet>
+							<ToSet Key="ACT_RETP" Value="NA"></ToSet>
+						</SubCondition>
+					</SubConditions>
+				</Condition>
+				<!-- NSF/ Replace -->
+				<Condition Operand1="$CANC_TYPE" Operator="==" Operand2="11992" OperandType="Double">
+					<SubConditions>
+						<!-- Cancellation Option Pro-Rata -->
+						<SubCondition Operand1="$CANC_OPT" Operator="==" Operand2="11994" OperandType="Double">
+							<ToSet Key="ACT_UPDP" Value="WOFF"></ToSet>
+							<ToSet Key="ACT_RETP" Value="NA"></ToSet>
+						</SubCondition>
+					</SubConditions>
+				</Condition>
+				<!-- NSF/ No replacement -->
+				<Condition Operand1="$CANC_TYPE" Operator="==" Operand2="11993" OperandType="Double">
+					<SubConditions>
+						<!-- Cancellation Option Pro-Rata -->
+						<SubCondition Operand1="$CANC_OPT" Operator="==" Operand2="11994" OperandType="Double">
+							<ToSet Key="ACT_UPDP" Value="WOFF"></ToSet>
+							<ToSet Key="ACT_RETP" Value="NA"></ToSet>
+						</SubCondition>
+					</SubConditions>
+				</Condition>
+				<!-- Company Request -->
+				<Condition Operand1="$CANC_TYPE" Operator="==" Operand2="11990" OperandType="Double">
+					<SubConditions>
+						<!-- Cancellation Option Pro-Rata -->
+						<SubCondition Operand1="$CANC_OPT" Operator="==" Operand2="11994" OperandType="Double">
+							<ToSet Key="ACT_UPDP" Value="BLINS"></ToSet>
+							<ToSet Key="ACT_RETP" Value="NA"></ToSet>
+						</SubCondition>
+					</SubConditions>
+				</Condition>				
+				<!-- Non Renewal -->
+				<Condition Operand1="$CANC_TYPE" Operator="==" Operand2="11991" OperandType="Double">
+					<SubConditions>
+						<!-- Cancellation Option Pro-Rata -->
+						<SubCondition Operand1="$CANC_OPT" Operator="==" Operand2="11994" OperandType="Double">
+							<ToSet Key="ACT_UPDP" Value="BLINS"></ToSet>
+							<ToSet Key="ACT_RETP" Value="NA"></ToSet>
+						</SubCondition>
+					</SubConditions>
+				</Condition>
+				<!-- Insured Request -->
+				<Condition Operand1="$CANC_TYPE" Operator="==" Operand2="11989" OperandType="Double">
+					<SubConditions>
+						<!-- Cancellation Option Pro-Rata -->
+						<SubCondition Operand1="$CANC_OPT" Operator="==" Operand2="11994" OperandType="Double">
+							<ToSet Key="ACT_UPDP" Value="BLINS"></ToSet>
+							<ToSet Key="ACT_RETP" Value="NA"></ToSet>
+						</SubCondition>
+						<!-- Cancellation Option Flat -->
+						<SubCondition Operand1="$CANC_OPT" Operator="==" Operand2="11995" OperandType="Double">
+							<ToSet Key="ACT_UPDP" Value="BILNS"></ToSet>
+							<ToSet Key="ACT_RETP" Value="NA"></ToSet>
+						</SubCondition>
+					</SubConditions>
+				</Condition>
+				<!-- Agent Request -->
+				<Condition Operand1="$CANC_TYPE" Operator="==" Operand2="11987" OperandType="Double">
+					<SubConditions>
+						<!-- Cancellation Option Pro-Rata -->
+						<SubCondition Operand1="$CANC_OPT" Operator="==" Operand2="11994" OperandType="Double">
+							<ToSet Key="ACT_UPDP" Value="BLINS"></ToSet>
+							<ToSet Key="ACT_RETP" Value="NA"></ToSet>
+						</SubCondition>
+						<!-- Cancellation Option Flat -->
+						<SubCondition Operand1="$CANC_OPT" Operator="==" Operand2="11995" OperandType="Double">
+							<ToSet Key="ACT_UPDP" Value="BILNS"></ToSet>
+							<ToSet Key="ACT_RETP" Value="NA"></ToSet>
+						</SubCondition>
+					</SubConditions>
+				</Condition>
+				<!-- Cancel & Rewrite -->
+				<Condition Operand1="$CANC_TYPE" Operator="==" Operand2="11988" OperandType="Double">
+					<SubConditions>
+						<!-- Cancellation Option Pro-Rata -->
+						<SubCondition Operand1="$CANC_OPT" Operator="==" Operand2="11994" OperandType="Double">
+							<ToSet Key="ACT_UPDP" Value="BILNS"></ToSet>
+							<ToSet Key="ACT_RETP" Value="NA"></ToSet>
+						</SubCondition>
+						<!-- Cancellation Option Flat -->
+						<SubCondition Operand1="$CANC_OPT" Operator="==" Operand2="11995" OperandType="Double">
+							<ToSet Key="ACT_UPDP" Value="BILNS"></ToSet>
+							<ToSet Key="ACT_RETP" Value="NA"></ToSet>
+						</SubCondition>
+					</SubConditions>
+				</Condition>
+				<!-- Cancel & Reinstate -->
+				<Condition Operand1="$CANC_TYPE" Operator="==" Operand2="11971" OperandType="Double">
+					<SubConditions>
+						<!-- Cancellation Option Pro-Rata -->
+						<SubCondition Operand1="$CANC_OPT" Operator="==" Operand2="11994" OperandType="Double">
+							<ToSet Key="ACT_UPDP" Value="CFG"></ToSet>
+							<ToSet Key="ACT_RETP" Value="NA"></ToSet>
+						</SubCondition>
+						<!-- Cancellation Option Flat -->
+						<SubCondition Operand1="$CANC_OPT" Operator="==" Operand2="11995" OperandType="Double">
+							<ToSet Key="ACT_UPDP" Value="CFG"></ToSet>
+							<ToSet Key="ACT_RETP" Value="NA"></ToSet>
+						</SubCondition>
+					</SubConditions>
+				</Condition>
+				<!-- Rescind -->
+				<Condition Operand1="$CANC_TYPE" Operator="==" Operand2="11970" OperandType="Double">
+					<SubConditions>
+						<!-- Cancellation Option Pro-Rata -->
+						<SubCondition Operand1="$CANC_OPT" Operator="==" Operand2="11994" OperandType="Double">
+							<ToSet Key="ACT_UPDP" Value="BLINS"></ToSet>
+							<ToSet Key="ACT_RETP" Value="NA"></ToSet>
+						</SubCondition>
+						<!-- Cancellation Option Flat -->
+						<SubCondition Operand1="$CANC_OPT" Operator="==" Operand2="11995" OperandType="Double">
+							<ToSet Key="ACT_UPDP" Value="BILNS"></ToSet>
+							<ToSet Key="ACT_RETP" Value="NA"></ToSet>
+						</SubCondition>
+					</SubConditions>
+				</Condition>
+			</Conditions>
+		</Rule>
+	</Group>
+	<!-- Cancellation after Renewal  Payment Recieved-->
+	<Group Code="REN-PTRCD" CodeID="18">
+		<Rule Action="Master" StartDate="1950-01-01" EndDate="3000-12-30">
+			<!-- Cancellation Type -->
+			<Conditions>
+				<!-- Non Pay DB -->
+				<Condition Operand1="$CANC_TYPE" Operator="==" Operand2="11969" OperandType="Double">
+					<SubConditions>
+						<!-- Cancellation Option Equity -->
+						<SubCondition Operand1="$CANC_OPT" Operator="==" Operand2="11996" OperandType="Double">
+							<ToSet Key="ACT_UPDP" Value="WOFF"></ToSet>
+							<ToSet Key="ACT_RETP" Value="NA"></ToSet>
+						</SubCondition>
+					</SubConditions>
+				</Condition>
+				<!-- NSF/ Replace -->
+				<Condition Operand1="$CANC_TYPE" Operator="==" Operand2="11992" OperandType="Double">
+					<SubConditions>
+						<!-- Cancellation Option Pro-Rata -->
+						<SubCondition Operand1="$CANC_OPT" Operator="==" Operand2="11994" OperandType="Double">
+							<ToSet Key="ACT_UPDP" Value="WOFF"></ToSet>
+							<ToSet Key="ACT_RETP" Value="RFD"></ToSet>
+						</SubCondition>
+					</SubConditions>
+				</Condition>
+				<!-- NSF/ No replacement -->
+				<Condition Operand1="$CANC_TYPE" Operator="==" Operand2="11993" OperandType="Double">
+					<SubConditions>
+						<!-- Cancellation Option Pro-Rata -->
+						<SubCondition Operand1="$CANC_OPT" Operator="==" Operand2="11994" OperandType="Double">
+							<ToSet Key="ACT_UPDP" Value="WOFF"></ToSet>
+							<ToSet Key="ACT_RETP" Value="RFD"></ToSet>
+						</SubCondition>
+					</SubConditions>
+				</Condition>
+				<!-- Company Request -->
+				<Condition Operand1="$CANC_TYPE" Operator="==" Operand2="11990" OperandType="Double">
+					<SubConditions>
+						<!-- Cancellation Option Pro-Rata -->
+						<SubCondition Operand1="$CANC_OPT" Operator="==" Operand2="11994" OperandType="Double">
+							<ToSet Key="ACT_UPDP" Value="BLINS"></ToSet>
+							<ToSet Key="ACT_RETP" Value="RFD"></ToSet>
+						</SubCondition>
+					</SubConditions>
+				</Condition>
+				<!-- Insured Request -->
+				<Condition Operand1="$CANC_TYPE" Operator="==" Operand2="11989" OperandType="Double">
+					<SubConditions>
+						<!-- Cancellation Option Pro-Rata -->
+						<SubCondition Operand1="$CANC_OPT" Operator="==" Operand2="11994" OperandType="Double">
+							<ToSet Key="ACT_UPDP" Value="BLINS"></ToSet>
+							<ToSet Key="ACT_RETP" Value="RFD"></ToSet>
+						</SubCondition>
+						<!-- Cancellation Option Flat -->
+						<SubCondition Operand1="$CANC_OPT" Operator="==" Operand2="11995" OperandType="Double">
+							<ToSet Key="ACT_UPDP" Value="BILNS"></ToSet>
+							<ToSet Key="ACT_RETP" Value="RFD"></ToSet>
+						</SubCondition>
+					</SubConditions>
+				</Condition>
+				<!-- Agent Request -->
+				<Condition Operand1="$CANC_TYPE" Operator="==" Operand2="11987" OperandType="Double">
+					<SubConditions>
+						<!-- Cancellation Option Pro-Rata -->
+						<SubCondition Operand1="$CANC_OPT" Operator="==" Operand2="11994" OperandType="Double">
+							<ToSet Key="ACT_UPDP" Value="BLINS"></ToSet>
+							<ToSet Key="ACT_RETP" Value="RFD"></ToSet>
+						</SubCondition>
+						<!-- Cancellation Option Flat -->
+						<SubCondition Operand1="$CANC_OPT" Operator="==" Operand2="11995" OperandType="Double">
+							<ToSet Key="ACT_UPDP" Value="BILNS"></ToSet>
+							<ToSet Key="ACT_RETP" Value="RFD"></ToSet>
+						</SubCondition>
+					</SubConditions>
+				</Condition>
+				<!-- Cancel & Rewrite -->
+				<Condition Operand1="$CANC_TYPE" Operator="==" Operand2="11988" OperandType="Double">
+					<SubConditions>
+						<!-- Cancellation Option Pro-Rata -->
+						<SubCondition Operand1="$CANC_OPT" Operator="==" Operand2="11994" OperandType="Double">
+							<ToSet Key="ACT_UPDP" Value="BILNS"></ToSet>
+							<ToSet Key="ACT_RETP" Value="CFG"></ToSet>
+						</SubCondition>
+						<!-- Cancellation Option Flat -->
+						<SubCondition Operand1="$CANC_OPT" Operator="==" Operand2="11995" OperandType="Double">
+							<ToSet Key="ACT_UPDP" Value="BILNS"></ToSet>
+							<ToSet Key="ACT_RETP" Value="CFG"></ToSet>
+						</SubCondition>
+					</SubConditions>
+				</Condition>
+				<!-- Cancel & Reinstate -->
+				<Condition Operand1="$CANC_TYPE" Operator="==" Operand2="11971" OperandType="Double">
+					<SubConditions>
+						<!-- Cancellation Option Pro-Rata -->
+						<SubCondition Operand1="$CANC_OPT" Operator="==" Operand2="11994" OperandType="Double">
+							<ToSet Key="ACT_UPDP" Value="CFG"></ToSet>
+							<ToSet Key="ACT_RETP" Value="CFG"></ToSet>
+						</SubCondition>
+						<!-- Cancellation Option Flat -->
+						<SubCondition Operand1="$CANC_OPT" Operator="==" Operand2="11995" OperandType="Double">
+							<ToSet Key="ACT_UPDP" Value="CFG"></ToSet>
+							<ToSet Key="ACT_RETP" Value="CFG"></ToSet>
+						</SubCondition>
+					</SubConditions>
+				</Condition>
+				<!-- Rescind -->
+				<Condition Operand1="$CANC_TYPE" Operator="==" Operand2="11970" OperandType="Double">
+					<SubConditions>
+						<!-- Cancellation Option Pro-Rata -->
+						<SubCondition Operand1="$CANC_OPT" Operator="==" Operand2="11994" OperandType="Double">
+							<ToSet Key="ACT_UPDP" Value="BLINS"></ToSet>
+							<ToSet Key="ACT_RETP" Value="NA"></ToSet>
+						</SubCondition>
+						<!-- Cancellation Option Flat -->
+						<SubCondition Operand1="$CANC_OPT" Operator="==" Operand2="11995" OperandType="Double">
+							<ToSet Key="ACT_UPDP" Value="BILNS"></ToSet>
+							<ToSet Key="ACT_RETP" Value="NA"></ToSet>
+						</SubCondition>
+					</SubConditions>
+				</Condition>
+			</Conditions>
+		</Rule>
+	</Group>
+	<!-- Cancellation after New Business NO Payment Recieved-->
+	<Group Code="AB" CodeID="" >
+		<Rule Action="Master" StartDate="1950-01-01" EndDate="3000-12-30">
+			<!-- Cancellation Type -->
+			<Conditions>
+				<!-- Non Pay AB -->
+				<Condition Operand1="$CANC_TYPE" Operator="==" Operand2="11969" OperandType="Double">
+					<SubConditions>
+						<!-- Cancellation Option ProRata -->
+						<SubCondition Operand1="$CANC_OPT" Operator="==" Operand2="11994" OperandType="Double">
+							<ToSet Key="ACT_UPDP" Value="CHAG"></ToSet>
+							<ToSet Key="ACT_RETP" Value="NA"></ToSet>
+						</SubCondition>
+					</SubConditions>
+				</Condition>
+				<!-- Company Request -->
+				<Condition Operand1="$CANC_TYPE" Operator="==" Operand2="11990" OperandType="Double">
+					<SubConditions>
+						<!-- Cancellation Option Pro-Rata -->
+						<SubCondition Operand1="$CANC_OPT" Operator="==" Operand2="11994" OperandType="Double">
+							<ToSet Key="ACT_UPDP" Value="CHAG"></ToSet>
+							<ToSet Key="ACT_RETP" Value="NA"></ToSet>
+						</SubCondition>
+					</SubConditions>
+				</Condition>				
+				<!-- Insured Request -->
+				<Condition Operand1="$CANC_TYPE" Operator="==" Operand2="11989" OperandType="Double">
+					<SubConditions>
+						<!-- Cancellation Option Pro-Rata -->
+						<SubCondition Operand1="$CANC_OPT" Operator="==" Operand2="11994" OperandType="Double">
+							<ToSet Key="ACT_UPDP" Value="BLINS"></ToSet>
+							<ToSet Key="ACT_RETP" Value="NA"></ToSet>
+						</SubCondition>
+						<!-- Cancellation Option Flat -->
+						<SubCondition Operand1="$CANC_OPT" Operator="==" Operand2="11995" OperandType="Double">
+							<ToSet Key="ACT_UPDP" Value="BILNS"></ToSet>
+							<ToSet Key="ACT_RETP" Value="NA"></ToSet>
+						</SubCondition>
+					</SubConditions>
+				</Condition>
+				<!-- Agent Request -->
+				<Condition Operand1="$CANC_TYPE" Operator="==" Operand2="11987" OperandType="Double">
+					<SubConditions>
+						<!-- Cancellation Option Pro-Rata -->
+						<SubCondition Operand1="$CANC_OPT" Operator="==" Operand2="11994" OperandType="Double">
+							<ToSet Key="ACT_UPDP" Value="BLINS"></ToSet>
+							<ToSet Key="ACT_RETP" Value="NA"></ToSet>
+						</SubCondition>
+						<!-- Cancellation Option Flat -->
+						<SubCondition Operand1="$CANC_OPT" Operator="==" Operand2="11995" OperandType="Double">
+							<ToSet Key="ACT_UPDP" Value="BILNS"></ToSet>
+							<ToSet Key="ACT_RETP" Value="NA"></ToSet>
+						</SubCondition>
+					</SubConditions>
+				</Condition>
+				<!-- Cancel & Rewrite -->
+				<Condition Operand1="$CANC_TYPE" Operator="==" Operand2="11988" OperandType="Double">
+					<SubConditions>
+						<!-- Cancellation Option Pro-Rata -->
+						<SubCondition Operand1="$CANC_OPT" Operator="==" Operand2="11994" OperandType="Double">
+							<ToSet Key="ACT_UPDP" Value="BILNS"></ToSet>
+							<ToSet Key="ACT_RETP" Value="NA"></ToSet>
+						</SubCondition>
+						<!-- Cancellation Option Flat -->
+						<SubCondition Operand1="$CANC_OPT" Operator="==" Operand2="11995" OperandType="Double">
+							<ToSet Key="ACT_UPDP" Value="BILNS"></ToSet>
+							<ToSet Key="ACT_RETP" Value="NA"></ToSet>
+						</SubCondition>
+					</SubConditions>
+				</Condition>
+				<!-- Cancel & Reinstate -->
+				<Condition Operand1="$CANC_TYPE" Operator="==" Operand2="11971" OperandType="Double">
+					<SubConditions>
+						<!-- Cancellation Option Pro-Rata -->
+						<SubCondition Operand1="$CANC_OPT" Operator="==" Operand2="11994" OperandType="Double">
+							<ToSet Key="ACT_UPDP" Value="CFG"></ToSet>
+							<ToSet Key="ACT_RETP" Value="NA"></ToSet>
+						</SubCondition>
+						<!-- Cancellation Option Flat -->
+						<SubCondition Operand1="$CANC_OPT" Operator="==" Operand2="11995" OperandType="Double">
+							<ToSet Key="ACT_UPDP" Value="CFG"></ToSet>
+							<ToSet Key="ACT_RETP" Value="NA"></ToSet>
+						</SubCondition>
+					</SubConditions>
+				</Condition>
+				<!-- Rescind -->
+				<Condition Operand1="$CANC_TYPE" Operator="==" Operand2="11970" OperandType="Double">
+					<SubConditions>
+						<!-- Cancellation Option Pro-Rata -->
+						<SubCondition Operand1="$CANC_OPT" Operator="==" Operand2="11994" OperandType="Double">
+							<ToSet Key="ACT_UPDP" Value="BLINS"></ToSet>
+							<ToSet Key="ACT_RETP" Value="NA"></ToSet>
+						</SubCondition>
+						<!-- Cancellation Option Flat -->
+						<SubCondition Operand1="$CANC_OPT" Operator="==" Operand2="11995" OperandType="Double">
+							<ToSet Key="ACT_UPDP" Value="BILNS"></ToSet>
+							<ToSet Key="ACT_RETP" Value="NA"></ToSet>
+						</SubCondition>
+					</SubConditions>
+				</Condition>
+			</Conditions>
+		</Rule>
+	</Group>
+</Root>

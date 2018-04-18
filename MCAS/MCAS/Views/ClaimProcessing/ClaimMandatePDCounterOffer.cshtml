@@ -1,0 +1,837 @@
+﻿@model MCAS.Web.Objects.ClaimObjectHelper.ClaimMandateModel
+@{
+    ViewBag.Title = "ClaimMandatePDCounterOffer";
+    Layout = null;
+    var co = TempData["Groupuser"].ToString();
+}
+
+<div>
+    <fieldset>
+        <legend>TPBI Mandate Approval</legend>
+        <div class="panel-body">
+            <div class="row">
+                <fieldset>
+                    <legend>Mandate Details</legend>
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="form-group">
+                                    <label class="col-sm-3 control-label" for="inputAssignTo">
+                                        Assign To
+                                    </label>
+                                    <div class="col-sm-9">
+                                        <div class="col-sm-3">
+                                        <div class="form-group">
+                                            <select class="col-lg-12 form-control" id="AssignTo" name="AssignTo">
+                                                <option value="">[Select...]</option>
+                                                <option value="1">Abhinav Gupta</option>
+                                                <option value="2">Nishant Gupta</option>
+                                                <option value="3">Sanjay Gaur</option>
+                                                <option value="4">Gaurav Sharma</option>
+                                            </select>
+                                          </div>
+                                        </div>
+                                        <label class="col-sm-2 control-label" for="inputClaimType">
+                                            Type of Claim
+                                        </label>
+                                        <div class="col-sm-3">
+                                        <div class="form-group">
+                                            <select class="col-lg-12 form-control" id="ClaimType" name="ClaimType">
+                                                <option value="">[Select...]</option>
+                                                <option value="PD">OD Claim</option>
+                                                <option value="BI">TPPD Claim</option>
+                                                <option value="OD">TPBI Claim</option>
+                                            </select>
+                                            </div>
+                                        </div>
+                                        <label class="col-sm-2 control-label" for="inputInvestigationResult">
+                                            Investigation Result
+                                        </label>
+                                        <div class="col-sm-2">
+                                        <div class="form-group">
+                                            <select class="col-lg-12 form-control" id="InvestigationResult" name="InvestigationResult">
+                                                <option value="">[Select...]</option>
+                                                <option value="1">Fully At Fault</option>
+                                                <option value="2">Not At Fault</option>
+                                                <option value="3">Partial At Fault</option>
+                                            </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="form-group">
+                                    <label class="col-sm-3 control-label" for="inputAssignTo">
+                                        Scenario
+                                    </label>
+                                    <div class="col-sm-9">
+                                        <input class="form-control" data-val="true" id="inputReportedDate" name="ReportedDate"
+                                            type="text" value="" size="10" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="form-group">
+                                    <label class="col-sm-3 control-label" for="inputAssignTo">
+                                        Evidence
+                                    </label>
+                                    <div class="col-sm-9">
+                                        <input type="checkbox" name="UC001" value="CCTV" id="CCTV" style="text-align: center;" />&nbsp;
+                                        CCTV&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" name="UC001" value="WIT"
+                                            id="WIT" style="text-align: center;" />&nbsp; Witness Statement&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input
+                                                type="checkbox" name="UC001" value="SPIC" id="SPIC" style="text-align: center;" />&nbsp;
+                                        Scene Pics
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="form-group">
+                                    <label class="col-sm-3 control-label" for="inputRelatedFacts">
+                                        Related Facts
+                                    </label>
+                                    <div class="col-sm-9">
+                                        <textarea class="form-control" cols="20" id="inputRelatedFacts" maxlength="250" name="inputRelatedFacts"
+                                            rows="2"></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="form-group">
+                                    <label class="col-sm-3 control-label" for="inputCOAssessment">
+                                        CO's Assessment
+                                    </label>
+                                    <div class="col-sm-9">
+                                        <textarea class="form-control" cols="20" id="inputCOAssessment" maxlength="250" name="inputCOAssessment"
+                                            rows="4"></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </fieldset>
+                <fieldset>
+                    <legend>Supervisor Approval</legend>
+                    <div id="CO" class="panel-body">
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="form-group">
+                                    <label class="col-sm-3 control-label" for="inputSVAssignTo">
+                                        Assigned To
+                                    </label>
+                                    <div class="col-sm-9">
+                                        <select class="col-lg-6 form-control" id="inputSVAssignTo" name="inputSVAssignTo">
+                                            <option value="">[Select...]</option>
+                                            <option value="1">Abhinav Gupta</option>
+                                            <option value="2">Nishant Gupta</option>
+                                            <option value="3">Sanjay Gaur</option>
+                                            <option value="4">Gaurav Sharma</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="form-group">
+                                    <label class="col-sm-3 control-label" for="inputAppRecommendations">
+                                        Approve Recommendations?
+                                    </label>
+                                    <div class="col-sm-9">
+                                        <div class="RadioButton">
+                                            <input id="inputAppRecommendations_Y" name="inputAppRecommendations" type="radio"
+                                                value="Y" />&nbsp;&nbsp;<label for="inputAppRecommendations_Y">Yes</label>&nbsp;</div>
+                                        <div class="RadioButton">
+                                            <input id="inputAppRecommendations_N" name="inputAppRecommendations" type="radio"
+                                                value="N" />&nbsp;&nbsp;<label for="inputAppRecommendations_N">No</label>&nbsp;</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="form-group">
+                                    <label class="col-sm-3 control-label" for="inputSVRemarks">
+                                        Supervisor's Remarks
+                                    </label>
+                                    <div class="col-sm-9">
+                                        <textarea class="form-control" cols="20" id="inputSVRemarks" maxlength="250" name="inputSVRemarks"
+                                            rows="4"></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </fieldset>
+
+                <fieldset>
+                    <legend>TPBI Claim Breakdown</legend>
+                    <div id="Togglediv" class="panel-body">
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="form-group" style="margin-bottom:-10px">
+                                    <div class="col-sm-3">
+                                    </div>
+                                    <label class="col-sm-3 text-center" for="input3rdParty">
+                                        3rd Party's</label>
+                                                                    
+                                    <label class="col-sm-3 text-center" for="inputCORecommendations">
+                                        CO's Recommendations</label>
+                                    <label id="super" class="col-sm-3 text-center" for="inputCORecommendations">
+                                        Supervisor's Mandate</label>
+
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="form-group" style="margin-bottom:-15px">
+                                    <div class="col-sm-3">
+                                    </div>
+                                    <label class="col-sm-3 text-center" for="inputOwnVehicleRepair">
+                                        Claim Quantum</label>
+                                    <label class="col-sm-3 text-center" for="inputOwnVehicleRepair">
+                                        Maximum Offer</label>
+                                    <label id="Maxoffer" class="col-sm-3 text-center" for="inputOwnVehicleRepair">
+                                        Maximum Offer</label>
+                                </div>
+                            </div>
+                        </div>
+                        <fieldset>
+                            <legend id="l1">
+                                <img alt="" id="l1img" src='@Url.Content("~/Images/icon_minus.png")' />General Damages</legend>
+                            <div class="row" id="l1div">
+                                <div class="col-lg-12">
+                                    <div class="form-group">
+                                        <label class="col-sm-3 control-label" for="inputCostofRepairs">
+                                            General Damages
+                                        </label>
+                                        <div class="col-sm-3">
+                                            <input format="" numlen="11" class="form-control" data-val="true" id="inputCoRClaimQuant" name="inputCoRClaimQuant"
+                                                type="text" value="" size="10" />
+                                        </div>
+                                        <div class="col-sm-3">
+                                            <input format="" numlen="11" class="form-control" data-val="true" id="inputCoRPreOffer" name="inputCoRPreOffer"
+                                                type="text" value="" size="10" />
+                                        </div>
+                                        <div class="col-sm-3">
+                                            <input format="" numlen="11" class="form-control" data-val="true" id="inputCoRCounterOffer" name="inputCoRCounterOffer"
+                                                type="text" value="" size="10" />
+                                        </div>
+                                        
+                                    </div>
+                                </div>
+                            </div>
+                        </fieldset>
+                        
+                        <fieldset>
+                            <legend id="l2">
+                                <img alt="" id="l2img" src='@Url.Content("~/Images/icon_minus.png")' />Medical
+                                Expenses</legend>
+                            <div class="row" id="l2div">
+                                <div>
+                                    <div class="col-lg-12">
+                                        <div class="form-group">
+                                            <label class="col-sm-3 control-label" for="inputLossofUse">
+                                                Medical Expenses 
+                                            </label>
+                                            <div class="col-sm-3">
+                                                <input format="" numlen="11" class="form-control" data-val="true" id="inputLoUClaimQuant" name="inputLoUClaimQuant"
+                                                    type="text" value="" size="10" />
+                                            </div>
+                                            <div class="col-sm-3">
+                                                <input format="" numlen="11" class="form-control" data-val="true" id="inputLoUPreOffer" name="inputLoUPreOffer"
+                                                    type="text" value="" size="10" />
+                                            </div>
+                                            <div class="col-sm-3">
+                                                <input format="" numlen="11" class="form-control" data-val="true" id="inputLoUCounterOffer" name="inputLoUCounterOffer"
+                                                    type="text" value="" size="10" />
+                                            </div>
+                                            
+                                            
+                                        </div>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="col-lg-12">
+                                        <div class="form-group">
+                                            <label class="col-sm-3 control-label" for="inputLossofEarning">
+                                                Future Medical Expenses
+                                            </label>
+                                            <div class="col-sm-3">
+                                                <input format="" numlen="11" class="form-control" data-val="true" id="inputLoEClaimQuant" name="inputLoEClaimQuant"
+                                                    type="text" value="" size="10" />
+                                            </div>
+                                             <div class="col-sm-3">
+                                                <input format="" numlen="11" class="form-control" data-val="true" id="inputLoEPreOffer" name="inputLoEPreOffer"
+                                                    type="text" value="" size="10" />
+                                            </div>
+                                             <div class="col-sm-3">
+                                                <input format="" numlen="11" class="form-control" data-val="true" id="inputLoECounterOffer" name="inputLoECounterOffer"
+                                                    type="text" value="" size="10" />
+                                            </div>
+                                            
+                                            
+                                        </div>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="col-lg-12">
+                                        <div class="form-group">
+                                            <label class="col-sm-3 control-label" for="inputLossofRental">
+                                                LOG Medical Expenses
+                                            </label>
+                                            <div class="col-sm-3">
+                                                <input format="" numlen="11" class="form-control" data-val="true" id="inputLoRClaimQuant" name="inputLoRClaimQuant"
+                                                    type="text" value="" size="10" />
+                                            </div>
+                                             <div class="col-sm-3">
+                                                <input format="" numlen="11" class="form-control" data-val="true" id="inputLoRPreOffer" name="inputLoRPreOffer"
+                                                    type="text" value="" size="10" />
+                                            </div>
+                                             <div class="col-sm-3">
+                                                <input format="" numlen="11" class="form-control" data-val="true" id="inputLoRCounterOffer" name="inputLoRCounterOffer"
+                                                    type="text" value="" size="10" />
+                                            </div>
+                                            
+                                            
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                            </div>
+                        </fieldset>
+
+                        <fieldset>
+                            <legend id="l2">
+                                <img alt="" id="l2img" src='@Url.Content("~/Images/icon_minus.png")' />Loss of 
+                                Earnings</legend>
+                            <div class="row" id="l2div">
+                                <div>
+                                    <div class="col-lg-12">
+                                        <div class="form-group">
+                                            <label class="col-sm-3 control-label" for="inputLossofUse">
+                                                Loss of Earning Capacity 
+                                            </label>
+                                            <div class="col-sm-3">
+                                                <input format="" numlen="11" class="form-control" data-val="true" id="inputLoUClaimQuant" name="inputLoUClaimQuant"
+                                                    type="text" value="" size="10" />
+                                            </div>
+                                            <div class="col-sm-3">
+                                                <input format="" numlen="11" class="form-control" data-val="true" id="inputLoUPreOffer" name="inputLoUPreOffer"
+                                                    type="text" value="" size="10" />
+                                            </div>
+                                            <div class="col-sm-3">
+                                                <input format="" numlen="10" class="form-control" data-val="true" id="inputLoUCounterOffer" name="inputLoUCounterOffer"
+                                                    type="text" value="" size="10" />
+                                            </div>
+                                            
+                                            
+                                        </div>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="col-lg-12">
+                                        <div class="form-group">
+                                            <label class="col-sm-3 control-label" for="inputLossofEarning">
+                                                Loss of Earnings
+                                            </label>
+                                            <div class="col-sm-3">
+                                                <input format="" numlen="10" class="form-control" data-val="true" id="inputLoEClaimQuant" name="inputLoEClaimQuant"
+                                                    type="text" value="" size="10" />
+                                            </div>
+                                             <div class="col-sm-3">
+                                                <input format="" numlen="10" class="form-control" data-val="true" id="inputLoEPreOffer" name="inputLoEPreOffer"
+                                                    type="text" value="" size="10" />
+                                            </div>
+                                             <div class="col-sm-3">
+                                                <input format="" numlen="10" class="form-control" data-val="true" id="inputLoECounterOffer" name="inputLoECounterOffer"
+                                                    type="text" value="" size="10" />
+                                            </div>
+                                            
+                                            
+                                        </div>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="col-lg-12">
+                                        <div class="form-group">
+                                            <label class="col-sm-3 control-label" for="inputLossofRental">
+                                                Loss of Future Earnings
+                                            </label>
+                                            <div class="col-sm-3">
+                                                <input format="" numlen="10" class="form-control" data-val="true" id="inputLoRClaimQuant" name="inputLoRClaimQuant"
+                                                    type="text" value="" size="10" />
+                                            </div>
+                                             <div class="col-sm-3">
+                                                <input format="" numlen="10" class="form-control" data-val="true" id="inputLoRPreOffer" name="inputLoRPreOffer"
+                                                    type="text" value="" size="10" />
+                                            </div>
+                                             <div class="col-sm-3">
+                                                <input format="" numlen="10" class="form-control" data-val="true" id="inputLoRCounterOffer" name="inputLoRCounterOffer"
+                                                    type="text" value="" size="10" />
+                                            </div>
+                                            
+                                            
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                            </div>
+                        </fieldset>
+
+                        <fieldset>
+                            <legend id="l1">
+                                <img alt="" id="l1img" src='@Url.Content("~/Images/icon_minus.png")' />Transport</legend>
+                            <div class="row" id="l1div">
+                                <div class="col-lg-12">
+                                    <div class="form-group">
+                                        <label class="col-sm-3 control-label" for="inputCostofRepairs">
+                                            Transport 
+                                        </label>
+                                        <div class="col-sm-3">
+                                            <input format="" numlen="10" class="form-control" data-val="true" id="inputCoRClaimQuant" name="inputCoRClaimQuant"
+                                                type="text" value="" size="10" />
+                                        </div>
+                                        <div class="col-sm-3">
+                                            <input format="" numlen="10" class="form-control" data-val="true" id="inputCoRPreOffer" name="inputCoRPreOffer"
+                                                type="text" value="" size="10" />
+                                        </div>
+                                        <div class="col-sm-3">
+                                            <input format="" numlen="10" class="form-control" data-val="true" id="inputCoRCounterOffer" name="inputCoRCounterOffer"
+                                                type="text" value="" size="10" />
+                                        </div>
+                                        
+                                    </div>
+                                </div>
+                            </div>
+                        </fieldset>
+
+                        <fieldset>
+                            <legend id="l3">
+                                <img alt="" id="l3img" src='@Url.Content("~/Images/icon_minus.png")' />Liability</legend>
+                            <div class="row" id="l3div">
+                                <div>
+                                    <div class="col-lg-12">
+                                        <div class="form-group">
+                                            <label class="col-sm-3 control-label" for="inputLiability">
+                                                Liability (%)
+                                            </label>
+                                            <div class="col-sm-3">
+                                            </div>
+                                            <div class="col-sm-3">
+                                                <input format="" numlen="10" class="form-control" data-val="true" id="inputLibPreOffer" name="inputLibPreOffer"
+                                                    type="text" value="" size="10" />
+                                            </div>
+                                            <div class="col-sm-3">
+                                                <input format="" numlen="10" class="form-control" data-val="true" id="inputLibCounterOffer" name="inputLibCounterOffer"
+                                                    type="text" value="" size="10" />
+                                            </div>
+                                            
+                                        </div>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="col-lg-12">
+                                        <div class="form-group">
+                                            <label class="col-sm-3 control-label" for="inputSubTotal">
+                                                Sub-Total
+                                            </label>
+                                            <div class="col-sm-3">
+                                            </div>
+                                            <div class="col-sm-3">
+                                                <input format="" numlen="10" class="form-control" data-val="true" id="inputSubPreOffer" name="inputSubPreOffer"
+                                                    type="text" value="" size="10" />
+                                            </div>
+                                            <div class="col-sm-3">
+                                                <input format="" numlen="10" class="form-control" data-val="true" id="inputSubCounterOffer" name="inputSubCounterOffer"
+                                                    type="text" value="" size="10" />
+                                            </div>
+                                            
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </fieldset>
+
+
+                        <fieldset>
+                            <legend id="l4">
+                                <img alt="" id="l4img" src='@Url.Content("~/Images/icon_minus.png")' />Other Expenses</legend>
+                            <div class="row" id="l4div">
+                                <div class="col-lg-12">
+                                    <div class="form-group">
+                                        <label class="col-sm-3 control-label" for="inputOtherExpenses">
+                                            Other Expenses
+                                        </label>
+                                        <div class="col-sm-3">
+                                            <input format="" numlen="10" class="form-control" data-val="true" id="inputOTExClaimQuant" name="inputOTExClaimQuant"
+                                                type="text" value="" size="10" />
+                                        </div>
+                                        <div class="col-sm-3">
+                                            <input format="" numlen="10" class="form-control" data-val="true" id="inputOTExPreOffer" name="inputOTExPreOffer"
+                                                type="text" value="" size="10" />
+                                        </div>
+                                        <div class="col-sm-3">
+                                            <input format="" numlen="10" class="form-control" data-val="true" id="inputOTExCounterOffer" name="inputOTExCounterOffer"
+                                                type="text" value="" size="10" />
+                                        </div>
+                                        
+                                    </div>
+                                </div>
+                            </div>
+                        </fieldset>
+
+
+                        <fieldset>
+                            <legend id="l5">
+                                <img alt="" id="l5img" src='@Url.Content("~/Images/icon_minus.png")' />Report Fees</legend>
+                            <div class="row" id="l5div">
+                                <div>
+                                    <div class="col-lg-12">
+                                        <div class="form-group">
+                                            <label class="col-sm-3 control-label" for="inputSurveyFee">
+                                                Medical Report
+                                            </label>
+                                            <div class="col-sm-3">
+                                                <input format="" numlen="10" class="form-control" data-val="true" id="inputSFeeClaimQuant" name="inputSFeeClaimQuant"
+                                                    type="text" value="" size="10" />
+                                            </div>
+                                             <div class="col-sm-3">
+                                                <input format="" numlen="10" class="form-control" data-val="true" id="inputSFeePreOffer" name="inputSFeePreOffer"
+                                                    type="text" value="" size="10" />
+                                            </div>
+                                             <div class="col-sm-3">
+                                                <input format="" numlen="10" class="form-control" data-val="true" id="inputSFeeCounterOffer" name="inputSFeeCounterOffer"
+                                                    type="text" value="" size="10" />
+                                            </div>
+                                            
+                                        </div>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="col-lg-12">
+                                        <div class="form-group">
+                                            <label class="col-sm-3 control-label" for="inputReSurveyFee">
+                                                Public Trustee Fee
+                                            </label>
+                                            <div class="col-sm-3">
+                                                <input format="" numlen="10" class="form-control" data-val="true" id="inputRSFeeClaimQuant" name="inputRSFeeClaimQuant"
+                                                    type="text" value="" size="10" />
+                                            </div>
+                                             <div class="col-sm-3">
+                                                <input format="" numlen="10" class="form-control" data-val="true" id="inputRSFeePreOffer" name="inputRSFeePreOffer"
+                                                    type="text" value="" size="10" />
+                                            </div>
+                                             <div class="col-sm-3">
+                                                <input format="" numlen="10" class="form-control" data-val="true" id="inputRSFeeCounterOffer" name="inputRSFeeCounterOffer"
+                                                    type="text" value="" size="10" />
+                                            </div>
+                                            
+                                        </div>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="col-lg-12">
+                                        <div class="form-group">
+                                            <label class="col-sm-3 control-label" for="inputReportFee">
+                                                LTA/GIA/Police Report Fees
+                                            </label>
+                                            <div class="col-sm-3">
+                                                <input format="" numlen="10" class="form-control" data-val="true" id="inputRptFeeClaimQuant" name="inputRptFeeClaimQuant"
+                                                    type="text" value="" size="10" />
+                                            </div>
+                                            <div class="col-sm-3">
+                                                <input format="" numlen="10" class="form-control" data-val="true" id="inputRptFeePreOffer" name="inputRptFeeClaimQuant"
+                                                    type="text" value="" size="10" />
+                                            </div>
+                                            <div class="col-sm-3">
+                                                <input format="" numlen="10"  class="form-control" data-val="true" id="inputRptFeeCounterOffer" name="inputRptFeeCounterOffer"
+                                                    type="text" value="" size="10" />
+                                            </div>
+                                            
+                                        </div>
+                                    </div>
+                                </div>  
+
+                                <div>
+                                    <div class="col-lg-12">
+                                        <div class="form-group">
+                                            <label class="col-sm-3 control-label" for="inputReportFee">
+                                                Our Professional Expert Fees
+                                            </label>
+                                            <div class="col-sm-3">
+                                                <input format="" numlen="10" class="form-control" data-val="true" id="inputRptFeeClaimQuant" name="inputRptFeeClaimQuant"
+                                                    type="text" value="" size="10" />
+                                            </div>
+                                            <div class="col-sm-3">
+                                                <input format="" numlen="10" class="form-control" data-val="true" id="inputRptFeePreOffer" name="inputRptFeeClaimQuant"
+                                                    type="text" value="" size="10" />
+                                            </div>
+                                            <div class="col-sm-3">
+                                                <input format="" numlen="10" class="form-control" data-val="true" id="inputRptFeeCounterOffer" name="inputRptFeeCounterOffer"
+                                                    type="text" value="" size="10" />
+                                            </div>
+                                            
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </fieldset>
+
+
+                        <fieldset>
+                            <legend id="l6">
+                                <img alt="" id="l6img" src='@Url.Content("~/Images/icon_minus.png")' />3rd Party
+                                Legal Fees</legend>
+                            <div class="row" id="l6div">
+                                <div>
+                                    <div class="col-lg-12">
+                                        <div class="form-group">
+                                            <label class="col-sm-3 control-label" for="inputTPLawyerCost">
+                                                3rd Party Lawyer's Cost
+                                            </label>
+                                            <div class="col-sm-3">
+                                                <input format="" numlen="10" class="form-control" data-val="true" id="inputTPLCostClaimQuant" name="inputTPLCostClaimQuant"
+                                                    type="text" value="" size="10" />
+                                            </div>
+                                            <div class="col-sm-3">
+                                                <input format="" numlen="10" class="form-control" data-val="true" id="inputTPLCostPreOffer" name="inputTPLCostPreOffer"
+                                                    type="text" value="" size="10" />
+                                            </div>
+                                            <div class="col-sm-3">
+                                                <input format="" numlen="10" class="form-control" data-val="true" id="inputTPLCostCounterOffer" name="inputTPLCostCounterOffer"
+                                                    type="text" value="" size="10" />
+                                            </div>
+                                            
+                                            
+                                        </div>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="col-lg-12">
+                                        <div class="form-group">
+                                            <label class="col-sm-3 control-label" for="inputTPLawyerDis">
+                                                3rd Party Lawyer's Disbursements
+                                            </label>
+                                            <div class="col-sm-3">
+                                                <input format="" numlen="10" class="form-control" data-val="true" id="inputTPLDClaimQuant" name="inputTPLDClaimQuant"
+                                                    type="text" value="" size="10" />
+                                            </div>
+                                            <div class="col-sm-3">
+                                                <input format="" numlen="10" class="form-control" data-val="true" id="inputTPLDPreOffer" name="inputTPLDPreOffer"
+                                                    type="text" value="" size="10" />
+                                            </div>
+                                            <div class="col-sm-3">
+                                                <input format="" numlen="10" class="form-control" data-val="true" id="inputTPLDCounterOffer" name="inputTPLDCounterOffer"
+                                                    type="text" value="" size="10" />
+                                            </div>
+                                            
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </fieldset>
+
+
+                        <fieldset>
+                            <legend id="l7">
+                                <img alt="" id="l7img" src='@Url.Content("~/Images/icon_minus.png")' />Our Legal
+                                Fees</legend>
+                            <div id="l7div" class="row">
+                                <div>
+                                    <div class="col-lg-12">
+                                        <div class="form-group">
+                                            <label class="col-sm-3 control-label" for="inputOurLawyerCost">
+                                                Our Lawyer's Cost
+                                            </label>
+                                            <div class="col-sm-3">
+                                                <input format="" numlen="10" class="form-control" data-val="true" id="inputOLCClaimQuant" name="inputOLCClaimQuant"
+                                                    type="text" value="" size="10" />
+                                            </div>
+                                            <div class="col-sm-3">
+                                                <input format="" numlen="10" class="form-control" data-val="true" id="inputOLCPreOffer" name="inputOLCPreOffer"
+                                                    type="text" value="" size="10" />
+                                            </div>
+                                            <div class="col-sm-3">
+                                                <input format="" numlen="10" class="form-control" data-val="true" id="inputOLCCounterOffer" name="inputOLCCounterOffer"
+                                                    type="text" value="" size="10" />
+                                            </div>
+                                            
+                                        </div>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="col-lg-12">
+                                        <div class="form-group">
+                                            <label class="col-sm-3 control-label" for="inputOurLawyerDis">
+                                                Our Lawyer's Disbursements
+                                            </label>
+                                            <div class="col-sm-3">
+                                                <input format="" numlen="10" class="form-control" data-val="true" id="inputOLDClaimQuant" name="inputOLDClaimQuant"
+                                                    type="text" value="" size="10" />
+                                            </div>
+                                            <div class="col-sm-3">
+                                                <input format="" numlen="10" class="form-control" data-val="true" id="inputOLDPreOffer" name="inputOLDPreOffer"
+                                                    type="text" value="" size="10" />
+                                            </div>
+                                            <div class="col-sm-3">
+                                                <input format="" numlen="10" class="form-control" data-val="true" id="inputOLDCounterOffer" name="inputOLDCounterOffer"
+                                                    type="text" value="" size="10" />
+                                            </div>
+                                            
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </fieldset>
+                        <div style="padding-top: 10px">
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="form-group">
+                                        <label class="col-sm-3 control-label" for="inputTotal">
+                                            Total
+                                        </label>
+                                        <div class="col-sm-3">
+                                            <input format="" numlen="10" class="form-control" data-val="true" id="inputTotClaimQuant" name="inputTotClaimQuant"
+                                                type="text" value="" size="10" />
+                                        </div>
+                                        <div class="col-sm-3">
+                                            <input format="" numlen="10" class="form-control" data-val="true" id="inputTotPreOffer" name="inputTotPreOffer"
+                                                type="text" value="" size="10" />
+                                        </div>
+                                        <div class="col-sm-3">
+                                            <input format="" numlen="10" class="form-control" data-val="true" id="inputTotCounterOffer" name="inputTotCounterOffer"
+                                                type="text" value="" size="10" />
+                                        </div>
+                                        
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div style="padding-top: 5px">
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="form-group">
+                                        <label class="col-sm-3 control-label" for="inputTotal">
+                                            Remarks
+                                        </label>
+                                        <div class="col-sm-9">
+                                            <textarea class="form-control" cols="20" id="inputRmarks" maxlength="250" name="inputRmarks"
+                                                rows="4"></textarea>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </fieldset>
+            </div>
+        </div>
+    </fieldset>
+</div>
+<script language="javascript" type="text/javascript">
+    $(function () {
+        $("#Togglediv legend").click(function (a) {
+            $("#" + this.id + "img", this).attr("src", function (a, b) {
+                return '@Url.Content("~/Images/icon_minus.png")' == b ? '@Url.Content("~/Images/icon_plus.png")' : '@Url.Content("~/Images/icon_minus.png")'
+            });
+            $("#" + this.id + "div").toggle()
+        }).css("cursor", "pointer")
+        if ('@co' == "CO") {
+            $("#CO,#Maxoffer,#super").css("background", "grey");
+
+        }
+
+         $('input[type=text]').each(function () {
+            if (void 0 !== $(this).attr("format")) {
+                if ($(this).val() != "") {
+                    $(this).val($(this).val().toString().replace(/,/g, ""));
+                }
+            };
+        });
+
+        $('td').each(function () {
+            if (void 0 !== $(this).attr("format")) {
+                if ($(this).html() != "") {
+                    $(this).html(CurrencyFormat($(this).html()));
+                }
+            };
+        });
+
+        $("input[type=text], textarea").keypress(function () {
+            if (void 0 !== $(this).attr("numlen")) {
+                var b = $(this).val().length,
+            c = parseInt($(this).attr("numlen"));
+                if (c > parseInt(b)) {
+                    var b = "#" + this.id,
+                a = event.type,
+                a = a.which ? a.which : event.keyCode;
+                    return 46 != a && 31 < a && (48 > a || 57 < a) ? ($(b).focus(), !1) : !0
+                }
+                return !1
+            }
+            if (void 0 !== $(this).attr("strlen")) return b = $(this).val().length, c = parseInt($(this).attr("strlen")), c > parseInt(b) ? (a = a || event, a = 32 == a.keyCode ? !0 : /[a-z]+$/i.test(String.fromCharCode(a.keyCode || a.which)), 0 == a ? !1 : a) : !1;
+            if (void 0 !== $(this).attr("len")) return b = $(this).val().length, c = parseInt($(this).attr("len")), c > parseInt(b) ? !0 : !1;
+            $(this).valid();
+        });
+
+        $("input[type=text]").blur(function () {
+            if (void 0 !== $(this).attr("format")) {
+                var a = $(this).val().replace(/,/g, "");
+                if ("" != a && !isNaN(a)) {
+                    $(this).val(CurrencyFormat($(this).val().replace(/,/g, "")));
+
+                }
+                $(this).valid();
+            };
+        });
+
+        $('input[type=text]').each(function () {
+            if (void 0 !== $(this).attr("format")) {
+                if ($(this).val() != "") {
+                    $(this).val(CurrencyFormat($(this).val()));
+                }
+            };
+        });
+    });
+    
+    function CurrencyFormat(number) {
+        var decimalplaces = 2;
+        var decimalcharacter = ".";
+        var thousandseparater = ",";
+        number = parseFloat(number);
+        var sign = number < 0 ? "-" : "";
+        var formatted = new String(number.toFixed(decimalplaces));
+        if (decimalcharacter.length && decimalcharacter != ".") { formatted = formatted.replace(/\./, decimalcharacter); }
+        var integer = "";
+        var fraction = "";
+        var strnumber = new String(formatted);
+        var dotpos = decimalcharacter.length ? strnumber.indexOf(decimalcharacter) : -1;
+        if (dotpos > -1) {
+            if (dotpos) { integer = strnumber.substr(0, dotpos); }
+            fraction = strnumber.substr(dotpos + 1);
+        }
+        else { integer = strnumber; }
+        if (integer) { integer = String(Math.abs(integer)); }
+        while (fraction.length < decimalplaces) { fraction += "0"; }
+        temparray = new Array();
+        while (integer.length > 3) {
+            temparray.unshift(integer.substr(-3));
+            integer = integer.substr(0, integer.length - 3);
+        }
+        temparray.unshift(integer);
+        integer = temparray.join(thousandseparater);
+        return integer + decimalcharacter + fraction;
+    }
+    
+</script>

@@ -1,0 +1,537 @@
+﻿@using MCAS.Web.Objects.Resources.ClaimProcessing;
+@model MCAS.Web.Objects.ClaimObjectHelper.ClaimAttachmentsModel
+@using MCAS.Web.Objects.CommonHelper
+@using MCAS.Web.Objects.Resources.Common;
+@using MCAS.Globalisation;
+@using Microsoft.Web.Helpers;
+@{
+    var mMCASQueryString = Html.MCASQueryString(Request.QueryString);
+    var caller = mMCASQueryString["claimMode"] != null ? Convert.ToString(mMCASQueryString["claimMode"]) : "";
+    var lebmode = mMCASQueryString["mode"] != null ? Convert.ToString(mMCASQueryString["mode"]) : "";
+    var accidentClaimIdNew = mMCASQueryString["AccidentClaimId"] != null ? Convert.ToString(mMCASQueryString["AccidentClaimId"]) : "";
+    var SubMenu = !string.IsNullOrEmpty(Convert.ToString((HttpContext.Current.Session["ScreenNameDash"]))) ? MenuListItem.ClaimTabs.GetClaimLabel(Convert.ToString((HttpContext.Current.Session["ScreenNameDash"]))) : ClaimReserve.ResourceManager.GetString(MenuListItem.ClaimTabs.SubMenuString(@caller, @accidentClaimIdNew, @lebmode, "ClaimReserve"));
+    var policyid = mMCASQueryString["PolicyId"] != null ? Convert.ToString(mMCASQueryString["PolicyId"]) : "";
+    var permission = mMCASQueryString["permission"] != null ? Convert.ToString(mMCASQueryString["permission"]) : "";
+    //var claimId = Model.ClaimId == null ? 0 : Model.ClaimId;
+    var claimId = mMCASQueryString["ClaimId"] == null ? "" : Convert.ToString(mMCASQueryString["ClaimId"]);
+    var claimMode = mMCASQueryString["claimMode"] == null ? @Model.HiddenclaimMode : mMCASQueryString["claimMode"];
+    var isPost = TempData["isPost"] == null ? "" : TempData["isPost"].ToString();
+    var imid = Model.AttachFileName == null ? "" : Path.GetFileNameWithoutExtension(Model.AttachFileName).EndsWith("_" + Model.AttachId) ? Path.GetFileNameWithoutExtension(Model.AttachFileName).Substring(0, (Path.GetFileNameWithoutExtension(Model.AttachFileName).Length - (Model.AttachId.ToString().Length + 1))) + Path.GetExtension(Model.AttachFileName) : Model.AttachFileName;
+    var dis = imid == null ? "none;" : "inline";
+    var setClaims = TempData["SetClaims"] == null ? "" : TempData["SetClaims"].ToString();
+    SecurityPermissions myPemissions = (SecurityPermissions)ViewData["UserPermissions"];
+    ViewBag.Title = "ClaimAttachmentsEditor";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var chkClaim = Model.HchkhasClaim;
+    var Viewmode = mMCASQueryString["Viewmode"] == null ? "" : Convert.ToString(mMCASQueryString["Viewmode"]);
+    var DonotDiableControl = lebmode == "Enq" ? "form-horizontal" : lebmode == "Payment" ? "form-horizontal" : lebmode == "Recovery" ? "form-horizontal" : chkClaim == 0 ? "form-horizontal" : Model.ReadOnly == true ? "form-horizontal" : "form-horizontal DonotDiableControl";
+    string isEncryptedParams = System.Configuration.ConfigurationManager.AppSettings["EncryptQueryParams"].ToUpper();
+    string taxiOrcar = Convert.ToString(Session["OrganisationType"]).ToLower() == "tx" || Convert.ToString(Session["OrganisationType"]).ToLower() == "pc" ? "true" : "false";
+    var calimantErrMsg2 = ClaimAttachmentsEditor.RFVTPVehicleNo;
+}
+<script src="@Url.Content("~/Scripts/jquery-2.1.0.min.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/Scripts/jquery.validate.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.min.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/Scripts/globalize/globalize.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/Scripts/globalize/cultures/globalize.culture.en-GB.js")" type="text/javascript"></script>
+<style type="text/css">
+    fieldset
+    {
+        padding: 5px;
+        margin: 1px;
+        border: 1px solid;
+        border-color: #DAD7D7;
+        border-radius: 3px;
+    }
+    .form-horizontal .control-label
+    {
+        text-align: left;
+    }
+    legend
+    {
+        display: block;
+        width: auto;
+        padding: 1px;
+        margin-bottom: 2px;
+        font-size: 14px;
+        line-height: inherit;
+        color: #1e91cf !important;
+        border: 0;
+    }
+    #divimage
+    {
+        max-width: 100% !important;
+        max-height: 100% !important;
+        height: 400px !important;
+    }
+    #downloadAttachment, #trigger
+    {
+        white-space: pre-wrap; /* css-3 */
+        white-space: -moz-pre-wrap; /* Mozilla, since 1999 */
+        white-space: -pre-wrap; /* Opera 4-6 */
+        white-space: -o-pre-wrap; /* Opera 7 */
+        word-wrap: break-word; /* Internet Explorer 5.5+ */
+    }
+</style>
+<div class="dashboard-wrapper">
+    <div class="container">
+        <div class="page-title" id="reg">
+            @{
+                if ((Convert.ToString(Session["OrganisationType"]).ToLower() == "tx") || (Convert.ToString(Session["OrganisationType"]).ToLower() == "pc")) { }
+                else
+                {
+                <div class="col-lg-12" id="reg2" style="background-color: white; position: fixed;
+                    z-index: 1;">
+                    <h2>@ClaimReserve.ResourceManager.GetString(MenuListItem.ClaimTabs.PreBreadCrumbString(@lebmode))</h2>
+                    <ul class="breadcrumb">
+                        <li>@SubMenu</li>
+                        <li>@ClaimAttachmentsEditor.Attachments</li>
+                    </ul>
+                </div>
+                }
+            }
+            <div style="position: relative!important">
+                @{
+                    if ((Convert.ToString(Session["OrganisationType"]).ToLower() == "tx") || (Convert.ToString(Session["OrganisationType"]).ToLower() == "pc"))
+                    { 
+                    @Html.Action("_ClaimDeatailsPCNTX", "ClaimRegistrationProcessing")
+                    }
+                    else
+                    {
+                    @Html.Action("_ClaimDetails", "ClaimProcessing", new { PolicyId = @policyid })
+                    }
+                }
+            </div>
+        </div>
+        <hr />
+        <!-- Row start -->
+        <div class="row" id="toprow">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <div class="panel panel-info">
+                    <div class="panel-heading clearfix">
+                        <i class="icon-check-sign"></i>
+                        <h3 class="panel-title">
+                            @ClaimAttachmentsEditor.AttachmentsEntry</h3>
+                    </div>
+                    @{
+                        object routes = new { PolicyId = @policyid, ClaimId = @claimId, AccidentClaimId = @accidentClaimIdNew, claimMode = @caller, mode = lebmode };
+                        if (isEncryptedParams.ToUpper() == "YES")
+                        {
+                            string res = RouteEncryptDecrypt.getRouteString(routes);
+                            res = RouteEncryptDecrypt.Encrypt(res);
+                            routes = new { Q = res };
+                        }
+                    }
+                    @Html.Action("ClaimAttachmentsList", "ClaimProcessing", new { PolicyId = @policyid, ClaimId = @claimId, AccidentClaimId = @accidentClaimIdNew, claimMode = @caller })
+                    <hr style='font-weight: bold' />
+                    <div class="panel-body" id="ClaimAttachEditor" style="display: none;">
+                        @using (Html.BeginForm("ClaimAttachmentsEditor", "ClaimProcessing", routes, FormMethod.Post, new { enctype = "multipart/form-data", role = "form", @class = @DonotDiableControl, id = "ClaimAttachmentsEditor", name = "ClaimAttachmentsEditor" }))
+                        {
+                            @Html.ValidationSummary(true)
+                            @Html.HiddenFor(m => m.hiddenprop)
+                            @Html.HiddenFor(m => m.ReadOnly)
+                            @Html.HiddenFor(m => m.ViewMode)
+                            <a id="reload" href='@Url.ActionEncoded("ClaimAttachmentsEditor", "ClaimProcessing", new { PolicyId = @policyid, ClaimId = @claimId, AttachId = @Model.AttachId, AccidentClaimId = @accidentClaimIdNew, claimMode = @caller })' style="display:none">
+                                Reload</a>    
+                            <div style="color: Red; font-weight: bold;" class="has-error" id="error">
+                                <p align="center">
+                                    @if (@ViewData["SuccessMsg"] != null)
+                                    {
+                                        @ViewData["SuccessMsg"]
+                                    }
+                                </p>
+                            </div>
+
+                            <div style="width: 99%; padding-left: 10px">
+                                <fieldset>
+                                    <legend>@ClaimAttachmentsEditor.Attachments</legend>
+                                    <div class="panel-body">
+                                        <div class="row">
+                                            <div class="col-lg-6">
+                                                @Html.HiddenFor(m => m.AttachEntId)
+                                                @Html.HiddenFor(m => m.AttachId)
+                                                @Html.HiddenFor(m => m.AttachFileName)
+                                                @Html.HiddenFor(m => m.HiddenclaimMode)
+                                                @Html.HiddenFor(m => m.HiddenAccidentClaimId)
+                                                <div class="form-group">
+                                                    <label class="col-sm-4 control-label" for="txtFileUpload">
+                                                        @ClaimAttachmentsEditor.AttachFileName <span class="text-danger">*</span>
+                                                    </label>
+                                                    <div class="col-sm-8">
+                                                        <div style="display:@dis">
+                                                            @Html.TextBoxFor(m => m.AttachFileName, new { id = "txtFileUpload", name = "AttachFileName", type = "file", onchange = "checkfile(this);", @class = "col-sm-8 form-control" })
+                                                            @if (!string.IsNullOrEmpty(@imid) && Model.IsUrlValid == "Y")
+                                                            {
+                                                                @Html.ActionLink(@imid, "FileDownload", "ClaimProcessing", new { AttachId = @Model.AttachId }, new { id = "downloadAttachment", target = "_blank" })
+                                                            }
+                                                            @if (Model.IsUrlValid == "N")
+                                                            {
+                                                                <a id="trigger" href="#">@imid</a>
+                                                            }
+                                                        </div>
+                                                        @Html.ValidationMessageFor(m => m.AttachFileName)
+                                                    </div>
+                                                    <div class="col-sm-4" style="display: none;" id="divimage">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-6">
+                                                <div class="form-group">
+                                                    <label class="col-sm-4 control-label">
+                                                        @ClaimAttachmentsEditor.AttachFileDesc
+                                                    </label>
+                                                    <div class="col-sm-8">
+                                                        @{
+                                                            if ((Convert.ToString(Session["OrganisationType"]).ToLower() == "tx") || (Convert.ToString(Session["OrganisationType"]).ToLower() == "pc"))
+                                                            {
+                                                            @Html.TextAreaFor(m => m.AttachFileDesc, new { id = "inputFileDesc", @class = "form-control", @maxlength = "2500" })
+                                                            @Html.ValidationMessageFor(m => m.AttachFileDesc)
+                                                            }
+                                                            else
+                                                            {
+                                                            @Html.TextAreaFor(m => m.AttachFileDesc, new { id = "inputFileDesc", @class = "form-control", @maxlength = "100" })
+                                                            @Html.ValidationMessageFor(m => m.AttachFileDesc)
+                                                            }
+                                                        }
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-lg-6">
+                                                <div class="form-group">
+                                                    <label class="col-sm-4 control-label">
+                                                        @ClaimAttachmentsEditor.AttachEntityType<span class="text-danger">*</span>
+                                                    </label>
+                                                    <div class="col-sm-8">
+                                                        @Html.DropDownListFor(m => m.AttachType, new SelectList(Model.AttachTypeList, "Lookup_value", "Lookup_desc"), new { id = "ddlAttachType", @class = "form-control" })
+                                                        @Html.ValidationMessageFor(m => m.AttachType)
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-6">
+                                                <div class="form-group">
+                                                    <label class="col-sm-4 control-label">
+                                                        @{
+                                                            if ((Convert.ToString(Session["OrganisationType"]).ToLower() == "tx") || (Convert.ToString(Session["OrganisationType"]).ToLower() == "pc"))
+                                                            {
+                                                            @ClaimAttachmentsEditor.TPVehicleNo <span class="text-danger">*</span>
+                                                            }
+                                                            else
+                                                            { 
+                                                            @ClaimAttachmentsEditor.ClaimantName <span class="text-danger">*</span>
+                                                            }
+                                                        }
+                                                    </label>
+                                                    <div class="col-sm-8">
+                                                        @Html.DropDownListFor(m => m.ClaimantName, new SelectList(Model.ClaimantNameList, "ID", "Text"), new { id = "ClaimantName", @class = "form-control" })
+                                                        <span id="claimantNameSpan">
+                                                            @Html.ValidationMessageFor(m => m.ClaimantName)
+                                                        </span>
+                                                        <span class="field-validation-error"><span for="ClaimantName2" class=""></span></span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </fieldset>
+                                <div class="row">
+                                    <div class="clearfix igr text-center">
+                                        <div class="form-group" id="divSaveReset">
+                                            @if (@myPemissions.Write)
+                                            {
+                                                <button class="btn btn-info" id="btnSave">
+                                                    @Common.Save</button>
+                                                if (@Model.AttachId == 0 || @Model.AttachId == null)
+                                                {
+                                                <button type="button" class="btn btn-info" id="btnReset" onclick="onclickcancel(); ">
+                                                    @Common.Reset</button>
+                                                }
+                                                else
+                                                {
+                                                 <a name="btnReset1" id="btnReset1" class="btn btn-info" href="#">@Common.Reset</a> 
+                                                }
+                                            }
+                                        </div>
+                                    </div>
+                                </div>
+                                <fieldset>
+                                    <legend></legend>
+                                    <div class="form-group">
+                                        <div class="col-lg-12">
+                                            @Html.Partial("~/Views/Shared/_TimeStamp.cshtml", Model)
+                                        </div>
+                                    </div>
+                                </fieldset>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Row End -->
+    </div>
+</div>
+<script type="text/javascript">
+    setTabActive('AttachmentsTab');
+
+    $('#ClaimAttachmentsEditor').on('submit', function (event) {
+        document.getElementById('hiddenprop').value = "1";
+        $("#HiddenclaimMode").val(getQueryVariable("claimMode"));
+        $("#HiddenAccidentClaimId").val(getQueryVariable("AccidentClaimId"));
+        if ($('#txtFileUpload').val() == "" && !$('#trigger').is(':visible') && !$('#downloadAttachment').is(':visible')) {
+            alert("Please select File To Upload");
+            event.preventDefault();
+            return false;
+        }
+        return true;
+    });
+
+
+    var do_on_load = function () {
+        $('.ui-wrapper').css("padding", 0);
+        $('textarea').resizable({ handles: 's' });
+
+        $('#trigger').click(function () {
+            alert("Attachment doesnot exists")
+            return false;
+        });
+
+
+        $("#btnSave").click(function (event) {
+            var selectedFile = $('input[type=file]').val().split('\\').pop();
+            var claimantName = $("#ClaimantName").val();
+                var PNCTX = @taxiOrcar;
+                if (PNCTX == true && claimantName == "" && claimantName != undefined) {
+                $("span#claimantNameSpan").css("display","none");
+                $("span[for='ClaimantName2']").text("@calimantErrMsg2");
+                }else{
+                $("span#claimantNameSpan").css("display","block");
+                $("span[for='ClaimantName2']").text("");
+                }
+            if (selectedFile != '') {
+                if ('@imid' != selectedFile || '@Model.AttachFileDesc' != $('#inputFileDesc').val() || '@Model.ClaimantName' != $('#ClaimantName').val() || '@Model.AttachType' != $('#ddlAttachType').val() || "@Model.IsUrlValid" == "N") {
+                    return true;
+                }
+                else {
+                    alert('No Changes Have Been Made!');
+                    return false;
+                }
+            }
+            else {
+                if ('@imid' != '@Model.AttachFileName' || '@Model.AttachFileDesc' != $('#inputFileDesc').val() || '@Model.ClaimantName' != $('#ClaimantName').val() || '@Model.AttachType' != $('#ddlAttachType').val()) {
+                    if ($('#txtFileUpload').val() == "" && !$('#trigger').is(':visible') && !$('#downloadAttachment').is(':visible')) {
+                        alert("Please select File To Upload");
+                        event.preventDefault();
+                        return false;
+                    }
+                    return true;
+                }
+                else {
+                    if (IsPageChanged()) {
+                        alert('No Changes Have Been Made!');
+                        return false;
+                    }
+                }
+            }
+        })
+
+
+        var maxLength = 42;
+        $('#ClaimantName > option').text(function (i, text) {
+            if (text.length > maxLength) {
+                return text.substr(0, maxLength) + '...';
+            }
+        });
+
+        if ("@lebmode" == "Enq") {
+            $("#ClaimAttachmentsEditor").removeClass("DonotDiableControl");
+        }
+        var ispostbackObject = document.getElementById('hiddenprop').value;
+        var attachId = document.getElementById('AttachId').value;
+        if (ispostbackObject != "1") {
+            if ('@setClaims' == "N") {
+                $('#ClaimAttachEditor').attr('style', 'Display:inline');
+                document.getElementById('hiddenprop').value = "0";
+            }
+            else {
+                if (attachId != null && attachId != "") {
+                    $('#ClaimAttachEditor').attr('style', 'Display:inline');
+                    document.getElementById('hiddenprop').value = "0";
+                }
+                else {
+                    if ("@Viewmode" == "AddNewAttachment") {
+                        $('#ClaimAttachEditor').attr('style', 'Display:inline');
+                    }
+                    else {
+                        $('#ClaimAttachEditor').attr('style', 'Display:none');
+                    }
+                }
+            }
+        }
+        else {
+            $('#ClaimAttachEditor').attr('style', 'Display:inline');
+            document.getElementById('hiddenprop').value = "0";
+        };
+        if ('@permission' == '') {
+            if ('@isPost' != 'Y') {
+                if ("@Viewmode" == "AddNewAttachment") {
+                }
+                else {
+                    $("#btnSave").attr('disabled', 'disabled');
+                    $("#btnReset").attr('disabled', 'disabled');
+                    $("#txtFileUpload").attr('disabled', 'disabled');
+                    $("#inputFileDesc").attr('readonly', true);
+                    $('#ClaimantName').prop("disabled", "true")
+                    $("#ddlAttachType").prop("disabled", "true")
+                }
+            }
+
+        }
+
+        $("#ClaimantName").change(function () {
+            var claimant = $("#ClaimantName").val();
+            $.ajax({
+                type: "POST",
+                url: '@Url.ActionEncoded("chkClaimantStatus", "ClaimProcessing")',
+                data: {
+                    AccId: '@accidentClaimIdNew',
+                    ClaimantId: claimant
+                },
+                success: function (a) {
+                    if (a == 2) {
+                        alert('Claimant has been finalized, You cannot add Attchments for it.');
+                        $("#ClaimantName").val($("#ClaimantName option:first").val());
+                    }
+                    if (a == 3) {
+                        alert('Claimant has been cancelled, You cannot add Attchments for it.');
+                        $("#ClaimantName").val($("#ClaimantName option:first").val());
+                    }
+                }
+            });
+        });
+
+         $("#btnReset1").click(function () {
+            debugger;
+            var ClaimId = '@claimId';
+            var AccidentClaimId = '@accidentClaimIdNew';
+            var policyId = '@policyid';
+            var AttachId = '@Model.AttachId';
+            var claimMode= '@caller';
+            var mode = '@lebmode';
+            var AttachFileName = '@imid';
+            var AttachEntId = '@Model.AttachEntId';
+            var AttachFileDesc='@Model.AttachFileDesc';
+            var ClaimantName= '@Model.ClaimantName';
+            var AttachType='@Model.AttachType';
+            var permission = '@permission';
+            var a = parseInt(ClaimId);
+            var b = parseInt(AccidentClaimId);
+            var c = parseInt(policyId);
+            var d = parseInt(AttachId);
+            window.location.href = '@Url.Action("ClaimAttachmentsEditor", "ClaimProcessing")?ClaimId=' + a + '&AccidentClaimId=' + b + '&claimMode=' + claimMode + '&policyId=' + c + '&AttachId=' + d + '&mode=' + mode + '&AttachFileName=' + AttachFileName + '&AttachEntId=' + AttachEntId + '&AttachFileDesc=' + AttachFileDesc + '&ClaimantName=' + ClaimantName + '&AttachType=' + AttachType + '&permission=' + permission;
+        });
+
+        $('textarea').removeAttr('width').removeAttr('height').parents('div:eq(0)').css('width', '').css('height', "50px");
+        SetDivPost();
+    }
+    $(document).ready(do_on_load);
+    $(window).bind("page:change", do_on_load);
+    function onclickcancel() {
+        $('form')[0].reset();
+        $('#AttachId').val("");
+        $('input[type="text"]').val("");
+        $("select").prop("selectedIndex", 0);
+        $('textarea').val("");
+        $("#error").hide();
+        $("#trigger,#downloadAttachment").hide();
+        $('span.field-validation-error').removeClass('field-validation-error').addClass('field-validation-valid');
+        $("#btnSave").removeAttr("disabled");
+        $('#txtFileUpload').val("");
+        $("#divimage").hide();
+
+    }
+
+    function OpenNewAttachments() {
+        $('#ClaimAttachEditor').attr('style', 'Display:inline');
+        $('#AttachId').val("");
+        $('input[type="text"]').val("");
+        $("select").prop("selectedIndex", 0);
+        $('textarea').val("");
+        $("#error").hide();
+        $("#trigger,#downloadAttachment").hide();
+        $("#divimage").hide();
+        $('span.field-validation-error').removeClass('field-validation-error').addClass('field-validation-valid');
+        if (($("#ReadOnly").val() != "True" || $("#ViewMode").val() != "Read") && $('form').hasClass("DonotDiableControl")) {
+            $("#btnSave").removeAttr('disabled');
+            $("#btnReset").removeAttr('disabled');
+            $("#txtFileUpload").removeAttr('disabled');
+            $("#inputFileDesc").attr('readonly', false);
+            $("#ddlAttachType").removeAttr("disabled");
+            $("#ClaimantName").removeAttr("disabled");
+        }
+        $("#txtFileUpload").val("");
+        $('#DivCrDtBy,#DivMoDtBy,#DivCrDt,#DivUpDt,#DivCrTime,#DivUpTime').empty();
+    }
+
+
+    function getQueryVariable(a) {
+        for (var e = "@MenuListItem.ClaimTabs.GetQueryStringVal()".replace(/amp;/ig, "").split("&"), d = 0; d < e.length; d++) {
+            var b = e[d].split("=");
+            if (b[0] == a) return b[1]
+        }
+    };
+
+    function checkfile(sender) {
+
+        var validExts = new Array(".png", ".tif", ".tiff", ".gif", ".jpeg", ".jpg", ".jif", ".jfif");
+        var fileExt = sender.value;
+        fileExt = fileExt.substring(fileExt.lastIndexOf('.'));
+        if (fileExt.toLowerCase() == ".exe") {
+            alert("Invalid file selected .");
+            $("#btnSave").attr("disabled", "disabled");
+            return false;
+        } else {
+            $("#btnSave").removeAttr("disabled");
+            return true;
+        }
+    };
+
+    function checkKeyCode(evt)// for F5 disable
+    {
+
+        var evt = (evt) ? evt : ((event) ? event : null);
+        var node = (evt.target) ? evt.target : ((evt.srcElement) ? evt.srcElement : null);
+        if (event.keyCode == 116)//disable F5
+        {
+            evt.keyCode = 0;
+            alert('This operation is not allowed.')
+            return false
+        }
+    }
+
+    document.onkeydown = checkKeyCode;
+    var attachType = "";
+    $('#ddlAttachType  option:selected').each(function () {
+        if ($(this).attr("selected", "selected")) {
+            attachType = "1";
+            return false;
+        }
+    });
+    if (attachType != "1") {
+        $("#ddlAttachType  option[value='']").attr('selected', true);
+
+    }
+
+    var claimantName = "";
+    $('#ClaimantName  option:selected').each(function () {
+        if ($(this).attr("selected", "selected")) {
+            claimantName = "1";
+            return false;
+        }
+    });
+    if (claimantName != "1") {
+        $("#ClaimantName  option[value='']").attr('selected', true);
+
+    }
+</script>

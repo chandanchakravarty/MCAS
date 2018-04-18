@@ -1,0 +1,811 @@
+﻿@using MCAS.Web.Resources
+@using MCAS.Web.Objects.Resources.ClaimProcessing;
+@using MCAS.Web.Objects.Resources.Common;
+@using MCAS.Web.Objects.CommonHelper
+@using MCAS.Web.Objects.MastersHelper
+@using MCAS.Globalisation
+@model MCAS.Web.Objects.MastersHelper.DiaryModel
+@{
+    var mMCASQueryString = Html.MCASQueryString(Request.QueryString);
+    var caller = mMCASQueryString["claimMode"] != null ? Convert.ToString(mMCASQueryString["claimMode"]) : "";
+    var Reassign = mMCASQueryString["Reassign"] != null ? Convert.ToString(mMCASQueryString["Reassign"]) : "";
+    var lebmode = mMCASQueryString["mode"] != null ? Convert.ToString(mMCASQueryString["mode"]) : "";
+    var accidentClaimIdNew = mMCASQueryString["AccidentClaimId"] != null ? Convert.ToString(mMCASQueryString["AccidentClaimId"]) : "";
+    var SubMenu = !string.IsNullOrEmpty(Convert.ToString((HttpContext.Current.Session["ScreenNameDash"]))) ? MenuListItem.ClaimTabs.GetClaimLabel(Convert.ToString((HttpContext.Current.Session["ScreenNameDash"]))) : ClaimReserve.ResourceManager.GetString(MenuListItem.ClaimTabs.SubMenuString(@caller, @accidentClaimIdNew, @lebmode, "ClaimReserve"));
+    var DairyId = string.IsNullOrEmpty(mMCASQueryString["DairyId"]) ? "" : mMCASQueryString["DairyId"];
+    var ReAssignDateFrom = Model.ReAssignDateFrom == null ? DateTime.Now.ToString("dd/MM/yyyy") : Model.ReAssignDateFrom.Value.ToString("dd/MM/yyyy");
+    var policyid = mMCASQueryString["PolicyId"] == null ? "0" : Convert.ToString(mMCASQueryString["PolicyId"]);
+    var DonotDiableControl = lebmode == "Enq" ? "form-horizontal" : lebmode == "Payment" ? "form-horizontal" : lebmode == "Recovery" ? "form-horizontal" : Model.ReadOnly == true ? "form-horizontal" : "form-horizontal DonotDiableControl";
+    var claimId = Model.ClaimId;
+    if (lebmode == "Adj")
+    {
+        Session["screenID"] = "CLM_REG";
+        Session["ScreenNameDash"] = "208";
+    }
+    var model = new DiaryModel();
+    var createby = Model.CreatedBy == null ? Convert.ToString(HttpContext.Current.Session["LoggedInUserName"]) : Model.CreatedBy;
+    var LoginUserDispname = DiaryModel.GetUserDispName(Convert.ToString(HttpContext.Current.Session["LoggedInUserId"]));
+    var viewMode = mMCASQueryString["ViewMode"] != null ? Convert.ToString(mMCASQueryString["ViewMode"]) : "";
+    SecurityPermissions myPemissions = (SecurityPermissions)ViewData["UserPermissions"];
+    ViewBag.Title = "DiaryTaskEditor";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    string isEncryptedParams = System.Configuration.ConfigurationManager.AppSettings["EncryptQueryParams"].ToUpper();
+}
+<link href="@Url.Content("~/Content/jquery-ui.css")" rel="Stylesheet" media="screen" />
+<style type="text/css">
+    .reassignToBackgroundColor
+    {
+        background-color: Gray;
+        color: White;
+    }
+    .ui-button-icon-primary.ui-icon.ui-icon-closethick
+    {
+        margin: -7px 0 0 -7px;
+    }
+    div.ui-dialog.ui-widget.ui-widget-content.ui-corner-all.ui-front.alert.ui-draggable
+    {
+        top: 130px !important;
+    }
+    
+    fieldset
+    {
+        padding: 5px;
+        margin: 1px;
+        border: 1px solid;
+        border-color: #DAD7D7;
+        border-radius: 3px;
+    }
+    
+    legend
+    {
+        display: block;
+        width: auto;
+        padding: 1px;
+        margin-bottom: 2px;
+        font-size: 14px;
+        line-height: inherit;
+        color: #1e91cf !important;
+        border: 0;
+    }
+</style>
+<script src="@Url.Content("~/Scripts/jquery-2.1.0.min.js")" type="text/javascript"></script>
+<div class="dashboard-wrapper">
+    <div class="container">
+        <div class="page-title" id="reg">
+            @{
+                //if (Session["Module"] == "CrTx") { }
+                if ((Convert.ToString(Session["OrganisationType"]).ToLower() == "tx") || (Convert.ToString(Session["OrganisationType"]).ToLower() == "pc")) { }
+                else
+                {
+                <div class="col-lg-12" id="reg2" style="background-color: white; position: fixed;
+                    z-index: 1;">
+                    <h2>@ClaimReserve.ResourceManager.GetString(MenuListItem.ClaimTabs.PreBreadCrumbString(@lebmode))</h2>
+                    <ul class="breadcrumb">
+                        <li>@SubMenu</li>
+                        <li>@DiaryTaskEditor.Alerts</li>
+                    </ul>
+                </div>
+                }
+            }
+            <div style="position: relative!important">
+                @{ 
+                    //if (Session["Module"] == "CrTx") {
+                    if ((Convert.ToString(Session["OrganisationType"]).ToLower() == "tx") || (Convert.ToString(Session["OrganisationType"]).ToLower() == "pc")) { 
+                    @Html.Action("_ClaimDeatailsPCNTX", "ClaimRegistrationProcessing")
+                    }
+                    else
+                    {
+                    @Html.Action("_ClaimDetails", "ClaimProcessing", new { PolicyId = @policyid })
+                    }
+                }
+                @*  @Html.Action("_ClaimDetails", "ClaimProcessing", new { PolicyId = @policyid })*@
+            </div>
+        </div>
+        <hr />
+        <div class="row" id="toprow">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <div class="panel panel-info">
+                    <div class="panel-heading clearfix">
+                        <i class="icon-check-sign"></i>
+                        <h3 class="panel-title">
+                            @DiaryTaskEditor.AlertsInformation</h3>
+                    </div>
+                    @if (@Model.DairyList != null)
+                    {
+                        @Html.Partial("ToDoList", Model.DairyList)
+                    }
+                    <div class="row">
+                        <div class="clearfix igr col-md-1 text-center">
+                            <a class="btn btn-info" id="Previous">@Common.Previous</a>
+                        </div>
+                        <div class="col-lg-10 text-center">
+                        </div>
+                        <div class="clearfix igr col-md-1 text-center">
+                            <a class="btn btn-info" id="Next">@Common.Next</a>
+                        </div>
+                    </div>
+                    @{
+                        object routes = new { PolicyId = @policyid, ClaimId = @claimId, AccidentClaimId = @accidentClaimIdNew, claimMode = @caller, mode = lebmode };
+                        if (isEncryptedParams.ToUpper() == "YES")
+                        {
+                            string res = RouteEncryptDecrypt.getRouteString(routes);
+                            res = RouteEncryptDecrypt.Encrypt(res);
+                            routes = new { Q = res };
+                        }
+                    }
+                    <br />
+                    <div class="row">
+                        <div class="col-lg-2 text-left">
+                            @if (@myPemissions.Write)
+                            {
+                                <a class="btn btn-info" id="openDiaryTask" href="#">@DiaryTaskEditor.AddNewAlert</a>
+                            }
+                        </div>
+                        <div class="col-lg-7 text-left">
+                        </div>
+                        <div class="col-lg-3 text-right">
+                            @if (@myPemissions.SplPermission)
+                            {
+                                <a class="btn btn-info" id="openDiaryReassignment" href="#">@DiaryTaskEditor.AlertsReassignment</a>
+                            }
+                        </div>
+                    </div>
+                    <hr style='font-weight: bold' />
+                    <div style="color: Red; font-weight: bold;" class="has-error" id="error">
+                        <p align="center" id="result">
+                            @if (TempData["result"] != null)
+                            {
+                                @TempData["result"]
+                                TempData.Remove("result");
+
+                            }
+                        </p>
+                    </div>
+                    <div class="panel-body" id="ClaimDiaryEditor" style="display: inline;">
+                        @using (Html.BeginForm("DiaryTaskEditor", "ClaimProcessing", routes, FormMethod.Post, new { role = "form", @class = @DonotDiableControl, id = "diarytaskeditorform", name = "diarytaskeditorform" }))
+                        {                                  
+                            @Html.ValidationSummary(true)
+                            <div style="width: 99%; padding-left: 10px">
+                                <fieldset id="NewDairy" style="display: none;">
+                                    <legend>@DiaryTaskEditor.AddNewAlert</legend>
+                                    <div class="panel-body col-lg-12">
+                                        <div class="row">
+                                            <div class="col-lg-6">
+                                                @Html.HiddenFor(m => m.InsurerId)
+                                                @Html.HiddenFor(m => m.PolicyId)
+                                                @Html.HiddenFor(m => m.ClaimId)
+                                                @Html.HiddenFor(m => m.ListId)
+                                                @Html.HiddenFor(m => m.ReadOnly)
+                                                @Html.HiddenFor(m => m.ViewMode)
+                                                @Html.HiddenFor(m => m.AccidentId)
+                                                @Html.HiddenFor(m => m.Prop1, new { @Value = "0" })
+                                                @Html.HiddenFor(m => m.hiddenprop)
+                                                @Html.HiddenFor(m => m.DairyId)
+                                                @Html.HiddenFor(m => m.ListOpen)
+                                                <a id="reload" href='@Url.Action("DiaryTaskEditor", "ClaimProcessing", new { PolicyId = @policyid, ClaimId = @claimId, ListId = @Model.ListId, AccidentClaimId = @accidentClaimIdNew, claimMode = @caller })' style="display:none">
+                                                    Reload</a>
+                                                <input type = "hidden" id="ViewMode" value = '@caller' />
+                                                <div class="form-group">
+                                                    <label class="col-sm-4 control-label" for="ddlDiaryDesc">
+                                                        @DiaryTaskEditor.LISTTYPEID<span class="text-danger">*</span></label>
+                                                    <div class="col-sm-8">
+                                                        @Html.DropDownListFor(m => m.ListTypeID, new SelectList(Model.TypeList, "Lookup_value", "Lookup_desc"), new { id = "ddlDiaryDesc", @class = "col-lg-12 form-control" })
+                                                        @Html.ValidationMessageFor(m => m.ListTypeID)
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-6">
+                                                <div class="form-group">
+                                                    <label class="col-sm-4 control-label">
+                                                        @DiaryTaskEditor.CreatedBy<span class="text-danger">*</span>
+                                                    </label>
+                                                    <div class="col-sm-8">
+                                                        @Html.TextBoxFor(m => m.FromUserId, new { id = "inputCreatedBy", @class = "form-control", @Value = @createby, @Readonly = "readonly" })
+                                                        @Html.ValidationMessageFor(m => m.FromUserId)
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-lg-6">
+                                                <div class="form-group">
+                                                    <label class="col-sm-4 control-label" for="ddlUserID">
+                                                        @DiaryTaskEditor.TOUSERID<span class="text-danger">*</span>
+                                                    </label>
+                                                    <div class="col-sm-8">
+                                                        @Html.DropDownListFor(m => m.ToUserId, new SelectList(Model.UserList, "SNO", "UserDispName"), new { id = "ddlUserID", @class = "col-lg-12 form-control" })<br />
+                                                        @Html.ValidationMessageFor(m => m.ToUserId)
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-lg-6">
+                                                <div class="form-group">
+                                                    <label class="col-sm-4 control-label">
+                                                        @DiaryTaskEditor.STARTTIME<span class="text-danger">*</span></label>
+                                                    <div class="col-sm-8">
+                                                        @Html.TextBoxFor(m => m.StartTime, "{0:d}", new { @class = "form-control datepicker validateDateFormate", maxlength = 10 })
+                                                        @Html.ValidationMessageFor(m => m.StartTime)
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-6">
+                                                <div class="form-group">
+                                                    <label class="col-sm-4 control-label">
+                                                        @DiaryTaskEditor.ENDTIME</label>
+                                                    <div class="col-sm-8">
+                                                        @Html.TextBoxFor(m => m.EndTime, new { @class = "form-control datepicker validateDateFormate", maxlength = 10 })
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-lg-6" id="EsclationTo">
+                                                <div class="form-group">
+                                                    <label class="col-sm-4 control-label" for="ddlEsclationTo">
+                                                        @DiaryTaskEditor.EscalationTo<span class="text-danger">*</span>
+                                                    </label>
+                                                    <div class="col-sm-8">
+                                                        @Html.DropDownListFor(m => m.EscalationTo, new SelectList(Model.UserList, "SNO", "UserDispName", "0"), new { id = "ddlEsclationTo", @class = "col-lg-12 form-control" })
+                                                        @Html.ValidationMessageFor(m => m.EscalationTo)
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-6">
+                                                <div class="form-group">
+                                                    <label class="col-sm-4 control-label" for="inputSubjectLine">
+                                                        @DiaryTaskEditor.SUBJECTLINE<span class="text-danger">*</span></label>
+                                                    <div class="col-sm-8">
+                                                        @Html.TextBoxFor(m => m.SubjectLine, new { id = "inputSubjectLine", @class = "form-control", @maxlength = "200" })
+                                                        @Html.ValidationMessageFor(m => m.SubjectLine)
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-lg-6">
+                                                <div class="form-group">
+                                                    <label class="col-sm-4 control-label" for="inputEmailBody">
+                                                        @DiaryTaskEditor.EmailBody</label>
+                                                    <div class="col-sm-8">
+                                                        @Html.TextAreaFor(m => m.EmailBody, new { id = "inputEmailBody", @class = "form-control", @maxlength = "250" })
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-6">
+                                                <div class="form-group">
+                                                    <label class="col-sm-4 control-label" for="inputNote">
+                                                        @Common.Remarks</label>
+                                                    <div class="col-sm-8">
+                                                        @Html.TextAreaFor(m => m.Note, new { id = "inputNote", @class = "form-control", @maxlength = "500" })
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                        </div>
+                                    </div>
+                                </fieldset>
+                                <fieldset id="ReassignDairy" style="display: none;">
+                                    <legend>@DiaryTaskEditor.ReassignAlerts</legend>
+                                    <div class="panel-body">
+                                        <div class="row">
+                                            <div class="col-lg-12">
+                                                <div class="form-group">
+                                                    <div class="col-md-4">
+                                                        <label for="inputGroupCode">
+                                                            @DiaryTaskEditor.Dairiestobereassigned</label>
+                                                    </div>
+                                                    <div class="col-md-8">
+                                                        @Html.TextAreaFor(m => m.Dairiestobereassigned, new { id = "Dairiestobereassigned", @class = "form-control", rows = "4", cols = "10", @readOnly = "readOnly" })
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-lg-12">
+                                                <div class="form-group">
+                                                    <div class="col-md-4">
+                                                        <label for="inputGroupCode">
+                                                            @DiaryTaskEditor.ReAssignTo&nbsp;<span class="text-danger">*</span></label>
+                                                    </div>
+                                                    <div class="col-md-5">
+                                                        @Html.DropDownListFor(m => m.ReAssignTo, new SelectList(Model.Values, "Value", "Text", "--Individual Users--"), new { id = "ReAssignTo", @class = "form-control" })
+                                                        @Html.ValidationMessageFor(m => m.ReAssignTo)
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-lg-12">
+                                                <div class="form-group">
+                                                    <div class="col-md-4">
+                                                        <label for="inputGroupCode">
+                                                            @DiaryTaskEditor.ReAssignDateFrom&nbsp;<span class="text-danger">*</span></label>
+                                                    </div>
+                                                    <div class="col-md-5">
+                                                        @Html.TextBoxFor(m => m.ReAssignDateFrom, "{0:d}", new { id = "ReAssignDateFrom", @class = "form-control datepicker ", @Value = @ReAssignDateFrom })
+                                                        @Html.ValidationMessageFor(m => m.ReAssignDateFrom)
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-lg-12">
+                                                <div class="form-group">
+                                                    <div class="col-md-4">
+                                                        <label for="inputGroupCode">
+                                                            @Common.Remarks</label>
+                                                    </div>
+                                                    <div class="col-md-5">
+                                                        @Html.TextAreaFor(m => m.Remark, new { id = "Remark", @class = "form-control", rows = "4", cols = "10", @maxlength = "500" })
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </fieldset>
+                                <div id="divsave" class="row" style="display: none;">
+                                    <div class="clearfix igr col-md-12 text-center">
+                                        @if (@myPemissions.Write || @myPemissions.SplPermission)
+                                        {
+                                            <input id="btnSave" class="btn btn-info" type="button" value=" @Common.Save" />
+                                            <input type="button" class="btn btn-info" id="btnReset" onclick="onclickcancel();" value="@Common.Reset"/>
+                                                 
+                                        }
+                                    </div>
+                                </div>
+                                @if (Model.hiddenprop == "1")
+                                {
+                                    <fieldset id="timeStamp">
+                                        <legend></legend>
+                                        <div class="form-group">
+                                            <div class="col-lg-12">
+                                                @Html.Partial("~/Views/Shared/_TimeStamp.cshtml", Model)
+                                            </div>
+                                        </div>
+                                    </fieldset>
+                                }
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    setTabActive("ToDoTab");
+    var do_on_load = function () {
+        $('.ui-wrapper').css("padding", 0);
+        $('textarea').resizable({ handles: 's' });
+
+        var pattern1 = /^(?:(?:31(\/|-|\.)(?:0?[13578]|1[02]))\1|(?:(?:29|30)(\/|-|\.)(?:0?[1,3-9]|1[0-2])\2))(?:(?:1[6-9]|[2-9]\d)?\d{2})$|^(?:29(\/|-|\.)0?2\3(?:(?:(?:1[6-9]|[2-9]\d)?(?:0[48]|[2468][048]|[13579][26])|(?:(?:16|[2468][048]|[3579][26])00))))$|^(?:0?[1-9]|1\d|2[0-8])(\/|-|\.)(?:(?:0?[1-9])|(?:1[0-2]))\4(?:(?:1[6-9]|[2-9]\d)?\d{2})$/;
+
+        $.validator.unobtrusive.adapters.add("isfuturedate", ["other"], function (a) {
+            a.rules.greaterThanCurrent = !0;
+            a.messages.greaterThanCurrent = a.message
+        });
+
+        $.validator.addMethod("greaterThanCurrent", function (a, b, c) {
+            var Currentdate = new Date;
+            var Comparetodate = new Date(a.split("/")["1"] + "/" + a.split("/")["0"] + "/" + a.split("/")["2"]);
+            return "" != a && pattern1.test(a) && !/Invalid|NaN/.test(new Date(a.split("/")["1"] + "/" + a.split("/")["0"] + "/" + a.split("/")["2"])) ?
+            Currentdate.toLocaleDateString() == Comparetodate.toLocaleDateString() ? !0 : new Date(a.split("/")["1"] + "/" + a.split("/")["0"] + "/" + a.split("/")["2"]) > new Date : !0
+        }, "");
+
+        $.validator.unobtrusive.adapters.add("date", ["other"], function (a) {
+            a.rules.date = !0;
+            a.messages.date = "The field " == a.message.substring(0, 10) && a.message.substring(10, a.message.length).replace("must be a date.", "must be in 'dd/mm/yyyy' format.")
+        });
+
+
+        $.validator.methods.required = function (value, element) {
+
+            return element.className.contains("datepicker") && (null == value || "" == value || "DD/MM/YYYY" == value) ? false : (null == value || "" == value) ? false : true;
+        }
+
+
+        $(document).on("focus", ":input", function () { $(this).attr("autocomplete", "off") });
+        $.culture = Globalize.culture("en-GB");
+        $.validator.methods.date = function (a, b) {
+            return ("DD/MM/YYYY" == a.toString() || "" == a.toString()) ? true : this.optional(b) || Globalize.parseDate(a, "dd/MM/yyyy", "en-GB") || Globalize.parseDate(a, "yyyy-mm-dd")
+        };
+
+        $("#ddlDiaryDesc").change(function () { "" != $("#ddlDiaryDesc").val() && $("#inputSubjectLine").val($("#ddlDiaryDesc option:selected").text()).valid(); });
+
+        '@Model.hiddenprop' ? '@Model.hiddenprop' == "1" ? $('#NewDairy,#divsave').show() : $('#ReassignDairy,#divsave,#ReAssignDateFrom').show() : $('#NewDairy,#ReassignDairy,#ReAssignDateFrom,#divsave').hide();
+        '@myPemissions.SplPermission' ? $('#openDiaryReassignment').show() : $('#openDiaryReassignment').hide();
+        SetDateLen();
+
+        $("#btnSave").click(function (a) {
+            if (IsPageChanged()) {
+                $('#ClaimDiaryEditor').find('*').prop('disabled', false);
+                var a = $("#NewDairy").is(':visible');
+                if (IsPageChanged() && $("#Escalation_Y").is(':checked') && $("#ddlEsclationTo").val() == "" && $("#NewDairy").is(':visible')) {
+                    alert("Please select Escalation To", "ddlEsclationTo");
+                }
+                else if (IsPageChanged() && $('#ReassignDairy').is(':visible') && ($("#ReAssignTo").val() == "") && a != true) {
+                    alert("Please select ReAssign To", "ReAssignTo");
+                }
+                else if (IsPageChanged() && $('#ReassignDairy').is(':visible') && ($("#ReAssignDateFrom").val() == "") && a != true) {
+                    alert("Please Enter Re Assign Date From", "ReAssignDateFrom");
+                }
+                else {
+                    IsPageChanged() && $("#diarytaskeditorform").submit();
+                }
+            }
+        });
+        $('.datepicker').datepicker({
+            dateFormat: "dd/mm/yy",
+            showStatus: true,
+            showWeeks: true,
+            currentText: 'Now',
+            autoSize: true,
+            gotoCurrent: true,
+            showAnim: 'blind',
+            highlightWeek: true,
+            changeMonth: !0,
+            changeYear: !0,
+            yearRange: "1951:2050",
+            onSelect: function (a) {
+                $(this).valid()
+
+                if ($('#EndTime').val() != '') {
+                    var endTimeDt = $('#EndTime').val();
+
+                    var ary = new Array();
+                    ary = endTimeDt.split("/");
+
+                    var d = ary[0];
+                    var m = ary[1];
+                    var y = ary[2];
+                    endTimeDt = m + "/" + d + "/" + y;
+                    var d = new Date();
+                    var CurrDt = (d.getMonth() + 1) + "/" + d.getDate() + "/" + d.getFullYear();
+                    if (endTimeDt != '') {
+                        if (new Date(Date.parse(CurrDt)) > new Date(Date.parse(endTimeDt)) || new Date(Date.parse(CurrDt)) < new Date(Date.parse(endTimeDt))) {
+                            alert("Completed Date should be current date.")
+                            $('#EndTime').val('');
+                            $('#ListOpen').val('');
+                        }
+                        else {
+                            $('#ListOpen').val('N');
+                        }
+                    }
+                }
+                if ($('#StartTime').val() != '' && !($('#StartTime').is('[disabled=disabled]'))) {
+                    var startTimeDt = $('#StartTime').val();
+                    var ary = new Array();
+                    ary = startTimeDt.split("/");
+
+                    var d = ary[0];
+                    var m = ary[1];
+                    var y = ary[2];
+                    startTimeDt = m + "/" + d + "/" + y;
+                    var d = new Date();
+                    var CurrDt = (d.getMonth() + 1) + "/" + d.getDate() + "/" + d.getFullYear();
+                    if (startTimeDt != '') {
+                        if (new Date(Date.parse(CurrDt)) > new Date(Date.parse(startTimeDt))) {
+                            alert("Estimated Completion Date can not be less then current date.")
+                            $('#StartTime').val('');
+                        }
+                    }
+                }
+            }
+        });
+        $("#inputReminderBeforeCompletion").keypress(function () {
+            var b = b || event;
+            if (/[a-z]/i.test(String.fromCharCode(b.keyCode)) || 46 == b.keyCode) return !1;
+        });
+        $('#inputEsclation').change(function () { $('#inputEsclation').val() == 'Y' ? $('#EsclationTo').attr('style', 'Display:inline') : $('#EsclationTo').attr('style', 'Display:none'); });
+        if ("@caller" == "Read") {
+            $('#openDiaryReassignment').attr('disabled', 'disabled')
+        }
+        $("#openDiaryTask").click(function () {
+            if ("@caller" == "Read") {
+                $('#ClaimDiaryEditor').show();
+                $('#NewDairy,#divsave').show("slow");
+                $('#ClaimDiaryEditor').find(":input:not([id=Next]):not([id=Previous]):not(.DonotDiableControl)").each(function () {
+                    switch (this.type) {
+                        case "text":
+                            $(this).attr('disabled', 'disabled')
+                        case "textarea":
+                            $(this).attr('disabled', 'disabled')
+                        case "checkbox":
+                            $(this).attr('disabled', 'disabled')
+                        case "radio":
+                            $(this).attr('disabled', 'disabled')
+                        case "button":
+                            $(this).attr('disabled', 'disabled')
+                        case "file":
+                            $(this).attr('disabled', 'disabled')
+
+                    }
+                }) && $('select:not(.DonotDiableControl)').attr('disabled', 'disabled') && $('button:not([id=btnSave]):not(.DonotDiableControl)').attr('disabled', 'disabled') && $('#btnSave,#btnReset').attr('disabled', 'disabled');
+            }
+            else {
+                $('#ClaimDiaryEditor').show();
+                $('#NewDairy,#divsave').show("slow");
+                $('#ReassignDairy').hide();
+                $('#hiddenprop').val("1");
+                $('#ListId').val("")
+                $("select").prop("selectedIndex", 0);
+                $('input[type="text"]').val("");
+                $('#inputCreatedBy').val("@LoginUserDispname")
+                $("textarea").val("");
+                $(':radio').prop('checked', false);
+                $('#result').empty();
+                $('input[type=checkbox]').each(function () {
+                    $(this).attr('checked', false);
+                });
+                $("span.field-validation-error").removeClass("field-validation-error").addClass("field-validation-valid");
+                $('#DivCrDtBy,#DivMoDtBy,#DivCrDt,#DivUpDt,#DivCrTime,#DivUpTime').empty();
+                $("#ReAssignDateFrom").css({ display: "none" });
+                $('#ClaimDiaryEditor').find('*').prop('disabled', false);
+
+                ('@Convert.ToString(Session["ScreenNameDash"])' == '209') && !$('form').hasClass("DonotDiableControl") && $("form").find(":input:not([id=Next]):not([id=Previous]):not([id=btnDialogeOK]):not(.DonotDiableControl)").each(function () {
+                    switch (this.type) {
+                        case "text":
+                            $(this).attr('disabled', 'disabled')
+                        case "textarea":
+                            $(this).attr('disabled', 'disabled')
+                        case "checkbox":
+                            $(this).attr('disabled', 'disabled')
+                        case "radio":
+                            $(this).attr('disabled', 'disabled')
+                        case "button":
+                            $(this).attr('disabled', 'disabled')
+                        case "file":
+                            $(this).attr('disabled', 'disabled')
+
+                    }
+                }) && $('select:not(.DonotDiableControl)').attr('disabled', 'disabled') && $('button:not([id=btnDialogeOK]):not(.DonotDiableControl)').attr('disabled', 'disabled') && $('#btnSave,#btnReset').attr('disabled', 'disabled');
+            }
+        });
+        $("#openDiaryReassignment").click(function (event) {
+            var chkArray = [], d = [];
+            $(".chk:checked").each(function () {
+                if (this.id != "select-all")
+                    chkArray.push($(this).val()) && d.push($(this).attr("SNO"));
+            });
+            var selected;
+            selected = chkArray.join(',') + ",";
+            selected = selected.slice(0, -1);
+            if ((selected.length > 0)) {
+                $.ajax({
+                    type: "POST",
+                    url: '@Url.ActionEncoded("Dairiestobereassigned", "ClaimProcessing")',
+                    data: { DairyId: selected },
+                    success: function (data) {
+                        document.getElementById("Dairiestobereassigned").value = data.join("\n");
+                    }
+                });
+
+                $('#timeStamp').hide();
+                $("#ReAssignDateFrom").css({ display: "block" });
+                $('#ClaimDiaryEditor').show();
+                $('#ReassignDairy,#divsave').show();
+                $('#NewDairy').hide();
+                $('#DairyId').val(selected);
+                $('#hiddenprop').val("2");
+                $('#ListId').val("")
+                $("select").prop("selectedIndex", 0);
+                $("#Remark").val("");
+                $('#result').empty();
+                $("span.field-validation-error").removeClass("field-validation-error").addClass("field-validation-valid");
+                $('#ClaimDiaryEditor').find('*').prop('disabled', false);
+                for (var i = 0, curr; curr = d[i]; i++) {
+                    $("#ReAssignTo option[value=" + curr + "]").attr('disabled', 'disabled');
+                    $("#ReAssignTo option[value=" + curr + "]").addClass('reassignToBackgroundColor');
+                }
+                $("#Dairiestobereassigned,#ReAssignTo,#ReAssignDateFrom,#Remark,#Save,#btnReset").prop("disabled", false).removeAttr("disabled");
+            }
+            else {
+                $('#ReassignDairy').hide();
+                alert("Please select at least one of the checkbox");
+            }
+        });
+
+        if ("@Reassign" != "") {
+            $('input[type=checkbox]').each(function () { "@Reassign" == $(this)[0].value && $(this).prop('checked', true); });
+            $.ajax({
+                type: "POST",
+                url: '@Url.ActionEncoded("Dairiestobereassigned", "ClaimProcessing")',
+                data: { DairyId: "@Reassign" },
+                success: function (data) {
+                    document.getElementById("Dairiestobereassigned").value = data.join("\n");
+                }
+            });
+            $('#ClaimDiaryEditor').show();
+            $('#ReassignDairy,#divsave').show();
+            $('#NewDairy').hide();
+            $('#DairyId').val("@Reassign");
+            $('#hiddenprop').val("2");
+            $('#ListId').val("")
+            $("select").prop("selectedIndex", 0);
+            $("#Remark").val("");
+            $('#result').empty();
+            $("span.field-validation-error").removeClass("field-validation-error").addClass("field-validation-valid");
+        };
+
+        var diaryDesc = "";
+        $('#ddlDiaryDesc option:selected').each(function () {
+            if ($(this).attr("selected", "selected")) {
+                diaryDesc = "1";
+                return false;
+            }
+        });
+        diaryDesc != "1" && $("#ddlDiaryDesc option[value='0']").attr('selected', true);
+        var userID = "";
+        $('#ddlUserID option:selected').each(function () {
+            if ($(this).attr("selected", "selected")) {
+                userID = "1";
+                return false;
+            }
+        });
+        userID != "1" && $("#ddlUserID option[value='0']").attr('selected', true);
+        var esclationTo = "";
+        $('#ddlEsclationTo option:selected').each(function () {
+            if ($(this).attr("selected", "selected")) {
+                esclationTo = "1";
+                return false;
+            }
+        });
+        esclationTo != "1" && $("#ddlEsclationTo option[value='0']").attr('selected', true);
+
+        $('textarea').each(function () {
+            $(this).removeAttr('width').removeAttr('height').parents('div:eq(0)').css('width', '').css('height', "50px");
+        });
+        SetDivPost();
+    };
+    $(document).ready(do_on_load);
+    $(window).bind("page:change", do_on_load);
+
+    function getQueryVariable(a) {
+        for (var e = "@MenuListItem.ClaimTabs.GetQueryStringVal()".replace(/amp;/ig, "").split("&"), d = 0; d < e.length; d++) {
+            var b = e[d].split("=");
+            if (b[0] == a) return b[1]
+        }
+    };
+    function SetDateLen() {
+        $("input[type=text]").each(function () {
+            $(this).hasClass("datepicker") && 10 < $(this).val().length && $(this).val($(this).val().substring(0, 10));
+        });
+    };
+    function onclickcancel() {
+        $('#ListId').val("");
+        $("select").prop("selectedIndex", 0);
+        $('input[type="text"]:not("#ReAssignDateFrom")').val("");
+        $('#inputCreatedBy').val("@createby")
+        $("#inputNote,#inputEmailBody,#Remark").val("");
+        $(':radio').prop('checked', false);
+        $('#result').empty();
+        $("span.field-validation-error").removeClass("field-validation-error").addClass("field-validation-valid");
+        $('input[type=checkbox]').each(function () {
+            $(this).attr('checked', false);
+        });
+    };
+    String.prototype.contains = function (a) {
+        return -1 != this.indexOf(a)
+    };
+
+    function checkKeyCode(evt)// for F5 disable
+    {
+        var evt = (evt) ? evt : ((event) ? event : null);
+        var node = (evt.target) ? evt.target : ((evt.srcElement) ? evt.srcElement : null);
+        if (event.keyCode == 116)//disable F5
+        {
+            evt.keyCode = 0;
+            alert('This operation is not allowed.')
+            return false
+        }
+    }
+
+    var reAssignTo = "";
+    $('#ReAssignTo  option:selected').each(function () {
+        if ($(this).attr("selected", "selected")) {
+            reAssignTo = "1";
+            return false;
+        }
+    });
+    if (reAssignTo != "1") {
+        $("#ReAssignTo  option[value='']").attr('selected', true);
+
+    }
+    document.onkeydown = checkKeyCode;
+    if ("@viewMode" == 'ReadOnly') {
+        $('#ClaimDiaryEditor').find(":input:not([id=Next]):not([id=Previous]):not(.DonotDiableControl)").each(function () {
+            switch (this.type) {
+                case "text":
+                    $(this).attr('disabled', 'disabled')
+                case "textarea":
+                    $(this).attr('disabled', 'disabled')
+                case "checkbox":
+                    $(this).attr('disabled', 'disabled')
+                case "radio":
+                    $(this).attr('disabled', 'disabled')
+                case "button":
+                    $(this).attr('disabled', 'disabled')
+                case "file":
+                    $(this).attr('disabled', 'disabled')
+
+            }
+        }) && $('select:not(.DonotDiableControl)').attr('disabled', 'disabled') && $('button:not([id=btnSave]):not(.DonotDiableControl)').attr('disabled', 'disabled') && $('#btnSave,#btnReset').attr('disabled', 'disabled');
+    }
+    else if ("@viewMode" == 'Edit') {
+        $('#ClaimDiaryEditor').find(":input:not([id=Next]):not([id=Previous]):not([id=EndTime]):not([id=btnSave]):not([id=btnReset])").each(function () {
+            switch (this.type) {
+                case "text":
+                    $(this).attr('disabled', 'disabled')
+                case "textarea":
+                    $(this).attr('disabled', 'disabled')
+                case "checkbox":
+                    $(this).attr('disabled', 'disabled')
+                case "radio":
+                    $(this).attr('disabled', 'disabled')
+                case "button":
+                    $(this).attr('disabled', 'disabled')
+                case "file":
+                    $(this).attr('disabled', 'disabled')
+
+            }
+        }) && $('select:not(.DonotDiableControl)').attr('disabled', 'disabled') && $('button:not([id=btnDialogeOK]):not(.DonotDiableControl)').attr('disabled', 'disabled')
+    }
+    $(".validateDateFormate").blur(function (event) {
+        if ($(this).val() != "" && $(this).val() != 'DD/MM/YYYY') {
+            var errMessage = "";
+            var dob = $(this).val();
+            var pattern = /^(?:(?:31(\/|-|\.)(?:0?[13578]|1[02]))\1|(?:(?:29|30)(\/|-|\.)(?:0?[1,3-9]|1[0-2])\2))(?:(?:1[6-9]|[2-9]\d)?\d{2})$|^(?:29(\/|-|\.)0?2\3(?:(?:(?:1[6-9]|[2-9]\d)?(?:0[48]|[2468][048]|[13579][26])|(?:(?:16|[2468][048]|[3579][26])00))))$|^(?:0?[1-9]|1\d|2[0-8])(\/|-|\.)(?:(?:0?[1-9])|(?:1[0-2]))\4(?:(?:1[6-9]|[2-9]\d)?\d{2})$/;
+            if (!pattern.test(dob)) {
+                errMessage += "Date must be in 'dd/mm/yyyy' format.\n";
+                alert(errMessage);
+                $(this).val("");
+                event.preventDefault();
+                return false;
+            }
+        }
+    });
+
+    if ($('#ddlUserID').val() != '') {
+        if ($('#EndTime').val() == '') {
+            $('#ClaimDiaryEditor').find(":input:not([id=Next]):not([id=Previous]):not([id=EndTime]):not([id=btnSave]):not([id=btnReset])").each(function () {
+                switch (this.type) {
+                    case "text":
+                        $(this).attr('disabled', 'disabled')
+                    case "textarea":
+                        $(this).attr('disabled', 'disabled')
+                    case "checkbox":
+                        $(this).attr('disabled', 'disabled')
+                    case "radio":
+                        $(this).attr('disabled', 'disabled')
+                    case "button":
+                        $(this).attr('disabled', 'disabled')
+                    case "file":
+                        $(this).attr('disabled', 'disabled')
+
+                }
+            }) && $('select:not(.DonotDiableControl)').attr('disabled', 'disabled') && $('button:not([id=btnDialogeOK]):not(.DonotDiableControl)').attr('disabled', 'disabled')
+        }
+        else {
+            $('#ClaimDiaryEditor').find(":input:not([id=Next]):not([id=Previous]):not(.DonotDiableControl)").each(function () {
+                switch (this.type) {
+                    case "text":
+                        $(this).attr('disabled', 'disabled')
+                    case "textarea":
+                        $(this).attr('disabled', 'disabled')
+                    case "checkbox":
+                        $(this).attr('disabled', 'disabled')
+                    case "radio":
+                        $(this).attr('disabled', 'disabled')
+                    case "button":
+                        $(this).attr('disabled', 'disabled')
+                    case "file":
+                        $(this).attr('disabled', 'disabled')
+
+                }
+            }) && $('select:not(.DonotDiableControl)').attr('disabled', 'disabled') && $('button:not([id=btnSave]):not(.DonotDiableControl)').attr('disabled', 'disabled') && $('#btnSave,#btnReset').attr('disabled', 'disabled');
+        }
+    }
+</script>

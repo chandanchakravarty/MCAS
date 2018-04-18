@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Root>
+  <PageTitle>
+    <Culture Code="en-US">Agency</Culture>
+    <Culture Code="zh-SG">Agency</Culture>
+  </PageTitle>
+
+<PageElement name="cmbSTATE_ID" type="LST" Desc=""
+                   IsMandatory="No"
+                   IsReadOnly="No"
+                   IsDisabled="No"
+                   IsDisplay="Yes"
+                   IsFormatingRequired="No"
+                   JsFunctionToFormat=""
+                   OnChangeJSFunction=""
+                   MaxLength="200"
+               >
+  <Bindings>
+    <DataSource type="Proc" name="Proc_FetchAllCountryList" TextField="COUNTRY_NAME" ValueField="COUNTRY_ID" WhereClause="">
+    </DataSource>
+  </Bindings>
+    <Style Position="relative" Top="0" Left="10" CssClass="midcolora" />
+    <rev Enabled="No" ExpKey="" />
+    <Culture Code="en-US" Desc="set Label and Message for English language">
+      <Caption>Country in System</Caption>
+      <rfvMessage>Please enter Carrier Name. </rfvMessage>
+    </Culture>
+    <Culture Code="zh-SG" Desc="set Label and Message for Singapore language">
+      <Caption>Country in System</Caption>
+      <rfvMessage>Please enter Carrier Name. </rfvMessage>
+    </Culture>
+  </PageElement>
+
+
+<PageElement name="cmbSTATEAssignLossCodes" type="LST" Desc=""
+                   IsMandatory="Yes"
+                   IsReadOnly="No"
+                   IsDisabled="No"
+                   IsDisplay="Yes"
+                   IsFormatingRequired="No"
+                   JsFunctionToFormat=""
+                   OnChangeJSFunction=""
+                   MaxLength="200"
+               >
+    <Style Position="relative" Top="0" Left="10" CssClass="midcolora" />
+    <rev Enabled="No" ExpKey="" />
+    <Culture Code="en-US" Desc="set Label and Message for English language">
+      <Caption>Country in Contract</Caption>
+      <rfvMessage>Please enter Carrier Name. </rfvMessage>
+    </Culture>
+    <Culture Code="zh-SG" Desc="set Label and Message for Singapore language">
+      <Caption>Country in Contract</Caption>
+      <rfvMessage>Please enter Carrier Name. </rfvMessage>
+    </Culture>
+  </PageElement>
+
+ 
+</Root>

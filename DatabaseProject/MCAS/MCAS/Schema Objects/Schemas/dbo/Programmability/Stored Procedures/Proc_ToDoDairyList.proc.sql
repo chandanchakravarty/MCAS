@@ -1,0 +1,10 @@
+﻿CREATE PROCEDURE [dbo].[Proc_ToDoDairyList]
+	@ListID [bigint]
+WITH EXECUTE AS CALLER
+AS
+BEGIN
+SET FMTONLY OFF;
+Delete from dbo.TODODIARYLIST where LISTID = @ListID 
+END
+
+

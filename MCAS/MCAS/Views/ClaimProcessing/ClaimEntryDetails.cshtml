@@ -1,0 +1,266 @@
+﻿@model MCAS.Web.Objects.ClaimObjectHelper.ClaimAccidentDetailsModel
+@{
+    ViewBag.Title = "ClaimEntryDetails";
+    Layout = null;
+    var policyid = Request.QueryString["PolicyId"];
+}
+
+<!-- Main Container start -->
+<div class="dashboard-wrapper">
+    <!-- Bootstrap Container Start -->
+    <div class="container">
+        <!-- Page title start -->
+        <div class="row page-title">
+            <div class="col-lg-12">
+                <h2>
+                    Registration</h2>
+                <ul class="breadcrumb">
+                    <li>Home</li>
+                    <li>New Claim Registration</li>
+                </ul>
+            </div>
+        </div>
+        <!-- Page title end -->
+        <!-- Form Start -->
+        <div class="row">
+            <div class="col-lg-12 col-md-12 col-sx-12 col-sm-12">
+                <div class="panel panel-secondary">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">
+                            <i class="icon-keyboard"></i>New Claim Entry</h3>
+                    </div>
+                    <div class="panel-body">
+                        <form role="form" class="form-horizontal" action="#">
+                        <div class="row">
+                            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                                <div class="form-group">
+                                    <label class="col-sm-4 control-label" for="inputIPNo">
+                                        IP No.</label>
+                                    <div class="col-sm-8">
+                                        @Html.DisplayFor(m => m.IPNo, new { id = "inputIPNo"})
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                                <div class="form-group">
+                                    <label class="col-sm-4 control-label" for="inputClaimNo">
+                                        Claim No
+                                    </label>
+                                    <div class="col-sm-8">
+                                        @Html.DisplayFor(m => m.ClaimNo, new { id = "inputClaimNo"})
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                                <div class="form-group">
+                                    <label class="col-sm-4 control-label" for="inputBusServiceNo">
+                                        Bus Service No
+                                    </label>
+                                    <div class="col-sm-8">
+                                        @Html.DisplayFor(m => m.BusServiceNo, new { id = "inputBusServiceNo"})
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                                <div class="form-group">
+                                    <label class="col-sm-4 control-label" for="inputVehicleNo">
+                                        vehicle No
+                                    </label>
+                                    <div class="col-sm-8">
+                                        @Html.DisplayFor(m => m.VehicleNo, new { id = "inputVehicleNo"})
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                                <div class="form-group">
+                                    <label class="col-sm-4 control-label" for="inputAccidentDate">
+                                        Accident Date</label>
+                                    <div class="col-sm-8">
+                                        @Html.DisplayFor(m => m.AccidentDate, new { id = "datepicker"})
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                                <div class="form-group">
+                                    <label class="col-sm-4 control-label" for="inputAccidentTime">
+                                        Accident Time
+                                    </label>
+                                    <div class="col-sm-8">
+                                        @Html.DisplayFor(m => m.AccidentDate, new { id = "inputAccidentTime"})
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                                <div class="form-group">
+                                    <label class="col-sm-4 control-label" for="inputOrganization">
+                                        Organization</label>
+                                    <div class="col-sm-8">
+                                        @Html.DisplayFor(m => m.InvestStatus, new { id = "inputOrganization"})
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                                <div class="form-group">
+                                    <label class="col-sm-4 control-label" for="inputAccidentImage">
+                                        Accident Image
+                                    </label>
+                                    <div class="col-sm-8">
+                                        @Html.DisplayFor(m => m.InvestStatus, new { id = "inputAccidentImage"})
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        </form>
+                        <!-- Tab Start -->
+                        <div class="row">
+                            <div class="col-lg-12 col-md-12 col-sx-12 col-sm-12">
+                                <ul class="nav nav-tabs" id="myTab1">
+                                    <li class="active"><a data-toggle="tab" href="#Accident">Accident</a></li>
+                                    <li><a data-toggle="tab" href="#Claim">Claim</a></li>
+                                    <li><a data-toggle="tab" href="#ThirdParty">3rd Party</a></li>
+                                    <li><a data-toggle="tab" href="#Notes">Notes</a></li>
+                                    <li><a data-toggle="tab" href="#Reserve">Tasks</a></li>
+                                    <li><a data-toggle="tab" href="#PaymentDetails">Finance</a></li>
+                                    <li><a data-toggle="tab" href="#Transactions">Transactions</a></li>
+                                    <li><a data-toggle="tab" href="#Attachments">Attachments</a></li>
+                                </ul>
+                                <!-- Tab panes -->
+                                <div class="tab-content" id="myTabContent2">
+                                    <div class="tab-pane fade active in" id="Accident">
+                                        <div class="row">
+                                            <div class="col-lg-12">
+                                                <div class="panel panel-info" id="divTabAccident">
+                                                    <div class="panel-heading" >
+                                                        Accident Details</div>
+                                                    <div class="panel-body">
+                                                        @Html.Action("ClaimAccidentEditor", "ClaimProcessing", new { PolicyId = @policyid})
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div id="Claim" class="tab-pane fade">
+                                        <div class="row">
+                                            <div class="col-lg-12">
+                                                <div class="panel panel-info" id="divTabClaim">
+                                                    <div class="panel-heading">
+                                                        Claim Details</div>
+                                                    <div class="panel-body">
+                                                        @Html.Action("ClaimRegistrationEditor", "ClaimProcessing", new { PolicyId = @policyid })
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div id="ThirdParty" class="tab-pane fade">
+                                        <div class="row">
+                                            <div class="col-lg-12">
+                                                <div class="panel panel-info">
+                                                    <div class="panel-heading">
+                                                        3rd party Details</div>
+                                                    <div class="panel-body">
+                                                        @Html.Action("ThirdPartyList", "ClaimProcessing", new { PolicyId = @policyid })
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div id="Notes" class="tab-pane fade">
+                                        <div class="row">
+                                            <div class="col-lg-12">
+                                                <div class="panel panel-info">
+                                                    <div class="panel-heading">
+                                                        Notes Details</div>
+                                                    <div class="panel-body">
+                                                        Notes form goes here
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div id="Reserve" class="tab-pane fade">
+                                        <div class="row">
+                                            <div class="col-lg-12">
+                                                <div class="panel panel-info">
+                                                    <div class="panel-heading">
+                                                        Task Details</div>
+                                                    <div class="panel-body">
+                                                        tasks form goes here
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div id="PaymentDetails" class="tab-pane fade">
+                                        <div class="row">
+                                            <div class="col-lg-12">
+                                                <div class="panel panel-info">
+                                                    <div class="panel-heading">
+                                                        Finance Details</div>
+                                                    <div class="panel-body">
+                                                        finance form goes here
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div id="Transactions" class="tab-pane fade">
+                                        <div class="row">
+                                            <div class="col-lg-12">
+                                                <div class="panel panel-info">
+                                                    <div class="panel-heading">
+                                                        Transaction Details</div>
+                                                    <div class="panel-body">
+                                                        transaction form goes here..
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div id="Attachments" class="tab-pane fade">
+                                        <div class="row">
+                                            <div class="col-lg-12">
+                                                <div class="panel panel-info">
+                                                    <div class="panel-heading">
+                                                        Attachments Details</div>
+                                                    <div class="panel-body">
+                                                        @Html.Action("ClaimAttachmentsList", "ClaimProcessing", new { PolicyId = @policyid })
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Bootstrap Container end -->
+</div>
+<!-- Main Container end -->
+<script type="text/javascript">
+
+//    $(document).ready(function () {
+//        $(function () { // will trigger when the document is ready
+//            $('.datepicker').datepicker(); //Initialise any date pickers
+//        });
+//    });
+
+//    function OnlyNumeric(e) {
+//        if ((e.which < 48 || e.which > 57)) {
+//            if (e.which == 8 || e.which == 46 || e.which == 0) {
+//                return true;
+//            }
+//            else {
+//                return false;
+//            }
+//        }
+//    }
+</script>

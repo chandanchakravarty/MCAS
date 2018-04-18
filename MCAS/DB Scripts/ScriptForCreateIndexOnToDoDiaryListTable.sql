@@ -1,0 +1,22 @@
+IF EXISTS (SELECT name FROM sys.indexes
+            WHERE name = N'PK_TODODIARYLIST_TOUSERID') 
+    DROP INDEX PK_TODODIARYLIST_TOUSERID ON [dbo].[TODODIARYLIST]; 
+GO
+
+CREATE NONCLUSTERED INDEX PK_TODODIARYLIST_TOUSERID
+    ON [dbo].[TODODIARYLIST] (TOUSERID); 
+GO
+
+
+//************************************************************
+************************************************************//
+
+
+IF EXISTS (SELECT name FROM sys.indexes
+            WHERE name = N'IX_TODODIARYLIST_CLAIMID') 
+    DROP INDEX IX_TODODIARYLIST_CLAIMID ON [dbo].[TODODIARYLIST]; 
+GO
+
+CREATE NONCLUSTERED INDEX IX_TODODIARYLIST_CLAIMID
+    ON [dbo].[TODODIARYLIST] (CLAIMID); 
+GO

@@ -1,0 +1,125 @@
+--begin tran  
+--DROP PROC dbo.Proc_GenerateProfitLoss  
+--go  
+/*----------------------------------------------------------          
+Proc Name        : dbo.Proc_GenerateProfitLoss          
+Created by       :      
+Date             :   
+Purpose          :   
+Revison History  :          
+Used In          : Wolverine          
+------------------------------------------------------------          
+Date     Review By          Comments          
+------   ------------       -------------------------*/          
+--DROP PROC dbo.Proc_GenerateProfitLoss    
+          
+CREATE PROC [dbo].[Proc_GenerateProfitLoss]          
+(          
+ /*Input parameters*/      
+ @GLID INT = NULL,      
+ @YEARFROM INT = NULL,      -- Valid year format YYYY      
+ @YEARTO INT = NULL,           
+ @MMONTH INT = NULL    -- Valid month 1 to 12       
+      
+)          
+AS          
+BEGIN          
+  
+/*Memory Variables*/      
+DECLARE   
+@MONTHNAME VARCHAR(8),      
+@QUERY VARCHAR(8000),       
+@SUBQUERY VARCHAR(8000)  
+  
+select @MONTHNAME = CONVERT(VARCHAR,@MMONTH) + '/01/00'    
+select @MONTHNAME = UPPER(SUBSTRING(DATENAME (MONTH, @MONTHNAME),1,3))    
+    
+/*Sub query to calculate MTD/YTD based on passed month parameter*/    
+SET @SUBQUERY = 'SELECT GL_ID,ACCOUNT_ID,FISCAL_START_DATE,FISCAL_END_DATE,SUM(YEAR_'+ @MONTHNAME + '_MTD) AS YEAR_MTD, SUM(YEAR_' + @MONTHNAME + '_YTD) AS YEAR_YTD FROM ACT_GENERAL_LEDGER_TOTALS'     
+    
+    
+DECLARE @WHERE VARCHAR(2000)          
+SET @WHERE = ''    
+    
+    
+IF NOT @GLID IS NULL          
+BEGIN          
+  SET @WHERE = 'GL_ID =' + CONVERT(VARCHAR,@GLID)          
+END    
+    
+IF NOT @YEARFROM IS NULL  AND NOT @YEARTO IS NULL         
+BEGIN          
+ if ltrim(rtrim(@WHERE)) = ''      
+  SET @WHERE = 'FISCAL_START_YEAR >= '+ CONVERT(VARCHAR,@YEARFROM) + ' AND FISCAL_END_YEAR <= ' + CONVERT(VARCHAR,@YEARTO)          
+ else      
+  SET @WHERE = @WHERE  + ' AND FISCAL_START_YEAR >= '+ CONVERT(VARCHAR,@YEARFROM) + ' AND FISCAL_END_YEAR <= ' + CONVERT(VARCHAR,@YEARTO)    
+END     
+    
+IF(@WHERE <>'')        
+BEGIN          
+  SET @SUBQUERY = @SUBQUERY + ' WHERE ' + @WHERE          
+END    
+  --Added a Case SUB2.PRIOR_YEAR_MTD as decimal(18,2)) For Itrack Issue 6502   
+SET @SUBQUERY = @SUBQUERY + ' GROUP BY GL_ID,ACCOUNT_ID,FISCAL_START_DATE,FISCAL_END_DATE'    
+    
+SET @QUERY = 'SELECT SUB1.GL_ID AS LEDGER_ID,SUB1.ACCOUNT_ID,GA.ACC_DISP_NUMBER AS ACC_NUMBER,GA.ACC_TYPE_ID AS ACC_TYPE,    
+TM.ACC_TYPE_DESC,SUB1.YEAR_MTD,SUB2.PRIOR_YEAR_MTD,ISNULL(SUB1.YEAR_MTD,0) - ISNULL(SUB2.PRIOR_YEAR_MTD,0) AS VARIANCE_MTD,    
+CHNG_MTD = CASE    
+WHEN SUB1.YEAR_MTD IS NULL AND SUB2.PRIOR_YEAR_MTD IS NULL THEN CAST(0 as decimal(18,2))    
+WHEN SUB1.YEAR_MTD IS NOT NULL AND SUB2.PRIOR_YEAR_MTD IS NULL THEN CAST(100 as decimal(18,2))  
+ ELSE CAST((SUB1.YEAR_MTD - SUB2.PRIOR_YEAR_MTD)* 100/  
+  
+   CASE WHEN ISNULL(SUB2.PRIOR_YEAR_MTD,0)= 0 THEN CASE WHEN  ISNULL(SUB1.YEAR_MTD,0) = 0 THEN 1 ELSE    
+            SUB1.YEAR_MTD END  
+   ELSE SUB2.PRIOR_YEAR_MTD END AS DECIMAL(18,2))   
+END,    
+  
+  
+SUB1.YEAR_YTD,SUB2.PRIOR_YEAR_YTD,ISNULL(SUB1.YEAR_YTD,0) - ISNULL(SUB2.PRIOR_YEAR_YTD,0) AS VARIANCE_YTD,    
+CHNG_YTD = CASE    
+WHEN SUB1.YEAR_YTD IS NULL AND SUB2.PRIOR_YEAR_YTD IS NULL THEN CAST(0 as decimal(18,2))    
+WHEN SUB1.YEAR_YTD IS NOT NULL AND SUB2.PRIOR_YEAR_YTD IS NULL THEN CAST(100 as decimal(18,2))    
+ELSE CAST((SUB1.YEAR_YTD - SUB2.PRIOR_YEAR_YTD)* 100/  
+  
+   CASE WHEN ISNULL(SUB2.PRIOR_YEAR_YTD,0) = 0 THEN CASE WHEN ISNULL(SUB1.YEAR_YTD,0) = 0 THEN 1  ELSE  
+   SUB1.YEAR_YTD END   
+   ELSE SUB2.PRIOR_YEAR_YTD END AS DECIMAL(18,2))   
+  
+END,    
+GL.LEDGER_NAME AS LEDGER_NAME,GA.ACC_DESCRIPTION AS ACC_DESC    
+FROM (' + @SUBQUERY +') SUB1'    
+    
+IF NOT @YEARFROM IS NULL  AND NOT @YEARTO IS NULL    
+BEGIN     
+    
+ SET @QUERY = @QUERY + ' LEFT OUTER JOIN (SELECT GL_ID,ACCOUNT_ID,SUM(YEAR_'+ @MONTHNAME + '_MTD) AS PRIOR_YEAR_MTD, SUM(YEAR_' + @MONTHNAME + '_YTD) AS PRIOR_YEAR_YTD FROM ACT_GENERAL_LEDGER_TOTALS WHERE FISCAL_START_YEAR >= ' + CONVERT(VARCHAR,@YEARFROM
+  
+  
+  
+  
+  
+  
+  
+-1) +' AND FISCAL_END_YEAR <= ' + CONVERT(VARCHAR,@YEARTO-1) +' GROUP BY GL_ID,ACCOUNT_ID) SUB2 ON SUB1.GL_ID = SUB2.GL_ID AND SUB1.ACCOUNT_ID = SUB2.ACCOUNT_ID'    
+END    
+    
+SET @QUERY = @QUERY +' LEFT OUTER JOIN ACT_GENERAL_LEDGER GL ON SUB1.GL_ID = GL.GL_ID AND SUB1.FISCAL_START_DATE = GL.FISCAL_BEGIN_DATE AND SUB1.FISCAL_END_DATE = GL.FISCAL_END_DATE    
+LEFT OUTER JOIN ACT_GL_ACCOUNTS GA ON SUB1.GL_ID = GA.GL_ID AND SUB1.ACCOUNT_ID = GA.ACCOUNT_ID    
+LEFT OUTER JOIN ACT_TYPE_MASTER TM ON GA.ACC_TYPE_ID = TM.ACC_TYPE_ID  
+WHERE TM.ACC_TYPE_ID IN (4,5) ORDER BY ACC_TYPE,ACC_NUMBER'    
+    
+--Print @QUERY       
+EXECUTE(@QUERY)          
+END          
+--        
+--go  
+--exec Proc_GenerateProfitLoss null,2008,2008,12  
+--rollback tran   
+  
+  
+  
+  
+  
+  
+  
+  

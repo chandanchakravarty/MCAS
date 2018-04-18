@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Root>
+
+  <PageCalledFor TypeID="">
+
+    <HeaderString>
+      <value Culture="en-US">Underwriting Limits</value>
+      <value Culture="zh-SG">Underwriting Limits</value>
+      <value Culture="pt-BR">Underwriting Limits</value>
+    </HeaderString>
+
+    <SearchMessage>
+      <value Culture="en-US">Please select the Search Option,enter Search Criteria,and click on the Search button^Please select the Search Option, enter Search Criteria, and click on the Search button</value>
+      <value Culture="zh-SG">Please select the Search Option,enter Search Criteria,and click on the Search button^Please select the Search Option, enter Search Criteria, and click on the Search button</value>
+      <value Culture="pt-BR">Por favor, selecione a opção de pesquisa, introduzir critérios de pesquisa, e clique no botão Pesquisar ^ Por favor, selecione a opção de pesquisa, introduzir critérios de pesquisa, e clique no botão Pesquisar</value>
+    </SearchMessage>
+
+    <FilterLabel>
+      <value Culture="en-US">Include Inactive</value>
+      <value Culture="zh-SG">Include Inactive</value>
+      <value Culture="pt-BR">Include Inactive</value>
+    </FilterLabel>
+    <SearchColumnHeadings>
+      <value Culture="en-US">Country^Product^Pml Limit</value>
+      <value Culture="zh-SG">Country^Product^Sum Insured</value>
+      <value Culture="pt-BR">Country^Product^Pml Limit</value>
+    </SearchColumnHeadings>
+    <SearchColumnNames>
+      <value>MCL.COUNTRY_NAME^MUCL.LOB_ID^PML_LIMIT</value>
+    </SearchColumnNames>
+
+    <SearchColumnType>
+      <value>T^L^T</value>
+    </SearchColumnType>
+
+    <DropDownColumns>
+      <value>^LOB^</value>
+    </DropDownColumns>
+    <DisplayColumnNumbers>
+      <value>1^2^3^4</value>
+    </DisplayColumnNumbers>
+
+    <DisplayColumnHeadings>
+      <value Culture="en-US">Country^Product^Pml Limit^Premium</value>
+      <value Culture="zh-SG">Country^Product^Sum Insured^Premium Approval Limit</value>
+      <value Culture="pt-BR">Country^Product^Pml Limit^Premium</value>
+    </DisplayColumnHeadings>
+
+    <DisplayColumnNames>
+      <value>COUNTRY_NAME^LOB_DESC^PML_LIMIT^PREMIUM_APPROVAL_LIMIT</value>
+    </DisplayColumnNames>
+
+    <DisplayTextLength>
+      <value>20^40^20^20</value>
+    </DisplayTextLength>
+
+    <DisplayColumnPercent>
+      <value>20^40^20^20</value>
+    </DisplayColumnPercent>
+
+    <FetchColumns>
+      <value>1^2^3^4</value>
+    </FetchColumns>
+
+    <ColumnTypes>
+      <value>B^B^B^B</value>
+    </ColumnTypes>
+
+    <SelectClause>
+      <value>
+        MCL.COUNTRY_NAME,MLM.LOB_DESC,PML_LIMIT,PREMIUM_APPROVAL_LIMIT,USER_ID,LOOKUP_VALUE_DESC,ASSIGN_ID
+      </value>
+    </SelectClause>
+
+    <FromClause>
+      <value>MNT_UNDERWRITING_CLAIM_LIMITS MUCL LEFT JOIN MNT_COUNTRY_LIST MCL on MCL.COUNTRY_ID=MUCL.COUNTRY_ID LEFT JOIN MNT_LOB_MASTER MLM on MLM.LOB_ID=MUCL.LOB_ID LEFT join MNT_LOOKUP_VALUES MLV on Lookup_unique_id=CLAIM_REOPEN</value>
+    </FromClause>
+
+    <WhereClause>
+      <value></value>
+    </WhereClause>
+
+    <PrimaryColumns>
+      <value>1</value>
+    </PrimaryColumns>
+
+    <PrimaryColumnsName>
+      <value>ASSIGN_ID</value>
+    </PrimaryColumnsName>
+
+    <OrderByClause>
+      <value>ASSIGN_ID asc</value>
+    </OrderByClause>
+
+    <AllowDBLClick>
+      <value>true</value>
+    </AllowDBLClick>
+
+    <ExtraButtons>
+      <value>1^Add New^0^addRecord</value>
+    </ExtraButtons>
+
+    <RequireQuery>
+      <value>Y</value>
+    </RequireQuery>
+
+    <QueryStringColumns>
+      <value>ASSIGN_ID^USER_ID</value>
+    </QueryStringColumns>
+
+    <DefaultSearch>
+      <value>Y</value>
+    </DefaultSearch>
+
+    <FilterValue>
+      <value>Y</value>
+    </FilterValue>
+
+  </PageCalledFor>
+
+  <!--<PageCalledFor TypeID="1">
+    
+    <HeaderString>
+      <value Culture="en-US">Insurance Funds</value>
+      <value Culture="zh-SG">Insurance Funds</value>
+      <value Culture="pt-BR">Insurance Funds</value>
+    </HeaderString>
+    
+  </PageCalledFor>-->
+
+</Root>
+
+

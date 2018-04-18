@@ -1,0 +1,1799 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Group Code taken from RuleType  Enumeration defined in ClsCoverages  -->
+<Root>
+	<Master>
+		<Query Code="SELECT" Level="APP">Proc_GetKeysForAuto_APP</Query>
+		<Query Code="SELECT" Level="POLICY">Proc_GetKeysForAuto_Policy</Query>
+		<Column Code="APP_EFFECTIVE_DATE" MapColumnn="APP_EFFECTIVE_DATE" TableAssociated="APP_LIST"
+			ColumnAssociated="APP_EFFECTIVE_DATE"></Column>
+		<Column Code="APP_YEAR" MapColumnn="APP_YEAR" TableAssociated="APP_LIST" ColumnAssociated="APP_EFFECTIVE_DATE"></Column>
+		<Column Code="STATE_ID" MapColumnn="STATE_ID" TableAssociated="APP_LIST" ColumnAssociated="STATE_ID"></Column>
+		<Column Code="AUTO_TYPE" MapColumnn="AUTO_TYPE" TableAssociated="APP_VEHICLE_INFO"></Column>
+		<Column Code="AUTO_USE" MapColumnn="AUTO_USE" TableAssociated="APP_VEHICLE_INFO"></Column>
+		<Column Code="LOB_ID" MapColumnn="LOB_ID" TableAssociated="APP_VEHICLE_INFO"></Column>
+		<Column Code="PIP_COV" MapColumnn="PIP_COV" TableAssociated="APP_VEHICLE_COVERAGE"></Column>
+		<Column Code="DRIVER_TYPE" MapColumnn="DRIVER_TYPE" TableAssociated="APP_VEHICLE_COVERAGE"></Column>
+		<Column Code="PPIP" MapColumnn="PPIP" TableAssociated="APP_VEHICLE_COVERAGE"></Column>
+		<Column Code="CPIP" MapColumnn="CPIP" TableAssociated="APP_VEHICLE_COVERAGE"></Column>
+		<Column Code="WAIVER_LOSS" MapColumnn="WAIVER_LOSS" TableAssociated="APP_VEHICLE_COVERAGE"></Column>
+		<Column Code="AMOUNT_TYPE" MapColumnn="AMOUNT_TYPE" TableAssociated="APP_VEHICLE_INFO"></Column>
+		<Column Code="VEHICLE_USE" MapColumnn="VEHICLE_USE" TableAssociated="APP_VEHICLE_INFO"></Column>
+		<Column Code="SUM_MIS" MapColumnn="SUM_MIS" TableAssociated="APP_MISCELLANEOUS_EQUIPMENT_VALUES"></Column>
+		<Column Code="COUNT_MIS" MapColumnn="COUNT_MIS" TableAssociated="APP_MISCELLANEOUS_EQUIPMENT_VALUES"></Column>
+		<Column Code="OLD_COMP" MapColumnn="OLD_COMP" TableAssociated="APP_VEHICLE_COVERAGE"></Column>
+		<Column Code="OLD_COLL" MapColumnn="OLD_COLL" TableAssociated="APP_VEHICLE_COVERAGE"></Column>
+		<Column Code="VEH_AMOUNT" MapColumnn="VEH_AMOUNT" TableAssociated="APP_VEHICLE_COVERAGE"></Column>
+		<Column Code="VEH_MAKE" MapColumnn="VEH_MAKE" TableAssociated="APP_VEHICLE_COVERAGE"></Column>
+		<Column Code="NO_CLAIMS" MapColumnn="NO_CLAIMS" TableAssociated="APP_VEHICLE_COVERAGE"></Column>
+		<Column Code="EXT_NON_OWN" MapColumnn="EXT_NON_OWN" TableAssociated="APP_DRIVER_DETAILS"></Column>
+		<Column Code="SLL_OPTED" MapColumnn="SLL_OPTED" TableAssociated="APP_VEHICLE_COVERAGE"></Column>
+		<Column Code="COLL_OPTED" MapColumnn="COLL_OPTED" TableAssociated="APP_VEHICLE_COVERAGE"></Column>
+		<Column Code="FULLPIP" MapColumnn="FULLPIP" TableAssociated="APP_VEHICLE_COVERAGE"></Column>
+		<Column Code="IS_SUSPENDED" MapColumnn="IS_SUSPENDED" TableAssociated="APP_VEHICLE_COVERAGE"></Column>
+		<Column Code="NEW_COLL" MapColumnn=""></Column>
+		<Column Code="NEW_COLL_TEMP" MapColumnn=""></Column>
+		<Column Code="OLD_COLL_TEXT" MapColumnn="OLD_COLL_TEXT"></Column>
+		<Column Code="NEW_COMP" MapColumnn=""></Column>
+	</Master>
+	<!-- Coverages to be defaulted when new vehicle is added  -->
+	<Group Code="Default">
+		<Rule Action="Database" StartDate="1950-01-01" EndDate="3000-12-30" STATE_ID="22">
+			<Conditions>
+        <!-- Adding MCCA fee as Coverage in vehicle Coverage table; added on 26 Aug 2010 by PK -->
+        <Condition Operand1="1" Operator="==" Operand2="1" OperandType="Double">
+         <ToGrant CoverageCode="MCCAF">
+          <Limit Value="" Operand1="" Operator="" Operand2="" DeducID=""></Limit>
+          <Deductible Value="" Operand1="" Operator="" Operand2="" DeducID=""></Deductible>
+        </ToGrant>
+        </Condition>
+      </Conditions>
+		</Rule>
+	</Group>
+	<!-- Coverages to be Adjusted when called from MakeApp  -->
+	<!-- IN case of make App call this after save default coverage & before importing Make App Data -->
+	<Group Code="MakeAppDependent">
+		<Rule Action="Database" StartDate="1950-01-01" EndDate="3000-12-30">
+			<Conditions>
+				<Condition Operand1="1" Operator="==" Operand2="1" OperandType="Double">
+					<ToRevoke CoverageCode="BISPL"></ToRevoke>
+					<ToRevoke CoverageCode="PD"></ToRevoke>
+				</Condition>
+			</Conditions>
+		</Rule>
+	</Group>
+	<!-- Risk Dependent Rules -->
+	<Group Code="RiskDependent">
+		<!-- Rules for setting Master Keys -->
+		<Rule Action="Master" StartDate="1950-01-01" EndDate="3000-12-12" STATE_ID="14">
+			<Conditions>
+				<!--Vehicle Type And Amount-->
+				<Condition Operand1="1" Operator="==" Operand2="1" OperandType="Double">
+					<ToSet Key="$NEW_COLL" Value="0"></ToSet>
+					<ToSet Key="$NEW_COMP" Value="0"></ToSet>
+				</Condition>
+			</Conditions>
+			<Conditions>
+				<Condition Operand1="$IS_SUSPENDED" Operator="==" Operand2="1" OperandType="Double">
+					<SubConditions>
+						<SubCondition Operand1="$OLD_COMP" Operator="==" Operand2="0" OperandType="Double">
+							<ToSet Key="$NEW_COMP" Value="250"></ToSet>
+						</SubCondition>
+					</SubConditions>
+				</Condition>
+				<!--Vehicle Type And Amount-->
+				<!--11336 : Motor home, Truck or Van Campers-->
+				<Condition Operand1="$AUTO_TYPE" Operator="==" Operand2="11336" OperandType="Double">
+					<SubConditions>
+						<SubCondition Operand1="$VEH_AMOUNT" Operator="&lt;" Operand2="50000" OperandType="Double">
+							<ToSet Key="$NEW_COMP" Value="100"></ToSet>
+						</SubCondition>
+					</SubConditions>
+				</Condition>
+			</Conditions>
+			<Conditions>
+				<!--No Of Claims Dependency-->
+				<Condition Operand1="$NO_CLAIMS" Operator="==" Operand2="2" OperandType="Double">
+					<ToSet Key="$NEW_COMP" Value="150"></ToSet>
+				</Condition>
+				<Condition Operand1="$NO_CLAIMS" Operator="==" Operand2="3" OperandType="Double">
+					<ToSet Key="$NEW_COMP" Value="250"></ToSet>
+				</Condition>
+				<Condition Operand1="$NO_CLAIMS" Operator=">=" Operand2="4" OperandType="Double">
+					<ToSet Key="$NEW_COMP" Value="500"></ToSet>
+				</Condition>
+			</Conditions>
+			<Conditions>
+				<!--Vehicle Use Commercial -->
+				<!--11341 : Trailer-->
+				<Condition Operand1="$AUTO_TYPE" Operator="==" Operand2="11341" OperandType="Double">
+					<SubConditions>
+						<SubCondition Operand1="$AUTO_USE" Operator="==" Operand2="11333" OperandType="Double">
+							<ToSet Key="$NEW_COMP" Value="250"></ToSet>
+							<ToSet Key="$NEW_COLL" Value="250"></ToSet>
+							<ToSet Key="$NEW_COLL_TEMP" Value="250 Broad"></ToSet>
+						</SubCondition>
+					</SubConditions>
+				</Condition>
+			</Conditions>
+			<Conditions>
+				<!--Make Of Vehicle-->
+				<Condition Operand1="$VEH_MAKE" Operator="!=" Operand2="0" OperandType="Double">
+					<ToSet Key="$NEW_COMP" Value="500"></ToSet>
+					<ToSet Key="$NEW_COLL" Value="500"></ToSet>
+				</Condition>
+			</Conditions>
+			<Conditions>
+				<!--Vehicle Type And Amount-->
+				<Condition Operand1="$AUTO_TYPE" Operator="==" Operand2="11336" OperandType="Double">
+					<SubConditions>
+						<SubCondition Operand1="$VEH_AMOUNT" Operator="&lt;" Operand2="50001" OperandType="Double">
+							<ToSet Key="$NEW_COLL" Value="500"></ToSet>
+						</SubCondition>
+						<SubCondition Operand1="$VEH_AMOUNT" Operator="&gt;" Operand2="50000" OperandType="Double">
+							<ToSet Key="$NEW_COMP" Value="2000"></ToSet>
+							<ToSet Key="$NEW_COLL" Value="2000"></ToSet>
+						</SubCondition>
+					</SubConditions>
+				</Condition>
+			</Conditions>
+			<Conditions>
+				<Condition Operand1="$OLD_COMP" Operator=">=" Operand2="$NEW_COMP" OperandType="Double">
+					<ToSet Key="$NEW_COMP" Value="$OLD_COMP"></ToSet>
+				</Condition>
+			</Conditions>
+			<Conditions>
+				<Condition Operand1="$OLD_COLL" Operator=">=" Operand2="$NEW_COLL" OperandType="Double">
+					<ToSet Key="$NEW_COLL" Value="$OLD_COLL"></ToSet>
+				</Condition>
+			</Conditions>
+		</Rule>
+		<Rule Action="Master" StartDate="1950-01-01" EndDate="3000-12-12" STATE_ID="22">
+			<Conditions>
+				<!--Vehicle Type And Amount-->
+				<Condition Operand1="1" Operator="==" Operand2="1" OperandType="Double">
+					<ToSet Key="$NEW_COLL" Value="0"></ToSet>
+					<ToSet Key="$NEW_COMP" Value="0"></ToSet>
+					<ToSet Key="$NEW_COLL_TEMP" Value="0"></ToSet>
+				</Condition>
+			</Conditions>
+			<Conditions>
+				<Condition Operand1="$IS_SUSPENDED" Operator="==" Operand2="1" OperandType="Double">
+					<SubConditions>
+						<SubCondition Operand1="$OLD_COMP" Operator="==" Operand2="0" OperandType="Double">
+							<ToSet Key="$NEW_COMP" Value="250"></ToSet>
+						</SubCondition>
+					</SubConditions>
+				</Condition>
+				<!--Vehicle Type And Amount-->
+				<Condition Operand1="$AUTO_TYPE" Operator="==" Operand2="11336" OperandType="Double">
+					<SubConditions>
+						<SubCondition Operand1="$VEH_AMOUNT" Operator="&lt;" Operand2="50000" OperandType="Double">
+							<ToSet Key="$NEW_COMP" Value="100"></ToSet>
+						</SubCondition>
+					</SubConditions>
+				</Condition>
+			</Conditions>
+			<Conditions>
+				<!--No Of Claims Dependency-->
+				<Condition Operand1="$NO_CLAIMS" Operator="==" Operand2="2" OperandType="Double">
+					<ToSet Key="$NEW_COMP" Value="150"></ToSet>
+				</Condition>
+				<Condition Operand1="$NO_CLAIMS" Operator="==" Operand2="3" OperandType="Double">
+					<ToSet Key="$NEW_COMP" Value="250"></ToSet>
+				</Condition>
+				<Condition Operand1="$NO_CLAIMS" Operator=">=" Operand2="4" OperandType="Double">
+					<ToSet Key="$NEW_COMP" Value="500"></ToSet>
+				</Condition>
+			</Conditions>
+			<Conditions>
+				<!--Vehicle Use Commercial -->
+				<!--11341 : Trailer-->
+				<Condition Operand1="$AUTO_TYPE" Operator="==" Operand2="11341" OperandType="Double">
+					<SubConditions>
+						<SubCondition Operand1="$AUTO_USE" Operator="==" Operand2="11333" OperandType="Double">
+							<ToSet Key="$NEW_COMP" Value="250"></ToSet>
+							<ToSet Key="$NEW_COLL" Value="250"></ToSet>
+							<ToSet Key="$NEW_COLL_TEMP" Value="250 Broad"></ToSet>
+						</SubCondition>
+					</SubConditions>
+				</Condition>
+			</Conditions>
+			<Conditions>
+				<!--Make Of Vehicle-->
+				<Condition Operand1="$VEH_MAKE" Operator="!=" Operand2="0" OperandType="Double">
+					<ToSet Key="$NEW_COMP" Value="500"></ToSet>
+					<SubConditions>
+						<SubCondition Operand1="$OLD_COLL" Operator="==" Operand2="0" OperandType="String">
+							<ToSet Key="$NEW_COLL" Value="$OLD_COLL"></ToSet>
+							<ToSet Key="$NEW_COLL_TEMP" Value="0 Limited"></ToSet>
+						</SubCondition>
+						<SubCondition Operand1="$OLD_COLL" Operator="!=" Operand2="0" OperandType="String">
+							<ToSet Key="$NEW_COLL" Value="500"></ToSet>
+							<ToSet Key="$NEW_COLL_TEMP" Value="500 Broad"></ToSet>
+						</SubCondition>
+					</SubConditions>
+				</Condition>
+			</Conditions>
+			<Conditions>
+				<!--Vehicle Type And Amount-->
+				<Condition Operand1="$AUTO_TYPE" Operator="==" Operand2="11336" OperandType="Double">
+					<SubConditions>
+						<SubCondition Operand1="$VEH_AMOUNT" Operator="&lt;" Operand2="50001" OperandType="Double">
+							<ToSet Key="$NEW_COLL" Value="500"></ToSet>
+							<ToSet Key="$NEW_COLL_TEMP" Value="500 Broad"></ToSet>
+						</SubCondition>
+						<SubCondition Operand1="$VEH_AMOUNT" Operator="&gt;" Operand2="50000" OperandType="Double">
+							<ToSet Key="$NEW_COMP" Value="2000"></ToSet>
+							<ToSet Key="$NEW_COLL" Value="2000"></ToSet>
+						</SubCondition>
+					</SubConditions>
+				</Condition>
+			</Conditions>
+			<Conditions>
+				<!--Vehicle Type And Amount-->
+				<Condition Operand1="$OLD_COMP" Operator=">=" Operand2="$NEW_COMP" OperandType="Double">
+					<ToSet Key="$NEW_COMP" Value="$OLD_COMP"></ToSet>
+				</Condition>
+			</Conditions>
+			<Conditions>
+				<!--Get The final Rule-->
+				<Condition Operand1="$OLD_COLL" Operator=">=" Operand2="$NEW_COLL" OperandType="Double">
+					<ToSet Key="$NEW_COLL" Value="$OLD_COLL_TEXT"></ToSet>
+					<ToSet Key="$NEW_COLL_TEMP" Value="$OLD_COLL_TEXT"></ToSet>
+				</Condition>
+				<Condition Operand1="$AUTO_TYPE" Operator="==" Operand2="11336" OperandType="Double">
+					<SubConditions>
+						<SubCondition Operand1="$VEH_AMOUNT" Operator="&gt;" Operand2="50000" OperandType="Double">
+							<ToSet Key="$NEW_COLL" Value="2000"></ToSet>
+						</SubCondition>
+						<SubCondition Operand1="$OLD_COLL" Operator="==" Operand2="400" OperandType="Double">
+							<ToSet Key="$NEW_COLL" Value="400"></ToSet>
+							<ToSet Key="$NEW_COLL_TEMP" Value="$OLD_COLL_TEXT"></ToSet>
+						</SubCondition>
+						<SubCondition Operand1="$OLD_COLL" Operator="==" Operand2="0" OperandType="Double">
+							<ToSet Key="$NEW_COLL" Value="$OLD_COLL"></ToSet>
+							<ToSet Key="$NEW_COLL_TEMP" Value="$OLD_COLL_TEXT"></ToSet>
+						</SubCondition>
+					</SubConditions>
+				</Condition>
+			</Conditions>
+			<!-- Conditions
+				Get The final Rule
+				Condition Operand1="$NEW_COLL" Operator=">=" Operand2="500" OperandType="Double">
+					ToSet Key="$NEW_COLL_TEMP" Value="500 Broad"></ToSet>
+				/Condition>
+			/Conditions -->
+			<Conditions>
+				<!--Get The final Rule-->
+				<Condition Operand1="$AUTO_TYPE" Operator="==" Operand2="11336" OperandType="Double">
+					<SubConditions>
+						<SubCondition Operand1="$NEW_COLL" Operator=">=" Operand2="2000" OperandType="Double">
+							<ToSet Key="$NEW_COLL_TEMP" Value="2000 Broad"></ToSet>
+						</SubCondition>
+					</SubConditions>
+				</Condition>
+			</Conditions>
+			<Conditions>
+				<!--Get The Value From Temporary Variable-->
+				<Condition Operand1="1" Operator="==" Operand2="1" OperandType="Double">
+					<ToSet Key="$NEW_COLL" Value="$NEW_COLL_TEMP"></ToSet>
+				</Condition>
+			</Conditions>
+		</Rule>
+		<!-- For Defaulting BISPL & PD -->
+		<Rule Action="Database" StartDate="1950-01-01" EndDate="3000-12-30" STATE_ID="22">
+			<Conditions>
+				<!--Commercial  11333   -->
+				<Condition Operand1="$AUTO_USE" Operator="==" Operand2="11333">
+					<SubCondition Operand1="$SLL_OPTED" Operator="==" Operand2="0">
+						<ToGrant CoverageCode="BISPL">
+							<Limit Value="25/50000" Operand1="" Operator="" Operand2="" DeducID=""></Limit>
+							<Deductible Value="" Operand1="" Operator="" Operand2="" DeducID=""></Deductible>
+						</ToGrant>
+						<ToGrant CoverageCode="PD">
+							<Limit Value="25000" Operand1="" Operator="" Operand2="" DeducID=""></Limit>
+							<Deductible Value="" Operand1="" Operator="" Operand2="" DeducID=""></Deductible>
+						</ToGrant>
+					</SubCondition>
+				</Condition>
+				<!--Private Passenger Auto  11334   -->
+				<Condition Operand1="$AUTO_TYPE" Operator="==" Operand2="11334">
+					<SubCondition Operand1="$SLL_OPTED" Operator="==" Operand2="0">
+						<ToGrant CoverageCode="BISPL">
+							<Limit Value="25/50000" Operand1="" Operator="" Operand2="" DeducID=""></Limit>
+							<Deductible Value="" Operand1="" Operator="" Operand2="" DeducID=""></Deductible>
+						</ToGrant>
+						<ToGrant CoverageCode="PD">
+							<Limit Value="25000" Operand1="" Operator="" Operand2="" DeducID=""></Limit>
+							<Deductible Value="" Operand1="" Operator="" Operand2="" DeducID=""></Deductible>
+						</ToGrant>
+					</SubCondition>
+				</Condition>
+				<!-- Customized Van or Truck  11335 -->
+				<Condition Operand1="$AUTO_TYPE" Operator="==" Operand2="11335">
+					<SubCondition Operand1="$SLL_OPTED" Operator="==" Operand2="0">
+						<ToGrant CoverageCode="BISPL">
+							<Limit Value="25/50000" Operand1="" Operator="" Operand2="" DeducID=""></Limit>
+							<Deductible Value="" Operand1="" Operator="" Operand2="" DeducID=""></Deductible>
+						</ToGrant>
+						<ToGrant CoverageCode="PD">
+							<Limit Value="25000" Operand1="" Operator="" Operand2="" DeducID=""></Limit>
+							<Deductible Value="" Operand1="" Operator="" Operand2="" DeducID=""></Deductible>
+						</ToGrant>
+					</SubCondition>
+				</Condition>
+				<!--Motor home, Truck or Van Campers 11336   -->
+				<Condition Operand1="$AUTO_TYPE" Operator="==" Operand2="11336">
+					<SubCondition Operand1="$SLL_OPTED" Operator="==" Operand2="0">
+						<ToGrant CoverageCode="BISPL">
+							<Limit Value="25/50000" Operand1="" Operator="" Operand2="" DeducID=""></Limit>
+							<Deductible Value="" Operand1="" Operator="" Operand2="" DeducID=""></Deductible>
+						</ToGrant>
+						<ToGrant CoverageCode="PD">
+							<Limit Value="25000" Operand1="" Operator="" Operand2="" DeducID=""></Limit>
+							<Deductible Value="" Operand1="" Operator="" Operand2="" DeducID=""></Deductible>
+						</ToGrant>
+					</SubCondition>
+				</Condition>
+			</Conditions>
+		</Rule>
+		<Rule Action="Database" StartDate="1950-01-01" EndDate="3000-12-30" STATE_ID="22">
+			<!--  Vehicle Type Dependency-->
+			<Conditions>
+				<Condition Operand1="$AUTO_USE" Operator="==" Operand2="11332">
+					<ToGrant CoverageCode="PIP">
+						<Limit Value=" Excess Medical" Operand1="" Operator="" Operand2="" DeducID=""></Limit>
+						<Deductible Value="300" Operand1="" Operator="" Operand2="" DeducID=""></Deductible>
+					</ToGrant>
+					<ToGrant CoverageCode="CAB91">
+						<Limit Value="" Operand1="" Operator="" Operand2="" DeducID=""></Limit>
+						<Deductible Value="300" Operand1="" Operator="" Operand2="" DeducID=""></Deductible>
+					</ToGrant>
+					<ToGrant CoverageCode="PAP6">
+						<Limit Value="" Operand1="" Operator="" Operand2="" DeducID=""></Limit>
+						<Deductible Value="" Operand1="" Operator="" Operand2="" DeducID=""></Deductible>
+					</ToGrant>
+					<ToGrant CoverageCode="TE90">
+						<Limit Value="" Operand1="" Operator="" Operand2="" DeducID=""></Limit>
+						<Deductible Value="" Operand1="" Operator="" Operand2="" DeducID=""></Deductible>
+					</ToGrant>
+					<ToSet CoverageCode="COLL">
+						<Limit Value="" Operand1="" Operator="" Operand2="" DeducID=""></Limit>
+						<Deductible Value="$NEW_COLL" Operand1="" Operator="" Operand2="" DeducID=""></Deductible>
+					</ToSet>
+					<ToSet CoverageCode="COMP">
+						<Limit Value="" Operand1="" Operator="" Operand2="" DeducID=""></Limit>
+						<Deductible Value="$NEW_COMP" Operand1="" Operator="" Operand2="" DeducID=""></Deductible>
+					</ToSet>
+					<SubCondition Operand1="$PPIP" Operator="==" Operand2="0">
+						<ToSet CoverageCode="PIP">
+							<Limit Value=" Excess Medical" Operand1="" Operator="" Operand2="" LimitID=""></Limit>
+							<Deductible Value="300" Operand1="" Operator="" Operand2="" DeducID=""></Deductible>
+						</ToSet>
+					</SubCondition>
+					<!--Commetted as per Itrack 4229 ToRevoke CoverageCode="TE92"></ToRevoke -->
+					<!-- Commented by Asfa(13-June-2008) - iTrack #4283
+					<ToRevoke CoverageCode="TAP7"></ToRevoke>
+					-->
+				</Condition>
+			</Conditions>
+			<Conditions>
+				<Condition Operand1="$AUTO_USE" Operator="==" Operand2="11332">
+					<SubCondition Operand1="$FULLPIP" Operator="!=" Operand2="0">
+						<ToRevoke CoverageCode="CAB91"></ToRevoke>
+					</SubCondition>
+				</Condition>
+			</Conditions>
+			<Conditions>
+				<!--  Personal (11332)        -->
+				<Condition Operand1="$AUTO_USE" Operator="==" Operand2="11332">
+					<SubCondition Operand1="$VEHICLE_USE" Operator="==" Operand2="11272" OperandType="Double">
+						<ToGrant CoverageCode="SPA8">
+							<Limit Value="" Operand1="" Operator="" Operand2="" DeducID=""></Limit>
+							<Deductible Value="250" Operand1="" Operator="" Operand2="" DeducID=""></Deductible>
+						</ToGrant>
+					</SubCondition>
+					<SubCondition Operand1="$VEHICLE_USE" Operator="!=" Operand2="11272" OperandType="Double">
+						<ToRevoke CoverageCode="SPA8"></ToRevoke>
+					</SubCondition>
+				</Condition>
+			</Conditions>
+			<Conditions>
+				<Condition Operand1="$AUTO_USE" Operator="==" Operand2="11332">
+					<SubCondition Operand1="$AMOUNT_TYPE" Operator="==" Operand2="8708">
+						<ToGrant CoverageCode="SA44">
+							<Limit Value="" Operand1="" Operator="" Operand2="" DeducID=""></Limit>
+							<Deductible Value="" Operand1="" Operator="" Operand2="" DeducID=""></Deductible>
+						</ToGrant>
+					</SubCondition>
+					<SubCondition Operand1="$AMOUNT_TYPE" Operator="!=" Operand2="8708">
+						<ToRevoke CoverageCode="SA44"></ToRevoke>
+					</SubCondition>
+				</Condition>
+			</Conditions>
+			<!--  Is Suspended-Comp  Yes      -->
+			<Conditions>
+				<Condition Operand1="$IS_SUSPENDED" Operator="==" Operand2="1">
+					<ToGrant CoverageCode="COMP">
+						<Limit Value="" Operand1="" Operator="" Operand2="" DeducID=""></Limit>
+						<Deductible Value="$NEW_COMP" Operand1="" Operator="" Operand2="" DeducID=""></Deductible>
+					</ToGrant>
+					<ToRevoke CoverageCode="PPI"></ToRevoke>
+					<ToRevoke CoverageCode="ROAD"></ToRevoke>
+					<ToRevoke CoverageCode="LPD"></ToRevoke>
+					<ToRevoke CoverageCode="LLGC"></ToRevoke>
+					<ToRevoke CoverageCode="RREIM"></ToRevoke>
+					<ToRevoke CoverageCode="SORPE"></ToRevoke>
+					<ToRevoke CoverageCode="SORCV"></ToRevoke>
+					<ToRevoke CoverageCode="SLL"></ToRevoke>
+					<ToRevoke CoverageCode="BISPL"></ToRevoke>
+					<ToRevoke CoverageCode="UMPD"></ToRevoke>
+					<ToRevoke CoverageCode="PUNCS"></ToRevoke>
+					<ToRevoke CoverageCode="PUMSP"></ToRevoke>
+					<ToRevoke CoverageCode="UNDSP"></ToRevoke>
+					<ToRevoke CoverageCode="UNCSL"></ToRevoke>
+					<ToRevoke CoverageCode="ENO"></ToRevoke>
+					<ToRevoke CoverageCode="EBENO"></ToRevoke>
+					<ToRevoke CoverageCode="PIP"></ToRevoke>
+					<ToRevoke CoverageCode="PD"></ToRevoke>
+					<ToRevoke CoverageCode="EBCE"></ToRevoke>
+					<ToRevoke CoverageCode="MHT22"></ToRevoke>
+					<ToRevoke CoverageCode="AMC49"></ToRevoke>
+					<ToRevoke CoverageCode="CC49"></ToRevoke>
+					<ToRevoke CoverageCode="SPA8"></ToRevoke>
+					<ToRevoke CoverageCode="CAB91"></ToRevoke>
+					<ToRevoke CoverageCode="RCC68"></ToRevoke>
+					<ToRevoke CoverageCode="DD25"></ToRevoke>
+					<!-- ITrack 5518 -->
+					<!--ToRevoke CoverageCode="EP95"></ToRevoke-->
+					<!--ToRevoke CoverageCode="PAP6"></ToRevoke-->
+					<!--ToRevoke CoverageCode="TE90"></ToRevoke-->
+					<ToRevoke CoverageCode="PIP94"></ToRevoke>
+					<ToRevoke CoverageCode="SA44"></ToRevoke>
+					<ToRevoke CoverageCode="EECOMP"></ToRevoke>
+					<ToRevoke CoverageCode="COLL"></ToRevoke>
+					<ToRevoke CoverageCode="SRTE"></ToRevoke>
+					<!-- Customized Van or Truck  11335  Itrack 5674-->
+					<SubCondition Operand1="$AUTO_TYPE" Operator="==" Operand2="11335">
+						<ToGrant CoverageCode="EBCE">
+							<Limit Value="" Operand1="" Operator="" Operand2="" DeducID=""></Limit>
+							<Deductible Value="" Operand1="" Operator="" Operand2="" DeducID=""></Deductible>
+						</ToGrant>
+					</SubCondition>
+					<!--Motor home, Truck or Van Campers 11336   Itrack 5674-->
+					<SubCondition Operand1="$AUTO_TYPE" Operator="==" Operand2="11336">
+						<ToGrant CoverageCode="MHT22">
+							<Limit Value="" Operand1="" Operator="" Operand2="" DeducID=""></Limit>
+							<Deductible Value="" Operand1="" Operator="" Operand2="" DeducID=""></Deductible>
+						</ToGrant>
+					</SubCondition>
+					<!--Antique Car  11869   -->
+					<SubCondition Operand1="$AUTO_TYPE" Operator="==" Operand2="11869">
+						<ToGrant CoverageCode="AMC49">
+							<Limit Value="" Operand1="" Operator="" Operand2="" DeducID=""></Limit>
+							<Deductible Value="" Operand1="" Operator="" Operand2="" DeducID=""></Deductible>
+						</ToGrant>
+						<ToGrant CoverageCode="SA44">
+							<Limit Value="" Operand1="" Operator="" Operand2="" DeducID=""></Limit>
+							<Deductible Value="" Operand1="" Operator="" Operand2="" DeducID=""></Deductible>
+						</ToGrant>
+					</SubCondition>
+					<!-- Classic Car  11868 -->
+					<SubCondition Operand1="$AUTO_TYPE" Operator="==" Operand2="11868">
+						<ToGrant CoverageCode="CC49">
+							<Limit Value="" Operand1="" Operator="" Operand2="" DeducID=""></Limit>
+							<Deductible Value="" Operand1="" Operator="" Operand2="" DeducID=""></Deductible>
+						</ToGrant>
+						<ToGrant CoverageCode="SA44">
+							<Limit Value="" Operand1="" Operator="" Operand2="" DeducID=""></Limit>
+							<Deductible Value="" Operand1="" Operator="" Operand2="" DeducID=""></Deductible>
+						</ToGrant>
+					</SubCondition>
+				</Condition>
+				<!--  Suspended-Comp Only (11618-SCO)        -->
+				<Condition Operand1="$AUTO_TYPE" Operator="==" Operand2="11618">
+					<ToRevoke CoverageCode="PPI"></ToRevoke>
+					<ToRevoke CoverageCode="ROAD"></ToRevoke>
+					<ToRevoke CoverageCode="LPD"></ToRevoke>
+					<ToRevoke CoverageCode="LLGC"></ToRevoke>
+					<ToRevoke CoverageCode="RREIM"></ToRevoke>
+					<ToRevoke CoverageCode="SORPE"></ToRevoke>
+					<ToRevoke CoverageCode="SORCV"></ToRevoke>
+					<ToRevoke CoverageCode="SLL"></ToRevoke>
+					<ToRevoke CoverageCode="BISPL"></ToRevoke>
+					<ToRevoke CoverageCode="UMPD"></ToRevoke>
+					<ToRevoke CoverageCode="PUNCS"></ToRevoke>
+					<ToRevoke CoverageCode="PUMSP"></ToRevoke>
+					<ToRevoke CoverageCode="UNDSP"></ToRevoke>
+					<ToRevoke CoverageCode="UNCSL"></ToRevoke>
+					<ToRevoke CoverageCode="ENO"></ToRevoke>
+					<ToRevoke CoverageCode="EBENO"></ToRevoke>
+					<ToRevoke CoverageCode="PIP"></ToRevoke>
+					<ToRevoke CoverageCode="PD"></ToRevoke>
+					<ToRevoke CoverageCode="EBCE"></ToRevoke>
+					<ToRevoke CoverageCode="MHT22"></ToRevoke>
+					<ToRevoke CoverageCode="AMC49"></ToRevoke>
+					<ToRevoke CoverageCode="CC49"></ToRevoke>
+					<ToRevoke CoverageCode="SPA8"></ToRevoke>
+					<ToRevoke CoverageCode="CAB91"></ToRevoke>
+					<ToRevoke CoverageCode="RCC68"></ToRevoke>
+					<ToRevoke CoverageCode="DD25"></ToRevoke>
+					<!-- ITrack 5518 -->
+					<!--ToRevoke CoverageCode="EP95"></ToRevoke-->
+					<!--ToRevoke CoverageCode="PAP6"></ToRevoke-->
+					<!--ToRevoke CoverageCode="TE90"></ToRevoke-->
+					<ToRevoke CoverageCode="PIP94"></ToRevoke>
+					<ToRevoke CoverageCode="SA44"></ToRevoke>
+					<ToRevoke CoverageCode="EECOMP"></ToRevoke>
+					<ToRevoke CoverageCode="COLL"></ToRevoke>
+				</Condition>
+				<!--  Utility Trailer  (11337)        -->
+				<Condition Operand1="$AUTO_TYPE" Operator="==" Operand2="11337">
+					<ToRevoke CoverageCode="PPI"></ToRevoke>
+					<ToRevoke CoverageCode="ROAD"></ToRevoke>
+					<ToRevoke CoverageCode="LPD"></ToRevoke>
+					<ToRevoke CoverageCode="LLGC"></ToRevoke>
+					<ToRevoke CoverageCode="RREIM"></ToRevoke>
+					<ToRevoke CoverageCode="SORPE"></ToRevoke>
+					<ToRevoke CoverageCode="SORCV"></ToRevoke>
+					<ToRevoke CoverageCode="SLL"></ToRevoke>
+					<ToRevoke CoverageCode="BISPL"></ToRevoke>
+					<ToRevoke CoverageCode="UMPD"></ToRevoke>
+					<ToRevoke CoverageCode="PUNCS"></ToRevoke>
+					<ToRevoke CoverageCode="PUMSP"></ToRevoke>
+					<ToRevoke CoverageCode="UNDSP"></ToRevoke>
+					<ToRevoke CoverageCode="UNCSL"></ToRevoke>
+					<ToRevoke CoverageCode="ENO"></ToRevoke>
+					<ToRevoke CoverageCode="EBENO"></ToRevoke>
+					<ToRevoke CoverageCode="PIP"></ToRevoke>
+					<ToRevoke CoverageCode="PD"></ToRevoke>
+					<ToRevoke CoverageCode="EBCE"></ToRevoke>
+					<ToRevoke CoverageCode="MHT22"></ToRevoke>
+					<ToRevoke CoverageCode="AMC49"></ToRevoke>
+					<ToRevoke CoverageCode="CC49"></ToRevoke>
+					<!-- as per itrack 4536 -->
+					<ToRevoke CoverageCode="PIP94"></ToRevoke>
+					<ToRevoke CoverageCode="EP95"></ToRevoke>
+					<ToRevoke CoverageCode="CAB91"></ToRevoke>
+					<ToRevoke CoverageCode="SRTE"></ToRevoke>
+					<!--ToRevoke CoverageCode="TE90"></ToRevoke-->
+					<ToRevoke CoverageCode="SPA8"></ToRevoke>
+					<ToRevoke CoverageCode="SA44"></ToRevoke>
+					<!--ToRevoke CoverageCode="PAP6"></ToRevoke-->
+					<ToRevoke CoverageCode="EECOLL"></ToRevoke>
+					<ToRevoke CoverageCode="EECOMP"></ToRevoke>
+					<!-- end as per Itrack 4536 -->
+				</Condition>
+				<!--Commercial  11333   -->
+				<Condition Operand1="$AUTO_USE" Operator="==" Operand2="11333">
+					<!-- Commetted as per Itrack 4229
+					<ToGrant CoverageCode="TE92">
+						<Limit Value="" Operand1="" Operator="" Operand2="" DeducID=""></Limit>
+						<Deductible Value="" Operand1="" Operator="" Operand2="" DeducID=""></Deductible>
+					</ToGrant>
+					 -->
+					<!-- Commented by Asfa(13-June-2008) - iTrack #4283
+					<ToGrant CoverageCode="TAP7">
+						<Limit Value="" Operand1="" Operator="" Operand2="" DeducID=""></Limit>
+						<Deductible Value="" Operand1="" Operator="" Operand2="" DeducID=""></Deductible>
+					</ToGrant>
+					-->
+					<ToGrant CoverageCode="PPI">
+						<Limit Value="1000000" Operand1="" Operator="" Operand2="" DeducID=""></Limit>
+						<Deductible Value="" Operand1="" Operator="" Operand2="" DeducID=""></Deductible>
+					</ToGrant>
+					<!-- ToGrant CoverageCode="PIP">
+						<Limit Value="  Excess Medical &amp; Full Wage Loss" Operand1="" Operator="" Operand2=""
+							DeducID=""></Limit>
+						<Deductible Value="300" Operand1="" Operator="" Operand2="" DeducID=""></Deductible>
+					</ToGrant -->
+					<ToGrant CoverageCode="CAB91">
+						<Limit Value="" Operand1="" Operator="" Operand2="" DeducID=""></Limit>
+						<Deductible Value="300" Operand1="" Operator="" Operand2="" DeducID=""></Deductible>
+					</ToGrant>
+					<ToSet CoverageCode="COLL">
+						<Limit Value="" Operand1="" Operator="" Operand2="" DeducID=""></Limit>
+						<Deductible Value="$NEW_COLL" Operand1="" Operator="" Operand2="" DeducID=""></Deductible>
+					</ToSet>
+					<ToSet CoverageCode="COMP">
+						<Limit Value="" Operand1="" Operator="" Operand2="" DeducID=""></Limit>
+						<Deductible Value="$NEW_COMP" Operand1="" Operator="" Operand2="" DeducID=""></Deductible>
+					</ToSet>
+					<ToGrant CoverageCode="TE90">
+						<Limit Value="" Operand1="" Operator="" Operand2="" DeducID=""></Limit>
+						<Deductible Value="" Operand1="" Operator="" Operand2="" DeducID=""></Deductible>
+					</ToGrant>
+					<!-- PAP6 added as per Itrack 4530 -->
+					<ToGrant CoverageCode="PAP6">
+						<Limit Value="" Operand1="" Operator="" Operand2="" DeducID=""></Limit>
+						<Deductible Value="" Operand1="" Operator="" Operand2="" DeducID=""></Deductible>
+					</ToGrant>
+					<ToRevoke CoverageCode="EBHA"></ToRevoke>
+					<ToRevoke CoverageCode="ROAD"></ToRevoke>
+					<ToRevoke CoverageCode="RREIM"></ToRevoke>
+					<ToRevoke CoverageCode="UNDSP"></ToRevoke>
+					<ToRevoke CoverageCode="ENO"></ToRevoke>
+					<ToRevoke CoverageCode="MHT22"></ToRevoke>
+					<ToRevoke CoverageCode="AMC49"></ToRevoke>
+					<ToRevoke CoverageCode="CC49"></ToRevoke>
+					<ToRevoke CoverageCode="EBCE"></ToRevoke>
+					<ToRevoke CoverageCode="EBENO"></ToRevoke>
+					<ToRevoke CoverageCode="EBHA"></ToRevoke>
+					<ToRevoke CoverageCode="SPA8"></ToRevoke>
+					<ToRevoke CoverageCode="UNCSL"></ToRevoke>
+					<!-- ToRevoke CoverageCode="TE90"></ToRevoke -->
+					<ToRevoke CoverageCode="SA44"></ToRevoke>
+					<ToRevoke CoverageCode="LLGC"></ToRevoke>
+					<ToRevoke CoverageCode="SORPE"></ToRevoke>
+					<ToRevoke CoverageCode="SRTE"></ToRevoke>
+					<SubCondition Operand1="$CPIP" Operator="==" Operand2="0">
+						<ToGrant CoverageCode="PIP">
+							<Limit Value=" Excess Medical &amp; Full Wage Loss" Operand1="" Operator="" Operand2=""
+								LimitID=""></Limit>
+							<Deductible Value="300" Operand1="" Operator="" Operand2="" DeducID=""></Deductible>
+						</ToGrant>
+					</SubCondition>
+				</Condition>
+				<!--Private Passenger Auto  11334   -->
+				<Condition Operand1="$AUTO_TYPE" Operator="==" Operand2="11334">
+					<ToGrant CoverageCode="PPI">
+						<Limit Value="1000000" Operand1="" Operator="" Operand2="" DeducID=""></Limit>
+						<Deductible Value="" Operand1="" Operator="" Operand2="" DeducID=""></Deductible>
+					</ToGrant>
+					<ToRevoke CoverageCode="EBCE"></ToRevoke>
+					<ToRevoke CoverageCode="MHT22"></ToRevoke>
+					<ToRevoke CoverageCode="EBCE"></ToRevoke>
+					<ToRevoke CoverageCode="CC49"></ToRevoke>
+					<ToRevoke CoverageCode="AMC49"></ToRevoke>
+				</Condition>
+				<!-- Customized Van or Truck  11335 -->
+				<Condition Operand1="$AUTO_TYPE" Operator="==" Operand2="11335">
+					<ToGrant CoverageCode="PPI">
+						<Limit Value="1000000" Operand1="" Operator="" Operand2="" DeducID=""></Limit>
+						<Deductible Value="" Operand1="" Operator="" Operand2="" DeducID=""></Deductible>
+					</ToGrant>
+					<ToGrant CoverageCode="EBCE">
+						<Limit Value="" Operand1="" Operator="" Operand2="" DeducID=""></Limit>
+						<Deductible Value="" Operand1="" Operator="" Operand2="" DeducID=""></Deductible>
+					</ToGrant>
+					<ToRevoke CoverageCode="MHT22"></ToRevoke>
+					<ToRevoke CoverageCode="CC49"></ToRevoke>
+					<ToRevoke CoverageCode="AMC49"></ToRevoke>
+				</Condition>
+				<!--Antique Car  11869   -->
+				<Condition Operand1="$AUTO_TYPE" Operator="==" Operand2="11869">
+					<ToGrant CoverageCode="AMC49">
+						<Limit Value="" Operand1="" Operator="" Operand2="" DeducID=""></Limit>
+						<Deductible Value="" Operand1="" Operator="" Operand2="" DeducID=""></Deductible>
+					</ToGrant>
+					<ToGrant CoverageCode="SA44">
+						<Limit Value="" Operand1="" Operator="" Operand2="" DeducID=""></Limit>
+						<Deductible Value="" Operand1="" Operator="" Operand2="" DeducID=""></Deductible>
+					</ToGrant>
+					<ToRevoke CoverageCode="MHT22"></ToRevoke>
+					<ToRevoke CoverageCode="EBCE"></ToRevoke>
+					<ToRevoke CoverageCode="CC49"></ToRevoke>
+				</Condition>
+				<!-- Classic Car  11868 -->
+				<Condition Operand1="$AUTO_TYPE" Operator="==" Operand2="11868">
+					<ToGrant CoverageCode="CC49">
+						<Limit Value="" Operand1="" Operator="" Operand2="" DeducID=""></Limit>
+						<Deductible Value="" Operand1="" Operator="" Operand2="" DeducID=""></Deductible>
+					</ToGrant>
+					<ToGrant CoverageCode="SA44">
+						<Limit Value="" Operand1="" Operator="" Operand2="" DeducID=""></Limit>
+						<Deductible Value="" Operand1="" Operator="" Operand2="" DeducID=""></Deductible>
+					</ToGrant>
+					<ToRevoke CoverageCode="MHT22"></ToRevoke>
+					<ToRevoke CoverageCode="EBCE"></ToRevoke>
+					<ToRevoke CoverageCode="AMC49"></ToRevoke>
+				</Condition>
+				<!--Motor home, Truck or Van Campers 11336   -->
+				<Condition Operand1="$AUTO_TYPE" Operator="==" Operand2="11336">
+					<ToGrant CoverageCode="PPI">
+						<Limit Value="1000000" Operand1="" Operator="" Operand2="" DeducID=""></Limit>
+						<Deductible Value="" Operand1="" Operator="" Operand2="" DeducID=""></Deductible>
+					</ToGrant>
+					<ToGrant CoverageCode="MHT22">
+						<Limit Value="" Operand1="" Operator="" Operand2="" DeducID=""></Limit>
+						<Deductible Value="" Operand1="" Operator="" Operand2="" DeducID=""></Deductible>
+					</ToGrant>
+					<ToRevoke CoverageCode="RREIM"></ToRevoke>
+					<ToRevoke CoverageCode="EBCE"></ToRevoke>
+					<ToRevoke CoverageCode="CC49"></ToRevoke>
+					<ToRevoke CoverageCode="AMC49"></ToRevoke>
+				</Condition>
+				<!--Camper&amp; Travel Trailer 11870   -->
+				<Condition Operand1="$AUTO_TYPE" Operator="==" Operand2="11870">
+					<ToGrant CoverageCode="MHT22">
+						<Limit Value="" Operand1="" Operator="" Operand2="" DeducID=""></Limit>
+						<Deductible Value="" Operand1="" Operator="" Operand2="" DeducID=""></Deductible>
+					</ToGrant>
+					<ToRevoke CoverageCode="RREIM"></ToRevoke>
+					<ToRevoke CoverageCode="EBCE"></ToRevoke>
+					<!-- as per itrack 4536 -->
+					<ToRevoke CoverageCode="PPI"></ToRevoke>
+					<ToRevoke CoverageCode="ROAD"></ToRevoke>
+					<ToRevoke CoverageCode="LPD"></ToRevoke>
+					<ToRevoke CoverageCode="LLGC"></ToRevoke>
+					<ToRevoke CoverageCode="SORPE"></ToRevoke>
+					<ToRevoke CoverageCode="SORCV"></ToRevoke>
+					<ToRevoke CoverageCode="SLL"></ToRevoke>
+					<ToRevoke CoverageCode="BISPL"></ToRevoke>
+					<ToRevoke CoverageCode="UMPD"></ToRevoke>
+					<ToRevoke CoverageCode="PUNCS"></ToRevoke>
+					<ToRevoke CoverageCode="PUMSP"></ToRevoke>
+					<ToRevoke CoverageCode="UNDSP"></ToRevoke>
+					<ToRevoke CoverageCode="UNCSL"></ToRevoke>
+					<ToRevoke CoverageCode="ENO"></ToRevoke>
+					<ToRevoke CoverageCode="EBENO"></ToRevoke>
+					<ToRevoke CoverageCode="PIP"></ToRevoke>
+					<ToRevoke CoverageCode="PD"></ToRevoke>
+					<ToRevoke CoverageCode="AMC49"></ToRevoke>
+					<ToRevoke CoverageCode="CC49"></ToRevoke>
+					<ToRevoke CoverageCode="PIP94"></ToRevoke>
+					<ToRevoke CoverageCode="EP95"></ToRevoke>
+					<ToRevoke CoverageCode="CAB91"></ToRevoke>
+					<ToRevoke CoverageCode="SRTE"></ToRevoke>
+					<!--ToRevoke CoverageCode="TE90"></ToRevoke-->
+					<ToRevoke CoverageCode="SPA8"></ToRevoke>
+					<ToRevoke CoverageCode="SA44"></ToRevoke>
+					<!--ToRevoke CoverageCode="PAP6"></ToRevoke-->
+					<ToRevoke CoverageCode="EECOLL"></ToRevoke>
+					<ToRevoke CoverageCode="EECOMP"></ToRevoke>
+					<!-- end as per Itrack 4536 -->
+				</Condition>
+			</Conditions>
+			<Conditions>
+				<!--Commercial  11333   and type is trailer  as per itrack 4536 -->
+				<Condition Operand1="$AUTO_USE" Operator="==" Operand2="11333">
+					<!--ITrack 5586  -->
+					<ToGrant CoverageCode="TE90">
+						<Limit Value="" Operand1="" Operator="" Operand2="" DeducID=""></Limit>
+						<Deductible Value="" Operand1="" Operator="" Operand2="" DeducID=""></Deductible>
+					</ToGrant>
+					<ToGrant CoverageCode="PAP6">
+						<Limit Value="" Operand1="" Operator="" Operand2="" DeducID=""></Limit>
+						<Deductible Value="" Operand1="" Operator="" Operand2="" DeducID=""></Deductible>
+					</ToGrant>
+					<!--  Is Suspended-Comp  Yes      -->
+					<SubCondition Operand1="$IS_SUSPENDED" Operator="==" Operand2="1">
+						<ToGrant CoverageCode="COMP">
+							<Limit Value="" Operand1="" Operator="" Operand2="" DeducID=""></Limit>
+							<Deductible Value="$NEW_COMP" Operand1="" Operator="" Operand2="" DeducID=""></Deductible>
+						</ToGrant>
+						<ToRevoke CoverageCode="PPI"></ToRevoke>
+						<ToRevoke CoverageCode="LPD"></ToRevoke>
+						<ToRevoke CoverageCode="SORCV"></ToRevoke>
+						<ToRevoke CoverageCode="SLL"></ToRevoke>
+						<ToRevoke CoverageCode="BISPL"></ToRevoke>
+						<ToRevoke CoverageCode="UMPD"></ToRevoke>
+						<ToRevoke CoverageCode="PUNCS"></ToRevoke>
+						<ToRevoke CoverageCode="PUMSP"></ToRevoke>
+						<ToRevoke CoverageCode="UNCSL"></ToRevoke>
+						<ToRevoke CoverageCode="UNDSP"></ToRevoke>
+						<ToRevoke CoverageCode="COLL"></ToRevoke>
+						<ToRevoke CoverageCode="ROAD"></ToRevoke>
+						<ToRevoke CoverageCode="RREIM"></ToRevoke>
+						<ToRevoke CoverageCode="LLGC"></ToRevoke>
+						<ToRevoke CoverageCode="EBCE"></ToRevoke>
+						<ToRevoke CoverageCode="SORPE"></ToRevoke>
+						<ToRevoke CoverageCode="PIP94"></ToRevoke>
+						<ToRevoke CoverageCode="PIP"></ToRevoke>
+						<ToRevoke CoverageCode="PD"></ToRevoke>
+						<ToRevoke CoverageCode="PIP94"></ToRevoke>
+						<!-- ITrack 5518 -->
+						<!--ToRevoke CoverageCode="EP95"></ToRevoke-->
+						<ToRevoke CoverageCode="CAB91"></ToRevoke>
+						<ToRevoke CoverageCode="SRTE"></ToRevoke>
+						<ToRevoke CoverageCode="EECOLL"></ToRevoke>
+						<ToRevoke CoverageCode="EECOMP"></ToRevoke>
+						<ToRevoke CoverageCode="TE92"></ToRevoke>
+					</SubCondition>
+					<SubCondition Operand1="$AUTO_TYPE" Operator="==" Operand2="11341">
+						<ToRevoke CoverageCode="PPI"></ToRevoke>
+						<ToRevoke CoverageCode="LPD"></ToRevoke>
+						<ToRevoke CoverageCode="SORCV"></ToRevoke>
+						<ToRevoke CoverageCode="SLL"></ToRevoke>
+						<ToRevoke CoverageCode="BISPL"></ToRevoke>
+						<ToRevoke CoverageCode="UMPD"></ToRevoke>
+						<ToRevoke CoverageCode="PUNCS"></ToRevoke>
+						<ToRevoke CoverageCode="PUMSP"></ToRevoke>
+						<ToRevoke CoverageCode="UNCSL"></ToRevoke>
+						<ToRevoke CoverageCode="PIP"></ToRevoke>
+						<ToRevoke CoverageCode="PD"></ToRevoke>
+						<ToRevoke CoverageCode="PIP94"></ToRevoke>
+						<ToRevoke CoverageCode="EP95"></ToRevoke>
+						<ToRevoke CoverageCode="CAB91"></ToRevoke>
+						<ToRevoke CoverageCode="SRTE"></ToRevoke>
+						<!--ToRevoke CoverageCode="TE90"></ToRevoke>
+						<ToRevoke CoverageCode="PAP6"></ToRevoke-->
+						<ToRevoke CoverageCode="EECOLL"></ToRevoke>
+						<ToRevoke CoverageCode="EECOMP"></ToRevoke>
+					</SubCondition>
+				</Condition>
+			</Conditions>
+			<Conditions>
+				<!--if make model is CORVETTE Remove -->
+				<Condition Operand1="$AUTO_USE" Operator="==" Operand2="11332">
+					<SubCondition Operand1="$VEH_MAKE" Operator="!=" Operand2="0">
+						<ToRevoke CoverageCode="RCC68"></ToRevoke>
+					</SubCondition>
+				</Condition>
+			</Conditions>
+		</Rule>
+		<!-- Rule for Defaulting Bispl  & PD -->
+		<Rule Action="Database" StartDate="1950-01-01" EndDate="3000-12-30" STATE_ID="14">
+			<Conditions>
+				<!--Commercial  11333   -->
+				<Condition Operand1="$AUTO_USE" Operator="==" Operand2="11333">
+					<SubCondition Operand1="$SLL_OPTED" Operator="==" Operand2="0">
+						<ToGrant CoverageCode="BISPL">
+							<Limit Value="25/50000" Operand1="" Operator="" Operand2="" DeducID=""></Limit>
+							<Deductible Value="" Operand1="" Operator="" Operand2="" DeducID=""></Deductible>
+						</ToGrant>
+						<ToGrant CoverageCode="PD">
+							<Limit Value="25000" Operand1="" Operator="" Operand2="" DeducID=""></Limit>
+							<Deductible Value="" Operand1="" Operator="" Operand2="" DeducID=""></Deductible>
+						</ToGrant>
+					</SubCondition>
+				</Condition>
+				<!--Private Passenger Auto  11334   -->
+				<Condition Operand1="$AUTO_TYPE" Operator="==" Operand2="11334">
+					<SubCondition Operand1="$SLL_OPTED" Operator="==" Operand2="0">
+						<ToGrant CoverageCode="BISPL">
+							<Limit Value="25/50000" Operand1="" Operator="" Operand2="" DeducID=""></Limit>
+							<Deductible Value="" Operand1="" Operator="" Operand2="" DeducID=""></Deductible>
+						</ToGrant>
+						<ToGrant CoverageCode="PD">
+							<Limit Value="25000" Operand1="" Operator="" Operand2="" DeducID=""></Limit>
+							<Deductible Value="" Operand1="" Operator="" Operand2="" DeducID=""></Deductible>
+						</ToGrant>
+					</SubCondition>
+				</Condition>
+				<!-- Customized Van or Truck  11335 -->
+				<Condition Operand1="$AUTO_TYPE" Operator="==" Operand2="11335">
+					<SubCondition Operand1="$SLL_OPTED" Operator="==" Operand2="0">
+						<ToGrant CoverageCode="BISPL">
+							<Limit Value="25/50000" Operand1="" Operator="" Operand2="" DeducID=""></Limit>
+							<Deductible Value="" Operand1="" Operator="" Operand2="" DeducID=""></Deductible>
+						</ToGrant>
+						<ToGrant CoverageCode="PD">
+							<Limit Value="25000" Operand1="" Operator="" Operand2="" DeducID=""></Limit>
+							<Deductible Value="" Operand1="" Operator="" Operand2="" DeducID=""></Deductible>
+						</ToGrant>
+					</SubCondition>
+				</Condition>
+				<!--Motorhome 11336   -->
+				<Condition Operand1="$AUTO_TYPE" Operator="==" Operand2="11336">
+					<SubCondition Operand1="$SLL_OPTED" Operator="==" Operand2="0">
+						<ToGrant CoverageCode="BISPL">
+							<Limit Value="25/50000" Operand1="" Operator="" Operand2="" DeducID=""></Limit>
+							<Deductible Value="" Operand1="" Operator="" Operand2="" DeducID=""></Deductible>
+						</ToGrant>
+						<ToGrant CoverageCode="PD">
+							<Limit Value="25000" Operand1="" Operator="" Operand2="" DeducID=""></Limit>
+							<Deductible Value="" Operand1="" Operator="" Operand2="" DeducID=""></Deductible>
+						</ToGrant>
+					</SubCondition>
+				</Condition>
+			</Conditions>
+		</Rule>
+		<Rule Action="Database" StartDate="1950-01-01" EndDate="3000-12-30" STATE_ID="14">
+			<!--  Driver Details        -->
+			<Conditions>
+				<!--  Personal (11332)        -->
+				<Condition Operand1="$AUTO_USE" Operator="==" Operand2="11332">
+					<ToGrant CoverageCode="TAP7">
+						<Limit Value="" Operand1="" Operator="" Operand2="" DeducID=""></Limit>
+						<Deductible Value="" Operand1="" Operator="" Operand2="" DeducID=""></Deductible>
+					</ToGrant>
+					<ToGrant CoverageCode="TE90">
+						<Limit Value="" Operand1="" Operator="" Operand2="" DeducID=""></Limit>
+						<Deductible Value="" Operand1="" Operator="" Operand2="" DeducID=""></Deductible>
+					</ToGrant>
+					<ToSet CoverageCode="COLL">
+						<Limit Value="" Operand1="" Operator="" Operand2="" DeducID=""></Limit>
+						<Deductible Value="$NEW_COLL" Operand1="" Operator="" Operand2="" DeducID=""></Deductible>
+					</ToSet>
+					<ToSet CoverageCode="OTC">
+						<Limit Value="" Operand1="" Operator="" Operand2="" DeducID=""></Limit>
+						<Deductible Value="$NEW_COMP" Operand1="" Operator="" Operand2="" DeducID=""></Deductible>
+					</ToSet>
+					<!-- Commetted as per Itrack 4229 ToRevoke CoverageCode="TE92"></ToRevoke> -->
+					<SubCondition Operand1="$AMOUNT_TYPE" Operator="==" Operand2="8708">
+						<ToGrant CoverageCode="SA44">
+							<Limit Value="" Operand1="" Operator="" Operand2="" DeducID=""></Limit>
+							<Deductible Value="" Operand1="" Operator="" Operand2="" DeducID=""></Deductible>
+						</ToGrant>
+					</SubCondition>
+					<SubCondition Operand1="$AMOUNT_TYPE" Operator="!=" Operand2="8708">
+						<ToRevoke CoverageCode="SA44"></ToRevoke>
+					</SubCondition>
+				</Condition>
+			</Conditions>
+			<Conditions>
+				<!--  Personal (11332)        -->
+				<Condition Operand1="$AUTO_USE" Operator="==" Operand2="11332">
+					<SubCondition Operand1="$VEHICLE_USE" Operator="==" Operand2="11272" OperandType="Double">
+						<ToGrant CoverageCode="SPA8">
+							<Limit Value="" Operand1="" Operator="" Operand2="" DeducID=""></Limit>
+							<Deductible Value="250" Operand1="" Operator="" Operand2="" DeducID=""></Deductible>
+						</ToGrant>
+					</SubCondition>
+					<SubCondition Operand1="$VEHICLE_USE" Operator="!=" Operand2="11272" OperandType="Double">
+						<ToRevoke CoverageCode="SPA8"></ToRevoke>
+					</SubCondition>
+				</Condition>
+			</Conditions>
+			<!--  Is Suspended-Comp Yes        -->
+			<Conditions>
+				<Condition Operand1="$IS_SUSPENDED" Operator="==" Operand2="1">
+					<ToGrant CoverageCode="OTC">
+						<Limit Value="" Operand1="" Operator="" Operand2="" DeducID=""></Limit>
+						<Deductible Value="$NEW_COMP" Operand1="" Operator="" Operand2="" DeducID=""></Deductible>
+					</ToGrant>
+					<ToRevoke CoverageCode="PPI"></ToRevoke>
+					<ToRevoke CoverageCode="ROAD"></ToRevoke>
+					<ToRevoke CoverageCode="LPD"></ToRevoke>
+					<ToRevoke CoverageCode="LLGC"></ToRevoke>
+					<ToRevoke CoverageCode="RREIM"></ToRevoke>
+					<ToRevoke CoverageCode="SORPE"></ToRevoke>
+					<ToRevoke CoverageCode="SORCV"></ToRevoke>
+					<ToRevoke CoverageCode="SLL"></ToRevoke>
+					<ToRevoke CoverageCode="BISPL"></ToRevoke>
+					<ToRevoke CoverageCode="UMPD"></ToRevoke>
+					<ToRevoke CoverageCode="PUNCS"></ToRevoke>
+					<ToRevoke CoverageCode="PUMSP"></ToRevoke>
+					<ToRevoke CoverageCode="UNDSP"></ToRevoke>
+					<ToRevoke CoverageCode="UNCSL"></ToRevoke>
+					<ToRevoke CoverageCode="ENO"></ToRevoke>
+					<ToRevoke CoverageCode="EBENO"></ToRevoke>
+					<ToRevoke CoverageCode="PIP"></ToRevoke>
+					<ToRevoke CoverageCode="PD"></ToRevoke>
+					<ToRevoke CoverageCode="EBCE"></ToRevoke>
+					<ToRevoke CoverageCode="MHT22"></ToRevoke>
+					<ToRevoke CoverageCode="AMC49"></ToRevoke>
+					<ToRevoke CoverageCode="CC49"></ToRevoke>
+					<ToRevoke CoverageCode="SPA8"></ToRevoke>
+					<ToRevoke CoverageCode="CAB91"></ToRevoke>
+					<ToRevoke CoverageCode="RCC68"></ToRevoke>
+					<ToRevoke CoverageCode="DD25"></ToRevoke>
+					<!-- ITrack 5518 -->
+					<!--ToRevoke CoverageCode="EP95"></ToRevoke-->
+					<ToRevoke CoverageCode="PAP6"></ToRevoke>
+					<!--ToRevoke CoverageCode="TE90"></ToRevoke-->
+					<ToRevoke CoverageCode="PIP94"></ToRevoke>
+					<ToRevoke CoverageCode="SA44"></ToRevoke>
+					<ToRevoke CoverageCode="EECOMP"></ToRevoke>
+					<ToRevoke CoverageCode="COLL"></ToRevoke>
+					<ToRevoke CoverageCode="RRUM"></ToRevoke>
+					<!--ToRevoke CoverageCode="TAP7"></ToRevoke-->
+					<ToRevoke CoverageCode="MHT22"></ToRevoke>
+					<ToRevoke CoverageCode="SRTE"></ToRevoke>
+					<ToRevoke CoverageCode="TE92"></ToRevoke>
+					<ToRevoke CoverageCode="MP"></ToRevoke>
+					<!-- Customized Van or Truck  11335  Itrack 5674-->
+					<SubCondition Operand1="$AUTO_TYPE" Operator="==" Operand2="11335">
+						<ToGrant CoverageCode="EBCE">
+							<Limit Value="" Operand1="" Operator="" Operand2="" DeducID=""></Limit>
+							<Deductible Value="" Operand1="" Operator="" Operand2="" DeducID=""></Deductible>
+						</ToGrant>
+					</SubCondition>
+					<!--Motor home, Truck or Van Campers 11336   Itrack 5674-->
+					<SubCondition Operand1="$AUTO_TYPE" Operator="==" Operand2="11336">
+						<ToGrant CoverageCode="MHT22">
+							<Limit Value="" Operand1="" Operator="" Operand2="" DeducID=""></Limit>
+							<Deductible Value="" Operand1="" Operator="" Operand2="" DeducID=""></Deductible>
+						</ToGrant>
+					</SubCondition>
+					<!--Antique Car  11869   -->
+					<SubCondition Operand1="$AUTO_TYPE" Operator="==" Operand2="11869">
+						<ToGrant CoverageCode="AMC49">
+							<Limit Value="" Operand1="" Operator="" Operand2="" DeducID=""></Limit>
+							<Deductible Value="" Operand1="" Operator="" Operand2="" DeducID=""></Deductible>
+						</ToGrant>
+						<ToGrant CoverageCode="SA44">
+							<Limit Value="" Operand1="" Operator="" Operand2="" DeducID=""></Limit>
+							<Deductible Value="" Operand1="" Operator="" Operand2="" DeducID=""></Deductible>
+						</ToGrant>
+						<ToRevoke CoverageCode="CC49"></ToRevoke>
+					</SubCondition>
+					<!-- Classic Car  11868 -->
+					<SubCondition Operand1="$AUTO_TYPE" Operator="==" Operand2="11868">
+						<ToGrant CoverageCode="CC49">
+							<Limit Value="" Operand1="" Operator="" Operand2="" DeducID=""></Limit>
+							<Deductible Value="" Operand1="" Operator="" Operand2="" DeducID=""></Deductible>
+						</ToGrant>
+						<ToGrant CoverageCode="SA44">
+							<Limit Value="" Operand1="" Operator="" Operand2="" DeducID=""></Limit>
+							<Deductible Value="" Operand1="" Operator="" Operand2="" DeducID=""></Deductible>
+						</ToGrant>
+						<ToRevoke CoverageCode="AMC49"></ToRevoke>
+					</SubCondition>
+				</Condition>
+				<!--  Suspended-Comp Only (11618-SCO)        -->
+				<Condition Operand1="$AUTO_TYPE" Operator="==" Operand2="11618">
+					<ToRevoke CoverageCode="PPI"></ToRevoke>
+					<ToRevoke CoverageCode="ROAD"></ToRevoke>
+					<ToRevoke CoverageCode="LPD"></ToRevoke>
+					<ToRevoke CoverageCode="LLGC"></ToRevoke>
+					<ToRevoke CoverageCode="RREIM"></ToRevoke>
+					<ToRevoke CoverageCode="SORPE"></ToRevoke>
+					<ToRevoke CoverageCode="SORCV"></ToRevoke>
+					<ToRevoke CoverageCode="SLL"></ToRevoke>
+					<ToRevoke CoverageCode="BISPL"></ToRevoke>
+					<ToRevoke CoverageCode="UMPD"></ToRevoke>
+					<ToRevoke CoverageCode="PUNCS"></ToRevoke>
+					<ToRevoke CoverageCode="PUMSP"></ToRevoke>
+					<ToRevoke CoverageCode="UNDSP"></ToRevoke>
+					<ToRevoke CoverageCode="UNCSL"></ToRevoke>
+					<ToRevoke CoverageCode="ENO"></ToRevoke>
+					<ToRevoke CoverageCode="EBENO"></ToRevoke>
+					<ToRevoke CoverageCode="PIP"></ToRevoke>
+					<ToRevoke CoverageCode="PD"></ToRevoke>
+					<ToRevoke CoverageCode="EBCE"></ToRevoke>
+					<ToRevoke CoverageCode="MHT22"></ToRevoke>
+					<ToRevoke CoverageCode="AMC49"></ToRevoke>
+					<ToRevoke CoverageCode="CC49"></ToRevoke>
+					<ToRevoke CoverageCode="SPA8"></ToRevoke>
+					<ToRevoke CoverageCode="CAB91"></ToRevoke>
+					<ToRevoke CoverageCode="RCC68"></ToRevoke>
+					<ToRevoke CoverageCode="DD25"></ToRevoke>
+					<!-- ITrack 5518 -->
+					<!--ToRevoke CoverageCode="EP95"></ToRevoke-->
+					<!--ToRevoke CoverageCode="PAP6"></ToRevoke>
+					<ToRevoke CoverageCode="TE90"></ToRevoke-->
+					<ToRevoke CoverageCode="PIP94"></ToRevoke>
+					<ToRevoke CoverageCode="SA44"></ToRevoke>
+					<ToRevoke CoverageCode="EECOMP"></ToRevoke>
+					<ToRevoke CoverageCode="COLL"></ToRevoke>
+					<ToRevoke CoverageCode="RRUM"></ToRevoke>
+					<!-- ITrack 5518 -->
+					<!--ToRevoke CoverageCode="TAP7"></ToRevoke-->
+					<ToRevoke CoverageCode="MHT22"></ToRevoke>
+				</Condition>
+				<!--  Utility Trailer  (11337)        -->
+				<Condition Operand1="$AUTO_TYPE" Operator="==" Operand2="11337">
+					<ToRevoke CoverageCode="PPI"></ToRevoke>
+					<ToRevoke CoverageCode="ROAD"></ToRevoke>
+					<ToRevoke CoverageCode="LPD"></ToRevoke>
+					<ToRevoke CoverageCode="LLGC"></ToRevoke>
+					<ToRevoke CoverageCode="RREIM"></ToRevoke>
+					<ToRevoke CoverageCode="SORPE"></ToRevoke>
+					<ToRevoke CoverageCode="SORCV"></ToRevoke>
+					<ToRevoke CoverageCode="BISPL"></ToRevoke>
+					<ToRevoke CoverageCode="UMPD"></ToRevoke>
+					<ToRevoke CoverageCode="PUNCS"></ToRevoke>
+					<ToRevoke CoverageCode="PUMSP"></ToRevoke>
+					<ToRevoke CoverageCode="UNDSP"></ToRevoke>
+					<ToRevoke CoverageCode="UNCSL"></ToRevoke>
+					<ToRevoke CoverageCode="ENO"></ToRevoke>
+					<ToRevoke CoverageCode="EBENO"></ToRevoke>
+					<ToRevoke CoverageCode="PD"></ToRevoke>
+					<ToRevoke CoverageCode="EBCE"></ToRevoke>
+					<ToRevoke CoverageCode="SLL"></ToRevoke>
+					<ToRevoke CoverageCode="AMC49"></ToRevoke>
+					<ToRevoke CoverageCode="CC49"></ToRevoke>
+					<ToRevoke CoverageCode="MHT22"></ToRevoke>
+					<!-- as per itrack 4536 -->
+					<ToRevoke CoverageCode="CAB91"></ToRevoke>
+					<ToRevoke CoverageCode="EP95"></ToRevoke>
+					<ToRevoke CoverageCode="SRTE"></ToRevoke>
+					<!-- ITrack 5518 -->
+					<!--ToRevoke CoverageCode="TE90"></ToRevoke-->
+					<ToRevoke CoverageCode="SPA8"></ToRevoke>
+					<ToRevoke CoverageCode="SA44"></ToRevoke>
+					<ToRevoke CoverageCode="EECOLL"></ToRevoke>
+					<ToRevoke CoverageCode="EECOMP"></ToRevoke>
+					<!-- ITrack 5518 -->
+					<!--ToRevoke CoverageCode="TAP7"></ToRevoke-->
+					<!-- end as per Itrack 4536 -->
+				</Condition>
+				<!--Commercial  11333   -->
+				<Condition Operand1="$AUTO_USE" Operator="==" Operand2="11333">
+					<ToGrant CoverageCode="PPI">
+						<Limit Value="1000000" Operand1="" Operator="" Operand2="" DeducID=""></Limit>
+						<Deductible Value="" Operand1="" Operator="" Operand2="" DeducID=""></Deductible>
+					</ToGrant>
+					<!-- Commetted as per Itrack 4229 Terrorism Endorsement C-92
+					<ToGrant CoverageCode="TE92">
+						<Limit Value="" Operand1="" Operator="" Operand2="" DeducID=""></Limit>
+						<Deductible Value="" Operand1="" Operator="" Operand2="" DeducID=""></Deductible>
+					</ToGrant>
+					-->
+					<ToGrant CoverageCode="TAP7">
+						<Limit Value="" Operand1="" Operator="" Operand2="" DeducID=""></Limit>
+						<Deductible Value="" Operand1="" Operator="" Operand2="" DeducID=""></Deductible>
+					</ToGrant>
+					<ToSet CoverageCode="COLL">
+						<Limit Value="" Operand1="" Operator="" Operand2="" DeducID=""></Limit>
+						<Deductible Value="$NEW_COLL" Operand1="" Operator="" Operand2="" DeducID=""></Deductible>
+					</ToSet>
+					<ToSet CoverageCode="OTC">
+						<Limit Value="" Operand1="" Operator="" Operand2="" DeducID=""></Limit>
+						<Deductible Value="$NEW_COMP" Operand1="" Operator="" Operand2="" DeducID=""></Deductible>
+					</ToSet>
+					<ToGrant CoverageCode="TE90">
+						<Limit Value="" Operand1="" Operator="" Operand2="" DeducID=""></Limit>
+						<Deductible Value="" Operand1="" Operator="" Operand2="" DeducID=""></Deductible>
+					</ToGrant>
+					<!--m-->
+					<ToRevoke CoverageCode="ROAD"></ToRevoke>
+					<ToRevoke CoverageCode="RREIM"></ToRevoke>
+					<!--<ToRevoke CoverageCode="UNDSP"></ToRevoke>-->
+					<ToRevoke CoverageCode="AMC49"></ToRevoke>
+					<ToRevoke CoverageCode="CC49"></ToRevoke>
+					<ToRevoke CoverageCode="SA44"></ToRevoke>
+					<!-- ToRevoke CoverageCode="TE90"></ToRevoke -->
+					<ToRevoke CoverageCode="SPA8"></ToRevoke>
+					<ToRevoke CoverageCode="EBCE"></ToRevoke>
+					<ToRevoke CoverageCode="ENO"></ToRevoke>
+					<ToRevoke CoverageCode="MHT22"></ToRevoke>
+					<ToRevoke CoverageCode="LLGC"></ToRevoke>
+					<ToRevoke CoverageCode="SORPE"></ToRevoke>
+					<ToRevoke CoverageCode="SRTE"></ToRevoke>
+				</Condition>
+				<!--Antique Car  11869   -->
+				<Condition Operand1="$AUTO_TYPE" Operator="==" Operand2="11869">
+					<ToGrant CoverageCode="AMC49">
+						<Limit Value="" Operand1="" Operator="" Operand2="" DeducID=""></Limit>
+						<Deductible Value="" Operand1="" Operator="" Operand2="" DeducID=""></Deductible>
+					</ToGrant>
+					<ToGrant CoverageCode="SA44">
+						<Limit Value="" Operand1="" Operator="" Operand2="" DeducID=""></Limit>
+						<Deductible Value="" Operand1="" Operator="" Operand2="" DeducID=""></Deductible>
+					</ToGrant>
+					<ToRevoke CoverageCode="MHT22"></ToRevoke>
+					<ToRevoke CoverageCode="EBCE"></ToRevoke>
+					<ToRevoke CoverageCode="CC49"></ToRevoke>
+				</Condition>
+				<!-- Classic Car  11868 -->
+				<Condition Operand1="$AUTO_TYPE" Operator="==" Operand2="11868">
+					<ToGrant CoverageCode="CC49">
+						<Limit Value="" Operand1="" Operator="" Operand2="" DeducID=""></Limit>
+						<Deductible Value="" Operand1="" Operator="" Operand2="" DeducID=""></Deductible>
+					</ToGrant>
+					<ToGrant CoverageCode="SA44">
+						<Limit Value="" Operand1="" Operator="" Operand2="" DeducID=""></Limit>
+						<Deductible Value="" Operand1="" Operator="" Operand2="" DeducID=""></Deductible>
+					</ToGrant>
+					<ToRevoke CoverageCode="MHT22"></ToRevoke>
+					<ToRevoke CoverageCode="EBCE"></ToRevoke>
+					<ToRevoke CoverageCode="AMC49"></ToRevoke>
+				</Condition>
+				<!--Private Passenger Auto  11334   -->
+				<Condition Operand1="$AUTO_TYPE" Operator="==" Operand2="11334">
+					<ToGrant CoverageCode="PPI">
+						<Limit Value="1000000" Operand1="" Operator="" Operand2="" DeducID=""></Limit>
+						<Deductible Value="" Operand1="" Operator="" Operand2="" DeducID=""></Deductible>
+					</ToGrant>
+					<ToRevoke CoverageCode="MHT22"></ToRevoke>
+					<ToRevoke CoverageCode="EBCE"></ToRevoke>
+					<ToRevoke CoverageCode="CC49"></ToRevoke>
+					<ToRevoke CoverageCode="AMC49"></ToRevoke>
+				</Condition>
+				<!-- Customized Van or Truck  11335 -->
+				<Condition Operand1="$AUTO_TYPE" Operator="==" Operand2="11335">
+					<ToGrant CoverageCode="PPI">
+						<Limit Value="1000000" Operand1="" Operator="" Operand2="" DeducID=""></Limit>
+						<Deductible Value="" Operand1="" Operator="" Operand2="" DeducID=""></Deductible>
+					</ToGrant>
+					<ToGrant CoverageCode="EBCE">
+						<Limit Value="" Operand1="" Operator="" Operand2="" DeducID=""></Limit>
+						<Deductible Value="" Operand1="" Operator="" Operand2="" DeducID=""></Deductible>
+					</ToGrant>
+					<ToRevoke CoverageCode="MHT22"></ToRevoke>
+					<ToRevoke CoverageCode="CC49"></ToRevoke>
+					<ToRevoke CoverageCode="AMC49"></ToRevoke>
+				</Condition>
+				<!--Motorhome 11336   -->
+				<Condition Operand1="$AUTO_TYPE" Operator="==" Operand2="11336">
+					<ToGrant CoverageCode="PPI">
+						<Limit Value="1000000" Operand1="" Operator="" Operand2="" DeducID=""></Limit>
+						<Deductible Value="" Operand1="" Operator="" Operand2="" DeducID=""></Deductible>
+					</ToGrant>
+					<ToGrant CoverageCode="MHT22">
+						<Limit Value="" Operand1="" Operator="" Operand2="" DeducID=""></Limit>
+						<Deductible Value="" Operand1="" Operator="" Operand2="" DeducID=""></Deductible>
+					</ToGrant>
+					<ToRevoke CoverageCode="RREIM"></ToRevoke>
+					<ToRevoke CoverageCode="EBCE"></ToRevoke>
+					<ToRevoke CoverageCode="CC49"></ToRevoke>
+					<ToRevoke CoverageCode="AMC49"></ToRevoke>
+				</Condition>
+				<!--Camper&amp; Travel Trailer 11870   -->
+				<Condition Operand1="$AUTO_TYPE" Operator="==" Operand2="11870">
+					<ToGrant CoverageCode="MHT22">
+						<Limit Value="" Operand1="" Operator="" Operand2="" DeducID=""></Limit>
+						<Deductible Value="" Operand1="" Operator="" Operand2="" DeducID=""></Deductible>
+					</ToGrant>
+					<ToRevoke CoverageCode="RREIM"></ToRevoke>
+					<ToRevoke CoverageCode="EBCE"></ToRevoke>
+					<!-- as per itrack 4536 -->
+					<ToRevoke CoverageCode="PPI"></ToRevoke>
+					<ToRevoke CoverageCode="ROAD"></ToRevoke>
+					<ToRevoke CoverageCode="LPD"></ToRevoke>
+					<ToRevoke CoverageCode="LLGC"></ToRevoke>
+					<ToRevoke CoverageCode="SORPE"></ToRevoke>
+					<ToRevoke CoverageCode="SORCV"></ToRevoke>
+					<ToRevoke CoverageCode="BISPL"></ToRevoke>
+					<ToRevoke CoverageCode="UMPD"></ToRevoke>
+					<ToRevoke CoverageCode="PUNCS"></ToRevoke>
+					<ToRevoke CoverageCode="PUMSP"></ToRevoke>
+					<ToRevoke CoverageCode="UNDSP"></ToRevoke>
+					<ToRevoke CoverageCode="UNCSL"></ToRevoke>
+					<ToRevoke CoverageCode="ENO"></ToRevoke>
+					<ToRevoke CoverageCode="EBENO"></ToRevoke>
+					<ToRevoke CoverageCode="PD"></ToRevoke>
+					<ToRevoke CoverageCode="SLL"></ToRevoke>
+					<ToRevoke CoverageCode="AMC49"></ToRevoke>
+					<ToRevoke CoverageCode="CC49"></ToRevoke>
+					<ToRevoke CoverageCode="CAB91"></ToRevoke>
+					<ToRevoke CoverageCode="EP95"></ToRevoke>
+					<ToRevoke CoverageCode="SRTE"></ToRevoke>
+					<!--ToRevoke CoverageCode="TE90"></ToRevoke-->
+					<ToRevoke CoverageCode="SPA8"></ToRevoke>
+					<ToRevoke CoverageCode="SA44"></ToRevoke>
+					<ToRevoke CoverageCode="EECOLL"></ToRevoke>
+					<ToRevoke CoverageCode="EECOMP"></ToRevoke>
+					<!--ToRevoke CoverageCode="TAP7"></ToRevoke-->
+					<ToRevoke CoverageCode="EP95"></ToRevoke>
+					<ToRevoke CoverageCode="TE92"></ToRevoke>
+					<ToRevoke CoverageCode="MP"></ToRevoke>
+					<!-- end as per Itrack 4536 -->
+				</Condition>
+			</Conditions>
+			<Conditions>
+				<!--Commercial  11333   and type is trailer  as per itrack 4536 -->
+				<Condition Operand1="$AUTO_USE" Operator="==" Operand2="11333">
+					<!--ITrack 5586  -->
+					<ToGrant CoverageCode="TE90">
+						<Limit Value="" Operand1="" Operator="" Operand2="" DeducID=""></Limit>
+						<Deductible Value="" Operand1="" Operator="" Operand2="" DeducID=""></Deductible>
+					</ToGrant>
+					<ToGrant CoverageCode="TAP7">
+						<Limit Value="" Operand1="" Operator="" Operand2="" DeducID=""></Limit>
+						<Deductible Value="" Operand1="" Operator="" Operand2="" DeducID=""></Deductible>
+					</ToGrant>
+					<!--  Is Suspended-Comp  Yes      -->
+					<SubCondition Operand1="$IS_SUSPENDED" Operator="==" Operand2="1">
+						<ToGrant CoverageCode="COMP">
+							<Limit Value="" Operand1="" Operator="" Operand2="" DeducID=""></Limit>
+							<Deductible Value="$NEW_COMP" Operand1="" Operator="" Operand2="" DeducID=""></Deductible>
+						</ToGrant>
+						<ToRevoke CoverageCode="MP"></ToRevoke>
+						<ToRevoke CoverageCode="RRUM"></ToRevoke>
+						<ToRevoke CoverageCode="PPI"></ToRevoke>
+						<ToRevoke CoverageCode="LPD"></ToRevoke>
+						<ToRevoke CoverageCode="SORCV"></ToRevoke>
+						<ToRevoke CoverageCode="SLL"></ToRevoke>
+						<ToRevoke CoverageCode="BISPL"></ToRevoke>
+						<ToRevoke CoverageCode="UMPD"></ToRevoke>
+						<ToRevoke CoverageCode="PUNCS"></ToRevoke>
+						<ToRevoke CoverageCode="PUMSP"></ToRevoke>
+						<ToRevoke CoverageCode="UNCSL"></ToRevoke>
+						<ToRevoke CoverageCode="UNDSP"></ToRevoke>
+						<ToRevoke CoverageCode="COLL"></ToRevoke>
+						<ToRevoke CoverageCode="SORPE"></ToRevoke>
+						<ToRevoke CoverageCode="ROAD"></ToRevoke>
+						<ToRevoke CoverageCode="RREIM"></ToRevoke>
+						<ToRevoke CoverageCode="LLGC"></ToRevoke>
+						<ToRevoke CoverageCode="EBCE"></ToRevoke>
+						<ToRevoke CoverageCode="SA44"></ToRevoke>
+						<ToRevoke CoverageCode="SPA8"></ToRevoke>
+						<ToRevoke CoverageCode="PIP"></ToRevoke>
+						<ToRevoke CoverageCode="SRTE"></ToRevoke>
+						<ToRevoke CoverageCode="PD"></ToRevoke>
+						<ToRevoke CoverageCode="PIP94"></ToRevoke>
+						<ToRevoke CoverageCode="RRUM"></ToRevoke>
+						<!-- ITrack 5518 -->
+						<!--ToRevoke CoverageCode="EP95"></ToRevoke-->
+						<ToRevoke CoverageCode="CAB91"></ToRevoke>
+						<ToRevoke CoverageCode="SRTE"></ToRevoke>
+						<ToRevoke CoverageCode="EECOLL"></ToRevoke>
+						<ToRevoke CoverageCode="EECOMP"></ToRevoke>
+						<ToRevoke CoverageCode="TE92"></ToRevoke>
+					</SubCondition>
+					<SubCondition Operand1="$AUTO_TYPE" Operator="==" Operand2="11341">
+						<ToRevoke CoverageCode="MP"></ToRevoke>
+						<ToRevoke CoverageCode="RRUM"></ToRevoke>
+						<ToRevoke CoverageCode="PPI"></ToRevoke>
+						<ToRevoke CoverageCode="LPD"></ToRevoke>
+						<ToRevoke CoverageCode="SORCV"></ToRevoke>
+						<ToRevoke CoverageCode="SLL"></ToRevoke>
+						<ToRevoke CoverageCode="BISPL"></ToRevoke>
+						<ToRevoke CoverageCode="UMPD"></ToRevoke>
+						<ToRevoke CoverageCode="PUNCS"></ToRevoke>
+						<ToRevoke CoverageCode="PUMSP"></ToRevoke>
+						<ToRevoke CoverageCode="UNCSL"></ToRevoke>
+						<ToRevoke CoverageCode="PIP"></ToRevoke>
+						<ToRevoke CoverageCode="PD"></ToRevoke>
+						<ToRevoke CoverageCode="PIP94"></ToRevoke>
+						<ToRevoke CoverageCode="EP95"></ToRevoke>
+						<ToRevoke CoverageCode="CAB91"></ToRevoke>
+						<ToRevoke CoverageCode="SRTE"></ToRevoke>
+						<!--ToRevoke CoverageCode="TE90"></ToRevoke>
+						<ToRevoke CoverageCode="PAP6"></ToRevoke>
+						<ToRevoke CoverageCode="TAP7"></ToRevoke-->
+						<ToRevoke CoverageCode="EECOLL"></ToRevoke>
+						<ToRevoke CoverageCode="EECOMP"></ToRevoke>
+						<!--ToRevoke CoverageCode="TAP7"></ToRevoke-->
+					</SubCondition>
+				</Condition>
+			</Conditions>
+		</Rule>
+	</Group>
+	<Group Code="LobDependent">
+		<Rule Action="Database" StartDate="1950-01-01" EndDate="2002-02-28">
+			<Conditions></Conditions>
+		</Rule>
+	</Group>
+	<Group Code="MiscEquipment">
+		<!-- Rules for setting Master Keys -->
+		<Rule Action="Master" StartDate="1950-01-01" EndDate="3000-12-12" STATE_ID="14">
+			<Conditions>
+				<!--Vehicle Type And Amount-->
+				<Condition Operand1="1" Operator="==" Operand2="1" OperandType="Double">
+					<ToSet Key="$NEW_COLL" Value="0"></ToSet>
+					<ToSet Key="$NEW_COMP" Value="0"></ToSet>
+				</Condition>
+			</Conditions>
+			<Conditions>
+				<Condition Operand1="$IS_SUSPENDED" Operator="==" Operand2="1" OperandType="Double">
+					<SubConditions>
+						<SubCondition Operand1="$OLD_COMP" Operator="==" Operand2="0" OperandType="Double">
+							<ToSet Key="$NEW_COMP" Value="250"></ToSet>
+						</SubCondition>
+					</SubConditions>
+				</Condition>
+				<!--Vehicle Type And Amount-->
+				<!--11336 : Motor home, Truck or Van Campers-->
+				<Condition Operand1="$AUTO_TYPE" Operator="==" Operand2="11336" OperandType="Double">
+					<SubConditions>
+						<SubCondition Operand1="$VEH_AMOUNT" Operator="&lt;" Operand2="50000" OperandType="Double">
+							<ToSet Key="$NEW_COMP" Value="100"></ToSet>
+						</SubCondition>
+					</SubConditions>
+				</Condition>
+			</Conditions>
+			<Conditions>
+				<!--No Of Claims Dependency-->
+				<Condition Operand1="$NO_CLAIMS" Operator="==" Operand2="2" OperandType="Double">
+					<ToSet Key="$NEW_COMP" Value="150"></ToSet>
+				</Condition>
+				<Condition Operand1="$NO_CLAIMS" Operator="==" Operand2="3" OperandType="Double">
+					<ToSet Key="$NEW_COMP" Value="250"></ToSet>
+				</Condition>
+				<Condition Operand1="$NO_CLAIMS" Operator=">=" Operand2="4" OperandType="Double">
+					<ToSet Key="$NEW_COMP" Value="500"></ToSet>
+				</Condition>
+			</Conditions>
+			<Conditions>
+				<!--Vehicle Use Commercial -->
+				<!--11341 : Trailer-->
+				<Condition Operand1="$AUTO_TYPE" Operator="==" Operand2="11341" OperandType="Double">
+					<SubConditions>
+						<SubCondition Operand1="$AUTO_USE" Operator="==" Operand2="11333" OperandType="Double">
+							<ToSet Key="$NEW_COMP" Value="250"></ToSet>
+							<ToSet Key="$NEW_COLL" Value="250"></ToSet>
+							<ToSet Key="$NEW_COLL_TEMP" Value="250 Broad"></ToSet>
+						</SubCondition>
+					</SubConditions>
+				</Condition>
+			</Conditions>
+			<Conditions>
+				<!--Make Of Vehicle-->
+				<Condition Operand1="$VEH_MAKE" Operator="!=" Operand2="0" OperandType="Double">
+					<ToSet Key="$NEW_COMP" Value="500"></ToSet>
+					<ToSet Key="$NEW_COLL" Value="500"></ToSet>
+				</Condition>
+			</Conditions>
+			<Conditions>
+				<!--Vehicle Type And Amount-->
+				<Condition Operand1="$AUTO_TYPE" Operator="==" Operand2="11336" OperandType="Double">
+					<SubConditions>
+						<SubCondition Operand1="$VEH_AMOUNT" Operator="&lt;" Operand2="50001" OperandType="Double">
+							<ToSet Key="$NEW_COLL" Value="500"></ToSet>
+						</SubCondition>
+						<SubCondition Operand1="$VEH_AMOUNT" Operator="&gt;" Operand2="50000" OperandType="Double">
+							<ToSet Key="$NEW_COMP" Value="2000"></ToSet>
+							<ToSet Key="$NEW_COLL" Value="2000"></ToSet>
+						</SubCondition>
+					</SubConditions>
+				</Condition>
+			</Conditions>
+			<Conditions>
+				<Condition Operand1="$OLD_COMP" Operator=">=" Operand2="$NEW_COMP" OperandType="Double">
+					<ToSet Key="$NEW_COMP" Value="$OLD_COMP"></ToSet>
+				</Condition>
+			</Conditions>
+			<Conditions>
+				<Condition Operand1="$OLD_COLL" Operator=">=" Operand2="$NEW_COLL" OperandType="Double">
+					<ToSet Key="$NEW_COLL" Value="$OLD_COLL"></ToSet>
+				</Condition>
+			</Conditions>
+		</Rule>
+		<Rule Action="Master" StartDate="1950-01-01" EndDate="3000-12-12" STATE_ID="22">
+			<Conditions>
+				<!--Vehicle Type And Amount-->
+				<Condition Operand1="1" Operator="==" Operand2="1" OperandType="Double">
+					<ToSet Key="$NEW_COLL" Value="0"></ToSet>
+					<ToSet Key="$NEW_COMP" Value="0"></ToSet>
+					<ToSet Key="$NEW_COLL_TEMP" Value="0"></ToSet>
+				</Condition>
+			</Conditions>
+			<Conditions>
+				<Condition Operand1="$IS_SUSPENDED" Operator="==" Operand2="1" OperandType="Double">
+					<SubConditions>
+						<SubCondition Operand1="$OLD_COMP" Operator="==" Operand2="0" OperandType="Double">
+							<ToSet Key="$NEW_COMP" Value="250"></ToSet>
+						</SubCondition>
+					</SubConditions>
+				</Condition>
+				<!--Vehicle Type And Amount-->
+				<Condition Operand1="$AUTO_TYPE" Operator="==" Operand2="11336" OperandType="Double">
+					<SubConditions>
+						<SubCondition Operand1="$VEH_AMOUNT" Operator="&lt;" Operand2="50000" OperandType="Double">
+							<ToSet Key="$NEW_COMP" Value="100"></ToSet>
+						</SubCondition>
+					</SubConditions>
+				</Condition>
+			</Conditions>
+			<Conditions>
+				<!--No Of Claims Dependency-->
+				<Condition Operand1="$NO_CLAIMS" Operator="==" Operand2="2" OperandType="Double">
+					<ToSet Key="$NEW_COMP" Value="150"></ToSet>
+				</Condition>
+				<Condition Operand1="$NO_CLAIMS" Operator="==" Operand2="3" OperandType="Double">
+					<ToSet Key="$NEW_COMP" Value="250"></ToSet>
+				</Condition>
+				<Condition Operand1="$NO_CLAIMS" Operator=">=" Operand2="4" OperandType="Double">
+					<ToSet Key="$NEW_COMP" Value="500"></ToSet>
+				</Condition>
+			</Conditions>
+			<Conditions>
+				<!--Vehicle Use Commercial -->
+				<!--11341 : Trailer-->
+				<Condition Operand1="$AUTO_TYPE" Operator="==" Operand2="11341" OperandType="Double">
+					<SubConditions>
+						<SubCondition Operand1="$AUTO_USE" Operator="==" Operand2="11333" OperandType="Double">
+							<ToSet Key="$NEW_COMP" Value="250"></ToSet>
+							<ToSet Key="$NEW_COLL" Value="250"></ToSet>
+							<ToSet Key="$NEW_COLL_TEMP" Value="250 Broad"></ToSet>
+						</SubCondition>
+					</SubConditions>
+				</Condition>
+			</Conditions>
+			<Conditions>
+				<!--Make Of Vehicle-->
+				<Condition Operand1="$VEH_MAKE" Operator="!=" Operand2="0" OperandType="Double">
+					<ToSet Key="$NEW_COMP" Value="500"></ToSet>
+					<SubConditions>
+						<SubCondition Operand1="$OLD_COLL" Operator="==" Operand2="0" OperandType="String">
+							<ToSet Key="$NEW_COLL" Value="$OLD_COLL"></ToSet>
+							<ToSet Key="$NEW_COLL_TEMP" Value="0 Limited"></ToSet>
+						</SubCondition>
+						<SubCondition Operand1="$OLD_COLL" Operator="!=" Operand2="0" OperandType="String">
+							<ToSet Key="$NEW_COLL" Value="500"></ToSet>
+							<ToSet Key="$NEW_COLL_TEMP" Value="500 Broad"></ToSet>
+						</SubCondition>
+					</SubConditions>
+				</Condition>
+			</Conditions>
+			<Conditions>
+				<!--Vehicle Type And Amount-->
+				<Condition Operand1="$AUTO_TYPE" Operator="==" Operand2="11336" OperandType="Double">
+					<SubConditions>
+						<SubCondition Operand1="$VEH_AMOUNT" Operator="&lt;" Operand2="50001" OperandType="Double">
+							<ToSet Key="$NEW_COLL" Value="500"></ToSet>
+							<ToSet Key="$NEW_COLL_TEMP" Value="500 Broad"></ToSet>
+						</SubCondition>
+						<SubCondition Operand1="$VEH_AMOUNT" Operator="&gt;" Operand2="50000" OperandType="Double">
+							<ToSet Key="$NEW_COMP" Value="2000"></ToSet>
+							<ToSet Key="$NEW_COLL" Value="2000"></ToSet>
+						</SubCondition>
+					</SubConditions>
+				</Condition>
+			</Conditions>
+			<Conditions>
+				<!--Vehicle Type And Amount-->
+				<Condition Operand1="$OLD_COMP" Operator=">=" Operand2="$NEW_COMP" OperandType="Double">
+					<ToSet Key="$NEW_COMP" Value="$OLD_COMP"></ToSet>
+				</Condition>
+			</Conditions>
+			<Conditions>
+				<!--Get The final Rule-->
+				<Condition Operand1="$OLD_COLL" Operator=">=" Operand2="$NEW_COLL" OperandType="Double">
+					<ToSet Key="$NEW_COLL" Value="$OLD_COLL_TEXT"></ToSet>
+					<ToSet Key="$NEW_COLL_TEMP" Value="$OLD_COLL_TEXT"></ToSet>
+				</Condition>
+				<Condition Operand1="$AUTO_TYPE" Operator="==" Operand2="11336" OperandType="Double">
+					<SubConditions>
+						<SubCondition Operand1="$VEH_AMOUNT" Operator="&gt;" Operand2="50000" OperandType="Double">
+							<ToSet Key="$NEW_COLL" Value="2000"></ToSet>
+						</SubCondition>
+						<SubCondition Operand1="$OLD_COLL" Operator="==" Operand2="400" OperandType="Double">
+							<ToSet Key="$NEW_COLL" Value="400"></ToSet>
+							<ToSet Key="$NEW_COLL_TEMP" Value="$OLD_COLL_TEXT"></ToSet>
+						</SubCondition>
+						<SubCondition Operand1="$OLD_COLL" Operator="==" Operand2="0" OperandType="Double">
+							<ToSet Key="$NEW_COLL" Value="$OLD_COLL"></ToSet>
+							<ToSet Key="$NEW_COLL_TEMP" Value="$OLD_COLL_TEXT"></ToSet>
+						</SubCondition>
+					</SubConditions>
+				</Condition>
+			</Conditions>
+			<!-- Conditions
+				Get The final Rule
+				Condition Operand1="$NEW_COLL" Operator=">=" Operand2="500" OperandType="Double">
+					ToSet Key="$NEW_COLL_TEMP" Value="500 Broad"></ToSet>
+				/Condition>
+			/Conditions -->
+			<Conditions>
+				<!--Get The final Rule-->
+				<Condition Operand1="$AUTO_TYPE" Operator="==" Operand2="11336" OperandType="Double">
+					<SubConditions>
+						<SubCondition Operand1="$NEW_COLL" Operator=">=" Operand2="2000" OperandType="Double">
+							<ToSet Key="$NEW_COLL_TEMP" Value="2000 Broad"></ToSet>
+						</SubCondition>
+					</SubConditions>
+				</Condition>
+			</Conditions>
+			<Conditions>
+				<!--Get The Value From Temporary Variable-->
+				<Condition Operand1="1" Operator="==" Operand2="1" OperandType="Double">
+					<ToSet Key="$NEW_COLL" Value="$NEW_COLL_TEMP"></ToSet>
+				</Condition>
+			</Conditions>
+		</Rule>
+		<Rule Action="Database" StartDate="1950-01-01" EndDate="3000-12-30">
+			<Conditions>
+				<Condition Operand1="$COUNT_MIS" Operator="!=" Operand2="0">
+					<SubCondition Operand1="$OLD_COMP" Operator="!=" Operand2="0">
+						<ToGrant CoverageCode="EECOMP">
+							<Limit Value="$SUM_MIS" Operand1="" Operator="" Operand2="" LimitID=""></Limit>
+							<Deductible Value="$NEW_COMP" Operand1="" Operator="" Operand2="" DeducID=""></Deductible>
+						</ToGrant>
+					</SubCondition>
+					<SubCondition Operand1="$OLD_COMP" Operator="==" Operand2="0">
+						<ToRevoke CoverageCode="EECOMP"></ToRevoke>
+					</SubCondition>
+					<ToSet CoverageCode="EECOMP">
+						<Limit Value="$SUM_MIS" Operand1="" Operator="" Operand2="" DeducID=""></Limit>
+						<Deductible Value="$NEW_COMP" Operand1="" Operator="" Operand2="" DeducID=""></Deductible>
+					</ToSet>
+				</Condition>
+				<Condition Operand1="$COUNT_MIS" Operator="==" Operand2="0">
+					<ToRevoke CoverageCode="EECOMP"></ToRevoke>
+				</Condition>
+			</Conditions>
+			<Conditions>
+				<Condition Operand1="$COUNT_MIS" Operator="!=" Operand2="0">
+					<SubCondition Operand1="$COLL_OPTED" Operator="!=" Operand2="0" OperandType="String">
+						<ToGrant CoverageCode="EECOLL">
+							<Limit Value="$SUM_MIS" Operand1="" Operator="" Operand2="" LimitID=""></Limit>
+							<Deductible Value="$NEW_COLL" Operand1="" Operator="" Operand2="" DeducID=""></Deductible>
+						</ToGrant>
+					</SubCondition>
+					<SubCondition Operand1="$COLL_OPTED" Operator="==" Operand2="0">
+						<ToRevoke CoverageCode="EECOLL"></ToRevoke>
+					</SubCondition>
+					<ToSet CoverageCode="EECOLL">
+						<Limit Value="$SUM_MIS" Operand1="" Operator="" Operand2="" DeducID=""></Limit>
+						<Deductible Value="$NEW_COLL" Operand1="" Operator="" Operand2="" DeducID=""></Deductible>
+					</ToSet>
+				</Condition>
+				<Condition Operand1="$COUNT_MIS" Operator="==" Operand2="0">
+					<ToRevoke CoverageCode="EECOLL"></ToRevoke>
+				</Condition>
+			</Conditions>
+			<Conditions>
+				<Condition Operand1="$IS_SUSPENDED" Operator="==" Operand2="1">
+					<ToRevoke CoverageCode="EECOLL"></ToRevoke>
+					<ToRevoke CoverageCode="EECOMP"></ToRevoke>
+				</Condition>
+				<Condition Operand1="$AUTO_USE" Operator="==" Operand2="11333">
+					<SubCondition Operand1="$AUTO_TYPE" Operator="==" Operand2="11341">
+						<ToRevoke CoverageCode="EECOLL"></ToRevoke>
+						<ToRevoke CoverageCode="EECOMP"></ToRevoke>
+					</SubCondition>
+				</Condition>
+				<Condition Operand1="$AUTO_TYPE" Operator="==" Operand2="11337">
+					<ToRevoke CoverageCode="EECOLL"></ToRevoke>
+					<ToRevoke CoverageCode="EECOMP"></ToRevoke>
+				</Condition>
+				<Condition Operand1="$AUTO_TYPE" Operator="==" Operand2="11618">
+					<ToRevoke CoverageCode="EECOLL"></ToRevoke>
+					<ToRevoke CoverageCode="EECOMP"></ToRevoke>
+				</Condition>
+				<Condition Operand1="$AUTO_TYPE" Operator="==" Operand2="11870">
+					<ToRevoke CoverageCode="EECOLL"></ToRevoke>
+					<ToRevoke CoverageCode="EECOMP"></ToRevoke>
+				</Condition>
+			</Conditions>
+		</Rule>
+	</Group>
+	<Group Code="AutoDriverDep">
+		<Rule Action="Database" StartDate="1950-01-01" EndDate="3000-12-30">
+			<!--  Driver Details        -->
+			<Conditions>
+				<Condition Operand1="$DRIVER_TYPE" Operator="!=" Operand2="0" OperandType="Double">
+					<ToGrant CoverageCode="EP95">
+						<Limit Value="" Operand1="" Operator="" Operand2="" DeducID=""></Limit>
+						<Deductible Value="" Operand1="" Operator="" Operand2="" DeducID=""></Deductible>
+					</ToGrant>
+				</Condition>
+				<Condition Operand1="$DRIVER_TYPE" Operator="==" Operand2="0" OperandType="Double">
+					<ToRevoke CoverageCode="EP95"></ToRevoke>
+				</Condition>
+			</Conditions>
+			<!-- added by Pravesh for Extented non owned Qu? on Driver Page -->
+			<Conditions>
+				<Condition Operand1="$EXT_NON_OWN" Operator="!=" Operand2="0">
+					<ToGrant CoverageCode="ENO">
+						<Limit Value="" Operand1="" Operator="" Operand2="" DeducID=""></Limit>
+						<Deductible Value="" Operand1="" Operator="" Operand2="" DeducID=""></Deductible>
+					</ToGrant>
+				</Condition>
+				<Condition Operand1="$EXT_NON_OWN" Operator="==" Operand2="0">
+					<ToRevoke CoverageCode="ENO"></ToRevoke>
+				</Condition>
+			</Conditions>
+			<Conditions>
+				<!--Itrack 5442 EP95 will be available for Suspended comp only (11334,11335,11336,11618,11868,11869) -->
+				<Condition Operand1="$IS_SUSPENDED" Operator="==" Operand2="1">
+					<SubCondition Operand1="$AUTO_TYPE" Operator="==" Operand2="11618">
+						<ToRevoke CoverageCode="ENO"></ToRevoke>
+						<!--ToRevoke CoverageCode="EP95"></ToRevoke-->
+					</SubCondition>
+					<SubCondition Operand1="$AUTO_TYPE" Operator="==" Operand2="11337">
+						<ToRevoke CoverageCode="ENO"></ToRevoke>
+						<ToRevoke CoverageCode="EP95"></ToRevoke>
+					</SubCondition>
+					<SubCondition Operand1="$AUTO_TYPE" Operator="==" Operand2="11870">
+						<ToRevoke CoverageCode="ENO"></ToRevoke>
+						<ToRevoke CoverageCode="EP95"></ToRevoke>
+					</SubCondition>
+					<SubCondition Operand1="$AUTO_TYPE" Operator="==" Operand2="11340">
+						<ToRevoke CoverageCode="ENO"></ToRevoke>
+						<ToRevoke CoverageCode="EP95"></ToRevoke>
+					</SubCondition>
+					<SubCondition Operand1="$AUTO_TYPE" Operator="==" Operand2="11341">
+						<ToRevoke CoverageCode="ENO"></ToRevoke>
+						<ToRevoke CoverageCode="EP95"></ToRevoke>
+					</SubCondition>
+					<SubCondition Operand1="$AUTO_TYPE" Operator="==" Operand2="11334">
+						<ToRevoke CoverageCode="ENO"></ToRevoke>
+						<!--ToRevoke CoverageCode="EP95"></ToRevoke-->
+					</SubCondition>
+					<SubCondition Operand1="$AUTO_TYPE" Operator="==" Operand2="11336">
+						<ToRevoke CoverageCode="ENO"></ToRevoke>
+						<!--ToRevoke CoverageCode="EP95"></ToRevoke-->
+					</SubCondition>
+					<SubCondition Operand1="$AUTO_TYPE" Operator="==" Operand2="11335">
+						<ToRevoke CoverageCode="ENO"></ToRevoke>
+						<!--ToRevoke CoverageCode="EP95"></ToRevoke-->
+					</SubCondition>
+					<SubCondition Operand1="$AUTO_TYPE" Operator="==" Operand2="11868">
+						<ToRevoke CoverageCode="ENO"></ToRevoke>
+						<!--ToRevoke CoverageCode="EP95"></ToRevoke-->
+					</SubCondition>
+					<SubCondition Operand1="$AUTO_TYPE" Operator="==" Operand2="11869">
+						<ToRevoke CoverageCode="ENO"></ToRevoke>
+						<!--ToRevoke CoverageCode="EP95"></ToRevoke-->
+					</SubCondition>
+					<SubCondition Operand1="$AUTO_TYPE" Operator="==" Operand2="11338">
+						<ToRevoke CoverageCode="ENO"></ToRevoke>
+					</SubCondition>
+					<SubCondition Operand1="$AUTO_TYPE" Operator="==" Operand2="11339">
+						<ToRevoke CoverageCode="ENO"></ToRevoke>
+					</SubCondition>
+					<SubCondition Operand1="$AUTO_TYPE" Operator="==" Operand2="11871">
+						<ToRevoke CoverageCode="ENO"></ToRevoke>
+					</SubCondition>
+				</Condition>
+				<Condition Operand1="$AUTO_TYPE" Operator="==" Operand2="11618">
+					<ToRevoke CoverageCode="ENO"></ToRevoke>
+					<ToRevoke CoverageCode="EP95"></ToRevoke>
+				</Condition>
+				<Condition Operand1="$AUTO_TYPE" Operator="==" Operand2="11337">
+					<ToRevoke CoverageCode="ENO"></ToRevoke>
+					<ToRevoke CoverageCode="EP95"></ToRevoke>
+				</Condition>
+				<Condition Operand1="$AUTO_TYPE" Operator="==" Operand2="11870">
+					<ToRevoke CoverageCode="ENO"></ToRevoke>
+					<ToRevoke CoverageCode="EP95"></ToRevoke>
+				</Condition>
+				<Condition Operand1="$AUTO_USE" Operator="==" Operand2="11333">
+					<SubCondition Operand1="$AUTO_TYPE" Operator="==" Operand2="11340">
+						<ToRevoke CoverageCode="ENO"></ToRevoke>
+						<ToRevoke CoverageCode="EP95"></ToRevoke>
+					</SubCondition>
+					<SubCondition Operand1="$AUTO_TYPE" Operator="==" Operand2="11341">
+						<ToRevoke CoverageCode="ENO"></ToRevoke>
+						<ToRevoke CoverageCode="EP95"></ToRevoke>
+					</SubCondition>
+					<SubCondition Operand1="$AUTO_TYPE" Operator="==" Operand2="11338">
+						<ToRevoke CoverageCode="ENO"></ToRevoke>
+					</SubCondition>
+					<SubCondition Operand1="$AUTO_TYPE" Operator="==" Operand2="11339">
+						<ToRevoke CoverageCode="ENO"></ToRevoke>
+					</SubCondition>
+				</Condition>
+			</Conditions>
+			<!--Conditions>
+				<Condition Operand1="$IS_SUSPENDED" Operator="==" Operand2="1">
+					<SubCondition Operand1="$AUTO_TYPE" Operator="==" Operand2="11340">
+						<ToRevoke CoverageCode="ENO"></ToRevoke>
+						<ToRevoke CoverageCode="EP95"></ToRevoke>
+					</SubCondition>
+					<SubCondition Operand1="$AUTO_TYPE" Operator="==" Operand2="11341">
+						<ToRevoke CoverageCode="ENO"></ToRevoke>
+						<ToRevoke CoverageCode="EP95"></ToRevoke>
+					</SubCondition>
+					<SubCondition Operand1="$AUTO_TYPE" Operator="==" Operand2="11338">
+						<ToRevoke CoverageCode="ENO"></ToRevoke>
+					</SubCondition>
+					<SubCondition Operand1="$AUTO_TYPE" Operator="==" Operand2="11339">
+						<ToRevoke CoverageCode="ENO"></ToRevoke>
+					</SubCondition>
+				</Condition>
+				<Condition Operand1="$AUTO_USE" Operator="==" Operand2="11333">
+					<SubCondition Operand1="$AUTO_TYPE" Operator="==" Operand2="11340">
+						<ToRevoke CoverageCode="ENO"></ToRevoke>
+						<ToRevoke CoverageCode="EP95"></ToRevoke>
+					</SubCondition>
+					<SubCondition Operand1="$AUTO_TYPE" Operator="==" Operand2="11341">
+						<ToRevoke CoverageCode="ENO"></ToRevoke>
+						<ToRevoke CoverageCode="EP95"></ToRevoke>
+					</SubCondition>
+					<SubCondition Operand1="$AUTO_TYPE" Operator="==" Operand2="11338">
+						<ToRevoke CoverageCode="ENO"></ToRevoke>
+					</SubCondition>
+					<SubCondition Operand1="$AUTO_TYPE" Operator="==" Operand2="11339">
+						<ToRevoke CoverageCode="ENO"></ToRevoke>
+					</SubCondition>
+				</Condition>
+			</Conditions-->
+			<!-- end here  -->
+		</Rule>
+		<Rule Action="Database" StartDate="1950-01-01" EndDate="3000-12-30" STATE_ID="22">
+			<Conditions>
+				<Condition Operand1="$AUTO_USE" Operator="==" Operand2="11332">
+					<SubCondition Operand1="$WAIVER_LOSS" Operator="!=" Operand2="0">
+						<ToGrant CoverageCode="PIP94">
+							<Limit Value="" Operand1="" Operator="" Operand2="" LimitID=""></Limit>
+							<Deductible Value="" Operand1="" Operator="" Operand2="" DeducID=""></Deductible>
+						</ToGrant>
+					</SubCondition>
+					<SubCondition Operand1="$WAIVER_LOSS" Operator="==" Operand2="0">
+						<ToRevoke CoverageCode="PIP94"></ToRevoke>
+					</SubCondition>
+				</Condition>
+				<Condition Operand1="$AUTO_USE" Operator="==" Operand2="11333">
+					<ToRevoke CoverageCode="PIP94"></ToRevoke>
+				</Condition>
+			</Conditions>
+			<Conditions>
+				<Condition Operand1="$IS_SUSPENDED" Operator="==" Operand2="1">
+					<ToRevoke CoverageCode="PIP94"></ToRevoke>
+				</Condition>
+				<Condition Operand1="$AUTO_TYPE" Operator="==" Operand2="11618">
+					<ToRevoke CoverageCode="PIP94"></ToRevoke>
+				</Condition>
+				<Condition Operand1="$AUTO_TYPE" Operator="==" Operand2="11337">
+					<ToRevoke CoverageCode="PIP94"></ToRevoke>
+				</Condition>
+				<Condition Operand1="$AUTO_TYPE" Operator="==" Operand2="11870">
+					<ToRevoke CoverageCode="PIP94"></ToRevoke>
+				</Condition>
+			</Conditions>
+		</Rule>
+	</Group>
+	<Group Code="AppDependent">
+		<Rule Action="Database" StartDate="1950-01-01" EndDate="2002-02-28">
+			<Conditions></Conditions>
+		</Rule>
+	</Group>
+</Root>

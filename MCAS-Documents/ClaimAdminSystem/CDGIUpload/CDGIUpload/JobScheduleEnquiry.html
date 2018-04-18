@@ -1,0 +1,235 @@
+<html xmlns="http://www.w3.org/1999/xhtml" >
+<head id="Head1">
+	<title>Upload</title>
+    <link href="SIPLStyles.css" rel="stylesheet" type="text/css" />
+	<style type="text/css">
+	.Asterik
+	{
+		font-weight: bolder;
+        font-size: 9pt;
+        color: red;
+        font-family: Arial, Verdana, Times New Roman;
+	}
+	.Header
+    {
+        font-weight: bolder;
+        font-size: 15pt;
+        color: black;
+        font-family: Arial, Verdana, Times New Roman;
+        height: 25px;
+        background-color: W;
+		text-align: center;
+        border-right:solid 1px white;
+        border-bottom:solid 1px white;
+      
+    }
+    .RepeaterHeader
+    {
+        font-weight: bolder;
+        font-size: 9pt;
+        color: #ffffff;
+        font-family: Arial, Verdana, Times New Roman;
+        height: 25px;
+        background-color: #233852;
+        text-align: left;
+        border-right:solid 1px white;
+        border-bottom:solid 1px white;
+      
+    }
+	.RepeaterHeaderCenter
+    {
+        font-weight: bolder;
+        font-size: 9pt;
+        color: #ffffff;
+        font-family: Arial, Verdana, Times New Roman;
+        height: 25px;
+        background-color: #233852;
+        text-align: center;
+        border-right:solid 1px white;
+        border-bottom:solid 1px white;
+      
+    }
+    .RepeaterRow
+    {
+        font-size: 9pt;
+        text-align: right;
+        color: #black;
+        font-family: Arial, Verdana, Times New Roman;
+        height: 25px;
+        background-color: #F5F2F2;
+        border-right:solid 1px white;
+        border-bottom:solid 1px white;
+        font-weight:normal;
+    }
+    .RepeaterRowAlt
+    {
+        font-size: 9pt;
+        color: #black;
+        text-align: right;
+        font-family: Arial, Verdana, Times New Roman;
+        height: 25px;
+        border-right:solid 1px white;
+        border-bottom:solid 1px white;
+        background-color :#D9E2E9;
+        font-weight:normal;
+        
+    }
+    .RepeaterRowLeft
+    {
+        font-size: 9pt;
+        color: #black;
+        font-family: Arial, Verdana, Times New Roman;
+        height: 25px;
+        background-color: #F5F2F2;
+        text-align: left;
+        border-right:solid 1px white;
+        border-bottom:solid 1px white;
+        font-weight:normal;
+    }
+     .RepeaterRowLeftAlt
+    {
+        font-size: 9pt;
+        color: #black;
+        font-family: Arial, Verdana, Times New Roman;
+        height: 25px;
+        background-color: #D9E2E9;
+        text-align: left;
+        border-right:solid 1px white;
+        border-bottom:solid 1px white;
+        font-weight:normal;
+    }
+     .RepeaterRowRight
+    {
+        font-size: 9pt;
+        color: #black;
+        font-family: Arial, Verdana, Times New Roman;
+        height: 25px;
+        background-color: #F5F2F2;
+        text-align: right;
+        border-right:solid 1px white;
+        border-bottom:solid 1px white;
+        font-weight:normal;
+        
+    }
+    .FooterRow
+    {
+        font-size: 9pt;
+        text-align: right;
+        color: #black;
+        font-family: Arial, Verdana, Times New Roman;
+        height: 25px;
+        background-color: #DEDEDE;
+        border-right:solid 1px white;
+        border-bottom:solid 1px white;
+        font-weight:normal;
+    }
+    .FooterRowLeft
+    {
+        font-size: 9pt;
+        text-align: left;
+        color: #black;
+        font-family: Arial, Verdana, Times New Roman;
+        height: 25px;
+        background-color: #DEDEDE;
+        border-right:solid 1px white;
+        border-bottom:solid 1px white;
+        font-weight:normal;
+    }
+    
+    </style>
+
+</head>
+<body>
+	
+	<table cellpadding="1" cellspacing="1" border="0" width="100%">
+		<tr>
+			<td colspan="4" align="center">&nbsp;</td>
+		</tr>
+		<tr>
+			<td colspan="4" class="TDBackGround"><p class="Header"><span id="lblHeader">Job Schedule Enquiry</p></td>
+		</tr>
+		<tr>
+			<td colspan="4" align="center">&nbsp;</td>
+		</tr>
+		<tr>
+			<td colspan="4" class="RepeaterHeader"><span id="lblTitle">Search Job Schedule</td>
+		</tr>
+		<tr>
+			<td class="RepeaterRowLeft">Job No</td>
+			<td class="RepeaterRowLeft"><input type="text"></td>
+			<td class="RepeaterRowLeft">Process Ref. No</td>
+			<td class="RepeaterRowLeft"><input type="text"></td>
+		</tr>
+		
+		<tr>
+			<td class="RepeaterRowLeft">Scheduled  From Date</td>
+			<td class="RepeaterRowLeft"><input type="text"></td>
+			<td class="RepeaterRowLeft">Scheduled  To Date</td>
+			<td class="RepeaterRowLeft"><input type="text"></td>
+		</tr>
+		<tr>
+			<td class="RepeaterRowLeft">Job Type</td>
+			<td class="RepeaterRowLeft">
+				<select>
+					<option value="">[Select...]</option>
+					<option value="TAC">TAC Upload</option>
+					<option value="CLM">Claim Upload</option>
+				</select>
+			</td>
+			<td class="RepeaterRowLeft">Job Status</td>
+			<td class="RepeaterRowLeft">
+				<select>
+					<option value="">[Select...]</option>
+					<option value="IQ">In Queue</option>
+					<option value="IP">In Progress</option>
+					<option value="C">Completed</option>
+				</select>
+			</td>
+		</tr>
+		<tr>
+			<td colspan="4" align="center">&nbsp;</td>
+		</tr>
+		<tr>
+			<td colspan="4" align="center"><input type="button" Value="Back" onclick="window.location.href='index.html'">&nbsp;<input type="button" Value="Search">&nbsp;<input type="button" Value="Clear"></td>
+		</tr>
+		<tr>
+			<td colspan="4" align="center">&nbsp;</td>
+		</tr>
+		
+	</table>
+			
+	<table cellpadding="1" cellspacing="1" border="0" width="100%">
+		<tr >
+			<td  class="RepeaterHeaderCenter">Job No</td>
+			<td  class="RepeaterHeaderCenter">Job Type</td>
+			<td  class="RepeaterHeaderCenter">Process Ref.No</td>
+			<td  class="RepeaterHeaderCenter">Schedule Date & Time</td>
+			<td  class="RepeaterHeaderCenter">Job Start Date & Time</td>
+			<td  class="RepeaterHeaderCenter">Job Finish Date & Time</td>
+			<td  class="RepeaterHeaderCenter">Job Status</td>
+		</tr>
+		<tr>
+			<td class="RepeaterRowLeft">JOB000002</td>
+			<td class="RepeaterRowLeft">Claim Upload</td>
+			<td class="RepeaterRowLeft">CLM-0000001</td>
+			<td class="RepeaterRowLeft">25/10/2014 11:00</td>
+			<td class="RepeaterRowLeft">25/10/2014 11:01</td>
+			<td class="RepeaterRowLeft">25/10/2014 11:20</td>
+			<td class="RepeaterRowLeft">Completed</td>
+		</tr>
+		<tr>
+			<td class="RepeaterRowLeft">JOB000001</td>
+			<td class="RepeaterRowLeft">TAC Upload</td>
+			<td class="RepeaterRowLeft">TAC-0000001</td>
+			<td class="RepeaterRowLeft">25/10/2014 10:00</td>
+			<td class="RepeaterRowLeft">25/10/2014 10:01</td>
+			<td class="RepeaterRowLeft">25/10/2014 10:20</td>
+			<td class="RepeaterRowLeft">Completed</td>
+		</tr>
+		<tr>
+			<td colspan="7" align="center">&nbsp;</td>
+		</tr>
+		
+	</table>
+</body>
+<html>

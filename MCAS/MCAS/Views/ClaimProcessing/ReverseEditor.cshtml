@@ -1,0 +1,603 @@
+﻿@model MCAS.Web.Objects.MastersHelper.ReverseEditorModel
+@{
+    var PreReserveOrgAmt = "0.00";
+    var PreReserveLocalAmt = "0.00";
+    var PreExRateOrgCurr = "0.00";
+    var PreExRateLocalCurr = "0.00";
+    var MoveReserveOrgAmt = "0.00";
+    var MoveReserveLocalAmt = "0.00";
+    var FinalReserveOrgAmt = "0.00";
+    var FinalReserveLocalAmt = "0.00";
+    var prop = "0.00";
+    if (Model.PreReserveOrgAmt != null && Convert.ToString(Model.PreReserveOrgAmt) != "0.00")
+    {
+        PreReserveOrgAmt = Convert.ToString(Model.PreReserveOrgAmt) == "0" ? "0.00" : Convert.ToString(Model.PreReserveOrgAmt);
+    }
+    if (Model.PreReserveLocalAmt != null && Convert.ToString(Model.PreReserveLocalAmt) != "0.00")
+    {
+        PreReserveLocalAmt = Convert.ToString(Model.PreReserveLocalAmt) == "0" ? "0.00" : Convert.ToString(Model.PreReserveLocalAmt);
+    }
+    if (Model.PreExRateOrgCurr != null && Convert.ToString(Model.PreExRateOrgCurr) != "0.00")
+    {
+        PreExRateOrgCurr = Convert.ToString(Model.PreExRateOrgCurr) == "0" ? "0.00" : Convert.ToString(Model.PreExRateOrgCurr);
+    }
+    if (Model.PreExRateLocalCurr != null && Convert.ToString(Model.PreExRateLocalCurr) != "0.00")
+    {
+        PreExRateLocalCurr = Convert.ToString(Model.PreExRateLocalCurr) == "0" ? "0.00" : Convert.ToString(Model.PreExRateLocalCurr);
+    }
+    if (Model.MoveReserveOrgAmt != null && Convert.ToString(Model.MoveReserveOrgAmt) != "0.00")
+    {
+        MoveReserveOrgAmt = Convert.ToString(Model.MoveReserveOrgAmt) == "0" ? "0.00" : Convert.ToString(Model.MoveReserveOrgAmt);
+    }
+    if (Model.MoveReserveLocalAmt != null && Convert.ToString(Model.MoveReserveLocalAmt) != "0.00")
+    {
+        MoveReserveLocalAmt = Convert.ToString(Model.MoveReserveLocalAmt) == "0" ? "0.00" : Convert.ToString(Model.MoveReserveLocalAmt);
+    }
+    if (Model.FinalReserveOrgAmt != null && Convert.ToString(Model.FinalReserveOrgAmt) != "0.00")
+    {
+        FinalReserveOrgAmt = Convert.ToString(Model.FinalReserveOrgAmt) == "0" ? "0.00" : Convert.ToString(Model.FinalReserveOrgAmt);
+    }
+    if (Model.FinalReserveLocalAmt != null && Convert.ToString(Model.FinalReserveLocalAmt) != "0.00")
+    {
+        FinalReserveLocalAmt = Convert.ToString(Model.FinalReserveLocalAmt) == "0" ? "0.00" : Convert.ToString(Model.FinalReserveLocalAmt);
+    }
+    var Display = "none;";
+    if (TempData["Display"] == "Display")
+    {
+        Display = "inline;";
+    }
+    else
+    {
+        Display = "none;";
+    }
+
+    var caller = "";
+    if (Request.QueryString["claimMode"] != null)
+    {
+        caller = Request.QueryString["claimMode"].ToString();
+    }
+
+    var lebmode = "";
+    if (Request.QueryString["mode"] != null)
+    {
+        lebmode = Request.QueryString["mode"].ToString();
+    }
+
+    ViewBag.Title = "ReserveEditor";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var policyid = Request.QueryString["PolicyId"];
+    var Hclaimant = Request.QueryString["ClaimId"] == null ? "0" : Request.QueryString["ClaimId"];
+    var AccId = Request.QueryString["AccidentClaimId"] == null ? "0" : Request.QueryString["AccidentClaimId"];
+    var Cmode = Request.QueryString["claimMode"] == null ? "Read" : Request.QueryString["claimMode"];
+    var accidentClaimIdNew = Request.QueryString["AccidentClaimId"];
+}
+<link href="@Url.Content("~/Content/jquery-ui.css")" rel="Stylesheet" media="screen" />
+<style type="text/css">
+    .ui-button-icon-primary.ui-icon.ui-icon-closethick
+    {
+        margin: -7px 0 0 -7px;
+    }
+    div.ui-dialog.ui-widget.ui-widget-content.ui-corner-all.ui-front.alert.ui-draggable, div.ui-dialog.ui-widget.ui-widget-content.ui-corner-all.alert.ui-draggable
+    {
+        top: 130px !important;
+    }
+    
+    fieldset
+    {
+        padding: 5px;
+        margin: 1px;
+        border: 1px solid;
+        border-color: #DAD7D7;
+    }
+    
+    legend
+    {
+        display: block;
+        width: auto;
+        padding: 1px;
+        margin-bottom: 2px;
+        font-size: 14px;
+        line-height: inherit;
+        color: #1e91cf !important;
+        border: 0;
+    }
+</style>
+<script src="@Url.Content("~/Scripts/jquery-2.1.0.min.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/Scripts/jquery.validate.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.min.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/Scripts/jquery-ui-v1.10.3.js")" type="text/javascript"></script>
+<div class="dashboard-wrapper">
+    <div class="ReserveDialogue" style="overflow: hidden;">
+    </div>
+    <div class="container">
+        <div class="row page-title">
+            <div class="col-lg-12">
+                <h2>
+                    Registration
+                </h2>
+                <ul class="breadcrumb">
+                    <li>Home</li>
+                    @{
+                        if (@caller == "Write" && @accidentClaimIdNew != null && @accidentClaimIdNew != "0")
+                        {
+                        <li>Incomplete Claim Registration</li>
+                        }
+                        else if (@caller == "Write")
+                        {
+                        <li>New Claim Registration</li>
+                        }
+                        else if (@caller == "Read" && @lebmode == "Adj")
+                        {
+                        <li>Claim Adjustments</li>
+                        }
+                        else if (@caller == "Read" && @lebmode == "Enq")
+                        {
+                        <li>Claim Enquiry</li>
+                        }
+                        else if (@caller == "Read" && @lebmode == "Payment")
+                        {
+                        <li>Claim Payment Processing</li>
+                        }
+                        else
+                        {
+                        <li>New Claim Registration</li>
+                        }
+                    }
+                </ul>
+            </div>
+        </div>
+        <hr />
+        @Html.Action("_ClaimDetails", "ClaimProcessing", new { PolicyId = @policyid })
+        <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <div class="panel panel-info">
+                    <div class="panel-heading clearfix">
+                        <i class="icon-check-sign"></i>
+                        <h3 class="panel-title">
+                            Reserve Change
+                        </h3>
+                    </div>
+                    @Html.Action("ReverseChange", "ClaimProcessing", new { PolicyId = @policyid })
+                    <div class="row">
+                        <div class="col-lg-6 text-left">
+                            <a class="btn btn-info" id="NewReserve" href="#">Add New Reserve</a>
+                        </div>
+                        <div class="col-lg-6 text-right">
+                            <a class="btn btn-info" id="ViewReserveHistory" href="#">View Reserve History</a>
+                        </div>
+                    </div>
+                    <hr style='font-weight: bold' />
+                    <div style="color: Red; font-weight: bold;" class="has-error" id="error">
+                        <p align="center" id="result">
+                            @if (TempData["result"] != null)
+                            {
+                                @TempData["result"]
+                                TempData.Remove("result");
+                            }
+                        </p>
+                    </div>
+                    <div class="panel-body" id="NewReserveEditor" style="display: @Display">
+                        @using (Html.BeginForm("ReverseEditor", "ClaimProcessing", new { PolicyId = @policyid, AccidentClaimId = @AccId, claimMode = @Cmode, ClaimId = @Hclaimant }, FormMethod.Post, new { role = "form", @class = "form-horizontal", id = "ReverseEditor", name = "ReverseEditor" }))
+                        {
+                            <fieldset id="Claimant_Fieldset">
+                                @Html.HiddenFor(m => m.ReadOnly)
+                                <legend>Claimant</legend>
+                                <div class="panel-body">
+                                    <div class="row">
+                                        <div class="col-lg-6" id="Reserve_claimant">
+                                            <div class="form-group">
+                                                <label class="col-sm-4 control-label" for="inputContactNo">
+                                                    Claimant&nbsp;<span class="text-danger">*</span>
+                                                </label>
+                                                <div class="col-sm-3">
+                                                    @Html.DropDownListFor(m => m.ClaimantID, new SelectList(Model.Claimant_List, "TPartyId", "CompanyName", "Select"), new { id = "ClaimantID", @class = "form-control" })
+                                                </div>
+                                                <div class="col-sm-4">
+                                                    @Html.ValidationMessageFor(m => m.ClaimantID)
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </fieldset>
+                            <fieldset id="Previous_Reserve_Fieldset">
+                                <legend>Previous Reserve</legend>
+                                <div class="panel-body">
+                                    <div class="row">
+                                        <div class="col-lg-6" id="re_Original_Reserve_Previous">
+                                            <div class="form-group">
+                                                <label class="col-sm-4 control-label" for="inputContactNo">
+                                                    Original Reserve
+                                                </label>
+                                                <div class="col-sm-3">
+                                                    @Html.DropDownListFor(m => m.PreResOrgCurrCode, new SelectList(Model.Payment_Type_List, "CurrencyCode", "Description", "SGD"), new { id = "PreResOrgCurrCode", @class = "form-control" })
+                                                </div>
+                                                <div class="col-sm-4">
+                                                    @Html.TextBoxFor(m => m.PreReserveOrgAmt, new { id = "PreReserveOrgAmt", @class = "form-control", @Value = Convert.ToInt32(@PreReserveOrgAmt.ToString().Split('.')[1].Length) > 2 ? @PreReserveOrgAmt.ToString().Split('.')[0] + ".00" : @PreReserveOrgAmt })
+                                                   
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6" id="re_E_R">
+                                            <div class="form-group" id="re_Payee">
+                                                <label class="col-sm-4 control-label" for="inputVehicleRegnNo">
+                                                    PreExRateOrgCurr
+                                                </label>
+                                                <div class="col-sm-4">
+                                                    @Html.TextBoxFor(m => m.PreExRateOrgCurr, new { id = "PreExRateOrgCurr", @class = "form-control", @Value = @PreExRateOrgCurr })
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-lg-6" id="re_Local_Reserve_Previous">
+                                            <div class="form-group">
+                                                <label class="col-sm-4 control-label" for="inputContactNo">
+                                                    Local Reserve
+                                                </label>
+                                                <div class="col-sm-3">
+                                                    @Html.DropDownListFor(m => m.PreResLocalCurrCode, new SelectList(Model.Payment_Type_List, "CurrencyCode", "Description", "SGD"), new { id = "PreResLocalCurrCode", @class = "form-control" })
+                                                </div>
+                                                <div class="col-sm-4">
+                                                    @Html.TextBoxFor(m => m.PreReserveLocalAmt, new { id = "PreReserveLocalAmt", @class = "form-control", @Value = Convert.ToInt32(@PreReserveLocalAmt.ToString().Split('.')[1].Length) > 2 ? @PreReserveLocalAmt.ToString().Split('.')[0] + ".00" : @PreReserveLocalAmt })
+                                                    
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6" id="re_E">
+                                            <div class="form-group" id="re_Paye">
+                                                <label class="col-sm-4 control-label" for="inputVehicleRegnNo">
+                                                    Ex Rate To Local Currency
+                                                </label>
+                                                <div class="col-sm-4">
+                                                    @Html.TextBoxFor(m => m.PreExRateLocalCurr, new { id = "PreExRateLocalCurr", @class = "form-control", @Value = @PreExRateLocalCurr })
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </fieldset>
+                            <fieldset id="Reserve_Movement">
+                                <legend>Reserve Movement</legend>
+                                <div class="panel-body">
+                                    <div class="row">
+                                        <div class="col-lg-6" id="re_Original_Reserve_Reserve">
+                                            <div class="form-group">
+                                                <label class="col-sm-4 control-label" for="inputContactNo">
+                                                    Original Reserve&nbsp;<span class="text-danger">*</span>
+                                                </label>
+                                                <div class="col-sm-3">
+                                                    @Html.DropDownListFor(m => m.MoveResOrgCurrCode, new SelectList(Model.Payment_Type_List, "CurrencyCode", "Description", "SGD"), new { id = "MoveResOrgCurrCode", @class = "form-control" })
+                                                    @Html.ValidationMessageFor(m => m.MoveResOrgCurrCode)
+                                                </div>
+                                                <div class="col-lg-4" id="re_Local_Reserve_Reserve">
+                                                    @Html.TextBoxFor(m => m.MoveReserveOrgAmt, new { id = "MoveReserveOrgAmt", @class = "form-control", maxlength = 30, @Value = @MoveReserveOrgAmt })
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <div class="form-group" style="padding-left: 0px !important; padding-right: 100px !important;
+                                                margin-left: -100px !important;">
+                                                <label class="col-sm-9 control-label" for="inputContactNo">
+                                                    @Html.ValidationMessageFor(m => m.MoveReserveOrgAmt)
+                                                </label>
+                                                <div class="col-sm-3">
+                                                </div>
+                                                <div class="col-lg-4">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-lg-6" id="re_Local_Reserve_Local">
+                                            <div class="form-group">
+                                                <label class="col-sm-4 control-label" for="inputContactNo">
+                                                    Local Reserve
+                                                </label>
+                                                <div class="col-sm-3">
+                                                    @Html.DropDownListFor(m => m.MoveResLocalCurrCode, new SelectList(Model.Payment_Type_List, "CurrencyCode", "Description", "SGD"), new { id = "MoveResLocalCurrCode", @class = "form-control" })
+                                                    
+                                                </div>
+                                                <div class="col-lg-4" id="re_Local_Currency">
+                                                    @Html.TextBoxFor(m => m.MoveReserveLocalAmt, new { id = "MoveReserveLocalAmt", @class = "form-control", maxlength = 30, @Value = @MoveReserveLocalAmt })
+                                                    
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </fieldset>
+                            <fieldset id="Current_Transaction_Reserve">
+                                <legend>Current Reserve</legend>
+                                <div class="panel-body">
+                                    <div class="row">
+                                        <div class="col-lg-6" id="re_Original_Reserve_Local">
+                                            <div class="form-group">
+                                                <label class="col-sm-4 control-label" for="inputContactNo">
+                                                    Original Reserve
+                                                </label>
+                                                <div class="col-sm-3">
+                                                    @Html.DropDownListFor(m => m.FinalResOrgCurrCode, new SelectList(Model.Payment_Type_List, "CurrencyCode", "Description", "SGD"), new { id = "FinalResOrgCurrCode", @class = "form-control" })
+                                                </div>
+                                                <div class="col-lg-4" id="re_Original_Reserve_Local_Textval">
+                                                    @Html.TextBoxFor(m => m.FinalReserveOrgAmt, new { id = "FinalReserveOrgAmt", @class = "form-control", maxlength = 30, @Value = @FinalReserveOrgAmt })
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-lg-6" id="re_br">
+                                            <div class="form-group">
+                                                <label class="col-sm-4 control-label" for="inputContactNo">
+                                                    Local Reserve
+                                                </label>
+                                                <div class="col-sm-3">
+                                                    @Html.DropDownListFor(m => m.FinalResLocalCurrCode, new SelectList(Model.Payment_Type_List, "CurrencyCode", "Description", "SGD"), new { id = "FinalResLocalCurrCode", @class = "form-control" })
+                                                </div>
+                                                <div class="col-lg-4" id="re_Local_Reserve_Local_Textval">
+                                                    @Html.TextBoxFor(m => m.FinalReserveLocalAmt, new { id = "FinalReserveLocalAmt", @class = "form-control", maxlength = 30, @Value = @FinalReserveLocalAmt })
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </fieldset>
+                            <div class="row">
+                                @Html.HiddenFor(m => m.Prop1, new { id = "Prop1", @class = "form-control", maxlength = 30, @Value = @prop })
+                                @Html.HiddenFor(m => m.Hclaimant, new { id = "Hclaimant", @class = "form-control", maxlength = 30, @Value = @Hclaimant })
+                                <div class="clearfix igr col-md-12 text-center">
+                                    <button class="btn btn-info" id="btnSave">
+                                        Save</button>
+                                    <button type="button" class="btn btn-info" onclick="onclickcancel();">
+                                        Reset</button>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#ClaimantID').change(function (e) {
+            if ($('#Reserve_Movement > div > div:nth-child(1) > div:nth-child(2) > div > label > span').hasClass("field-validation-error")) {
+                $("#Reserve_Movement > div > div:nth-child(1) > div:nth-child(2) > div > label > span").addClass("field-validation-valid");
+                $("#Reserve_Movement > div > div:nth-child(1) > div:nth-child(2) > div > label > span").removeClass("field-validation-error");
+                e.stopPropagation();
+            }
+        }
+);
+
+        $("#PreResOrgCurrCode option[value!='SGD']").remove();
+        $("#PreResLocalCurrCode option[value!='SGD']").remove();
+        $("#MoveResOrgCurrCode option[value!='SGD']").remove();
+        $("#MoveResLocalCurrCode option[value!='SGD']").remove();
+        $("#FinalResOrgCurrCode option[value!='SGD']").remove();
+        $("#FinalResLocalCurrCode option[value!='SGD']").remove();
+        $("#PreResOrgCurrCode,#PreResLocalCurrCode,#MoveResOrgCurrCode,#MoveResLocalCurrCode,#FinalResOrgCurrCode,#FinalResLocalCurrCode").css({ "pointer-events": "none", "cursor": "default" }).css('background-color', '#eee');
+        $.validator.unobtrusive.adapters.add("notequalto", ["other"], function (a) {
+            a.rules.notEqualTo = "#" + a.params.other;
+            a.message && (a.messages.notEqualTo = a.message)
+        });
+        $.validator.addMethod("notEqualTo", function (a, b, c) {
+            return this.optional(b) || a != $(c).val()
+        }, "");
+
+        $("#ViewReserveHistory").click(function (event) {
+            var id = this.id, uuid = guid(), nuuid = "#" + uuid;
+            var str = '<div id="' + uuid + '" title="Reserve History" style="overflow: hidden;"> </div>';
+            $(str).appendTo(".ReserveDialogue");
+            InitializeDialog($(nuuid));
+            event.preventDefault();
+            $(nuuid).dialog("open");
+            $('div.ui-dialog.ui-widget.ui-widget-content.ui-corner-all.ui-front.alert.ui-draggable').css("top", "130px !important");
+            $('div.ui-dialog.ui-widget.ui-widget-content.ui-corner-all.alert.ui-draggable').css("top", "130px !important");
+            return false;
+        });
+
+        function InitializeDialog($element) {
+            $element.dialog({
+                width: 1200,
+                resizable: false,
+                draggable: true,
+                show: { effect: 'drop', direction: "up" },
+                title: "Reserve History",
+                model: true,
+                show: 'slide',
+                dialogClass: 'alert',
+                closeOnEscape: true,
+                open: function (event) {
+                    var pathname = '@Url.Content("~/ClaimProcessing/ReverseChangeall")';
+                    var cid = pathname + "?ClaimId=" + getQueryVariable("ClaimId") + "&Tab=RT&uid=" + guid();
+                    $element.load(cid);
+                },
+                position: {
+                    my: "center",
+                    at: "center",
+                    of: window
+                },
+                close: function () {
+                    $element.dialog('destroy').remove();
+                }
+
+            });
+
+        };
+
+        $(function () {
+            $("#ClaimantID").change(function () {
+
+                var a = $(this).val();
+                "" == a ? ($('input[type="text"]').val("0.00"), $("#result").hide(), $("select").prop("selectedIndex", 0), $("#PreResOrgCurrCode option[value='SGD']").attr("selected", "selected"), $("#PreResLocalCurrCode option[value='SGD']").attr("selected", "selected"), $("#MoveResOrgCurrCode option[value='SGD']").attr("selected", "selected"), $("#MoveResLocalCurrCode option[value='SGD']").attr("selected", "selected"), $("#FinalResOrgCurrCode option[value='SGD']").attr("selected", "selected"), $("#FinalResLocalCurrCode option[value='SGD']").attr("selected", "selected")) : $.ajax({
+                    type: "POST",
+                    url: '@Url.Action("GetReserve", "ClaimProcessing")',
+                    data: {
+                        ClaimantNo: a
+                    },
+                    success: function (a) {
+                        $("#PreResOrgCurrCode option:contains(" + $.trim(void 0 == a[0] ? "SGD" : null == a[0].PreResOrgCurrCode ? "SGD" : a[0].PreResOrgCurrCode) + ")").attr("selected", "selected");
+                        $("#PreReserveOrgAmt").val(void 0 == a[0] ? "0.00" : null == a[0].PreReserveOrgAmt ? "0.00" : numberWithCommas(a[0].PreReserveOrgAmt) + ".00");
+                        $("#PreExRateOrgCurr").val(void 0 == a[0] ? "0.00" : null == a[0].PreExRateOrgCurr ? "0.00" : numberWithCommas(a[0].PreExRateOrgCurr) + ".00");
+                        $("#PreReserveLocalAmt").val(void 0 == a[0] ? "0.00" : null == a[0].PreReserveLocalAmt ? "0.00" : numberWithCommas(a[0].PreReserveLocalAmt) + ".00");
+                        $("#PreExRateOrgCurr").val("0.00" == '@Model.PreExRateOrgCurr' ? "0.00" : a[0].PreExRateOrgCurr);
+                        Rsum();
+                        $("#result").hide()
+                    }
+                })
+            })
+        });
+        $(function () {
+            var claimentStatus = '@ViewData["EnableTab"]';
+            enableTPTab(claimentStatus.toLowerCase());
+        });
+        $(function () {
+            var ODStatus = '@ViewData["EnableODTab"]';
+            enableODTab(ODStatus.toLowerCase());
+        });
+        setTabActive('ReverseEditor');
+        $(document).on("focus", ":input", function () {
+            $(this).attr("autocomplete", "off")
+        });
+        $('input[type="text"]').prop("readonly", !0);
+        $("#MoveReserveOrgAmt").prop("readonly", !1);
+        $("input[type=text]").bind("copy paste cut", function (a) {
+            a.preventDefault()
+        }).css("cursor", "pointer").each(function () {
+            "0.00" == $(this).val() || $(this).val().contains(",") || $(this).val(numberWithCommas(removecomma($(this).val())) + ".00")
+        }).change(function () {
+            $("#result").hide()
+        }).blur(function () {
+            var a = $(this).val();
+            if ("" != a && !1 == /^[^.]+$/.test(a)) {
+                var a = a.split("."),
+        b = 2 < String(a[1]).length ? String(a[1]).substring(0, 2) : 1 == String(a[1]).length ? String(a[1]) + "0" : String(a[1]);
+                $(this).val(String(a[0]) + "." + b)
+            };
+        });
+
+        $("select").change(function () {
+            $("#result").hide();
+        });
+
+        $("#AccidentTab,#ClaimTab,#ThirdPartyTab,#NotesTab,#ReserveTab,#TransactionsTab,#AttachmentsTab,#ToDoTab,#PaymentEditor").removeClass("active");
+        $("#ReverseEditor").addClass("active");
+        $("#MoveReserveOrgAmt").blur(function () {
+            Rsum()
+        });
+        $("#NewReserve").click(function () {
+            $("#NewReserveEditor").toggle();
+            $("#NewReserve").text(function (a, b) {
+                return "block" == $("#NewReserveEditor").css("display") || "inline" == $("#NewReserveEditor").css("display") ? "Hide New Reserve" : "Add New Reserve"
+            });
+            $('input[type="text"]').val("0.00");
+            $("#result").hide();
+            $("select").prop("selectedIndex", 0);
+            $("#PreResOrgCurrCode option[value='SGD']").attr("selected", "selected");
+            $("#PreResLocalCurrCode option[value='SGD']").attr("selected", "selected");
+            $("#MoveResOrgCurrCode option[value='SGD']").attr("selected", "selected");
+            $("#MoveResLocalCurrCode option[value='SGD']").attr("selected", "selected");
+            $("#FinalResOrgCurrCode option[value='SGD']").attr("selected", "selected");
+            $("#FinalResLocalCurrCode option[value='SGD']").attr("selected", "selected");
+            $('span.field-validation-error').removeClass('field-validation-error').addClass('field-validation-valid');
+        });
+        "block" == $("#NewReserveEditor").css("display") || "inline" == $("#NewReserveEditor").css("display") ? $("#NewReserve").text("Hide New Reserve") : $("#NewReserve").text("Add New Reserve");
+        $('input[type="text"]').change(function () {
+            var a = "#" + this.id;
+            $(a).val("" == $(a).val() ? $(a).val() : $(a).val().contains(".") ? $(a).val() : numberWithCommas(parseInt($(a).val())) + ".00")
+        }).keypress(function () {
+            var a = $("#" + this.id).val().length;
+            if (10 > parseInt(a)) {
+                var a = "#" + this.id,
+                     b = event.type,
+                     b = b.which ? b.which : event.keyCode;
+                return 45 != b && 46 != b && 31 < b && (48 > b || 57 < b) ? ($(a).focus(), !1) : !0
+            }
+            return !1
+        })
+
+        var val11 = '@Model.PreExRateOrgCurr';
+        $("#PreExRateOrgCurr").val(val11);
+        if ('@Model.MoveReserveOrgAmt' != null && '@Model.MoveReserveOrgAmt' != '0.00' && '@Model.MoveReserveOrgAmt' != '0') {
+            $("#MoveReserveOrgAmt").val("0.00");
+            $("#PreReserveOrgAmt").val($("#FinalReserveOrgAmt").val());
+        }
+    });
+    function setTabActive(elementid) {
+        $('#myTab1').children().each(function (el, value) {
+            if (value.id == elementid)
+                $(value).removeClass("active").addClass("active");
+            else
+                $(value).removeClass("active");
+        }
+       );
+    }
+    function Rsum() {
+        $("#MoveReserveOrgAmt").val("" == $("#MoveReserveOrgAmt").val() ? "0.00" : $("#MoveReserveOrgAmt").val());
+        $("#MoveReserveLocalAmt").val("" == $("#MoveReserveLocalAmt").val() ? "0.00" : numberWithCommas(removecomma($("#MoveReserveLocalAmt").val()) * removecomma($("#PreExRateLocalCurr").val())) + ".00");
+        $("#FinalReserveOrgAmt").val(numberWithCommas(removecomma($("#PreReserveOrgAmt").val()) + removecomma($("#MoveReserveOrgAmt").val())) + ".00");
+        $("#FinalReserveLocalAmt").val(numberWithCommas(removecomma($("#PreReserveLocalAmt").val()) + removecomma($("#MoveReserveLocalAmt").val())) + ".00")
+    }
+    function numberWithCommas(a) {
+        if (/^[^.]+$/.test(a)) {
+            a = a.toString();
+            for (var b = /(-?\d+)(\d{3})/; b.test(a); ) a = a.replace(b, "$1,$2");
+            return a
+        }
+        else {
+            return a
+        }
+    }
+
+    function onclickcancel() {
+        $('input[type="text"]').val("0.00");
+        $("#result").hide();
+        $("select").prop("selectedIndex", 0);
+        $("#PreResOrgCurrCode option[value='SGD']").attr("selected", "selected");
+        $("#PreResLocalCurrCode option[value='SGD']").attr("selected", "selected");
+        $("#MoveResOrgCurrCode option[value='SGD']").attr("selected", "selected");
+        $("#MoveResLocalCurrCode option[value='SGD']").attr("selected", "selected");
+        $("#FinalResOrgCurrCode option[value='SGD']").attr("selected", "selected");
+        $("#FinalResLocalCurrCode option[value='SGD']").attr("selected", "selected");
+        $('span.field-validation-error').removeClass('field-validation-error').addClass('field-validation-valid');
+    }
+    function removecomma(a) {
+        return parseInt(a.substring(0, a.indexOf(".")).replace(/,/g, ""))
+    }
+
+    function getQueryVariable(a) {
+        for (var e = "@MCAS.Web.Objects.CommonHelper.MenuListItem.ClaimTabs.GetQueryStringVal()".replace(/amp;/ig, "").split("&"), d = 0; d < e.length; d++) {
+            var b = e[d].split("=");
+            if (b[0] == a) return b[1]
+        }
+    };
+    var guid = (function () {
+        function s4() {
+            return Math.floor((1 + Math.random()) * 0x10000)
+               .toString(16)
+               .substring(1);
+        }
+        return function () {
+            return s4() + s4() + '-' + s4() + '-' + s4() + '-' +
+           s4() + '-' + s4() + s4() + s4();
+        };
+    })();
+    String.prototype.contains = function (a) {
+        return -1 != this.indexOf(a)
+    };
+    function checkKeyCode(evt)// for F5 disable
+    {
+
+        var evt = (evt) ? evt : ((event) ? event : null);
+        var node = (evt.target) ? evt.target : ((evt.srcElement) ? evt.srcElement : null);
+        if (event.keyCode == 116)//disable F5
+        {
+            evt.keyCode = 0;
+            alert('This operation is not allowed.')
+            return false
+        }
+    }
+
+    document.onkeydown = checkKeyCode;
+</script>

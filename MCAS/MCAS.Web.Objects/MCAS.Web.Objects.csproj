@@ -1,0 +1,1552 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{450619DF-D51F-45B1-BBC6-B0EA269D1C1D}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>MCAS.Web.Objects</RootNamespace>
+    <AssemblyName>MCAS.Web.Objects</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EAWXmlToPDFParser, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31cfb2a6ffda0136, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\MCAS\bin\EAWXmlToPDFParser.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.ReportViewer.WebForms, Version=9.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
+    <Reference Include="Microsoft.SQLServer.ManagedDTS, Version=10.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>C:\Program Files\Microsoft SQL Server\100\SDK\Assemblies\Microsoft.SQLServer.ManagedDTS.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.Entity" />
+    <Reference Include="System.Data.Linq" />
+    <Reference Include="System.Linq.Dynamic">
+      <HintPath>..\packages\System.Linq.Dynamic.1.0.4\lib\net40\System.Linq.Dynamic.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
+    <Reference Include="System.Net.Http.Formatting, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="System.Net.Http.WebRequest, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Helpers, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="System.Web.Http, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="System.Web.Http.WebHost, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="System.Web.Mvc, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.Web.WebPages, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="ClaimObjectHelper\ClaimFileUploadEditorModel.cs" />
+    <Compile Include="ClaimObjectHelper\ClaimFileUploadViewEditorModel.cs" />
+    <Compile Include="ClaimObjectHelper\ClaimFileUploadViewListModel.cs" />
+    <Compile Include="ClaimObjectHelper\ClaimFinanceModel.cs" />
+    <Compile Include="ClaimObjectHelper\ClaimForCRTXInfoModel.cs" />
+    <Compile Include="ClaimObjectHelper\ClaimInfoPayment.cs" />
+    <Compile Include="ClaimObjectHelper\ClaimMandateModel.cs" />
+    <Compile Include="ClaimObjectHelper\ClaimMandateNewModel.cs" />
+    <Compile Include="ClaimObjectHelper\ClaimNotesModel.cs" />
+    <Compile Include="ClaimObjectHelper\ClaimAccidentDetailsModel.cs" />
+    <Compile Include="ClaimObjectHelper\ClaimAttachmentsModel.cs" />
+    <Compile Include="ClaimObjectHelper\ClaimEntryInfoModel.cs" />
+    <Compile Include="ClaimObjectHelper\ClaimObjectHelper.cs" />
+    <Compile Include="ClaimObjectHelper\ClaimPaymentInfo.cs" />
+    <Compile Include="ClaimObjectHelper\ClaimRecoveryCrTxModel.cs" />
+    <Compile Include="ClaimObjectHelper\ClaimRecoveryModel.cs" />
+    <Compile Include="ClaimObjectHelper\ClaimRegistrationModel.cs" />
+    <Compile Include="ClaimObjectHelper\ClaimReserveModel.cs" />
+    <Compile Include="ClaimObjectHelper\ClaimTransactionsModel.cs" />
+    <Compile Include="ClaimObjectHelper\ClaimInfoModel.cs" />
+    <Compile Include="ClaimObjectHelper\ClmClaimQutmModel.cs" />
+    <Compile Include="ClaimObjectHelper\ClmClaimQutmPCNTXModel.cs" />
+    <Compile Include="ClaimObjectHelper\ClmDetailModel.cs" />
+    <Compile Include="ClaimObjectHelper\ClaimMandatePCNTXModel.cs" />
+    <Compile Include="ClaimObjectHelper\LogRequestModel.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="ClaimObjectHelper\ReverseInfo.cs" />
+    <Compile Include="ClaimObjectHelper\TacFileUploadEditorModel.cs" />
+    <Compile Include="ClaimObjectHelper\TacFileUploadViewEditorModel.cs" />
+    <Compile Include="ClaimObjectHelper\TacFileUploadViewListModel.cs" />
+    <Compile Include="ClaimObjectHelper\ThirdPartyInfoModel.cs" />
+    <Compile Include="CommonHelper\BaseModel.cs" />
+    <Compile Include="CommonHelper\CedantListItem.cs" />
+    <Compile Include="CommonHelper\CommonUtilities.cs" />
+    <Compile Include="CommonHelper\DataMapper.cs" />
+    <Compile Include="CommonHelper\DiaryListType.cs" />
+    <Compile Include="CommonHelper\DocumentModel.cs" />
+    <Compile Include="CommonHelper\EnDecryption.cs" />
+    <Compile Include="CommonHelper\GSTListItem.cs" />
+    <Compile Include="CommonHelper\HtmlExtensions.cs" />
+    <Compile Include="CommonHelper\MenuListItem.cs" />
+    <Compile Include="CommonHelper\ProviceList.cs" />
+    <Compile Include="CommonHelper\RequiredIf.cs" />
+    <Compile Include="CommonHelper\RiskTypeListItem.cs" />
+    <Compile Include="CommonHelper\SearchCriteria.cs" />
+    <Compile Include="CommonHelper\ServiceProvider.cs" />
+    <Compile Include="CommonHelper\SubClassListItem.cs" />
+    <Compile Include="CommonHelper\UserCityListItem.cs" />
+    <Compile Include="CommonHelper\UserList.cs" />
+    <Compile Include="CommonHelper\VehicleListItem.cs" />
+    <Compile Include="MastersHelper\AddressModel.cs" />
+    <Compile Include="MastersHelper\AdjusterModel.cs" />
+    <Compile Include="MastersHelper\BranchListItems.cs" />
+    <Compile Include="MastersHelper\CatastropheListIems.cs" />
+    <Compile Include="MastersHelper\CedantModel.cs" />
+    <Compile Include="MastersHelper\ClaimOfficerDutyModel.cs" />
+    <Compile Include="MastersHelper\CLMClaimRecoveryModel.cs" />
+    <Compile Include="MastersHelper\CurrencyMasterModel.cs" />
+    <Compile Include="MastersHelper\DepartmentsListItems.cs" />
+    <Compile Include="MastersHelper\DiaryModel.cs" />
+    <Compile Include="MastersHelper\FALModel.cs" />
+    <Compile Include="MastersHelper\GroupMastersListItems.cs" />
+    <Compile Include="CommonHelper\LookUpListItems.cs" />
+    <Compile Include="CommonHelper\ProductsListItems.cs" />
+    <Compile Include="CommonHelper\UserCountryListItems.cs" />
+    <Compile Include="MastersHelper\CountryModel.cs" />
+    <Compile Include="MastersHelper\InsuranceModel.cs" />
+    <Compile Include="MastersHelper\LoginAuditLogModel.cs" />
+    <Compile Include="MastersHelper\LossNatureListItems.cs" />
+    <Compile Include="MastersHelper\LossTypeModel.cs" />
+    <Compile Include="CommonHelper\UserAdminModel.cs" />
+    <Compile Include="MastersHelper\LOUModel.cs" />
+    <Compile Include="CommonHelper\NotEqual.cs" />
+    <Compile Include="MastersHelper\PaymentEditortModel.cs" />
+    <Compile Include="MastersHelper\ProductBusinessModel.cs" />
+    <Compile Include="MastersHelper\ReAssignmentModel.cs" />
+    <Compile Include="MastersHelper\ReverseEditorModel.cs" />
+    <Compile Include="ClaimObjectHelper\ServiceProviderModel.cs" />
+    <Compile Include="MastersHelper\TaskModel.cs" />
+    <Compile Include="MastersHelper\TransactionModel.cs" />
+    <Compile Include="MastersHelper\UserGroupListItems.cs" />
+    <Compile Include="MastersHelper\VehicleModel.cs" />
+    <Compile Include="MastersHelper\WorkShopModel.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Resources\AdjusterMasters\Solicitor.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Solicitor.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\AdjusterMasters\Solicitor.fr.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Solicitor.fr.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\AdjusterMasters\Surveyor.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Surveyor.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\AdjusterMasters\Surveyor.fr.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Surveyor.fr.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\Cedant\Cedant.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Cedant.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\Cedant\Cedant.fr.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Cedant.fr.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\ClaimMasters\ClaimCloseEditor.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ClaimCloseEditor.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\ClaimMasters\ClaimCloseIndex.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ClaimCloseIndex.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\ClaimMasters\ClaimDocumentsPrintedIndex.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ClaimDocumentsPrintedIndex.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\ClaimMasters\ClaimDocumentsPrintedIndex.fr.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ClaimDocumentsPrintedIndex.fr.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\ClaimMasters\ClaimExpenseEditor.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ClaimExpenseEditor.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\ClaimMasters\ClaimExpenseIndex.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ClaimExpenseIndex.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\ClaimMasters\ClaimExpenseIndex.fr.Designer.cs">
+      <DependentUpon>ClaimExpenseIndex.fr.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Resources\ClaimMasters\ClaimExpenseEditor.fr.Designer.cs">
+      <DependentUpon>ClaimExpenseEditor.fr.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Resources\ClaimMasters\ClaimCloseIndex.fr.Designer.cs">
+      <DependentUpon>ClaimCloseIndex.fr.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Resources\ClaimMasters\ClaimCloseEditor.fr.Designer.cs">
+      <DependentUpon>ClaimCloseEditor.fr.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Resources\ClaimMasters\GSTEditor.fr.Designer.cs">
+      <DependentUpon>GSTEditor.fr.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Resources\ClaimMasters\GSTIndex.fr.Designer.cs">
+      <DependentUpon>GSTIndex.fr.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Resources\ClaimMasters\ExchangeEditor.fr.Designer.cs">
+      <DependentUpon>ExchangeEditor.fr.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Resources\ClaimMasters\ExchangeIndex.fr.Designer.cs">
+      <DependentUpon>ExchangeIndex.fr.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Resources\ClaimMasters\CurrencyMasterEditor.fr.Designer.cs">
+      <DependentUpon>CurrencyMasterEditor.fr.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Resources\ClaimMasters\CurrencyMasterIndex.fr.Designer.cs">
+      <DependentUpon>CurrencyMasterIndex.fr.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Resources\ClaimMasters\Create.fr.Designer.cs">
+      <DependentUpon>Create.fr.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Resources\ClaimMasters\Create.Designer.cs">
+      <DependentUpon>Create.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Resources\ClaimMasters\CurrencyMasterEditor.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CurrencyMasterEditor.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\ClaimMasters\CurrencyMasterIndex.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CurrencyMasterIndex.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\ClaimMasters\ExchangeEditor.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ExchangeEditor.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\ClaimMasters\ExchangeIndex.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ExchangeIndex.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\ClaimMasters\GSTEditor.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>GSTEditor.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\ClaimMasters\GSTIndex.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>GSTIndex.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\ClaimMasters\Hospital.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Hospital.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\ClaimMasters\Hospital.fr.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Hospital.fr.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\ClaimMasters\Index.Designer.cs">
+      <DependentUpon>Index.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Resources\ClaimMasters\Index.fr.Designer.cs">
+      <DependentUpon>Index.fr.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Resources\ClaimProcessing\ClaimAccident.Designer.cs">
+      <DependentUpon>ClaimAccident.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Resources\ClaimProcessing\ClaimAttachmentsEditor.Designer.cs">
+      <DependentUpon>ClaimAttachmentsEditor.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Resources\ClaimProcessing\ClaimAttachmentsEditor.fr.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ClaimAttachmentsEditor.fr.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\ClaimProcessing\ClaimEditor.Designer.cs">
+      <DependentUpon>ClaimEditor.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Resources\ClaimProcessing\ClaimEditor.fr.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ClaimEditor.fr.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\ClaimProcessing\ClaimInfo.Designer.cs">
+      <DependentUpon>ClaimInfo.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Resources\ClaimProcessing\ClaimInfo.fr.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ClaimInfo.fr.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\ClaimProcessing\ClaimInfoPayment.Designer.cs">
+      <DependentUpon>ClaimInfoPayment.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Resources\ClaimProcessing\ClaimInfoPayment.fr.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ClaimInfoPayment.fr.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\ClaimProcessing\ClaimLogRequest.Designer.cs">
+      <DependentUpon>ClaimLogRequest.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Resources\ClaimProcessing\ClaimLogRequest.fr.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ClaimLogRequest.fr.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\ClaimProcessing\ClaimMandate.Designer.cs">
+      <DependentUpon>ClaimMandate.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Resources\ClaimProcessing\ClaimMandate.fr.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ClaimMandate.fr.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\ClaimProcessing\ClaimNotesEditor.Designer.cs">
+      <DependentUpon>ClaimNotesEditor.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Resources\ClaimProcessing\ClaimNotesEditor.fr.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ClaimNotesEditor.fr.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\ClaimProcessing\ClaimRecovery.Designer.cs">
+      <DependentUpon>ClaimRecovery.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Resources\ClaimProcessing\ClaimRegistration.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ClaimRegistration.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\ClaimProcessing\ClaimReserve.Designer.cs">
+      <DependentUpon>ClaimReserve.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Resources\ClaimProcessing\ClaimAccident.fr.Designer.cs">
+      <DependentUpon>ClaimAccident.fr.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Resources\ClaimProcessing\ClaimReserve.fr.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ClaimReserve.fr.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\ClaimProcessing\DiaryTaskEditor.Designer.cs">
+      <DependentUpon>DiaryTaskEditor.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Resources\ClaimProcessing\DiaryTaskEditor.fr.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DiaryTaskEditor.fr.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\ClaimProcessing\JobScheduleEnquiry.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>JobScheduleEnquiry.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\ClaimProcessing\JobScheduleEnquiry.fr.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>JobScheduleEnquiry.fr.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\ClaimProcessing\ServiceProvider.fr.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ServiceProvider.fr.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\ClaimProcessing\ServiceProvider1.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ServiceProvider.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\ClaimProcessing\TaskEditor.Designer.cs">
+      <DependentUpon>TaskEditor.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Resources\ClaimProcessing\TaskEditor.fr.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>TaskEditor.fr.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\ClaimProcessing\TransactionEditor.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>TransactionEditor.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\ClaimProcessing\TransactionEditor.fr.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>TransactionEditor.fr.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\ClaimRecoveryProcessing\ClaimRecoveryEditor.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ClaimRecoveryEditor.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\ClaimRecoveryProcessing\ClaimRecoveryEditor.fr.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ClaimRecoveryEditor.fr.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\ClaimRegProcPCNTX\ClaimRecoveryCrTx.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ClaimRecoveryCrTx.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\ClaimRegProcPCNTX\ClaimRecoveryCrTx.fr.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ClaimRecoveryCrTx.fr.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\ClaimRegProcPCNTX\NewClaimClientErrorCrTx.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>NewClaimClientErrorCrTx.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\ClaimRegProcPCNTX\NewClaimCrTx.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>NewClaimCrTx.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\ClaimRegProcPCNTX\NewClaimCrTx.fr.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>NewClaimCrTx.fr.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\ClaimRegProcPCNTX\ServiceProviderClienError.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ServiceProviderClienError.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\ClaimRegProcPCNTX\ServiceProviderClienError.fr.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ServiceProviderClienError.fr.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\ClaimRegProcPCNTX\ServiceProviderCrTx.fr.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ServiceProviderCrTx.fr.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\ClaimRegProcPCNTX\ServiceProviderCrTx1.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ServiceProviderCrTx.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\ClaimUploadProcessing\ClaimFileUploadEditor.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ClaimFileUploadEditor.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\ClaimUploadProcessing\ClaimFileUploadEditor.fr.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ClaimFileUploadEditor.fr.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\ClaimUploadProcessing\ClaimFileUploadViewEditor.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ClaimFileUploadViewEditor.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\ClaimUploadProcessing\ClaimFileUploadViewEditor.fr.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ClaimFileUploadViewEditor.fr.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\ClaimUploadProcessing\ClaimFileUploadViewList.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ClaimFileUploadViewList.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\ClaimUploadProcessing\ClaimFileUploadViewList.fr.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ClaimFileUploadViewList.fr.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\ClaimUploadProcessing\TacFileUploadEditor.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>TacFileUploadEditor.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\ClaimUploadProcessing\TacFileUploadEditor.fr.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>TacFileUploadEditor.fr.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\Common\Common.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Common.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\Common\Common.fr.Designer.cs">
+      <DependentUpon>Common.fr.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Resources\Common\DashBoard.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DashBoard.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\Common\DashBoard.fr.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DashBoard.fr.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\Common\Menu.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Menu.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\Common\Menu.fr.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Menu.fr.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\CountryMaster\Country.fr.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Country.fr.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\CountryMaster\Country.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Country.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\CountryMaster\OrgCountry.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>OrgCountry.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\CountryMaster\OrgCountry.fr.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>OrgCountry.fr.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\CountryMaster\OrgCountryErrorLog.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>OrgCountryErrorLog.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\Home\Index.fr.Designer.cs">
+      <DependentUpon>Index.fr.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Resources\Home\Index1.Designer.cs">
+      <DependentUpon>Index.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Resources\Home\Login1.Designer.cs">
+      <DependentUpon>Login.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Resources\InsuranceMaster\InsurancePolicyMasterEditor.fr.Designer.cs">
+      <DependentUpon>InsurancePolicyMasterEditor.fr.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Resources\InsuranceMaster\InsurancePolicyMasterIndex.fr.Designer.cs">
+      <DependentUpon>InsurancePolicyMasterIndex.fr.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Resources\InsuranceMaster\InsurancePolicyMasterEditor.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>InsurancePolicyMasterEditor.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\InsuranceMaster\InsurancePolicyMasterIndex.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>InsurancePolicyMasterIndex.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\Masters\BusCaptain.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>BusCaptain.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\Masters\BusCaptain.fr.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>BusCaptain.fr.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\Masters\CommonMaster.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CommonMaster.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\Masters\CommonMaster.fr.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CommonMaster.fr.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\Masters\Deductible.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Deductible.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\Masters\Deductible.fr.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Deductible.fr.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\Masters\DepotMaster.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DepotMaster.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\Masters\DepotMaster.fr.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DepotMaster.fr.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\Masters\FAL.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>FAL.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\Masters\InterChange.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>InterChange.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\Masters\InterChange.fr.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>InterChange.fr.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\Masters\LOU.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>LOU.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\Masters\LOU.fr.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>LOU.fr.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\Masters\FAL.fr.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>FAL.fr.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\Masters\VehicleListingMaster.fr.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>VehicleListingMaster.fr.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\Masters\VModelList.fr.Designer.cs">
+      <DependentUpon>VModelList.fr.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Resources\Masters\VModelIndex.fr.Designer.cs">
+      <DependentUpon>VModelIndex.fr.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Resources\Masters\VehicleMaster.fr.Designer.cs">
+      <DependentUpon>VehicleMaster.fr.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Resources\Masters\VehicleIndex.fr.Designer.cs">
+      <DependentUpon>VehicleIndex.fr.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Resources\Masters\VehicleClassEditor.fr.Designer.cs">
+      <DependentUpon>VehicleClassEditor.fr.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Resources\Masters\VehicleClassIndex.fr.Designer.cs">
+      <DependentUpon>VehicleClassIndex.fr.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Resources\Masters\VehicleClassEditor.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>VehicleClassEditor.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\Masters\VehicleClassIndex.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>VehicleClassIndex.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\Masters\VehicleIndex.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>VehicleIndex.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\Masters\VehicleListingMaster.Designer.cs">
+      <DependentUpon>VehicleListingMaster.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Resources\Masters\VehicleMaster.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>VehicleMaster.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\Masters\VModelIndex.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>VModelIndex.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\Masters\VModelList.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>VModelList.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\ProductBusiness\SubClassEditor.fr.Designer.cs">
+      <DependentUpon>SubClassEditor.fr.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Resources\ProductBusiness\SubClassIndex.fr.Designer.cs">
+      <DependentUpon>SubClassIndex.fr.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Resources\ProductBusiness\ProductBusinessEditor.fr.Designer.cs">
+      <DependentUpon>ProductBusinessEditor.fr.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Resources\ProductBusiness\ProductBusinessIndex.fr.Designer.cs">
+      <DependentUpon>ProductBusinessIndex.fr.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Resources\ProductBusiness\ProductBusinessEditor.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ProductBusinessEditor.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\ProductBusiness\ProductBusinessIndex.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ProductBusinessIndex.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\ProductBusiness\SubClassEditor.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SubClassEditor.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\ProductBusiness\SubClassIndex.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SubClassIndex.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\Shared\_ClaimDeatailsPCNTX.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>_ClaimDeatailsPCNTX.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\Shared\_ClaimDeatailsPCNTX.fr.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>_ClaimDeatailsPCNTX.fr.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\Shared\_ClaimDetails.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>_ClaimDetails.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\Shared\_ClaimDetails.fr.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>_ClaimDetails.fr.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\UserAdmin\OrganizationAccess.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>OrganizationAccess.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\UserAdmin\OrganizationAccess.fr.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>OrganizationAccess.fr.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\UserAdmin\UserAdminMasters.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>UserAdminMasters.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\UserAdmin\UserAdminMasters.fr.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>UserAdminMasters.fr.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\UserAdmin\UserDeptIndex.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>UserDeptIndex.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\UserAdmin\UserDeptIndex.fr.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>UserDeptIndex.fr.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\UserAdmin\UserGroupsIndex.Designer.cs">
+      <DependentUpon>UserGroupsIndex.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Resources\UserAdmin\UserGroupsIndex.fr.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>UserGroupsIndex.fr.resx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\MCAS.Entity\MCAS.Entity.csproj">
+      <Project>{217D73D7-B4A4-4885-8F8E-A53EA9B443BE}</Project>
+      <Name>MCAS.Entity</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MCAS.ExceptionPublisher\MCAS.ExceptionPublisher.csproj">
+      <Project>{B4A9B305-0471-4FC3-AEE6-D34F14DA6029}</Project>
+      <Name>MCAS.ExceptionPublisher</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MCAS.Globalisation\MCAS.Globalisation.csproj">
+      <Project>{74DCDC62-E7B3-44D0-808D-5CA389893C2B}</Project>
+      <Name>MCAS.Globalisation</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\AdjusterMasters\Solicitor.fr.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Solicitor.fr.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\AdjusterMasters\Solicitor.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Solicitor.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\AdjusterMasters\Surveyor.fr.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Surveyor.fr.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\AdjusterMasters\Surveyor.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Surveyor.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Cedant\Cedant.fr.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Cedant.fr.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Cedant\Cedant.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Cedant.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\ClaimMasters\ClaimCloseEditor.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>ClaimCloseEditor.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\ClaimMasters\ClaimCloseIndex.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>ClaimCloseIndex.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\ClaimMasters\ClaimDocumentsPrintedIndex.fr.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>ClaimDocumentsPrintedIndex.fr.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\ClaimMasters\ClaimDocumentsPrintedIndex.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>ClaimDocumentsPrintedIndex.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\ClaimMasters\ClaimExpenseEditor.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>ClaimExpenseEditor.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\ClaimMasters\ClaimExpenseIndex.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>ClaimExpenseIndex.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\ClaimMasters\ClaimExpenseIndex.fr.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>ClaimExpenseIndex.fr.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\ClaimMasters\ClaimExpenseEditor.fr.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>ClaimExpenseEditor.fr.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\ClaimMasters\ClaimCloseIndex.fr.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>ClaimCloseIndex.fr.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\ClaimMasters\ClaimCloseEditor.fr.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>ClaimCloseEditor.fr.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\ClaimMasters\GSTEditor.fr.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>GSTEditor.fr.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\ClaimMasters\GSTIndex.fr.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>GSTIndex.fr.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\ClaimMasters\ExchangeEditor.fr.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>ExchangeEditor.fr.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\ClaimMasters\ExchangeIndex.fr.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>ExchangeIndex.fr.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\ClaimMasters\CurrencyMasterEditor.fr.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>CurrencyMasterEditor.fr.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\ClaimMasters\CurrencyMasterIndex.fr.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>CurrencyMasterIndex.fr.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\ClaimMasters\Create.fr.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Create.fr.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\ClaimMasters\Create.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Create.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\ClaimMasters\CurrencyMasterEditor.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>CurrencyMasterEditor.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\ClaimMasters\CurrencyMasterIndex.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>CurrencyMasterIndex.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\ClaimMasters\ExchangeEditor.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>ExchangeEditor.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\ClaimMasters\ExchangeIndex.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>ExchangeIndex.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\ClaimMasters\GSTEditor.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>GSTEditor.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\ClaimMasters\GSTIndex.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>GSTIndex.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\ClaimMasters\Hospital.fr.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Hospital.fr.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\ClaimMasters\Hospital.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Hospital.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\ClaimMasters\Index.fr.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Index.fr.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\ClaimMasters\Index.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Index.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\ClaimProcessing\ClaimAccident.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>ClaimAccident.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\ClaimProcessing\ClaimAttachmentsEditor.fr.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>ClaimAttachmentsEditor.fr.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\ClaimProcessing\ClaimAttachmentsEditor.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>ClaimAttachmentsEditor.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\ClaimProcessing\ClaimEditor.fr.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>ClaimEditor.fr.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\ClaimProcessing\ClaimEditor.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>ClaimEditor.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\ClaimProcessing\ClaimInfo.fr.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>ClaimInfo.fr.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\ClaimProcessing\ClaimInfo.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>ClaimInfo.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\ClaimProcessing\ClaimInfoPayment.fr.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>ClaimInfoPayment.fr.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\ClaimProcessing\ClaimInfoPayment.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>ClaimInfoPayment.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\ClaimProcessing\ClaimLogRequest.fr.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>ClaimLogRequest.fr.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\ClaimProcessing\ClaimLogRequest.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>ClaimLogRequest.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\ClaimProcessing\ClaimMandate.fr.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>ClaimMandate.fr.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\ClaimProcessing\ClaimMandate.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>ClaimMandate.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\ClaimProcessing\ClaimNotesEditor.fr.resx">
+      <SubType>Designer</SubType>
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>ClaimNotesEditor.fr.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\ClaimProcessing\ClaimNotesEditor.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>ClaimNotesEditor.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\ClaimProcessing\ClaimPaymentProcessing.resx" />
+    <EmbeddedResource Include="Resources\ClaimProcessing\ClaimRecovery.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>ClaimRecovery.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\ClaimProcessing\ClaimRegistration.fr.resx" />
+    <EmbeddedResource Include="Resources\ClaimProcessing\ClaimRegistration.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>ClaimRegistration.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\ClaimProcessing\ClaimReserve.fr.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>ClaimReserve.fr.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\ClaimProcessing\ClaimReserve.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>ClaimReserve.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\ClaimProcessing\ClaimAccident.fr.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>ClaimAccident.fr.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\ClaimProcessing\DiaryTaskEditor.fr.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>DiaryTaskEditor.fr.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\ClaimProcessing\DiaryTaskEditor.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>DiaryTaskEditor.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\ClaimProcessing\JobScheduleEnquiry.fr.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>JobScheduleEnquiry.fr.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\ClaimProcessing\JobScheduleEnquiry.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>JobScheduleEnquiry.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\ClaimProcessing\ServiceProvider.fr.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>ServiceProvider.fr.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\ClaimProcessing\ServiceProvider.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>ServiceProvider1.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\ClaimProcessing\TaskEditor.fr.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>TaskEditor.fr.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\ClaimProcessing\TaskEditor.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>TaskEditor.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\ClaimProcessing\TransactionEditor.fr.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>TransactionEditor.fr.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\ClaimProcessing\TransactionEditor.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>TransactionEditor.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\ClaimRecoveryProcessing\ClaimRecoveryEditor.fr.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>ClaimRecoveryEditor.fr.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\ClaimRecoveryProcessing\ClaimRecoveryEditor.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>ClaimRecoveryEditor.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\ClaimRegProcPCNTX\ClaimRecoveryCrTx.fr.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>ClaimRecoveryCrTx.fr.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\ClaimRegProcPCNTX\ClaimRecoveryCrTx.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>ClaimRecoveryCrTx.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\ClaimRegProcPCNTX\NewClaimClientErrorCrTx.fr.resx" />
+    <EmbeddedResource Include="Resources\ClaimRegProcPCNTX\NewClaimClientErrorCrTx.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>NewClaimClientErrorCrTx.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\ClaimRegProcPCNTX\NewClaimCrTx.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>NewClaimCrTx.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\ClaimRegProcPCNTX\NewClaimCrTx.fr.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>NewClaimCrTx.fr.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\ClaimRegProcPCNTX\ServiceProviderClienError.fr.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>ServiceProviderClienError.fr.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\ClaimRegProcPCNTX\ServiceProviderClienError.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>ServiceProviderClienError.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\ClaimRegProcPCNTX\ServiceProviderCrTx.fr.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>ServiceProviderCrTx.fr.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\ClaimRegProcPCNTX\ServiceProviderCrTx.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>ServiceProviderCrTx1.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\ClaimUploadProcessing\ClaimFileUploadEditor.fr.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>ClaimFileUploadEditor.fr.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\ClaimUploadProcessing\ClaimFileUploadEditor.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>ClaimFileUploadEditor.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\ClaimUploadProcessing\ClaimFileUploadViewEditor.fr.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>ClaimFileUploadViewEditor.fr.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\ClaimUploadProcessing\ClaimFileUploadViewEditor.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>ClaimFileUploadViewEditor.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\ClaimUploadProcessing\ClaimFileUploadViewList.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>ClaimFileUploadViewList.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\ClaimUploadProcessing\ClaimFileUploadViewList.fr.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>ClaimFileUploadViewList.fr.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\ClaimUploadProcessing\TacFileUploadEditor.fr.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>TacFileUploadEditor.fr.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\ClaimUploadProcessing\TacFileUploadEditor.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>TacFileUploadEditor.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Common\Common.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Common.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Common\Common.fr.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Common.fr.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Common\DashBoard.fr.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>DashBoard.fr.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Common\DashBoard.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>DashBoard.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Common\Menu.fr.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Menu.fr.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Common\Menu.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Menu.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\CountryMaster\Country.fr.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Country.fr.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\CountryMaster\Country.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Country.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\CountryMaster\OrgCountry.fr.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>OrgCountry.fr.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\CountryMaster\OrgCountry.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>OrgCountry.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\CountryMaster\OrgCountryErrorLog.fr.resx" />
+    <EmbeddedResource Include="Resources\CountryMaster\OrgCountryErrorLog.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>OrgCountryErrorLog.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Home\Index.fr.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Index.fr.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Home\Index.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Index1.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Home\Login.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Login1.Designer.cs</LastGenOutput>
+      <CustomToolNamespace>MCAS.Web.Resources</CustomToolNamespace>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\InsuranceMaster\InsurancePolicyMasterEditor.fr.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>InsurancePolicyMasterEditor.fr.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\InsuranceMaster\InsurancePolicyMasterIndex.fr.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>InsurancePolicyMasterIndex.fr.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\InsuranceMaster\InsurancePolicyMasterEditor.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>InsurancePolicyMasterEditor.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\InsuranceMaster\InsurancePolicyMasterIndex.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>InsurancePolicyMasterIndex.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Masters\BusCaptain.fr.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>BusCaptain.fr.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Masters\BusCaptain.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>BusCaptain.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Masters\CommonMaster.fr.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>CommonMaster.fr.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Masters\CommonMaster.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>CommonMaster.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Masters\Deductible.fr.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Deductible.fr.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Masters\Deductible.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Deductible.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Masters\DepotMaster.fr.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>DepotMaster.fr.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Masters\DepotMaster.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>DepotMaster.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Masters\FAL.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>FAL.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Masters\InterChange.fr.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>InterChange.fr.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Masters\InterChange.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>InterChange.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Masters\LOU.fr.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>LOU.fr.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Masters\LOU.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>LOU.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Masters\FAL.fr.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>FAL.fr.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Masters\VehicleListingMaster.fr.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>VehicleListingMaster.fr.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Masters\VModelList.fr.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>VModelList.fr.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Masters\VModelIndex.fr.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>VModelIndex.fr.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Masters\VehicleMaster.fr.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>VehicleMaster.fr.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Masters\VehicleIndex.fr.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>VehicleIndex.fr.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Masters\VehicleClassEditor.fr.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>VehicleClassEditor.fr.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Masters\VehicleClassIndex.fr.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>VehicleClassIndex.fr.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Masters\VehicleClassEditor.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>VehicleClassEditor.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Masters\VehicleClassIndex.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>VehicleClassIndex.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Masters\VehicleIndex.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>VehicleIndex.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Masters\VehicleListingMaster.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>VehicleListingMaster.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Masters\VehicleMaster.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>VehicleMaster.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Masters\VModelIndex.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>VModelIndex.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Masters\VModelList.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>VModelList.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\ProductBusiness\SubClassEditor.fr.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>SubClassEditor.fr.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\ProductBusiness\SubClassIndex.fr.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>SubClassIndex.fr.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\ProductBusiness\ProductBusinessEditor.fr.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>ProductBusinessEditor.fr.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\ProductBusiness\ProductBusinessIndex.fr.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>ProductBusinessIndex.fr.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\ProductBusiness\ProductBusinessEditor.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>ProductBusinessEditor.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\ProductBusiness\ProductBusinessIndex.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>ProductBusinessIndex.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\ProductBusiness\SubClassEditor.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>SubClassEditor.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\ProductBusiness\SubClassIndex.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>SubClassIndex.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Shared\_ClaimDeatailsPCNTX.fr.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>_ClaimDeatailsPCNTX.fr.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Shared\_ClaimDeatailsPCNTX.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>_ClaimDeatailsPCNTX.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Shared\_ClaimDetails.fr.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>_ClaimDetails.fr.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Shared\_ClaimDetails.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>_ClaimDetails.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\UserAdmin\OrganizationAccess.fr.resx">
+      <SubType>Designer</SubType>
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>OrganizationAccess.fr.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\UserAdmin\OrganizationAccess.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>OrganizationAccess.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\UserAdmin\UserAdminMasters.fr.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>UserAdminMasters.fr.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\UserAdmin\UserAdminMasters.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>UserAdminMasters.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\UserAdmin\UserDeptIndex.fr.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>UserDeptIndex.fr.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\UserAdmin\UserDeptIndex.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>UserDeptIndex.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\UserAdmin\UserGroupsIndex.fr.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>UserGroupsIndex.fr.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\UserAdmin\UserGroupsIndex.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>UserGroupsIndex.Designer.cs</LastGenOutput>
+      <CustomToolNamespace>MCAS.Web.Resources</CustomToolNamespace>
+    </EmbeddedResource>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

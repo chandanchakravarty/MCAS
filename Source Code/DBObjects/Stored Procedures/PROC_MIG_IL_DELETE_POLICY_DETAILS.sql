@@ -1,0 +1,173 @@
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[PROC_MIG_IL_DELETE_POLICY_DETAILS]') AND type in (N'P', N'PC'))
+DROP PROCEDURE [dbo].[PROC_MIG_IL_DELETE_POLICY_DETAILS]
+GO
+
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+ ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+-- =============================================          
+-- Author:  <Pradeep Kr. Kushwaha>          
+-- Create date: <14-11-2011>          
+-- Description: <Delete Initial load policy details data>          
+-- DROP proc [PROC_MIG_IL_DELETE_POLICY_DETAILS]  1495,'8,7' ,'DEL'       
+--SELECT HAS_ERRORS,* FROM MIG_IL_POLICY_DETAILS WHERE IMPORT_REQUEST_ID=1495 AND IMPORT_SERIAL_NO IN(8,7)
+-- =============================================          
+CREATE PROCEDURE [dbo].[PROC_MIG_IL_DELETE_POLICY_DETAILS]           
+          
+--------------------------------- INPUT PARAMETER          
+@IMPORT_REQUEST_ID  INT,
+@IMPORT_SERIAL_NO  NVARCHAR(MAX)=NULL,
+@CALLED_FOR NVARCHAR(25)=NULL
+-------------------------------------------------          
+            
+AS          
+BEGIN          
+           
+-------------------------------- DECLARATION PART          
+----------------------------------------------------------------------------------------          
+DECLARE @ERROR_NUMBER    INT            
+DECLARE @ERROR_SEVERITY  INT            
+DECLARE @ERROR_STATE     INT            
+DECLARE @ERROR_PROCEDURE VARCHAR(512)            
+DECLARE @ERROR_LINE    INT            
+DECLARE @ERROR_MESSAGE   NVARCHAR(MAX)     
+
+DECLARE @COUNTER INT  =1            
+DECLARE @MAX_RECORD_COUNT INT             
+DECLARE @CUSTOMER_ID INT          
+DECLARE @POLICY_ID INT          
+DECLARE @POLICY_VERSION_ID INT          
+       
+----------------------------------------------------------------------------------------          
+          
+ BEGIN TRY
+ 
+ -------------------------------- CREATE TEMP TABLE FOR THOSE RECORDS NEEDS TO BE DELETE 
+-----------------------------------------------------------------------------------------          
+    CREATE TABLE #TEMP_IL_POLICY_DETAILS      
+     (          
+		ID INT IDENTITY(1,1),          
+		IMPORT_REQUEST_ID INT,
+		IMPORT_SERIAL_NO INT,
+		CUSTOMER_ID INT ,
+		POLICY_ID INT,
+		POLICY_VERSION_ID INT
+     )  
+    
+     IF(@CALLED_FOR='DEL_ALL')
+	 BEGIN
+		  INSERT INTO #TEMP_IL_POLICY_DETAILS          
+			 (          
+				IMPORT_REQUEST_ID,
+				IMPORT_SERIAL_NO,
+				CUSTOMER_ID,
+				POLICY_ID,
+				POLICY_VERSION_ID 
+			 )          
+			 (          
+			  SELECT 
+				IMPORT_REQUEST_ID,
+				IMPORT_SERIAL_NO,
+				CUSTOMER_ID,
+				POLICY_ID,
+				POLICY_VERSION_ID     
+			 FROM MIG_IL_POLICY_DETAILS WITH(NOLOCK) WHERE 
+			 HAS_ERRORS=0 AND HAS_COMMITED_ERROR=1 AND
+			 IMPORT_REQUEST_ID= @IMPORT_REQUEST_ID  )   
+	 END
+	 ELSE
+	 BEGIN
+			 
+			INSERT INTO #TEMP_IL_POLICY_DETAILS          
+			 (          
+				IMPORT_REQUEST_ID,IMPORT_SERIAL_NO,
+				CUSTOMER_ID,POLICY_ID,POLICY_VERSION_ID 
+			 )          
+			 (          
+			  SELECT 
+				IMPORT_REQUEST_ID,IMPORT_SERIAL_NO,
+				CUSTOMER_ID,POLICY_ID,POLICY_VERSION_ID     
+			 FROM MIG_IL_POLICY_DETAILS WITH(NOLOCK) WHERE 
+			 HAS_ERRORS=0 AND HAS_COMMITED_ERROR=1 AND
+			 IMPORT_REQUEST_ID= @IMPORT_REQUEST_ID  AND IMPORT_SERIAL_NO IN(SELECT DATA FROM DBO.SPLIT(@IMPORT_SERIAL_NO, ',') ) )  
+	 END
+   ------------------------------------                  
+   -- GET MAX RECOUNT COUNT            
+   ------------------------------------               
+    SELECT @MAX_RECORD_COUNT = COUNT(ID)             
+    FROM   #TEMP_IL_POLICY_DETAILS      
+     
+--------------------------------DELETE POLICY DETAILS DATA  
+-----------------------------------------------------------------------------------------          
+  WHILE(@COUNTER<=@MAX_RECORD_COUNT)            
+  BEGIN     
+	   SET @POLICY_ID=0          
+	   SET @CUSTOMER_ID=0          
+	   SET @POLICY_VERSION_ID=0       
+   
+      SELECT    
+      @CUSTOMER_ID			=	CUSTOMER_ID,
+      @POLICY_ID			=	POLICY_ID,
+      @POLICY_VERSION_ID	=	POLICY_VERSION_ID
+     FROM   #TEMP_IL_POLICY_DETAILS (NOLOCK) WHERE ID   = @COUNTER  
+     
+     EXEC Proc_PolicyDeleteNewVersion @CUSTOMER_ID, @POLICY_ID , @POLICY_VERSION_ID           
+     -------------DELETE POLICY MIG IL DATA FROM MIG IL TABLE----------
+
+		DELETE FROM MIG_IL_POLICY_RISK_BENIFICIARY_DETAILS WHERE CUSTOMER_ID=@CUSTOMER_ID AND POLICY_ID=@POLICY_ID AND POLICY_VERSION_ID=@POLICY_VERSION_ID   
+		DELETE FROM MIG_IL_POLICY_RISK_COVERAGES_DETAILS WHERE CUSTOMER_ID=@CUSTOMER_ID AND POLICY_ID=@POLICY_ID AND POLICY_VERSION_ID=@POLICY_VERSION_ID   
+		DELETE FROM MIG_IL_POLICY_DISCOUNTS_DETAILS WHERE CUSTOMER_ID=@CUSTOMER_ID AND POLICY_ID=@POLICY_ID AND POLICY_VERSION_ID=@POLICY_VERSION_ID   
+		DELETE FROM MIG_IL_POLICY_RISK_DISCOUNTS_DETAILS WHERE CUSTOMER_ID=@CUSTOMER_ID AND POLICY_ID=@POLICY_ID AND POLICY_VERSION_ID=@POLICY_VERSION_ID   
+		DELETE FROM MIG_IL_POLICY_COAPPLICANT_DETAILS WHERE CUSTOMER_ID=@CUSTOMER_ID AND POLICY_ID=@POLICY_ID AND POLICY_VERSION_ID=@POLICY_VERSION_ID   
+		DELETE FROM MIG_IL_POLICY_REINSURANCE_DETAILS WHERE CUSTOMER_ID=@CUSTOMER_ID AND POLICY_ID=@POLICY_ID AND POLICY_VERSION_ID=@POLICY_VERSION_ID   
+		DELETE FROM MIG_IL_POLICY_CLAUSES_DETAILS WHERE CUSTOMER_ID=@CUSTOMER_ID AND POLICY_ID=@POLICY_ID AND POLICY_VERSION_ID=@POLICY_VERSION_ID   
+		DELETE FROM MIG_IL_POLICY_REMUNERATION_DETAILS WHERE CUSTOMER_ID=@CUSTOMER_ID AND POLICY_ID=@POLICY_ID AND POLICY_VERSION_ID=@POLICY_VERSION_ID   
+		DELETE FROM MIG_IL_POLICY_COINSURER_DETAILS WHERE CUSTOMER_ID=@CUSTOMER_ID AND POLICY_ID=@POLICY_ID AND POLICY_VERSION_ID=@POLICY_VERSION_ID   
+		DELETE FROM MIG_IL_POLICY_LOCATION_DETAILS WHERE CUSTOMER_ID=@CUSTOMER_ID AND POLICY_ID=@POLICY_ID AND POLICY_VERSION_ID=@POLICY_VERSION_ID   
+		DELETE FROM MIG_IL_POLICY_RISK_DETAILS WHERE CUSTOMER_ID=@CUSTOMER_ID AND POLICY_ID=@POLICY_ID AND POLICY_VERSION_ID=@POLICY_VERSION_ID   
+		DELETE FROM POL_IL_POLICY_BOLETO_DETAILS WHERE CUSTOMER_ID=@CUSTOMER_ID AND POLICY_ID=@POLICY_ID AND POLICY_VERSION_ID=@POLICY_VERSION_ID   
+		DELETE FROM MIG_IL_POLICY_BILLING_DETAILS WHERE CUSTOMER_ID=@CUSTOMER_ID AND POLICY_ID=@POLICY_ID AND POLICY_VERSION_ID=@POLICY_VERSION_ID   
+		DELETE FROM MIG_IL_POLICY_DETAILS WHERE CUSTOMER_ID=@CUSTOMER_ID AND POLICY_ID=@POLICY_ID AND POLICY_VERSION_ID=@POLICY_VERSION_ID   
+		DELETE FROM MIG_IL_IMPORT_SUMMARY WHERE CUSTOMER_ID=@CUSTOMER_ID AND POLICY_ID=@POLICY_ID AND POLICY_VERSION_ID=@POLICY_VERSION_ID   
+------------------------------------------------------------------
+     SET @COUNTER+=1       
+  END
+   
+	          
+END TRY          
+BEGIN CATCH            
+             
+ SELECT             
+    @ERROR_NUMBER    = ERROR_NUMBER(),            
+    @ERROR_SEVERITY  = ERROR_SEVERITY(),            
+    @ERROR_STATE     = ERROR_STATE(),            
+    @ERROR_PROCEDURE = ERROR_PROCEDURE(),            
+    @ERROR_LINE   = ERROR_LINE(),            
+    @ERROR_MESSAGE   = ERROR_MESSAGE()            
+                 
+  -- CREATING LOG OF EXCEPTION          
+  EXEC [PROC_MIG_INSERT_ERROR_LOG]              
+  @IMPORT_REQUEST_ID    = @IMPORT_REQUEST_ID            
+ ,@IMPORT_SERIAL_NO  = 0            
+ ,@ERROR_NUMBER      = @ERROR_NUMBER            
+ ,@ERROR_SEVERITY    = @ERROR_SEVERITY            
+ ,@ERROR_STATE          = @ERROR_STATE            
+ ,@ERROR_PROCEDURE   = @ERROR_PROCEDURE            
+ ,@ERROR_LINE        = @ERROR_LINE            
+ ,@ERROR_MESSAGE        = @ERROR_MESSAGE            
+ ,@INITIAL_LOAD_FLAG    = 'Y'            
+              
+             
+ END CATCH            
+                
+          
+          
+           
+END   
+      
+GO
+

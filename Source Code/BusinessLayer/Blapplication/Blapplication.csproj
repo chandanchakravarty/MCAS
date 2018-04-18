@@ -1,0 +1,180 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{2D13EE8A-85AD-41F3-AB14-7A4DD0717C09}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Blapplication</RootNamespace>
+    <AssemblyName>Blapplication</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="AdvCommon">
+      <HintPath>..\..\Cms\bin\AdvCommon.dll</HintPath>
+    </Reference>
+    <Reference Include="AdvRuleParser">
+      <HintPath>..\..\Cms\bin\AdvRuleParser.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="ClsAdditionalInterest.cs" />
+    <Compile Include="ClsAircraftDetails.cs" />
+    <Compile Include="ClsApplicantInsured.cs" />
+    <Compile Include="clsapplication.cs" />
+    <Compile Include="ClsAutoIDInformation.cs" />
+    <Compile Include="ClsBeneficiaryDetails.cs" />
+    <Compile Include="ClsBillingDetails.cs" />
+    <Compile Include="ClsContractorsDetail.cs" />
+    <Compile Include="ClsCoverages.cs" />
+    <Compile Include="ClsDriverDetails.cs" />
+    <Compile Include="ClsDwellingDetails.cs" />
+    <Compile Include="ClsExpiryDates.cs" />
+    <Compile Include="ClsFireProt.cs" />
+    <Compile Include="ClsGeneralInformation.cs" />
+    <Compile Include="ClsHomeCoverages.cs" />
+    <Compile Include="ClsHomeGeneralInformation.cs" />
+    <Compile Include="ClsHomeRating.cs" />
+    <Compile Include="ClsHomeRecrVehicles.cs" />
+    <Compile Include="ClsHomeSubjectsInsurance.cs" />
+    <Compile Include="ClsInformationLimits.cs" />
+    <Compile Include="ClsInstallmentInfo.cs" />
+    <Compile Include="ClsInterestRates.cs" />
+    <Compile Include="ClsLocation.cs" />
+    <Compile Include="ClsMntViolations.cs" />
+    <Compile Include="ClsMvrInformation.cs" />
+    <Compile Include="ClsMVRUtility.cs" />
+    <Compile Include="ClsNamedPerils.cs" />
+    <Compile Include="ClsOldBuildingDetail.cs" />
+    <Compile Include="ClsPersArticleGenInformation.cs" />
+    <Compile Include="ClsPkgLobDetails.cs" />
+    <Compile Include="ClsPolicyInstallments.cs" />
+    <Compile Include="ClsPolicyUWQMarine.cs" />
+    <Compile Include="ClsPolicyUWQuestion.cs" />
+    <Compile Include="ClsPPGeneralInformation.cs" />
+    <Compile Include="ClsPriorLoss.cs" />
+    <Compile Include="ClsPriorPolicy.cs" />
+    <Compile Include="ClsProductCoverages.cs" />
+    <Compile Include="ClsProducts.cs" />
+    <Compile Include="ClsPropertyCoverages.cs" />
+    <Compile Include="ClsPropertyDetail.cs" />
+    <Compile Include="ClsRatingAndUnderwritingRules.cs" />
+    <Compile Include="ClsRealEstateLocation.cs" />
+    <Compile Include="ClsScheduleOfUnderlying.cs" />
+    <Compile Include="ClsSchItemsCovg.cs" />
+    <Compile Include="ClsSolidFuel.cs" />
+    <Compile Include="ClsSquareFootage.cs" />
+    <Compile Include="ClsSubLocation.cs" />
+    <Compile Include="ClsTrailer.cs" />
+    <Compile Include="ClsUmbrellaCoverages.cs" />
+    <Compile Include="ClsUmbrellaDwelling.cs" />
+    <Compile Include="ClsUmbrellaFarm.cs" />
+    <Compile Include="ClsUmbrellaGenInfo.cs" />
+    <Compile Include="ClsUmbrellaPolicyOthers.cs" />
+    <Compile Include="ClsUmbrellaRating.cs" />
+    <Compile Include="ClsUmbrellaRealEstateSubLocation.cs" />
+    <Compile Include="ClsUmbrellaRecrVeh.cs" />
+    <Compile Include="ClsUmbSchRecords.cs" />
+    <Compile Include="ClsUnitClearance.cs" />
+    <Compile Include="ClsUnitClearanceScreen.cs" />
+    <Compile Include="ClsVehicleCoverages.cs" />
+    <Compile Include="ClsVehicleEndorsements.cs" />
+    <Compile Include="ClsVehicleInformation.cs" />
+    <Compile Include="ClsVinMaster.cs" />
+    <Compile Include="ClsVinMotorcycle.cs" />
+    <Compile Include="ClsVoyageInformation.cs" />
+    <Compile Include="ClsWarehouseDetail.cs" />
+    <Compile Include="ClsWaterCraftAppCoverages.cs" />
+    <Compile Include="ClsWatercraftCoverages.cs" />
+    <Compile Include="ClsWatercraftEndorsements.cs" />
+    <Compile Include="ClsWatercraftEngine.cs" />
+    <Compile Include="ClsWatercraftEquipment.cs" />
+    <Compile Include="ClsWatercraftGenInformation.cs" />
+    <Compile Include="ClsWatercraftInformation.cs" />
+    <Compile Include="GeneralLiability\ClsAdditionalInterest.cs" />
+    <Compile Include="GeneralLiability\ClsDeductibles.cs" />
+    <Compile Include="GeneralLiability\ClsExposureRating.cs" />
+    <Compile Include="GeneralLiability\ClsGeneralCoverageLimit.cs" />
+    <Compile Include="GeneralLiability\ClsGeneralInformation.cs" />
+    <Compile Include="GeneralLiability\ClsGeneralLiabilityCoverages.cs" />
+    <Compile Include="GeneralLiability\ClsGeneralLiabilityDetails.cs" />
+    <Compile Include="GeneralLiability\ClsGeneralLocation.cs" />
+    <Compile Include="HomeOwners\ClsChimneyStove.cs" />
+    <Compile Include="HomeOwners\ClsDwellingCoverageLimit.cs" />
+    <Compile Include="HomeOwners\ClsDwellingEndorsements.cs" />
+    <Compile Include="HomeOwners\ClsOtherLocations.cs" />
+    <Compile Include="HomeOwners\ClsOtherStructures.cs" />
+    <Compile Include="HomeOwners\ClsPolicyHomeownerEndorsements.cs" />
+    <Compile Include="HomeOwners\ClsRecrVehCoverages.cs" />
+    <Compile Include="HomeOwners\clsSchItemsCvgsDetails.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\DataLayer\DataLayer.csproj">
+      <Project>{A7B69366-3DA6-4CB3-84F3-25C88559EF12}</Project>
+      <Name>DataLayer</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\EbixDataTypes\EbixDataTypes.csproj">
+      <Project>{7826B9D8-F728-465D-9226-D6E86430D6C3}</Project>
+      <Name>EbixDataTypes</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\exceptionpublisher\exceptionpublisher.csproj">
+      <Project>{276362EA-FE60-484F-A729-19248E75D239}</Project>
+      <Name>exceptionpublisher</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Model\Model.csproj">
+      <Project>{8BED9EF7-4F80-4195-87FC-62CE73BC3672}</Project>
+      <Name>Model</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\BlAccount\BlAccount.csproj">
+      <Project>{B69C8E73-4B43-4FA6-8F9F-1E7173C169C8}</Project>
+      <Name>BlAccount</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\BlCommon\BlCommon.csproj">
+      <Project>{9C17273B-F9AA-4DCE-B344-4BFD098134AA}</Project>
+      <Name>BlCommon</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

@@ -1,0 +1,1 @@
+delete from MNT_InsruanceM where PolicyNo='4444444'

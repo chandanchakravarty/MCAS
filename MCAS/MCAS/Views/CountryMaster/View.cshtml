@@ -1,0 +1,48 @@
+﻿@model MCAS.Web.Objects.MastersHelper.CountryModel
+
+@{
+    ViewBag.Title = "Edit";
+   
+}
+<div class="dashboard-wrapper"> 
+<h2>View</h2>
+
+<div class="container">
+    <form class="form-horizontal" action='@Url.Action("View", "CountryMaster")' role="form" id="losstypeform" method="post">
+      <div class="row">
+       <div class="table"></div>
+        <div class="clearfix igr col-md-12">
+            <div class="col-md-2">
+            @Html.HiddenFor(m=> m.Countryid)
+                <label for="inputLossTypeCode">Country Code</label>
+            </div>
+            <div class="col-md-3">
+                @Html.DisplayFor(m => m.CountryCode, new  { @maxlength="7"})
+                @Html.ValidationMessageFor(m => m.CountryCode)<br />
+                @*<input type="text" id="inputLossTypeCode" placeholder="" name="txtCode"/>*@
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="clearfix igr col-md-12">
+            <div class="col-md-2">
+                <label for="inputLossTypeName">Country Name</label>
+            </div>
+            <div class="col-md-3">
+            @Html.DisplayFor(m=>m.CountryName)<br />
+                @Html.ValidationMessageFor(m => m.CountryName)<br />
+                @*<input type="text" id="inputLossTypeName" placeholder="" name="txtName"/>*@
+            </div>
+        </div>
+    </div>
+    
+    <div class="row">
+        <div class="clearfix igr col-md-12">
+           
+           @*@Html.ActionLink("Cancel", "Index", null, new { @class = "btn btn-primary btn-large" })*@
+            <a href="javascript:hideViewDetail();" class = "btn btn-primary btn-large">Cancel</a>
+        </div>
+    </div>
+    </form>
+</div>
+</div>

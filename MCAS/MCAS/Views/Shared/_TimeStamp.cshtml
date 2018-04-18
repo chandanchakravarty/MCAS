@@ -1,0 +1,83 @@
+﻿@model MCAS.Web.Objects.CommonHelper.BaseModel
+@using MCAS.Web.Objects.Resources.Common;
+@{
+    var createdDate = "";
+    var createdTime = "";
+    Model.CreatedBy = Model.CreatedBy == null ? null : MCAS.Web.Objects.CommonHelper.CommonUtilities.GetuserDisplayName(Model.CreatedBy);
+    if (Model.CreatedOn != null && Model.CreatedOn != DateTime.MinValue && Model.CreatedBy != null)
+    {
+        createdDate = ((DateTime)Model.CreatedOn).Date.ToShortDateString();
+        createdTime = ((DateTime)Model.CreatedOn).TimeOfDay.ToString();
+    }
+    var UpdateDate = "";
+    var UpdateTime = "";
+    if (Model.ModifiedOn != null)
+    {
+        UpdateDate = ((DateTime)Model.ModifiedOn).Date.ToShortDateString();
+        UpdateTime = ((DateTime)Model.ModifiedOn).TimeOfDay.ToString();
+    }
+}
+<style type="text/css">
+#DivCrDtBy,#DivMoDtBy
+{
+     text-transform: capitalize;
+}
+</style>
+<legend></legend>
+<div class="form-group">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-3">
+                <label for="CreatedBy">                
+                    @Common.CreatedBy:
+                </label>
+            </div>
+            <div class="col-md-3" id="DivCrDtBy">
+                @Html.DisplayFor(m => m.CreatedBy)
+            </div>
+            <div class="col-md-3">
+                <label for="UpdatedBy">
+                    @Common.LastUpdatedBy:</label>
+            </div>
+            <div class="col-md-3" id="DivMoDtBy">
+                @Html.DisplayFor(m => m.ModifiedBy)
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-3">
+                <label for="CreatedDate">
+                    @Common.CreatedDate:</label>
+            </div>
+            <div class="col-md-3" id="DivCrDt">
+                @createdDate
+            </div>
+            <div class="col-md-3">
+                <label for="UpdatedDate">
+                    @Common.LastUpdatedDate:</label>
+            </div>
+            <div class="col-md-3" id="DivUpDt">
+                @UpdateDate
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-3">
+                <label for="CreateTime">
+                    @Common.CreatedTime:</label>
+            </div>
+            <div class="col-md-3" id="DivCrTime">
+                @createdTime
+            </div>
+            <div class="col-md-3">
+                <label for="UpdatedTime">
+                    @Common.LastUpdatedTime:</label>
+            </div>
+            <div class="col-md-3" id="DivUpTime">
+                @UpdateTime
+            </div>
+        </div>
+    </div>
+</div>

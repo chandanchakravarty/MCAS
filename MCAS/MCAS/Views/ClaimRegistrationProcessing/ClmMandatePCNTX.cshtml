@@ -1,0 +1,503 @@
+﻿@using MCAS.Web.Objects.Resources.ClaimProcessing;
+@using MCAS.Web.Objects.CommonHelper
+@using MCAS.Web.Objects.Resources.Common;
+@using MCAS.Globalisation;
+@model Tuple<MCAS.Web.Objects.ClaimObjectHelper.ClaimMandateModel, MCAS.Web.Objects.ClaimObjectHelper.ClmClaimQutmModel>
+@{
+    ViewBag.Title = "ClmMandatePCNTX";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="dashboard-wrapper">
+    <div class="MandateDialogue" style="overflow: hidden;" />
+    <div class="container">
+        <div class="page-title" id="reg">
+             @Html.Action("_ClaimDeatailsPCNTX", "ClaimRegistrationProcessing")
+        </div>
+        <div class="row" id="toprow">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <div class="panel panel-info">
+                    <div class="panel-body" id="MandateRqstEditor">
+                        <div class="panel-body" style="" id="divManDtlsSupAppval">
+                            <fieldset>
+                                <legend>Mandate for Recovery Claim Settlement</legend>
+                                <div class="panel-body">
+                                    <div class="row">
+                                        <div class="form-group">
+                                            <div class="col-lg-6">
+                                                <div class="form-group">
+                                                    <label class="col-sm-4 control-label">
+                                                        TP Vehicle No <span class="text-danger">*</span></label>
+                                                    <div class="col-sm-8">
+                                                        @Html.TextBoxFor(tuple => tuple.Item1.ClaimantName, new { @maxlength = "250", @class = "form-control" })
+                                                    </div>
+                                                    <label>
+                                                    </label>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-6">
+                                                <div class="form-group">
+                                                    <label class="col-sm-4 control-label">
+                                                        @ClaimMandate.AssignedTo <span class="text-danger">*</span>
+                                                    </label>
+                                                    <div class="col-sm-8">
+                                                        @Html.DropDownListFor(tuple => tuple.Item1.AssignedTo, new SelectList(Model.Item1.AssignTypeListSP, "intId", "Text", "Select..."), new { id = "Assignedto", @class = "form-control CO" })
+                                                        @Html.ValidationMessageFor(tuple => tuple.Item1.AssignedTo)
+                                                    </div>
+                                                    <label>
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="form-group">
+                                            <div class="col-lg-6">
+                                                <div class="form-group">
+                                                    <label class="col-sm-4 control-label">
+                                                        Manager's FAL</label>
+                                                    <div class="col-sm-8">
+                                                        @Html.TextBoxFor(tuple => tuple.Item1.SPFAL, new { @maxlength = "1500", @class = "form-control format Number" })
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-6">
+                                                <div class="form-group">
+                                                    <label class="col-sm-4 control-label">
+                                                        ClaimType <span class="text-danger">*</span>
+                                                    </label>
+                                                    <div class="col-sm-8">
+                                                        @Html.DropDownListFor(tuple => tuple.Item1.ClaimType, new SelectList(Model.Item1.ClaimTypeList, "Lookup_value", "Lookup_desc", "[Select...]"), new { id = "Claimtype", @class = "form-control CO" })
+                                                        @Html.ValidationMessageFor(tuple => tuple.Item1.ClaimType)
+                                                    </div>
+                                                    <label>
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="form-group">
+                                            <div class="col-lg-6">
+                                                <label class="col-sm-4 control-label">
+                                                    Evidence</label>
+                                                <div class="col-sm-8">
+                                                    <input type="checkbox" name="vehicle" value="Bike">
+                                                    CCTV
+                                                    <input type="checkbox" name="vehicle" value="Car">
+                                                    Scene Pics
+                                                    <input type="checkbox" name="vehicle" value="aa">
+                                                    Witness Statement
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-6">
+                                                <div class="form-group">
+                                                    <label class="col-sm-4 control-label">
+                                                        Proposed Liablity</label>
+                                                    <div class="col-sm-8">
+                                                        @Html.TextBoxFor(tuple => tuple.Item1.ProposedLiability, new { @maxlength = "3", @class = "form-control format Number" })
+                                                    </div>
+                                                    <label>
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="form-group">
+                                            <div class="col-lg-6">
+                                                <div class="form-group">
+                                                    <label class="col-sm-4 control-label">
+                                                        Related Facts</label>
+                                                    <div class="col-sm-8">
+                                                        @Html.TextAreaFor(tuple => tuple.Item1.RelatedFacts, new { @maxlength = "1500", @class = "form-control CO" })
+                                                        @Html.ValidationMessageFor(tuple => tuple.Item1.RelatedFacts)
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-6">
+                                                <div class="form-group">
+                                                    <label class="col-sm-4 control-label">
+                                                        OIC's Assesment<span class="text-danger">*</span>
+                                                    </label>
+                                                    <div class="col-sm-8">
+                                                        @Html.TextAreaFor(tuple => tuple.Item1.COAssessment, new { @class = "form-control CO" })
+                                                        @Html.ValidationMessageFor(tuple => tuple.Item1.COAssessment)
+                                                    </div>
+                                                    <label>
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </fieldset>
+                            <fieldset>
+                                <legend>Manager Mandate for Recovery Claim</legend>
+                                <div id="CO" class="panel-body">
+                                    <div class="row">
+                                        <div class="form-group">
+                                            <label class="col-sm-2 control-label">
+                                                Assign To <span class="text-danger">*</span>
+                                            </label>
+                                            <div class="col-sm-4">
+                                                @Html.DropDownListFor(tuple => tuple.Item1.SupervisorAssignto, new SelectList(Model.Item1.AssignTypeListCO, "intId", "Text"), new { id = "AssignedToSup", @class = "form-control " })
+                                                <label>
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="form-group">
+                                            <label class="col-sm-2 control-label" style="padding-right: 0px;">
+                                                Approve Recommedations <span class="text-danger">*</span>
+                                            </label>
+                                            <div class="col-sm-4">
+                                                Yes
+                                                <input type="radio" name="gender" value="male" checked>
+                                                No
+                                                <input type="radio" name="gender" value="female">
+                                            </div>
+                                            <label>
+                                            </label>
+                                        </div>
+                                        <label>
+                                        </label>
+                                    </div>
+                                    <div class="row">
+                                        <div class="form-group">
+                                            <label class="col-sm-2 control-label">
+                                                Manager's Remarks</label>
+                                            <div class="col-sm-10">
+                                                @Html.TextAreaFor(tuple => tuple.Item1.SupervisorRemarks, new { @class = "form-control SP" })
+                                                @Html.ValidationMessageFor(tuple => tuple.Item1.SupervisorRemarks)
+                                            </div>
+                                            <label>
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </fieldset>
+                        </div>
+                        <div class="panel-body" id="ODPDBIRequestEditor">
+                            <div class="row">
+                                <div class="panel-body">
+                                    <div class="row">
+                                        <fieldset>
+                                            <legend id="mainheader">Claim Breakdown</legend>
+                                            <div class="row">
+                                                <div class="col-lg-12">
+                                                    <div>
+                                                        <div class="col-sm-6">
+                                                        </div>
+                                                        <div class="col-sm-2 text-center">
+                                                            <label id="labelir" class="text-center" for="inputInitialReserve">
+                                                                Claim Quantum</label>
+                                                        </div>
+                                                        <div class="col-sm-2 text-center">
+                                                            <label id="labelrm" class="text-center" for="inputReserveMovement">
+                                                                OIC's Recommendations Minimum Offer</label>
+                                                        </div>
+                                                        <div class="col-sm-2 text-center">
+                                                            <label id="labelor" class="text-center" for="inputCurrentReserve">
+                                                                Manager's Mandate</label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div id="Taxi">
+                                                <fieldset>
+                                                    <legend>Cost Of Repairs </legend>
+                                                    <div class="row BI" id="BIl1div">
+                                                        <div class="col-lg-12">
+                                                            <div class="form-group">
+                                                                <div class="col-sm-4">
+                                                                </div>
+                                                                <label class="col-sm-2 control-label">
+                                                                    Invoice Amount
+                                                                </label>
+                                                                <div class="col-sm-2">
+                                                                    @Html.TextBoxFor(tuple => tuple.Item2.InAmt_I, new { @maxlength = "14", @class = "form-control format Number" })
+                                                                </div>
+                                                                <div class="col-sm-2">
+                                                                    @Html.TextBoxFor(tuple => tuple.Item2.InAmt_M, new { @maxlength = "14", @class = "form-control format Number" })
+                                                                </div>
+                                                                <div class="col-sm-2">
+                                                                    @Html.TextBoxFor(tuple => tuple.Item2.InAmt_C, new { @maxlength = "14", @class = "form-control format Number" })
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </fieldset>
+                                                <fieldset>
+                                                    <legend>Claim Expenses- Claimant </legend>
+                                                    <div class="row BI" id="ClEx-Cl">
+                                                        <div class="col-lg-12">
+                                                            <div>
+                                                                <div class="form-group">
+                                                                    <div class="col-sm-4">
+                                                                    </div>
+                                                                    <label class="col-sm-2 control-label">
+                                                                        Loss Of Rental
+                                                                    </label>
+                                                                    <div class="col-sm-2">
+                                                                        @Html.TextBoxFor(tuple => tuple.Item2.LOR_I, new { @maxlength = "14", @class = "form-control format Number" })
+                                                                    </div>
+                                                                    <div class="col-sm-2">
+                                                                        @Html.TextBoxFor(tuple => tuple.Item2.LOI_M, new { @maxlength = "14", @class = "form-control format Number NegativeAllow" })
+                                                                    </div>
+                                                                    <div class="col-sm-2">
+                                                                        @Html.TextBoxFor(tuple => tuple.Item2.LOI_C, new { @maxlength = "14", @class = "form-control format Number" })
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <label>
+                                                            </label>
+                                                            <div class="form-group">
+                                                                <div class="col-sm-4">
+                                                                </div>
+                                                                <label class="col-sm-2 control-label">
+                                                                    Loss Of Income
+                                                                </label>
+                                                                <div class="col-sm-2">
+                                                                    @Html.TextBoxFor(tuple => tuple.Item2.LOI_I, new { @maxlength = "14", @class = "form-control format Number" })
+                                                                </div>
+                                                                <div class="col-sm-2">
+                                                                    @Html.TextBoxFor(tuple => tuple.Item2.LOI_M, new { @maxlength = "14", @class = "form-control format Number NegativeAllow" })
+                                                                </div>
+                                                                <div class="col-sm-2">
+                                                                    @Html.TextBoxFor(tuple => tuple.Item2.LOI_C, new { @maxlength = "14", @class = "form-control format Number" })
+                                                                </div>
+                                                            </div>
+                                                            <label>
+                                                            </label>
+                                                            <div id="taxi" style="display: none;">
+                                                                <div>
+                                                                    <div class="form-group">
+                                                                        <div class="col-sm-4">
+                                                                        </div>
+                                                                        <label class="col-sm-2 control-label">
+                                                                            Loss Of Use
+                                                                        </label>
+                                                                        <div class="col-sm-2">
+                                                                            @Html.TextBoxFor(tuple => tuple.Item2.LOU_I, new { @maxlength = "14", @class = "form-control format Number" })
+                                                                        </div>
+                                                                        <div class="col-sm-2">
+                                                                            @Html.TextBoxFor(tuple => tuple.Item2.LOU_M, new { @maxlength = "14", @class = "form-control format Number NegativeAllow" })
+                                                                        </div>
+                                                                        <div class="col-sm-2">
+                                                                            @Html.TextBoxFor(tuple => tuple.Item2.LOU_C, new { @maxlength = "14", @class = "form-control format Number" })
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <label>
+                                                                </label>
+                                                                <div class="form-group">
+                                                                    <div class="col-sm-4">
+                                                                    </div>
+                                                                    <label class="col-sm-2 control-label">
+                                                                        Medical Expenses
+                                                                    </label>
+                                                                    <div class="col-sm-2">
+                                                                        @Html.TextBoxFor(tuple => tuple.Item2.MdclExps_I, new { @maxlength = "14", @class = "form-control format Number" })
+                                                                    </div>
+                                                                    <div class="col-sm-2">
+                                                                        @Html.TextBoxFor(tuple => tuple.Item2.MdclExps_M, new { @maxlength = "14", @class = "form-control format Number NegativeAllow" })
+                                                                    </div>
+                                                                    <div class="col-sm-2">
+                                                                        @Html.TextBoxFor(tuple => tuple.Item2.MdclExps_C, new { @maxlength = "14", @class = "form-control format Number" })
+                                                                    </div>
+                                                                </div>
+                                                                <label>
+                                                                </label>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <div class="col-sm-4">
+                                                                </div>
+                                                                <label class="col-sm-2 control-label">
+                                                                    Others(1)
+                                                                </label>
+                                                                <div class="col-sm-2">
+                                                                    @Html.TextBoxFor(tuple => tuple.Item2.Others1_I, new { @maxlength = "14", @class = "form-control format Number" })
+                                                                </div>
+                                                                <div class="col-sm-2">
+                                                                    @Html.TextBoxFor(tuple => tuple.Item2.Others1_M, new { @maxlength = "14", @class = "form-control format Number NegativeAllow" })
+                                                                </div>
+                                                                <div class="col-sm-2">
+                                                                    @Html.TextBoxFor(tuple => tuple.Item2.Others2_C, new { @maxlength = "14", @class = "form-control format Number" })
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </fieldset>
+                                                <fieldset>
+                                                    <legend>Claim Expenses- Incidential</legend>
+                                                    <div class="row BI" id="ClEx-In">
+                                                        <div class="col-lg-12">
+                                                            <div class="form-group">
+                                                                <div class="col-sm-4">
+                                                                </div>
+                                                                <label class="col-sm-2 control-label">
+                                                                    Legal Fee
+                                                                </label>
+                                                                <div class="col-sm-2">
+                                                                    @Html.TextBoxFor(tuple => tuple.Item2.LglFee_I, new { @maxlength = "14", @class = "form-control format Number" })
+                                                                </div>
+                                                                <div class="col-sm-2">
+                                                                    @Html.TextBoxFor(tuple => tuple.Item2.LglFee_M, new { @maxlength = "14", @class = "form-control format Number NegativeAllow" })
+                                                                </div>
+                                                                <div class="col-sm-2">
+                                                                    @Html.TextBoxFor(tuple => tuple.Item2.LglFee_C, new { @maxlength = "14", @class = "form-control format Number" })
+                                                                </div>
+                                                            </div>
+                                                            <label>
+                                                            </label>
+                                                            <div class="form-group">
+                                                                <div class="col-sm-4">
+                                                                </div>
+                                                                <label class="col-sm-2 control-label">
+                                                                    Survey Fee
+                                                                </label>
+                                                                <div class="col-sm-2">
+                                                                    @Html.TextBoxFor(tuple => tuple.Item2.SrvFee_I, new { @maxlength = "14", @class = "form-control format Number" })
+                                                                </div>
+                                                                <div class="col-sm-2">
+                                                                    @Html.TextBoxFor(tuple => tuple.Item2.SrvFee_M, new { @maxlength = "14", @class = "form-control format Number NegativeAllow" })
+                                                                </div>
+                                                                <div class="col-sm-2">
+                                                                    @Html.TextBoxFor(tuple => tuple.Item2.SrvFee_C, new { @maxlength = "14", @class = "form-control format Number" })
+                                                                </div>
+                                                            </div>
+                                                            <label>
+                                                            </label>
+                                                            <div class="form-group">
+                                                                <div class="col-sm-4">
+                                                                </div>
+                                                                <label class="col-sm-2 control-label">
+                                                                    TP/GIA Fee
+                                                                </label>
+                                                                <div class="col-sm-2">
+                                                                    @Html.TextBoxFor(tuple => tuple.Item2.TPGIAFee_I, new { @maxlength = "14", @class = "form-control format Number" })
+                                                                </div>
+                                                                <div class="col-sm-2">
+                                                                    @Html.TextBoxFor(tuple => tuple.Item2.TPGIAFee_M, new { @maxlength = "14", @class = "form-control format Number NegativeAllow" })
+                                                                </div>
+                                                                <div class="col-sm-2">
+                                                                    @Html.TextBoxFor(tuple => tuple.Item2.TPGIAFee_C, new { @maxlength = "14", @class = "form-control format Number" })
+                                                                </div>
+                                                            </div>
+                                                            <label>
+                                                            </label>
+                                                            <div class="form-group">
+                                                                <div class="col-sm-4">
+                                                                </div>
+                                                                <label class="col-sm-2 control-label">
+                                                                    LTA Fee
+                                                                </label>
+                                                                <div class="col-sm-2">
+                                                                    @Html.TextBoxFor(tuple => tuple.Item2.LTAFee_I, new { @maxlength = "14", @class = "form-control format Number" })
+                                                                </div>
+                                                                <div class="col-sm-2">
+                                                                    @Html.TextBoxFor(tuple => tuple.Item2.LTAFee_M, new { @maxlength = "14", @class = "form-control format Number NegativeAllow" })
+                                                                </div>
+                                                                <div class="col-sm-2">
+                                                                    @Html.TextBoxFor(tuple => tuple.Item2.LTAFee_C, new { @maxlength = "14", @class = "form-control format Number" })
+                                                                </div>
+                                                            </div>
+                                                            <label>
+                                                            </label>
+                                                            <div style="display: none;">
+                                                                <div class="form-group">
+                                                                    <div class="col-sm-4">
+                                                                    </div>
+                                                                    <label class="col-sm-2 control-label">
+                                                                        Car Rental
+                                                                    </label>
+                                                                    <div class="col-sm-2">
+                                                                        @Html.TextBoxFor(tuple => tuple.Item2.CrRntl_I, new { @maxlength = "14", @class = "form-control format Number" })
+                                                                    </div>
+                                                                    <div class="col-sm-2">
+                                                                        @Html.TextBoxFor(tuple => tuple.Item2.CrRntl_M, new { @maxlength = "14", @class = "form-control format Number NegativeAllow" })
+                                                                    </div>
+                                                                    <div class="col-sm-2">
+                                                                        @Html.TextBoxFor(tuple => tuple.Item2.CrRntl_C, new { @maxlength = "14", @class = "form-control format Number" })
+                                                                    </div>
+                                                                </div>
+                                                                <label>
+                                                                </label>
+                                                                <div class="form-group">
+                                                                    <div class="col-sm-4">
+                                                                    </div>
+                                                                    <label class="col-sm-2 control-label">
+                                                                        Courtesy Car
+                                                                    </label>
+                                                                    <div class="col-sm-2">
+                                                                        @Html.TextBoxFor(tuple => tuple.Item2.CrtsyCR_I, new { @maxlength = "14", @class = "form-control format Number" })
+                                                                    </div>
+                                                                    <div class="col-sm-2">
+                                                                        @Html.TextBoxFor(tuple => tuple.Item2.CrtsyCR_M, new { @maxlength = "14", @class = "form-control format Number NegativeAllow" })
+                                                                    </div>
+                                                                    <div class="col-sm-2">
+                                                                        @Html.TextBoxFor(tuple => tuple.Item2.CrtsyCR_C, new { @maxlength = "14", @class = "form-control format Number" })
+                                                                    </div>
+                                                                </div>
+                                                                <label>
+                                                                </label>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <div class="col-sm-4">
+                                                                </div>
+                                                                <label class="col-sm-2 control-label">
+                                                                    Others(2)
+                                                                </label>
+                                                                <div class="col-sm-2">
+                                                                    @Html.TextBoxFor(tuple => tuple.Item2.Others2_I, new { @maxlength = "14", @class = "form-control format Number" })
+                                                                </div>
+                                                                <div class="col-sm-2">
+                                                                    @Html.TextBoxFor(tuple => tuple.Item2.Others2_M, new { @maxlength = "14", @class = "form-control format Number NegativeAllow" })
+                                                                </div>
+                                                                <div class="col-sm-2">
+                                                                    @Html.TextBoxFor(tuple => tuple.Item2.Others2_C, new { @maxlength = "14", @class = "form-control format Number" })
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </fieldset>
+                                                <label>
+                                                </label>
+                                                <div class="form-group">
+                                                    <div class="col-sm-4">
+                                                    </div>
+                                                    <label class="col-sm-2 control-label">
+                                                        Total
+                                                    </label>
+                                                    <div class="col-sm-2">
+                                                        @Html.TextBoxFor(tuple => tuple.Item2.Total_I, new { @maxlength = "14", @class = "form-control format Number" })
+                                                    </div>
+                                                    <div class="col-sm-2">
+                                                        @Html.TextBoxFor(tuple => tuple.Item2.Total_M, new { @maxlength = "14", @class = "form-control format Number NegativeAllow" })
+                                                    </div>
+                                                    <div class="col-sm-2">
+                                                        @Html.TextBoxFor(tuple => tuple.Item2.Total_C, new { @maxlength = "14", @class = "form-control format Number" })
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </fieldset>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-12 text-center">
+                            <div class="form-group" id="DivSave1">
+                                <input id="btnSave" class="btn btn-info" type="button" value="Save" />
+                                <input id="btnReset" class="btn btn-info" type="button" value="Reset" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

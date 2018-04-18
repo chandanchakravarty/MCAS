@@ -1,0 +1,1440 @@
+﻿@using MCAS.Web.Objects.Resources.ClaimProcessing;
+@using MCAS.Web.Objects.CommonHelper
+@using MCAS.Web.Objects.Resources.Common;
+@using MCAS.Globalisation;
+@model MCAS.Web.Objects.ClaimObjectHelper.ClaimInfoPayment
+@{
+    ViewBag.Title = "ClaimPaymentEditor";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var mMCASQueryString = Html.MCASQueryString(Request.QueryString);
+    var caller = mMCASQueryString["claimMode"] == null ? "" : Convert.ToString(mMCASQueryString["claimMode"]);
+    var viewonly = mMCASQueryString["Viewmode"] == null ? "" : Convert.ToString(mMCASQueryString["Viewmode"]);
+    var pagemode = MenuListItem.ClaimTabs.GetMode(Convert.ToString(Session["ScreenNameDash"]), mMCASQueryString["mode"] == null ? "" : Convert.ToString(mMCASQueryString["mode"]));
+    var DonotDiableControl = Model.ReadOnly != true && pagemode == "Payment" ? "form-horizontal DonotDiableControl" : "form-horizontal";
+    var policyid = mMCASQueryString["PolicyId"] == null ? "" : Convert.ToString(mMCASQueryString["PolicyId"]);
+    var claimId = Model.ClaimID == null ? "" : Convert.ToString(Model.ClaimID);
+    var claimMode = mMCASQueryString["claimMode"] == null ? "" : Convert.ToString(mMCASQueryString["claimMode"]);
+    var PaymentId = mMCASQueryString["PaymentId"] == null ? "" : Convert.ToString(mMCASQueryString["PaymentId"]);
+    var accidentClaimIdNew = mMCASQueryString["AccidentClaimId"] == null ? "" : Convert.ToString(mMCASQueryString["AccidentClaimId"]);
+    var SubMenu = !string.IsNullOrEmpty(Convert.ToString((HttpContext.Current.Session["ScreenNameDash"]))) ? MenuListItem.ClaimTabs.GetClaimLabel(Convert.ToString((HttpContext.Current.Session["ScreenNameDash"]))) : ClaimInfoPayment.ResourceManager.GetString(MenuListItem.ClaimTabs.SubMenuString(@caller, @accidentClaimIdNew, @pagemode, "ClaimPayment"));
+    var Hshowgrid = Model.Hshowgrid == null ? "" : Model.Hshowgrid;
+    var ClaimType1 = mMCASQueryString["ClaimType"] == null ? (Model.ClaimType == null || Model.ClaimType == 0) ? 0 : Model.ClaimType : Convert.ToInt32(mMCASQueryString["ClaimType"]);
+    var Display = TempData["DisplayDiv"] == null ? "none;" : "block;";
+    var ShowSaveAndResetButton = (mMCASQueryString["Viewmode"] == "AddPayment") || (mMCASQueryString["Viewmode"] == "ApprovePayment") ? "Y" : "N";
+    var ReadOnlyPayment = MenuListItem.ClaimTabs.SubMenuString(@caller, @accidentClaimIdNew, @pagemode, "ReadOnlyPayment");
+    string MandateRecordNo = mMCASQueryString["MandateRecordNo"] != null && mMCASQueryString["MandateRecordNo"] != "" ? Convert.ToString(mMCASQueryString["MandateRecordNo"]) : "";
+    Model.ViewMode = pagemode == "Adj" ? "Read" : "";
+    string isEncryptedParams = System.Configuration.ConfigurationManager.AppSettings["EncryptQueryParams"].ToUpper();
+}
+<script src="@Url.Content("~/Scripts/jquery-2.1.0.min.js")" type="text/javascript"></script>
+<div class="dashboard-wrapper">
+    <div class="PaymentDialogue" style="overflow: hidden;" />
+    <div class="container">
+        <div class="page-title" id="reg">
+            <div class="col-lg-12" id="reg2" style="background-color: white; position: fixed;
+                z-index: 1;">
+                <h2>@ClaimReserve.ResourceManager.GetString(MenuListItem.ClaimTabs.PreBreadCrumbString(@pagemode))</h2>
+                <ul class="breadcrumb">
+                    <li>@SubMenu</li>
+                    <li>@ClaimInfoPayment.Payment</li>
+                </ul>
+            </div>
+            <div style="position: relative!important">
+                @Html.Action("_ClaimDetails", "ClaimProcessing", new { PolicyId = @policyid })
+            </div>
+        </div>
+        <hr />
+        <div class="row" id="toprow">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <div class="panel panel-info">
+                    @if (Convert.ToBoolean(TempData["PaymentPermission"]))
+                    {
+                        <div class="panel-heading clearfix">
+                            <i class="icon-check-sign"></i>
+                            <h3 class="panel-title">
+                                @ClaimInfoPayment.Payment</h3>
+                        </div>
+                        <div class="panel-body">
+                            @Html.Partial("ClaimPayment", Model.ClaimPaymentModelCollection)
+                            <div>
+                                <br />
+                            </div>
+                            <div class="row">
+                                <div class="clearfix igr col-md-1 text-center">
+                                    <a class="btn btn-info" id="Previous">@Common.Previous</a>
+                                </div>
+                                <div class="col-lg-10 text-center">
+                                </div>
+                                <div class="clearfix igr col-md-1 text-center">
+                                    <a class="btn btn-info" id="Next">@Common.Next</a>
+                                </div>
+                            </div>
+                            @{
+                        object routes = new { PolicyId = @policyid, AccidentClaimId = @accidentClaimIdNew, claimMode = @caller, mode = @pagemode, MandateRecordNo = @MandateRecordNo };
+                        if (isEncryptedParams.ToUpper() == "YES")
+                        {
+                            string res = RouteEncryptDecrypt.getRouteString(routes);
+                            res = RouteEncryptDecrypt.Encrypt(res);
+                            routes = new { Q = res };
+                        }
+                            }
+                            <hr style='font-weight: bold' />
+                            <div class="panel-body" id="PaymentEditor">
+                                @using (Html.BeginForm("PaymentEditorNew", "ClaimProcessing", routes, FormMethod.Post, new { role = "form", @class = @DonotDiableControl, id = "PaymentEditorNew", name = "PaymentEditorNew" }))
+                                {
+                                    @Html.HiddenFor(m => m.PaymentId);
+                                    @Html.HiddenFor(m => m.MandateId);
+                                    @Html.HiddenFor(m => m.ReserveId);
+                                    @Html.HiddenFor(m => m.ClaimID);
+                                    @Html.HiddenFor(m => m.ClaimType);
+                                    @Html.HiddenFor(m => m.CreatedBy);
+                                    @Html.HiddenFor(m => m.Prop1);
+                                    @Html.HiddenFor(m => m.HDeductibleAmt);
+                                    @Html.HiddenFor(m => m.HTotalPreviousApprovePayment);
+                                    @Html.HiddenFor(m => m.ReadOnly); 
+                                    @Html.HiddenFor(m => m.ViewMode); 
+                                    @Html.HiddenFor(m => m.Hshowgrid);
+                                    @Html.HiddenFor(m => m.HUserId);
+                                    @Html.HiddenFor(m => m.HEffdateto)
+                                    @Html.HiddenFor(m => m.HEffdatefrom) 
+                                    @Html.HiddenFor(m => m.HOrgname)
+                                    @Html.HiddenFor(m => m.HChildGrid)                               
+                                    <a id="reload" href='@Url.ActionEncoded("PaymentEditorNew", "ClaimProcessing", new { PolicyId = @policyid, ClaimId = @claimId, Viewmode = @Model.ViewMode, ClaimType = @Model.ClaimType, PaymentId = @Model.PaymentId, AccidentClaimId = @accidentClaimIdNew, MandateRecordNo = @MandateRecordNo, MandateId = @Model.MandateId, ReserveId = @Model.ReserveId, claimMode = @caller })' style="display:none">
+                                        Reload</a>                                 
+                                    <div style="color: Red; font-weight: bold;" class="has-error result1" id="error">
+                                        <p align="center">
+                                            @if (@ViewData["SuccessMsg"] != null)
+                                            {
+                                                @ViewData["SuccessMsg"]
+                                            }
+                                        </p>
+                                    </div>
+                                    <div class="panel-body" id="PaymentEditorMainDiv" style="display:@Display">
+                                        <div class="row">
+                                            <fieldset>
+                                                <legend id="mainheader">@ClaimInfoPayment.ODClaimBreakdown</legend>
+                                                <div id="Togglediv" class="panel-body">
+                                                    <fieldset>
+                                                        <legend class="ExpCol ui-minusicon">@ClaimInfoPayment.PaymentDetails</legend>
+                                                        <div class="row" id="BIl3div">
+                                                            <div class="col-lg-12">
+                                                                <div class="form-group">
+                                                                    <label class="col-sm-3 control-label">
+                                                                        @ClaimInfoPayment.Claimant&nbsp;<span class="text-danger">*</span>
+                                                                    </label>
+                                                                    <div class="col-sm-9">
+                                                                        @Html.TextBoxFor(m => m.ClaimantName, new { @class = "form-control" })
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-lg-12">
+                                                                <div class="form-group">
+                                                                    <label class="col-sm-3 control-label" for="inputAssignedTo">
+                                                                        @ClaimInfoPayment.AssignedTo&nbsp;<span class="text-danger">*</span>
+                                                                    </label>
+                                                                    <div class="col-sm-4">
+                                                                        @Html.DropDownListFor(m => m.AssignedTo, new SelectList(Model.AssignedToCoList, "intId", "Text", "[Select...]"), new { @class = "form-control" })
+                                                                        @Html.ValidationMessageFor(m => m.AssignedTo)
+                                                                    </div>
+                                                                    <label class="col-sm-1  control-label" style="padding: 0px;">
+                                                                        @ClaimInfoPayment.SPFAL</label>
+                                                                    <div class="col-sm-4">
+                                                                        @Html.TextBoxFor(m => m.SPFAL, new { @maxlength = "1500", @class = "form-control format Number", @readonly = "readonly" })
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-lg-12">
+                                                                <div class="form-group">
+                                                                    <label class="col-sm-3 control-label" for="PaymentRequestType">
+                                                                        @ClaimInfoPayment.PaymentRequestType&nbsp;<span class="text-danger">*</span>
+                                                                    </label>
+                                                                    <div class="col-sm-4">
+                                                                        @Html.TextBoxFor(m => m.PaymentRequestType, new { name = "PaymentRequestType", @class = "form-control" })
+                                                                    </div>
+                                                                    <label class="col-sm-1 control-label" for="PaymentRequestDate" style="padding: 0px;">
+                                                                        @ClaimInfoPayment.PaymentRequestDate&nbsp;<span class="text-danger">*</span>
+                                                                    </label>
+                                                                    <div class="col-sm-4">
+                                                                        @Html.TextBoxFor(m => m.PaymentRequestDate, "{0:d}", new { @class = "form-control datepicker" })
+                                                                        @Html.ValidationMessageFor(m => m.PaymentRequestDate)
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-lg-12">
+                                                                <div class="form-group">
+                                                                    <label class="col-sm-3 control-label" for="PaymentDueDate">
+                                                                        @ClaimInfoPayment.PaymentDueDate&nbsp;<span class="text-danger">*</span>
+                                                                    </label>
+                                                                    <div class="col-sm-4">
+                                                                        @Html.TextBoxFor(m => m.PaymentDueDate, "{0:d}", new { @class = "form-control datepicker" })
+                                                                        @Html.ValidationMessageFor(m => m.PaymentDueDate)
+                                                                    </div>
+                                                                    <label class="col-sm-1 control-label" style="padding: 0px;">
+                                                                        @ClaimInfoPayment.Payee&nbsp;<span class="text-danger">*</span>
+                                                                    </label>
+                                                                    <div class="col-sm-4">
+                                                                        @Html.DropDownListFor(m => m.Payee, new SelectList(Model.PayeeList, "Id", "Text", null),
+new { @class = "form-control" })
+                                                                        @Html.ValidationMessageFor(m => m.Payee)
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-lg-12">
+                                                                <div class="form-group">
+                                                                    <label class="col-sm-3 control-label" for="Address">
+                                                                        @ClaimInfoPayment.Address&nbsp;<span class="text-danger">*</span>
+                                                                    </label>
+                                                                    <div class="col-sm-4">
+                                                                        @Html.TextBoxFor(m => m.Address, new { @maxlength = "100", @class = "form-control" })
+                                                                        @Html.ValidationMessageFor(m => m.Address)
+                                                                    </div>
+                                                                    <label class="col-sm-1 control-label" style="padding-left: 0px; padding-right: 0px;">
+                                                                        @ClaimInfoPayment.Address1
+                                                                    </label>
+                                                                    <div class="col-sm-4">
+                                                                        @Html.TextBoxFor(m => m.Address1, new { @maxlength = "100", @class = "form-control" })
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-lg-12">
+                                                                <div class="form-group">
+                                                                    <label class="col-sm-3 control-label" for="Address2">
+                                                                        @ClaimInfoPayment.Address2
+                                                                    </label>
+                                                                    <div class="col-sm-4">
+                                                                        @Html.TextBoxFor(m => m.Address2, new { @maxlength = "100", @class = "form-control" })
+                                                                    </div>
+                                                                    <label class="col-sm-1 control-label" for="PostalCodes" style="padding-left: 0px;
+                                                                        padding-right: 0px;">
+                                                                        @ClaimInfoPayment.PostalCodes&nbsp;<span class="text-danger">*</span>
+                                                                    </label>
+                                                                    <div class="col-sm-4">
+                                                                        @Html.TextBoxFor(m => m.PostalCodes, new { @maxlength = "10", @class = "form-control" })
+                                                                        @Html.ValidationMessageFor(m => m.PostalCodes)
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-lg-12">
+                                                                <div class="form-group">
+                                                                    <label class="col-sm-3 control-label" for="CoRemarks">
+                                                                        @ClaimInfoPayment.CoRemarks
+                                                                    </label>
+                                                                    <div class="col-sm-9">
+                                                                        @Html.TextAreaFor(m => m.CoRemarks, new { @maxlength = "800", @class = "form-control", @rows = "2" })
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </fieldset>
+                                                    <fieldset>
+                                                        <legend class="ExpCol ui-minusicon">@ClaimInfoPayment.SupervisorApproval</legend>
+                                                        <div class="row" id="BIl0div">
+                                                            <div class="col-lg-12">
+                                                                <div class="form-group">
+                                                                    <label class="col-sm-3 control-label">
+                                                                        @ClaimInfoPayment.AssignedToSupervisor&nbsp;<span class="text-danger">*</span>
+                                                                    </label>
+                                                                    <div class="col-sm-9">
+                                                                        @Html.DropDownListFor(m => m.AssignedToSupervisor, new SelectList(Model.AssignedToSupervisorList, "intId", "Text", "Select..."), new { @class = "form-control" })
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-lg-12">
+                                                                <div class="form-group">
+                                                                    <label class="col-sm-3 control-label">
+                                                                        @ClaimInfoPayment.ApprovePayment&nbsp;<span class="text-danger">*</span>
+                                                                    </label>
+                                                                    <div class="col-sm-4" id="DivApprovePayment">
+                                                                        @Html.RadioButtonForSelectList(m => m.ApprovePayment, new SelectList(Model.ApprovePaymentList, "Lookup_value", "Lookup_desc"))
+                                                                        @Html.ValidationMessageFor(m => m.ApprovePayment)
+                                                                    </div>
+                                                                    <label class="col-sm-1 control-label" for="PaymentRequestType" style="padding-left: 0px;
+                                                                        padding-right: 0px;">
+                                                                    </label>
+                                                                    <div class="col-sm-4">
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-lg-12">
+                                                                <div class="form-group">
+                                                                    <label class="col-sm-3 control-label">
+                                                                        @ClaimInfoPayment.SupervisorRemarks
+                                                                    </label>
+                                                                    <div class="col-sm-9">
+                                                                        @Html.TextAreaFor(m => m.SupervisorRemarks, new { @len = "800", @class = "form-control", @rows = "2" })
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-lg-12">
+                                                                <div class="form-group">
+                                                                    <label class="col-sm-3 control-label">
+                                                                        @ClaimInfoPayment.InformSafetytoreviewfindings
+                                                                    </label>
+                                                                    <div class="col-sm-4">
+                                                                        @Html.TextBoxFor(m => m.InformSafetytoreviewfindings, new { @class = "form-control", @readonly = "readonly" })
+                                                                    </div>
+                                                                    <label class="col-sm-1 control-label" style="padding-left: 0px; padding-right: 0px;">
+                                                                        @ClaimInfoPayment.DateofNoticetoSafety
+                                                                    </label>
+                                                                    <div class="col-sm-4">
+                                                                        @Html.TextBoxFor(m => m.DateofNoticetoSafety, "{0:d}", new { @class = "form-control", @readonly = "readonly" })
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-lg-12">
+                                                                <div class="form-group">
+                                                                    <label class="col-sm-3 control-label">
+                                                                        @ClaimInfoPayment.ODStatus
+                                                                    </label>
+                                                                    <div id="DivODStatus" class="col-sm-4">
+                                                                        @Html.RadioButtonForSelectList(m => m.ODStatus, Model.generallookupvalue)
+                                                                    </div>
+                                                                    <label class="col-sm-1 control-label" style="padding-left: 0px; padding-right: 0px;">
+                                                                        @ClaimInfoPayment.RecoverableFromInsurerBI
+                                                                    </label>
+                                                                    <div class="col-sm-4">
+                                                                        @Html.DropDownListFor(m => m.RecoverableFromInsurerBI, new SelectList(Model.RecoverableFromInsurerBIList, "Lookup_value", "Lookup_desc", ""), new { @class = "form-control" })
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-lg-12">
+                                                                <div class="form-group">
+                                                                    <label class="col-sm-3 control-label">
+                                                                        @ClaimInfoPayment.EZLinkCardNo
+                                                                    </label>
+                                                                    <div class="col-sm-4">
+                                                                        @Html.DropDownListFor(m => m.EZLinkCardNo, new SelectList(Model.EZLinkCardNolist, "Lookup_value", "Lookup_desc", ""), new { @class = "form-control" })
+                                                                    </div>
+                                                                    <label class="col-sm-1 control-label" style="padding-left: 0px; padding-right: 0px;">
+                                                                    </label>
+                                                                    <div class="col-sm-4">
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                    </fieldset>
+                                                    <div class="row">
+                                                        <div class="col-lg-12">
+                                                            <div class="form-group" style="margin-bottom: -15px">
+                                                                <div class="col-sm-3">
+                                                                </div>
+                                                                <label class="col-sm-5 text-center" style="padding-right: 95px;" for="inputInitialReserve">
+                                                                    @ClaimInfoPayment.AmountDue</label>
+                                                                <label class="col-sm-4 text-center" for="inputReserveMovement">
+                                                                    @ClaimInfoPayment.AmountMandate</label>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    @for (int i = 0; i < Model.PaymentDetails.Count; i++)
+                                                    {
+                                                        @Html.HiddenFor(m => m.PaymentDetails[i].CompCode) 
+                                                        @Html.HiddenFor(m => m.PaymentDetails[i].PaymentDetailId)
+                                                        @Html.HiddenFor(m => m.PaymentDetails[i].ReserveId)
+                                                        @Html.HiddenFor(m => m.PaymentDetails[i].MandateId)
+                                                        @Html.HiddenFor(m => m.PaymentDetails[i].PaymentId)
+                                                        @Html.HiddenFor(m => m.PaymentDetails[i].ClaimID)
+                                                        @Html.HiddenFor(m => m.PaymentDetails[i].AccidentClaimId)
+                                                        var PaymentDueId = Model.PaymentDetails[i].CompDesc + "_D";
+                                                        var MandateId = Model.PaymentDetails[i].CompDesc + "_S";
+                                                        var CuurentReserveId = Model.PaymentDetails[i].CompDesc + "_C";
+
+                                                        if (Model.PaymentDetails[i].CompCode == "GD")
+                                                        {    
+                                                        <fieldset class="BI">
+                                                            <legend class="ExpCol ui-minusicon">@ClaimInfoPayment.GD </legend>
+                                                            <div class="row BI" id="BIl1div">
+                                                                <div class="col-lg-12">
+                                                                    <div class="form-group">
+                                                                        <label class="col-sm-3 control-label">
+                                                                            @ClaimInfoPayment.GD
+                                                                        </label>
+                                                                        <div class="col-sm-5" style="padding-right: 95px;">
+                                                                            @Html.TextBoxFor(m => m.PaymentDetails[i].PaymentDue, new { @maxlength = "14", @class = "form-control format Number", @id = @PaymentDueId })
+                                                                        </div>
+                                                                        <div class="col-sm-4">
+                                                                            @Html.TextBoxFor(m => m.PaymentDetails[i].Mandate, new { @maxlength = "14", @class = "form-control format Number", @id = @MandateId })
+                                                                            @Html.HiddenFor(m => m.PaymentDetails[i].CurrentReserve, new { @id = @CuurentReserveId })
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </fieldset>
+                                                        }
+                                                        if (Model.PaymentDetails[i].CompCode == "ME")
+                                                        {
+                                                        <fieldset class="BI">
+                                                            <legend class="ExpCol ui-minusicon">@ClaimInfoPayment.ME</legend>
+                                                            <div class="row BI" id="BIl2div">
+                                                                @if (Model.PaymentDetails[i].CompCode == "ME")
+                                                                {
+                                                                    <div>
+                                                                        <div class="col-lg-12">
+                                                                            <div class="form-group">
+                                                                                <label class="col-sm-3 control-label" for="inputMEReserve">
+                                                                                    @ClaimInfoPayment.ME
+                                                                                </label>
+                                                                                <div class="col-sm-5" style="padding-right: 95px;">
+                                                                                    @Html.TextBoxFor(m => m.PaymentDetails[i].PaymentDue, new { @maxlength = "14", @class = "form-control format Number", @id = @PaymentDueId })
+                                                                                </div>
+                                                                                <div class="col-sm-4">
+                                                                                    @Html.TextBoxFor(m => m.PaymentDetails[i].Mandate, new { @maxlength = "14", @class = "form-control format Number", @id = @MandateId })
+                                                                                    @Html.HiddenFor(m => m.PaymentDetails[i].CurrentReserve, new { @id = @CuurentReserveId })
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                }
+                                                                @if (Model.PaymentDetails[i + 1].CompCode == "FME")
+                                                                {
+                                                                    <div>
+                                                                        <div class="col-lg-12">
+                                                                            <div class="form-group">
+                                                                                <label class="col-sm-3 control-label" for="inputFMEReserve">
+                                                                                    @ClaimInfoPayment.FME
+                                                                                </label>
+                                                                                <div class="col-sm-5" style="padding-right: 95px;">
+                                                                                    @Html.TextBoxFor(m => m.PaymentDetails[i + 1].PaymentDue, new { @maxlength = "14", @class = "form-control format Number", @id = @Model.PaymentDetails[i + 1].CompDesc + "_D" })
+                                                                                </div>
+                                                                                <div class="col-sm-4">
+                                                                                    @Html.TextBoxFor(m => m.PaymentDetails[i + 1].Mandate, new { @maxlength = "14", @class = "form-control format Number", @id = @Model.PaymentDetails[i + 1].CompDesc + "_S" })
+                                                                                    @Html.HiddenFor(m => m.PaymentDetails[i + 1].CurrentReserve, new { @id = @Model.PaymentDetails[i + 1].CompDesc + "_C" })
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                }
+                                                                @if (Model.PaymentDetails[i + 2].CompCode == "LME")
+                                                                {
+                                                                    <div>
+                                                                        <div class="col-lg-12">
+                                                                            <div class="form-group">
+                                                                                <label class="col-sm-3 control-label" for="inputLOGMEReserve">
+                                                                                    @ClaimInfoPayment.LME
+                                                                                </label>
+                                                                                <div class="col-sm-5" style="padding-right: 95px;">
+                                                                                    @Html.TextBoxFor(m => m.PaymentDetails[i + 2].PaymentDue, new { @maxlength = "14", @class = "form-control format Number", @id = @Model.PaymentDetails[i + 2].CompDesc + "_D" })
+                                                                                </div>
+                                                                                <div class="col-sm-4">
+                                                                                    @Html.TextBoxFor(m => m.PaymentDetails[i + 2].Mandate, new { @maxlength = "14", @class = "form-control format Number", @id = @Model.PaymentDetails[i + 2].CompDesc + "_S" })
+                                                                                    @Html.HiddenFor(m => m.PaymentDetails[i + 2].CurrentReserve, new { @id = @Model.PaymentDetails[i + 2].CompDesc + "_C" })
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                }
+                                                            </div>
+                                                        </fieldset>
+                                                        }
+                                                        if (Model.PaymentDetails[i].CompCode == "LEC")
+                                                        {
+                                                        <fieldset class="BI">
+                                                            <legend class="ExpCol ui-minusicon">@ClaimInfoPayment.LOEAR</legend>
+                                                            <div class="row BI" id="BIl4div">
+                                                                @if (Model.PaymentDetails[i].CompCode == "LEC")
+                                                                {
+                                                                    <div>
+                                                                        <div class="col-lg-12">
+                                                                            <div class="form-group">
+                                                                                <label class="col-sm-3 control-label">
+                                                                                    @ClaimInfoPayment.LEC
+                                                                                </label>
+                                                                                <div class="col-sm-5" style="padding-right: 95px;">
+                                                                                    @Html.TextBoxFor(m => m.PaymentDetails[i].PaymentDue, new { @maxlength = "14", @class = "form-control format Number", @id = @PaymentDueId })
+                                                                                </div>
+                                                                                <div class="col-sm-4">
+                                                                                    @Html.TextBoxFor(m => m.PaymentDetails[i].Mandate, new { @maxlength = "14", @class = "form-control format Number", @id = @MandateId })
+                                                                                    @Html.HiddenFor(m => m.PaymentDetails[i].CurrentReserve, new { @id = @CuurentReserveId })
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                }
+                                                                @if (Model.PaymentDetails[i + 1].CompCode == "LOEAR")
+                                                                {
+                                                                    <div>
+                                                                        <div class="col-lg-12">
+                                                                            <div class="form-group">
+                                                                                <label class="col-sm-3 control-label">
+                                                                                    @ClaimInfoPayment.LOEAR
+                                                                                </label>
+                                                                                <div class="col-sm-5" style="padding-right: 95px;">
+                                                                                    @Html.TextBoxFor(m => m.PaymentDetails[i + 1].PaymentDue, new { @maxlength = "14", @class = "form-control format Number", @id = @Model.PaymentDetails[i + 1].CompDesc + "_D" })
+                                                                                </div>
+                                                                                <div class="col-sm-4">
+                                                                                    @Html.TextBoxFor(m => m.PaymentDetails[i + 1].Mandate, new { @maxlength = "14", @class = "form-control format Number", @id = @Model.PaymentDetails[i + 1].CompDesc + "_S" })
+                                                                                    @Html.HiddenFor(m => m.PaymentDetails[i + 1].CurrentReserve, new { @id = @Model.PaymentDetails[i + 1].CompDesc + "_C" })
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                }
+                                                                @if (Model.PaymentDetails[i + 2].CompCode == "LODE")
+                                                                {
+                                                                    <div>
+                                                                        <div class="col-lg-12">
+                                                                            <div class="form-group">
+                                                                                <label class="col-sm-3 control-label">
+                                                                                    @ClaimInfoPayment.LODE
+                                                                                </label>
+                                                                                <div class="col-sm-5" style="padding-right: 95px;">
+                                                                                    @Html.TextBoxFor(m => m.PaymentDetails[i + 2].PaymentDue, new { @maxlength = "14", @class = "form-control format Number", @id = @Model.PaymentDetails[i + 2].CompDesc + "_D" })
+                                                                                </div>
+                                                                                <div class="col-sm-4">
+                                                                                    @Html.TextBoxFor(m => m.PaymentDetails[i + 2].Mandate, new { @maxlength = "14", @class = "form-control format Number", @id = @Model.PaymentDetails[i + 2].CompDesc + "_S" })
+                                                                                    @Html.HiddenFor(m => m.PaymentDetails[i + 2].CurrentReserve, new { @id = @Model.PaymentDetails[i + 2].CompDesc + "_C" })
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                }
+                                                            </div>
+                                                        </fieldset>
+                                                        }
+                                                        if (Model.PaymentDetails[i].CompCode == "TRAN")
+                                                        {
+                                                        <fieldset class="BI">
+                                                            <legend class="ExpCol ui-minusicon">@ClaimInfoPayment.TRAN</legend>
+                                                            <div class="row BI" id="BIl5div">
+                                                                <div class="col-lg-12">
+                                                                    <div class="form-group">
+                                                                        <label class="col-sm-3 control-label">
+                                                                            @ClaimInfoPayment.TRAN
+                                                                        </label>
+                                                                        <div class="col-sm-5" style="padding-right: 95px;">
+                                                                            @Html.TextBoxFor(m => m.PaymentDetails[i].PaymentDue, new { @maxlength = "14", @class = "form-control format Number", @id = @PaymentDueId })
+                                                                        </div>
+                                                                        <div class="col-sm-4">
+                                                                            @Html.TextBoxFor(m => m.PaymentDetails[i].Mandate, new { @maxlength = "14", @class = "form-control format Number", @id = @MandateId })
+                                                                            @Html.HiddenFor(m => m.PaymentDetails[i].CurrentReserve, new { @id = @CuurentReserveId })
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </fieldset>
+                                                        }
+                                                        if (Model.PaymentDetails[i].CompCode == "COR")
+                                                        {
+                                                        <fieldset class="OD PD">
+                                                            <legend class="ExpCol ui-minusicon">@ClaimInfoPayment.COR</legend>
+                                                            <div class="row OD PD" id="ODl1div">
+                                                                <div class="col-lg-12">
+                                                                    <div class="form-group">
+                                                                        <label class="col-sm-3 control-label" for="inputCostofRepairs">
+                                                                            @ClaimInfoPayment.COR
+                                                                        </label>
+                                                                        <div class="col-sm-5" style="padding-right: 95px;" id="ODl1div3">
+                                                                            @Html.TextBoxFor(m => m.PaymentDetails[i].PaymentDue, new { @maxlength = "14", @class = "form-control format Number", @id = @PaymentDueId })
+                                                                        </div>
+                                                                        <div class="col-sm-4">
+                                                                            @Html.TextBoxFor(m => m.PaymentDetails[i].Mandate, new { @maxlength = "14", @class = "form-control format Number", @id = @MandateId })
+                                                                            @Html.HiddenFor(m => m.PaymentDetails[i].CurrentReserve, new { @id = @CuurentReserveId })
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </fieldset>
+                                                        }
+                                                        if (Model.PaymentDetails[i].CompCode == "LOUUN")
+                                                        {
+                                                        <fieldset class="OD PD">
+                                                            <legend class="ExpCol ui-minusicon">@ClaimInfoPayment.LOUUN </legend>
+                                                            <div id="ODl2div">
+                                                                @if (Model.PaymentDetails[i].CompCode == "LOUUN")
+                                                                {
+                                                                    <div class="row PD">
+                                                                        <div class="col-lg-12">
+                                                                            <div class="form-group">
+                                                                                <label class="col-sm-3 control-label" for="inputLoUReserve">
+                                                                                    @ClaimInfoPayment.LossofUse
+                                                                                </label>
+                                                                                <div class="col-sm-5" style="padding-right: 95px;">
+                                                                                    @Html.TextBoxFor(m => m.PaymentDetails[i].PaymentDue, new { @maxlength = "14", @class = "form-control format Number", @id = @PaymentDueId })
+                                                                                </div>
+                                                                                <div class="col-sm-4">
+                                                                                    @Html.TextBoxFor(m => m.PaymentDetails[i].Mandate, new { @maxlength = "14", @class = "form-control format Number", @id = @MandateId })
+                                                                                    @Html.HiddenFor(m => m.PaymentDetails[i].CurrentReserve, new { @id = @CuurentReserveId })
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                }
+                                                                @if (Model.PaymentDetails[i + 1].CompCode == "LOE")
+                                                                {
+                                                                    <div class="row PD">
+                                                                        <div class="col-lg-12">
+                                                                            <div class="form-group">
+                                                                                <label class="col-sm-3 control-label" for="inputLoEReserve">
+                                                                                    @ClaimInfoPayment.LOE
+                                                                                </label>
+                                                                                <div class="col-sm-5" style="padding-right: 95px;">
+                                                                                    @Html.TextBoxFor(m => m.PaymentDetails[i + 1].PaymentDue, new { @maxlength = "14", @class = "form-control format Number", @id = @Model.PaymentDetails[i + 1].CompDesc + "_D" })
+                                                                                </div>
+                                                                                <div class="col-sm-4">
+                                                                                    @Html.TextBoxFor(m => m.PaymentDetails[i + 1].Mandate, new { @maxlength = "14", @class = "form-control format Number", @id = @Model.PaymentDetails[i + 1].CompDesc + "_S" })
+                                                                                    @Html.HiddenFor(m => m.PaymentDetails[i + 1].CurrentReserve, new { @id = @Model.PaymentDetails[i + 1].CompDesc + "_C" })
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                }
+                                                                @if (Model.PaymentDetails[i + 2].CompCode == "LOR")
+                                                                {
+                                                                    <div class="row PD">
+                                                                        <div class="col-lg-12">
+                                                                            <div class="form-group">
+                                                                                <label class="col-sm-3 control-label" for="inputLoRReserve">
+                                                                                    @ClaimInfoPayment.LOR
+                                                                                </label>
+                                                                                <div class="col-sm-5" style="padding-right: 95px;">
+                                                                                    @Html.TextBoxFor(m => m.PaymentDetails[i + 2].PaymentDue, new { @maxlength = "14", @class = "form-control format Number", @id = @Model.PaymentDetails[i + 2].CompDesc + "_D" })
+                                                                                </div>
+                                                                                <div class="col-sm-4">
+                                                                                    @Html.TextBoxFor(m => m.PaymentDetails[i + 2].Mandate, new { @maxlength = "14", @class = "form-control format Number", @id = @Model.PaymentDetails[i + 2].CompDesc + "_S" })
+                                                                                    @Html.HiddenFor(m => m.PaymentDetails[i + 2].CurrentReserve, new { @id = @Model.PaymentDetails[i + 2].CompDesc + "_C" })
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                }
+                                                                @if (Model.PaymentDetails[i + 3].CompCode == "Ex")
+                                                                {
+                                                                    <div class="row PD">
+                                                                        <div class="col-lg-12">
+                                                                            <div class="form-group">
+                                                                                <label class="col-sm-3 control-label" for="inputExcessReserve">
+                                                                                    @ClaimInfoPayment.Ex
+                                                                                </label>
+                                                                                <div class="col-sm-5" style="padding-right: 95px;">
+                                                                                    @Html.TextBoxFor(m => m.PaymentDetails[i + 3].PaymentDue, new { @maxlength = "14", @class = "form-control format Number", @id = @Model.PaymentDetails[i + 3].CompDesc + "_D" })
+                                                                                </div>
+                                                                                <div class="col-sm-4">
+                                                                                    @Html.TextBoxFor(m => m.PaymentDetails[i + 3].Mandate, new { @maxlength = "14", @class = "form-control format Number", @id = @Model.PaymentDetails[i + 3].CompDesc + "_S" })
+                                                                                    @Html.HiddenFor(m => m.PaymentDetails[i + 3].CurrentReserve, new { @id = @Model.PaymentDetails[i + 3].CompDesc + "_C" })
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                }
+                                                                @if (Model.PaymentDetails[i + 4].CompCode == "LOU")
+                                                                {
+                                                                    <div class="row OD">
+                                                                        <div class="col-lg-12">
+                                                                            <div class="form-group">
+                                                                                <label class="col-sm-3 control-label" for="inputLoEReserve">
+                                                                                    @ClaimInfoPayment.LossofUse
+                                                                                </label>
+                                                                                <div class="col-sm-5" style="padding-right: 95px;">
+                                                                                    @Html.TextBoxFor(m => m.PaymentDetails[i + 4].PaymentDue, new { @maxlength = "14", @class = "form-control format Number", @id = @Model.PaymentDetails[i + 4].CompDesc + "_D" })
+                                                                                </div>
+                                                                                <div class="col-sm-4">
+                                                                                    @Html.TextBoxFor(m => m.PaymentDetails[i + 4].Mandate, new { @maxlength = "14", @class = "form-control format Number", @id = @Model.PaymentDetails[i + 4].CompDesc + "_S" })
+                                                                                    @Html.HiddenFor(m => m.PaymentDetails[i + 4].CurrentReserve, new { @id = @Model.PaymentDetails[i + 4].CompDesc + "_C" })
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                }
+                                                            </div>
+                                                        </fieldset>
+                                                        }
+                                                        if (Model.PaymentDetails[i].CompCode == "OE")
+                                                        {
+                                                        <fieldset class="OD PD BI">
+                                                            <legend class="ExpCol ui-minusicon">@ClaimInfoPayment.OE</legend>
+                                                            <div class="row" id="ODl4div">
+                                                                @if (Model.PaymentDetails[i].CompCode == "OE")
+                                                                {
+                                                                    <div class="col-lg-12 OD PD BI">
+                                                                        <div class="form-group">
+                                                                            <label class="col-sm-3 control-label" for="inputOtherExpenses">
+                                                                                @ClaimInfoPayment.OE
+                                                                            </label>
+                                                                            <div class="col-sm-5" style="padding-right: 95px;">
+                                                                                @Html.TextBoxFor(m => m.PaymentDetails[i].PaymentDue, new { @maxlength = "14", @class = "form-control format Number", @id = @PaymentDueId })
+                                                                            </div>
+                                                                            <div class="col-sm-4">
+                                                                                @Html.TextBoxFor(m => m.PaymentDetails[i].Mandate, new { @maxlength = "14", @class = "form-control format Number", @id = @MandateId })
+                                                                                @Html.HiddenFor(m => m.PaymentDetails[i].CurrentReserve, new { @id = @CuurentReserveId })
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                }
+                                                                @if (Model.PaymentDetails[i + 1].CompCode == "IEF")
+                                                                {
+                                                                    <div class="col-lg-12 BI">
+                                                                        <div class="form-group">
+                                                                            <label class="col-sm-3 control-label" for="inputOtherExpenses">
+                                                                                @ClaimInfoPayment.IEF
+                                                                            </label>
+                                                                            <div class="col-sm-5" style="padding-right: 95px;">
+                                                                                @Html.TextBoxFor(m => m.PaymentDetails[i + 1].PaymentDue, new { @maxlength = "14", @class = "form-control format Number", @id = @Model.PaymentDetails[i + 1].CompDesc + "_D" })
+                                                                            </div>
+                                                                            <div class="col-sm-4">
+                                                                                @Html.TextBoxFor(m => m.PaymentDetails[i + 1].Mandate, new { @maxlength = "14", @class = "form-control format Number", @id = @Model.PaymentDetails[i + 1].CompDesc + "_S" })
+                                                                                @Html.HiddenFor(m => m.PaymentDetails[i + 1].CurrentReserve, new { @id = @Model.PaymentDetails[i + 1].CompDesc + "_C" })
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                }
+                                                            </div>
+                                                        </fieldset>
+                                                        }
+                                                        if (Model.PaymentDetails[i].CompCode == "MR")
+                                                        {
+                                                        <fieldset class="OD PD BI">
+                                                            <legend class="ExpCol ui-minusicon">@ClaimInfoPayment.ReportFees</legend>
+                                                            <div class="row" id="ODl5div">
+                                                                @if (Model.PaymentDetails[i].CompCode == "MR")
+                                                                {
+                                                                    <div class="col-lg-12 BI">
+                                                                        <div class="form-group">
+                                                                            <label class="col-sm-3 control-label" for="inputSFeeReserve">
+                                                                                @ClaimInfoPayment.MR
+                                                                            </label>
+                                                                            <div class="col-sm-5" style="padding-right: 95px;">
+                                                                                @Html.TextBoxFor(m => m.PaymentDetails[i].PaymentDue, new { @maxlength = "14", @class = "form-control format Number", @id = @PaymentDueId })
+                                                                            </div>
+                                                                            <div class="col-sm-4">
+                                                                                @Html.TextBoxFor(m => m.PaymentDetails[i].Mandate, new { @maxlength = "14", @class = "form-control format Number", @id = @MandateId })
+                                                                                @Html.HiddenFor(m => m.PaymentDetails[i].CurrentReserve, new { @id = @CuurentReserveId })
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                }
+                                                                @if (Model.PaymentDetails[i + 1].CompCode == "PTF")
+                                                                {
+                                                                    <div class="col-lg-12 BI">
+                                                                        <div class="form-group">
+                                                                            <label class="col-sm-3 control-label" for="inputRSFeeReserve">
+                                                                                @ClaimInfoPayment.PTF
+                                                                            </label>
+                                                                            <div class="col-sm-5" style="padding-right: 95px;">
+                                                                                @Html.TextBoxFor(m => m.PaymentDetails[i + 1].PaymentDue, new { @maxlength = "14", @class = "form-control format Number", @id = @Model.PaymentDetails[i + 1].CompDesc + "_D" })
+                                                                            </div>
+                                                                            <div class="col-sm-4">
+                                                                                @Html.TextBoxFor(m => m.PaymentDetails[i + 1].Mandate, new { @maxlength = "14", @class = "form-control format Number", @id = @Model.PaymentDetails[i + 1].CompDesc + "_S" })
+                                                                                @Html.HiddenFor(m => m.PaymentDetails[i + 1].CurrentReserve, new { @id = @Model.PaymentDetails[i + 1].CompDesc + "_C" })
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                }
+                                                                @if (Model.PaymentDetails[i + 2].CompCode == "SF")
+                                                                {
+                                                                    <div class="col-lg-12 OD PD">
+                                                                        <div class="form-group">
+                                                                            <label class="col-sm-3 control-label" for="inputSurveyFee">
+                                                                                @ClaimInfoPayment.SF
+                                                                            </label>
+                                                                            <div class="col-sm-5" style="padding-right: 95px;">
+                                                                                @Html.TextBoxFor(m => m.PaymentDetails[i + 2].PaymentDue, new { @maxlength = "14", @class = "form-control format Number", @id = @Model.PaymentDetails[i + 2].CompDesc + "_D" })
+                                                                            </div>
+                                                                            <div class="col-sm-4">
+                                                                                @Html.TextBoxFor(m => m.PaymentDetails[i + 2].Mandate, new { @maxlength = "14", @class = "form-control format Number", @id = @Model.PaymentDetails[i + 2].CompDesc + "_S" })
+                                                                                @Html.HiddenFor(m => m.PaymentDetails[i + 2].CurrentReserve, new { @id = @Model.PaymentDetails[i + 2].CompDesc + "_C" })
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                }
+                                                                @if (Model.PaymentDetails[i + 3].CompCode == "RSF")
+                                                                {
+                                                                    <div class="col-lg-12 OD PD">
+                                                                        <div class="form-group">
+                                                                            <label class="col-sm-3 control-label">
+                                                                                @ClaimInfoPayment.RSF
+                                                                            </label>
+                                                                            <div class="col-sm-5" style="padding-right: 95px;">
+                                                                                @Html.TextBoxFor(m => m.PaymentDetails[i + 3].PaymentDue, new { @maxlength = "14", @class = "form-control format Number", @id = @Model.PaymentDetails[i + 3].CompDesc + "_D" })
+                                                                            </div>
+                                                                            <div class="col-sm-4">
+                                                                                @Html.TextBoxFor(m => m.PaymentDetails[i + 3].Mandate, new { @maxlength = "14", @class = "form-control format Number", @id = @Model.PaymentDetails[i + 3].CompDesc + "_S" })
+                                                                                @Html.HiddenFor(m => m.PaymentDetails[i + 3].CurrentReserve, new { @id = @Model.PaymentDetails[i + 3].CompDesc + "_C" })
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                }
+                                                                @if (Model.PaymentDetails[i + 4].CompCode == "LPRF")
+                                                                {
+                                                                    <div class="col-lg-12 OD PD BI">
+                                                                        <div class="form-group">
+                                                                            <label class="col-sm-3 control-label">
+                                                                                @ClaimInfoPayment.LPRF
+                                                                            </label>
+                                                                            <div class="col-sm-5" style="padding-right: 95px;">
+                                                                                @Html.TextBoxFor(m => m.PaymentDetails[i + 4].PaymentDue, new { @maxlength = "14", @class = "form-control format Number", @id = @Model.PaymentDetails[i + 4].CompDesc + "_D" })
+                                                                            </div>
+                                                                            <div class="col-sm-4">
+                                                                                @Html.TextBoxFor(m => m.PaymentDetails[i + 4].Mandate, new { @maxlength = "14", @class = "form-control format Number", @id = @Model.PaymentDetails[i + 4].CompDesc + "_S" })
+                                                                                @Html.HiddenFor(m => m.PaymentDetails[i + 4].CurrentReserve, new { @id = @Model.PaymentDetails[i + 4].CompDesc + "_C" })
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                }
+                                                                @if (Model.PaymentDetails[i + 5].CompCode == "OPEF")
+                                                                {
+                                                                    <div class="col-lg-12 BI">
+                                                                        <div class="form-group">
+                                                                            <label class="col-sm-3 control-label">
+                                                                                @ClaimInfoPayment.OPEF
+                                                                            </label>
+                                                                            <div class="col-sm-5" style="padding-right: 95px;">
+                                                                                @Html.TextBoxFor(m => m.PaymentDetails[i + 5].PaymentDue, new { @maxlength = "14", @class = "form-control format Number", @id = @Model.PaymentDetails[i + 5].CompDesc + "_D" })
+                                                                            </div>
+                                                                            <div class="col-sm-4">
+                                                                                @Html.TextBoxFor(m => m.PaymentDetails[i + 5].Mandate, new { @maxlength = "14", @class = "form-control format Number", @id = @Model.PaymentDetails[i + 5].CompDesc + "_S" })
+                                                                                @Html.HiddenFor(m => m.PaymentDetails[i + 5].CurrentReserve, new { @id = @Model.PaymentDetails[i + 5].CompDesc + "_C" })
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                }
+                                                            </div>
+                                                        </fieldset>
+                                                        }
+                                                        if (Model.PaymentDetails[i].CompCode == "PLC")
+                                                        {
+                                                        <fieldset>
+                                                            <legend class="ExpCol ui-minusicon">@ClaimInfoPayment.ThirdPartyLegalFees</legend>
+                                                            <div class="row" id="ODl6div">
+                                                                @if (Model.PaymentDetails[i].CompCode == "PLC")
+                                                                {
+                                                                    <div>
+                                                                        <div class="col-lg-12">
+                                                                            <div class="form-group">
+                                                                                <label class="col-sm-3 control-label" for="inputTPLawyerCost">
+                                                                                    @ClaimInfoPayment.PLC
+                                                                                </label>
+                                                                                <div class="col-sm-5" style="padding-right: 95px;">
+                                                                                    @Html.TextBoxFor(m => m.PaymentDetails[i].PaymentDue, new { @maxlength = "14", @class = "form-control format Number", @id = @PaymentDueId })
+                                                                                </div>
+                                                                                <div class="col-sm-4">
+                                                                                    @Html.TextBoxFor(m => m.PaymentDetails[i].Mandate, new { @maxlength = "14", @class = "form-control format Number", @id = @MandateId })
+                                                                                    @Html.HiddenFor(m => m.PaymentDetails[i].CurrentReserve, new { @id = @CuurentReserveId })
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                }
+                                                                @if (Model.PaymentDetails[i + 1].CompCode == "PLD")
+                                                                {
+                                                                    <div>
+                                                                        <div class="col-lg-12">
+                                                                            <div class="form-group">
+                                                                                <label class="col-sm-3 control-label" for="inputTPLawyerDis">
+                                                                                    @ClaimInfoPayment.PLD
+                                                                                </label>
+                                                                                <div class="col-sm-5" style="padding-right: 95px;">
+                                                                                    @Html.TextBoxFor(m => m.PaymentDetails[i + 1].PaymentDue, new { @maxlength = "14", @class = "form-control format Number", @id = @Model.PaymentDetails[i + 1].CompDesc + "_D" })
+                                                                                </div>
+                                                                                <div class="col-sm-4">
+                                                                                    @Html.TextBoxFor(m => m.PaymentDetails[i + 1].Mandate, new { @maxlength = "14", @class = "form-control format Number", @id = @Model.PaymentDetails[i + 1].CompDesc + "_S" })
+                                                                                    @Html.HiddenFor(m => m.PaymentDetails[i + 1].CurrentReserve, new { @id = @Model.PaymentDetails[i + 1].CompDesc + "_C" })
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                }
+                                                            </div>
+                                                        </fieldset>
+                                                        }
+                                                        if (Model.PaymentDetails[i].CompCode == "OLC")
+                                                        {
+                                                        <fieldset>
+                                                            <legend class="ExpCol ui-minusicon">@ClaimInfoPayment.OurLegalFees</legend>
+                                                            <div id="ODl7div" class="row">
+                                                                @if (Model.PaymentDetails[i].CompCode == "OLC")
+                                                                {
+                                                                    <div>
+                                                                        <div class="col-lg-12">
+                                                                            <div class="form-group">
+                                                                                <label class="col-sm-3 control-label" for="inputOurLawyerCost">
+                                                                                    @ClaimInfoPayment.OLC
+                                                                                </label>
+                                                                                <div class="col-sm-5" style="padding-right: 95px;">
+                                                                                    @Html.TextBoxFor(m => m.PaymentDetails[i].PaymentDue, new { @maxlength = "14", @class = "form-control format Number", @id = @PaymentDueId })
+                                                                                </div>
+                                                                                <div class="col-sm-4">
+                                                                                    @Html.TextBoxFor(m => m.PaymentDetails[i].Mandate, new { @maxlength = "14", @class = "form-control format Number", @id = @MandateId })
+                                                                                    @Html.HiddenFor(m => m.PaymentDetails[i].CurrentReserve, new { @id = @CuurentReserveId })
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                }
+                                                                @if (Model.PaymentDetails[i + 1].CompCode == "OLD")
+                                                                {
+                                                                    <div>
+                                                                        <div class="col-lg-12">
+                                                                            <div class="form-group">
+                                                                                <label class="col-sm-3 control-label" for="inputOurLawyerDis">
+                                                                                    @ClaimInfoPayment.OLD
+                                                                                </label>
+                                                                                <div class="col-sm-5" style="padding-right: 95px;">
+                                                                                    @Html.TextBoxFor(m => m.PaymentDetails[i + 1].PaymentDue, new { @maxlength = "14", @class = "form-control format Number", @id = @Model.PaymentDetails[i + 1].CompDesc + "_D" })
+                                                                                </div>
+                                                                                <div class="col-sm-4">
+                                                                                    @Html.TextBoxFor(m => m.PaymentDetails[i + 1].Mandate, new { @maxlength = "14", @class = "form-control format Number", @id = @Model.PaymentDetails[i + 1].CompDesc + "_S" })
+                                                                                    @Html.HiddenFor(m => m.PaymentDetails[i + 1].CurrentReserve, new { @id = @Model.PaymentDetails[i + 1].CompDesc + "_C" })
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                }
+                                                            </div>
+                                                        </fieldset>
+                                                        }
+                                                        if (Model.PaymentDetails[i].CompCode == "TOTAL")
+                                                        {
+                                                        <div style="padding-top: 10px">
+                                                            <div class="row">
+                                                                <div class="col-lg-12">
+                                                                    <div class="form-group">
+                                                                        <label class="col-sm-3 control-label">
+                                                                            @ClaimInfoPayment.TOTAL
+                                                                        </label>
+                                                                        <div class="col-sm-5" style="padding-right: 95px;">
+                                                                            @Html.TextBoxFor(m => m.PaymentDetails[i].PaymentDue, new { @maxlength = "14", @readonly = "readonly", @class = "form-control format Number", @id = @PaymentDueId })
+                                                                        </div>
+                                                                        <div class="col-sm-4">
+                                                                            @Html.TextBoxFor(m => m.PaymentDetails[i].Mandate, new { @maxlength = "14", @class = "form-control format Number", @id = @MandateId })
+                                                                            @Html.HiddenFor(m => m.PaymentDetails[i].CurrentReserve, new { @id = @CuurentReserveId })
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        }
+                                                    }
+                                                </div>
+                                            </fieldset>
+                                            <div class="form-group" id="divsave">
+                                                <div class="col-lg-1">
+                                                    <div class="form-group" style="padding-left: 20px;">
+                                                        <a class="btn btn-info" id="Previous">@Common.Previous</a>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-10 text-center">
+                                                    @if (ShowSaveAndResetButton == "Y")
+                                                    {
+                                                        <div class="form-group">
+                                                            <input id="btnSave" class="btn btn-info" type="button" value="@Common.Save" tabindex="12" />
+                                                            <a type="button" class="btn btn-info" id="btnReset" tabindex="13">@Common.Reset</a>
+                                                        </div>
+                                                    }
+                                                </div>
+                                                <div class="col-lg-1">
+                                                    <div class="form-group">
+                                                        <a class="btn btn-info" id="Next">@Common.Next</a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <fieldset>
+                                                <legend></legend>
+                                                <div class="form-group">
+                                                    <div class="col-lg-12">
+                                                        @Html.Partial("~/Views/Shared/_TimeStamp.cshtml", Model)
+                                                    </div>
+                                                </div>
+                                            </fieldset>
+                                        </div>
+                                    </div>
+                                }
+                            </div>
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="row-fluid bg2 blue-bt-bdr">
+                            <br />
+                            <br />
+                            <br />
+                            <div class="container text-center">
+                                <div class="errorInfo">
+                                    <p>
+                                        <b>Sorry!! You dont have permission for this screen.</b></p>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    setTabActive('PaymentEditor');
+    $("#PaymentRequestType").prop('readonly', true);
+
+    var do_on_load = function () {
+        $("a.Print").each(function () { $(this).attr("url", $(this).attr("href")).attr("href", "#"); });
+        $("a.Print").on('click', function () {
+            $("div.PreviewDocumentClass").length && $("div.PreviewDocumentClass").remove();
+            var a = guid(), b = "#" + a;
+            $('<div class="PreviewDocumentClass" id="' + a + '" title="Print" style="overflow: hidden;"><div class="Printloading"><p>Please wait...<br><img src="@Url.Content("~/Images/ajax-loader.gif")" alt="Loading.."></p></div></div>').appendTo(".PrintDialogue");
+            InitializeDialog($(b), $(this).attr("url").getstringinbetween("ClaimID"), $(this).attr("url").getstringinbetween("PaymentId"));
+            $(b).dialog("open");
+            return !1
+        });
+        $("#RecoverableFromInsurerBI,#EZLinkCardNo").css({ "pointer-events": "none", "cursor": "default" }).css('background-color', '#eee');
+        $('.ui-wrapper').css("padding", 0);
+        $("#DivODStatus :radio:not(:checked)").attr("disabled", !0);
+        $('textarea').resizable({ handles: 's' }).removeAttr('width').removeAttr('height');
+        $(document).on("focus", ":input", function () { $(this).attr("autocomplete", "off") });
+        $(".datepicker").datepicker({ dateFormat: "dd/mm/yy", showStatus: !0, showWeeks: !0, currentText: "Now", autoSize: !0, gotoCurrent: !0, showAnim: "blind", highlightWeek: !0, changeMonth: !0, changeYear: !0, yearRange: "1951:2050", onSelect: function () { $(this).valid() } });
+        $.culture = Globalize.culture("en-GB");
+        $.validator.methods.date = function (value, element) { return this.optional(element) || Globalize.parseDate(value, "dd/MM/yyyy", "en-GB") || Globalize.parseDate(value, "yyyy-mm-dd"); };
+        $.validator.unobtrusive.adapters.add("notequalto", ["other"], function (b) { b.rules.notEqualTo = "#" + b.params.other; b.message && (b.messages.notEqualTo = b.message) });
+        $.validator.addMethod("notEqualTo", function (b, e, g) { return this.optional(e) || b != $(g).val() }, "");
+        DatepickerLen();
+        ReadyOnlyPayment("_S");
+
+        $("table.ui-ebixgrid-btable").css("table-layout", "fixed;");
+        $("table.ui-ebixgrid-btable input[type=button]").click(function (event) {
+            var Ctype = $(this).closest('td').prev('td').text();
+            "View" == $(this).context.value && $.ajax({
+                type: "POST",
+                url: '@Url.ActionEncoded("GetClaimTypeNo", "ClaimProcessing")',
+                data: {
+                    ClaimType: Ctype
+                },
+                success: function (d) {
+                    var a = guid(), b = "#" + a;
+                    $('<div id="' + a + '" title="Payment History" style="overflow: hidden;"></div>').appendTo(".PaymentDialogue");
+                    InitializeDialog($(b), d);
+                    event.preventDefault();
+                    $(b).dialog("open");
+                    return !1
+                }
+            });
+        });
+
+
+
+        $(".ui-ebixgrid-view > table > tbody > tr > td > a").each(function () {
+            "Approve Payment" == $(this).text() && "@Model.HUserId" != $(this).attr("href").getstringinbetween("HAssignedTo") && $(this).attr('disabled', 'disabled').attr('readonly', 'readonly');
+        });
+
+        $(".ui-ebixgrid-view > table > tbody > tr > td > a").each(function () {
+            ("Add Payment" == $(this).text() || "Approve Payment" == $(this).text()) && ($(this).attr("href").getstringinbetween("HClaimantStatus") == "2" || $(this).attr("href").getstringinbetween("HClaimantStatus") == "3") && $(this).hide();
+        });
+
+
+        $('#AssignedTo').change(function () {
+            $.ajax({
+                type: "POST",
+                url: '@Url.ActionEncoded("GetFALforSP", "ClaimProcessing")',
+                data: {
+                    AssignedtoSP: $("#AssignedTo").val(),
+                    ClaimType: "@ClaimType1"
+                },
+                success: function (a) {
+
+                    $("#SPFAL").val(a);
+                    // apply format class on 'Supervisor Name – FAL'
+                    if ($("#SPFAL").hasClass("format") && "" != $("#SPFAL").val()) {
+                        var b = "-" == $("#SPFAL").val().charAt(0) ? "-" : "", a = $("#SPFAL").val().replace(/,/g, "");
+                        "" == a || isNaN(a) || $("#SPFAL").val(b + CurrencyFormat($("#SPFAL").val().replace(/,/g, "")));
+                        $("#SPFAL").valid()
+                    }
+                    $("#SPFAL").hasClass("format") && "" == $("#SPFAL").val() && ($("#SPFAL").val("0.00"), $("#SPFAL").valid());
+                }
+            });
+        });
+
+//        $("#btnReset").click(function () { ClearForm("Togglediv"); });
+
+        $("#btnReset").click(function () {
+            debugger;
+            var ClaimId = '@claimId';
+            var accidentclaimId = '@accidentClaimIdNew';
+            var policyId = '@policyid';
+            var MandateId = '@Model.MandateId';
+            var Viewmode = '@viewonly';
+            var claimMode = '@caller';
+            var claimType = '@ClaimType1';
+            var PaymentId = '@Model.PaymentId';
+            var MandateRecordNo = '@MandateRecordNo';
+            var ReserveId = '@Model.ReserveId';
+            var mode = '@pagemode';
+            var a = parseInt(ClaimId);
+            var b = parseInt(accidentclaimId);
+            var c = parseInt(policyId);
+            var d = parseInt(MandateId);
+            var e= parseInt(PaymentId);
+            var f= parseInt(ReserveId);
+            window.location.href = '@Url.Action("PaymentEditorNew", "ClaimProcessing")?ClaimId=' + a + '&AccidentClaimId=' + b + '&claimMode=' + claimMode + '&policyId=' + c + '&MandateId=' + d + '&Viewmode=' + Viewmode + '&ClaimType=' + claimType + '&mode=' + mode + '&PaymentId=' + e + '&RecoveryId=' + f;
+        });
+
+
+        $("table.ui-ebixgrid-btable span").click(function () {
+            var a = $(this).context.id;
+            $("#Hshowgrid").val(a);
+            $("table.ui-ebixgrid-btable span").each(function () {
+                if ($(this).hasClass("ui-icon-minus") || $(this).hasClass("ui-icon-plus")) {
+                    if (!a.beginsWith($(this).context.id)) {
+                        var spanid = $(this).context.id, id = spanid.slice(5, spanid.length);
+                        $('#' + id).hide();
+                        $('#' + spanid).removeClass('ui-icon-minus').addClass('ui-icon-plus');
+                    }
+                }
+            });
+        });
+        $.ajax({
+            type: "POST",
+            url: '@Url.ActionEncoded("GetClaimType", "ClaimProcessing")',
+            data: {
+                ClaimTypeNo: "@ClaimType1"
+            },
+            success: function (d) {
+                $("#PaymentRequestType").val(d == "" ? "" : d.match(/\(([^)]+)\)/)[1] + " Payment Request");
+            }
+        });
+        SetHiddenSpan();
+        ExpandGridAfterPost($("#Hshowgrid").val());
+        $("#PaymentEditor input[type=text]:not([id=PaymentRequestDate]):not([id=PaymentDueDate]):not([id=Address]):not([id=Address1]):not([id=Address2]):not([id=PostalCodes])").change(function () {
+            var b = 0, a = $(this).context.id.slice(-2), c = "" == $(this).val() ? "0.00" : $(this).val();
+            var name = parseFloat($("#" + $(this).context.id.replace(a, "_S")).val().replace(/,/g, "")) <= parseFloat($("#" + $(this).context.id.replace(a, "_C")).val().replace(/,/g, "")) ? "Mandate" : "Current Reserve";
+            var minvalue = Math.min(parseFloat($("#" + $(this).context.id.replace(a, "_S")).val().replace(/,/g, "")), parseFloat($("#" + $(this).context.id.replace(a, "_C")).val().replace(/,/g, "")));
+            $(this).is(":visible") && "_D" == a && $(this).hasClass("format") && parseFloat(c.replace(/,/g, "")) <= minvalue ? ($("input[type=text]").each(function () {
+                var a = "" == $(this).val() ? "0.00" : $(this).val();
+                $(this).is(":visible") && "_D" == $(this).context.id.slice(-2) && "Total_D" != $(this).context.id && $(this).hasClass("format") && (b = parseFloat(a.replace(/,/g, "")) + b)
+            }), $("#Total_D").val(("-" == b.toString().charAt(0) ? "-" : "") + CurrencyFormat(parseFloat(b)))) : ($(this).val("0.00"), alert("Payment amount cannot be greater than respective " + name + " amount ie $ " + minvalue + ".", $(this).context.id))
+        });
+        $(".ui-ebixgrid-view > table > tbody > tr > td > a").each(function () {
+            ("CO" == "@Model.HRoleCode" && "Approve Payment" == $(this).text() && $(this).hide());
+            ("Approve Payment" == $(this).text()) && $(this).attr("href").getstringinbetween("ApprovePayment") != "Pending" && $(this).attr("disabled", !0);
+        });
+
+
+        ("@ShowSaveAndResetButton" != "Y") && $("form").find(":input:not([id=Next]):not([id=Previous])").each(function () {
+            switch (this.type) {
+                case "text":
+                    $(this).attr('disabled', 'disabled')
+                case "textarea":
+                    $(this).attr('disabled', 'disabled')
+                case "checkbox":
+                    $(this).attr('disabled', 'disabled')
+                case "radio":
+                    $(this).attr('disabled', 'disabled')
+                case "button":
+                    $(this).attr('disabled', 'disabled')
+
+            }
+        }) && $('select').attr('disabled', 'disabled') && $('button').attr('disabled', 'disabled') && $("#btnReset,#btnSave").attr('disabled', 'disabled').hide();
+
+
+
+        "@claimId" != "" && $.ajax({
+            type: "POST",
+            url: '@Url.ActionEncoded("GetClaimantName", "ClaimProcessing")',
+            data: {
+                ClaimId: "@claimId"
+            },
+            success: function (d) {
+                $("#ClaimantName").val(d);
+            }
+        });
+        "CO" == "@Model.HRoleCode" && ($("#BIl0div :input").attr("readonly", "readonly"), $("#BIl0div :radio:not(:checked)").attr("disabled", !0), $("#AssignedToSupervisor").css({ "pointer-events": "none", cursor: "default" }).css("background-color", "#eee"));
+        "AddPayment" == "@viewonly" && ($("#BIl0div :input").attr("readonly", "readonly"), $("#BIl0div :radio:not(:checked)").attr("disabled", !0), $("#AssignedToSupervisor").css({ "pointer-events": "none", cursor: "default" }).css("background-color", "#eee"));
+        '@ClaimType1' != 0 && ShowHideDiv("@ClaimType1");
+        $("#mainheader").text(Tmainheader["@ClaimType1"]());
+        $("#Togglediv legend").click(function (a) {
+            $(this).hasClass("ExpCol") && ($(this).hasClass("ui-minusicon") ? $(this).addClass("ui-plusicon").removeClass("ui-minusicon") : $(this).addClass("ui-minusicon").removeClass("ui-plusicon"), $(this).next("div").toggle("slow"));
+        });
+        $(" .ui-ebixgrid-btable > tbody > tr > td:nth-child(3)").addClass("format");
+
+        $("#btnSave").click(function (a) {
+            if (!IsPageChanged()) return !1;
+            var b = $("#PaymentEditorNew").valid();
+            if (("" == $("#Total_D").val() || "0.00" == $("#Total_D").val()) && b) return alert("Amount Due Total is required", "Total_D"), !1;
+            if ("0" == $("#AssignedToSupervisor").val() && ("SP" == "@Model.HRoleCode" || "COSP" == "@Model.HRoleCode") && "ApprovePayment" == "@viewonly" && b) return alert("Assigned To is required.", "AssignedToSupervisor"), !1;
+            if (!$('#ApprovePayment_Y').is(":checked") && !$('#ApprovePayment_N').is(":checked") && ("SP" == "@Model.HRoleCode" || "COSP" == "@Model.HRoleCode") && "ApprovePayment" == "@viewonly" && b) return alert("Approve Payment is required.", "ApprovePayment_Y"), !1;
+            var Ctrlmsg = "", Ctrlres = false, Ctrlid = "";
+            $("#PaymentEditor input[type=text]").each(function () {
+                if ($(this).is(":visible") && "_D" == $(this).context.id.slice(-2) && $(this).hasClass("format")) {
+
+                    var a = $(this).context.id.slice(-2), name = parseFloat($("#" + $(this).context.id.replace(a, "_S")).val().replace(/,/g, "")) <= parseFloat($("#" + $(this).context.id.replace(a, "_C")).val().replace(/,/g, "")) ? "Mandate" : "Current Reserve";
+                    var minvalue = Math.min(parseFloat($("#" + $(this).context.id.replace(a, "_S")).val().replace(/,/g, "")), parseFloat($("#" + $(this).context.id.replace(a, "_C")).val().replace(/,/g, "")));
+                    if (parseFloat($(this).val().replace(/,/g, "")) > minvalue) {
+                        Ctrlid = $(this).context.id;
+                        Ctrlmsg = "Payment amount can not be greater than respective " + name + " amount ie $ " + minvalue + ".";
+                        Ctrlres = true;
+                        return false;
+                    }
+                }
+            });
+
+            if (Ctrlres && b) return $("#" + Ctrlid).val("0.00"), alert(Ctrlmsg, Ctrlid), !1;
+            (b && "@ClaimType1" == "1" && (parseFloat($("#Total_D").val().replace(/,/g, ""))) > parseFloat("@Model.HFALAmtOD")) ?
+            CreateDialog("You can't approve amount.Your FAL limit is : $" + "@Model.HFALAmtOD" + ", Click OK to Continue", "Yes", "Cancel") :
+            (b && "@ClaimType1" == "2" && (parseFloat($("#Total_D").val().replace(/,/g, ""))) > parseFloat("@Model.HFALAmtPDBI")) ?
+            CreateDialog("You can't approve amount.Your FAL limit is : $" + "@Model.HFALAmtPDBI" + ", Click OK to Continue", "Yes", "Cancel") :
+            (b && "@ClaimType1" == "3" && (parseFloat($("#Total_D").val().replace(/,/g, ""))) > parseFloat("@Model.HFALAmtPDBI")) ?
+            CreateDialog("You can't approve amount.Your FAL limit is : $" + "@Model.HFALAmtPDBI" + ", Click OK to Continue", "Yes", "Cancel") :
+            (Date.parse("@Model.HEffdateto") < Date.parse(new Date()) && (parseFloat("@Model.HTotalPreviousApprovePayment") + parseFloat($("#Total_D").val().replace(/,/g, ""))) > parseFloat("@Model.HDeductibleAmt") && "@ClaimType1" == "3" && b) ? CreateDialog1("Deductible has expired for" + "@Model.HOrgname" + ".", "Ok", OnConfirmT)
+            :
+            (!(Date.parse("@Model.HEffdateto") < Date.parse(new Date())) && (parseFloat("@Model.HTotalPreviousApprovePayment") + parseFloat($("#Total_D").val().replace(/,/g, ""))) > parseFloat("@Model.HDeductibleAmt") && "@ClaimType1" == "3" && b) ? CreateDialog("Deductible amount exceeded $" + "@Model.HDeductibleAmt" + ", Click OK to Continue", "Yes", "Cancel", OnConfirmTrue) : ($("#ClaimType").val("@ClaimType1"), SetHiddenSpan(), FormatValue(), $("#PaymentEditorNew").submit());
+        });
+        $("#Payee").change(function () {
+            $.ajax({
+                type: "POST",
+                url: '@Url.ActionEncoded("GetPayeeDetailFrmServiceprovider", "ClaimProcessing")',
+                data: {
+                    Payee: $("#Payee").val(),
+                    UniqueId: guid()
+                },
+                success: function (a) {
+                    $.each(a, function (a, b) {
+                        $("#Address").val(b.Address1 ? b.Address1 : "");
+                        $("#Address1").val(b.Address2 ? b.Address2 : "");
+                        $("#Address2").val(b.Address3 ? b.Address3 : "");
+                        $("#PostalCodes").val(b.PostalCode ? b.PostalCode : "");
+                        $("#Address,#PostalCodes").valid();
+                    })
+                }
+            });
+
+        });
+        SetDivPost();
+        $("a.btn.btn-xs.btn-info.changeHref").each(function () { $(this).attr("url", $(this).attr("href")).attr("href", "#") });
+    };
+
+    function CreateDialog1(TexttoDisplay, okText, okCallback) {
+        $("<div id='CreateDialog_id'></div>").text(TexttoDisplay).dialog({
+            modal: true,
+            title: 'CRIS+',
+            draggable: false,
+            buttons: [{
+                id: 'btnDialogeOK',
+                text: okText,
+                click: function () {
+                    $(this).dialog("close");
+                    typeof (okCallback) == "function" && okCallback();
+                }
+            }]
+        }).height('auto').attr('id', 'dialogId');
+        $("#btnDialogeOK").closest("div").css({
+            "display": "block",
+            "margin": "0 auto",
+            "text-align": "center",
+            "float": "none !important"
+        });
+    };
+
+    var Tmainheader = { 1: function () { return '@Html.Raw(ClaimInfoPayment.ODClaimBreakdown)' }, 2: function () { return '@Html.Raw(ClaimInfoPayment.TPPDClaimBreakdown)' }, 3: function () { return '@Html.Raw(ClaimInfoPayment.TPBIClaimBreakdown)' }, 0: function () { return '@Html.Raw(ClaimInfoPayment.ODClaimBreakdown)'; } }, CName = { 1: function () { return '@Html.Raw(ClaimInfoPayment.OwnDamage)' }, 2: function () { return '@Html.Raw(ClaimInfoPayment.PropertyDamage)' }, 3: function () { return '@Html.Raw(ClaimInfoPayment.BodyInjury)' }
+    };
+    $(document).ready(do_on_load);
+    $(window).bind("page:change", do_on_load);
+
+
+    function OnConfirmTrue() {
+        $("#ClaimType").val("@ClaimType1");
+        SetHiddenSpan();
+        FormatValue();
+        $("#PaymentEditorNew").submit();
+    }
+
+    function OnConfirmT() {
+        CreateDialog("Deductible amount exceeded $" + "@Model.HDeductibleAmt" + ", Click OK to Continue", "Yes", "Cancel", OnConfirmTrue)
+    }
+
+    function ShowHideDiv(e) {
+        $("#PaymentEditor fieldset,#PaymentEditor div").each(function () {
+            if ($(this).hasClass("OD") || $(this).hasClass("PD") || $(this).hasClass("BI")) "1" == e ? $(this).hasClass("OD") ? ($(this), $(this).show()) : $(this).hide() : "2" == e ? $(this).hasClass("PD") ? $(this).show() : $(this).hide() : $(this).hasClass("BI") ? $(this).show() : $(this).hide();
+        });
+        $("#ClaimantName").prop("readonly", !0);
+        $("input[type=text]").each(function () {
+            var a = ["ClaimantName"]; -1 == $.inArray($(this).context.id, a) ? $(this).hasClass("format") && "" == $(this).val() && $(this).val("0.00") : ("" == $(this).val() || "0.00" == $(this).val()) && -1 < $.inArray($(this).context.id, a) && $(this).val("");
+        });
+    };
+    function SetHiddenSpan() {
+        if (($("#Hshowgrid").val() == null || $("#Hshowgrid").val() == "") && getQueryVariable("Viewmode") == "Select" || getQueryVariable("Viewmode") == "ApprovePayment" || getQueryVariable("Viewmode") == "AddPayment") {
+            var AccidentClaimId = getQueryVariable("AccidentClaimId"), ClaimID = getQueryVariable("ClaimID"), ClaimType = getQueryVariable("ClaimType"), PaymentId = getQueryVariable("PaymentId");
+            $(".ui-ebixgrid-view > table > tbody > tr > td > a").each(function () {
+                if ($(this).attr("href") && $(this).attr("href").getstringinbetween("AccidentClaimId") == AccidentClaimId && $(this).attr("href").getstringinbetween("ClaimID") == ClaimID && $(this).attr("href").getstringinbetween("ClaimType") == ClaimType && $(this).attr("href").getstringinbetween("PaymentId") == PaymentId) {
+                    $("#Hshowgrid").val("span_" + $(this).closest('tr')[0].id + "_s0");
+                }
+            });
+        }
+    }
+    if ("ApprovePayment" == '@viewonly') {
+        $("#ClaimantName,#SPFAL,#PaymentRequestType,#PaymentRequestDate,#PaymentDueDate,#Address,#Address1,#Address2,#PostalCodes,#CoRemarks").prop("readonly", !0);
+
+        $("#AssignedTo,#Payee").css({
+            "pointer-events": "none",
+            cursor: "default"
+        }).css("background-color", "#eee")
+    }
+    function InitializeDialog($element, a) {
+        $element.dialog({
+            width: "900",
+            resizable: false,
+            draggable: true,
+            show: { effect: 'drop', direction: "up" },
+            title: CName[a]() + "-Payment History",
+            model: true,
+            show: 'slide',
+            dialogClass: 'alert',
+            closeOnEscape: true,
+            open: function (event, ui) {
+                var path = '@Url.Content("~/ClaimProcessing/PaymentChangeall")' + "?resid=" + a + "&AccidentClaimId=" + '@accidentClaimIdNew' + "&uid=" + guid();
+                $element.load(path);
+            },
+            position: {
+                my: "center",
+                at: "center",
+                of: window
+            },
+            close: function () {
+                $element.dialog('destroy').remove();
+            }
+
+        });
+    };
+
+    function DatepickerLen() {
+        $("input[type=text]").each(function () {
+            $(this).hasClass("datepicker") && 10 < $(this).val().length && $(this).val($(this).val().substring(0, 10));
+            if (void 0 !== $(this).attr("data-val-date") && "The field " == $(this).attr("data-val-date").substring(0, 10)) {
+                var b = $(this).attr("data-val-date").substring(10, $(this).attr("data-val-date").length).replace("must be a date.", "must be in 'dd/mm/yyyy' format.");
+                $(this).removeAttr("data-val-date");
+                $(this).attr("data-val-date", b)
+            };
+        });
+    };
+    function FormatValue() {
+        $("input[type=text]").each(function () {
+            if ($(this).hasClass("format") && "" != $(this).val()) {
+                var a = $(this).context.id, b = $(this).val().replace(/,/g, "");
+                $("#" + a).val(b.replace("NaN", "0"))
+            }
+        });
+    };
+    function getQueryVariable(a) {
+        for (var c = "@MenuListItem.ClaimTabs.GetQueryStringVal()".replace(/amp;/ig, "").split("&"), b = 0; b < c.length; b++) {
+            var d = c[b].split("=");
+            if (d[0] == a) return d[1]
+        }
+    };
+    function ClearForm(a) {
+        $("#error").hide();
+        $("#" + a).find(':input:not([id=PaymentRequestType]):not([id=ClaimantName])').each(function () {
+            switch (this.type) {
+                case 'text':
+                    $(this).val($(this).hasClass("format") ? "0.00" : "");
+                    break;
+                case 'textarea':
+                    $(this).val('');
+                    break;
+                case 'checkbox':
+                case 'radio':
+                    this.checked = false;
+            }
+        });
+        $("#" + a).find('select').each(function () {
+            $(this).prop('selectedIndex', 0);
+        });
+        $('span.field-validation-error').removeClass('field-validation-error').addClass('field-validation-valid');
+        $("#Total_D,#Total_S").prop('readonly', true).val('0.00');
+        ReadyOnlyPayment("_S");
+    };
+    function ReadyOnlyPayment(a) {
+        $("input[type=text]").each(function () {
+            $(this).context.id.slice(-2) == a && $(this).hasClass("format") && $(this).prop("readonly", !0)
+        });
+    };
+    function ExpandGridAfterPost(a) {
+        $("table.ui-ebixgrid-btable span").each(function () {
+            if ($(this).hasClass("ui-icon-minus") || $(this).hasClass("ui-icon-plus")) {
+                if (a.beginsWith($(this).context.id)) {
+                    var spanid = $(this).context.id, id = spanid.slice(5, spanid.length);
+                    $('#' + id).show();
+                    $('#' + spanid).removeClass('ui-icon-plus').addClass('ui-icon-minus');
+                }
+            }
+        });
+    };
+    function SveGridIdBeforePost(a) {
+        $("table.ui-ebixgrid-btable span").each(function () {
+            if ($(this).hasClass("ui-icon-minus") || $(this).hasClass("ui-icon-plus")) {
+                if (a.beginsWith($(this).context.id)) {
+                    var spanid = $(this).context.id, id = spanid.slice(5, spanid.length);
+                    $('#' + id).show();
+                    $('#' + spanid).removeClass('ui-icon-plus').addClass('ui-icon-minus');
+                }
+            }
+        });
+    };
+    var guid = (function () {
+        function s4() {
+            return Math.floor((1 + Math.random()) * 0x10000).toString(16).substring(1);
+        }
+        return function () {
+            return s4() + s4() + '-' + s4() + '-' + s4() + '-' + s4() + '-' + s4() + s4() + s4();
+        };
+    })();
+    String.prototype.getstringinbetween = function (a) {
+        for (var e = this.split("&"), d = 0; d < e.length; d++) {
+            var b = e[d].split("=");
+            if (b[0] == a) return b[1]
+        };
+    };
+    String.prototype.contains = function (a) {
+        return -1 != this.indexOf(a)
+    };
+    String.prototype.beginsWith = function (string) {
+        return (this.indexOf(string) === 0);
+    };
+    function InitializeDialog($element, a, c) {
+        $element.dialog({
+            width: "900",
+            resizable: false,
+            draggable: true,
+            show: { effect: 'drop', direction: "up" },
+            title: "Print",
+            model: true,
+            show: 'slide',
+            dialogClass: 'alert',
+            closeOnEscape: true,
+            open: function (event, ui) {
+                var path = '@Url.Content("~/ClaimMasters/PreviewDocumentIndex")' + "?ClaimID=" + a + "&AccidentClaimId=" + '@accidentClaimIdNew' + "&ScreenId=" + '@Model.screenId' + "&SId=" + c + "&uid=" + guid();
+                $element.load(path);
+            },
+            position: {
+                my: "center",
+                at: "center",
+                of: window
+            },
+            close: function () {
+                $element.dialog('destroy').remove();
+                if ($("#HChildGrid").val() != "" && $("#" + $("#HChildGrid").val()).length) {
+                    try {
+                        $("#" + $("#HChildGrid").val()).remove()
+                        $('div[aria-describedby="' + $("#HChildGrid").val() + '"]').remove();
+                        $("#HChildGrid").val("");
+                    }
+                    catch (exx) {
+                    }
+                }
+            }
+
+        }).css('max-height', '500px').css('overflow-y', 'scroll');
+    };
+    
+
+    $("body").delegate("a.btn.btn-xs.btn-info", "click", function () {
+        var sPageURL = $(this)[0].getAttribute("url");
+        if ('@isEncryptedParams' == "YES") {
+            $.ajax({
+                type: "POST",
+                url: '@Url.Action("GetEncryptedUrl", "ClaimProcessing")',
+                data: {
+                    Url: sPageURL
+                },
+                success: function (data) {
+                    window.location.href = data;
+                }
+            });
+        }
+        else {
+            window.location.href = sPageURL;
+        }
+    });
+</script>

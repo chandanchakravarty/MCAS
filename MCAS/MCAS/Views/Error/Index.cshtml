@@ -1,0 +1,26 @@
+﻿@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="dashboard-wrapper">
+    <!-- Bootstrap Container Start -->
+    <div class="container">
+<div class="row-fluid bg2 blue-bt-bdr">
+    <div class="container text-center">
+    	<div class="errorInfo">
+        	<h1>OOPS! <small>Error 404!</small></h1>
+            <p>It seems that page you are looking for no longer exists. Please Go to <h3><a href="@Url.Action("Index", "Home")">HOME Page</a></h3></p>
+        </div>
+    </div>
+  </div>
+  </div>
+  </div>
+@*  <div class="row-fluid mrt30 text-center footerPad">
+    <div class="container">
+      <div class="thanks">Thank you for visiting Ebix web site. Please provide us with your information and one of our business representatives will contact you shortly. If you are an existing customer and have any support related queries, you can contact our local support departments.</div>
+      <p class="text-center"><a href="@Url.Action("contactus", "Contents")" class="listen">Contact Us</a></p>
+    </div>
+  </div>*@
+
+

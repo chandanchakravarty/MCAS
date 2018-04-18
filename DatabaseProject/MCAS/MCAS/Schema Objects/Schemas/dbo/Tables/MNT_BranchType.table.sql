@@ -1,0 +1,10 @@
+﻿CREATE TABLE [dbo].[MNT_BranchType](
+	[BranchType] [varchar](1) COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL,
+	[BranchTypeDesc] [nvarchar](50) COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
+ CONSTRAINT [PK_TM_BranchType] PRIMARY KEY CLUSTERED 
+(
+	[BranchType] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON)
+)
+
+

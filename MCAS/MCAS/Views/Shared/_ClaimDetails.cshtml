@@ -1,0 +1,557 @@
+﻿@using MCAS.Web.Resources;
+@using MCAS.Web.Objects.CommonHelper;
+@using MCAS.Web.Objects.Resources.Shared;
+@using MCAS.Globalisation;
+@model MCAS.Web.Objects.ClaimObjectHelper.ClaimObjectHelper
+@{
+    var mMCASQueryString = @Html.MCASQueryString(Request.QueryString);
+    var accidentClaimIdNew = mMCASQueryString["AccidentClaimId"] == null ? "0" : mMCASQueryString["AccidentClaimId"];
+    var accidentClaimIdfromModel = Model.AccidentClaimId == null ? "0" : Convert.ToString(Model.AccidentClaimId);
+    var orgType = Model.Organization == null ? "" : Convert.ToString(Model.Organization);
+    var lebmode = mMCASQueryString["mode"] != null ? mMCASQueryString["mode"].ToString() : "";
+    var caller = mMCASQueryString["claimMode"] != null ? Convert.ToString(mMCASQueryString["claimMode"]) : Model.ViewMode;
+    var policyid = mMCASQueryString["PolicyId"] == null ? "0" : mMCASQueryString["PolicyId"];
+    var claimAccidentId = Model.AccidentClaimId == null ? 0 : Model.AccidentClaimId;
+    var claimId = Model.ClaimId == null ? 0 : Model.ClaimId;
+    var accd = Model.AccidentDate == null ? "" : Model.AccidentDate == "" ? "" : Model.AccidentDate.Substring(0, 10);
+    var acct = Model.AccidentTime == null ? "" : Model.AccidentTime;
+    var accdatetime = accd + " " + acct;
+    var ipnum = Model.IPNo != null ? Model.IPNo.ToString().Split('.')[0] : "";
+    var path = Url.Content("~/Images/transparent.png");
+    bool DisplayTabredirect = (null == Session["ScreenNameDash"] || "206" == Convert.ToString(Session["ScreenNameDash"]) || "207" == Convert.ToString(Session["ScreenNameDash"])) ? false : true;
+    TempData["Acc"] = @caller == "Write" && @accidentClaimIdNew != null && @accidentClaimIdNew != "0" ? "Inc" : @caller == "Write" ? "New" : "Adj";
+    System.Resources.ResourceManager MenuResource = (new MCAS.Web.Objects.MastersHelper.TransactionModel()).GetResourceManager("MCAS.Web.Objects.Resources.Common.Menu");
+    var PageName = System.IO.Path.GetFileNameWithoutExtension(HttpContext.Current.Request.Url.AbsolutePath);
+    bool ClaimDivDisplay = ("TacFileUploadViewEditor" == PageName || "TacFileUploadEditor" == PageName || "ClaimFileUploadViewEditor" == PageName || "ClaimFileUploadEditor" == PageName) ? false : true;
+    Model.TabredirectList = Model.GetTabredirectList();
+    Layout = null;
+}
+@{
+    object routeValues = new { PolicyId = Model.PolicyId, AccidentClaimId = Model.AccidentClaimId, claimMode = caller, mode = lebmode };
+    var Checkclaimcompletestatuscheck = MenuListItem.ClaimTabs.claimcompletestatus(accidentClaimIdNew);
+    var orgIDCheck = MenuListItem.ClaimTabs.GetOrganizationType(orgType);
+    var Checkclaimcompletestatus = Checkclaimcompletestatuscheck == null ? "0" : Convert.ToString(Checkclaimcompletestatuscheck);
+    var orgID = orgIDCheck == null ? "0" : Convert.ToString(orgIDCheck);
+}
+<style type="text/css">
+    .form-horizontal .control-label
+    {
+        text-align: left;
+    }
+    .disabledTab
+    {
+        pointer-events: none;
+    }
+    
+    .ui-ebixgrid-btable > thead > tr > th:nth-child(1), td.ui-widget-content.subgrid-cell
+    {
+        padding-left: 2px !important;
+    }
+    .enabledTab
+    {
+        pointer-events: inherit;
+    }
+    .rightJustified
+    {
+        text-align: right;
+    }
+    .form-horizontal .control-label, .form-horizontal .radio, .form-horizontal .checkbox, .form-horizontal .radio-inline, .form-horizontal .checkbox-inline
+    {
+        margin-bottom: 0;
+        margin-top: 0;
+        padding-top: 0;
+    }
+    #mainbody
+    {
+        overflow-y: scroll;
+        overflow-x: hidden;
+    }
+    .ui-dialog-buttonset
+    {
+        display: block;
+        margin: 0 auto;
+        text-align: center;
+        float: none !important;
+    }
+    
+    .ui-priority-secondary, .ui-widget-content .ui-priority-secondary, .ui-widget-header .ui-priority-secondary
+    {
+        font-weight: bold;
+        opacity: 10;
+    }
+    textarea.ui-resizable
+    {
+        overflow: hidden;
+        width: 100% !important;
+        height: 100% !important;
+    }
+    div.ui-wrapper
+    {
+        padding: 0px !important;
+        width: auto !important;
+    }
+    @@media (max-width:767px) 
+    {
+    #top {width:auto;}
+    #Hormenu,#Hormenuwizard {display:block;}
+    div.ui-ebixgrid > div
+    {
+        width:1024px;
+    }
+    div.ui-dialog.ui-widget.ui-widget-content.ui-corner-all.ui-front.alert.ui-draggable
+    {
+            width: inherit !important;
+    }
+    table#Result
+    {
+        table-layout:auto !important;
+    }
+    }
+</style>
+@Html.HiddenFor(m => m.PolicyId)
+@Html.HiddenFor(m => m.AccidentClaimId)
+@Html.HiddenFor(m => m.ClaimId)
+@Html.HiddenFor(m => m.OrganizationType)
+@Html.HiddenFor(m => m.ReadOnly)
+<div id="divLoading" class="Claimloading"><p>Please wait...<br>   <img src="@Url.Content("~/Images/ajax-loader.gif")" alt="Loading.."> </p></div>
+<div id="top" style="background-color: white; position: fixed; z-index: 1; width: auto; box-sizing: border-box; overflow: hidden;">
+    <table style="width: 100%; border: none;" cellpadding="0" cellspacing="0" border="0"
+        margin-top="50" class="table-responsive" id="ClaimDiv1">
+        @if (DisplayTabredirect)
+        {
+            <tr>
+                <td colspan="5" style="width: 100%">
+                    <table style="width: 100%">
+                        <tr>
+                            <td style="width: 80%">
+                            </td>
+                            <td style="width: 20%">
+                                @Html.DropDownListFor(m => m.Tabredirect, new SelectList(Model.TabredirectList, "Lookup_value", "Lookup_desc", "0"), new { @class = "col-lg-12 form-control DonotDiableControl" })
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+        }
+        <tr>
+            <td style="width: 5%">
+            </td>
+            <td style="width: 30%">
+                <div class="row top-buffer">
+                    <div class="clearfix igr col-md-12">
+                        <div class="col-md-3">
+                            <label>@_ClaimDetails.IPNo.</label>
+                        </div>
+                        <div class="col-md-9">
+                            @ipnum
+                        </div>
+                    </div>
+                </div>
+            </td>
+            <td style="width: 30%">
+                <div class="row top-buffer">
+                    <div class="clearfix igr col-md-12">
+                        <div class="col-md-3">
+                            <label>
+                                @_ClaimDetails.ClaimNo</label>
+                        </div>
+                        <div class="col-md-9">
+                            @Html.DisplayFor(m => m.ClaimNo, new { id = "inputClaimNo" })
+                        </div>
+                    </div>
+                </div>
+            </td>
+            <td style="width: 30%">
+                <div class="row top-buffer">
+                    <div class="clearfix igr col-md-12">
+                        <div class="col-md-5">
+                            <label>
+                                @_ClaimDetails.BusServiceNo</label>
+                        </div>
+                        <div class="col-md-7">
+                            @Html.DisplayFor(m => m.BusServiceNo, new { id = "inputBusServiceNo" })
+                        </div>
+                    </div>
+                </div>
+            </td>
+            <td style="width: 5%">
+            </td>
+        </tr>
+        <tr>
+            <td style="width: 5%">
+                <img alt="" id="Previous" src="@Url.Content("~/Images/arrowleft.jpg")" />
+            </td>
+            <td style="width: 30%">
+                <div class="row top-buffer">
+                    <div class="clearfix igr col-md-12">
+                        <div class="col-md-3">
+                            <label>@_ClaimDetails.VehicleNo</label>
+                        </div>
+                        <div class="col-md-9">
+                            @Html.DisplayFor(m => m.VehicleNo, new { id = "inputVehicleNo" })
+                        </div>
+                    </div>
+                </div>
+            </td>
+            <td style="width: 30%">
+                <div class="row top-buffer">
+                    <div class="clearfix igr col-md-12">
+                        <div class="col-md-3">
+                            <label>
+                                @_ClaimDetails.AccidentDateTime</label>
+                        </div>
+                        <div class="col-md-9">
+                            @accdatetime
+                        </div>
+                    </div>
+                </div>
+            </td>
+            <td style="width: 30%">
+                <div class="row top-buffer">
+                    <div class="clearfix igr col-md-12">
+                        <div class="col-md-5">
+                            <label>
+                                @_ClaimDetails.Organization</label>
+                        </div>
+                        <div class="col-md-7">
+                            @Html.DisplayFor(m => m.OrganizationName, new { id = "inputOrganization" })
+                        </div>
+                    </div>
+                </div>
+            </td>
+            <td style="width: 5%">
+                <img alt="" id="Next" src="@Url.Content("~/Images/arrowright.jpg")" />
+            </td>
+        </tr>
+    </table>
+    <div class="row" id="Hormenuwizard" style="float: left;">
+        <ul class="nav nav-tabs">
+            <li id="Hormenu" class="list-box" style="margin-left: 20px;"><a id="aHormenu" href="#"
+                style="background-color: #373737;"><i class="icon-exchange text-warning"></i></a>
+            </li>
+        </ul>
+    </div>
+    <div class="row" id="wizard" style="height: auto;">
+        <ul class="nav nav-tabs" id="myTabs">
+            @{
+                if (Session != null && Session["menuList"] != null)
+                {
+                    var calledAction = Path.GetFileName(Request.Url.AbsolutePath);
+                    var menuFilter = calledAction == "TacFileUploadViewEditor" || calledAction == "TacFileUploadEditor" ? "TacUpload" : calledAction == "ClaimFileUploadViewEditor" || calledAction == "ClaimFileUploadEditor" ? "CUpload" : "CLAIM";
+                    var myMenuList = (List<MenuListItem>)Session["menuList"];
+                    int[] listC = (from x in myMenuList where x.TabId.Equals(menuFilter) && x.IsMenu.Equals("Y") select x.MenuId).ToArray();
+                    var listarray = string.Join(",", listC);
+                    if (listC.Length > 1)
+                    {
+                <input type="hidden" id="arrval" value="@listarray" />
+                <input type="hidden" id="last" value="@listC[listC.Length - 1]" />
+                    }
+                    if (menuFilter == "CLAIM")
+                    {
+                <li class="donotHide" id="AccidentTab" style="padding-left: 10px"><a id="@MenuListItem.ClaimTabs.ClaimAccidentEditor" href='@Url.ActionEncoded("ClaimAccidentEditor", "ClaimProcessing", routeValues)'>@_ClaimDetails.Accident</a></li>
+                        TempData["AccidentPermission"] = !listC.Contains(MenuListItem.ClaimTabs.ClaimAccidentEditor) ? false : true;
+                        if (listC.Contains(MenuListItem.ClaimTabs.ClaimEditor))
+                        {
+                <li id="ClaimTab1"><a id="@MenuListItem.ClaimTabs.ClaimEditor"  href='@Url.ActionEncoded("ClaimEditor", "ClaimProcessing", routeValues)'>@_ClaimDetails.Claims</a></li>
+                        }
+                        if (listC.Contains(MenuListItem.ClaimTabs.ServiceProvider))
+                        {
+                <li id="ThirdPartyTab"><a id="@MenuListItem.ClaimTabs.ServiceProvider"  href='@Url.ActionEncoded("ServiceProvider", "ClaimProcessing", routeValues)'>@_ClaimDetails.ServiceProvider</a></li>
+                        }
+                        if (listC.Contains(MenuListItem.ClaimTabs.ClaimNotesEditor))
+                        {
+                <li id="NotesTab"><a id="@MenuListItem.ClaimTabs.ClaimNotesEditor"  href='@Url.ActionEncoded("ClaimNotesEditor", "ClaimProcessing", routeValues)'>@_ClaimDetails.Notes</a></li>
+                        }
+                        if (listC.Contains(MenuListItem.ClaimTabs.TaskEditor))
+                        {
+                <li id="TasksTab"><a id="@MenuListItem.ClaimTabs.TaskEditor"  href='@Url.ActionEncoded("TaskEditor", "ClaimProcessing", routeValues)'>@_ClaimDetails.Tasks</a></li>
+                        }
+                        if (listC.Contains(MenuListItem.ClaimTabs.ClaimAttachmentsEditor))
+                        {
+                <li id="AttachmentsTab"><a id="@MenuListItem.ClaimTabs.ClaimAttachmentsEditor" href='@Url.ActionEncoded("ClaimAttachmentsEditor", "ClaimProcessing", routeValues)'>@_ClaimDetails.Attachments</a></li>
+                        }
+                        if (listC.Contains(MenuListItem.ClaimTabs.DiaryTaskEditor))
+                        {
+                <li id="ToDoTab"><a id="@MenuListItem.ClaimTabs.DiaryTaskEditor" href='@Url.ActionEncoded("DiaryTaskEditor", "ClaimProcessing", routeValues)'>@_ClaimDetails.Alerts</a></li>
+                        }
+                        if (listC.Contains(MenuListItem.ClaimTabs.ClaimReserveEditor))
+                        {
+                <li id="ReverseEditor"><a id="@MenuListItem.ClaimTabs.ClaimReserveEditor"  href='@Url.ActionEncoded("ClaimReserveEditor", "ClaimProcessing", routeValues)'>@_ClaimDetails.Reserve</a></li>
+                        }
+                        if (listC.Contains(MenuListItem.ClaimTabs.ClaimMandateEditor))
+                        {
+                <li id="MandateTab"><a id="@MenuListItem.ClaimTabs.ClaimMandateEditor" href='@Url.ActionEncoded("ClaimMandateReqEditor", "ClaimProcessing", routeValues)'>@_ClaimDetails.Mandate</a></li>
+                        }
+                        if (listC.Contains(MenuListItem.ClaimTabs.ClaimPaymentEditor))
+                        {
+                <li id="PaymentEditor"><a id="@MenuListItem.ClaimTabs.ClaimPaymentEditor" href='@Url.ActionEncoded("PaymentEditorNew", "ClaimProcessing", routeValues)'>@_ClaimDetails.Payment</a></li>
+                            TempData["PaymentPermission"] = true;
+                        }
+                        else
+                        {
+                            TempData["PaymentPermission"] = false;
+                        }
+                        if (listC.Contains(MenuListItem.ClaimTabs.ClaimRecoveryEditor))
+                        {
+                <li id="RecoveryEditor"><a id="@MenuListItem.ClaimTabs.ClaimRecoveryEditor" href='@Url.ActionEncoded("ClaimRecoveryEditor", "ClaimRecoveryProcessing", routeValues)'>@_ClaimDetails.Recovery</a></li>
+                        }
+                        if (listC.Contains(MenuListItem.ClaimTabs.ClaimTransactionEditor))
+                        {
+                <li id="TransactionsHistoryTab"><a id="@MenuListItem.ClaimTabs.ClaimTransactionEditor" href='@Url.ActionEncoded("TransactionEditor", "ClaimProcessing", routeValues)'>@_ClaimDetails.TransactionsHistory</a></li>
+                        }
+                    }
+                    if (menuFilter == "TacUpload")
+                    {
+                                
+                <li id="TacFileUploadEditorTab" class="donotHide"><a href='@Url.ActionEncoded("TacFileUploadEditor", "ClaimUploadProcessing", new { claimMode = @caller })'>@_ClaimDetails.TACFileUpload</a></li>
+                       
+                        TempData["TacFilePermission"] = !listC.Contains(MenuListItem.ClaimTabs.TacFileUploadEditor) ? false : true;
+
+                        if (listC.Contains(MenuListItem.ClaimTabs.TacFileUploadViewEditor))
+                        {
+                <li id="TacFileUploadViewEditorTab" class="donotHide"><a   href='@Url.ActionEncoded("TacFileUploadViewEditor", "ClaimUploadProcessing", new { claimMode = @caller })'>
+                    @_ClaimDetails.ViewTACFileUploadStatus</a></li>
+                        }
+                    }
+                    if (menuFilter == "CUpload")
+                    {
+                                
+                <li id="ClaimFileUploadEditorTab" class="donotHide"><a   href='@Url.ActionEncoded("ClaimFileUploadEditor", "ClaimUploadProcessing", new { claimMode = @caller })'>@_ClaimDetails.ClaimFileUpload</a></li>
+                        TempData["ClaimFilePermission"] = !listC.Contains(MenuListItem.ClaimTabs.ClaimFileUploadEditor) ? false : true;
+                        if (listC.Contains(MenuListItem.ClaimTabs.ClaimFileUploadViewEditor))
+                        {
+                <li id="ClaimFileUploadViewEditorTab" class="donotHide"><a   href='@Url.ActionEncoded("ClaimFileUploadViewEditor", "ClaimUploadProcessing", new { claimMode = @caller })'>@_ClaimDetails.ViewClaimFileUploadStatus</a></li>
+                        }
+                    }
+                }
+            }
+        </ul>
+    </div>
+</div>
+<div id="testdiv">
+</div>
+<script type="text/javascript">
+    var Tname = {
+        130: function () {
+            return "ClaimAccidentEditor"
+        },
+        131: function () {
+            return "ClaimEditor"
+        },
+        132: function () {
+            return "ServiceProvider"
+        },
+        133: function () {
+            return "ClaimNotesEditor"
+        },
+        134: function () {
+            return "TaskEditor"
+        },
+        135: function () {
+            return "ClaimAttachmentsEditor"
+        },
+        136: function () {
+            return "DiaryTaskEditor"
+        },
+        137: function () {
+            return "ClaimReserveEditor"
+        },
+        138: function () {
+            return "ClaimMandateReqEditor"
+        },
+        139: function () {
+            return "PaymentEditorNew"
+        },
+        294: function () {
+            return "ClaimRecoveryEditor"
+        },
+        140: function () {
+            return "TransactionEditor"
+        }
+    };
+
+    $("form").submit(function () {
+        $('input[type=text]').each(function () {
+            void 0 !== $(this).attr("format") && $(this).val() != "" && $(this).val($(this).val().toString().replace(/,/g, ""));
+        });
+    });
+    if ("TacFileUploadViewEditor" == getCurentFileName() || "TacFileUploadEditor" == getCurentFileName() || "ClaimFileUploadViewEditor" == getCurentFileName() || "ClaimFileUploadEditor" == getCurentFileName()) $("#ClaimDiv1").css("display", "none"), SetDivPosition(), setTabActive(getCurentFileName() + "Tab");
+
+//    debugger;
+//    if ('@orgType' == "PvtCar" || '@orgType' == "Taxi") $("#ClaimDiv1").css("display", "none");
+
+    var do_on_load = function () {
+        ("@Checkclaimcompletestatus" == "2" && "@caller" == "Read") && !$('form').hasClass("DonotDiableControl") && $("form").find(":input:not([id=Next]):not([id=Previous]):not([id=btnDialogeOK]):not(.DonotDiableControl)").each(function () {
+            switch (this.type) {
+                case "text":
+                    $(this).attr('disabled', 'disabled')
+                case "textarea":
+                    $(this).attr('disabled', 'disabled')
+                case "checkbox":
+                    $(this).attr('disabled', 'disabled')
+                case "radio":
+                    $(this).attr('disabled', 'disabled')
+                case "button":
+                    $(this).attr('disabled', 'disabled')
+                case "file":
+                    $(this).attr('disabled', 'disabled')
+
+            }
+        }) && $('select:not(.DonotDiableControl)').attr('disabled', 'disabled') && $('button:not([id=btnDialogeOK]):not(.DonotDiableControl)').attr('disabled', 'disabled') && $('#btnSave,#btnReset').attr('disabled', 'disabled');
+
+        '@orgType' == '' ? '@accidentClaimIdfromModel' == '0' && $('#myTabs li').each(function () { !$(this).hasClass("donotHide") && $(this).hide() }) && $('img#Next,a#Next,img#Previous,a#Previous').hide() : !("@orgID" == "TR" || "@orgID" == "BU") && $('#myTabs li').each(function () { !$(this).hasClass("donotHide") && $(this).hide() }) && $('img#Next,a#Next,img#Previous,a#Previous').hide();
+
+        $('img[id="Next"],[id="Previous"]').css("cursor", "pointer");
+
+        $('#Tabredirect').change(function () {
+            var sPageURL = $("#Tabredirect option:selected").index() == "1" ? '@Url.ActionEncoded("ClaimAccidentEditor", "ClaimProcessing", new { PolicyId = Model.PolicyId, AccidentClaimId = Model.AccidentClaimId, claimMode = "Write", mode = "Adj" })' : $("#Tabredirect option:selected").index() == "2" ? '@Url.ActionEncoded("PaymentEditorNew", "ClaimProcessing", new { PolicyId = Model.PolicyId, AccidentClaimId = Model.AccidentClaimId, claimMode = "Read", mode = "Payment" })' : '@Url.ActionEncoded("ClaimRecoveryEditor", "ClaimRecoveryProcessing", new { PolicyId = Model.PolicyId, AccidentClaimId = Model.AccidentClaimId, claimMode = "Read", mode = "Recovery" })', b = '@(Url.ActionEncoded("SetScreenName", "ClaimProcessing"))', a = $("#Tabredirect").val().split("-")[0], c = $("#Tabredirect").val().split("-")[1];
+            sPageURL = sPageURL.replace(/&amp;/g, '&');
+            if ($("#Tabredirect option:selected").index() != "0") {
+                $.ajax({
+                    type: "GET",
+                    url: b,
+                    data: {
+                        ScreenNameDash: a,
+                        screenid: c,
+                        uid: guid()
+                    },
+                    dataType: "json",
+                    success: function (result) {
+                        window.location.href = sPageURL;
+                    }
+                });
+            }
+
+        });
+
+
+        $("#Next,#Previous").click(function () {
+            var k1 = '@TempData["Acc"]' == "New" ? "ClaimAccidentEditorNew" : '@TempData["Acc"]' == "Inc" ? "ClaimAccidentEditor" : "ClaimAccidentDetails";
+            var k1index = $("#arrval").val().split(",").indexOf("130");
+            for (var c1 = "", i = 0; i < $("#arrval").val().split(",").length; i++) c1 = c1 + "," + Tname[$("#arrval").val().split(",")[i]]();
+            var c = [], c = c1.split(",").splice(1, c1.length);
+            "-1" != k1index ? c[0] = k1 : c.splice(0, 0, k1);
+            var a = window.location.pathname,
+                a = (a.substring(a.lastIndexOf("/") + 1) == "ClaimAccidentEditorNew" || a.substring(a.lastIndexOf("/") + 1) == "ClaimAccidentEditor" || a.substring(a.lastIndexOf("/") + 1) == "ClaimAccidentDetails") ? k1 : a.substring(a.lastIndexOf("/") + 1),
+                b = c.indexOf(a),
+                b = "Next" == this.id ? b + 1 : b - 1,
+                z = getQueryVariable("claimMode"),
+                z1 = getQueryVariable("mode");
+            if (a != Tname[$("#last").val()]() || "Next" != this.id) if (a != k1 || "Previous" != this.id) {
+                var pd = '@Model.PolicyId' ? '@Model.PolicyId' : "";
+                var ac = '@Model.AccidentClaimId' ? '@Model.AccidentClaimId' : "";
+                var ci = '@Model.ClaimId' ? '@Model.ClaimId' : "";
+                var ca = '@caller' ? '@caller' : "";
+                var leb = '@lebmode' ? '@lebmode' : "";
+                var d = (c[b] == "ClaimRecoveryEditor") ? ('@Url.Content("~/ClaimRecoveryProcessing")/' + c[b] + "?PolicyId=" + pd + "&AccidentClaimId=" + ac + "&claimMode=" + ca + "&mode=" + leb) : ('@Url.Content("~/ClaimProcessing")/' + c[b] + "?PolicyId=" + pd + "&AccidentClaimId=" + ac + "&claimMode=" + ca + "&mode=" + leb);
+                setTimeout(function () {
+                    document.location.href = window.location.protocol + "//" + window.location.host + d.replace(/amp;/gi, "")
+                }, 500)
+            };
+
+        });
+
+    };
+    $(document).ready(do_on_load);
+    $(window).bind("page:change", do_on_load);
+
+
+    function CurrencyFormat(number) {
+        var decimalplaces = 2;
+        var decimalcharacter = ".";
+        var thousandseparater = ",";
+        number = parseFloat(number);
+        var sign = number < 0 ? "-" : "";
+        var formatted = new String(number.toFixed(decimalplaces));
+        if (decimalcharacter.length && decimalcharacter != ".") { formatted = formatted.replace(/\./, decimalcharacter); }
+        var integer = "";
+        var fraction = "";
+        var strnumber = new String(formatted);
+        var dotpos = decimalcharacter.length ? strnumber.indexOf(decimalcharacter) : -1;
+        if (dotpos > -1) {
+            if (dotpos) { integer = strnumber.substr(0, dotpos); }
+            fraction = strnumber.substr(dotpos + 1);
+        }
+        else { integer = strnumber; }
+        if (integer) { integer = String(Math.abs(integer)); }
+        while (fraction.length < decimalplaces) { fraction += "0"; }
+        temparray = new Array();
+        while (integer.length > 3) {
+            temparray.unshift(integer.substr(-3));
+            integer = integer.substr(0, integer.length - 3);
+        }
+        temparray.unshift(integer);
+        integer = temparray.join(thousandseparater);
+        return integer + decimalcharacter + fraction;
+    };
+
+    function setTabActive(elementid) {
+        $('#myTabs').children().each(function (el, value) {
+            if (value.id == elementid)
+                $(value).removeClass("active").addClass("active");
+            else
+                $(value).removeClass("active");
+        }
+        );
+    };
+
+    function SetDivPosition() {
+        $("#sidebar").css("position", "fixed").css("z-index", "1033");
+        $("#header").addClass("navbar-fixed-top");
+        $("#reg2").css("top", $("#header").height());
+        $("#top").css("top", parseInt($("#header").height()) + parseInt($("#reg2").height())).css("width", $("#reg").width());
+        $("#testdiv").css("height", ($(window).width() > 768 ? ($("div#top").offset().top.toString()) : ($("div#Hormenuwizard").offset().top.toString())));
+    };
+    function scrollingTableSetThWidth(tableId) {
+        var table = document.getElementById(tableId);
+
+        ths = table.getElementsByTagName('div');
+
+        if (ths.length > 0) {
+            for (i = 0; i < ths.length; i++) {
+                tds[i].style.width = getCurrentComputedStyle(ths[i], 'width');
+            }
+        }
+    };
+    function getCurentFileName() {
+        var pagePathName = window.location.pathname;
+        return pagePathName.substring(pagePathName.lastIndexOf("/") + 1);
+    };
+
+    function getCurrentComputedStyle(element, attribute) {
+        var attributeValue;
+        if (window.getComputedStyle) { // class A browsers
+            var styledeclaration = document.defaultView.getComputedStyle(element, null);
+            attributeValue = styledeclaration.getPropertyValue(attribute);
+        } else if (element.currentStyle) { // IE
+            attributeValue = element.currentStyle[vclToCamelCases(attribute)];
+        }
+        return attributeValue;
+    };
+
+    function getQueryVariable(a) {
+        for (var e = "@MenuListItem.ClaimTabs.GetQueryStringVal()".replace(/amp;/ig, "").split("&"), d = 0; d < e.length; d++) {
+            var b = e[d].split("=");
+            if (b[0] == a) return b[1]
+        }
+    };
+    function SetDivPost() {
+        $("#sidebar").css("position", "fixed").css("z-index", "1033");
+        $("#header").addClass("navbar-fixed-top");
+        $("#reg2").css("top", $("#header").height());
+        $("#top").css("top", parseInt($("#header").height()) + parseInt($("#reg2").height())).css("width", $("#reg").width());
+        $("#testdiv").css("height", ($(window).width() > 768 ? (parseInt($("div#top").height()) + parseInt($("div#header").is(":visible") ? $("div#header").height() : "0")) :
+            ($("div#Hormenuwizard").offset().top.toString())));
+    }
+    var guid = (function () {
+        function s4() {
+            return Math.floor((1 + Math.random()) * 0x10000)
+               .toString(16)
+               .substring(1);
+        }
+        return function () {
+            return s4() + s4() + '-' + s4() + '-' + s4() + '-' +
+           s4() + '-' + s4() + s4() + s4();
+        };
+    })();
+</script>

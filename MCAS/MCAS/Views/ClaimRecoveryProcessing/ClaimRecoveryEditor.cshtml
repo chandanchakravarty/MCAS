@@ -1,0 +1,725 @@
+﻿@using MCAS.Web.Objects.Resources.ClaimProcessing;
+@model MCAS.Web.Objects.ClaimObjectHelper.ClaimRecoveryModel
+@using MCAS.Web.Objects.Resources.Common;
+@using MCAS.Web.Objects.CommonHelper
+@using MCAS.Web.Objects.Resources.ClaimRecoveryProcessing;
+@using MCAS.Globalisation;
+@{
+    ViewBag.Title = "Claim Recovery";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var mMCASQueryString = Html.MCASQueryString(Request.QueryString);
+    var caller = mMCASQueryString["claimMode"] == null ? "" : Convert.ToString(mMCASQueryString["claimMode"]);
+    var viewonly = mMCASQueryString["Viewmode"] == null ? "" : Convert.ToString(mMCASQueryString["Viewmode"]);
+    var pagemode = MenuListItem.ClaimTabs.GetMode(Convert.ToString(Session["ScreenNameDash"]), mMCASQueryString["mode"] == null ? "" : Convert.ToString(mMCASQueryString["mode"]));
+    var policyid = mMCASQueryString["PolicyId"] == null ? "" : Convert.ToString(mMCASQueryString["PolicyId"]);
+    var claimId = Model.ClaimId == null ? "" : Convert.ToString(Model.ClaimId);
+    var paymentId = mMCASQueryString["PaymentId"] == null ? "" : Convert.ToString(mMCASQueryString["PaymentId"]);
+    var mandateId = mMCASQueryString["MandateId"] == null ? "" : Convert.ToString(mMCASQueryString["MandateId"]);
+    var claimMode = mMCASQueryString["claimMode"] == null ? "" : Convert.ToString(mMCASQueryString["claimMode"]);
+    var Viewmode = mMCASQueryString["Viewmode"] == null ? "" : Convert.ToString(mMCASQueryString["Viewmode"]);
+    var accidentClaimIdNew = mMCASQueryString["AccidentClaimId"] == null ? "" : Convert.ToString(mMCASQueryString["AccidentClaimId"]);
+    var submenuval = HttpContext.Current.Session["ScreenNameDash"] == null ? "" : Convert.ToString(HttpContext.Current.Session["ScreenNameDash"]);
+    var SubMenu = !string.IsNullOrEmpty(submenuval) ? MenuListItem.ClaimTabs.GetClaimLabel(submenuval) : ClaimRecoveryEditor.ResourceManager.GetString(MenuListItem.ClaimTabs.SubMenuString(@caller, @accidentClaimIdNew, @pagemode, "ClaimRecoveryEditor"));
+    var dis = TempData["DisplayDiv"] == null ? "none;" : (viewonly == "" ? "none;" : "block;");
+    var DonotDiableControl = pagemode == "Recovery" ? "form-horizontal DonotDiableControl" : "form-horizontal";
+    var AddOrEdit = (mMCASQueryString["Viewmode"] == "Select" || mMCASQueryString["Viewmode"] == "Edit") ? "Y" : "N";
+    var Display1 = mMCASQueryString["showhidebtn"] == null ? "block;" : "none;"; //Request.QueryString["Viewmode"] == "Select" ? "none;" : "block;";
+    var ClaimType1 = (Model.ClaimType == null || Model.ClaimType == 0) ? mMCASQueryString["ClaimType"] == null ? 0 : Convert.ToInt32(mMCASQueryString["ClaimType"]) : Model.ClaimType;
+    Model.RecoverAmt = (mMCASQueryString["Viewmode"] == "Select" && Model.ClaimType == 3) ? Model.TPBIPayout - Model.Deductible : Model.RecoverAmt;
+    var HShowHideSelect = Model.HTPBIPayoutAmt == null ? "0" : Model.HTPBIPayoutAmt;
+    Model.ReadOnly = pagemode == "Adj" ? true : false;
+    Model.ViewMode = pagemode == "Adj" ? "Read" : "";
+    string isEncryptedParams = System.Configuration.ConfigurationManager.AppSettings["EncryptQueryParams"].ToUpper();
+}
+<style type="text/css">
+    .form-horizontal .control-label
+    {
+        text-align: left;
+    }
+</style>
+<script src="@Url.Content("~/Scripts/jquery-2.1.0.min.js")" type="text/javascript"></script>
+<div class="dashboard-wrapper">
+    <div class="container">
+        <div class="page-title" id="reg">
+            <div class="col-lg-12" id="reg2" style="background-color: white; position: fixed;
+                z-index: 1;">
+                <h2>@ClaimRecoveryEditor.ResourceManager.GetString(MenuListItem.ClaimTabs.PreBreadCrumbString(@pagemode))</h2>
+                <ul class="breadcrumb">
+                    <li>@SubMenu</li>
+                    <li>@ClaimRecoveryEditor.Recovery</li>
+                </ul>
+            </div>
+            <div style="position: relative!important">
+                @Html.Action("_ClaimDetails", "ClaimProcessing", new { PolicyId = @policyid })
+            </div>
+        </div>
+        <hr />
+        <div class="row" id="toprow">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <div class="panel panel-info">
+                    <div class="panel-heading clearfix">
+                        <i class="icon-check-sign"></i>
+                        <h3 class="panel-title">
+                            @ClaimRecoveryEditor.ClaimRecovery</h3>
+                    </div>
+                    <div class="panel-body">
+                        @Html.Partial("ClaimRecoveryList", Model.ClaimRecoveryModelCollection)
+                        <div>
+                            <br />
+                        </div>
+                        <div class="row">
+                            <div class="clearfix igr col-md-1 text-center">
+                                <a class="btn btn-info" id="Previous">@Common.Previous</a>
+                            </div>
+                            <div class="clearfix igr col-md-10 text-center">
+                            </div>
+                            <div class="clearfix igr col-md-1 text-center">
+                                <a class="btn btn-info" id="Next">@Common.Next</a>
+                            </div>
+                        </div>
+                        @{
+                            object routes = new { PolicyId = @policyid, AccidentClaimId = @accidentClaimIdNew, claimMode = @caller, mode = @pagemode, Viewmode = @Viewmode, ClaimType = @ClaimType1, showhidebtn = "saverecord" };
+                            if (isEncryptedParams.ToUpper() == "YES")
+                            {
+                                string res = RouteEncryptDecrypt.getRouteString(routes);
+                                res = RouteEncryptDecrypt.Encrypt(res);
+                                routes = new { Q = res };
+                            }
+                        }
+                        <br />
+                    </div>
+                    <hr style='font-weight: bold' />
+                    <div class="panel-body" id="ClaimRecoveryEditor" style="display:@dis">
+                        @using (Html.BeginForm("ClaimRecoveryEditor", "ClaimRecoveryProcessing", routes, FormMethod.Post, new { role = "form", @class = @DonotDiableControl, id = "ClaimRecoveryEditorForm", name = "ClaimRecoveryEditorForm" }))
+                        {
+                            @Html.ValidationSummary(true)
+                            @Html.HiddenFor(m => m.RecoveryId);
+                            @Html.HiddenFor(m => m.PaymentId);
+                            @Html.HiddenFor(m => m.MandateId);
+                            @Html.HiddenFor(m => m.ClaimId);
+                            @Html.HiddenFor(m => m.ClaimType);
+                            @Html.HiddenFor(m => m.CreatedBy);
+                            @Html.HiddenFor(m => m.Hshowgrid);
+                            @Html.HiddenFor(m => m.Prop1);
+                            @Html.HiddenFor(m => m.Prop2);
+                            @Html.HiddenFor(m => m.HDeductibleAmt);
+                            @Html.HiddenFor(m => m.ReadOnly); 
+                            @Html.HiddenFor(m => m.ViewMode); 
+                            <a id="reload" href='@Url.ActionEncoded("ClaimRecoveryEditor", "ClaimRecoveryProcessing", new { PolicyId = @policyid, AccidentClaimId = @accidentClaimIdNew, claimMode = @caller, mode = @pagemode, RecoveryId = @Model.RecoveryId, Viewmode = @Model.ViewMode, ClaimID = @Model.ClaimId, ClaimType = @Model.ClaimType, MandateId = @Model.MandateId, PaymentId = @Model.PaymentId })' style="display:none">
+                                Reload</a>
+                            <div style="color: Red; font-weight: bold;" class="has-error result1" id="error">
+                                <p align="center">
+                                    @if (@ViewData["SuccessMsg"] != null)
+                                    {
+                                        @ViewData["SuccessMsg"]
+                                    }
+                                </p>
+                            </div>
+                            <div class="panel-body" id="ODRequestEditor" style="display:@dis">
+                                <div class="row" id="divViewHide">
+                                    <fieldset>
+                                        <legend id="mainheader">@ClaimRecoveryEditor.ODClaimRecovery</legend>
+                                        <div id="Togglediv" class="panel-body">
+                                            <fieldset>
+                                                <legend class="ExpCol ui-minusicon">@ClaimRecoveryEditor.RecoveryDetails</legend>
+                                                <div class="row OD" id="ODRdiv">
+                                                    <div class="col-lg-12">
+                                                        <div class="form-group">
+                                                            <div class="col-lg-8">
+                                                                <div class="form-group">
+                                                                    <label class="col-sm-4 control-label" for="RecoverFrom">
+                                                                        @ClaimRecoveryEditor.RecoverFrom&nbsp;<span class="text-danger">*</span>
+                                                                    </label>
+                                                                    <div class="col-sm-6">
+                                                                        @Html.DropDownListFor(m => m.RecoverFrom, new SelectList(Model.RecoverFromListOD, "Id", "Text", "0"), new { @class = "form-control", @id = "RecoverFromOD" })
+                                                                        @Html.ValidationMessageFor(m => m.RecoverFrom)
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-12">
+                                                        <div class="form-group">
+                                                            <div class="col-lg-8">
+                                                                <div class="form-group">
+                                                                    <label class="col-sm-4 control-label" for="RecoverAmt">
+                                                                        @ClaimRecoveryEditor.RecoverAmt&nbsp;<span class="text-danger">*</span>
+                                                                    </label>
+                                                                    <div class="col-sm-6">
+                                                                        @Html.TextBoxFor(m => m.RecoverAmt, new { @maxlength = "14", @class = "form-control format Number", @id = "RecoverAmt_R" })
+                                                                        @Html.ValidationMessageFor(m => m.RecoverAmt)
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-12">
+                                                        <div class="form-group">
+                                                            <div class="col-lg-8">
+                                                                <div class="form-group">
+                                                                    <label class="col-sm-4 control-label" for="LeagalLawyerCost_R">
+                                                                        @ClaimRecoveryEditor.LeagalLawyerCost_R@*&nbsp;<span class="text-danger">*</span>*@
+                                                                    </label>
+                                                                    <div class="col-sm-6">
+                                                                        @Html.TextBoxFor(m => m.LeagalLawyerCost_R, new { @maxlength = "14", @class = "form-control format Number" })
+                                                                        @Html.ValidationMessageFor(m => m.LeagalLawyerCost_R)
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-12">
+                                                        <div class="form-group">
+                                                            <div class="col-lg-8">
+                                                                <div class="form-group">
+                                                                    <label class="col-sm-4 control-label" for="TotalAmt_R">
+                                                                        @ClaimRecoveryEditor.TotalAmt_R
+                                                                    </label>
+                                                                    <div class="col-sm-6">
+                                                                        @Html.TextBoxFor(m => m.TotalAmt_R, new { @maxlength = "14", @class = "form-control format Number" })
+                                                                        @Html.ValidationMessageFor(m => m.TotalAmt_R)
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-12">
+                                                        <div class="form-group">
+                                                            <div class="col-lg-8">
+                                                                <div class="form-group">
+                                                                    <label class="col-sm-4 control-label" for="Remarks">
+                                                                        @ClaimRecoveryEditor.RecoveryReason
+                                                                    </label>
+                                                                    <div class="col-sm-6">
+                                                                        @Html.TextAreaFor(m => m.RecoveryReason, new { @maxlength = "500", @class = "form-control" })
+                                                                        @Html.ValidationMessageFor(m => m.RecoveryReason)
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row BI" id="BIRdiv">
+                                                    <div class="col-lg-12">
+                                                        <div class="form-group">
+                                                            <div class="col-lg-8">
+                                                                <div class="form-group">
+                                                                    <label class="col-sm-4 control-label" for="inputRecoverFrom">
+                                                                        @ClaimRecoveryEditor.RecoverFrom&nbsp;<span class="text-danger">*</span>
+                                                                    </label>
+                                                                    <div class="col-sm-6">
+                                                                        @Html.DropDownListFor(m => m.RecoverFromBI, new SelectList(Model.RecoverFromListBI, "Id", "Text", "0"),
+new { @class = "form-control", @id = "RecoverFromBI" })
+                                                                        @Html.ValidationMessageFor(m => m.RecoverFromBI)
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-12">
+                                                        <div class="form-group">
+                                                            <div class="col-lg-8">
+                                                                <div class="form-group">
+                                                                    <label class="col-sm-4 control-label" for="inputPayout">
+                                                                        @ClaimRecoveryEditor.TPBIPayout
+                                                                    </label>
+                                                                    <div class="col-sm-6">
+                                                                        @Html.TextBoxFor(m => m.TPBIPayout, new { @maxlength = "14", @class = "form-control format" })
+                                                                        @Html.ValidationMessageFor(m => m.TPBIPayout)
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-12">
+                                                        <div class="form-group">
+                                                            <div class="col-lg-8">
+                                                                <div class="form-group">
+                                                                    <label class="col-sm-4 control-label" for="inputDeductible">
+                                                                        @ClaimRecoveryEditor.Deductible
+                                                                    </label>
+                                                                    <div class="col-sm-6">
+                                                                        @Html.TextBoxFor(m => m.Deductible, new { @maxlength = "14", @class = "form-control format" })
+                                                                        @Html.ValidationMessageFor(m => m.Deductible)
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-12">
+                                                        <div class="form-group">
+                                                            <div class="col-lg-8">
+                                                                <div class="form-group">
+                                                                    <label class="col-sm-4 control-label" for="inputRecover">
+                                                                        @ClaimRecoveryEditor.RecoverAmt
+                                                                    </label>
+                                                                    <div class="col-sm-6">
+                                                                        @Html.TextBoxFor(m => m.RecoverAmt, new { @maxlength = "14", @class = "form-control format" })
+                                                                        @Html.ValidationMessageFor(m => m.RecoverAmt)
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-12">
+                                                        <div class="form-group">
+                                                            <div class="col-lg-8">
+                                                                <div class="form-group">
+                                                                    <label class="col-sm-4 control-label" for="inputNetAmtRecovered">
+                                                                        @ClaimRecoveryEditor.NetAmtRecovered&nbsp;<span class="text-danger">*</span>
+                                                                    </label>
+                                                                    <div class="col-sm-6">
+                                                                        @Html.TextBoxFor(m => m.NetAmtRecovered, new { @maxlength = "14", @class = "form-control format" })
+                                                                        @Html.ValidationMessageFor(m => m.NetAmtRecovered)
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-12">
+                                                        <div class="form-group">
+                                                            <div class="col-lg-8">
+                                                                <div class="form-group">
+                                                                    <label class="col-sm-4 control-label" for="inputReason">
+                                                                        @ClaimRecoveryEditor.RecoveryReasonBI
+                                                                    </label>
+                                                                    <div class="col-sm-6">
+                                                                        @Html.TextAreaFor(m => m.RecoveryReasonBI, new { @maxlength = "500", @class = "form-control", @Value = "Deductible Exceeded" })
+                                                                        @Html.ValidationMessageFor(m => m.RecoveryReasonBI)
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </fieldset>
+                                        </div>
+                                    </fieldset>
+                                    <div class="form-group" id="divsave">
+                                        <div class="col-lg-1">
+                                            <div class="form-group" style="padding-left: 20px;">
+                                                <a class="btn btn-info" id="Previous">@Common.Previous</a>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-10 text-center">
+                                            @if (AddOrEdit == "Y")
+                                            {
+                                                <div class="form-group" style="display:@Display1">
+                                                    <input id="btnSave" class="btn btn-info" type="button" value=@Common.Save />
+                                                    <a type="button" class="btn btn-info" id="btnReset" tabindex="13">@Common.Reset</a>
+                                                </div>
+                                            }
+                                        </div>
+                                        <div class="col-lg-1">
+                                            <div class="form-group">
+                                                <a class="btn btn-info" id="Next">@Common.Next</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <fieldset>
+                                        <legend></legend>
+                                        <div class="form-group">
+                                            <div class="col-lg-12">
+                                                @Html.Partial("~/Views/Shared/_TimeStamp.cshtml", Model)
+                                            </div>
+                                        </div>
+                                    </fieldset>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    setTabActive('RecoveryEditor');
+    var do_on_load = function () {
+        $("a.Print").each(function () { $(this).attr("url", $(this).attr("href")).attr("href", "#"); })
+        $("a.Print").on('click', function () {
+            var a = guid(), b = "#" + a;
+            $('<div id="' + a + '" title="Print" style="overflow: hidden;"></div>').appendTo(".PrintDialogue");
+            InitializeDialog($(b), $(this).attr("url").getstringinbetween("ClaimID"), $(this).attr("url").getstringinbetween("RecoveryId"));
+            event.preventDefault();
+            $(b).dialog("open");
+            return !1
+        });
+        $('.ui-wrapper').css("padding", 0);
+        $('textarea').resizable({ handles: 's' });
+
+        $('textarea').each(function () {
+            $(this).removeAttr('width')
+            $(this).removeAttr('height');
+        });
+
+        ReadyOnlyPayment("_S");
+
+        $("div.RadioButton").removeAttr("style").addClass("col-sm-6").css("padding-left", "0px");
+        $(document).on("focus", ":input", function () {
+            $(this).attr("autocomplete", "off")
+        });
+        var bool = false, urltoredirect = "";
+        $(".datepicker").datepicker({
+            dateFormat: "dd/mm/yy",
+            showStatus: true,
+            showWeeks: true,
+            currentText: 'Now',
+            autoSize: true,
+            gotoCurrent: true,
+            showAnim: 'blind',
+            highlightWeek: true,
+            changeMonth: !0,
+            changeYear: !0,
+            yearRange: "1951:2050",
+            onSelect: function () {
+                $(this).valid()
+            }
+        });
+
+        '@ClaimType1' != '0' && ShowHideDiv("@ClaimType1");
+        '@ClaimType1' == '1' && $("#NetAmtRecovered").removeAttr("data-val-notequalto-other");
+        '@ClaimType1' == '3' && $("#LeagalLawyerCost_R").removeAttr("data-val-notequalto-other");
+        $("#mainheader").text(Tmainheader["@ClaimType1"]());
+
+        '@ClaimType1' == 1 ? $(getQueryVariable("Viewmode") == "Select") && ($("#TotalAmt_R").attr("readonly", "readonly")) : $(getQueryVariable("Viewmode") == "Select") && ($("#TPBIPayout,#Deductible,#RecoverAmt").attr("readonly", "readonly"));
+
+        // $("#RecoverFromOD,#RecoverFromBI").css({ "pointer-events": "none", cursor: "default" }).css("background-color", "#eee").children('option:not(:selected)').remove()
+        SetHiddenSpan();
+        ExpandGridAfterPost($("#Hshowgrid").val());
+
+        //        $("#btnReset").click(function () { ClearForm("Togglediv"); });
+
+        $("#btnReset").click(function () {
+            var ClaimId = '@claimId';
+            var accidentclaimId = '@accidentClaimIdNew';
+            var policyId = '@policyid';
+            var MandateId = '@Model.MandateId';
+            var Viewmode = '@viewonly';
+            var claimMode = '@caller';
+            var ClaimType = '@ClaimType1';
+            var PaymentId = '@Model.PaymentId';
+            var mode = '@pagemode';
+            var RecoveryId = '@Model.RecoveryId';
+            var a = parseInt(ClaimId);
+            var b = parseInt(accidentclaimId);
+            var c = parseInt(policyId);
+            var d = parseInt(MandateId);
+            var e = parseInt(PaymentId);
+            var f = parseInt(RecoveryId);
+            if (ClaimType == "3") {
+                $('#RecoverFromBI').attr("readonly", "readonly").attr("disabled", "disabled");
+            }
+            if (ClaimType == "1") {
+                $('#RecoverFromOD,#TotalAmt_R').attr("readonly", "readonly").attr("disabled", "disabled");
+            }
+            window.location.href = '@Url.Action("ClaimRecoveryEditor", "ClaimRecoveryProcessing")?ClaimId=' + a + '&AccidentClaimId=' + b + '&claimMode=' + claimMode + '&policyId=' + c + '&MandateId=' + d + '&Viewmode=' + Viewmode + '&ClaimType=' + ClaimType + '&mode=' + mode + '&PaymentId=' + e + '&RecoveryId=' + f;
+        });
+
+        $.culture = Globalize.culture("en-GB");
+        $.validator.methods.date = function (value, element) {
+            return this.optional(element)
+                    || Globalize.parseDate(value, "dd/MM/yyyy", "en-GB")
+                    || Globalize.parseDate(value, "yyyy-mm-dd");
+        };
+        $.validator.unobtrusive.adapters.add("notequalto", ["other"], function (a) {
+            a.rules.notEqualTo = "#" + a.params.other;
+            a.message && (a.messages.notEqualTo = a.message)
+        });
+        $.validator.addMethod("notEqualTo", function (a, b, c) {
+            return this.optional(b) || a != $(c).val()
+        }, "");
+        $("input[type=text]").each(function () {
+            $(this).hasClass("datepicker") && 10 < $(this).val().length && $(this).val($(this).val().substring(0, 10));
+            if (void 0 !== $(this).attr("data-val-date") && "The field " == $(this).attr("data-val-date").substring(0, 10)) {
+                var e = $(this).attr("data-val-date").substring(10, $(this).attr("data-val-date").length).replace("must be a date.", "must be in 'dd/mm/yyyy' format.");
+                $(this).removeAttr("data-val-date");
+                $(this).attr("data-val-date", e)
+            }
+        });
+        $(".ui-ebixgrid-view > table > tbody > tr > td > a").each(function () {
+            ("Select" == $(this).text()) && $(this).attr("href").getstringinbetween("status") == "Processed" && $(this).attr("disabled", !0);
+            ("View" == $(this).text()) && $(this).attr("href").getstringinbetween("status") == "" && $(this).attr("disabled", !0);
+            ("Edit" == $(this).text()) && $(this).attr("href").getstringinbetween("status") == "" && $(this).attr("disabled", !0);
+        }).each(function () {
+            ("208" == "@submenuval") && ("Select" == $(this).text() || "Edit" == $(this).text()) && $(this).attr("rec", $(this).attr("href")) && $(this).removeAttr("href");
+        }).click(function () {
+            if ("208" == "@submenuval" && ("Select" == $(this).text() || "Edit" == $(this).text())) {
+                CreateDialogRecovery("For Recovery You Are Redirected To Claim Recovery Processing", "Ok", $(this).attr("rec").replace("mode=Adj", "mode=Recovery").replace("claimMode=Write", "claimMode=Recovery"))
+            }
+        });
+
+        ("View" == '@viewonly') && ($("#divViewHide :input").attr("readonly", "readonly") && $("#divViewHide :input").attr("disabled", "disabled")) && ($('#btnReset').attr("disabled", "disabled"));
+
+        $("#ClaimGrid_table td").each(function () {
+            var id = $(this).closest("tr").attr("id");
+            $(this).html().contains("Own Damage (OD)") && $(this).attr("role") && "gridcell" == $(this).attr("role") && $("#ClaimGrid_table table").each(function () {
+                if ($(this).context.id.beginsWith(id)) {
+                    var a = "#" + $(this).context.id + " td:nth-child(3)", b = "#" + $(this).context.id + " td:nth-child(5)", c = "#" + $(this).context.id + " td:nth-child(6)", d = "#" + $(this).context.id + " th:nth-child(3)", e = "#" + $(this).context.id + " th:nth-child(5)", f = "#" + $(this).context.id + " th:nth-child(6)";
+                    $(a).hide();
+                    $(b).hide();
+                    $(c).hide();
+                    $(d).hide();
+                    $(e).hide();
+                    $(f).hide();
+                }
+            });
+            $(this).html().contains("Body Injury (TPBI)") && $(this).attr("role") && "gridcell" == $(this).attr("role") && $("#ClaimGrid_table table").each(function () {
+                if ($(this).context.id.beginsWith(id)) {
+                    var a = "#" + $(this).context.id + " td:nth-child(4)", d = "#" + $(this).context.id + " th:nth-child(4)";
+                    $(a).hide();
+                    $(d).hide();
+                }
+            });
+        });
+
+        $(" .ui-ebixgrid-view > table[id^='ClaimGrid'] > tbody > tr > td > a").each(function () {
+            if ("Select" == $(this).text() || "View" == $(this).text() || "Edit" == $(this).text()) {
+                var url = ($(this).attr("href") || $(this).attr("rec")), a = url.getstringinbetween("AccidentClaimId"), c = url.getstringinbetween("ClaimType"), f = guid(), id = url ? url.getstringinbetween("PaymentId") : "";
+                $(this).addClass(f);
+                c == "3" && $.ajax({
+                    type: "POST",
+                    url: '@Url.ActionEncoded("GetRecoveryTopId", "ClaimRecoveryProcessing")',
+                    data: {
+                        AccId: a,
+                        ClaimType: c
+                    },
+                    success: function (a) {
+                        (-1 == $.inArray(id, a.split("~"))) && $("a." + f).hide()
+                    }
+                })
+            }
+        });
+
+
+
+        $("#Togglediv legend").click(function (a) {
+            $(this).hasClass("ExpCol") && ($(this).hasClass("ui-minusicon") ? $(this).addClass("ui-plusicon").removeClass("ui-minusicon") : $(this).addClass("ui-minusicon").removeClass("ui-plusicon"), $(this).next("div").toggle("slow"));
+        });
+
+
+        $("#btnSave").click(function (a) {
+            if ('@ClaimType1' == '1' && IsPageChanged() && $("#ClaimRecoveryEditorForm").valid()) {
+                if (parseFloat("@Model.HApproveMandateAmt") > parseFloat($("#TotalAmt_R").val().replace(/,/g, ""))) {
+                    CreateDialog("Recovery Total amount cannot be less than approved mandate : $" + "@Model.HApproveMandateAmt" + ", Click OK to Continue", "Ok", "Cancel");
+                }
+                else {
+                    $('#RecoverFromOD,#TotalAmt_R').removeAttr("readonly").removeAttr("disabled");
+                    FormatValue();
+                    IsPageChanged() && $("#ClaimRecoveryEditorForm").submit();
+                }
+            }
+            else {
+                $('#RecoverFromBI').removeAttr("readonly").removeAttr("disabled");
+                FormatValue();
+                IsPageChanged() && $("#ClaimRecoveryEditorForm").valid() && $("#ClaimRecoveryEditorForm").submit();
+                $('#RecoverFromBI').attr("readonly", "readonly").attr("disabled", "disabled");
+            }
+        });
+
+        $("#ClaimRecoveryEditorForm input[type=text]").change(function () {
+            var b = 0, a = $(this).context.id.slice(-2), c = "" == $(this).val() ? "0.00" : $(this).val();
+            $("input[type=text]").each(function () {
+                var a = "" == $(this).val().replace(/,/g, "") ? "0.00" : $(this).val().replace(/,/g, "");
+                $(this).is(":visible") && "_R" == $(this).context.id.slice(-2) && "TotalAmt_R" != $(this).context.id && $(this).hasClass("format") && (b = parseFloat(a.replace(/,/g, "")) + b)
+            }), $("#TotalAmt_R").val(("-" == b.toString().charAt(0) ? "-" : "") + CurrencyFormat(parseFloat(b)))
+        });
+
+        $("table.ui-ebixgrid-btable span").click(function () {
+            var a = $(this).context.id;
+            $("table.ui-ebixgrid-btable span").each(function () {
+                if ($(this).hasClass("ui-icon-minus") || $(this).hasClass("ui-icon-plus")) {
+                    if (!a.beginsWith($(this).context.id)) {
+                        var spanid = $(this).context.id, id = spanid.slice(5, spanid.length);
+                        $('#' + id).hide();
+                        $('#' + spanid).removeClass('ui-icon-minus').addClass('ui-icon-plus');
+                    }
+                }
+            });
+        });
+
+        if ("215" == "@submenuval" && "Edit" == getQueryVariable("Viewmode")) {
+            var c = getQueryVariable("ClaimType");
+            if (c == "3") {
+                $('#RecoverFromBI').attr("readonly", "readonly").attr("disabled", "disabled");
+            }
+            if (c == "1") {
+                $('#RecoverFromOD,#TotalAmt_R').attr("readonly", "readonly").attr("disabled", "disabled");
+            }
+        }
+        SetDivPost();
+    };
+
+    var Tmainheader = {
+        1: function () { return '@Html.Raw(ClaimRecoveryEditor.ODClaimRecovery)' }, 2: function () { return '@Html.Raw(ClaimRecoveryEditor.TPPDClaimRecovery)' }, 3: function () { return '@Html.Raw(ClaimRecoveryEditor.TPBIClaimRecovery)' }, 0: function () { return '@Html.Raw(ClaimRecoveryEditor.ODClaimRecovery)'; }
+    };
+    $(document).ready(do_on_load);
+    $(window).bind('page:change', do_on_load);
+
+    function FormatValue() {
+        $("input[type=text]").each(function () {
+            if ($(this).hasClass("format") && "" != $(this).val()) {
+                var a = $(this).context.id, b = $(this).val().replace(/,/g, "");
+                $("#" + a).val(b.replace("NaN", "0"))
+            }
+        });
+    };
+    function CreateDialogRecovery(TexttoDisplay, okText, url) {
+        $("<div id='CreateDialog_id'></div>").text(TexttoDisplay).dialog({
+            modal: true,
+            title: 'CRIS+',
+            draggable: false,
+            buttons: [{
+                id: 'btnDialogeOK',
+                text: okText,
+                click: function () {
+                    $(this).dialog("close");
+                    window.location.href = url;
+                }
+            }]
+        }).height('auto').attr('id', 'dialogId');
+        $("#btnDialogeOK").closest("div").css("margin-right", "0%");
+    };
+    function InitializeDialog($element, a, b) {
+        $element.dialog({
+            width: "900",
+            resizable: false,
+            draggable: true,
+            show: { effect: 'drop', direction: "up" },
+            title: "Print",
+            model: true,
+            show: 'slide',
+            dialogClass: 'alert',
+            closeOnEscape: true,
+            open: function (event, ui) {
+                var path = '@Url.Content("~/ClaimMasters/PreviewDocumentIndex")' + "?ClaimID=" + a + "&SId=" + b + "&AccidentClaimId=" + '@accidentClaimIdNew' + "&ScreenId=" + '@Model.screenId' + "&uid=" + guid();
+                $element.load(path);
+            },
+            position: {
+                my: "center",
+                at: "center",
+                of: window
+            },
+            close: function () {
+                $element.dialog('destroy').remove();
+                if ($("#HChildGrid").val() != "" && $("#" + $("#HChildGrid").val()).length) {
+                    try {
+                        $("#" + $("#HChildGrid").val()).remove()
+                        $('div[aria-describedby="' + $("#HChildGrid").val() + '"]').remove();
+                        $("#HChildGrid").val("");
+                    }
+                    catch (exx) {
+                    }
+                }
+            }
+
+        }).css('max-height', '500px').css('overflow-y', 'scroll');
+    };
+    function ClearForm(a) {
+        $("#error").hide();
+        $("#" + a).find(':input').each(function () {
+            switch (this.type) {
+                case 'text':
+                    $("#RecoverAmt_R,#LeagalLawyerCost_R,#TotalAmt_R").val("0.00");
+                case 'textarea':
+                    $(this).val('');
+                    break;
+                case 'checkbox':
+                case 'radio':
+                    this.checked = false;
+            }
+        });
+        $("#" + a).find('select').each(function () {
+            $(this).prop('selectedIndex', 0);
+        });
+        $('span.field-validation-error').removeClass('field-validation-error').addClass('field-validation-valid');
+        $("#Total_D,#Total_S").prop('readonly', true).val('0.00');
+        ReadyOnlyPayment("_S");
+    };
+
+    function ReadyOnlyPayment(a) {
+        $("input[type=text]").each(function () {
+            $(this).context.id.slice(-2) == a && $(this).hasClass("format") && $(this).prop("readonly", !0)
+        });
+    };
+    function ExpandGridAfterPost(a) {
+        $("table.ui-ebixgrid-btable span").each(function () {
+            if ($(this).hasClass("ui-icon-minus") || $(this).hasClass("ui-icon-plus")) {
+                if (a.beginsWith($(this).context.id)) {
+                    var spanid = $(this).context.id, id = spanid.slice(5, spanid.length);
+                    $('#' + id).show();
+                    $('#' + spanid).removeClass('ui-icon-plus').addClass('ui-icon-minus');
+                }
+            }
+        });
+    };
+    function getQueryVariable(a) {
+        for (var c = "@MenuListItem.ClaimTabs.GetQueryStringVal()".replace(/amp;/ig, "").split("&"), b = 0; b < c.length; b++) {
+            var d = c[b].split("=");
+            if (d[0] == a) return d[1]
+        }
+    };
+    function SetHiddenSpan() {
+        var AccidentClaimId = getQueryVariable("AccidentClaimId"), RecoveryId = (null == getQueryVariable("RecoveryId")) ? "@Model.RecoveryId" : getQueryVariable("RecoveryId"), ClaimType = getQueryVariable("ClaimType");
+        $(".ui-ebixgrid-view > table > tbody > tr > td > a").each(function () {
+            $(this).attr("href") && $(this).attr("href").getstringinbetween("AccidentClaimId") == AccidentClaimId && $(this).attr("href").getstringinbetween("RecoveryId") == RecoveryId && $(this).attr("href").getstringinbetween("ClaimType") == ClaimType && $("#Hshowgrid").val("span_" + $(this).closest('tr')[0].id + "_s0");
+        });
+    }
+
+    function ShowHideDiv(e) {
+        $("#ClaimRecoveryEditorForm fieldset,#ClaimRecoveryEditorForm div").each(function () {
+            if ($(this).hasClass("OD") || $(this).hasClass("PD") || $(this).hasClass("BI")) "1" == e ? $(this).hasClass("OD") ? ($(this), $(this).show()) : $(this).hide() : "2" == e ? $(this).hasClass("PD") ? $(this).show() : $(this).hide() : $(this).hasClass("BI") ? $(this).show() : $(this).hide();
+        });
+        $("input[type=text]").each(function () {
+            var a = ["ClaimantName"]; -1 == $.inArray($(this).context.id, a) ? $(this).hasClass("format") && "" == $(this).val() && $(this).val("0.00") : ("" == $(this).val() || "0.00" == $(this).val()) && -1 < $.inArray($(this).context.id, a) && $(this).val("");
+        });
+    };
+
+    function ClearDropDown(a) {
+        for (var b = [], b = a.split(","), c = 0; b[c]; c++) $("#" + a).empty(), $("#" + a).append(new Option("[Select...]", ""));
+    };
+
+
+    var guid = (function () {
+        function s4() {
+            return Math.floor((1 + Math.random()) * 0x10000).toString(16).substring(1);
+        }
+        return function () {
+            return s4() + s4() + '-' + s4() + '-' + s4() + '-' + s4() + '-' + s4() + s4() + s4();
+        };
+    })();
+
+
+
+    String.prototype.getstringinbetween = function (a) {
+        for (var e = this.split("&"), d = 0; d < e.length; d++) {
+            var b = e[d].split("=");
+            if (b[0] == a) return b[1]
+        };
+    };
+
+    String.prototype.contains = function (a) {
+        return -1 != this.indexOf(a)
+    };
+    String.prototype.beginsWith = function (string) {
+        return (this.indexOf(string) === 0);
+    };
+    $("body").delegate("a.btn.btn-xs.btn-info", "click", function () {
+        var sPageURL = $(this)[0].getAttribute("href");
+        if ('@isEncryptedParams' == "YES") {
+            $.ajax({
+                type: "POST",
+                url: '@Url.Action("GetEncryptedUrl", "ClaimProcessing")',
+                data: {
+                    Url: sPageURL
+                },
+                success: function (data) {
+                    window.location.href = data;
+                }
+            });
+        }
+        else {
+            window.location.href = sPageURL;
+        }
+    });
+</script>

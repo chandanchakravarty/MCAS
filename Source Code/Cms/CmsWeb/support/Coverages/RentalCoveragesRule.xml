@@ -1,0 +1,1067 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Group Code taken from RuleType  Enumeration defined in ClsCoverages  -->
+<Root>
+	<Master>
+		<Query Code="SELECT" Level="APP">Proc_GetKeysForRental_APP</Query>
+		<Query Code="SELECT" Level="POLICY">Proc_GetKeysForRental_POL</Query>
+		<Column Code="APP_EFFECTIVE_DATE" MapColumnn="APP_EFFECTIVE_DATE" TableAssociated="APP_LIST"
+			ColumnAssociated="APP_EFFECTIVE_DATE"></Column>
+		<Column Code="APP_YEAR" MapColumnn="APP_YEAR" TableAssociated="APP_LIST" ColumnAssociated="APP_EFFECTIVE_DATE"></Column>
+		<Column Code="LOB_ID" MapColumnn="LOB_ID" TableAssociated="APP_LIST" ColumnAssociated="APP_LOB"></Column>
+		<Column Code="STATE_ID" MapColumnn="STATE_ID" TableAssociated="APP_LIST" ColumnAssociated="STATE_ID"></Column>
+		<Column Code="REP_COST" MapColumnn="REP_COST" TableAssociated="" ColumnAssociated=""></Column>
+		<Column Code="MKT_VALUE" MapColumnn="MKT_VALUE" TableAssociated="" ColumnAssociated=""></Column>
+		<Column Code="PKG_TYPE" MapColumnn="PKG_TYPE" TableAssociated="" ColumnAssociated=""></Column>
+		<Column Code="UND_CONS" MapColumnn="UND_CONS" TableAssociated="" ColumnAssociated=""></Column>
+		<Column Code="INS_VAL_OFF" MapColumnn="INS_VAL_OFF" TableAssociated="" ColumnAssociated=""></Column>
+		<Column Code="INS_VAL_SET_NO" MapColumnn="INS_VAL_SET_NO" TableAssociated="" ColumnAssociated=""></Column>
+		<Column Code="COV_BASE_EXCLUDED" MapColumnn="COV_BASE_EXCLUDED" TableAssociated="" ColumnAssociated=""></Column>
+		<Column Code="COV_BASE_REPL" MapColumnn="COV_BASE_REPL" TableAssociated="" ColumnAssociated=""></Column>
+		<Column Code="NUM_LOC_ALARMS" MapColumnn="NUM_LOC_ALARMS" TableAssociated="" ColumnAssociated=""></Column>
+		<Column Code="IS_DP392" MapColumnn="IS_DP392" TableAssociated="" ColumnAssociated=""></Column>
+		<Column Code="OLD_COV_A" MapColumnn="OLD_COV_A"></Column>
+		<Column Code="VALID_COUNTY" MapColumnn="VALID_COUNTY" TableAssociated="" ColumnAssociated=""></Column>
+		<Column Code="TMP_COV_A" MapColumnn=""></Column>
+		<Column Code="LP124" MapColumnn="LP124"></Column>
+		<Column Code="COV_A" MapColumnn=""></Column>
+		<Column Code="COV_B" MapColumnn=""></Column>
+		<Column Code="COV_C" MapColumnn=""></Column>
+		<Column Code="COV_D" MapColumnn=""></Column>
+		<Column Code="MIN_A" MapColumnn=""></Column>
+		<Column Code="TREE_A" MapColumnn=""></Column>
+		<Column Code="SET_TO_EQUAL" MapColumnn="SET_TO_EQUAL"></Column>
+		<!-- ADDE BY MANOJ Rathore -->
+		<Column Code="VERIFY_RULE" MapColumnn="VERIFY_RULE"></Column>
+	</Master>
+	<!-- Coverages to be defaulted when new dwelling is added  -->
+	<Group Code="Default">
+		<Rule Action="Database" StartDate="1950-01-01" EndDate="3000-12-30">
+			<Conditions>
+				<Condition Operand1="1" Operator="==" Operand2="1" OperandType="Double">
+					<!-- ToGrant CoverageCode="SD">
+						<Limit Value="" Operand1="" Operator="" Operand2="" LimitID=""></Limit>
+						<Deductible Value="" Operand1="" Operator="" Operand2="" DeducID=""></Deductible>
+					</ToGrant -->
+					<ToGrant CoverageCode="CSL">
+						<Limit Value="100000" Operand1="" Operator="" Operand2="" LimitID=""></Limit>
+						<Deductible Value="" Operand1="" Operator="" Operand2="" DeducID=""></Deductible>
+					</ToGrant>
+					<ToGrant CoverageCode="MEDPM">
+						<Limit Value="1000" Operand1="" Operator="" Operand2="" LimitID=""></Limit>
+						<Deductible Value="" Operand1="" Operator="" Operand2="" DeducID=""></Deductible>
+					</ToGrant>
+					<ToGrant CoverageCode="DP100">
+						<Limit Value="" Operand1="" Operator="" Operand2="" LimitID=""></Limit>
+						<Deductible Value="" Operand1="" Operator="" Operand2="" DeducID=""></Deductible>
+					</ToGrant>
+					<ToGrant CoverageCode="DP320">
+						<Limit Value="500" Operand1="" Operator="" Operand2="" LimitID=""></Limit>
+						<Deductible Value="" Operand1="" Operator="" Operand2="" DeducID=""></Deductible>
+					</ToGrant>
+					<ToGrant CoverageCode="DP422">
+						<Limit Value="" Operand1="" Operator="" Operand2="" LimitID=""></Limit>
+						<Deductible Value="" Operand1="" Operator="" Operand2="" DeducID=""></Deductible>
+					</ToGrant>
+					<ToGrant CoverageCode="DP417">
+						<Limit Value="" Operand1="" Operator="" Operand2="" LimitID=""></Limit>
+						<Deductible Value="" Operand1="" Operator="" Operand2="" DeducID=""></Deductible>
+					</ToGrant>
+					<ToGrant CoverageCode="APDI">
+						<Limit Value="" Operand1="" Operator="" Operand2="" LimitID=""></Limit>
+						<Deductible Value="" Operand1="" Operator="" Operand2="" DeducID=""></Deductible>
+						<AdDeductible Value="500" Operand1="" Operator="" Operand2="" DeducID=""></AdDeductible>
+					</ToGrant>
+					<!-- ToGrant CoverageCode="BOSTR">
+						<Limit Value="" Operand1="" Operator="" Operand2="" LimitID=""></Limit>
+						<Deductible Value="" Operand1="" Operator="" Operand2="" DeducID=""></Deductible>
+						<AdDeductible Value="" Operand1="" Operator="" Operand2="" DeducID=""></AdDeductible>
+					</ToGrant -->
+				</Condition>
+			</Conditions>
+			<Conditions>
+				<!--Michigan DP-2 Repair-->
+				<Condition Operand1="$PKG_TYPE" Operator="==" Operand2="11290" OperandType="Double">
+					<ToGrant CoverageCode="DP289">
+						<Limit Value="" Operand1="" Operator="" Operand2="" LimitID=""></Limit>
+						<Deductible Value="" Operand1="" Operator="" Operand2="" DeducID=""></Deductible>
+					</ToGrant>
+					<ToGrant CoverageCode="DP02">
+						<Limit Value="" Operand1="" Operator="" Operand2="" LimitID=""></Limit>
+						<Deductible Value="" Operand1="" Operator="" Operand2="" DeducID=""></Deductible>
+					</ToGrant>
+				</Condition>
+				<!--Michigan DP-3 Repair-->
+				<Condition Operand1="$PKG_TYPE" Operator="==" Operand2="11292" OperandType="Double">
+					<ToGrant CoverageCode="DP289">
+						<Limit Value="" Operand1="" Operator="" Operand2="" LimitID=""></Limit>
+						<Deductible Value="" Operand1="" Operator="" Operand2="" DeducID=""></Deductible>
+					</ToGrant>
+					<ToGrant CoverageCode="DP03">
+						<Limit Value="" Operand1="" Operator="" Operand2="" LimitID=""></Limit>
+						<Deductible Value="" Operand1="" Operator="" Operand2="" DeducID=""></Deductible>
+					</ToGrant>
+				</Condition>
+				<!--Indiana DP-2 Repair-->
+				<Condition Operand1="$PKG_TYPE" Operator="==" Operand2="11480" OperandType="Double">
+					<ToGrant CoverageCode="DP289">
+						<Limit Value="" Operand1="" Operator="" Operand2="" LimitID=""></Limit>
+						<Deductible Value="" Operand1="" Operator="" Operand2="" DeducID=""></Deductible>
+					</ToGrant>
+					<ToGrant CoverageCode="DP02">
+						<Limit Value="" Operand1="" Operator="" Operand2="" LimitID=""></Limit>
+						<Deductible Value="" Operand1="" Operator="" Operand2="" DeducID=""></Deductible>
+					</ToGrant>
+				</Condition>
+				<!--DP-2 Replacement-->
+				<Condition Operand1="$PKG_TYPE" Operator="==" Operand2="11289" OperandType="Double">
+					<ToGrant CoverageCode="DP02">
+						<Limit Value="" Operand1="" Operator="" Operand2="" LimitID=""></Limit>
+						<Deductible Value="" Operand1="" Operator="" Operand2="" DeducID=""></Deductible>
+					</ToGrant>
+				</Condition>
+				<!--DP-3 Repair-->
+				<Condition Operand1="$PKG_TYPE" Operator="==" Operand2="11482" OperandType="Double">
+					<ToGrant CoverageCode="DP03">
+						<Limit Value="" Operand1="" Operator="" Operand2="" LimitID=""></Limit>
+						<Deductible Value="" Operand1="" Operator="" Operand2="" DeducID=""></Deductible>
+					</ToGrant>
+				</Condition>
+				<!--DP-3 Replacement-->
+				<Condition Operand1="$PKG_TYPE" Operator="==" Operand2="11291" OperandType="Double">
+					<ToGrant CoverageCode="DP03">
+						<Limit Value="" Operand1="" Operator="" Operand2="" LimitID=""></Limit>
+						<Deductible Value="" Operand1="" Operator="" Operand2="" DeducID=""></Deductible>
+					</ToGrant>
+				</Condition>
+				<!--DP-3 Replacement-->
+				<Condition Operand1="$PKG_TYPE" Operator="==" Operand2="11458" OperandType="Double">
+					<ToGrant CoverageCode="DP03">
+						<Limit Value="" Operand1="" Operator="" Operand2="" LimitID=""></Limit>
+						<Deductible Value="" Operand1="" Operator="" Operand2="" DeducID=""></Deductible>
+					</ToGrant>
+				</Condition>
+				<!--DP-2 Replacement-->
+				<Condition Operand1="$PKG_TYPE" Operator="==" Operand2="11479" OperandType="Double">
+					<ToGrant CoverageCode="DP02">
+						<Limit Value="" Operand1="" Operator="" Operand2="" LimitID=""></Limit>
+						<Deductible Value="" Operand1="" Operator="" Operand2="" DeducID=""></Deductible>
+					</ToGrant>
+				</Condition>
+				<!--DP-3 Replacement-->
+				<Condition Operand1="$PKG_TYPE" Operator="==" Operand2="11481" OperandType="Double">
+					<ToGrant CoverageCode="DP03">
+						<Limit Value="" Operand1="" Operator="" Operand2="" LimitID=""></Limit>
+						<Deductible Value="" Operand1="" Operator="" Operand2="" DeducID=""></Deductible>
+					</ToGrant>
+				</Condition>
+			</Conditions>
+		</Rule>
+		<Rule Action="Database" StartDate="1950-01-01" EndDate="3000-12-30" STATE_ID="14">
+			<Conditions>
+				<Condition Operand1="1" Operator="==" Operand2="1" OperandType="Double">
+					<ToGrant CoverageCode="DP113">
+						<Limit Value="" Operand1="" Operator="" Operand2="" LimitID=""></Limit>
+						<Deductible Value="" Operand1="" Operator="" Operand2="" DeducID=""></Deductible>
+					</ToGrant>
+				</Condition>
+			</Conditions>
+		</Rule>
+		<Rule Action="Database" StartDate="1950-01-01" EndDate="3000-12-30" STATE_ID="22">
+			<Conditions>
+				<Condition Operand1="1" Operator="==" Operand2="1" OperandType="Double">
+					<ToGrant CoverageCode="DP121">
+						<Limit Value="" Operand1="" Operator="" Operand2="" LimitID=""></Limit>
+						<Deductible Value="" Operand1="" Operator="" Operand2="" DeducID=""></Deductible>
+					</ToGrant>
+				</Condition>
+			</Conditions>
+		</Rule>
+	</Group>
+	<!-- Risk Dependent Rules -->
+	<Group Code="RiskDependent">
+		<!-- Rules for setting Master Keys -->
+		<!-- Start Of Michigan Rules -->
+		<Rule Action="Master" StartDate="1950-01-01" EndDate="3000-12-12" STATE_ID="22">
+			<Conditions>
+				<!--Michigan DP3 Premier-->
+				<Condition Operand1="$PKG_TYPE" Operator="==" Operand2="11458" OperandType="Double">
+					<ToSet Key="$COV_A" Value="$REP_COST"></ToSet>
+					<ToSet Key="$COV_B" Value="" Operand1="$COV_A" Operator="*" Operand2="0.1"></ToSet>
+					<ToSet Key="$COV_C" Value="" Operand1="$COV_A" Operator="*" Operand2="0.1"></ToSet>
+					<ToSet Key="$COV_D" Value="" Operand1="$COV_A" Operator="*" Operand2="0.1"></ToSet>
+					<SubConditions>
+						<SubCondition Operand1="$VERIFY_RULE" Operator="==" Operand2="N" OperandType="String">
+							<ToSet Key="$COV_A" Value="$REP_COST"></ToSet>
+							<ToSet Key="$COV_B" Value="" Operand1="$COV_A" Operator="*" Operand2="0.1"></ToSet>
+							<ToSet Key="$COV_C" Value="" Operand1="$COV_A" Operator="*" Operand2="0.1"></ToSet>
+							<ToSet Key="$COV_D" Value="" Operand1="$COV_A" Operator="*" Operand2="0.1"></ToSet>
+						</SubCondition>
+					</SubConditions>
+					<SubConditions>
+						<SubCondition Operand1="$COV_C" Operator="&gt;" Operand2="10000" OperandType="Double">
+							<ToSet Key="$COV_C" Value="10000"></ToSet>
+						</SubCondition>
+					</SubConditions>
+				</Condition>
+				<!--Michigan DP-2 Replacement-->
+				<Condition Operand1="$PKG_TYPE" Operator="==" Operand2="11289" OperandType="Double">
+					<!--ToSet Key="$COV_A" Value="$REP_COST"></ToSet-->
+					<SubConditions>
+						<SubCondition Operand1="$SET_TO_EQUAL" Operator="==" Operand2="1" OperandType="Double">
+							<ToSet Key="$TMP_COV_A" Value="" Operand1="$REP_COST" Operator="*" Operand2="1"></ToSet>
+						</SubCondition>
+						<SubCondition Operand1="$SET_TO_EQUAL" Operator="==" Operand2="0" OperandType="Double">
+							<ToSet Key="$TMP_COV_A" Value="" Operand1="$REP_COST" Operator="*" Operand2="0.8"></ToSet>
+						</SubCondition>
+					</SubConditions>
+					<SubConditions>
+						<SubCondition Operand1="$OLD_COV_A" Operator="&lt;" Operand2="$TMP_COV_A" OperandType="Double">
+							<ToSet Key="$COV_A" Value="$REP_COST"></ToSet>
+						</SubCondition>
+						<SubCondition Operand1="$REP_COST" Operator="&lt;" Operand2="$OLD_COV_A" OperandType="Double">
+							<ToSet Key="$COV_A" Value="$REP_COST"></ToSet>
+						</SubCondition>
+						<SubCondition Operand1="$OLD_COV_A" Operator=">=" Operand2="$TMP_COV_A" OperandType="Double">
+							<ToSet Key="$COV_A" Value="$OLD_COV_A"></ToSet>
+						</SubCondition>
+					</SubConditions>
+					<SubConditions>
+						<SubCondition Operand1="$VERIFY_RULE" Operator="==" Operand2="N" OperandType="String">
+							<!-- ToSet Key="$COV_A" Value="$REP_COST"></ToSet> Commented by Pravesh on 20 Aug 09 Itrack 6278 and was add as per old Itrack 3281 and dont remove this code  -->
+						</SubCondition>
+						<SubCondition Operand1="$COV_A" Operator="&lt;" Operand2="30000" OperandType="Double">
+							<ToSet Key="$COV_A" Value="30000"></ToSet>
+						</SubCondition>
+					</SubConditions>
+					<SubConditions>
+						<SubCondition Operand1="1" Operator="==" Operand2="1" OperandType="Double">
+							<ToSet Key="$COV_B" Value="" Operand1="$COV_A" Operator="*" Operand2="0.1"></ToSet>
+							<ToSet Key="$COV_C" Value="" Operand1="$COV_A" Operator="*" Operand2="0.05"></ToSet>
+							<ToSet Key="$COV_D" Value="" Operand1="$COV_A" Operator="*" Operand2="0.1"></ToSet>
+						</SubCondition>
+					</SubConditions>
+					<SubConditions>
+						<SubCondition Operand1="$COV_C" Operator="&gt;" Operand2="5000" OperandType="Double">
+							<ToSet Key="$COV_C" Value="5000"></ToSet>
+						</SubCondition>
+					</SubConditions>
+				</Condition>
+				<!--Michigan DP-2 Repair-->
+				<Condition Operand1="$PKG_TYPE" Operator="==" Operand2="11290" OperandType="Double">
+					<ToSet Key="$COV_A" Value="$MKT_VALUE"></ToSet>
+					<ToSet Key="$COV_B" Value="" Operand1="$COV_A" Operator="*" Operand2="0.1"></ToSet>
+					<ToSet Key="$COV_C" Value="" Operand1="$COV_A" Operator="*" Operand2="0.05"></ToSet>
+					<ToSet Key="$COV_D" Value="" Operand1="$COV_A" Operator="*" Operand2="0.1"></ToSet>
+					<SubConditions>
+						<SubCondition Operand1="$COV_C" Operator="&gt;" Operand2="5000" OperandType="Double">
+							<ToSet Key="$COV_C" Value="5000"></ToSet>
+						</SubCondition>
+					</SubConditions>
+				</Condition>
+				<!--Michigan DP-3 Replacement-->
+				<Condition Operand1="$PKG_TYPE" Operator="==" Operand2="11291" OperandType="Double">
+					<!--ToSet Key="$COV_A" Value="$REP_COST"></ToSet-->
+					<SubConditions>
+						<SubCondition Operand1="$SET_TO_EQUAL" Operator="==" Operand2="1" OperandType="Double">
+							<ToSet Key="$TMP_COV_A" Value="" Operand1="$REP_COST" Operator="*" Operand2="1"></ToSet>
+						</SubCondition>
+						<SubCondition Operand1="$SET_TO_EQUAL" Operator="==" Operand2="0" OperandType="Double">
+							<ToSet Key="$TMP_COV_A" Value="" Operand1="$REP_COST" Operator="*" Operand2="0.8"></ToSet>
+						</SubCondition>
+					</SubConditions>
+					<SubConditions>
+						<SubCondition Operand1="$OLD_COV_A" Operator="&lt;" Operand2="$TMP_COV_A" OperandType="Double">
+							<ToSet Key="$COV_A" Value="$REP_COST"></ToSet>
+						</SubCondition>
+						<SubCondition Operand1="$REP_COST" Operator="&lt;" Operand2="$OLD_COV_A" OperandType="Double">
+							<ToSet Key="$COV_A" Value="$REP_COST"></ToSet>
+						</SubCondition>
+						<SubCondition Operand1="$OLD_COV_A" Operator=">=" Operand2="$TMP_COV_A" OperandType="Double">
+							<ToSet Key="$COV_A" Value="$OLD_COV_A"></ToSet>
+						</SubCondition>
+					</SubConditions>
+					<SubConditions>
+						<SubCondition Operand1="$VERIFY_RULE" Operator="==" Operand2="N" OperandType="String">
+							<!-- ToSet Key="$COV_A" Value="$REP_COST"></ToSet> Commented by Pravesh on 20 Aug 09 Itrack 6278 and was add as per old Itrack 3281 and dont remove this code -->
+						</SubCondition>
+						<SubCondition Operand1="$COV_A" Operator="&lt;" Operand2="75000" OperandType="Double">
+							<ToSet Key="$COV_A" Value="75000"></ToSet>
+						</SubCondition>
+					</SubConditions>
+					<SubConditions>
+						<SubCondition Operand1="1" Operator="==" Operand2="1" OperandType="Double">
+							<ToSet Key="$COV_B" Value="" Operand1="$COV_A" Operator="*" Operand2="0.1"></ToSet>
+							<ToSet Key="$COV_C" Value="" Operand1="$COV_A" Operator="*" Operand2="0.05"></ToSet>
+							<ToSet Key="$COV_D" Value="" Operand1="$COV_A" Operator="*" Operand2="0.1"></ToSet>
+						</SubCondition>
+					</SubConditions>
+					<SubConditions>
+						<SubCondition Operand1="$COV_C" Operator="&gt;" Operand2="5000" OperandType="Double">
+							<ToSet Key="$COV_C" Value="5000"></ToSet>
+						</SubCondition>
+					</SubConditions>
+				</Condition>
+				<!--Michigan DP-3 Repair-->
+				<Condition Operand1="$PKG_TYPE" Operator="==" Operand2="11292" OperandType="Double">
+					<ToSet Key="$COV_A" Value="$MKT_VALUE"></ToSet>
+					<ToSet Key="$COV_B" Value="" Operand1="$COV_A" Operator="*" Operand2="0.1"></ToSet>
+					<ToSet Key="$COV_C" Value="" Operand1="$COV_A" Operator="*" Operand2="0.05"></ToSet>
+					<ToSet Key="$COV_D" Value="" Operand1="$COV_A" Operator="*" Operand2="0.1"></ToSet>
+					<SubConditions>
+						<SubCondition Operand1="$COV_C" Operator="&gt;" Operand2="5000" OperandType="Double">
+							<ToSet Key="$COV_C" Value="5000"></ToSet>
+						</SubCondition>
+					</SubConditions>
+				</Condition>
+			</Conditions>
+			<!-- implemented for Trees, Shrubs, Plants & Lawns (Max 500 per plant) coverage as per issue no 949 of covg-->
+			<Conditions>
+				<Condition Operand1="1" Operator="==" Operand2="1" OperandType="Double">
+					<ToSet Key="$TREE_A" Value="" Operand1="$COV_A" Operator="*" Operand2="0.05"></ToSet>
+				</Condition>
+			</Conditions>
+		</Rule>
+		<!-- End Of Michigan Rules -->
+		<!--Start Of Indiana Rule -->
+		<Rule Action="Master" StartDate="1950-01-01" EndDate="3000-12-12" STATE_ID="14">
+			<Conditions>
+				<!--Indiana DP-2 Replacement-->
+				<Condition Operand1="$PKG_TYPE" Operator="==" Operand2="11479" OperandType="Double">
+					<!--ToSet Key="$COV_A" Value="$REP_COST"></ToSet-->
+					<SubConditions>
+						<SubCondition Operand1="$SET_TO_EQUAL" Operator="==" Operand2="1" OperandType="Double">
+							<ToSet Key="$TMP_COV_A" Value="" Operand1="$REP_COST" Operator="*" Operand2="1"></ToSet>
+						</SubCondition>
+						<SubCondition Operand1="$SET_TO_EQUAL" Operator="==" Operand2="0" OperandType="Double">
+							<ToSet Key="$TMP_COV_A" Value="" Operand1="$REP_COST" Operator="*" Operand2="0.8"></ToSet>
+						</SubCondition>
+					</SubConditions>
+					<SubConditions>
+						<SubCondition Operand1="$OLD_COV_A" Operator="&lt;" Operand2="$TMP_COV_A" OperandType="Double">
+							<ToSet Key="$COV_A" Value="$REP_COST"></ToSet>
+						</SubCondition>
+						<SubCondition Operand1="$REP_COST" Operator="&lt;" Operand2="$OLD_COV_A" OperandType="Double">
+							<ToSet Key="$COV_A" Value="$REP_COST"></ToSet>
+						</SubCondition>
+						<SubCondition Operand1="$OLD_COV_A" Operator=">=" Operand2="$TMP_COV_A" OperandType="Double">
+							<ToSet Key="$COV_A" Value="$OLD_COV_A"></ToSet>
+						</SubCondition>
+					</SubConditions>
+					<SubConditions>
+						<SubCondition Operand1="$VERIFY_RULE" Operator="==" Operand2="N" OperandType="String">
+							<!-- ToSet Key="$COV_A" Value="$REP_COST"></ToSet> Commented by Pravesh on 20 Aug 09 Itrack 6278 and was add as per old Itrack 3281 and dont remove this code -->
+						</SubCondition>
+						<SubCondition Operand1="$COV_A" Operator="&lt;" Operand2="30000" OperandType="Double">
+							<ToSet Key="$COV_A" Value="30000"></ToSet>
+						</SubCondition>
+					</SubConditions>
+					<SubConditions>
+						<SubCondition Operand1="1" Operator="==" Operand2="1" OperandType="Double">
+							<ToSet Key="$COV_B" Value="" Operand1="$COV_A" Operator="*" Operand2="0.1"></ToSet>
+							<ToSet Key="$COV_C" Value="" Operand1="$COV_A" Operator="*" Operand2="0.05"></ToSet>
+							<ToSet Key="$COV_D" Value="" Operand1="$COV_A" Operator="*" Operand2="0.1"></ToSet>
+						</SubCondition>
+					</SubConditions>
+					<SubConditions>
+						<SubCondition Operand1="$COV_C" Operator="&gt;" Operand2="5000" OperandType="Double">
+							<ToSet Key="$COV_C" Value="5000"></ToSet>
+						</SubCondition>
+					</SubConditions>
+				</Condition>
+				<!--Indiana DP-2 Repair-->
+				<Condition Operand1="$PKG_TYPE" Operator="==" Operand2="11480" OperandType="Double">
+					<ToSet Key="$COV_A" Value="$MKT_VALUE"></ToSet>
+					<ToSet Key="$COV_B" Value="" Operand1="$COV_A" Operator="*" Operand2="0.1"></ToSet>
+					<ToSet Key="$COV_C" Value="" Operand1="$COV_A" Operator="*" Operand2="0.05"></ToSet>
+					<ToSet Key="$COV_D" Value="" Operand1="$COV_A" Operator="*" Operand2="0.1"></ToSet>
+					<SubConditions>
+						<SubCondition Operand1="$COV_C" Operator="&gt;" Operand2="5000" OperandType="Double">
+							<ToSet Key="$COV_C" Value="5000"></ToSet>
+						</SubCondition>
+					</SubConditions>
+				</Condition>
+				<!--Indiana DP-3 Replacement-->
+				<Condition Operand1="$PKG_TYPE" Operator="==" Operand2="11481" OperandType="Double">
+					<!--ToSet Key="$COV_A" Value="$REP_COST"></ToSet-->
+					<SubConditions>
+						<SubCondition Operand1="$SET_TO_EQUAL" Operator="==" Operand2="1" OperandType="Double">
+							<ToSet Key="$TMP_COV_A" Value="" Operand1="$REP_COST" Operator="*" Operand2="1"></ToSet>
+						</SubCondition>
+						<SubCondition Operand1="$SET_TO_EQUAL" Operator="==" Operand2="0" OperandType="Double">
+							<ToSet Key="$TMP_COV_A" Value="" Operand1="$REP_COST" Operator="*" Operand2="0.8"></ToSet>
+						</SubCondition>
+					</SubConditions>
+					<SubConditions>
+						<SubCondition Operand1="$OLD_COV_A" Operator="&lt;" Operand2="$TMP_COV_A" OperandType="Double">
+							<ToSet Key="$COV_A" Value="$REP_COST"></ToSet>
+						</SubCondition>
+						<SubCondition Operand1="$REP_COST" Operator="&lt;" Operand2="$OLD_COV_A" OperandType="Double">
+							<ToSet Key="$COV_A" Value="$REP_COST"></ToSet>
+						</SubCondition>
+						<SubCondition Operand1="$OLD_COV_A" Operator=">=" Operand2="$TMP_COV_A" OperandType="Double">
+							<ToSet Key="$COV_A" Value="$OLD_COV_A"></ToSet>
+						</SubCondition>
+					</SubConditions>
+					<SubConditions>
+						<SubCondition Operand1="$VERIFY_RULE" Operator="==" Operand2="N" OperandType="String">
+							<!-- ToSet Key="$COV_A" Value="$REP_COST"></ToSet> Commented by Pravesh on 20 Aug 09 Itrack 6278 and was add as per old Itrack 3281 and dont remove this code -->
+						</SubCondition>
+						<SubCondition Operand1="$COV_A" Operator="&lt;" Operand2="75000" OperandType="Double">
+							<ToSet Key="$COV_A" Value="75000"></ToSet>
+						</SubCondition>
+					</SubConditions>
+					<SubConditions>
+						<SubCondition Operand1="1" Operator="==" Operand2="1" OperandType="Double">
+							<ToSet Key="$COV_B" Value="" Operand1="$COV_A" Operator="*" Operand2="0.1"></ToSet>
+							<ToSet Key="$COV_C" Value="" Operand1="$COV_A" Operator="*" Operand2="0.05"></ToSet>
+							<ToSet Key="$COV_D" Value="" Operand1="$COV_A" Operator="*" Operand2="0.1"></ToSet>
+						</SubCondition>
+					</SubConditions>
+					<SubConditions>
+						<SubCondition Operand1="$COV_C" Operator="&gt;" Operand2="5000" OperandType="Double">
+							<ToSet Key="$COV_C" Value="5000"></ToSet>
+						</SubCondition>
+					</SubConditions>
+				</Condition>
+				<!--Indiana DP-3 Repair-->
+				<Condition Operand1="$PKG_TYPE" Operator="==" Operand2="11482" OperandType="Double">
+					<ToSet Key="$COV_A" Value="$MKT_VALUE"></ToSet>
+					<ToSet Key="$COV_B" Value="" Operand1="$COV_A" Operator="*" Operand2="0.1"></ToSet>
+					<ToSet Key="$COV_C" Value="" Operand1="$COV_A" Operator="*" Operand2="0.05"></ToSet>
+					<ToSet Key="$COV_D" Value="" Operand1="$COV_A" Operator="*" Operand2="0.1"></ToSet>
+					<SubConditions>
+						<SubCondition Operand1="$COV_C" Operator="&gt;" Operand2="5000" OperandType="Double">
+							<ToSet Key="$COV_C" Value="5000"></ToSet>
+						</SubCondition>
+					</SubConditions>
+				</Condition>
+			</Conditions>
+			<!-- implemented for Trees, Shrubs, Plants & Lawns (Max 500 per plant) coverage as per issue no 949 of covg-->
+			<Conditions>
+				<Condition Operand1="1" Operator="==" Operand2="1" OperandType="Double">
+					<ToSet Key="$TREE_A" Value="" Operand1="$COV_A" Operator="*" Operand2="0.05"></ToSet>
+				</Condition>
+			</Conditions>
+		</Rule>
+		<!--End Of Indiana Rule -->
+		<Rule Action="Database" StartDate="1950-01-01" EndDate="3000-12-30" STATE_ID="22">
+			<!-- implemented for Trees, Shrubs, Plants & Lawns (Max 500 per plant) coverage as per issue no 949 of covg-->
+			<Conditions>
+				<Condition Operand1="1" Operator="==" Operand2="1" OperandType="Double">
+					<ToSet CoverageCode="TSPL">
+						<Limit Value="$TREE_A" Operand1="" Operator="" Operand2="" LimitID=""></Limit>
+						<Deductible Value="-1" Operand1="" Operator="" Operand2="" DeducID=""></Deductible>
+					</ToSet>
+				</Condition>
+			</Conditions>
+			<!-- Location Type Dependency Dependency On County -->
+			<Conditions>
+				<Condition Operand1="$VALID_COUNTY" Operator="==" Operand2="0" OperandType="Double">
+					<ToRevoke CoverageCode="MSC480"></ToRevoke>
+				</Condition>
+			</Conditions>
+			<!--Coverage E – Personal Liability Each Occurrence Check for No Coverage -->
+			<Conditions>
+				<Condition Operand1="$LP124" Operator="==" Operand2="0" OperandType="Double">
+					<ToGrant CoverageCode="LP417">
+						<Limit Value="" Operand1="" Operator="" Operand2="" LimitID=""></Limit>
+						<Deductible Value="" Operand1="" Operator="" Operand2="" DeducID=""></Deductible>
+					</ToGrant>
+					<SubCondition Operand1="$IS_DP392" Operator="==" Operand2="0" OperandType="Double">
+						<ToGrant CoverageCode="DP382">
+							<Limit Value="" Operand1="" Operator="" Operand2="" LimitID=""></Limit>
+							<Deductible Value="" Operand1="" Operator="" Operand2="" DeducID=""></Deductible>
+						</ToGrant>
+					</SubCondition>
+					<SubCondition Operand1="$IS_DP392" Operator="!=" Operand2="0" OperandType="Double">
+						<ToRevoke CoverageCode="DP382"></ToRevoke>	
+					</SubCondition>
+					<ToGrant CoverageCode="LP124">
+						<Limit Value="" Operand1="" Operator="" Operand2="" LimitID=""></Limit>
+						<Deductible Value="" Operand1="" Operator="" Operand2="" DeducID=""></Deductible>
+					</ToGrant>
+				</Condition>
+				<Condition Operand1="$LP124" Operator="!=" Operand2="0" OperandType="Double">
+					<ToRevoke CoverageCode="LP417"></ToRevoke>
+					<ToRevoke CoverageCode="DP382"></ToRevoke>
+				</Condition>
+			</Conditions>
+			<!-- Rating Info Dependency -->
+			<Conditions>
+				<Condition Operand1="$PKG_TYPE" Operator="==" Operand2="11290" OperandType="Double">
+					<ToRevoke CoverageCode="BR1143"></ToRevoke>
+					<ToRevoke CoverageCode="IF184"></ToRevoke>
+					<ToRevoke CoverageCode="IFNSE"></ToRevoke>
+				</Condition>
+				<Condition Operand1="$PKG_TYPE" Operator="==" Operand2="11292" OperandType="Double">
+					<ToRevoke CoverageCode="BR1143"></ToRevoke>
+					<ToRevoke CoverageCode="IF184"></ToRevoke>
+					<ToRevoke CoverageCode="IFNSE"></ToRevoke>
+				</Condition>
+				<Condition Operand1="$UND_CONS" Operator="==" Operand2="1" OperandType="Double">
+					<ToGrant CoverageCode="BR1143">
+						<Limit Value="" Operand1="" Operator="" Operand2="" LimitID=""></Limit>
+						<Deductible Value="" Operand1="" Operator="" Operand2="" DeducID=""></Deductible>
+					</ToGrant>
+				</Condition>
+				<Condition Operand1="$UND_CONS" Operator="==" Operand2="0" OperandType="Double">
+					<ToRevoke CoverageCode="BR1143"></ToRevoke>
+					<ToRevoke CoverageCode="IF184"></ToRevoke>
+					<ToRevoke CoverageCode="IFNSE"></ToRevoke>
+				</Condition>
+			</Conditions>
+			<Conditions>
+				<Condition Operand1="$NUM_LOC_ALARMS" Operator=">=" Operand2="1" OperandType="Double">
+					<ToGrant CoverageCode="DP216">
+						<Limit Value="" Operand1="" Operator="" Operand2="" LimitID=""></Limit>
+						<Deductible Value="" Operand1="" Operator="" Operand2="" DeducID=""></Deductible>
+					</ToGrant>
+				</Condition>
+				<Condition Operand1="$NUM_LOC_ALARMS" Operator="==" Operand2="0" OperandType="Double">
+					<ToRevoke CoverageCode="DP216"></ToRevoke>
+				</Condition>
+			</Conditions>
+			<!-- SET -->
+			<Conditions>
+				<Condition Operand1="$INS_VAL_OFF" Operator="!=" Operand2="0" OperandType="Double">
+					<ToGrant CoverageCode="SD">
+						<Limit Value="" Operand1="" Operator="" Operand2="" LimitID=""></Limit>
+						<Deductible Value="$INS_VAL_OFF" Operand1="" Operator="" Operand2="" DeducID=""></Deductible>
+					</ToGrant>
+				</Condition>
+				<Condition Operand1="$INS_VAL_OFF" Operator="==" Operand2="0" OperandType="Double">
+					<ToRevoke CoverageCode="SD"></ToRevoke>	
+				</Condition>
+			</Conditions>
+			<Conditions>
+				<Condition Operand1="$COV_BASE_REPL" Operator="!=" Operand2="0" OperandType="Double">
+					<ToGrant CoverageCode="BOSTR"> <!-- change from OSTR to BOSTR on 21 dec by pravesh as Coverage B will not hav additional but in BOSTR itrack 3157-->
+						<Limit Value="" Operand1="" Operator="" Operand2="" LimitID=""></Limit>
+						<Deductible Value="$INS_VAL_SET_NO" Operand1="" Operator="" Operand2="" DeducID=""></Deductible>
+					</ToGrant>
+				</Condition>
+				<Condition Operand1="$COV_BASE_REPL" Operator="==" Operand2="0" OperandType="Double">
+					<ToRevoke CoverageCode="BOSTR"></ToRevoke>	
+				</Condition>
+				<!-- Condition Operand1="$COV_BASE_REPL" Operator="==" Operand2="0" OperandType="Double">
+					<ToSet CoverageCode="BOSTR">  change from OSTR to BOSTR on 21 dec by pravesh as Coverage B will not hav additional but in BOSTR itrack 3157
+						<Limit Value="" Operand1="" Operator="" Operand2="" LimitID=""></Limit>
+						<Deductible Value="" Operand1="" Operator="" Operand2="" DeducID=""></Deductible>
+					</ToSet>
+				</Condition -->
+				
+			</Conditions>
+			<!--Michigan DP 900-->
+			<Conditions>
+				<Condition Operand1="$COV_BASE_EXCLUDED" Operator="!=" Operand2="0" OperandType="Double">
+					<ToGrant CoverageCode="DP900">
+						<Limit Value="" Operand1="" Operator="" Operand2="" LimitID=""></Limit>
+						<Deductible Value="-1" Operand1="" Operator="" Operand2="" DeducID=""></Deductible>
+					</ToGrant>
+				</Condition>
+				<Condition Operand1="$COV_BASE_EXCLUDED" Operator="==" Operand2="0" OperandType="Double">
+					<ToRevoke CoverageCode="DP900"></ToRevoke>
+				</Condition>
+			</Conditions>
+			<!--Michigan DP 900 END-->
+			<Conditions>
+				<!--Michigan DP3 Premier-->
+				<Condition Operand1="$PKG_TYPE" Operator="==" Operand2="11458" OperandType="Double">
+					<ToGrant CoverageCode="DWELL">
+						<Limit Value="$COV_A" Operand1="" Operator="" Operand2="" LimitID=""></Limit>
+						<Deductible Value="-1" Operand1="" Operator="" Operand2="" DeducID=""></Deductible>
+					</ToGrant>
+					<ToGrant CoverageCode="OSTR">
+						<Limit Value="$COV_B" Operand1="" Operator="" Operand2="" LimitID=""></Limit>
+						<Deductible Value="-1" Operand1="" Operator="" Operand2="" DeducID=""></Deductible>
+					</ToGrant>
+					<ToGrant CoverageCode="LPP">
+						<Limit Value="$COV_C" Operand1="" Operator="" Operand2="" LimitID=""></Limit>
+						<Deductible Value="-1" Operand1="" Operator="" Operand2="" DeducID=""></Deductible>
+					</ToGrant>
+					<ToGrant CoverageCode="RV">
+						<Limit Value="$COV_D" Operand1="" Operator="" Operand2="" LimitID=""></Limit>
+						<Deductible Value="-1" Operand1="" Operator="" Operand2="" DeducID=""></Deductible>
+					</ToGrant>
+					<ToGrant CoverageCode="DP321">
+						<Limit Value="" Operand1="" Operator="" Operand2="" LimitID=""></Limit>
+						<Deductible Value="" Operand1="" Operator="" Operand2="" DeducID=""></Deductible>
+					</ToGrant>
+				</Condition>
+				<!--Michigan DP-2 Replacement-->
+				<Condition Operand1="$PKG_TYPE" Operator="==" Operand2="11289" OperandType="Double">
+					<ToGrant CoverageCode="DWELL">
+						<Limit Value="$COV_A" Operand1="" Operator="" Operand2="" LimitID=""></Limit>
+						<Deductible Value="-1" Operand1="" Operator="" Operand2="" DeducID=""></Deductible>
+					</ToGrant>
+					<ToGrant CoverageCode="OSTR">
+						<Limit Value="$COV_B" Operand1="" Operator="" Operand2="" LimitID=""></Limit>
+						<Deductible Value="-1" Operand1="" Operator="" Operand2="" DeducID=""></Deductible>
+					</ToGrant>
+					<ToGrant CoverageCode="LPP">
+						<Limit Value="$COV_C" Operand1="" Operator="" Operand2="" LimitID=""></Limit>
+						<Deductible Value="-1" Operand1="" Operator="" Operand2="" DeducID=""></Deductible>
+					</ToGrant>
+					<ToGrant CoverageCode="RV">
+						<Limit Value="$COV_D" Operand1="" Operator="" Operand2="" LimitID=""></Limit>
+						<Deductible Value="-1" Operand1="" Operator="" Operand2="" DeducID=""></Deductible>
+					</ToGrant>
+				</Condition>
+				<!--Michigan DP-2 Repair-->
+				<Condition Operand1="$PKG_TYPE" Operator="==" Operand2="11290" OperandType="Double">
+					<ToGrant CoverageCode="DWELL">
+						<Limit Value="$COV_A" Operand1="" Operator="" Operand2="" LimitID=""></Limit>
+						<Deductible Value="-1" Operand1="" Operator="" Operand2="" DeducID=""></Deductible>
+					</ToGrant>
+					<ToGrant CoverageCode="OSTR">
+						<Limit Value="$COV_B" Operand1="" Operator="" Operand2="" LimitID=""></Limit>
+						<Deductible Value="-1" Operand1="" Operator="" Operand2="" DeducID=""></Deductible>
+					</ToGrant>
+					<ToGrant CoverageCode="LPP">
+						<Limit Value="$COV_C" Operand1="" Operator="" Operand2="" LimitID=""></Limit>
+						<Deductible Value="-1" Operand1="" Operator="" Operand2="" DeducID=""></Deductible>
+					</ToGrant>
+					<ToGrant CoverageCode="RV">
+						<Limit Value="$COV_D" Operand1="" Operator="" Operand2="" LimitID=""></Limit>
+						<Deductible Value="-1" Operand1="" Operator="" Operand2="" DeducID=""></Deductible>
+					</ToGrant>
+				</Condition>
+				<!--Michigan DP-3 Replacement-->
+				<Condition Operand1="$PKG_TYPE" Operator="==" Operand2="11291" OperandType="Double">
+					<ToGrant CoverageCode="DWELL">
+						<Limit Value="$COV_A" Operand1="" Operator="" Operand2="" LimitID=""></Limit>
+						<Deductible Value="-1" Operand1="" Operator="" Operand2="" DeducID=""></Deductible>
+					</ToGrant>
+					<ToGrant CoverageCode="OSTR">
+						<Limit Value="$COV_B" Operand1="" Operator="" Operand2="" LimitID=""></Limit>
+						<Deductible Value="-1" Operand1="" Operator="" Operand2="" DeducID=""></Deductible>
+					</ToGrant>
+					<ToGrant CoverageCode="LPP">
+						<Limit Value="$COV_C" Operand1="" Operator="" Operand2="" LimitID=""></Limit>
+						<Deductible Value="-1" Operand1="" Operator="" Operand2="" DeducID=""></Deductible>
+					</ToGrant>
+					<ToGrant CoverageCode="RV">
+						<Limit Value="$COV_D" Operand1="" Operator="" Operand2="" LimitID=""></Limit>
+						<Deductible Value="-1" Operand1="" Operator="" Operand2="" DeducID=""></Deductible>
+					</ToGrant>
+				</Condition>
+				<!--Michigan DP-3 Repair-->
+				<Condition Operand1="$PKG_TYPE" Operator="==" Operand2="11292" OperandType="Double">
+					<ToGrant CoverageCode="DWELL">
+						<Limit Value="$COV_A" Operand1="" Operator="" Operand2="" LimitID=""></Limit>
+						<Deductible Value="-1" Operand1="" Operator="" Operand2="" DeducID=""></Deductible>
+					</ToGrant>
+					<ToGrant CoverageCode="OSTR">
+						<Limit Value="$COV_B" Operand1="" Operator="" Operand2="" LimitID=""></Limit>
+						<Deductible Value="-1" Operand1="" Operator="" Operand2="" DeducID=""></Deductible>
+					</ToGrant>
+					<ToGrant CoverageCode="LPP">
+						<Limit Value="$COV_C" Operand1="" Operator="" Operand2="" LimitID=""></Limit>
+						<Deductible Value="-1" Operand1="" Operator="" Operand2="" DeducID=""></Deductible>
+					</ToGrant>
+					<ToGrant CoverageCode="RV">
+						<Limit Value="$COV_D" Operand1="" Operator="" Operand2="" LimitID=""></Limit>
+						<Deductible Value="-1" Operand1="" Operator="" Operand2="" DeducID=""></Deductible>
+					</ToGrant>
+				</Condition>
+			</Conditions>
+		</Rule>
+		<!-- Start Of Indiana Rules -->
+		<Rule Action="Database" StartDate="1950-01-01" EndDate="3000-12-30" STATE_ID="14">
+			<!-- implemented for Trees, Shrubs, Plants & Lawns (Max 500 per plant) coverage as per issue no 949 of covg-->
+			<Conditions>
+				<Condition Operand1="1" Operator="==" Operand2="1" OperandType="Double">
+					<ToSet CoverageCode="TSPL">
+						<Limit Value="$TREE_A" Operand1="" Operator="" Operand2="" LimitID=""></Limit>
+						<Deductible Value="-1" Operand1="" Operator="" Operand2="" DeducID=""></Deductible>
+					</ToSet>
+				</Condition>
+			</Conditions>
+			<!-- Location Type Dependency Dependency On County -->
+			<Conditions>
+				<Condition Operand1="$VALID_COUNTY" Operator="==" Operand2="0" OperandType="Double">
+					<ToRevoke CoverageCode="MSC480"></ToRevoke>
+				</Condition>
+			</Conditions>
+			<!-- Automatically included DP382 and LP417 if LP-124 is checked off 
+			i.e if Limit of Coverage E is purchased than grant DP382 and LP417 by default-->
+			<Conditions>
+				<Condition Operand1="$LP124" Operator="==" Operand2="0" OperandType="Double">
+					<ToGrant CoverageCode="LP417">
+						<Limit Value="" Operand1="" Operator="" Operand2="" LimitID=""></Limit>
+						<Deductible Value="" Operand1="" Operator="" Operand2="" DeducID=""></Deductible>
+					</ToGrant>
+					<ToGrant CoverageCode="DP382">
+						<Limit Value="" Operand1="" Operator="" Operand2="" LimitID=""></Limit>
+						<Deductible Value="" Operand1="" Operator="" Operand2="" DeducID=""></Deductible>
+					</ToGrant>
+					<ToGrant CoverageCode="LP124">
+						<Limit Value="" Operand1="" Operator="" Operand2="" LimitID=""></Limit>
+						<Deductible Value="" Operand1="" Operator="" Operand2="" DeducID=""></Deductible>
+					</ToGrant>
+				</Condition>
+				<Condition Operand1="$LP124" Operator="!=" Operand2="0" OperandType="Double">
+					<ToRevoke CoverageCode="LP417"></ToRevoke>
+					<ToRevoke CoverageCode="DP382"></ToRevoke>
+				</Condition>
+			</Conditions>
+			<!-- Rating Info Dependency -->
+			<Conditions>
+				<Condition Operand1="$PKG_TYPE" Operator="==" Operand2="11480" OperandType="Double">
+					<ToRevoke CoverageCode="BR1143"></ToRevoke>
+					<ToRevoke CoverageCode="IF184"></ToRevoke>
+					<ToRevoke CoverageCode="IFNSE"></ToRevoke>
+				</Condition>
+				<Condition Operand1="$PKG_TYPE" Operator="==" Operand2="11482" OperandType="Double">
+					<ToRevoke CoverageCode="BR1143"></ToRevoke>
+					<ToRevoke CoverageCode="IF184"></ToRevoke>
+					<ToRevoke CoverageCode="IFNSE"></ToRevoke>
+				</Condition>
+				<Condition Operand1="$UND_CONS" Operator="==" Operand2="1" OperandType="Double">
+					<ToGrant CoverageCode="BR1143">
+						<Limit Value="" Operand1="" Operator="" Operand2="" LimitID=""></Limit>
+						<Deductible Value="" Operand1="" Operator="" Operand2="" DeducID=""></Deductible>
+					</ToGrant>
+				</Condition>
+				<Condition Operand1="$UND_CONS" Operator="==" Operand2="0" OperandType="Double">
+					<ToRevoke CoverageCode="BR1143"></ToRevoke>
+					<ToRevoke CoverageCode="IF184"></ToRevoke>
+					<ToRevoke CoverageCode="IFNSE"></ToRevoke>
+				</Condition>
+			</Conditions>
+			<Conditions>
+				<Condition Operand1="$INS_VAL_OFF" Operator="!=" Operand2="0" OperandType="Double">
+					<ToGrant CoverageCode="SD">
+						<Limit Value="" Operand1="" Operator="" Operand2="" LimitID=""></Limit>
+						<Deductible Value="$INS_VAL_OFF" Operand1="" Operator="" Operand2="" DeducID=""></Deductible>
+					</ToGrant>
+				</Condition>
+				<Condition Operand1="$INS_VAL_OFF" Operator="==" Operand2="0" OperandType="Double">
+					<ToRevoke CoverageCode="SD"></ToRevoke>
+				</Condition>
+			</Conditions>
+			<Conditions>
+				<Condition Operand1="$COV_BASE_REPL" Operator="!=" Operand2="0" OperandType="Double">
+					<ToGrant CoverageCode="BOSTR"> <!-- change from OSTR to BOSTR on 21 dec by pravesh as Coverage B will not hav additional but in BOSTR -->
+						<Limit Value="" Operand1="" Operator="" Operand2="" LimitID=""></Limit>
+						<Deductible Value="$INS_VAL_SET_NO" Operand1="" Operator="" Operand2="" DeducID=""></Deductible>
+					</ToGrant>
+				</Condition>
+				<Condition Operand1="$COV_BASE_REPL" Operator="==" Operand2="0" OperandType="Double">
+					<ToRevoke CoverageCode="BOSTR"></ToRevoke>
+				</Condition>
+				<!--
+				<Condition Operand1="$COV_BASE_REPL" Operator="==" Operand2="0" OperandType="Double">
+					<ToSet CoverageCode="BOSTR">  change from OSTR to BOSTR on 21 dec by pravesh as Coverage B will not hav additional but in BOSTR 
+						<Limit Value="" Operand1="" Operator="" Operand2="" LimitID=""></Limit>
+						<Deductible Value="" Operand1="" Operator="" Operand2="" DeducID=""></Deductible>
+					</ToSet>
+				</Condition>
+				-->
+			</Conditions>
+			<!--Indiana DP 900-->
+			<Conditions>
+				<Condition Operand1="$COV_BASE_EXCLUDED" Operator="!=" Operand2="0" OperandType="Double">
+					<ToGrant CoverageCode="DP900">
+						<Limit Value="" Operand1="" Operator="" Operand2="" LimitID=""></Limit>
+						<Deductible Value="-1" Operand1="" Operator="" Operand2="" DeducID=""></Deductible>
+					</ToGrant>
+				</Condition>
+				<Condition Operand1="$COV_BASE_EXCLUDED" Operator="==" Operand2="0" OperandType="Double">
+					<ToRevoke CoverageCode="DP900"></ToRevoke>
+				</Condition>
+			</Conditions>
+			<!--Indiana DP 900 END-->
+			<Conditions>
+				<Condition Operand1="$NUM_LOC_ALARMS" Operator=">=" Operand2="1" OperandType="Double">
+					<ToGrant CoverageCode="DP216">
+						<Limit Value="" Operand1="" Operator="" Operand2="" LimitID=""></Limit>
+						<Deductible Value="" Operand1="" Operator="" Operand2="" DeducID=""></Deductible>
+					</ToGrant>
+				</Condition>
+				<Condition Operand1="$NUM_LOC_ALARMS" Operator="==" Operand2="0" OperandType="Double">
+					<ToRevoke CoverageCode="DP216"></ToRevoke>
+				</Condition>
+			</Conditions>
+			<Conditions>
+				<!--Indiana DP-2 Replacement-->
+				<Condition Operand1="$PKG_TYPE" Operator="==" Operand2="11479" OperandType="Double">
+					<ToGrant CoverageCode="DWELL">
+						<Limit Value="$COV_A" Operand1="" Operator="" Operand2="" LimitID=""></Limit>
+						<Deductible Value="-1" Operand1="" Operator="" Operand2="" DeducID=""></Deductible>
+					</ToGrant>
+					<ToGrant CoverageCode="OSTR">
+						<Limit Value="$COV_B" Operand1="" Operator="" Operand2="" LimitID=""></Limit>
+						<Deductible Value="-1" Operand1="" Operator="" Operand2="" DeducID=""></Deductible>
+					</ToGrant>
+					<ToGrant CoverageCode="LPP">
+						<Limit Value="$COV_C" Operand1="" Operator="" Operand2="" LimitID=""></Limit>
+						<Deductible Value="-1" Operand1="" Operator="" Operand2="" DeducID=""></Deductible>
+					</ToGrant>
+					<ToGrant CoverageCode="RV">
+						<Limit Value="$COV_D" Operand1="" Operator="" Operand2="" LimitID=""></Limit>
+						<Deductible Value="-1" Operand1="" Operator="" Operand2="" DeducID=""></Deductible>
+					</ToGrant>
+				</Condition>
+				<!--Indiana DP-2 Repair-->
+				<Condition Operand1="$PKG_TYPE" Operator="==" Operand2="11480" OperandType="Double">
+					<ToGrant CoverageCode="DWELL">
+						<Limit Value="$COV_A" Operand1="" Operator="" Operand2="" LimitID=""></Limit>
+						<Deductible Value="-1" Operand1="" Operator="" Operand2="" DeducID=""></Deductible>
+					</ToGrant>
+					<ToGrant CoverageCode="OSTR">
+						<Limit Value="$COV_B" Operand1="" Operator="" Operand2="" LimitID=""></Limit>
+						<Deductible Value="-1" Operand1="" Operator="" Operand2="" DeducID=""></Deductible>
+					</ToGrant>
+					<ToGrant CoverageCode="LPP">
+						<Limit Value="$COV_C" Operand1="" Operator="" Operand2="" LimitID=""></Limit>
+						<Deductible Value="-1" Operand1="" Operator="" Operand2="" DeducID=""></Deductible>
+					</ToGrant>
+					<ToGrant CoverageCode="RV">
+						<Limit Value="$COV_D" Operand1="" Operator="" Operand2="" LimitID=""></Limit>
+						<Deductible Value="-1" Operand1="" Operator="" Operand2="" DeducID=""></Deductible>
+					</ToGrant>
+					<ToGrant CoverageCode="DP289">
+						<Limit Value="" Operand1="" Operator="" Operand2="" LimitID=""></Limit>
+						<Deductible Value="" Operand1="" Operator="" Operand2="" DeducID=""></Deductible>
+					</ToGrant>
+				</Condition>
+				<!--Indiana DP-3 Replacement-->
+				<Condition Operand1="$PKG_TYPE" Operator="==" Operand2="11481" OperandType="Double">
+					<ToGrant CoverageCode="DWELL">
+						<Limit Value="$COV_A" Operand1="" Operator="" Operand2="" LimitID=""></Limit>
+						<Deductible Value="-1" Operand1="" Operator="" Operand2="" DeducID=""></Deductible>
+					</ToGrant>
+					<ToGrant CoverageCode="OSTR">
+						<Limit Value="$COV_B" Operand1="" Operator="" Operand2="" LimitID=""></Limit>
+						<Deductible Value="-1" Operand1="" Operator="" Operand2="" DeducID=""></Deductible>
+					</ToGrant>
+					<ToGrant CoverageCode="LPP">
+						<Limit Value="$COV_C" Operand1="" Operator="" Operand2="" LimitID=""></Limit>
+						<Deductible Value="-1" Operand1="" Operator="" Operand2="" DeducID=""></Deductible>
+					</ToGrant>
+					<ToGrant CoverageCode="RV">
+						<Limit Value="$COV_D" Operand1="" Operator="" Operand2="" LimitID=""></Limit>
+						<Deductible Value="-1" Operand1="" Operator="" Operand2="" DeducID=""></Deductible>
+					</ToGrant>
+				</Condition>
+				<!--Indiana DP-3 Repair-->
+				<Condition Operand1="$PKG_TYPE" Operator="==" Operand2="11482" OperandType="Double">
+					<ToGrant CoverageCode="DWELL">
+						<Limit Value="$COV_A" Operand1="" Operator="" Operand2="" LimitID=""></Limit>
+						<Deductible Value="-1" Operand1="" Operator="" Operand2="" DeducID=""></Deductible>
+					</ToGrant>
+					<ToGrant CoverageCode="OSTR">
+						<Limit Value="$COV_B" Operand1="" Operator="" Operand2="" LimitID=""></Limit>
+						<Deductible Value="-1" Operand1="" Operator="" Operand2="" DeducID=""></Deductible>
+					</ToGrant>
+					<ToGrant CoverageCode="LPP">
+						<Limit Value="$COV_C" Operand1="" Operator="" Operand2="" LimitID=""></Limit>
+						<Deductible Value="-1" Operand1="" Operator="" Operand2="" DeducID=""></Deductible>
+					</ToGrant>
+					<ToGrant CoverageCode="RV">
+						<Limit Value="$COV_D" Operand1="" Operator="" Operand2="" LimitID=""></Limit>
+						<Deductible Value="-1" Operand1="" Operator="" Operand2="" DeducID=""></Deductible>
+					</ToGrant>
+				</Condition>
+			</Conditions>
+		</Rule>
+	</Group>
+	<Group Code="LobDependent">
+		<Rule Action="Database" StartDate="1950-01-01" EndDate="2002-02-28">
+			<Conditions></Conditions>
+		</Rule>
+	</Group>
+	<Group Code="AppDependent">
+		<Rule Action="Database" StartDate="1950-01-01" EndDate="3000-12-30" STATE_ID="22">
+			<!-- Package Type Dependency -->
+			<Conditions>
+				<!--Michigan DP3 Premier-->
+				<Condition Operand1="$PKG_TYPE" Operator="==" Operand2="11458" OperandType="Double">
+					<ToRevoke CoverageCode="DP02"></ToRevoke>
+					<ToRevoke CoverageCode="DP289"></ToRevoke>
+					<ToGrant CoverageCode="DP321">
+						<Limit Value="" Operand1="" Operator="" Operand2="" LimitID=""></Limit>
+						<Deductible Value="" Operand1="" Operator="" Operand2="" DeducID=""></Deductible>
+					</ToGrant>
+				</Condition>
+				<!--DP-2 Replacement  -->
+				<Condition Operand1="$PKG_TYPE" Operator="==" Operand2="11289" OperandType="Double">
+					<ToRevoke CoverageCode="DP321"></ToRevoke>
+					<ToRevoke CoverageCode="DP289"></ToRevoke>
+					<ToRevoke CoverageCode="DP03"></ToRevoke>
+				</Condition>
+				<!--DP-2 Repair Cost  -->
+				<Condition Operand1="$PKG_TYPE" Operator="==" Operand2="11290" OperandType="Double">
+					<ToRevoke CoverageCode="DP03"></ToRevoke>
+					<ToRevoke CoverageCode="DP321"></ToRevoke>
+					<ToGrant CoverageCode="DP289">
+						<Limit Value="" Operand1="" Operator="" Operand2="" LimitID=""></Limit>
+						<Deductible Value="" Operand1="" Operator="" Operand2="" DeducID=""></Deductible>
+					</ToGrant>
+				</Condition>
+				<!--DP-3 Repair Cost  -->
+				<Condition Operand1="$PKG_TYPE" Operator="==" Operand2="11292" OperandType="Double">
+					<ToRevoke CoverageCode="DP321"></ToRevoke>
+					<ToRevoke CoverageCode="DP02"></ToRevoke>
+					<ToGrant CoverageCode="DP289">
+						<Limit Value="" Operand1="" Operator="" Operand2="" LimitID=""></Limit>
+						<Deductible Value="" Operand1="" Operator="" Operand2="" DeducID=""></Deductible>
+					</ToGrant>
+				</Condition>
+				<!--DP-3 Replacement  -->
+				<Condition Operand1="$PKG_TYPE" Operator="==" Operand2="11292" OperandType="Double">
+					<ToRevoke CoverageCode="DP321"></ToRevoke>
+					<ToRevoke CoverageCode="DP02"></ToRevoke>
+					<ToRevoke CoverageCode="DP289"></ToRevoke>
+				</Condition>
+				<!--DP-3 Premier -->
+				<Condition Operand1="$PKG_TYPE" Operator="==" Operand2="11458" OperandType="Double">
+					<ToRevoke CoverageCode="DP02"></ToRevoke>
+					<ToRevoke CoverageCode="DP289"></ToRevoke>
+				</Condition>
+			</Conditions>
+		</Rule>
+		<Rule Action="Database" StartDate="1950-01-01" EndDate="3000-12-30" STATE_ID="14">
+			<!-- Package Type Dependency Indiana-->
+			<Conditions>
+				<!--DP-2 Replacement  -->
+				<Condition Operand1="$PKG_TYPE" Operator="==" Operand2="11479" OperandType="Double">
+					<ToRevoke CoverageCode="DP289"></ToRevoke>
+					<ToRevoke CoverageCode="DP03"></ToRevoke>
+				</Condition>
+				<!--DP-2 Repair Cost  -->
+				<Condition Operand1="$PKG_TYPE" Operator="==" Operand2="11480" OperandType="Double">
+					<ToRevoke CoverageCode="DP03"></ToRevoke>
+					<ToGrant CoverageCode="DP289">
+						<Limit Value="" Operand1="" Operator="" Operand2="" LimitID=""></Limit>
+						<Deductible Value="" Operand1="" Operator="" Operand2="" DeducID=""></Deductible>
+					</ToGrant>
+				</Condition>
+				<!--DP-3 Repair Cost  -->
+				<Condition Operand1="$PKG_TYPE" Operator="==" Operand2="11482" OperandType="Double">
+					<ToRevoke CoverageCode="DP02"></ToRevoke>
+					<ToGrant CoverageCode="DP289">
+						<Limit Value="" Operand1="" Operator="" Operand2="" LimitID=""></Limit>
+						<Deductible Value="" Operand1="" Operator="" Operand2="" DeducID=""></Deductible>
+					</ToGrant>
+				</Condition>
+				<!--DP-3 Replacement  -->
+				<Condition Operand1="$PKG_TYPE" Operator="==" Operand2="11481" OperandType="Double">
+					<ToRevoke CoverageCode="DP02"></ToRevoke>
+					<ToRevoke CoverageCode="DP289"></ToRevoke>
+				</Condition>
+			</Conditions>
+		</Rule>
+	</Group>
+	<Group Code="ProductDependend">
+		<Rule Action="Database" StartDate="1950-01-01" EndDate="3000-12-30" STATE_ID="22">
+			<!-- Package Type Dependency -->
+			<Conditions>
+				<!--Michigan DP3 Premier-->
+				<Condition Operand1="$PKG_TYPE" Operator="==" Operand2="11458" OperandType="Double">
+					<ToRevoke CoverageCode="DP02"></ToRevoke>
+					<ToRevoke CoverageCode="DP289"></ToRevoke>
+					<ToGrant CoverageCode="DP03">
+						<Limit Value="" Operand1="" Operator="" Operand2="" LimitID=""></Limit>
+						<Deductible Value="" Operand1="" Operator="" Operand2="" DeducID=""></Deductible>
+					</ToGrant>
+				</Condition>
+				<!--DP-2 Replacement  -->
+				<Condition Operand1="$PKG_TYPE" Operator="==" Operand2="11289" OperandType="Double">
+					<ToRevoke CoverageCode="DP321"></ToRevoke>
+					<ToRevoke CoverageCode="DP289"></ToRevoke>
+					<ToRevoke CoverageCode="DP03"></ToRevoke>
+					<ToGrant CoverageCode="DP02">
+						<Limit Value="" Operand1="" Operator="" Operand2="" LimitID=""></Limit>
+						<Deductible Value="" Operand1="" Operator="" Operand2="" DeducID=""></Deductible>
+					</ToGrant>
+				</Condition>
+				<!--DP-2 Repair Cost  -->
+				<Condition Operand1="$PKG_TYPE" Operator="==" Operand2="11290" OperandType="Double">
+					<ToRevoke CoverageCode="DP03"></ToRevoke>
+					<ToRevoke CoverageCode="DP321"></ToRevoke>
+					<ToGrant CoverageCode="DP289">
+						<Limit Value="" Operand1="" Operator="" Operand2="" LimitID=""></Limit>
+						<Deductible Value="" Operand1="" Operator="" Operand2="" DeducID=""></Deductible>
+					</ToGrant>
+					<ToGrant CoverageCode="DP02">
+						<Limit Value="" Operand1="" Operator="" Operand2="" LimitID=""></Limit>
+						<Deductible Value="" Operand1="" Operator="" Operand2="" DeducID=""></Deductible>
+					</ToGrant>
+				</Condition>
+				<!--DP-3 Repair Cost  -->
+				<Condition Operand1="$PKG_TYPE" Operator="==" Operand2="11292" OperandType="Double">
+					<ToRevoke CoverageCode="DP321"></ToRevoke>
+					<ToRevoke CoverageCode="DP02"></ToRevoke>
+					<ToGrant CoverageCode="DP289">
+						<Limit Value="" Operand1="" Operator="" Operand2="" LimitID=""></Limit>
+						<Deductible Value="" Operand1="" Operator="" Operand2="" DeducID=""></Deductible>
+					</ToGrant>
+					<ToGrant CoverageCode="DP03">
+						<Limit Value="" Operand1="" Operator="" Operand2="" LimitID=""></Limit>
+						<Deductible Value="" Operand1="" Operator="" Operand2="" DeducID=""></Deductible>
+					</ToGrant>
+				</Condition>
+				<!--DP-3 Replacement  -->
+				<Condition Operand1="$PKG_TYPE" Operator="==" Operand2="11291" OperandType="Double">
+					<ToRevoke CoverageCode="DP321"></ToRevoke>
+					<ToRevoke CoverageCode="DP02"></ToRevoke>
+					<ToRevoke CoverageCode="DP289"></ToRevoke>
+					<ToGrant CoverageCode="DP03">
+						<Limit Value="" Operand1="" Operator="" Operand2="" LimitID=""></Limit>
+						<Deductible Value="" Operand1="" Operator="" Operand2="" DeducID=""></Deductible>
+					</ToGrant>
+				</Condition>
+				<!--DP-3 Premier -->
+				<Condition Operand1="$PKG_TYPE" Operator="==" Operand2="11458" OperandType="Double">
+					<ToRevoke CoverageCode="DP02"></ToRevoke>
+					<ToRevoke CoverageCode="DP289"></ToRevoke>
+				</Condition>
+			</Conditions>
+		</Rule>
+		<Rule Action="Database" StartDate="1950-01-01" EndDate="3000-12-30" STATE_ID="14">
+			<!-- Package Type Dependency Indiana-->
+			<Conditions>
+				<!--DP-2 Replacement  -->
+				<Condition Operand1="$PKG_TYPE" Operator="==" Operand2="11479" OperandType="Double">
+					<ToRevoke CoverageCode="DP289"></ToRevoke>
+					<ToRevoke CoverageCode="DP03"></ToRevoke>
+					<ToGrant CoverageCode="DP02">
+						<Limit Value="" Operand1="" Operator="" Operand2="" LimitID=""></Limit>
+						<Deductible Value="" Operand1="" Operator="" Operand2="" DeducID=""></Deductible>
+					</ToGrant>
+				</Condition>
+				<!--DP-2 Repair Cost  -->
+				<Condition Operand1="$PKG_TYPE" Operator="==" Operand2="11480" OperandType="Double">
+					<ToRevoke CoverageCode="DP03"></ToRevoke>
+					<ToGrant CoverageCode="DP289">
+						<Limit Value="" Operand1="" Operator="" Operand2="" LimitID=""></Limit>
+						<Deductible Value="" Operand1="" Operator="" Operand2="" DeducID=""></Deductible>
+					</ToGrant>
+					<ToGrant CoverageCode="DP02">
+						<Limit Value="" Operand1="" Operator="" Operand2="" LimitID=""></Limit>
+						<Deductible Value="" Operand1="" Operator="" Operand2="" DeducID=""></Deductible>
+					</ToGrant>
+				</Condition>
+				<!--DP-3 Repair Cost  -->
+				<Condition Operand1="$PKG_TYPE" Operator="==" Operand2="11482" OperandType="Double">
+					<ToRevoke CoverageCode="DP02"></ToRevoke>
+					<ToGrant CoverageCode="DP03">
+						<Limit Value="" Operand1="" Operator="" Operand2="" LimitID=""></Limit>
+						<Deductible Value="" Operand1="" Operator="" Operand2="" DeducID=""></Deductible>
+					</ToGrant>
+				</Condition>
+				<!--DP-3 Replacement  -->
+				<Condition Operand1="$PKG_TYPE" Operator="==" Operand2="11481" OperandType="Double">
+					<ToRevoke CoverageCode="DP02"></ToRevoke>
+					<ToRevoke CoverageCode="DP289"></ToRevoke>
+					<ToGrant CoverageCode="DP03">
+						<Limit Value="" Operand1="" Operator="" Operand2="" LimitID=""></Limit>
+						<Deductible Value="" Operand1="" Operator="" Operand2="" DeducID=""></Deductible>
+					</ToGrant>
+				</Condition>
+			</Conditions>
+		</Rule>
+	</Group>
+</Root>

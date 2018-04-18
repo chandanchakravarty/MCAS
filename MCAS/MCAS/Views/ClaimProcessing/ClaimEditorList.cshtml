@@ -1,0 +1,95 @@
+﻿@using MCAS.Globalisation
+@using MCAS.Web.Objects.Resources.ClaimProcessing;
+@using MCAS.Web.Objects.Resources.Common;
+@model IEnumerable<MCAS.Web.Objects.ClaimObjectHelper.ClaimCollection>
+@{
+    var mMCASQueryString = Html.MCASQueryString(Request.QueryString);
+    ViewBag.Title = "ClaimEditorList";
+    Layout = null;
+    var claimMode = mMCASQueryString["claimMode"] == null ? "" : Convert.ToString(mMCASQueryString["claimMode"]);
+    var lebmode = mMCASQueryString["mode"] != null ? Convert.ToString(mMCASQueryString["mode"]) : "";
+}
+<link href="@Url.Content("~/Content/EbixGrid.css")" rel="Stylesheet" media="screen" />
+<link href="@Url.Content("~/Content/jquery-ui.css")" rel="Stylesheet" media="screen" />
+<div class="table-responsive">
+    <div class="ui-ebixgrid">
+        @Html.RenderGrid((from m in Model select new { m.ClaimType, m.ClaimTypeCode, m.ClaimTypeDesc }).Distinct(),
+            new EbixGrid.EbixGrid
+                {
+                    Columns = new List<EbixGrid.EGColumn> 
+                                 {
+                                     new EbixGrid.EGColumn { DataField = "ClaimType"   ,
+                                                        HeaderText = ClaimEditor.ClaimType ,
+                                                        PrimaryKey = true ,
+                                                        Hidden = true,
+                                                        Width = "0%" },
+                                     new EbixGrid.EGColumn { DataField = "ClaimTypeDesc"   ,
+                                                        HeaderText = ClaimEditor.ClaimType ,
+                                                        PrimaryKey = false ,
+                                                        Width = "100%" }
+                                 },
+                    Width = "650",
+                    Height = "350",
+
+                    ID = "ClaimGrid",
+                    IsChildRequired = true,
+                    childGrid = new EbixGrid.EbixGrid
+                    {
+                        Columns = new List<EbixGrid.EGColumn> 
+                                 {
+                                     new EbixGrid.EGColumn {
+                                                        DataField = "ClaimType",
+                                                        HeaderText = ClaimEditor.ClaimType ,
+                                                        PrimaryKey = false,
+                                                        ForeinKey = true,
+                                                        Hidden = true,
+                                                        Width = "0%" },
+                                     new EbixGrid.EGColumn { DataField = "RecordNumber",  HeaderText = ClaimEditor.ClaimRecordNo,  Width = "20%"},
+                                     new EbixGrid.EGColumn { DataField = "ClaimantName",  HeaderText = ClaimEditor.ClaimantName, Width = "40%" },
+                                     new EbixGrid.EGColumn 
+                                      { 
+                                         DataField = "",  HeaderText = Common.Select, Width = "20%",
+                                         Columntype = new EbixGrid.EGColumnType
+                                                             { 
+                                                                 Columntype = EbixGrid.ColumnType.LinkButton,
+                                                                 ColumnCell = new EbixGrid.EGCell{ Caption =Common.Select, Href = @Url.Content("~/ClaimProcessing/ClaimEditor"), CssClass ="btn btn-xs btn-info"}  
+                                                             } 
+                                       , QueryStringFields =  new List<string> {"PolicyId", "ClaimID","ClaimType", "AccidentClaimId", "claimMode=" + @claimMode, "mode=" +@lebmode }
+                                      },
+                                      new EbixGrid.EGColumn 
+                                      { 
+                                         DataField = "",  HeaderText = Common.Print, Width = "20%",
+                                         Columntype = new EbixGrid.EGColumnType
+                                                             { 
+                                                                 Columntype = EbixGrid.ColumnType.LinkButton,
+                                                                 ColumnCell = new EbixGrid.EGCell{ Caption =Common.Print, Href = @Url.Content("~/ClaimMasters/PreviewDocumentIndex"), CssClass ="Print btn btn-xs btn-info"}  
+                                                             } 
+                                       , QueryStringFields =  new List<string> {"PolicyId","ClaimID"}
+                                      },
+                                 },
+                        Width = "650",
+                        Height = "350",
+
+                        ID = "ClaimSubGrid",
+                        DataSource = Model
+                    }
+
+                }
+  )
+    </div>
+</div>
+<script type="text/javascript">
+    var do_on_load = function () {
+        setTabActive('ClaimTab1');
+    };
+    $(document).ready(do_on_load);
+    $(window).bind('page:change', do_on_load);
+
+    function showChildGrid(id, spanid) {
+        $('#' + id).slideToggle();
+        if ($('#span_' + id).hasClass('ui-icon-plus'))
+            $('#span_' + id).removeClass('ui-icon-plus').addClass('ui-icon-minus');
+        else
+            $('#span_' + id).removeClass('ui-icon-minus').addClass('ui-icon-plus');
+    }
+</script>

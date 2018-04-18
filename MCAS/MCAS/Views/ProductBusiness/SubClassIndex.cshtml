@@ -1,0 +1,195 @@
+﻿@model IEnumerable<MCAS.Web.Objects.MastersHelper.SubClassModel>
+@using MCAS.Web.Objects.CommonHelper
+@using MCAS.Web.Objects.Resources.ProductBusiness;
+@using MCAS.Web.Objects.Resources.Common;
+@using MCAS.Globalisation
+@{
+    //ViewBag.Title = "SubClassIndex";
+    ViewBag.Title = SubClassIndex.Title;
+    Layout = "~/Views/Shared/_SystemAdminLayout.cshtml";
+    @Html.Hidden("oldgroup", 1)
+    SecurityPermissions myPemissions = (MCAS.Web.Objects.CommonHelper.SecurityPermissions)ViewData["UserPermissions"];
+}
+<script src='@Url.Content("~/Scripts/jquery-2.1.0.min.js")' type="text/javascript"></script>
+<script src='@Url.Content("~/Scripts/jquery.validate.min.js")' type="text/javascript"></script>
+<script src='@Url.Content("~/Scripts/jquery.validate.unobtrusive.min.js")' type="text/javascript"></script>
+<div class="dashboard-wrapper">
+    <!-- Bootstrap Container Start -->
+    <div class="container">
+        <!-- Page title start -->
+        <!-- Page title end -->
+        <div class="row page-title">
+            <div class="col-lg-12">
+                <h2>
+                    @Common.SystemAdmin
+                </h2>
+                <ul class="breadcrumb">
+                    <li>@SubClassIndex.SubClass</li>
+                </ul>
+            </div>
+        </div>
+        <!-- Row start -->
+        <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <div class="panel panel-info">
+                    <div class="panel-heading clearfix">
+                        <i class="icon-check-sign"></i>
+                        <h3 class="panel-title">
+                            @SubClassIndex.SubClass
+                        </h3>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            <div class="panel panel-info">
+                                <div class="panel-sub-heading">
+                                    <span class="text-danger">*</span> @Common.SearchScreen
+                                </div>
+                                <div class="panel-body">
+                                    @using (Html.BeginForm("SubClassIndex", "ProductBusiness", FormMethod.Post, new { role = "form", @class = "form-horizontal" }))
+                                    {
+                                        <div class="row">
+                                            <div class="col-lg-6">
+                                                <div class="form-group">
+                                                    <label class="col-sm-4" for="inputUserId">
+                                                        @SubClassIndex.SubClassDescription
+                                                    </label>
+                                                    <div class="col-sm-6">
+                                                        <select name="ddlSubClass" id="ddlSubClass" class="col-lg-12 form-control">
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>    
+                                        <div class="row top-buffer">
+                                        </div>
+                                        <div class="row top-buffer">
+                                        </div>    
+                                                                            
+                                        <div class="row">
+                                            <div class="col-lg-12 text-center">
+                                                <button type="submit" class="btn btn-info">
+                                                    @Common.Search</button>
+                                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                @if (@myPemissions.Write)
+                                                {
+                                                    @Html.ActionLink(Common.AddNew, "SubClassEditor", "ProductBusiness",new{}, new { @class = "btn btn-info" })
+                                                }
+                                            </div>
+                                        </div>
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class="col-lg-12 text-center">
+                                <h4>
+                                    @Common.SearchResults</h4>
+                            </div>
+                            <div class="col-lg-12">
+                                <div class="table-responsive">
+                                    <div class="row-fluid">
+                                        <div class="dataTables_wrapper" id="Diary_wrapper" role="grid">
+                                            <table id="tableDiarySrc" width="100%" class="table table-striped table-hover display">
+                                                <thead>
+                                                    <tr>
+                                                        <th style="width: 15%; padding-left: 9px">
+                                                            @SubClassIndex.SubClassCode 
+                                                        </th>
+                                                        <th style="width: 65%; padding-left: 9px">
+                                                            @SubClassIndex.SubClassDescription 
+                                                        </th>
+                                                        <th style="width: 20%">
+                                                            <span class="block text-right">@Common.Select</span>
+                                                        </th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    @{
+                                                        int trid = 1;
+                                                        int rowmatch = 0;
+                                                        var display = "";
+                                                        var strNote = "";
+                                                        foreach (var item in Model)
+                                                        {
+                                                            rowmatch += 1;
+                                                            strNote = item.CobDesc.Substring(0, item.CobDesc.Length > 50 ? 50 : item.CobDesc.Length);
+                                                        <tr group='@(trid)' style="display:@display;">
+                                                            <td>
+                                                                @Html.DisplayFor(modelItem => item.CobCode)
+                                                            </td>
+                                                            <td>
+                                                                @Html.DisplayFor(modelItem => item.CobDesc)
+                                                            </td>
+                                                            <td>
+                                                                @if (@myPemissions.Write)
+                                                                {
+                                                                    @Html.EncodedActionLink(Common.Edit, "SubClassEditor", new { ID = item.ID, pageMode = "Edit" }, new { @class = "btn btn-xs btn-warning" })
+                                                                }
+                                                                @if (@myPemissions.Read)
+                                                                {
+                                                                    @Html.EncodedActionLink(Common.View, "SubClassEditor", new { ID = item.ID, pageMode = "View" }, new { @class = "btn btn-xs btn-info" })
+                                                                }
+                                                            </td>
+                                                        </tr>
+                                               
+                                                        }}
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Row End -->
+    </div>
+    <!-- Bootstrap Container End -->
+</div>
+<script type="text/javascript">
+
+    $(document).ready(function () {
+        loadSubClass();
+        loadProducts();
+    });
+
+
+    function loadSubClass() {
+        $.ajax({
+            url: '@(Url.Action("FillSubClassProducts"))',
+            cache: false,
+            success: function (data) {
+                $("#ddlSubClass").empty();
+                $.each(data, function (index, optiondata) {
+                    if (optiondata.ClassCode == '@ViewBag.subclass')
+                        $("#ddlSubClass").append("<option value='" + optiondata.ClassCode + "' selected=selected>" + optiondata.ClassDescrption + "</option>");
+                    else
+                        $("#ddlSubClass").append("<option value='" + optiondata.ClassCode + "'>" + optiondata.ClassDescrption + "</option>");
+                });
+            },
+            error: function (reponse) {
+                alert("error : " + reponse);
+            }
+        });
+    }
+
+    function loadProducts() {
+        $.ajax({
+            url: '@(Url.Action("FillProductDescription"))',
+            cache: false,
+            success: function (data) {
+                $("#ddlProduct").empty();
+                $.each(data, function (index, optiondata) {
+                    $("#ddlProduct").append("<option value='" + optiondata.ProductCode + "'>" + optiondata.ProductDisplayName + "</option>");
+                });
+            },
+            error: function (reponse) {
+                alert("error : " + reponse);
+            }
+        });
+    }
+</script>

@@ -1,0 +1,138 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<rule_collection>
+  <rule_collection_details>
+    <collection_code>EBX1001</collection_code>
+    <collection_version>12.25</collection_version>
+    <locked>false</locked>
+    <collection_effective_date>07/20/2011</collection_effective_date>
+    <collection_expiration_date>07/20/2011</collection_expiration_date>
+    <collection_country>1</collection_country>
+    <collection_state>
+      <state_cd>75</state_cd>
+      <state_cd>77</state_cd>
+      <state_cd>64</state_cd>
+    </collection_state>
+    <collection_product>1</collection_product>
+    <collection_lob>
+      <lob_id>18</lob_id>
+    </collection_lob>
+    <collection_sublob>
+      <sub_lob_id>7</sub_lob_id>
+      <sub_lob_id>1</sub_lob_id>
+      <sub_lob_id>2</sub_lob_id>
+      <sub_lob_id>6</sub_lob_id>
+    </collection_sublob>
+    <quoteapppolicy>
+      <Application>true</Application>
+      <Policy>true</Policy>
+      <Quote>true</Quote>
+    </quoteapppolicy>
+  </rule_collection_details>
+  <rules>
+    <rule RuleID="1">
+      <rule_type>Defined</rule_type>
+      <rule_category>Refer</rule_category>
+      <rule_priority>High</rule_priority>
+      <rule_status>Active</rule_status>
+      <if>
+        <conditionexpressions>
+          <expression expid="1" datatype ="string">
+            <operand1 Qualifier="All" type="Input">ROOT/POLICY/POLICY_LOB</operand1>
+            <operator>Equals</operator>
+            <operand2 Qualifier="None" type="Constant">2</operand2>
+          </expression>
+        </conditionexpressions>
+        <then>
+          <action type="ShowMessage">
+            <message_id>1</message_id>
+          </action>
+          <action type="SetVariable">
+            <variable></variable>
+            <value></value>
+          </action>
+        </then>
+      </if>
+      <else>
+        <then>
+          <action type="ShowMessage">
+            <message_id>2</message_id>
+          </action>
+          <action type="SetVariable">
+            <variable></variable>
+            <value></value>
+          </action>
+        </then>
+      </else>
+    </rule>
+    <rule RuleID="2">
+      <rule_type>Defined</rule_type>
+      <rule_category>Reject</rule_category>
+      <rule_priority>High</rule_priority>
+      <rule_status>Active</rule_status>
+      <if>
+        <conditionexpressions>
+          <expression expid="1" datatype ="string">
+            <operand1 Qualifier="All" type="Input">ROOT/POLICY/BILL_TYPE</operand1>
+            <operator>Equals</operator>
+            <operand2 Qualifier="None" type="Constant">DB</operand2>
+          </expression>
+        </conditionexpressions>
+        <then>
+          <action type="ShowMessage">
+            <message_id>1</message_id>
+          </action>
+          <action type="SetVariable">
+            <variable></variable>
+            <value></value>
+          </action>
+        </then>
+      </if>
+      <else>
+        <then>
+          <action type="ShowMessage">
+            <message_id>2</message_id>
+          </action>
+          <action type="SetVariable">
+            <variable></variable>
+            <value></value>
+          </action>
+        </then>
+      </else>
+    </rule>
+    <rule RuleID="3">
+      <rule_type>Defined</rule_type>
+      <rule_category>Mandatory</rule_category>
+      <rule_priority>High</rule_priority>
+      <rule_status>Active</rule_status>
+      <if>
+        <conditionexpressions>
+          <expression expid="1" datatype ="string">
+            <operand1 Qualifier="All" type="Input">ROOT/POLICY/POLICY_CURRENCY</operand1>
+            <operator>Equals</operator>
+            <operand2 Qualifier="None" type="Constant"></operand2>
+          </expression>
+        </conditionexpressions>
+        <then>
+          <action type="ShowMessage">
+            <message_id>1</message_id>
+          </action>
+          <action type="SetVariable">
+            <variable></variable>
+            <value></value>
+          </action>
+        </then>
+      </if>
+      <else>
+        <then>
+          <action type="ShowMessage">
+            <message_id>2</message_id>
+          </action>
+          <action type="SetVariable">
+            <variable></variable>
+            <value></value>
+          </action>
+        </then>
+      </else>
+    </rule>
+  </rules>
+</rule_collection>

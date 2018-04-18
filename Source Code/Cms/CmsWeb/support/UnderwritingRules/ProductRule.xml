@@ -1,0 +1,1412 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Root>
+  <Master>
+    <Query Code="SELECT" Level="POLICY">Proc_GetProductRuleKeys_Pol</Query>
+    <Column Code="APP_EFFECTIVE_DATE" MapColumnn="APP_EFFECTIVE_DATE" TableAssociated="APP_LIST"
+			ColumnAssociated="APP_EFFECTIVE_DATE"></Column>
+    <Column Code="LOB_ID" MapColumnn="LOB_ID" TableAssociated="POL_CUSTOMER_POLICY_LIST"></Column>
+    <Column Code="SUB_LOB_ID" MapColumnn="SUB_LOB_ID" TableAssociated="POL_CUSTOMER_POLICY_LIST"></Column>
+    <Column Code="CO_INSURANCE" MapColumnn="CO_INSURANCE" TableAssociated="POL_CUSTOMER_POLICY_LIST"></Column>
+    <!--<Column Code="PRODUCT_TYPE" MapColumnn="PRODUCT_TYPE" TableAssociated="POL_CUSTOMER_POLICY_LIST"></Column>-->
+    <Column Code="RISK" MapColumnn="RISK" TableAssociated="POL_CUSTOMER_POLICY_LIST"></Column>
+
+  </Master>
+  <!-- Application Rule  -->
+  <Group Code="AppDependent">
+    <SubGroup Code="All">
+      <SubSubGroup Code="Mandatory">
+        <Rule Action="Database" StartDate="1950-01-01" EndDate="3000-12-30" STATE_ID="0" LOB_ID="0">
+          <Screen ID="APPLICATIONS" IsRequired ="Y">
+            <Conditions>
+              <ToCompare Key="$POLICY_CURRENCY" Value="0" Type="Double"></ToCompare>
+              <ToCompare Key="$POLICY_LOB" Value="0" Type="String"></ToCompare>
+              <ToCompare Key="$POLICY_SUBLOB" Value="0" Type="String"></ToCompare>
+              <ToCompare Key="$APP_NUMBER" Value="0" Type="String"></ToCompare>
+              <ToCompare Key="$APP_VERSION" Value="0" Type="String"></ToCompare>
+              <ToCompare Key="$APP_TERMS" Value="0" Type="String"></ToCompare>
+              <ToCompare Key="$APP_EFFECTIVE_DATE" Value="" Type="Datetime"></ToCompare>
+              <ToCompare Key="$APP_EXPIRATION_DATE" Value="" Type="Datetime"></ToCompare>
+              <ToCompare Key="$APP_INCEPTION_DATE" Value="" Type="Datetime"></ToCompare>
+              <ToCompare Key="$CO_INSURANCE" Value="0" Type="Double"></ToCompare>
+              <ToCompare Key="$CSR" Value="-1" Type="Double"></ToCompare>
+              <ToCompare Key="$AGENCY_ID" Value="0" Type="Double"></ToCompare>
+              <Condition Operand1="$CALLED_FROM" Operator="==" Operand2="1" OperandType="String">
+                <ToCompare Key="$UNDERWRITER" Value="0" Type="Double"></ToCompare>
+              </Condition>
+              <Condition Operand1="$POLICY_LEVEL_COMM_APPLIES" Operator="==" Operand2="Y" OperandType="String">
+                <ToCompare Key="$POLICY_LEVEL_COMISSION" Value="0.00" Type="Double"></ToCompare>
+              </Condition>
+              <Condition Operand1="$BILL_TYPE_ID" Operator="==" Operand2="8464" OperandType="Double">
+                <ToCompare Key="$DOWN_PAY_MODE" Value="0" Type="Double"></ToCompare>
+              </Condition>
+              <Condition Operand1="$PAYOR" Operator="!=" Operand2="14544" OperandType="Double">
+                <ToCompare Key="$BILLTO" Value="0" Type="String"></ToCompare>
+              </Condition>
+              <Condition Operand1="$DIV_ID" Operator="==" Operand2="0" OperandType="Double">
+                <ToCompare Key="$DIV_ID" Value="0" Type="Double"></ToCompare>
+                <ToCompare Key="$DEPT_ID" Value="0" Type="Double"></ToCompare>
+                <ToCompare Key="$PC_ID" Value="0" Type="Double"></ToCompare>
+              </Condition>
+              <Condition Operand1="$BILL_TYPE" Operator="==" Operand2="DB" OperandType="String">
+                <SubCondition Operand1="$INSTALL_PLAN_ID" Operator="!=" Operand2="0" OperandType="Double">
+                  <ToCompare Key="$DOWN_PAY_MODE" Value="0" Type="Double"></ToCompare>
+                </SubCondition>
+              </Condition>
+            </Conditions>
+
+            <!--<Conditions>
+              <Condition Operand1="$CUSTOMER_TYPE1" Operator ="==" Operand2="11110" OperandType="String">
+                <SubCondition Operand1="$CO_INSURANCE" Operator ="!=" Operand2="14549" OperandType="String">
+                  <ToCompare Key="$CO_APP_REG_ID_ISSUE" Value="0" Type="String"></ToCompare>
+                  <ToCompare Key="$CO_APP_ORIGINAL_ISSUE" Value="0" Type="String"></ToCompare>
+                  <ToCompare Key="$CO_APP_REGIONAL_IDENTIFICATION" Value="0" Type="String"></ToCompare>
+                  <ToCompare Key="$CO_APPL_MARITAL_STATUS" Value="0" Type="String"></ToCompare>
+                  <ToCompare Key="$CO_APPL_DOB" Value="0" Type="String"></ToCompare>
+                  <ToCompare Key="$CO_APP_ACCOUNT_TYPE" Value="0" Type="String"></ToCompare>
+                  <ToCompare Key="$CO_APPL_CREATION_DATE" Value="0" Type="String"></ToCompare>
+                  <ToCompare Key="$CO_APPL_GENDER" Value="0" Type="String"></ToCompare>
+                </SubCondition>
+              </Condition>
+            </Conditions>-->
+          </Screen>
+
+          <Screen ID="LOCATIONS" IsRequired ="N">
+            <Conditions>
+              <Condition Operand1="$IS_MANDATORY" Operator ="==" Operand2="Y" OperandType="String">
+                <SubCondition Operand1="$PRODUCT_TYPE" Operator ="==" Operand2="14681" OperandType="String">
+                  <ToCompare Key="$LOC_ADD1" Value="" Type="String"></ToCompare>
+                  <ToCompare Key="$LOC_ZIP" Value="0" Type="Double"></ToCompare>
+                  <!--<ToCompare Key="$ACTIVITY_TYPE" Value="" Type="String"></ToCompare>-->
+                  <ToCompare Key="$DISTRICT" Value="" Type="String"></ToCompare>
+                  <ToCompare Key="$CAL_NUM" Value="0" Type="Double"></ToCompare>
+                  <ToCompare Key="$NAME" Value="" Type="String"></ToCompare>
+                  <ToCompare Key="$LOC_CITY" Value="" Type="String"></ToCompare>
+                  <ToCompare Key="$LOC_NUM" Value="0" Type="Double"></ToCompare>
+                  <ToCompare Key="$LOC_COUNTRY" Value="" Type="String"></ToCompare>
+                  <ToCompare Key="$LOC_STATE" Value="" Type="String"></ToCompare>
+                  <ToCompare Key="$NUMBER" Value="" Type="String"></ToCompare>
+                  <!--Commented by lalit for non mandatory field on location screen-->
+                  <!--<ToCompare Key="$OCCUPIED" Value="0" Type="Double"></ToCompare>-->
+                </SubCondition>
+              </Condition>
+            </Conditions>
+          </Screen>
+          <Screen ID="RISKS" IsRequired ="Y">
+            <Conditions>
+              <Condition Operand1="$IS_MANDATORY" Operator ="==" Operand2="Y" OperandType="String">
+                <SubCondition Operand1="$LOB_ID" Operator ="==" Operand2="13" OperandType="Double">
+                  <ToCompare Key="$VESSEL_NUMBER" Value="0" Type="Double"></ToCompare>
+                  <ToCompare Key="$NAME_OF_VESSEL" Value="" Type="String"></ToCompare>
+                  <ToCompare Key="$TYPE_OF_VESSEL" Value="" Type="String"></ToCompare>
+                </SubCondition>
+                <SubCondition Operand1="$LOB_ID" Operator ="==" Operand2="9" OperandType="Double">
+                  <ToCompare Key="$LOCATION" Value="0" Type="Double"></ToCompare>
+                  <!--<ToCompare Key="$ACTIVITY_TYPE" Value="" Type="String"></ToCompare>-->
+                  <!--<ToCompare Key="$CONSTRUCTION" Value="0" Type="Double"></ToCompare>-->
+                </SubCondition>
+                <SubCondition Operand1="$LOB_ID" Operator ="==" Operand2="15" OperandType="Double">
+                  <ToCompare Key="$STATE_ID" Value="0" Type="Double"></ToCompare>
+                  <ToCompare Key="$CPF_NUM" Value="" Type="String"></ToCompare>
+                  <ToCompare Key="$INDIVIDUAL_NAME" Value="" Type="String"></ToCompare>
+                  <ToCompare Key="$APPLICANT_ID" Value="0" Type="Double"></ToCompare>
+                  <ToCompare Key="$REG_ID_ISSUES" Value="" Type="Datetime"></ToCompare>
+                  <ToCompare Key="$REG_IDEN" Value="" Type="String"></ToCompare>
+                  <ToCompare Key="$REG_ID_ISSUES" Value="" Type="Datetime"></ToCompare>
+                  <ToCompare Key="$REG_IDEN" Value="" Type="String"></ToCompare>
+                  <ToCompare Key="$POSITION_ID" Value="0" Type="Double"></ToCompare>
+                </SubCondition>
+                <SubCondition Operand1="$LOB_ID" Operator ="==" Operand2="21" OperandType="Double">
+                  <ToCompare Key="$STATE_ID" Value="0" Type="Double"></ToCompare>
+                  <ToCompare Key="$CPF_NUM" Value="" Type="String"></ToCompare>
+                  <ToCompare Key="$INDIVIDUAL_NAME" Value="" Type="String"></ToCompare>
+                  <ToCompare Key="$REG_ID_ISSUES" Value="" Type="Datetime"></ToCompare>
+                  <ToCompare Key="$REG_IDEN" Value="" Type="String"></ToCompare>
+                  <ToCompare Key="$REG_ID_ISSUES" Value="" Type="Datetime"></ToCompare>
+                  <ToCompare Key="$REG_IDEN" Value="" Type="String"></ToCompare>
+                  <ToCompare Key="$POSITION_ID" Value="0" Type="Double"></ToCompare>
+                </SubCondition>
+                <SubCondition Operand1="$LOB_ID" Operator ="==" Operand2="10" OperandType="Double">
+                  <ToCompare Key="$LOCATION" Value="0" Type="Double"></ToCompare>
+                  <ToCompare Key="$CONSTRUCTION" Value="0" Type="Double"></ToCompare>
+                </SubCondition>
+                <SubCondition Operand1="$LOB_ID" Operator ="==" Operand2="11" OperandType="Double">
+                  <ToCompare Key="$LOCATION" Value="0" Type="Double"></ToCompare>
+                  <ToCompare Key="$CONSTRUCTION" Value="0" Type="Double"></ToCompare>
+                </SubCondition>
+                <SubCondition Operand1="$LOB_ID" Operator ="==" Operand2="12" OperandType="Double">
+                  <ToCompare Key="$LOCATION" Value="0" Type="Double"></ToCompare>
+                  <ToCompare Key="$CONSTRUCTION" Value="0" Type="Double"></ToCompare>
+                </SubCondition>
+                <SubCondition Operand1="$LOB_ID" Operator ="==" Operand2="14" OperandType="Double">
+                  <ToCompare Key="$LOCATION" Value="0" Type="Double"></ToCompare>
+                  <ToCompare Key="$CONSTRUCTION" Value="0" Type="Double"></ToCompare>
+                </SubCondition>
+                <SubCondition Operand1="$LOB_ID" Operator ="==" Operand2="16" OperandType="Double">
+                  <ToCompare Key="$LOCATION" Value="0" Type="Double"></ToCompare>
+                  <ToCompare Key="$CONSTRUCTION" Value="0" Type="Double"></ToCompare>
+                </SubCondition>
+                <SubCondition Operand1="$LOB_ID" Operator ="==" Operand2="19" OperandType="Double">
+                  <ToCompare Key="$LOCATION" Value="0" Type="Double"></ToCompare>
+                  <ToCompare Key="$CONSTRUCTION" Value="0" Type="Double"></ToCompare>
+                </SubCondition>
+                <SubCondition Operand1="$LOB_ID" Operator ="==" Operand2="22" OperandType="Double">
+                  <ToCompare Key="$START_DATE" Value="" Type="Datetime"></ToCompare>
+                  <ToCompare Key="$END_DATE" Value="" Type="Datetime"></ToCompare>
+                  <ToCompare Key="$NUMBER_OF_PASSENGERS" Value="0" Type="Double"></ToCompare>
+                </SubCondition>
+                <SubCondition Operand1="$LOB_ID" Operator ="==" Operand2="17" OperandType="Double">
+                  <ToCompare Key="$RISK_EFFECTIVE_DATE" Value="" Type="Datetime"></ToCompare>
+                  <ToCompare Key="$RISK_EXPIRE_DATE" Value="" Type="Datetime"></ToCompare>
+                  <ToCompare Key="$MANUFACTURED_YEAR" Value="0" Type="Double"></ToCompare>
+                  <ToCompare Key="$VEHICLE_NUMBER" Value="0" Type="Double"></ToCompare>
+                  <ToCompare Key="$CLIENT_ORDER" Value="0" Type="Double"></ToCompare>
+                </SubCondition>
+                <SubCondition Operand1="$LOB_ID" Operator ="==" Operand2="18" OperandType="Double">
+                  <ToCompare Key="$RISK_EFFECTIVE_DATE" Value="" Type="Datetime"></ToCompare>
+                  <ToCompare Key="$RISK_EXPIRE_DATE" Value="" Type="Datetime"></ToCompare>
+                  <ToCompare Key="$MANUFACTURED_YEAR" Value="0" Type="Double"></ToCompare>
+                  <ToCompare Key="$VEHICLE_NUMBER" Value="0" Type="Double"></ToCompare>
+                  <ToCompare Key="$CLIENT_ORDER" Value="0" Type="Double"></ToCompare>
+                </SubCondition>
+                <SubCondition Operand1="$LOB_ID" Operator ="==" Operand2="20" OperandType="Double">
+                  <ToCompare Key="$COMMODITY_NUMBER" Value="0" Type="Double"></ToCompare>
+                  <ToCompare Key="$DEPARTING_DATE" Value="" Type="Datetime"></ToCompare>
+                  <ToCompare Key="$COMMODITY" Value="0" Type="Double"></ToCompare>
+                  <ToCompare Key="$ORIGIN_COUNTRY" Value="0" Type="Double"></ToCompare>
+                  <ToCompare Key="$ORIGIN_STATE" Value="0" Type="Double"></ToCompare>
+                  <ToCompare Key="$ORIGIN_CITY" Value="" Type="String"></ToCompare>
+                  <ToCompare Key="$DESTINATION_COUNTRY" Value="0" Type="Double"></ToCompare>
+                  <ToCompare Key="$DESTINATION_STATE" Value="0" Type="Double"></ToCompare>
+                  <ToCompare Key="$DESTINATION_CITY" Value="" Type="String"></ToCompare>
+                  <ToCompare Key="$CONVEYANCE_TYPE" Value="0" Type="Double"></ToCompare>
+                </SubCondition>
+                <SubCondition Operand1="$LOB_ID" Operator ="==" Operand2="23" OperandType="Double">
+                  <ToCompare Key="$COMMODITY_NUMBER" Value="0" Type="Double"></ToCompare>
+                  <ToCompare Key="$DEPARTING_DATE" Value="" Type="Datetime"></ToCompare>
+                  <ToCompare Key="$COMMODITY" Value="0" Type="Double"></ToCompare>
+                  <ToCompare Key="$ORIGIN_COUNTRY" Value="0" Type="Double"></ToCompare>
+                  <ToCompare Key="$ORIGIN_STATE" Value="0" Type="Double"></ToCompare>
+                  <ToCompare Key="$ORIGIN_CITY" Value="" Type="String"></ToCompare>
+                  <ToCompare Key="$DESTINATION_COUNTRY" Value="0" Type="Double"></ToCompare>
+                  <ToCompare Key="$DESTINATION_STATE" Value="0" Type="Double"></ToCompare>
+                  <ToCompare Key="$DESTINATION_CITY" Value="" Type="String"></ToCompare>
+                  <ToCompare Key="$CONVEYANCE_TYPE" Value="0" Type="Double"></ToCompare>
+                </SubCondition>
+                <SubCondition Operand1="$LOB_ID" Operator ="==" Operand2="25" OperandType="Double">
+                  <ToCompare Key="$LOCATION" Value="0" Type="Double"></ToCompare>
+                  <ToCompare Key="$CONSTRUCTION" Value="0" Type="Double"></ToCompare>
+                </SubCondition>
+                <SubCondition Operand1="$LOB_ID" Operator ="==" Operand2="26" OperandType="Double">
+                  <ToCompare Key="$LOCATION" Value="0" Type="Double"></ToCompare>
+                  <ToCompare Key="$CONSTRUCTION" Value="0" Type="Double"></ToCompare>
+                </SubCondition>
+                <SubCondition Operand1="$LOB_ID" Operator ="==" Operand2="27" OperandType="Double">
+                  <ToCompare Key="$LOCATION" Value="0" Type="Double"></ToCompare>
+                  <ToCompare Key="$CONSTRUCTION" Value="0" Type="Double"></ToCompare>
+                </SubCondition>
+                <SubCondition Operand1="$LOB_ID" Operator ="==" Operand2="28" OperandType="Double">
+                  <ToCompare Key="$RISK_EFFECTIVE_DATE" Value="" Type="Datetime"></ToCompare>
+                  <ToCompare Key="$RISK_EXPIRE_DATE" Value="" Type="Datetime"></ToCompare>
+                  <ToCompare Key="$MANUFACTURED_YEAR" Value="0" Type="Double"></ToCompare>
+                  <ToCompare Key="$VEHICLE_NUMBER" Value="0" Type="Double"></ToCompare>
+                  <ToCompare Key="$CLIENT_ORDER" Value="0" Type="Double"></ToCompare>
+                </SubCondition>
+                <SubCondition Operand1="$LOB_ID" Operator ="==" Operand2="29" OperandType="Double">
+                  <ToCompare Key="$RISK_EFFECTIVE_DATE" Value="" Type="Datetime"></ToCompare>
+                  <ToCompare Key="$RISK_EXPIRE_DATE" Value="" Type="Datetime"></ToCompare>
+                  <ToCompare Key="$MANUFACTURED_YEAR" Value="0" Type="Double"></ToCompare>
+                  <ToCompare Key="$VEHICLE_NUMBER" Value="0" Type="Double"></ToCompare>
+                  <ToCompare Key="$CLIENT_ORDER" Value="0" Type="Double"></ToCompare>
+                </SubCondition>
+                <!--<SubCondition Operand1="$LOB_ID" Operator ="==" Operand2="30" OperandType="Double">
+                  <ToCompare Key="$RISK_EFFECTIVE_DATE" Value="" Type="Datetime"></ToCompare>
+                  <ToCompare Key="$RISK_EXPIRE_DATE" Value="" Type="Datetime"></ToCompare>
+                  <ToCompare Key="$MANUFACTURED_YEAR" Value="0" Type="Double"></ToCompare>
+                  <ToCompare Key="$VEHICLE_NUMBER" Value="0" Type="Double"></ToCompare>
+                  <ToCompare Key="$CLIENT_ORDER" Value="0" Type="Double"></ToCompare>
+                </SubCondition>-->
+                <SubCondition Operand1="$LOB_ID" Operator ="==" Operand2="31" OperandType="Double">
+                  <ToCompare Key="$RISK_EFFECTIVE_DATE" Value="" Type="Datetime"></ToCompare>
+                  <ToCompare Key="$RISK_EXPIRE_DATE" Value="" Type="Datetime"></ToCompare>
+                  <ToCompare Key="$MANUFACTURED_YEAR" Value="0" Type="Double"></ToCompare>
+                  <ToCompare Key="$VEHICLE_NUMBER" Value="0" Type="Double"></ToCompare>
+                  <ToCompare Key="$CLIENT_ORDER" Value="0" Type="Double"></ToCompare>
+                </SubCondition>
+                <SubCondition Operand1="$LOB_ID" Operator ="==" Operand2="32" OperandType="Double">
+                  <ToCompare Key="$LOCATION" Value="0" Type="Double"></ToCompare>
+                  <ToCompare Key="$CONSTRUCTION" Value="0" Type="Double"></ToCompare>
+                </SubCondition>
+                <SubCondition Operand1="$LOB_ID" Operator ="==" Operand2="33" OperandType="Double">
+                  <ToCompare Key="$STATE_ID" Value="0" Type="Double"></ToCompare>
+                  <ToCompare Key="$CPF_NUM" Value="" Type="String"></ToCompare>
+                  <ToCompare Key="$INDIVIDUAL_NAME" Value="" Type="String"></ToCompare>
+                  <ToCompare Key="$REG_ID_ISSUES" Value="" Type="Datetime"></ToCompare>
+                  <ToCompare Key="$REG_IDEN" Value="" Type="String"></ToCompare>
+                  <ToCompare Key="$REG_ID_ISSUES" Value="" Type="Datetime"></ToCompare>
+                  <ToCompare Key="$REG_IDEN" Value="" Type="String"></ToCompare>
+                  <ToCompare Key="$POSITION_ID" Value="0" Type="Double"></ToCompare>
+                </SubCondition>
+                <SubCondition Operand1="$LOB_ID" Operator ="==" Operand2="34" OperandType="Double">
+                  <ToCompare Key="$STATE_ID" Value="0" Type="Double"></ToCompare>
+                  <ToCompare Key="$CPF_NUM" Value="" Type="String"></ToCompare>
+                  <ToCompare Key="$INDIVIDUAL_NAME" Value="" Type="String"></ToCompare>
+                  <ToCompare Key="$REG_ID_ISSUES" Value="" Type="Datetime"></ToCompare>
+                  <ToCompare Key="$REG_IDEN" Value="" Type="String"></ToCompare>
+                  <ToCompare Key="$REG_ID_ISSUES" Value="" Type="Datetime"></ToCompare>
+                  <ToCompare Key="$REG_IDEN" Value="" Type="String"></ToCompare>
+                  <ToCompare Key="$POSITION_ID" Value="0" Type="Double"></ToCompare>
+                </SubCondition>
+              </Condition>
+              <!--<SubCondition Operand1="$LOB_ID" Operator ="==" Operand2="36" OperandType="Double">
+                <ToCompare Key="$RISK_EFFECTIVE_DATE" Value="" Type="Datetime"></ToCompare>
+                <ToCompare Key="$RISK_EXPIRE_DATE" Value="" Type="Datetime"></ToCompare>
+                <ToCompare Key="$MANUFACTURED_YEAR" Value="0" Type="Double"></ToCompare>
+                <ToCompare Key="$VEHICLE_NUMBER" Value="0" Type="Double"></ToCompare>
+                <ToCompare Key="$CLIENT_ORDER" Value="0" Type="Double"></ToCompare>
+				
+              </SubCondition>-->
+            </Conditions>
+          </Screen>
+          <Screen ID="COINSURANCES" IsRequired ="Y">
+            <Conditions>
+              <Condition Operand1="$LEADER_FOLLOWER" Operator ="==" Operand2="14549" OperandType="String">
+                <ToCompare Key="$COINSURANCE_PERCENT" Value="0.00" Type="Double"></ToCompare>
+
+              </Condition>
+              
+              <Condition Operand1="$CO_INSURANCE" Operator ="==" Operand2="14549" OperandType="String">
+
+                <ToCompare Key="$DUPLICATE" Value="1" Type="String"></ToCompare>
+              </Condition>
+              <Condition Operand1="$APP_CO_INSURANCE" Operator ="==" Operand2="14548" OperandType="Double">
+                <SubCondition Operand1="$TOTAL_COINSURANCE_PERCENT"  Operator ="!=" Operand2="100" OperandType="Double">
+                  <ToCompare Key="$TOTAL_COINSURANCE_PERCENT" Value="$TOTAL_COINSURANCE_PERCENT" Type="Double"></ToCompare>
+                </SubCondition>
+              </Condition>
+            </Conditions>
+            <Conditions>
+              <Condition Operand1="$APP_CO_INSURANCE" Operator ="==" Operand2="14549" OperandType="Double">
+                <SubCondition Operand1="$TOTAL_COINSURANCE_PERCENT"  Operator ="&gt;" Operand2="100" OperandType="Double">
+                  <ToCompare Key="$TOTAL_COINSURANCE_PERCENT" Value="$TOTAL_COINSURANCE_PERCENT" Type="Double"></ToCompare>
+                </SubCondition>
+              </Condition>
+            </Conditions>
+            <Conditions>
+              <Condition Operand1="$APP_CO_INSURANCE" Operator ="==" Operand2="14548" OperandType="Double">
+                <SubCondition Operand1="$TOTAL_COINSURANCE_FEE"  Operator ="&gt;" Operand2="100" OperandType="Double">
+                  <ToCompare Key="$TOTAL_COINSURANCE_FEE" Value="$TOTAL_COINSURANCE_FEE" Type="Double"></ToCompare>
+                </SubCondition>
+              </Condition>
+            </Conditions>
+            <Conditions>
+              <Condition Operand1="$APP_CO_INSURANCE" Operator ="==" Operand2="14548" OperandType="Double">
+                <SubCondition Operand1="$LEADER_FOLLOWER"  Operator ="==" Operand2="14549" OperandType="Double">
+                  <ToCompare Key="$COINSURANCE_FEE_FOLLOWER" Value="0.00" Type="Double"></ToCompare>
+                </SubCondition>
+              </Condition>
+            </Conditions>
+            <Conditions>
+              <Condition Operand1="$CO_INSURANCE" Operator ="==" Operand2="14548" OperandType="String">
+              <ToCompare Key="$COINSURANCE_PERCENT" Value="0.00" Type="Double"></ToCompare>
+              </Condition>
+            </Conditions>
+            </Screen>
+
+          <Screen ID="CLAUSES" IsRequired ="N">
+            <Conditions>
+            </Conditions>
+          </Screen>
+          <Screen ID="DISCOUNTS" IsRequired ="N">
+            <Conditions>
+            </Conditions>
+          </Screen>
+          <Screen ID="REINSURANCES" IsRequired ="N">
+            <Conditions>
+              <ToCompare Key="$CONTRACT_FACULTATIVE" Value="0" Type="Double"></ToCompare>
+              <ToCompare Key="$REINSURANCE_CEDED" Value="0" Type="Double"></ToCompare>
+              <!--<ToCompare Key="$REINSURANCE_COMMISSION" Value="0.00" Type="Double"></ToCompare>-->
+            </Conditions>
+          </Screen>
+          <Screen ID="COVERAGES" IsRequired ="N">
+            <Conditions>
+            </Conditions>
+          </Screen>
+          <Screen ID="P_DEVICES" IsRequired ="N">
+            <Conditions>
+            </Conditions>
+          </Screen>
+          <Screen ID="BILLING_INFOS" IsRequired ="Y">
+            <Conditions>
+			  <Condition Operand1="$IS_MANDATORY" Operator ="==" Operand2="Y" OperandType="String">
+              <!--<Condition Operand1="$RISK" Operator =">" Operand2="0" OperandType="Double">-->
+                <ToCompare Key="$TOTAL_PREMIUM" Value ="0.00" Type="Double"></ToCompare>
+              </Condition>
+            </Conditions>
+            <!--<Conditions>
+              <Condition Operand1="$PRODUCT_TYPE" Operator ="==" Operand2="14681" OperandType="String">
+                  <ToCompare Key="$TOTAL_PREMIUM" Value="0.00" Type="Double"></ToCompare>
+              </Condition>
+            </Conditions>-->
+            
+          </Screen>
+        </Rule>
+      </SubSubGroup>
+      <SubSubGroup Code="Reject">
+        <Rule Action="Database" StartDate="1950-01-01" EndDate="3000-12-30" STATE_ID="0"  LOB_ID="0">
+          <Screen ID="APPLICATIONS" IsRequired ="Y">
+            <Conditions>
+              <Condition Operand1="$TERMINATION_DATE" Operator ="==" Operand2="1" OperandType="Double">
+                <ToCompare Key="$TERMINATION_DATE" Value="$TERMINATION_DATE" Type="Double"></ToCompare>
+              </Condition>
+            </Conditions>
+          </Screen>
+          <Screen ID="REMUNERATIONS" IsRequired ="Y">
+            <Conditions>
+              <Condition Operand1="$TRANSACTION_TYPE" Operator ="==" Operand2="14560" OperandType="String">
+                <SubCondition Operand1="$CO_APPLICANT" Operator ="!=" Operand2="$NO_CO_APPLICANTS" OperandType="String">
+                  <ToCompare Key="$CO_APPLICANT" Value="$CO_APPLICANT" Type="String"></ToCompare>
+                </SubCondition>
+                  </Condition>
+            </Conditions>
+            <!--Implementation of leader per co-applicant-->
+            <Conditions>
+              <Condition Operand1="$COUNT_LEADER" Operator ="==" Operand2="0"  OperandType="String">
+                <ToCompare Key="$COUNT_LEADER" Value="$COUNT_LEADER" Type="String"></ToCompare>
+              </Condition>
+            </Conditions>
+            <Conditions>
+              <Condition Operand1="$POL_COMMISSION_PERCENT" Operator ="&gt;" Operand2="0.00" OperandType="Double">
+                <SubCondition Operand1="$REMU_COMMISSION_PERCENT" Operator ="==" Operand2="0.00"  OperandType="Double">
+                  <ToCompare Key="$REMU_COMMISSION_PERCENT" Value="$REMU_COMMISSION_PERCENT" Type="Double"></ToCompare>
+                </SubCondition>
+              </Condition>
+            </Conditions>
+            <Conditions>
+              <Condition Operand1="$POL_PRO_LABORE_PERCENT" Operator ="&gt;" Operand2="0.00" OperandType="Double">
+                <SubCondition Operand1="$REMU_PRO_LABORE_PERCENT" Operator ="==" Operand2="0.00"  OperandType="Double">
+                  <ToCompare Key="$REMU_PRO_LABORE_PERCENT" Value="$REMU_PRO_LABORE_PERCENT" Type="Double"></ToCompare>
+                </SubCondition>
+              </Condition>
+            </Conditions>
+            <Conditions>
+              <Condition Operand1="$POL_FEES_PERCENT" Operator ="&gt;" Operand2="0.00" OperandType="Double">
+                <SubCondition Operand1="$REMU_FEES_PERCENT" Operator ="==" Operand2="0.00"  OperandType="Double">
+                  <ToCompare Key="$REMU_FEES_PERCENT" Value="$REMU_FEES_PERCENT" Type="Double"></ToCompare>
+                </SubCondition>
+              </Condition>
+            </Conditions>
+            <Conditions>
+              <Condition Operand1="$REMU_COMMISSION_PERCENT" Operator ="&gt;" Operand2="0.00" OperandType="Double">
+                <SubCondition Operand1="$POL_COMMISSION_PERCENT" Operator ="==" Operand2="0.00"  OperandType="Double">
+                  <ToCompare Key="$POL_COMMISSION_PERCENT" Value="$POL_COMMISSION_PERCENT" Type="Double"></ToCompare>
+                </SubCondition>
+              </Condition>
+            </Conditions>
+            <Conditions>
+              <Condition Operand1="$REMU_PRO_LABORE_PERCENT" Operator ="&gt;" Operand2="0.00" OperandType="Double">
+                <SubCondition Operand1="$POL_PRO_LABORE_PERCENT" Operator ="==" Operand2="0.00"  OperandType="Double">
+                  <ToCompare Key="$POL_PRO_LABORE_PERCENT" Value="$POL_PRO_LABORE_PERCENT" Type="Double"></ToCompare>
+                </SubCondition>
+              </Condition>
+            </Conditions>
+            <Conditions>
+              <Condition Operand1="$REMU_FEES_PERCENT" Operator ="&gt;" Operand2="0.00" OperandType="Double">
+                <SubCondition Operand1="$POL_FEES_PERCENT" Operator ="==" Operand2="0.00"  OperandType="Double">
+                  <ToCompare Key="$POL_FEES_PERCENT" Value="$POL_FEES_PERCENT" Type="Double"></ToCompare>
+                </SubCondition>
+              </Condition>
+            </Conditions>
+           </Screen>
+
+          <Screen ID="COINSURANCES" IsRequired ="Y">
+            <Conditions>
+              <Condition Operand1="$CO_INSURANCE" Operator ="==" Operand2="14549"  OperandType="String">
+                <SubCondition Operand1="$LEADER_COUNT" Operator ="==" Operand2="0"  OperandType="String">
+                  <ToCompare Key="$LEADER_COUNT" Value="$LEADER_COUNT" Type="String"></ToCompare>
+                </SubCondition>
+              </Condition>
+              <Condition Operand1="$CO_INSURANCE" Operator ="==" Operand2="14548"  OperandType="String">
+                <SubCondition Operand1="$FOLLOWER_COUNT" Operator ="==" Operand2="0"  OperandType="String">
+                  <ToCompare Key="$FOLLOWER_COUNT" Value="$FOLLOWER_COUNT" Type="String"></ToCompare>
+                </SubCondition>
+              </Condition>
+            </Conditions>
+          </Screen>
+          <Screen ID="RISKS" IsRequired ="Y">
+            <Conditions>
+              <Condition Operand1="$LOB_ID"  Operator ="==" Operand2="16" OperandType="String">
+                <SubCondition Operand1="$SUB_COV_SI_SUM" Operator ="!=" Operand2="$MAIN_COV_SI_SUM"  OperandType="String">
+                  <ToCompare Key="$SUB_COV_SI_SUM" Value="$SUB_COV_SI_SUM" Type="String"></ToCompare>
+                </SubCondition>
+              </Condition>
+            </Conditions>
+            <Conditions>
+              <Condition Operand1="$LOB_ID"  Operator ="==" Operand2="16" OperandType="String">
+                <SubCondition Operand1="$SUB_COV_WP_SUM" Operator ="!=" Operand2="$MAIN_COV_WP_SUM"  OperandType="String">
+                  <ToCompare Key="$SUB_COV_WP_SUM" Value="$SUB_COV_WP_SUM" Type="String"></ToCompare>
+                </SubCondition>
+              </Condition>
+            </Conditions>
+          </Screen>          
+          <!--Commented By Lalit main coverages selection rule shifted according to per risk-->
+          <!--<Screen ID="COVERAGES" IsRequired ="Y">
+            <Conditions>
+              <Condition Operand1="$COUNT_ISMAIN"  Operator ="!=" Operand2="1" OperandType="String">
+                <ToCompare Key="$COUNT_ISMAIN" Value="$COUNT_ISMAIN" Type="String"></ToCompare>
+              </Condition>
+            </Conditions>
+          </Screen>-->
+          <Screen ID="REINSURANCES" IsRequired ="Y">   <!--Added by Aditya for tfs bug # 177-->
+            <Conditions>
+              <Condition Operand1="$REINSURANCE_CEDED_SUM"  Operator ="&gt;" Operand2="100.00" OperandType="double">
+                <ToCompare Key="$REINSURANCE_CEDED_SUM" Value="$REINSURANCE_CEDED_SUM" Type="double"></ToCompare>
+              </Condition>
+            </Conditions>
+          </Screen>  <!--Added till here-->
+        </Rule>
+      </SubSubGroup>
+      <SubSubGroup Code="Refered">
+        <Rule Action="Database" StartDate="1950-01-01" EndDate="3000-12-30" STATE_ID="0"  LOB_ID="0">
+          <Screen ID="BILLING_INFOS" IsRequired="Y">
+            <Conditions>
+              <Condition Operand1="$RISK" Operator =">" Operand2="0" OperandType="Double">
+                <SubCondition Operand1="$TOTAL_PREMIUM" Operator ="!=" Operand2="$COVERAGES_PREMIUM" OperandType="Double">
+                  <ToCompare Key="$TOTAL_PREMIUM" Value="$TOTAL_PREMIUM" Type="Double"></ToCompare>
+                  </SubCondition>
+              </Condition>
+            </Conditions>
+            <Conditions>
+              <Condition Operand1="$POLICY_DUE_DATE" Operator ="==" Operand2="1" OperandType="Double">
+                <ToCompare Key="$POLICY_DUE_DATE" Value="$POLICY_DUE_DATE" Type="Double"></ToCompare>
+                </Condition>
+            </Conditions>
+          </Screen>
+          <Screen ID="RISKS" IsRequired ="Y">
+            <Conditions>
+              <Condition Operand1="$VALUE_AT_RISK_APPLICABLE"  Operator ="==" Operand2="1" OperandType="String">
+                <SubCondition Operand1="$MAXIMUM_LIMIT" Operator ="!=" Operand2="$SUM_LIMIT" OperandType="Double">
+                  <ToCompare Key="$MAXIMUM_LIMIT" Value="$MAXIMUM_LIMIT" Type="Double"></ToCompare>
+                </SubCondition>
+                <SubCondition Operand1="$COUNT_ISMAIN" Operator ="!=" Operand2="$IS_MAIN_APPLY" OperandType="String">
+                  <ToCompare Key="$COUNT_ISMAIN" Value="$COUNT_ISMAIN" Type="Double"></ToCompare>
+                </SubCondition>
+                <SubCondition Operand1="$VALUE_AT_RISK"  Operator ="&lt;" Operand2="$BASIC_COVERAGE_SI" OperandType="Double">
+                  <ToCompare Key="$VALUE_AT_RISK" Value="$VALUE_AT_RISK" Type="Double"></ToCompare>
+                </SubCondition>
+              </Condition>
+              <!--Added By Lalit Chauhan.March 2,2011 for risk should have only one main coverage-->
+              <Condition Operand1="$VALUE_AT_RISK_APPLICABLE"  Operator ="!=" Operand2="1" OperandType="String">
+                <SubCondition Operand1="$COUNT_ISMAIN" Operator ="!=" Operand2="$IS_MAIN_APPLY" OperandType="String">
+                  <ToCompare Key="$COUNT_ISMAIN" Value="$COUNT_ISMAIN" Type="Double"></ToCompare>
+                </SubCondition>
+              </Condition>
+
+            </Conditions>
+          </Screen>
+          <Screen ID="REMUNERATIONS" IsRequired ="Y">
+            <Conditions>
+              <!--<Condition Operand1="$COMMISSION_TYPE" Operator ="==" Operand2="43" OperandType="Double">
+                <ToCompare Key="$COMMISSION_PERCENT" Value="0.0000" Type="Double"></ToCompare>
+                <ToCompare Key="$BROKER_ID" Value="0" Type="Double"></ToCompare>
+              </Condition>-->
+              <!--<Condition Operand1="$COMMISSION_TYPE" Operator ="==" Operand2="44" OperandType="Double">
+                -->
+              <!--<ToCompare Key="$AMOUNT" Value="0.00" Type="Double"></ToCompare>-->
+              <!--
+                <ToCompare Key="$BROKER_ID" Value="0" Type="Double"></ToCompare>
+              </Condition>-->
+              <!--<Condition Operand1="$COMMISSION_TYPE" Operator ="==" Operand2="45" OperandType="Double">
+                <ToCompare Key="$COMMISSION_PERCENT" Value="0.0000" Type="Double"></ToCompare>
+                <ToCompare Key="$BROKER_ID" Value="0" Type="Double"></ToCompare>
+              </Condition>-->
+              <Condition Operand1="$COMMISSION_PERCENT" Operator ="!=" Operand2="100.0000"  OperandType="Double">
+                <SubCondition Operand1="$POLICY_LEVEL_COMM_APPLIES" Operator ="==" Operand2="Y"  OperandType="String">
+                  <ToCompare Key="$COMMISSION_PERCENT" Value="$COMMISSION_PERCENT" Type="Double"></ToCompare>
+                  <ToCompare Key="$POLICY_LEVEL_COMM_APPLIES" Value="$POLICY_LEVEL_COMM_APPLIES" Type="String"></ToCompare>
+                </SubCondition>
+                <SubCondition Operand1="$COMMISSION_PERCENT" Operator ="&gt;" Operand2="100.0000"  OperandType="Double">
+                  <ToCompare Key="$COMMISSION_PERCENT" Value="$COMMISSION_PERCENT" Type="Double"></ToCompare>
+                </SubCondition>
+                <!--itrack no 1391 by praveer incase of Accepted Coinsurance, the broker commission cannot be mandatory-->
+                <!--<SubCondition Operand1="$COMMISSION_PERCENT" Operator ="==" Operand2="0"  OperandType="Double">
+                  <ToCompare Key="$COMMISSION_PERCENT" Value="$COMMISSION_PERCENT" Type="Double"></ToCompare>
+                </SubCondition>-->
+              </Condition>
+              <!--<Condition Operand1="$COMMISSION_TYPE" Operator ="==" Operand2="43"  OperandType="Double">
+                <SubCondition Operand1="$COMMISSION_PERCENT" Operator ="!=" Operand2="100.0000"  OperandType="Double">
+                  <ToCompare Key="$COMMISSION_PERCENT" Value="$COMMISSION_PERCENT" Type="Double"></ToCompare>
+                </SubCondition>
+              </Condition>-->
+              <Condition Operand1="$COMMISSION_TYPE" Operator ="==" Operand2="44"  OperandType="Double">
+                <SubCondition Operand1="$COMMISSION_PERCENT" Operator ="!=" Operand2="100.0000"  OperandType="Double">
+                  <ToCompare Key="$COMMISSION_PERCENT" Value="$COMMISSION_PERCENT" Type="Double"></ToCompare>
+                </SubCondition>
+              </Condition>
+              <Condition Operand1="$COMMISSION_TYPE" Operator ="==" Operand2="45"  OperandType="Double">
+                <SubCondition Operand1="$COMMISSION_PERCENT" Operator ="!=" Operand2="100.0000"  OperandType="Double">
+                  <ToCompare Key="$COMMISSION_PERCENT" Value="$COMMISSION_PERCENT" Type="Double"></ToCompare>
+                </SubCondition>
+              </Condition>
+            </Conditions>
+            <!--itrack no 1391 by praveer incase of Accepted Coinsurance, the broker commission cannot be mandatory-->
+            <Conditions>
+              <Condition Operand1="$COMMISSION_PERCENT" Operator ="==" Operand2="0"  OperandType="Double">
+                <SubCondition Operand1="$CO_INSURANCE" Operator ="!=" Operand2="14549"  OperandType="Double">
+                  <ToCompare Key="$COMMISSION_PERCENT" Value="$COMMISSION_PERCENT" Type="Double"></ToCompare>
+                </SubCondition>
+              </Condition>
+            </Conditions>
+          </Screen>
+          <Screen ID="APPLICATIONS" IsRequired ="Y">
+            <Conditions>
+              <Condition Operand1="$CO_INSURANCE" Operator ="!=" Operand2="14549" OperandType="String">
+                <ToCompare Key="$CUSTOMER_ZIP" Value="0" Type="String"></ToCompare>
+                <ToCompare Key="$CUSTOMER_ADDRESS1" Value="0" Type="String"></ToCompare>
+                <ToCompare Key="$CUSTOMER_CITY" Value="0" Type="String"></ToCompare>
+                <ToCompare Key="$CUSTOMER_STATE" Value="0" Type="String"></ToCompare>
+                <ToCompare Key="$CUSTOMER_COUNTRY" Value="0" Type="String"></ToCompare>
+                <ToCompare Key="$NUMBER" Value="0" Type="String"></ToCompare>
+                <ToCompare Key="$CUSTOMER_DISTRICT" Value="0" Type="String"></ToCompare>
+                <SubCondition Operand1="$CUSTOMER_TYPE1" Operator ="==" Operand2="11110" OperandType="String">
+                  <ToCompare Key="$ORIGINAL_ISSUE" Value="0" Type="String"></ToCompare>
+                  <ToCompare Key="$REGIONAL_IDENTIFICATION" Value="0" Type="String"></ToCompare>
+                  <ToCompare Key="$REG_ID_ISSUE" Value="0" Type="String"></ToCompare>
+                  <ToCompare Key="$DATE_OF_BIRTH" Value="0" Type="String"></ToCompare>
+                  <ToCompare Key="$MARITAL_STATUS" Value="0" Type="String"></ToCompare>
+                  <ToCompare Key="$GENDER" Value="0" Type="String"></ToCompare>
+                </SubCondition>
+                <SubCondition Operand1="$CUSTOMER_TYPE1" Operator ="!=" Operand2="11110" OperandType="String">
+                  <ToCompare Key="$CREATION_DATE" Value="0" Type="String"></ToCompare>
+                </SubCondition>
+              </Condition>
+            </Conditions>
+          </Screen>
+          <Screen ID="APPLICANTS" IsRequired ="N">
+            <Conditions>
+              <Condition Operand1="$CO_INSURANCE" Operator ="!=" Operand2="14549" OperandType="String">
+                <SubCondition Operand1="$APPLICANT_TYPE" Operator ="==" Operand2="11110" OperandType="String">
+                  <ToCompare Key="$FIRST_NAME" Value="0" Type="String"></ToCompare>
+                  <ToCompare Key="$ZIP_CODE" Value="0" Type="String"></ToCompare>
+                  <ToCompare Key="$ADDRESS1" Value="0" Type="String"></ToCompare>
+                  <ToCompare Key="$CITY" Value="0" Type="String"></ToCompare>
+                  <ToCompare Key="$STATE" Value="0" Type="String"></ToCompare>
+                  <ToCompare Key="$COUNTRY" Value="0" Type="String"></ToCompare>
+                  <ToCompare Key="$CO_APP_NUMBER" Value="0" Type="String"></ToCompare>
+                  <ToCompare Key="$CO_APP_DISTRICT" Value="0" Type="String"></ToCompare>
+                  <ToCompare Key="$CO_APP_REG_ID_ISSUE" Value="0" Type="String"></ToCompare>
+                  <ToCompare Key="$CO_APP_ORIGINAL_ISSUE" Value="0" Type="String"></ToCompare>
+                  <ToCompare Key="$CO_APP_REGIONAL_IDENTIFICATION" Value="0" Type="String"></ToCompare>
+                  <ToCompare Key="$CO_APPL_MARITAL_STATUS" Value="0" Type="String"></ToCompare>
+                  <ToCompare Key="$CO_APPL_DOB" Value="0" Type="String"></ToCompare>
+                  <ToCompare Key="$CO_APPL_GENDER" Value="0" Type="String"></ToCompare>
+                </SubCondition>
+                <SubCondition Operand1="$APPLICANT_TYPE" Operator ="!=" Operand2="11110" OperandType="String">
+                  <ToCompare Key="$CO_APPL_CREATION_DATE" Value="0" Type="String"></ToCompare>
+                  <ToCompare Key="$ZIP_CODE" Value="0" Type="String"></ToCompare>
+                  <ToCompare Key="$ADDRESS1" Value="0" Type="String"></ToCompare>
+                  <ToCompare Key="$CITY" Value="0" Type="String"></ToCompare>
+                  <ToCompare Key="$STATE" Value="0" Type="String"></ToCompare>
+                  <ToCompare Key="$COUNTRY" Value="0" Type="String"></ToCompare>
+                  <ToCompare Key="$CO_APP_NUMBER" Value="0" Type="String"></ToCompare>
+                  <ToCompare Key="$CO_APP_DISTRICT" Value="0" Type="String"></ToCompare>
+                </SubCondition>
+              </Condition>
+            </Conditions>
+          </Screen>
+          <!--Added by Lalit July 21 2011.itrack # 1329-->
+          <!--<Screen ID="COVERAGES" IsRequired ="Y">
+            <Conditions>
+              <Condition Operand1="$LAYER_AMOUNT"  Operator ="!=" Operand2="0" OperandType="Double">
+                <SubCondition Operand1="$TIV" Operator ="&gt;" Operand2="$LAYER_AMOUNT"  OperandType="Double">
+                  <ToCompare Key="$TIV" Value="$TIV" Type="String"></ToCompare>
+                </SubCondition>
+              </Condition>
+            </Conditions>
+          </Screen>-->   <!--Commented by Aditya For itrack # 1532,this msg has been shifted to confirmation box-->
+          <Screen ID="REINSURANCES" IsRequired ="Y">   <!--Added by Aditya for tfs bug # 180-->
+            <Conditions>
+              <Condition Operand1="$IS_DISREGARD_RI_CONTRACT" Operator ="==" Operand2="0" OperandType="Double">
+                <ToCompare Key="$IS_DISREGARD_RI_CONTRACT" Value="$IS_DISREGARD_RI_CONTRACT" Type="Double"></ToCompare>
+              </Condition>
+            </Conditions>
+          </Screen>
+        </Rule>
+      </SubSubGroup>
+    </SubGroup>
+  </Group>
+  <!--Policy Rule-->
+  <Group Code="PolicyDependent">
+  </Group>
+  <!--Process Rule-->
+  <Group Code="ProcessDependent">
+    <SubGroup Code="All">
+      <SubSubGroup Code="Mandatory">
+        <Rule Action="Database" StartDate="1950-01-01" EndDate="3000-12-30" STATE_ID="0"  LOB_ID="0">
+          <Conditions>
+          </Conditions>
+        </Rule>
+      </SubSubGroup>
+      <SubSubGroup Code="Reject">
+        <!--Added By Lalit For reject rule August 10,2010-->
+        <Rule Action="Database" StartDate="1950-01-01" EndDate="3000-12-30" STATE_ID="0"  LOB_ID="0">
+          <Screen ID="APPLICATIONS" IsRequired ="Y">
+            <Conditions>
+              <Condition Operand1="$TERMINATION_DATE" Operator ="==" Operand2="1" OperandType="Double">
+                <ToCompare Key="$TERMINATION_DATE" Value="$TERMINATION_DATE" Type="Double"></ToCompare>
+              </Condition>
+            </Conditions>
+          </Screen>
+          <Screen ID="REMUNERATIONS" IsRequired ="Y">
+            <Conditions>
+              <Condition Operand1="$CO_APPLICANT" Operator ="!=" Operand2="$NO_CO_APPLICANTS" OperandType="String">
+                <ToCompare Key="$CO_APPLICANT" Value="$CO_APPLICANT" Type="String"></ToCompare>
+              </Condition>
+            </Conditions>
+            </Screen>
+          <Screen ID="RISKS" IsRequired ="Y">
+            <Conditions>
+              <Condition Operand1="$LOB_ID"  Operator ="==" Operand2="16" OperandType="String">
+                <SubCondition Operand1="$SUB_COV_SI_SUM" Operator ="!=" Operand2="$MAIN_COV_SI_SUM"  OperandType="String">
+                  <ToCompare Key="$SUB_COV_SI_SUM" Value="$SUB_COV_SI_SUM" Type="String"></ToCompare>
+                </SubCondition>
+              </Condition>
+            </Conditions>
+            <Conditions>
+              <Condition Operand1="$LOB_ID"  Operator ="==" Operand2="16" OperandType="String">
+                <SubCondition Operand1="$SUB_COV_WP_SUM" Operator ="!=" Operand2="$MAIN_COV_WP_SUM"  OperandType="String">
+                  <ToCompare Key="$SUB_COV_WP_SUM" Value="$SUB_COV_WP_SUM" Type="String"></ToCompare>
+                </SubCondition>
+              </Condition>
+            </Conditions>
+          </Screen>
+        </Rule>
+      </SubSubGroup>
+      <SubSubGroup Code="Refered">
+        <Rule Action="Database" StartDate="1950-01-01" EndDate="3000-12-30" STATE_ID="0"  LOB_ID="0">
+          <!--Billing info rule moved to reffered rule,i-track # 962-->
+          <Screen ID="BILLING_INFOS" IsRequired="Y">
+            <Conditions>
+              <Condition Operand1="$IS_MANDATORY" Operator ="==" Operand2="Y" OperandType="String">
+                <SubCondition Operand1="$TOTAL_PREMIUM" Operator ="!=" Operand2="$COVERAGES_PREMIUM" OperandType="Double">
+                  <ToCompare Key="$TOTAL_PREMIUM" Value="$TOTAL_PREMIUM" Type="Double"></ToCompare>
+                  </SubCondition>
+              </Condition>
+            </Conditions>
+            <Conditions>
+              <Condition Operand1="$POLICY_DUE_DATE" Operator ="==" Operand2="1" OperandType="Double">
+                <ToCompare Key="$POLICY_DUE_DATE" Value="$POLICY_DUE_DATE" Type="Double"></ToCompare>
+              </Condition>
+            </Conditions>
+          </Screen>
+          <Screen ID="RISKS" IsRequired ="Y">
+            <Conditions>
+              <Condition Operand1="$VALUE_AT_RISK_APPLICABLE"  Operator ="==" Operand2="1" OperandType="String">
+                <SubCondition Operand1="$MAXIMUM_LIMIT" Operator ="!=" Operand2="$SUM_LIMIT" OperandType="Double">
+                  <ToCompare Key="$MAXIMUM_LIMIT" Value="$MAXIMUM_LIMIT" Type="Double"></ToCompare>
+                </SubCondition>
+                <SubCondition Operand1="$COUNT_ISMAIN" Operator ="!=" Operand2="$IS_MAIN_APPLY" OperandType="String">
+                  <ToCompare Key="$COUNT_ISMAIN" Value="$COUNT_ISMAIN" Type="Double"></ToCompare>
+                </SubCondition>
+                <SubCondition Operand1="$VALUE_AT_RISK"  Operator ="&lt;" Operand2="$BASIC_COVERAGE_SI" OperandType="Double">
+                  <ToCompare Key="$VALUE_AT_RISK" Value="$VALUE_AT_RISK" Type="Double"></ToCompare>
+                </SubCondition>
+              </Condition>
+              <!--Added By Lalit Chauhan.March 2,2011 for risk should have only one main coverage-->
+              <Condition Operand1="$VALUE_AT_RISK_APPLICABLE"  Operator ="!=" Operand2="1" OperandType="String">
+                <SubCondition Operand1="$COUNT_ISMAIN" Operator ="!=" Operand2="$IS_MAIN_APPLY" OperandType="String">
+                  <ToCompare Key="$COUNT_ISMAIN" Value="$COUNT_ISMAIN" Type="Double"></ToCompare>
+                </SubCondition>
+              </Condition>
+
+            </Conditions>
+          </Screen>
+          <Screen ID="REMUNERATIONS" IsRequired ="Y">
+            <Conditions>
+              <Condition Operand1="$COMMISSION_PERCENT" Operator ="!=" Operand2="100.0000"  OperandType="Double">
+                <SubCondition Operand1="$POLICY_LEVEL_COMM_APPLIES" Operator ="==" Operand2="Y"  OperandType="String">
+                  <ToCompare Key="$COMMISSION_PERCENT" Value="$COMMISSION_PERCENT" Type="Double"></ToCompare>
+                  <ToCompare Key="$POLICY_LEVEL_COMM_APPLIES" Value="$POLICY_LEVEL_COMM_APPLIES" Type="String"></ToCompare>
+                </SubCondition>
+                <SubCondition Operand1="$COMMISSION_PERCENT" Operator ="&gt;" Operand2="100.0000"  OperandType="Double">
+                  <ToCompare Key="$COMMISSION_PERCENT" Value="$COMMISSION_PERCENT" Type="Double"></ToCompare>
+                </SubCondition>
+                <!--itrack no 1391 by praveer incase of Accepted Coinsurance, the broker commission cannot be mandatory-->
+                <!--<SubCondition Operand1="$COMMISSION_PERCENT" Operator ="==" Operand2="0"  OperandType="Double">
+                  <ToCompare Key="$COMMISSION_PERCENT" Value="$COMMISSION_PERCENT" Type="Double"></ToCompare>
+                </SubCondition>-->
+              </Condition>
+              <Condition Operand1="$COMMISSION_TYPE" Operator ="==" Operand2="44"  OperandType="Double">
+                <SubCondition Operand1="$COMMISSION_PERCENT" Operator ="!=" Operand2="100.0000"  OperandType="Double">
+                  <ToCompare Key="$COMMISSION_PERCENT" Value="$COMMISSION_PERCENT" Type="Double"></ToCompare>
+                </SubCondition>
+              </Condition>
+              <Condition Operand1="$COMMISSION_TYPE" Operator ="==" Operand2="45"  OperandType="Double">
+                <SubCondition Operand1="$COMMISSION_PERCENT" Operator ="!=" Operand2="100.0000"  OperandType="Double">
+                  <ToCompare Key="$COMMISSION_PERCENT" Value="$COMMISSION_PERCENT" Type="Double"></ToCompare>
+                </SubCondition>
+              </Condition>
+            </Conditions>
+            <!--itrack no 1391 by praveer incase of Accepted Coinsurance, the broker commission cannot be mandatory-->
+            <Conditions>
+              <Condition Operand1="$COMMISSION_PERCENT" Operator ="==" Operand2="0"  OperandType="Double">
+                <SubCondition Operand1="$CO_INSURANCE" Operator ="!=" Operand2="14549"  OperandType="Double">
+                  <ToCompare Key="$COMMISSION_PERCENT" Value="$COMMISSION_PERCENT" Type="Double"></ToCompare>
+                </SubCondition>
+              </Condition>
+            </Conditions>
+          </Screen>
+          <Screen ID="APPLICATIONS" IsRequired ="Y">
+            <Conditions>
+              <Condition Operand1="$CO_INSURANCE" Operator ="!=" Operand2="14549" OperandType="String">
+                <ToCompare Key="$CUSTOMER_ZIP" Value="0" Type="String"></ToCompare>
+                <ToCompare Key="$CUSTOMER_ADDRESS1" Value="0" Type="String"></ToCompare>
+                <ToCompare Key="$CUSTOMER_CITY" Value="0" Type="String"></ToCompare>
+                <ToCompare Key="$CUSTOMER_STATE" Value="0" Type="String"></ToCompare>
+                <ToCompare Key="$CUSTOMER_COUNTRY" Value="0" Type="String"></ToCompare>
+                <ToCompare Key="$NUMBER" Value="0" Type="String"></ToCompare>
+                <ToCompare Key="$CUSTOMER_DISTRICT" Value="0" Type="String"></ToCompare>
+                <SubCondition Operand1="$CUSTOMER_TYPE1" Operator ="==" Operand2="11110" OperandType="String">
+                  <ToCompare Key="$ORIGINAL_ISSUE" Value="0" Type="String"></ToCompare>
+                  <ToCompare Key="$REGIONAL_IDENTIFICATION" Value="0" Type="String"></ToCompare>
+                  <ToCompare Key="$REG_ID_ISSUE" Value="0" Type="String"></ToCompare>
+                  <ToCompare Key="$DATE_OF_BIRTH" Value="0" Type="String"></ToCompare>
+                  <ToCompare Key="$MARITAL_STATUS" Value="0" Type="String"></ToCompare>
+                  <ToCompare Key="$GENDER" Value="0" Type="String"></ToCompare>
+                </SubCondition>
+                <SubCondition Operand1="$CUSTOMER_TYPE1" Operator ="!=" Operand2="11110" OperandType="String">
+                  <ToCompare Key="$CREATION_DATE" Value="0" Type="String"></ToCompare>
+                </SubCondition>
+              </Condition>
+            </Conditions>
+          </Screen>
+          <Screen ID="APPLICANTS" IsRequired ="N">
+            <Conditions>
+              <Condition Operand1="$CO_INSURANCE" Operator ="!=" Operand2="14549" OperandType="String">
+                <SubCondition Operand1="$APPLICANT_TYPE" Operator ="==" Operand2="11110" OperandType="String">
+                  <ToCompare Key="$FIRST_NAME" Value="0" Type="String"></ToCompare>
+                  <ToCompare Key="$ZIP_CODE" Value="0" Type="String"></ToCompare>
+                  <ToCompare Key="$ADDRESS1" Value="0" Type="String"></ToCompare>
+                  <ToCompare Key="$CITY" Value="0" Type="String"></ToCompare>
+                  <ToCompare Key="$STATE" Value="0" Type="String"></ToCompare>
+                  <ToCompare Key="$COUNTRY" Value="0" Type="String"></ToCompare>
+                  <ToCompare Key="$CO_APP_NUMBER" Value="0" Type="String"></ToCompare>
+                  <ToCompare Key="$CO_APP_DISTRICT" Value="0" Type="String"></ToCompare>
+                  <ToCompare Key="$CO_APP_REG_ID_ISSUE" Value="0" Type="String"></ToCompare>
+                  <ToCompare Key="$CO_APP_ORIGINAL_ISSUE" Value="0" Type="String"></ToCompare>
+                  <ToCompare Key="$CO_APP_REGIONAL_IDENTIFICATION" Value="0" Type="String"></ToCompare>
+                  <ToCompare Key="$CO_APPL_MARITAL_STATUS" Value="0" Type="String"></ToCompare>
+                  <ToCompare Key="$CO_APPL_DOB" Value="0" Type="String"></ToCompare>
+                  <ToCompare Key="$CO_APPL_GENDER" Value="0" Type="String"></ToCompare>
+                </SubCondition>
+                  <SubCondition Operand1="$APPLICANT_TYPE" Operator ="!=" Operand2="11110" OperandType="String">
+                    <ToCompare Key="$CO_APPL_CREATION_DATE" Value="0" Type="String"></ToCompare>
+                    <ToCompare Key="$ZIP_CODE" Value="0" Type="String"></ToCompare>
+                    <ToCompare Key="$ADDRESS1" Value="0" Type="String"></ToCompare>
+                    <ToCompare Key="$CITY" Value="0" Type="String"></ToCompare>
+                    <ToCompare Key="$STATE" Value="0" Type="String"></ToCompare>
+                    <ToCompare Key="$COUNTRY" Value="0" Type="String"></ToCompare>
+                    <ToCompare Key="$CO_APP_NUMBER" Value="0" Type="String"></ToCompare>
+                    <ToCompare Key="$CO_APP_DISTRICT" Value="0" Type="String"></ToCompare>
+                  </SubCondition>
+                
+              </Condition>
+            </Conditions>
+          </Screen>
+          <!--Added by Lalit July 21 2011.itrack # 1329-->
+          <!--<Screen ID="COVERAGES" IsRequired ="Y">
+            <Conditions>
+              <Condition Operand1="$LAYER_AMOUNT"  Operator ="!=" Operand2="0" OperandType="Double">
+                <SubCondition Operand1="$TIV" Operator ="&gt;" Operand2="$LAYER_AMOUNT"  OperandType="Double">
+                  <ToCompare Key="$TIV" Value="$TIV" Type="String"></ToCompare>
+                </SubCondition>
+              </Condition>
+            </Conditions>
+          </Screen>-->   <!--Commented by Aditya For itrack # 1532,this msg has been shifted to confirmation box-->
+        </Rule>
+      </SubSubGroup>
+    </SubGroup>
+    <SubGroup Code="Endorsement">
+      <SubSubGroup Code="Mandatory">
+        <Rule Action="Database" StartDate="1950-01-01" EndDate="3000-12-30" STATE_ID="0"  LOB_ID="0">
+
+          <Screen ID="COINSURANCES" IsRequired ="Y">
+            <Conditions>
+              <Condition Operand1="$LEADER_FOLLOWER" Operator ="==" Operand2="14549" OperandType="String">
+                <ToCompare Key="$COINSURANCE_PERCENT" Value="0.00" Type="Double"></ToCompare>
+              </Condition>
+              <Condition Operand1="$CO_INSURANCE" Operator ="==" Operand2="14549" OperandType="String">
+                <ToCompare Key="$DUPLICATE" Value="1" Type="String"></ToCompare>
+              </Condition>
+              <Condition Operand1="$APP_CO_INSURANCE" Operator ="==" Operand2="14548" OperandType="Double">
+                <SubCondition Operand1="$TOTAL_COINSURANCE_PERCENT"  Operator ="!=" Operand2="100" OperandType="Double">
+                  <ToCompare Key="$TOTAL_COINSURANCE_PERCENT" Value="$TOTAL_COINSURANCE_PERCENT" Type="Double"></ToCompare>
+                </SubCondition>
+              </Condition>
+            </Conditions>
+            <Conditions>
+              <Condition Operand1="$APP_CO_INSURANCE" Operator ="==" Operand2="14549" OperandType="Double">
+                <SubCondition Operand1="$TOTAL_COINSURANCE_PERCENT"  Operator ="&gt;" Operand2="100" OperandType="Double">
+                  <ToCompare Key="$TOTAL_COINSURANCE_PERCENT" Value="$TOTAL_COINSURANCE_PERCENT" Type="Double"></ToCompare>
+                </SubCondition>
+              </Condition>
+            </Conditions>
+            <Conditions>
+              <Condition Operand1="$APP_CO_INSURANCE" Operator ="==" Operand2="14548" OperandType="Double">
+                <SubCondition Operand1="$TOTAL_COINSURANCE_FEE"  Operator ="&gt;" Operand2="100" OperandType="Double">
+                  <ToCompare Key="$TOTAL_COINSURANCE_FEE" Value="$TOTAL_COINSURANCE_FEE" Type="Double"></ToCompare>
+                </SubCondition>
+              </Condition>
+            </Conditions>
+            <Conditions>
+              <Condition Operand1="$APP_CO_INSURANCE" Operator ="==" Operand2="14548" OperandType="Double">
+                <SubCondition Operand1="$LEADER_FOLLOWER"  Operator ="==" Operand2="14549" OperandType="Double">
+                  <ToCompare Key="$COINSURANCE_FEE_FOLLOWER" Value="0.00" Type="Double"></ToCompare>
+                </SubCondition>
+              </Condition>
+            </Conditions>
+            <Conditions>
+              <Condition Operand1="$CO_INSURANCE" Operator ="==" Operand2="14548" OperandType="String">
+                <ToCompare Key="$COINSURANCE_PERCENT" Value="0.00" Type="Double"></ToCompare>
+              </Condition>
+            </Conditions>
+          </Screen>
+        </Rule>
+      </SubSubGroup>
+      <SubSubGroup Code="Reject">
+        <Rule Action="Database" StartDate="1950-01-01" EndDate="3000-12-30" STATE_ID="0"  LOB_ID="0">
+          <!--Added By Lalit For reject the policy if coverage premium change from billing premium-->
+          <Screen ID="APPLICATIONS" IsRequired ="Y">
+            <Conditions>
+              <Condition Operand1="$TERMINATION_DATE" Operator ="==" Operand2="1" OperandType="Double">
+                <ToCompare Key="$TERMINATION_DATE" Value="$TERMINATION_DATE" Type="Double"></ToCompare>
+              </Condition>
+            </Conditions>
+          </Screen>
+          <Screen ID="REMUNERATIONS" IsRequired ="Y">
+            <Conditions>
+              <Condition Operand1="$TRANSACTION_TYPE" Operator ="==" Operand2="14560" OperandType="String">
+                <SubCondition Operand1="$CO_APPLICANT" Operator ="!=" Operand2="$NO_CO_APPLICANTS" OperandType="String">
+                  <ToCompare Key="$CO_APPLICANT" Value="$CO_APPLICANT" Type="String"></ToCompare>
+                </SubCondition>
+              </Condition>
+            </Conditions>
+            <!--Implementation of leader per co-applicant-->
+            <Conditions>
+            <Condition Operand1="$COUNT_LEADER" Operator ="==" Operand2="0"  OperandType="String">
+              <ToCompare Key="$COUNT_LEADER" Value="$COUNT_LEADER" Type="String"></ToCompare>
+            </Condition>
+            </Conditions>
+             <Conditions>
+              <Condition Operand1="$POL_COMMISSION_PERCENT" Operator ="&gt;" Operand2="0.00" OperandType="Double">
+                <SubCondition Operand1="$REMU_COMMISSION_PERCENT" Operator ="==" Operand2="0.00"  OperandType="Double">
+                  <ToCompare Key="$REMU_COMMISSION_PERCENT" Value="$REMU_COMMISSION_PERCENT" Type="Double"></ToCompare>
+                </SubCondition>
+              </Condition>
+            </Conditions>
+            <Conditions>
+              <Condition Operand1="$POL_PRO_LABORE_PERCENT" Operator ="&gt;" Operand2="0.00" OperandType="Double">
+                <SubCondition Operand1="$REMU_PRO_LABORE_PERCENT" Operator ="==" Operand2="0.00"  OperandType="Double">
+                  <ToCompare Key="$REMU_PRO_LABORE_PERCENT" Value="$REMU_PRO_LABORE_PERCENT" Type="Double"></ToCompare>
+                </SubCondition>
+              </Condition>
+            </Conditions>
+            <Conditions>
+              <Condition Operand1="$POL_FEES_PERCENT" Operator ="&gt;" Operand2="0.00" OperandType="Double">
+                <SubCondition Operand1="$REMU_FEES_PERCENT" Operator ="==" Operand2="0.00"  OperandType="Double">
+                  <ToCompare Key="$REMU_FEES_PERCENT" Value="$REMU_FEES_PERCENT" Type="Double"></ToCompare>
+                </SubCondition>
+              </Condition>
+            </Conditions>
+            <Conditions>
+              <Condition Operand1="$REMU_COMMISSION_PERCENT" Operator ="&gt;" Operand2="0.00" OperandType="Double">
+                <SubCondition Operand1="$POL_COMMISSION_PERCENT" Operator ="==" Operand2="0.00"  OperandType="Double">
+                  <ToCompare Key="$POL_COMMISSION_PERCENT" Value="$POL_COMMISSION_PERCENT" Type="Double"></ToCompare>
+                </SubCondition>
+              </Condition>
+            </Conditions>
+            <Conditions>
+              <Condition Operand1="$REMU_PRO_LABORE_PERCENT" Operator ="&gt;" Operand2="0.00" OperandType="Double">
+                <SubCondition Operand1="$POL_PRO_LABORE_PERCENT" Operator ="==" Operand2="0.00"  OperandType="Double">
+                  <ToCompare Key="$POL_PRO_LABORE_PERCENT" Value="$POL_PRO_LABORE_PERCENT" Type="Double"></ToCompare>
+                </SubCondition>
+              </Condition>
+            </Conditions>
+            <Conditions>
+              <Condition Operand1="$REMU_FEES_PERCENT" Operator ="&gt;" Operand2="0.00" OperandType="Double">
+                <SubCondition Operand1="$POL_FEES_PERCENT" Operator ="==" Operand2="0.00"  OperandType="Double">
+                  <ToCompare Key="$POL_FEES_PERCENT" Value="$POL_FEES_PERCENT" Type="Double"></ToCompare>
+                </SubCondition>
+              </Condition>
+            </Conditions>
+           </Screen>
+
+          <Screen ID="COINSURANCES" IsRequired ="Y">
+            <Conditions>
+              <Condition Operand1="$CO_INSURANCE" Operator ="==" Operand2="14549"  OperandType="String">
+                <SubCondition Operand1="$LEADER_COUNT" Operator ="==" Operand2="0"  OperandType="String">
+                  <ToCompare Key="$LEADER_COUNT" Value="$LEADER_COUNT" Type="String"></ToCompare>
+                </SubCondition>
+              </Condition>
+              <Condition Operand1="$CO_INSURANCE" Operator ="==" Operand2="14548"  OperandType="String">
+                <SubCondition Operand1="$FOLLOWER_COUNT" Operator ="==" Operand2="0"  OperandType="String">
+                  <ToCompare Key="$FOLLOWER_COUNT" Value="$FOLLOWER_COUNT" Type="String"></ToCompare>
+                </SubCondition>
+              </Condition>
+            </Conditions>
+
+          </Screen>
+          <Screen ID="RISKS" IsRequired ="Y">
+            <Conditions>
+              <Condition Operand1="$LOB_ID"  Operator ="==" Operand2="16" OperandType="String">
+                <SubCondition Operand1="$SUB_COV_SI_SUM" Operator ="!=" Operand2="$MAIN_COV_SI_SUM"  OperandType="String">
+                  <ToCompare Key="$SUB_COV_SI_SUM" Value="$SUB_COV_SI_SUM" Type="String"></ToCompare>
+                </SubCondition>
+              </Condition>
+            </Conditions>
+            <Conditions>
+              <Condition Operand1="$LOB_ID"  Operator ="==" Operand2="16" OperandType="String">
+                <SubCondition Operand1="$SUB_COV_WP_SUM" Operator ="!=" Operand2="$MAIN_COV_WP_SUM"  OperandType="String">
+                  <ToCompare Key="$SUB_COV_WP_SUM" Value="$SUB_COV_WP_SUM" Type="String"></ToCompare>
+                </SubCondition>
+              </Condition>
+            </Conditions>
+          </Screen>
+          <Screen ID="BILLING_INFOS" IsRequired="Y">
+            <Conditions>
+              <Condition Operand1="$TOTAL_TRAN_PREMIUM" Operator ="&lt;" Operand2="0" OperandType="Double">
+                <SubCondition Operand1="$ADDITIONAL_ENDORSEMENT" Operator ="==" Operand2="14682" OperandType="String">
+                  <ToCompare Key="$ADDITIONAL_ENDORSEMENT" Value="$ADDITIONAL_ENDORSEMENT" Type="String"></ToCompare>
+                </SubCondition>
+              </Condition>
+            </Conditions>
+            <Conditions>
+              <Condition Operand1="$TOTAL_TRAN_PREMIUM" Operator ="&gt;" Operand2="0" OperandType="Double">
+                <SubCondition Operand1="$REFUND_ENDORSEMENT" Operator ="==" Operand2="14684" OperandType="String">
+                  <ToCompare Key="$REFUND_ENDORSEMENT" Value="$REFUND_ENDORSEMENT" Type="String"></ToCompare>
+                </SubCondition>
+              </Condition>
+            </Conditions>
+            <Conditions> <!--Added by Aditya on 30-08-2011 for TFS Bug # 478-->
+             <Condition Operand1="$INSTALLMENT_AMOUNT" Operator ="&lt;" Operand2="0" OperandType="Double">
+                <ToCompare Key="$INSTALLMENT_AMOUNT" Value="$INSTALLMENT_AMOUNT" Type="Double"></ToCompare>
+              </Condition>
+            </Conditions>
+          </Screen>
+          <Screen ID="REINSURANCES" IsRequired ="Y">   <!--Added by Aditya for tfs bug # 177-->
+            <Conditions>
+              <Condition Operand1="$REINSURANCE_CEDED_SUM"  Operator ="&gt;" Operand2="100.00" OperandType="double">
+                <ToCompare Key="$REINSURANCE_CEDED_SUM" Value="$REINSURANCE_CEDED_SUM" Type="double"></ToCompare>
+              </Condition>
+            </Conditions>
+          </Screen> <!--Added till here-->
+        </Rule>
+      </SubSubGroup>
+      
+      <SubSubGroup Code="Refered">
+        <Rule Action="Database" StartDate="1950-01-01" EndDate="3000-12-30" STATE_ID="0"  LOB_ID="0">
+          <Screen ID="BILLING_INFOS" IsRequired="Y">          
+            <Conditions>
+              <Condition Operand1="$COVERAGES_PREMIUM" Operator ="!=" Operand2="$PREV_PREMIUM" OperandType="Double">
+                <SubCondition Operand1="$TOTAL_TRAN_PREMIUM" Operator="!=" Operand2="$PRORATA_AMOUNT" OperandType="Double">
+                  <ToCompare Key="$TOTAL_TRAN_PREMIUM" Value="$TOTAL_TRAN_PREMIUM" Type="Double"></ToCompare>
+                </SubCondition>
+              </Condition>
+            </Conditions>
+            <Conditions>
+              <Condition Operand1="$PRODUCT_TYPE" Operator ="==" Operand2="14560" OperandType="Double">
+                <SubCondition Operand1="$TOTAL_TRAN_PREMIUM" Operator="!=" Operand2="$PRORATA_AMOUNT" OperandType="Double">
+                  <ToCompare Key="$TOTAL_TRAN_PREMIUM" Value="$TOTAL_TRAN_PREMIUM" Type="Double"></ToCompare>
+                </SubCondition>
+              </Condition>
+            </Conditions>
+            <Conditions>
+              <Condition Operand1="$POLICY_DUE_DATE" Operator ="==" Operand2="1" OperandType="Double">
+                <ToCompare Key="$POLICY_DUE_DATE" Value="$POLICY_DUE_DATE" Type="Double"></ToCompare>
+              </Condition>
+            </Conditions>
+            <!--Added By Lalit ,Compare billing Info Premium, If coverage premium has no change from 
+            previous version and installment genrated with new transaction premium  -->
+            <Conditions>
+              <Condition Operand1="$COVERAGES_PREMIUM" Operator ="==" Operand2="$PREV_PREMIUM" OperandType="Double">
+                <SubCondition Operand1="$TOTAL_TRAN_PREMIUM" Operator="!=" Operand2="$PRORATA_AMOUNT" OperandType="Double">
+                  <ToCompare Key="$TOTAL_TRAN_PREMIUM" Value="$TOTAL_TRAN_PREMIUM" Type="Double"></ToCompare>
+                </SubCondition>
+              </Condition>
+            </Conditions>
+          </Screen>
+          <Screen ID="RISKS" IsRequired ="Y">
+            <Conditions>
+              <Condition Operand1="$VALUE_AT_RISK_APPLICABLE"  Operator ="==" Operand2="1" OperandType="String">
+                <SubCondition Operand1="$MAXIMUM_LIMIT" Operator ="!=" Operand2="$SUM_LIMIT" OperandType="Double">
+                  <ToCompare Key="$MAXIMUM_LIMIT" Value="$MAXIMUM_LIMIT" Type="Double"></ToCompare>
+                </SubCondition>
+                <SubCondition Operand1="$COUNT_ISMAIN" Operator ="!=" Operand2="$IS_MAIN_APPLY" OperandType="String">
+                  <ToCompare Key="$COUNT_ISMAIN" Value="$COUNT_ISMAIN" Type="Double"></ToCompare>
+                </SubCondition>
+                <SubCondition Operand1="$VALUE_AT_RISK"  Operator ="&lt;" Operand2="$BASIC_COVERAGE_SI" OperandType="Double">
+                  <ToCompare Key="$VALUE_AT_RISK" Value="$VALUE_AT_RISK" Type="Double"></ToCompare>
+                </SubCondition>
+              </Condition>
+              <!--Added By Lalit Chauhan.March 2,2011 for risk should have only one main coverage-->
+              <Condition Operand1="$VALUE_AT_RISK_APPLICABLE"  Operator ="!=" Operand2="1" OperandType="String">
+                <SubCondition Operand1="$COUNT_ISMAIN" Operator ="!=" Operand2="$IS_MAIN_APPLY" OperandType="String">
+                  <ToCompare Key="$COUNT_ISMAIN" Value="$COUNT_ISMAIN" Type="Double"></ToCompare>
+                </SubCondition>
+              </Condition>
+            </Conditions>
+          </Screen>
+          <Screen ID="REMUNERATIONS" IsRequired ="Y">
+            <Conditions>
+              <Condition Operand1="$COMMISSION_PERCENT" Operator ="!=" Operand2="100.0000"  OperandType="Double">
+                <SubCondition Operand1="$POLICY_LEVEL_COMM_APPLIES" Operator ="==" Operand2="Y"  OperandType="String">
+                  <ToCompare Key="$COMMISSION_PERCENT" Value="$COMMISSION_PERCENT" Type="Double"></ToCompare>
+                  <ToCompare Key="$POLICY_LEVEL_COMM_APPLIES" Value="$POLICY_LEVEL_COMM_APPLIES" Type="String"></ToCompare>
+                </SubCondition>
+                <SubCondition Operand1="$COMMISSION_PERCENT" Operator ="&gt;" Operand2="100.0000"  OperandType="Double">
+                  <ToCompare Key="$COMMISSION_PERCENT" Value="$COMMISSION_PERCENT" Type="Double"></ToCompare>
+                </SubCondition>
+                <!--itrack no 1391 by praveer incase of Accepted Coinsurance, the broker commission cannot be mandatory-->
+                <!--<SubCondition Operand1="$COMMISSION_PERCENT" Operator ="==" Operand2="0"  OperandType="Double">
+                  <ToCompare Key="$COMMISSION_PERCENT" Value="$COMMISSION_PERCENT" Type="Double"></ToCompare>
+                </SubCondition>-->
+              </Condition>
+              <Condition Operand1="$COMMISSION_TYPE" Operator ="==" Operand2="44"  OperandType="Double">
+                <SubCondition Operand1="$COMMISSION_PERCENT" Operator ="!=" Operand2="100.0000"  OperandType="Double">
+                  <ToCompare Key="$COMMISSION_PERCENT" Value="$COMMISSION_PERCENT" Type="Double"></ToCompare>
+                </SubCondition>
+              </Condition>
+              <Condition Operand1="$COMMISSION_TYPE" Operator ="==" Operand2="45"  OperandType="Double">
+                <SubCondition Operand1="$COMMISSION_PERCENT" Operator ="!=" Operand2="100.0000"  OperandType="Double">
+                  <ToCompare Key="$COMMISSION_PERCENT" Value="$COMMISSION_PERCENT" Type="Double"></ToCompare>
+                </SubCondition>
+              </Condition>
+            </Conditions>
+            <!--itrack no 1391 by praveer incase of Accepted Coinsurance, the broker commission cannot be mandatory-->
+            <Conditions>
+              <Condition Operand1="$COMMISSION_PERCENT" Operator ="==" Operand2="0"  OperandType="Double">
+                <SubCondition Operand1="$CO_INSURANCE" Operator ="!=" Operand2="14549"  OperandType="Double">
+                  <ToCompare Key="$COMMISSION_PERCENT" Value="$COMMISSION_PERCENT" Type="Double"></ToCompare>
+                </SubCondition>
+              </Condition>
+            </Conditions>
+           </Screen>
+          <Screen ID="APPLICATIONS" IsRequired ="Y">
+            <Conditions>
+              <Condition Operand1="$CO_INSURANCE" Operator ="!=" Operand2="14549" OperandType="String">
+                <ToCompare Key="$CUSTOMER_ZIP" Value="0" Type="String"></ToCompare>
+                <ToCompare Key="$CUSTOMER_ADDRESS1" Value="0" Type="String"></ToCompare>
+                <ToCompare Key="$CUSTOMER_CITY" Value="0" Type="String"></ToCompare>
+                <ToCompare Key="$CUSTOMER_STATE" Value="0" Type="String"></ToCompare>
+                <ToCompare Key="$CUSTOMER_COUNTRY" Value="0" Type="String"></ToCompare>
+                <ToCompare Key="$NUMBER" Value="0" Type="String"></ToCompare>
+                <ToCompare Key="$CUSTOMER_DISTRICT" Value="0" Type="String"></ToCompare>
+                <SubCondition Operand1="$CUSTOMER_TYPE1" Operator ="==" Operand2="11110" OperandType="String">
+                  <ToCompare Key="$ORIGINAL_ISSUE" Value="0" Type="String"></ToCompare>
+                  <ToCompare Key="$REGIONAL_IDENTIFICATION" Value="0" Type="String"></ToCompare>
+                  <ToCompare Key="$REG_ID_ISSUE" Value="0" Type="String"></ToCompare>
+                  <ToCompare Key="$DATE_OF_BIRTH" Value="0" Type="String"></ToCompare>
+                  <ToCompare Key="$MARITAL_STATUS" Value="0" Type="String"></ToCompare>
+                  <ToCompare Key="$GENDER" Value="0" Type="String"></ToCompare>
+                </SubCondition>
+                <SubCondition Operand1="$CUSTOMER_TYPE1" Operator ="!=" Operand2="11110" OperandType="String">
+                  <ToCompare Key="$CREATION_DATE" Value="0" Type="String"></ToCompare>
+                </SubCondition>
+              </Condition>
+            </Conditions>
+          </Screen>
+          <Screen ID="APPLICANTS" IsRequired ="N">
+            <Conditions>
+              <Condition Operand1="$CO_INSURANCE" Operator ="!=" Operand2="14549" OperandType="String">
+                <SubCondition Operand1="$APPLICANT_TYPE" Operator ="==" Operand2="11110" OperandType="String">
+                  <ToCompare Key="$FIRST_NAME" Value="0" Type="String"></ToCompare>
+                  <ToCompare Key="$ZIP_CODE" Value="0" Type="String"></ToCompare>
+                  <ToCompare Key="$ADDRESS1" Value="0" Type="String"></ToCompare>
+                  <ToCompare Key="$CITY" Value="0" Type="String"></ToCompare>
+                  <ToCompare Key="$STATE" Value="0" Type="String"></ToCompare>
+                  <ToCompare Key="$COUNTRY" Value="0" Type="String"></ToCompare>
+                  <ToCompare Key="$CO_APP_NUMBER" Value="0" Type="String"></ToCompare>
+                  <ToCompare Key="$CO_APP_DISTRICT" Value="0" Type="String"></ToCompare>
+                  <ToCompare Key="$CO_APP_REG_ID_ISSUE" Value="0" Type="String"></ToCompare>
+                  <ToCompare Key="$CO_APP_ORIGINAL_ISSUE" Value="0" Type="String"></ToCompare>
+                  <ToCompare Key="$CO_APP_REGIONAL_IDENTIFICATION" Value="0" Type="String"></ToCompare>
+                  <ToCompare Key="$CO_APPL_MARITAL_STATUS" Value="0" Type="String"></ToCompare>
+                  <ToCompare Key="$CO_APPL_DOB" Value="0" Type="String"></ToCompare>
+                  <ToCompare Key="$CO_APPL_GENDER" Value="0" Type="String"></ToCompare>
+                 </SubCondition>
+                  <SubCondition Operand1="$APPLICANT_TYPE" Operator ="!=" Operand2="11110" OperandType="String">
+                    <ToCompare Key="$CO_APPL_CREATION_DATE" Value="0" Type="String"></ToCompare>
+                    <ToCompare Key="$ZIP_CODE" Value="0" Type="String"></ToCompare>
+                    <ToCompare Key="$ADDRESS1" Value="0" Type="String"></ToCompare>
+                    <ToCompare Key="$CITY" Value="0" Type="String"></ToCompare>
+                    <ToCompare Key="$STATE" Value="0" Type="String"></ToCompare>
+                    <ToCompare Key="$COUNTRY" Value="0" Type="String"></ToCompare>
+                    <ToCompare Key="$CO_APP_NUMBER" Value="0" Type="String"></ToCompare>
+                    <ToCompare Key="$CO_APP_DISTRICT" Value="0" Type="String"></ToCompare>
+                  </SubCondition>
+               </Condition>
+            </Conditions>
+            <Conditions> <!--Compare Co-Applicant Commission-->
+              <Condition Operand1="$CURRENT_COMMISSION" Operator ="!=" Operand2="$PREV_COMMISSION" OperandType="Double">
+                <SubCondition Operand1="$CURRENT_COMMISSION" Operator ="==" Operand2="0.0000" OperandType="String">
+                  <ToCompare Key="$CURRENT_COMMISSION" Value="$CURRENT_COMMISSION" Type="Double"></ToCompare>
+                </SubCondition>
+                <SubCondition Operand1="$CURRENT_COMMISSION" Operator ="!=" Operand2="$PREV_COMMISSION" OperandType="String">
+                  <ToCompare Key="$PREV_COMMISSION" Value="$PREV_COMMISSION" Type="Double"></ToCompare>
+                </SubCondition>
+              </Condition>
+            </Conditions>
+            <Conditions><!--Compare Co-Applicant Fees-->
+              <Condition Operand1="$CURRENT_FEES" Operator ="!=" Operand2="$PREV_FEES" OperandType="Double">
+                <SubCondition Operand1="$CURRENT_FEES" Operator ="==" Operand2="0.0000" OperandType="String">
+                  <ToCompare Key="$CURRENT_FEES" Value="$CURRENT_FEES" Type="Double"></ToCompare>
+                </SubCondition>
+                <SubCondition Operand1="$CURRENT_FEES" Operator ="!=" Operand2="$PREV_FEES" OperandType="String">
+                  <ToCompare Key="$PREV_FEES" Value="$PREV_FEES" Type="Double"></ToCompare>
+                </SubCondition>
+              </Condition>
+            </Conditions>
+            <Conditions><!--Compare Co-Applicant Pro-Labore-->
+              <Condition Operand1="$CURRENT_PRO_LABORE" Operator ="!=" Operand2="$PREV_PROLABORE" OperandType="Double">
+                <SubCondition Operand1="$CURRENT_PRO_LABORE" Operator ="==" Operand2="0.0000" OperandType="String">
+                  <ToCompare Key="$CURRENT_PRO_LABORE" Value="$CURRENT_PRO_LABORE" Type="Double"></ToCompare>
+                </SubCondition>
+                <SubCondition Operand1="$CURRENT_PRO_LABORE" Operator ="!=" Operand2="$PREV_PROLABORE" OperandType="String">
+                  <ToCompare Key="$PREV_PROLABORE" Value="$PREV_PROLABORE" Type="Double"></ToCompare>
+                </SubCondition>
+              </Condition>
+            </Conditions>
+           </Screen>
+          <Screen ID="ENDORSEMENT_REMUNERATIONS" IsRequired ="Y">
+            <Conditions> <!--Compare Commission of brokers -->
+              <Condition Operand1="$IS_COMMISSION_CHANGED" Operator ="==" Operand2="1" OperandType="Double">
+                <SubCondition Operand1="$PREV_BROKER_COUNT" Operator ="==" Operand2="$CURRENT_BROKER_COUNT"  OperandType="String"> <!--Added by Aditya for itrack # 1282-->
+                <ToCompare Key="$IS_COMMISSION_CHANGED" Value="$IS_COMMISSION_CHANGED" Type="Double"></ToCompare>
+                </SubCondition>
+              </Condition>
+            </Conditions>
+            <Conditions> <!--Compare if commission changed by adding a new broker-->
+              <Condition Operand1="$IS_COMMISSION_CHANGED" Operator ="==" Operand2="1" OperandType="Double">
+                <SubCondition Operand1="$PREV_BROKER_COUNT" Operator ="!=" Operand2="$CURRENT_BROKER_COUNT"  OperandType="String"> 
+                  <ToCompare Key="$PREV_BROKER_COUNT" Value="$PREV_BROKER_COUNT" Type="String"></ToCompare>
+                </SubCondition>
+              </Condition>
+            </Conditions>
+          <Conditions> <!--Compare if broker deleted on endorsement--> <!--Added by Aditya for itrack # 1282-->
+              <Condition Operand1="$DELETE_BROKER_NBS" Operator ="==" Operand2="1" OperandType="Double">
+                <ToCompare Key="$DELETE_BROKER_NBS" Value="$DELETE_BROKER_NBS" Type="Double"></ToCompare>
+              </Condition>
+            </Conditions>
+          </Screen>
+          <!--Added by Lalit July 21 2011.itrack # 1329-->
+          <!--<Screen ID="COVERAGES" IsRequired ="Y">
+            <Conditions>
+              <Condition Operand1="$LAYER_AMOUNT"  Operator ="!=" Operand2="0" OperandType="Double">
+                <SubCondition Operand1="$TIV" Operator ="&gt;" Operand2="$LAYER_AMOUNT"  OperandType="Double">
+                  <ToCompare Key="$TIV" Value="$TIV" Type="String"></ToCompare>
+                </SubCondition>
+              </Condition>
+            </Conditions>
+          </Screen>-->
+          <Screen ID="REINSURANCES" IsRequired ="Y"> <!--Added by Aditya for tfs bug # 180-->
+            <Conditions>
+              <Condition Operand1="$IS_DISREGARD_RI_CONTRACT" Operator ="==" Operand2="0" OperandType="Double">
+                <ToCompare Key="$IS_DISREGARD_RI_CONTRACT" Value="$IS_DISREGARD_RI_CONTRACT" Type="Double"></ToCompare>
+              </Condition>
+            </Conditions>
+          </Screen>
+        </Rule>
+      </SubSubGroup>
+    </SubGroup>
+    <SubGroup Code="Renewal">
+      <SubSubGroup Code="Mandatory">
+        <Rule Action="Database" StartDate="1950-01-01" EndDate="3000-12-30" STATE_ID="0"  LOB_ID="0">
+          <Screen ID="BILLING_INFOS" IsRequired ="Y">
+            <Conditions>
+              <Condition Operand1="$IS_MANDATORY" Operator ="==" Operand2="Y" OperandType="String">
+                <ToCompare Key="$TOTAL_PREMIUM" Value="0.00" Type="Double"></ToCompare>
+              </Condition>
+            </Conditions>
+            <Conditions>
+              <Condition Operand1="$POLICY_DUE_DATE" Operator ="==" Operand2="1" OperandType="Double">
+                <ToCompare Key="$POLICY_DUE_DATE" Value="$POLICY_DUE_DATE" Type="Double"></ToCompare>
+              </Condition>
+            </Conditions>
+          </Screen>
+        </Rule>
+      </SubSubGroup>
+      <SubSubGroup Code="Reject">
+        <Rule Action="Database" StartDate="1950-01-01" EndDate="3000-12-30" STATE_ID="0"  LOB_ID="0">
+          <Screen ID="COINSURANCES" IsRequired ="Y">
+            <Conditions>
+              <Condition Operand1="$CO_INSURANCE" Operator ="==" Operand2="14549"  OperandType="String">
+                <SubCondition Operand1="$LEADER_COUNT" Operator ="==" Operand2="0"  OperandType="String">
+                  <ToCompare Key="$LEADER_COUNT" Value="$LEADER_COUNT" Type="String"></ToCompare>
+                </SubCondition>
+              </Condition>
+              <Condition Operand1="$CO_INSURANCE" Operator ="==" Operand2="14548"  OperandType="String">
+                <SubCondition Operand1="$FOLLOWER_COUNT" Operator ="==" Operand2="0"  OperandType="String">
+                  <ToCompare Key="$FOLLOWER_COUNT" Value="$FOLLOWER_COUNT" Type="String"></ToCompare>
+                </SubCondition>
+              </Condition>
+            </Conditions>
+          </Screen>
+          <Screen ID="RISKS" IsRequired ="Y">
+            <Conditions>
+              <Condition Operand1="$LOB_ID"  Operator ="==" Operand2="16" OperandType="String">
+                <SubCondition Operand1="$SUB_COV_SI_SUM" Operator ="!=" Operand2="$MAIN_COV_SI_SUM"  OperandType="String">
+                  <ToCompare Key="$SUB_COV_SI_SUM" Value="$SUB_COV_SI_SUM" Type="String"></ToCompare>
+                </SubCondition>
+              </Condition>
+            </Conditions>
+            <Conditions>
+              <Condition Operand1="$LOB_ID"  Operator ="==" Operand2="16" OperandType="String">
+                <SubCondition Operand1="$SUB_COV_WP_SUM" Operator ="!=" Operand2="$MAIN_COV_WP_SUM"  OperandType="String">
+                  <ToCompare Key="$SUB_COV_WP_SUM" Value="$SUB_COV_WP_SUM" Type="String"></ToCompare>
+                </SubCondition>
+              </Condition>
+            </Conditions>
+          </Screen>
+          <!--Added By Lalit For reject the policy if coverage premium change from billing premium-->
+          <!--commented by Lalit this rule is moved in to reffered rule-->
+          <!--<Screen ID="BILLING_INFOS" IsRequired="Y">
+            <Conditions>
+              <Condition Operand1="$IS_MANDATORY" Operator ="==" Operand2="Y" OperandType="String">
+                <SubCondition Operand1="$TOTAL_PREMIUM" Operator ="!=" Operand2="$COVERAGES_PREMIUM" OperandType="Double">
+                  <ToCompare Key="$TOTAL_PREMIUM" Value="$TOTAL_PREMIUM" Type="Double"></ToCompare>
+                </SubCondition>
+              </Condition>
+            </Conditions>
+          </Screen>-->
+        </Rule>
+      </SubSubGroup>
+      <SubSubGroup Code="Refered">
+        <Rule Action="Database" StartDate="1950-01-01" EndDate="3000-12-30" STATE_ID="0"  LOB_ID="0">
+          <Screen ID="BILLING_INFOS" IsRequired="Y">
+            <Conditions>
+              <Condition Operand1="$RISK" Operator =">" Operand2="0" OperandType="Double">
+                <SubCondition Operand1="$TOTAL_PREMIUM" Operator ="!=" Operand2="$COVERAGES_PREMIUM" OperandType="Double">
+                  <ToCompare Key="$TOTAL_PREMIUM" Value="$TOTAL_PREMIUM" Type="Double"></ToCompare>
+                </SubCondition>
+              </Condition>
+            </Conditions>
+            
+          </Screen>
+          <Screen ID="RISKS" IsRequired ="Y">
+            <Conditions>
+              <Condition Operand1="$VALUE_AT_RISK_APPLICABLE"  Operator ="==" Operand2="1" OperandType="String">
+                <SubCondition Operand1="$MAXIMUM_LIMIT" Operator ="!=" Operand2="$SUM_LIMIT" OperandType="Double">
+                  <ToCompare Key="$MAXIMUM_LIMIT" Value="$MAXIMUM_LIMIT" Type="Double"></ToCompare>
+                </SubCondition>
+                <SubCondition Operand1="$COUNT_ISMAIN" Operator ="!=" Operand2="$IS_MAIN_APPLY" OperandType="String">
+                  <ToCompare Key="$COUNT_ISMAIN" Value="$COUNT_ISMAIN" Type="Double"></ToCompare>
+                </SubCondition>
+                <SubCondition Operand1="$VALUE_AT_RISK"  Operator ="&lt;" Operand2="$BASIC_COVERAGE_SI" OperandType="Double">
+                  <ToCompare Key="$VALUE_AT_RISK" Value="$VALUE_AT_RISK" Type="Double"></ToCompare>
+                </SubCondition>
+              </Condition>
+              <!--Added By Lalit Chauhan.March 2,2011 for risk should have only one main coverage-->
+              <Condition Operand1="$VALUE_AT_RISK_APPLICABLE"  Operator ="!=" Operand2="1" OperandType="String">
+                <SubCondition Operand1="$COUNT_ISMAIN" Operator ="!=" Operand2="$IS_MAIN_APPLY" OperandType="String">
+                  <ToCompare Key="$COUNT_ISMAIN" Value="$COUNT_ISMAIN" Type="Double"></ToCompare>
+                </SubCondition>
+              </Condition>
+
+            </Conditions>
+          </Screen>
+          <Screen ID="REMUNERATIONS" IsRequired ="Y">
+            <Conditions>
+              <Condition Operand1="$COMMISSION_PERCENT" Operator ="!=" Operand2="100.0000"  OperandType="Double">
+                <SubCondition Operand1="$POLICY_LEVEL_COMM_APPLIES" Operator ="==" Operand2="Y"  OperandType="String">
+                  <ToCompare Key="$COMMISSION_PERCENT" Value="$COMMISSION_PERCENT" Type="Double"></ToCompare>
+                </SubCondition>
+                <SubCondition Operand1="$COMMISSION_PERCENT" Operator ="&gt;" Operand2="100.0000"  OperandType="Double">
+                  <ToCompare Key="$COMMISSION_PERCENT" Value="$COMMISSION_PERCENT" Type="Double"></ToCompare>
+                </SubCondition>
+                <!--itrack no 1391 by praveer incase of Accepted Coinsurance, the broker commission cannot be mandatory-->
+                <!--<SubCondition Operand1="$COMMISSION_PERCENT" Operator ="==" Operand2="0"  OperandType="Double">
+                  <ToCompare Key="$COMMISSION_PERCENT" Value="$COMMISSION_PERCENT" Type="Double"></ToCompare>
+                </SubCondition>-->
+              </Condition>
+              <Condition Operand1="$COMMISSION_TYPE" Operator ="==" Operand2="44"  OperandType="Double">
+                <SubCondition Operand1="$COMMISSION_PERCENT" Operator ="!=" Operand2="100.0000"  OperandType="Double">
+                  <ToCompare Key="$COMMISSION_PERCENT" Value="$COMMISSION_PERCENT" Type="Double"></ToCompare>
+                </SubCondition>
+              </Condition>
+              <Condition Operand1="$COMMISSION_TYPE" Operator ="==" Operand2="45"  OperandType="Double">
+                <SubCondition Operand1="$COMMISSION_PERCENT" Operator ="!=" Operand2="100.0000"  OperandType="Double">
+                  <ToCompare Key="$COMMISSION_PERCENT" Value="$COMMISSION_PERCENT" Type="Double"></ToCompare>
+                </SubCondition>
+              </Condition>
+            </Conditions>
+            <!--itrack no 1391 by praveer incase of Accepted Coinsurance, the broker commission cannot be mandatory-->
+            <Conditions>
+              <Condition Operand1="$COMMISSION_PERCENT" Operator ="==" Operand2="0"  OperandType="Double">
+                <SubCondition Operand1="$CO_INSURANCE" Operator ="!=" Operand2="14549"  OperandType="Double">
+                  <ToCompare Key="$COMMISSION_PERCENT" Value="$COMMISSION_PERCENT" Type="Double"></ToCompare>
+                </SubCondition>
+              </Condition>
+            </Conditions>
+          </Screen>
+          <!--Added by Lalit July 21 2011.itrack # 1329-->
+          <!--<Screen ID="COVERAGES" IsRequired ="Y">
+            <Conditions>
+              <Condition Operand1="$LAYER_AMOUNT"  Operator ="!=" Operand2="0" OperandType="Double">
+                <SubCondition Operand1="$TIV" Operator ="&gt;" Operand2="$LAYER_AMOUNT"  OperandType="Double">
+                  <ToCompare Key="$TIV" Value="$TIV" Type="String"></ToCompare>
+                </SubCondition>
+              </Condition>
+            </Conditions>
+          </Screen>-->   <!--Commented by Aditya For itrack # 1532,this msg has been shifted to confirmation box-->
+        </Rule>
+      </SubSubGroup>
+    </SubGroup>
+    <!--Added By Lalit Feb 23,2011-->
+    <SubGroup Code="CorrectiveUser">
+      <SubSubGroup Code="Mandatory">
+        <Rule Action="Database" StartDate="1950-01-01" EndDate="3000-12-30" STATE_ID="0"  LOB_ID="0">
+
+        </Rule>
+      </SubSubGroup>
+      <SubSubGroup Code="Reject">
+        <Rule Action="Database" StartDate="1950-01-01" EndDate="3000-12-30" STATE_ID="0"  LOB_ID="0">
+          <Screen ID="BILLING_INFOS" IsRequired="Y">
+            <Conditions>
+              <Condition Operand1="$COVERAGES_PREMIUM" Operator ="!=" Operand2="$PREV_PREMIUM" OperandType="Double">
+                <SubCondition Operand1="$TOTAL_TRAN_PREMIUM" Operator="!=" Operand2="$PRORATA_AMOUNT" OperandType="Double">
+                  <ToCompare Key="$TOTAL_TRAN_PREMIUM" Value="$TOTAL_TRAN_PREMIUM" Type="Double"></ToCompare>
+                </SubCondition>
+              </Condition>
+            </Conditions>
+            
+          </Screen>
+          <Screen ID="REMUNERATIONS" IsRequired ="Y">
+            <Conditions>
+              <Condition Operand1="$CO_APPLICANT" Operator ="!=" Operand2="$NO_CO_APPLICANTS" OperandType="String">
+                <ToCompare Key="$CO_APPLICANT" Value="$CO_APPLICANT" Type="String"></ToCompare>
+              </Condition>
+            </Conditions>
+          </Screen>
+          <Screen ID="RISKS" IsRequired ="Y">
+            <Conditions>
+              <Condition Operand1="$LOB_ID"  Operator ="==" Operand2="11" OperandType="String">
+                <SubCondition Operand1="$MAXIMUM_LIMIT" Operator ="!=" Operand2="$SUM_LIMIT" OperandType="Double">
+                  <ToCompare Key="$MAXIMUM_LIMIT" Value="$MAXIMUM_LIMIT" Type="Double"></ToCompare>
+                </SubCondition>
+              </Condition>
+              <!--Added By Lalit Chauhan.March 2,2011 for risk should have only one main coverage-->
+              <Condition Operand1="$IS_MAIN_APPLY"  Operator ="==" Operand2="1" OperandType="String">
+                <SubCondition Operand1="$COUNT_ISMAIN" Operator ="!=" Operand2="1" OperandType="String">
+                  <ToCompare Key="$COUNT_ISMAIN" Value="$COUNT_ISMAIN" Type="Double"></ToCompare>
+                </SubCondition>
+              </Condition>
+            </Conditions>
+          </Screen>
+        </Rule>
+      </SubSubGroup>
+      <SubSubGroup Code="Refered">
+        <Rule Action="Database" StartDate="1950-01-01" EndDate="3000-12-30" STATE_ID="0"  LOB_ID="0">
+        </Rule>
+      </SubSubGroup>
+    </SubGroup>
+  </Group>
+</Root>

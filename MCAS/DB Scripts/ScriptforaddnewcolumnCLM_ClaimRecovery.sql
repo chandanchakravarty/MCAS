@@ -1,0 +1,9 @@
+IF NOT EXISTS(SELECT TOP 1 1 FROM INFORMATION_SCHEMA.COLUMNS WHERE [TABLE_NAME] = 'CLM_ClaimRecovery' AND [COLUMN_NAME] = 'CreatedDate')
+BEGIN
+ALTER TABLE [dbo].[CLM_ClaimRecovery] ADD CreatedDate datetime null
+END
+
+IF NOT EXISTS(SELECT TOP 1 1 FROM INFORMATION_SCHEMA.COLUMNS WHERE [TABLE_NAME] = 'CLM_ClaimRecovery' AND [COLUMN_NAME] = 'ModifiedDate')
+BEGIN
+ALTER TABLE [dbo].[CLM_ClaimRecovery] ADD ModifiedDate datetime null
+END

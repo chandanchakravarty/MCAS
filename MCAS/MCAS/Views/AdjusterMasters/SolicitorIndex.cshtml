@@ -1,0 +1,225 @@
+﻿@model IEnumerable<MCAS.Web.Objects.MastersHelper.AdjusterModel>
+@using MCAS.Web.Objects.CommonHelper
+@using MCAS.Globalisation
+@{
+    ViewBag.Title = "SolicitorIndex";
+    Layout = "~/Views/Shared/_SystemAdminLayout.cshtml";
+    @Html.Hidden("oldgroup", 1)
+    SecurityPermissions myPemissions = (MCAS.Web.Objects.CommonHelper.SecurityPermissions)ViewData["UserPermissions"];
+    System.Resources.ResourceManager PageResource = (new MCAS.Web.Objects.MastersHelper.TransactionModel()).GetResourceManager("MCAS.Web.Objects.Resources.AdjusterMasters.Solicitor");
+}
+
+
+<script src='@Url.Content("~/Scripts/jquery-2.1.0.min.js")' type="text/javascript"></script>
+<script src='@Url.Content("~/Scripts/jquery.validate.min.js")' type="text/javascript"></script>
+<script src='@Url.Content("~/Scripts/jquery.validate.unobtrusive.min.js")' type="text/javascript"></script>
+
+<div class="dashboard-wrapper">
+    <!-- Bootstrap Container Start -->
+    <div class="container">
+        <!-- Page title start -->
+        <div class="row page-title">
+            <div class="col-lg-12">
+                <h2>@MCAS.Web.Objects.Resources.Common.Common.SystemAdmin</h2>
+                <ul class="breadcrumb">
+                    <li>@PageResource.GetString("ServiceProviderMaster")</li>
+                    <li>@PageResource.GetString("LawyerMaster") </li>
+                </ul>
+            </div>
+        </div>
+        <!-- Page title end -->
+        <!-- Row start for sub navigation -->
+        <hr>
+        <div class="row">
+            <div class="col-lg-12 text-left">
+                <div class="btn-group less-bottom-margin">
+                    <a class="btn btn-default" href='@Url.Action("CedantIndex", "Cedant")'>@PageResource.GetString("InsurerMaster")</a>
+                    <a class="btn btn-default" href='@Url.Action("SurveyorIndex", "AdjusterMasters")'> @PageResource.GetString("SurveyorMaster")</a> 
+                    <a class="btn btn-info" href='@Url.Action("SolicitorIndex", "AdjusterMasters")'>@PageResource.GetString("LawyerMaster")</a> 
+                    <a class="btn btn-default" href='@Url.Action("DepotMasterIndex", "Masters")'>@PageResource.GetString("WorkshopDepotMaster")</a>
+                    <a class="btn btn-default" href='@Url.Action("HospitalIndex", "ClaimMasters")'>@PageResource.GetString("HospitalMaster")</a> 
+                    <a class="btn btn-default" href='@Url.Action("AdjusterIndex", "AdjusterMasters")'>@PageResource.GetString("AdjusterMaster")</a>
+                </div>
+            </div>
+        </div>
+        <hr>
+        <!-- Row End -->
+        <!-- Row start -->
+        <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <div class="panel panel-info">
+                    <div class="panel-heading clearfix">
+                        <i class="icon-check-sign"></i>
+                        <h3 class="panel-title">@PageResource.GetString("LawyerMaster")</h3>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            <div class="panel panel-info">
+                    <div class="panel-sub-heading">
+                        <span class="text-danger">*</span> @PageResource.GetString("SearchScreen")
+                    </div>
+                    <div class="panel-body">
+                        @using (Html.BeginForm("SolicitorIndex", "AdjusterMasters", FormMethod.Post, new { role = "form", @class = "form-horizontal" }))
+                        {
+                            <div class="row">
+                                
+                                <div class="col-lg-6">
+                                            <div class="form-group">
+                                                <label class="col-sm-4" for="ddlSolicitor">
+                                                    @PageResource.GetString("LawFirmName")</label>
+                                                <div class="col-sm-6">
+                                                                                                
+                                                <input value="@ViewBag.solicitor"  type="text" placeholder="" name="inputLawFirmName"  id="inputLawFirmName"  class="form-control" />
+                                                </div>
+
+                                            </div>
+                                 </div>
+                                        
+                            </div>
+                            <div class="row top-buffer"></div>
+                             <div class="row top-buffer"></div> 
+                            <div class="row">
+                                <div class="col-lg-12 text-center">
+                                    @*<button type="submit" class="btn btn-primary">
+                                        Back</button>*@
+                                        <button type="submit" class="btn btn-info">@PageResource.GetString("Search")</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                         @if (@myPemissions.Write)
+                                         {
+                                    @Html.ActionLink(@PageResource.GetString("AddNew"), "SolicitorEditor", "AdjusterMasters", new { }, new { @class = "btn btn-info" })
+                                         }
+                                </div>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Row End -->
+        <!-- Row Start -->
+        <div class="panel-body">
+        <div class="row">
+            <div class="col-lg-12 text-center">
+                <h4 class="text-info">@PageResource.GetString("SearchResults")</h4>
+                <hr/>
+            </div>
+            <div class="col-lg-12">
+                <div class="table-responsive">
+                <div class="row-fluid">
+                 <div class="dataTables_wrapper" id="Diary_wrapper" role="grid">
+                    <table id="tableDiarySrc" width="100%" class="table table-striped table-hover display">
+                        <thead>
+                            <tr>
+                                <th style="width: 15%; padding-left:9px">
+                                    @PageResource.GetString("LawFirmCode")
+                                </th>
+                                <th style="width:65%; padding-left:9px">
+                                    @PageResource.GetString("LawFirmName")
+                                </th>
+                                <th style="width:10%; padding-left:9px">
+                                    @PageResource.GetString("Status")
+                                </th>
+                                
+                                
+                                <th style="width:10%;">
+                                    <span class="block text-right">@PageResource.GetString("Select")</span>
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody style="text-transform: capitalize;">
+                            @{
+                                int trid = 1;
+                                int rowmatch = 0;
+                                var display = "";
+                                var usrstatus = "";
+                                var strNote = "";
+                                foreach (var item in Model)
+                                {
+                                    rowmatch += 1;
+                                                                        
+                                <tr group='@(trid)' style="display:@display;">
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.AdjusterCode)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.AdjusterName)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.AdjusterAddress.Status)
+                                    </td>
+                                    
+                                   
+                                    <td>
+                                     @if (@Model.FirstOrDefault().UserPermissions.Write)
+                                     {
+                                        @Html.EncodedActionLink(@PageResource.GetString("Edit"), "SolicitorEditor", new { AdjusterId = item.AdjusterId, pageMode = "Edit" }, new { @class = "btn btn-xs btn-warning" }) 
+                                      }
+                                        @Html.EncodedActionLink(@PageResource.GetString("View"), "SolicitorEditor", new { AdjusterId = item.AdjusterId, pageMode = "View" }, new { @class = "btn btn-xs btn-info" })
+                                    </td>
+                                </tr>
+                                   
+                                }}
+                        </tbody>
+                    </table>
+                    </div>
+                    </div>
+                </div>
+            </div>
+           
+        </div>
+        </div>
+        <!-- Row End -->
+    </div>
+    <!-- Bootstrap Container End -->
+</div>
+</div>
+            </div>
+        </div>
+
+
+
+
+
+<script type="text/javascript">
+
+    $(document).ready(function () {
+        //  loadProducts();
+        loadSolicitor();
+    });
+
+    function loadProducts() {
+        $.ajax({
+            url: '@(Url.Action("FillProducts"))',
+            cache: false,
+            success: function (data) {
+                $("#ddlMainClassCode").empty();
+                $.each(data, function (index, optiondata) {
+                    $("#ddlMainClassCode").append("<option value='" + optiondata.ProductCode + "'>" + optiondata.ProductDisplayName + "</option>");
+                });
+            },
+            error: function (reponse) {
+                alert("error : " + reponse);
+            }
+        });
+    }
+
+    function loadSolicitor() {
+        $.ajax({
+            url: '@(Url.Action("FillSolicitor"))',
+            cache: false,
+            success: function (data) {
+                $("#ddlSolicitor").empty();
+                $.each(data, function (index, optiondata) {
+                    if (optiondata.AdjusterCode == '@ViewBag.solicitor')
+                        $("#ddlSolicitor").append("<option value='" + optiondata.AdjusterCode + "' selected=selected>" + optiondata.AdjusterName + "</option>");
+                    else
+                        $("#ddlSolicitor").append("<option value='" + optiondata.AdjusterCode + "'>" + optiondata.AdjusterName + "</option>");
+                });
+            },
+            error: function (reponse) {
+                alert("error : " + reponse);
+            }
+        });
+    }
+
+    
+</script>

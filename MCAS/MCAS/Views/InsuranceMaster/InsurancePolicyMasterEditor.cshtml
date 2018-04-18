@@ -1,0 +1,297 @@
+﻿@model MCAS.Web.Objects.MastersHelper.InsuranceModel
+@using MCAS.Web.Objects.CommonHelper
+@using MCAS.Web.Objects.Resources.InsuranceMaster;
+@using MCAS.Web.Objects.Resources.Common;
+@using MCAS.Globalisation
+@{
+    //ViewBag.Title = "InsurancePolicyMasterEditor";
+    ViewBag.Title = InsurancePolicyMasterEditor.Title;
+    var mMCASQueryString = Html.MCASQueryString(Request.QueryString);
+    Layout = "~/Views/Shared/_SystemAdminLayout.cshtml";
+    var pageMode = mMCASQueryString["pageMode"];
+    var btndisplay = pageMode == "View" ? "none" : "yes";
+    SecurityPermissions myPemissions = (SecurityPermissions)ViewData["UserPermissions"]; 
+}
+<link href="@Url.Content("~/Content/themes/base/jquery.ui.all.css")" rel="stylesheet" type="text/css" />
+<script src='@Url.Content("~/Scripts/jquery-2.1.0.min.js")' type="text/javascript"></script>
+<script src="@Url.Content("~/Scripts/jquery.validate.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.min.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/Scripts/globalize/globalize.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/Scripts/globalize/cultures/globalize.culture.en-GB.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/Scripts/jquery-ui-v1.10.3.js")" type="text/javascript"></script>
+<div class="dashboard-wrapper">
+    <div class="container">
+        <div class="row page-title">
+            <div class="col-lg-12">
+                <h2>
+                    @Common.SystemAdmin</h2>
+                <ul class="breadcrumb">
+                    <li>@InsurancePolicyMasterEditor.InsurancePolicyDetails</li>
+                </ul>
+            </div>
+        </div>
+        <hr />
+        <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <div class="panel panel-info">
+                    <div class="panel-heading clearfix">
+                        <i class="icon-check-sign"></i>
+                        <h3 class="panel-title">
+                            @InsurancePolicyMasterEditor.InsurancePolicyDetails</h3>
+                    </div>
+                    <div style="color: Red; font-weight: bold;" class="has-error" id="error">
+                        <p align="center">
+                            @if (TempData["result"] != null)
+                            {
+                                @TempData["result"]
+                            }
+                        </p>
+                    </div>
+                    <div id="t2">
+                        <div class="panel-body">
+                            @using (Html.BeginForm("InsurancePolicyMasterEditor", "InsuranceMaster", FormMethod.Post, new { role = "form", @class = "form-horizontal", id = "InsurancePolicyform", name = "InsurancePolicyform" }))
+                            {
+                                @Html.HiddenFor(m => m.PolicyId)
+                                @Html.HiddenFor(m => m.Prop1);
+                                @Html.HiddenFor(m => m.Prop2);
+                                @Html.HiddenFor(m => m.Prop3);                                                           
+                                @Html.ValidationSummary(true)
+                                <div class="row">
+                                    <div class="clearfix igr col-md-12">
+                                        <div class="col-md-3">
+                                            <label for="inputInsu">
+                                                @InsurancePolicyMasterEditor.Insurer&nbsp;<span class="text-danger">*</span></label>
+                                        </div>
+                                        <div class="col-md-3">
+                                            @Html.DropDownListFor(m => m.CedantId, new SelectList(Model.Cedantlist, "CedantId", "CedantName", ""), new { id = "ddlCedant", @class = "col-lg-12 form-control" })
+                                            @Html.ValidationMessageFor(m => m.CedantId)
+                                        </div>
+                                        <div class="col-md-3">
+                                            <label for="inputClass">
+                                                @InsurancePolicyMasterEditor.Class&nbsp;<span class="text-danger">*</span></label>
+                                        </div>
+                                        <div class="col-md-3">
+                                            @Html.DropDownListFor(m => m.ProductId, new SelectList(Model.ProductList, "ProductId", "ProductDisplayName", ""), new { id = "ddlProduct", @class = "col-lg-12 form-control" })
+                                            @Html.ValidationMessageFor(m => m.ProductId)
+                                        </div>
+                                    </div>
+                                </div>          
+                                                                             
+                                <div id="divSubClass" class="row top-buffer ">
+                                    <div class="clearfix igr col-md-12">
+                                        <div class="col-md-3">
+                                            <label for="inputSubClass">
+                                                @InsurancePolicyMasterEditor.SubClass&nbsp;<span class="text-danger">*</span>
+                                            </label>
+                                        </div>
+                                        <div class="col-md-3">
+                                            @Html.DropDownListFor(m => m.SubClassId, new SelectList(Model.SubClassList, "SubClassId", "ClassDescription", ""), new { id = "ddlSubProduct", @class = "col-lg-12 form-control" })
+                                            @Html.ValidationMessageFor(m => m.SubClassId)
+                                        </div>
+                                        <div class="col-md-3">
+                                            <label for="inputGroupCode">
+                                                @InsurancePolicyMasterEditor.PolicyNumber&nbsp;<span class="text-danger">*</span></label>
+                                        </div>
+                                        <div class="col-md-3">
+                                            @Html.TextBoxFor(m => m.PolicyNo, new { @maxlength = "45", @class = "col-lg-12 form-control" })
+                                            @Html.ValidationMessageFor(m => m.PolicyNo)
+                                        </div>
+                                    </div>
+                                </div>
+                                                 
+                                                   
+                                <div class="row top-buffer">
+                                    <div class="clearfix igr col-md-12">
+                                        <div class="col-md-3">
+                                            <label for="inputPolicyEffFrom">
+                                                @InsurancePolicyMasterEditor.PolicyEffectiveFrom&nbsp;<span class="text-danger">*</span></label>
+                                        </div>
+                                        <div class="col-md-3">
+                                            @Html.TextBoxFor(m => m.PolicyEffectiveFrom, "{0:d}", new { id = "inputPolicyEffFrom", @class = "form-control datepicker" })
+                                            @Html.ValidationMessageFor(m => m.PolicyEffectiveFrom)
+                                        </div>
+                                        <div class="col-md-3">
+                                            <label for="inputPolicyEffTo">
+                                                @InsurancePolicyMasterEditor.PolicyEffectiveTo&nbsp;<span class="text-danger">*</span></label>
+                                        </div>
+                                        <div class="col-md-3">
+                                            @Html.TextBoxFor(m => m.PolicyEffectiveTo, "{0:d}", new { id = "inputPolicyEffTo", @class = "form-control datepicker" })
+                                            @Html.ValidationMessageFor(m => m.PolicyEffectiveTo)
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row top-buffer">
+                                    <div class="clearfix igr col-md-12">
+                                        <div class="col-md-3">
+                                            <label for="inputDeductible">
+                                                @InsurancePolicyMasterEditor.Deductible
+                                            </label>
+                                        </div>
+                                        <div class="col-md-3">
+                                            @Html.TextBoxFor(m => m.Deductible, new { id = "txtDeductible", @numlen = "8", @class = "col-lg-12 form-control format " })
+                                            @Html.ValidationMessageFor(m => m.Deductible)
+                                        </div>
+                                        <div class="col-md-3">
+                                            <label for="inputPremium">
+                                                @InsurancePolicyMasterEditor.Premium&nbsp;<span class="text-danger">*</span></label>
+                                        </div>
+                                        <div class="col-md-3">
+                                            @Html.TextBoxFor(m => m.PremiumAmount, new { id = "txtPremium", @numlen = "8", @class = "col-lg-12 form-control format" })<br />
+                                            @Html.ValidationMessageFor(m => m.PremiumAmount)
+                                        </div>
+                                    </div>
+                                </div>
+                            
+                                <div class="row top-buffer">
+                                    <div class="clearfix igr col-md-12">
+                                        <div class="col-md-3">
+                                            <label for="inputCurrency">
+                                                @InsurancePolicyMasterEditor.Currency&nbsp;<span class="text-danger">*</span></label>
+                                        </div>
+                                        <div class="col-md-2">
+                                            @Html.DropDownListFor(m => m.CurrencyCode, new SelectList(Model.expenseslist, "CurrencyCode_Expenses",
+                                                  "Description_Expenses", "SGD"), new { id = "ddlCurrency", @class = "col-lg-12 form-control" })<br />
+                                            @Html.ValidationMessageFor(m => m.CurrencyCode)
+                                        </div>
+                                        <div class="col-md-2">
+                                            @Html.TextBoxFor(m => m.Exchangerate, new { id = "txtExchange", @numlen = "11", @readonly = "readonly", @class = "col-lg-12 form-control format" })<br />
+                                            @Html.ValidationMessageFor(m => m.Exchangerate)
+                                        </div>
+                                    </div>
+                                </div>
+                            
+                                <div class="row top-buffer">
+                                    <div class="clearfix igr col-md-12">
+                                        <div class="col-md-3">
+                                            <label for="PremiumLocalCurrency">
+                                                @InsurancePolicyMasterEditor.PremiumLocalCurrency
+                                            </label>
+                                        </div>
+                                        <div class="col-md-3">
+                                            @Html.TextBoxFor(m => m.PremiumLocalCurrency, new { id = "PremiumLocalCurrency", @numlen = "8", @class = "form-control format" })<br />
+                                            @Html.ValidationMessageFor(m => m.PremiumLocalCurrency)
+                                        </div>
+                                    </div>
+                                </div>
+
+                            
+                                <div class="row top-buffer">
+                                    <div class="clearfix igr col-md-12 text-center">
+                                        @if (@myPemissions.Write)
+                                        {
+                                            <input id="btnSave" class="btn btn-info" style="display:@btndisplay" type="button" value='@Common.Save' />
+                                        }
+                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                        @Html.ActionLink(Common.Back, "InsurancePolicyMasterIndex", null, new { @class = "btn btn-info" })&nbsp;&nbsp;&nbsp;&nbsp;
+                                    </div>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="panel">
+            @Html.Partial("~/Views/Shared/_TimeStamp.cshtml", Model)
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    var do_on_load = function () {
+        $(document).on("focus", ":input", function () { $(this).attr("autocomplete", "off") });
+        $(".datepicker").datepicker({
+            dateFormat: "dd/mm/yy",
+            showStatus: !0,
+            showWeeks: !0,
+            currentText: "Now",
+            autoSize: !0,
+            gotoCurrent: !0,
+            showAnim: "blind",
+            highlightWeek: !0,
+            yearRange: "1951:2050",
+            changeMonth: !0,
+            changeYear: !0,
+            onSelect: function (b) {
+                $(this).valid();
+            }
+        });
+        $.culture = Globalize.culture("en-GB");
+        $.validator.methods.date = function (value, element) { return this.optional(element) || Globalize.parseDate(value, "dd/MM/yyyy", "en-GB") || Globalize.parseDate(value, "yyyy-mm-dd"); };
+        $.validator.unobtrusive.adapters.add("notequalto", ["other"], function (b) { b.rules.notEqualTo = "#" + b.params.other; b.message && (b.messages.notEqualTo = b.message) });
+        $.validator.addMethod("notEqualTo", function (b, e, g) { return this.optional(e) || b != $(g).val() }, "");
+
+        $("#btnSave").click(function (a) {
+            if (IsPageChanged()) {
+                var b = $("#InsurancePolicyform").valid();
+                "" != $("#inputPolicyEffFrom").val() && "" != $("#inputPolicyEffTo").val() && $("#inputPolicyEffFrom").datepicker("getDate") > $("#inputPolicyEffTo").datepicker("getDate") ? (alert("@Html.Raw(InsurancePolicyMasterEditor.PolicyEffectiveDateCheck)"), a.preventDefault()) : (IsPageChanged() && b && (FormatValue(), $("#InsurancePolicyform").submit()));
+            }
+        });
+
+        $("#txtPremium").blur(function () {
+            var a = $("#txtPremium").val().toString().replace(/,/g, ""), b = $("#txtExchange").val().toString().replace(/,/g, "");
+            "" != a && "" != b && (a *= b, $("#PremiumLocalCurrency").val(CurrencyFormat(a)))
+        });
+        $('#ddlCurrency').change(function () {
+            $.ajax({
+                type: "POST",
+                url: '@Url.Action("ExpensesType", "InsuranceMaster")',
+                data: { CurrencyCode: $('#ddlCurrency').val() },
+                success: function (data) {
+                    $("#txtExchange").val(data);
+                    var premiumamount = $("#txtPremium").val().toString().replace(/,/g, "");
+                    var exchange = $("#txtExchange").val().toString().replace(/,/g, "");
+                    if (premiumamount != "" && exchange != "") {
+                        var localcurrency = premiumamount * exchange;
+                        $("#PremiumLocalCurrency").val(CurrencyFormat(localcurrency));
+                    }
+
+                }
+            });
+
+        });
+        //        $('#ddlCurrency').val() != '' && $.ajax({
+        //            type: "POST",
+        //            url: '@Url.Action("ExpensesType", "InsuranceMaster")',
+        //            data: { CurrencyCode: $('#ddlCurrency').val() },
+        //            success: function (data) {
+        //                $("#txtExchange").val(data);
+        //            }
+        //        });
+
+        '@pageMode' == 'View' && $('#t2').find('input, textarea, button, select').attr('disabled', 'disabled');
+
+        $("input[type=text]").each(function () {
+            if (void 0 !== $(this).attr("data-val-date") && "The field " == $(this).attr("data-val-date").substring(0, 10)) {
+                //var a = $(this).attr("data-val-date").substring(10, $(this).attr("data-val-date").length).replace("must be a date.", "must be in 'dd/mm/yyyy' format.");
+                var a = $(this).attr("data-val-date").substring(10, $(this).attr("data-val-date").length).replace("must be a date.", " @Html.Raw(InsurancePolicyMasterEditor.DateFormat)");
+                $(this).removeAttr("data-val-date");
+                $(this).attr("data-val-date", a)
+            }
+        });
+
+        $("input[type=text]").each(function () {
+            if (void 0 !== $(this).attr("data-val-number") && "The field " == $(this).attr("data-val-number").substring(0, 10)) {
+                var a = $(this).attr("data-val-number").substring(10, $(this).attr("data-val-number").length);
+                $(this).removeAttr("data-val-number");
+                $(this).attr("data-val-number", a)
+            }
+        });
+    };
+    $(document).ready(do_on_load);
+    $(window).bind("page:change", do_on_load);
+
+    function checkKeyCode(evt)// for F5 disable
+    {
+        var evt = evt || window.event, a = evt.which ? evt.which : evt.keyCode
+        if (a == 116) {
+            evt.keyCode = 0;
+            if ($('#reload').attr("href") != "" && $('#reload').attr("href") != undefined) {
+                evt.preventDefault();
+                window.location.href = $('#reload').attr("href");
+                return false;
+            }
+        }
+    }
+
+    document.onkeydown = checkKeyCode;
+</script>

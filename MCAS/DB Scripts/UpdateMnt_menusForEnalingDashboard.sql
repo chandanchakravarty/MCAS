@@ -1,0 +1,1 @@
+update MNT_Menus set IsActive='Y' where MenuId=200

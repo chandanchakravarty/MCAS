@@ -1,0 +1,346 @@
+﻿@using MCAS.Web.Objects.CommonHelper
+@using MCAS.Globalisation
+@using System;
+@model MCAS.Web.Objects.ClaimObjectHelper.ConfirmAmtModel
+@{
+    Layout = null;
+    var mMCASQueryString = Html.MCASQueryString(Request.QueryString);
+    var policyid = mMCASQueryString["PolicyId"] == null || mMCASQueryString["PolicyId"] == "" ? "0" : mMCASQueryString["PolicyId"];
+    var accidentClaimIdNew = mMCASQueryString["AccidentClaimId"] == null ? "" : Convert.ToString(mMCASQueryString["AccidentClaimId"]);
+    var claimId = Model.ClaimId == null ? "0" : Convert.ToString(Model.ClaimId);
+    string isEncryptedParams = System.Configuration.ConfigurationManager.AppSettings["EncryptQueryParams"].ToUpper();
+}
+
+<style>
+    .OnlyCar
+    {
+        display: none;
+    }
+</style>
+    <script src="@Url.Content("~/Scripts/custom.js")" type="text/javascript"></script>
+@*<div class="modal-header">
+                <button type="button" class="close" data-dissmiss="modal" aria-label="Close"><span aria-hidden="true">x</span></button>
+</div>*@
+             @{
+            object routes = new { ClaimId = claimId, PolicyId = policyid, AccidentClaimId = accidentClaimIdNew};
+            if (isEncryptedParams.ToUpper() == "YES")
+            {
+                string res = RouteEncryptDecrypt.getRouteString(routes);
+                res = RouteEncryptDecrypt.Encrypt(res);
+                routes = new { Q = res };
+            }
+        }
+        @using (Html.BeginForm("ConfirmAmountDtl", "ClaimRegistrationProcessing", routes, FormMethod.Post, new { role = "form", @class = "form-horizontal", id = "ConfirmAmtDtlform", name = "ConfirmAmtDtlform" }))
+        {
+ @*<div class="modal-body">*@
+        <!-- Row start -->
+        <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <div class="panel panel-info">
+@*                    <div class="panel-heading clearfix">
+                        <i class="icon-check-sign"></i>
+                        <h3 class="panel-title">
+                            Breakdown of Confirm Amount</h3>
+                    </div>*@
+                    <div class="panel-body">
+                    @if ((Convert.ToString(Session["OrganisationType"]).ToLower() == "tx"))
+                    {
+                        <div class = "OnlyTaxi">
+                            <fieldset id="fieldsetmlegend">
+                                <legend id="mlegend">Breakdown of Confirm Amount</legend>
+                                <div class="form-group">
+                                    <div class="col-lg-6">
+                                        <div class="form-group">
+                                            <label class="col-sm-4 control-label">
+                                                Invoice Amount
+                                            </label>
+                                            <div class="col-sm-8">
+                                            @Html.TextBoxFor(m => m.ConfirmInvoiceAmt, new { @maxlength = "14", @class = "form-control format Number", @id = "InvoiceAmtTX" })
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="form-group">
+                                            <label class="col-sm-4 control-label">
+                                                Loss of Rental
+                                            </label>
+                                            <div class="col-sm-8">
+                                                @Html.TextBoxFor(m => m.LossofRental, new { @maxlength = "24", @class = "form-control format Number" })
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-lg-6">
+                                        <div class="form-group">
+                                            <label class="col-sm-4 control-label">
+                                                Loss Of Income
+                                            </label>
+                                            <div class="col-sm-8">
+                                                @Html.TextBoxFor(m => m.LossOfIncome, new { @maxlength = "24", @class = "form-control format Number" })
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="form-group">
+                                            <label class="col-sm-4 control-label">
+                                                Legal Fee
+                                            </label>
+                                            <div class="col-sm-8">
+                                                @Html.TextBoxFor(m => m.LegalFee, new { @maxlength = "24", @class = "form-control format Number" })
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-lg-6">
+                                        <div class="form-group">
+                                            <label class="col-sm-4 control-label">
+                                                Others (1)
+                                            </label>
+                                            <div class="col-sm-8">
+                                                @Html.TextBoxFor(m => m.Others1, new { @maxlength = "24", @class = "form-control format Number" })
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="form-group">
+                                            <label class="col-sm-4 control-label">
+                                                Survey Fee
+                                            </label>
+                                            <div class="col-sm-8">
+                                                @Html.TextBoxFor(m => m.SurveyFee, new { @maxlength = "24", @class = "form-control format Number" })
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-lg-6">
+                                        <div class="form-group">
+                                            <label class="col-sm-4 control-label">
+                                                TP/GIA Fee
+                                            </label>
+                                            <div class="col-sm-8">
+                                                @Html.TextBoxFor(m => m.TPGIAFee, new { @maxlength = "24", @class = "form-control format Number" })
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="form-group">
+                                            <label class="col-sm-4 control-label">
+                                                LTA Fee
+                                            </label>
+                                            <div class="col-sm-8">
+                                                @Html.TextBoxFor(m => m.LTAFee, new { @maxlength = "24", @class = "form-control format Number" })
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-lg-6">
+                                        <div class="form-group">
+                                            <label class="col-sm-4 control-label">
+                                                Others (2)
+                                            </label>
+                                            <div class="col-sm-8">
+                                                @Html.TextBoxFor(m => m.Others2, new { @maxlength = "24", @class = "form-control format Number" })
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="form-group">
+                                            <label class="col-sm-4 control-label">
+                                                Total
+                                            </label>
+                                            <div class="col-sm-8">
+                                                @Html.TextBoxFor(m => m.Total, new { @maxlength = "24", @class = "form-control format Number", @readonly = "readonly" })
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </fieldset>
+                        </div>
+                    }
+                    @if ((Convert.ToString(Session["OrganisationType"]).ToLower() == "pc"))
+                    {
+                        <div class = "OnlyCar">
+                            <fieldset id="fieldsetpc">
+                                <legend id="pclegend">Breakdown of Confirm Amount</legend>
+                                <div class="form-group">
+                                    <div class="col-lg-6">
+                                        <div class="form-group">
+                                            <label class="col-sm-4 control-label">
+                                                Invoice Amount
+                                            </label>
+                                            <div class="col-sm-8">
+                                                @Html.TextBoxFor(m => m.ConfirmInvoiceAmt, new { @maxlength = "250", @class = "form-control format Number", @id = "InvoiceAmtPC" })
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="form-group">
+                                            <label class="col-sm-4 control-label">
+                                                TP/GIA Fee
+                                            </label>
+                                            <div class="col-sm-8">
+                                                @Html.TextBoxFor(m => m.TPGIAFee, new { @maxlength = "100", @class = "form-control format Number", @id = "TPGIAFeePC" })
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-lg-6">
+                                        <div class="form-group">
+                                            <label class="col-sm-4 control-label">
+                                                Loss Of Use
+                                            </label>
+                                            <div class="col-sm-8">
+                                                @Html.TextBoxFor(m => m.LossOfUse, new { @maxlength = "250", @class = "form-control format Number", @id = "LossOfUsePC" })
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="form-group">
+                                            <label class="col-sm-4 control-label">
+                                                LTA Fee
+                                            </label>
+                                            <div class="col-sm-8">
+                                                @Html.TextBoxFor(m => m.LTAFee, new { @maxlength = "100", @class = "form-control format Number", @id = "LTAFeePC" })
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-lg-6">
+                                        <div class="form-group">
+                                            <label class="col-sm-4 control-label">
+                                                Medical Expenses
+                                            </label>
+                                            <div class="col-sm-8">
+                                                @Html.TextBoxFor(m => m.MedicalExp, new { @maxlength = "250", @class = "form-control format Number", @id = "MedicalExpPC" })
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="form-group">
+                                            <label class="col-sm-4 control-label">
+                                                Car Rental
+                                            </label>
+                                            <div class="col-sm-8">
+                                                @Html.TextBoxFor(m => m.CarRental, new { @maxlength = "100", @class = "form-control format Number", @id = "CarRentalPC" })
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-lg-6">
+                                        <div class="form-group">
+                                            <label class="col-sm-4 control-label">
+                                                Others (1)
+                                            </label>
+                                            <div class="col-sm-8">
+                                                @Html.TextBoxFor(m => m.Others1, new { @maxlength = "250", @class = "form-control format Number", @id = "Others1PC" })
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="form-group">
+                                            <label class="col-sm-4 control-label">
+                                                Courtesy Car
+                                            </label>
+                                            <div class="col-sm-8">
+                                                @Html.TextBoxFor(m => m.CourtesyCar, new { @maxlength = "100", @class = "form-control format Number", @id = "CourtesyCarPC" })
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-lg-6">
+                                        <div class="form-group">
+                                            <label class="col-sm-4 control-label">
+                                                Legal Fee
+                                            </label>
+                                            <div class="col-sm-8">
+                                                @Html.TextBoxFor(m => m.LegalFee, new { @maxlength = "250", @class = "form-control format Number", @id = "LegalFeePC" })
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="form-group">
+                                            <label class="col-sm-4 control-label">
+                                                Others (2)
+                                            </label>
+                                            <div class="col-sm-8">
+                                                @Html.TextBoxFor(m => m.Others2, new { @maxlength = "100", @class = "form-control format Number", @id = "Others2PC" })
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-lg-6">
+                                        <div class="form-group">
+                                            <label class="col-sm-4 control-label">
+                                                Survey Fee
+                                            </label>
+                                            <div class="col-sm-8">
+                                                @Html.TextBoxFor(m => m.SurveyFee, new { @maxlength = "250", @class = "form-control format Number", @id = "SurveyFeePC" })
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="form-group">
+                                            <label class="col-sm-4 control-label">
+                                                Total
+                                            </label>
+                                            <div class="col-sm-8">
+                                                @Html.TextBoxFor(m => m.Total, new { @maxlength = "100", @class = "form-control format Number", @readonly = "readonly", @id = "TotalPC" })
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </fieldset>
+                        </div>
+                    }
+                    </div>
+                </div>
+            </div>
+        </div>
+
+@*                </div>
+                <div class="modal-footer">
+                <div class="col-lg-12 text-center">
+                    <input id="btnSave" class="btn btn-info" type="button" value="Save" />
+                    <input id="btnCancel" class="btn btn-info" type="button" value="Cancel" />
+                                                    </div>
+                </div>*@
+        }
+
+<script type="text/javascript">
+
+    var do_on_load = function () {
+        var Org = "";
+        Org = '@Session["OrganisationType"]'.toString().toLowerCase();
+        if (Org == "pc") {
+            $(".OnlyCar").css("display", "block");
+            $(".OnlyTaxi").css("display", "none");
+        }
+
+        $("#InvoiceAmtTX,#LossofRental,#LossOfIncome,#LegalFee,#Others1,#SurveyFee,#TPGIAFee,#LTAFee,#Others2").blur(function () {
+            var sumval = Number($("#InvoiceAmtTX").val().replace(/\,/g, '')) + Number($("#LossofRental").val().replace(/\,/g, '')) + Number($("#LossOfIncome").val().replace(/\,/g, '')) + Number($("#LegalFee").val().replace(/\,/g, '')) + Number($("#Others1").val().replace(/\,/g, '')) + Number($("#SurveyFee").val().replace(/\,/g, '')) + Number($("#TPGIAFee").val().replace(/\,/g, '')) + Number($("#LTAFee").val().replace(/\,/g, '')) + Number($("#Others2").val().replace(/\,/g, ''));
+
+            $("#Total").val(CurrencyFormat(sumval));
+        });
+
+        $("#InvoiceAmtPC,#TPGIAFeePC,#LossOfUsePC,#LTAFeePC,#MedicalExpPC,#CarRentalPC,#Others1PC,#CourtesyCarPC,#LegalFeePC,#Others2PC,#SurveyFeePC").blur(function () {
+            var sumvalPC = Number($("#InvoiceAmtPC").val().replace(/\,/g, '')) + Number($("#TPGIAFeePC").val().replace(/\,/g, '')) + Number($("#LossOfUsePC").val().replace(/\,/g, '')) + Number($("#LTAFeePC").val().replace(/\,/g, '')) + Number($("#MedicalExpPC").val().replace(/\,/g, '')) + Number($("#CarRentalPC").val().replace(/\,/g, '')) + Number($("#Others1PC").val().replace(/\,/g, '')) + Number($("#CourtesyCarPC").val().replace(/\,/g, '')) + Number($("#LegalFeePC").val().replace(/\,/g, '')) + Number($("#Others2PC").val().replace(/\,/g, '')) + Number($("#SurveyFeePC").val().replace(/\,/g, ''));
+
+            $("#TotalPC").val(CurrencyFormat(sumvalPC));
+        });
+    };
+
+    $(document).ready(do_on_load);
+    $(window).bind('page:change', do_on_load);
+
+
+</script>
+

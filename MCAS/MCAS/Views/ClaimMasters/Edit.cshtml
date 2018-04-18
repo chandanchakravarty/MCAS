@@ -1,0 +1,58 @@
+﻿@model MCAS.Web.Objects.MastersHelper.LossTypeModel
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container">
+    <form class="form-horizontal" action='@Url.Action("Edit", "ClaimMasters")' role="form" id="losstypeform" method="post">
+      <div class="row">
+        <div class="clearfix igr col-md-12">
+            <div class="col-md-2">
+            @Html.HiddenFor(m=> m.TranId)
+                <label for="inputLossTypeCode">Loss Type Code</label>
+            </div>
+            <div class="col-md-3">
+                @Html.TextBoxFor(m => m.LossTypeCode, new { @maxlength = "7" })<br />
+                 @Html.ValidationMessageFor(m => m.LossTypeCode)<br />
+                @*<input type="text" id="inputLossTypeCode" placeholder="" name="txtCode"/>*@
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="clearfix igr col-md-12">
+            <div class="col-md-2">
+                <label for="inputLossTypeName">Loss Type Name</label>
+            </div>
+            <div class="col-md-3">
+                @Html.TextBoxFor(m => m.LossTypeName)<br />
+                @Html.ValidationMessageFor(m => m.LossTypeName)<br />
+                @*<input type="text" id="inputLossTypeName" placeholder="" name="txtName"/>*@
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="clearfix igr col-md-12">
+            <div class="col-md-2">
+                <label for="inputLossTypeDesc">Loss Type Description</label>
+            </div>
+            <div class="col-md-3">
+                @Html.TextBoxFor(m => m.LossTypeDescription)
+                @*<input type="text" id="inputLossTypeDesc" placeholder="" name="txtDesc"/>*@
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="clearfix igr col-md-12">
+           <button type="submit" class="btn btn-primary btn-large">Update</button>
+           @Html.ActionLink("Cancel", "Index", null, new { @class = "btn btn-primary btn-large" })
+        </div>
+    </div>
+    </form>
+</div>
+
+<script type="text/javascript">
+    function onclickcancel() {
+        $('#losstypeform')[0].reset();
+    }
+</script>

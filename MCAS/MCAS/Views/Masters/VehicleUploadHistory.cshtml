@@ -1,0 +1,271 @@
+﻿@using MCAS.Web.Objects.CommonHelper
+@model MCAS.Web.Objects.MastersHelper.VehicleUploadViewModel
+@{
+    Layout = null;
+    SecurityPermissions myPemissions = (SecurityPermissions)ViewData["UserPermissions"];
+
+    var vType = "";
+    if (Model.UploadType == "VEH")
+    {
+        vType = "Vehicle Listing";
+    }
+    else
+    {
+        vType = "Bus Captain";
+    }
+    System.Resources.ResourceManager PageResource = (new MCAS.Web.Objects.MastersHelper.TransactionModel()).GetResourceManager(Model.Resource);
+}
+<div class="row">
+    <div class="VechileListAllDialogue" style="overflow: hidden;">
+    </div>
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+        <div class="panel panel-info">
+            <div class="panel-heading clearfix">
+                <i class="icon-check-sign"></i>
+                <h3 class="panel-title">
+                    @PageResource.GetString("Enquiryon") @vType @PageResource.GetString("Upload")</h3>
+            </div>
+            <div class="panel-body">
+                @using (Html.BeginForm("VehicleUploadHistory", "Masters", FormMethod.Post, new { role = "form", @class = "form-horizontal", id = "VehicleUploadHistoryForm", name = "VehicleUploadHistoryForm" }))
+                {                    
+                    @Html.ValidationSummary(true)
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <div class="form-group">
+                                <label class="col-sm-4" for="Uploadrefno">@PageResource.GetString("UploadFileRefNo")</label>
+                                @Html.HiddenFor(m => m.UploadType)
+                                <div class="col-sm-7">
+                                    @Html.TextBoxFor(m => m.UploadFileRefNo, new { id = "Uploadrefno", name = "Uploadrefno", @class = "form-control", @len = "50" })
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="form-group">
+                                <label class="col-sm-4" for="Uploadstatus">
+                                    @PageResource.GetString("Status")</label>
+                                <div class="col-sm-7">
+                                    @Html.DropDownListFor(m => m.Status, new SelectList(Model.ListUploadstatus, "Id", "Text", "Select"), new { id = "Uploadstatus", name = "Uploadstatus", @class = "col-lg-12 form-control" })
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <div class="form-group">
+                                <label class="col-sm-4" for="TACIPBUS">@PageResource.GetString("UploadedDate")</label>
+                                <div class="col-sm-7">
+                                    @*@Html.TextBoxFor(m => m.UploadFromDate, new { id = "UploadFromDate", name = "UploadFromDate", @class = "form-control datepicker" })*@
+                                    @Html.TextBoxFor(m => m.UploadFromDate, new { id = "UploadFromDate", @class = "form-control datepicker", maxlength = 10 })
+                                    @*@Html.ValidationMessageFor(m => m.UploadFromDate)*@
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="form-group">
+                                <label class="col-sm-4" for="UploadToDate">@PageResource.GetString("PROCESSED_DATE")</label>
+                                <div class="col-sm-7">
+                                    @*@Html.TextBoxFor(m => m.UploadToDate, new { id = "UploadToDate", name = "UploadToDate", @class = "form-control datepicker" })*@
+                                    @Html.TextBoxFor(m => m.UploadToDate, new { id = "UploadToDate", @class = "form-control datepicker", maxlength = 10 })
+                                    @*@Html.ValidationMessageFor(m => m.UploadToDate)*@
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="clearfix igr text-center">
+                            <div class="form-group">
+                                @if (@myPemissions.Read)
+                                {
+                                    <a class="btn btn-info" id="btnClear">@PageResource.GetString("Clear")</a>
+                                    <button type="submit" class="btn btn-info" id="btnSearch">
+                                        @PageResource.GetString("Search")</button>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+<div class="panel-body">
+    <div class="row">
+        <div class="col-lg-12 text-center">
+            <h4 class="text-info">
+                @PageResource.GetString("SearchResults")</h4>
+            <hr />
+        </div>
+        <div class="col-lg-12">
+            <div class="table-responsive">
+                <div class="row-fluid">
+                    <div class="dataTables_wrapper" id="Diary_wrapper" role="grid">
+                        <table id="tableDiarySrcUpload" cellspacing="0" class="table table-striped table-hover display">
+                            <thead>
+                                <tr>
+                                    <th style="width: 10%;padding-left:9px">
+                                        @PageResource.GetString("UploadFileRefNo")
+                                    </th>
+                                    <th style="width: 20%;padding-left:9px">
+                                         @PageResource.GetString("UploadedDateTIme")
+                                    </th>
+                                    <th style="width: 10%;padding-left:9px">
+                                        @PageResource.GetString("TotalRecords")
+                                    </th>
+                                    <th style="width: 10%;padding-left:9px">
+                                        @PageResource.GetString("SuccessRecords")
+                                    </th>
+                                    <th style="width: 10%;padding-left:9px">
+                                        @PageResource.GetString("FailedRecords")
+                                    </th>
+                                    <th style="width: 10%;padding-left:9px">
+                                        @PageResource.GetString("Statu")
+                                    </th>
+                                    <th style="width: 5%;">
+                                        @PageResource.GetString("LOGFile")
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @{
+                                   
+
+                                    foreach (var item in Model.ListVehicleUplaod)
+                                    { 
+                                    <tr>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.UploadFileRefNo)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.UploadedDate)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.TotalRecords)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.UplodedSuccess)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.UploadedFailed)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Status)
+                                        </td>
+                                        <td>
+                                            @if (item.UploadedFailed != null && item.UploadedFailed > 0)
+                                            {
+                                                @Html.ActionLink(@PageResource.GetString("Download"), "FileDownLoader", "Masters", new { fileRefNo = item.UploadFileRefNo }, new { target = "_blank", @class = "btn btn-xs btn-info" })
+                                            }
+                                        </td>
+                                    </tr>
+                           
+                                    }
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    var Tname = {
+        "UploadFromDate": function () {
+            return "Upload From Date"
+        },
+        "UploadToDate": function () {
+            return "Upload To Date"
+        }
+    };
+
+    $("#btnClear").click(function () {
+        $("input[type=text]").val("");
+        $('select option:first-child').attr("selected", "selected");
+
+    });
+    var do_on_load = function () {
+        if ($("#UploadFromDate").val() != "") {
+            var VUploadFromDate = $("#UploadFromDate").val();
+            var arr = VUploadFromDate.split('/');
+            VUploadFromDate = VUploadFromDate == "" ? "" : arr[1] + "/" + arr[0] + "/" + arr[2].substring(0, 4);
+            $("#UploadFromDate").val(VUploadFromDate);
+        }
+
+        if ($("#UploadToDate").val() != "") {
+            var arr1 = $("#UploadToDate").val().split('/');
+            VUploadToDate = $("#UploadToDate").val() == "" ? "" : arr1[1] + "/" + arr1[0] + "/" + arr1[2].substring(0, 4);
+            $("#UploadToDate").val(VUploadToDate);
+        }
+
+
+        $.culture = Globalize.culture("en-GB");
+        $.validator.methods.date = function (a, b) {
+            return this.optional(b) || Globalize.parseDate(a, "dd/MM/yyyy", "en-GB") || Globalize.parseDate(a, "yyyy-mm-dd")
+        };
+
+        $(".datepicker").datepicker({
+            dateFormat: "dd/mm/yy",
+            showStatus: true,
+            showWeeks: true,
+            currentText: 'Now',
+            autoSize: true,
+            gotoCurrent: true,
+            showAnim: 'blind',
+            highlightWeek: true,
+            changeMonth: !0,
+            changeYear: !0,
+            yearRange: "1951:2050",
+            onSelect: function (a) {
+                $(this).valid()
+            }
+        });
+        $("#querysearch").keypress(function () {
+            $("#" + this.id).val();
+            var a = event.type,
+        a = a.which ? a.which : event.keyCode;
+            return 13 == a ? !1 : !0
+        });
+
+        $("#UploadFromDate,#UploadToDate").change(function (event) {
+            var errMessage = "";
+            var dob = $(this).val();
+            if (dob != "") {
+                //var pattern = /^([0-9]{2})\/([0-9]{2})\/([0-9]{4})$/;
+                var pattern=/^(0[1-9]|[12][0-9]|3[01])[- /.](0[1-9]|1[012])[- /.](19|20)\d\d$/;
+                if (!pattern.test(dob)) {
+                    errMessage += Tname[this.id]() + " must be in 'dd/mm/yyyy' format.";
+                    alert(errMessage);
+                    $(this).val("");
+                    event.preventDefault();
+                    return false;
+                }
+            }
+        });
+
+        var table = $('#tableDiarySrcUpload').dataTable({
+            "pagingType": "full_numbers",
+            "oLanguage": {
+                "sSearch": '@MCAS.Web.Objects.Resources.Common.Common.Search',
+                "sInfo": "@MCAS.Web.Objects.Resources.Common.Common.Showing _START_ @MCAS.Web.Objects.Resources.Common.Common.to _END_ @MCAS.Web.Objects.Resources.Common.Common.of _TOTAL_ @MCAS.Web.Objects.Resources.Common.Common.entries",
+                "sLengthMenu": "@MCAS.Web.Objects.Resources.Common.Common.Show  _MENU_ @MCAS.Web.Objects.Resources.Common.Common.entries",
+                "sEmptyTable": "@MCAS.Web.Objects.Resources.Common.Common.sEmptyTable",
+                "sInfoEmpty": "@MCAS.Web.Objects.Resources.Common.Common.sInfoEmpty",
+                "sProcessing": "@MCAS.Web.Objects.Resources.Common.Common.sProcessing",
+                "oPaginate": {
+                    "sNext": '@MCAS.Web.Objects.Resources.Common.Common.Next',
+                    "sLast": '@MCAS.Web.Objects.Resources.Common.Common.Last',
+                    "sFirst": '@MCAS.Web.Objects.Resources.Common.Common.First',
+                    "sPrevious": '@MCAS.Web.Objects.Resources.Common.Common.Previous'
+                }
+            },
+            "order": [[0, "desc"]],
+            "filter": false,
+            "bStateSave": true,
+            "iDisplayLength": 10,
+            "aLengthMenu": [[10, 20, 25, 50, 100], [10, 20, 25, 50, 100]]
+
+
+        });
+    };
+    $(document).ready(do_on_load);
+</script>

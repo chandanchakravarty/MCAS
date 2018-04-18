@@ -1,0 +1,284 @@
+﻿@model MCAS.Web.Objects.MastersHelper.CommonMasterModel
+@using MCAS.Web.Objects.CommonHelper
+@using MCAS.Globalisation;
+@{
+    ViewBag.Title = "CommonMasterEditor";
+    Layout = "~/Views/Shared/_SystemAdminLayout.cshtml";
+    var mMCASQueryString = Html.MCASQueryString(Request.QueryString);
+    var pageMode = mMCASQueryString["pageMode"] == null ? "" : Convert.ToString(mMCASQueryString["pageMode"]);
+    var uid = mMCASQueryString["uid"] == null ? "" : Convert.ToString(mMCASQueryString["uid"]);
+    var btndisplay = pageMode != "View" ? "inline" : "none";
+    SecurityPermissions myPemissions = (SecurityPermissions)ViewData["UserPermissions"];
+    System.Resources.ResourceManager PageResource = (new MCAS.Web.Objects.MastersHelper.TransactionModel()).GetResourceManager(Model.Resource);
+    string isEncryptedParams = System.Configuration.ConfigurationManager.AppSettings["EncryptQueryParams"].ToUpper();
+}
+<style>
+.control-label
+{
+    text-align: left;
+    font-size:  13px !important;
+    }
+</style>
+
+<script type="text/javascript" src="@Url.Content("~/Scripts/jquery-2.1.0.min.js")"></script>
+
+<!-- Include Twitter Bootstrap and jQuery: -->
+<link rel="stylesheet" href="@Url.Content("~/Content/bootstrap.min.css")" type="text/css"/>
+@*<script type="text/javascript" src="@Url.Content("~/Scripts/bootstrap.min.js")"></script>*@
+ 
+<link rel="stylesheet" href="@Url.Content("~/Content/main.css")" type="text/css"/>
+
+<!-- Include the plugin's CSS and JS: -->
+<link rel="stylesheet" href="@Url.Content("~/Content/bootstrap-multiselect.css")" type="text/css"/>
+<script type="text/javascript" src="@Url.Content("~/Scripts/bootstrap-multiselect.js")"></script>
+
+<div class="dashboard-wrapper">
+    <div class="container">
+        <div class="row page-title">
+            <div class="col-lg-12">
+                <h2>
+                    @MCAS.Web.Objects.Resources.Common.Common.SystemAdmin</h2>
+                <ul class="breadcrumb">
+                    <li>@PageResource.GetString("CommonMasterDetails")</li>
+                </ul>
+            </div>
+        </div>
+        <hr />
+        <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <div class="panel panel-info">
+                    <div class="panel-heading clearfix">
+                        <i class="icon-check-sign"></i>
+                        <h3 class="panel-title">@PageResource.GetString("CommonMasterDetails")</h3>
+                    </div>
+                    <div style="color: Red; font-weight: bold;" class="has-error" id="error">
+                        <p align="center">
+                            @if (TempData["result"] != null)
+                            {
+                                @TempData["result"]
+                            }
+                        </p>
+                    </div>
+                    @{
+                        object routes = new { pageMode = @pageMode, uid = @uid };
+                        if (isEncryptedParams.ToUpper() == "YES")
+                        {
+                            string res = RouteEncryptDecrypt.getRouteString(routes);
+                            res = RouteEncryptDecrypt.Encrypt(res);
+                            routes = new { Q = res };
+                        }
+                    }
+                    <div class="panel-body">
+                        @using (Html.BeginForm("CommonMasterEditor", "Masters", routes, FormMethod.Post, new { role = "form", @class = "form-horizontal", id = "CommonMasterEditorForm", name = "CommonMasterEditorForm" }))
+                        {
+                            @Html.ValidationSummary(true)
+                            @Html.HiddenFor(m => m.LookupID)
+                            @Html.HiddenFor(m => m.idlist) 
+                            
+                            <div class="clearfix igr col-md-6">
+                                <div class="form-group">
+                                    <label class="col-md-6" style="font-size:  13px !important;">
+                                        @PageResource.GetString("Category") &nbsp;<span class="text-danger">*</span>
+                                    </label>
+                                    <div class="col-md-6">
+                                        @Html.DropDownListFor(m => m.LookUpCategory, new SelectList(Model.CommonMasterCategoryList, "LookupCategoryCode", "LookupCategoryDesc", "0"), new { @class = "form-control" })
+                                        @Html.ValidationMessageFor(m => m.LookUpCategory)
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="clearfix igr col-md-6" id="OrganisationDiv">
+                                <div class="form-group">
+                                    <label class="col-md-6"  style="font-size:  13px !important;padding: 0px;">
+                                        @PageResource.GetString("Organisation") &nbsp;<span class="text-danger">*</span>
+                                    </label>
+                                    <div class="col-md-6" style="overflow:auto;width: 250px;height: 180px;;padding: 0px;">
+                                     @Html.DropDownListFor(m => m.OrgCategory, new SelectList(Model.OrgCatTypelist, "OrgType", "Description", "0"), new { @class = "multiselect form-control", multiple = "multiple" })
+                                     @Html.ValidationMessageFor(m => m.OrgCategory)
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="clearfix igr col-md-6">
+                                <div class="form-group">
+                                    <label class="col-md-6" style="font-size:  13px !important;">
+                                        @PageResource.GetString("Lookupdesc") &nbsp;<span class="text-danger">*</span>
+                                    </label>
+                                    <div class="col-md-6">
+                                        @Html.TextBoxFor(m => m.Lookupdesc, new { @maxlength = 80, @class = "col-lg-12 form-control" })<br />
+                                        @Html.ValidationMessageFor(m => m.Lookupdesc)
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="clearfix igr col-md-6">
+                                <div class="form-group">
+                                    <label class="col-md-6" style="font-size:  13px !important;">
+                                       @PageResource.GetString("Lookupvalue") &nbsp;<span class="text-danger">*</span>
+                                    </label>
+                                    <div class="col-md-6">
+                                        @Html.TextBoxFor(m => m.Lookupvalue, new { @maxlength = 20, @class = "col-lg-12 form-control" })<br />
+                                        @Html.ValidationMessageFor(m => m.Lookupvalue)
+                                    </div>
+                                </div>
+                            </div>
+                            
+                             <div class="clearfix igr col-md-6">
+                                <div class="form-group">
+                                    <label class="col-md-6" style="font-size:  13px !important;">
+                                       @PageResource.GetString("IsActive")
+                                    </label>
+                                    <div class="col-md-6">
+                                         @Html.DropDownListFor(m => m.Status, new SelectList(Model.Statuslist, "Lookup_value", "Lookup_desc", "Active"), new { id = "ddlStatus", @class = "col-lg-12 form-control" })<br />
+                                    </div>
+                                </div>
+                            </div>
+                            
+                           @* <div class="row top-buffer">
+                                <div class="clearfix igr col-md-12">
+                                    <div class="col-md-3">
+                                        <label>@PageResource.GetString("Category") &nbsp;<span class="text-danger">*</span></label>
+                                    </div>
+                                    <div class="col-md-3">
+                                        @Html.DropDownListFor(m => m.LookUpCategory, new SelectList(Model.CommonMasterCategoryList, "LookupCategoryCode", "LookupCategoryDesc", "0"), new { @class = "form-control" })
+                                        @Html.ValidationMessageFor(m => m.LookUpCategory)
+                                    </div>
+                                    <div class="col-md-3">
+                                        <label>@PageResource.GetString("Lookupdesc") &nbsp;<span class="text-danger">*</span>
+                                        </label>
+                                    </div>
+                                    <div class="col-md-3">
+                                        @Html.TextBoxFor(m => m.Lookupdesc, new { @maxlength = 80, @class = "col-lg-12 form-control" })<br />
+                                        @Html.ValidationMessageFor(m => m.Lookupdesc)
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row top-buffer">
+                                <div class="clearfix igr col-md-12">
+                                    <div class="col-md-3">
+                                        <label>@PageResource.GetString("Lookupvalue") &nbsp;<span class="text-danger">*</span></label>
+                                    </div>
+                                    <div class="col-md-3">
+                                        @Html.TextBoxFor(m => m.Lookupvalue, new { @maxlength = 20, @class = "col-lg-12 form-control" })<br />
+                                        @Html.ValidationMessageFor(m => m.Lookupvalue)
+                                    </div>
+                                    <div class="col-md-3">
+                                        <label>@PageResource.GetString("IsActive")
+                                        </label>
+                                    </div>
+                                    <div class="col-md-3">
+                                        @Html.DropDownListFor(m => m.Status, new SelectList(Model.Statuslist, "Lookup_value", "Lookup_desc", "Active"), new { id = "ddlStatus", @class = "col-lg-12 form-control" })<br />
+                                    </div>
+                                </div>
+                            </div>    *@
+                            <div class="row top-buffer">
+                                <div class="clearfix igr col-md-12 text-center">
+                                    @if (@myPemissions.Write)
+                                    {
+                                        <button id="btnSave" style="display:@btndisplay" class="btn btn-info">
+                                            @PageResource.GetString("Save")</button>
+                                    }
+                                    &nbsp;&nbsp;&nbsp;&nbsp;
+                                    @Html.ActionLink(@PageResource.GetString("Back"), "CommonMasterIndex", null, new { @class = "btn btn-info" })&nbsp;&nbsp;&nbsp;&nbsp;
+                                </div>
+                            </div>
+                            
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="panel">
+            @Html.Partial("~/Views/Shared/_TimeStamp.cshtml", Model)
+        </div>
+    </div>
+</div> 
+<script>
+    $jq2 = jQuery.noConflict();
+</script>
+
+<script type="text/javascript">
+    $jq2(function () {
+        $jq2('#OrgCategory').multiselect({
+            includeSelectAllOption: true
+        });
+
+        $jq2('#btnSave').click(function () {
+            var selected = $jq2("#OrgCategory option:selected");
+            var message = "";
+            selected.each(function () {
+                //                    message += $jq2(this).text() + " " + $jq2(this).val() + "\n";
+                message += $jq2(this).val() + ",";
+            });
+            $jq2("#idlist").val(message);
+        });
+    });  
+    </script> 
+
+<script type="text/javascript">
+    var do_on_load = function () {
+        jQuery(document).on("focus", ":input", function () { jQuery(this).attr("autocomplete", "off") });
+        '@pageMode' == 'View' && jQuery('#CommonMasterEditorForm').find('input, textarea, button, select').attr('disabled', 'disabled');
+
+
+        var showDiv = '@Model.LookupID';
+        //        if (jQuery("#LookUpCategory").val() == "AlertDesc" || jQuery("#LookUpCategory").val() == "TASKTYPE") {
+        if (showDiv != null && showDiv != "") {
+            jQuery('#OrganisationDiv').show();
+
+            $jq2('#OrgCategory').multiselect("uncheckAll");
+            var abs = jQuery('#OrgCategory');
+            var listAssigned = jQuery("#OrgCategory option:selected").length;
+
+
+            if (listAssigned == 0) {
+                if (jQuery("#idlist").val() != null && jQuery("#idlist").val() != undefined && jQuery("#idlist").val() != "") {
+                    var arrOrgIdSelected = $("#idlist").val().split(',');
+
+
+                    if (arrOrgIdSelected != null && arrOrgIdSelected.length > 0) {
+                        for (var iCount = 0; iCount < arrOrgIdSelected.length; iCount++) {
+                            $jq2("#OrgCategory").multiselect("widget").find("input:checkbox[value='" + arrOrgIdSelected[iCount] + "']").attr("checked", "checked");
+                            jQuery("#OrgCategory option[value='" + arrOrgIdSelected[iCount] + "']").attr("selected", 1);
+                            $jq2("#OrgCategory").multiselect("refresh");
+                        }
+                    }
+                }
+            }
+        }
+        //        }
+
+        //        if ('@ViewData["ModelError"]' == "DuplicateError") {
+        //            if (jQuery("#LookUpCategory").val() == "AlertDesc" || jQuery("#LookUpCategory").val() == "TASKTYPE")
+        //            { jQuery('#OrganisationDiv').show(); }
+        //            else { jQuery('#OrganisationDiv').hide(); }
+        //        }
+
+
+        //        jQuery("#LookUpCategory").change(function () {
+        //            jQuery(this).val() == "AlertDesc" || jQuery(this).val() == "TASKTYPE" ? jQuery("#OrganisationDiv").show() : jQuery("#OrganisationDiv").hide()
+        //            jQuery('#OrganisationDiv').val("")
+        //        });
+    }
+    jQuery(document).ready(do_on_load);
+    jQuery(window).bind('page:change', do_on_load);
+
+
+    
+    var lookUpCategory = "";
+    jQuery('#LookUpCategory  option:selected').each(function () {
+        if (jQuery(this).attr("selected", "selected")) {
+            lookUpCategory = "1";
+            return false;
+        }
+    });
+    if (lookUpCategory != "1") {
+        jQuery("#LookUpCategory  option[value='']").attr('selected', true);
+
+    }
+
+</script>
+    
+<script>
+        $ = jQuery.noConflict();
+</script>

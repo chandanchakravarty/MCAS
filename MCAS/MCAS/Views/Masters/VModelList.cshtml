@@ -1,0 +1,278 @@
+﻿@model MCAS.Web.Objects.MastersHelper.VehicleModel
+@using MCAS.Web.Objects.CommonHelper
+@using MCAS.Web.Objects.Resources.Masters;
+@using MCAS.Web.Objects.Resources.Common;
+@using MCAS.Globalisation
+@{
+    //ViewBag.Title = "VModelList";
+    ViewBag.Title = VModelList.Title;
+    var mMCASQueryString = Html.MCASQueryString(Request.QueryString);
+    Layout = "~/Views/Shared/_SystemAdminLayout.cshtml";
+    var pageMode = mMCASQueryString["pageMode"];
+    var btndisplay = "yes";
+    if (pageMode == "View")
+    {
+        btndisplay = "none";
+    }
+
+
+    var VehicleModelCode = Model.ModelCode == null ? null : Model.ModelCode;
+    var dis = TempData["notice"] == "" ? null : VehicleModelCode == null ? "none;" : "Block";
+
+    SecurityPermissions myPemissions = (SecurityPermissions)ViewData["UserPermissions"];
+}
+<script src='@Url.Content("~/Scripts/jquery-2.1.0.min.js")' type="text/javascript"></script>
+<script src='@Url.Content("~/Scripts/jquery.validate.min.js")' type="text/javascript"></script>
+<script src='@Url.Content("~/Scripts/jquery.validate.unobtrusive.min.js")' type="text/javascript"></script>
+<div class="dashboard-wrapper">
+    <div class="container">
+        <div class="row page-title">
+            <div class="col-lg-12">
+                <h2>
+                    @Common.SystemAdmin</h2>
+                <ul class="breadcrumb">
+                    <li>@VModelList.VehicleModelDetails</li>
+                </ul>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <div class="panel panel-info">
+                    <div class="panel-heading clearfix">
+                        <i class="icon-check-sign"></i>
+                        <h3 class="panel-title">
+                            @VModelList.VehicleModelDetails</h3>
+                    </div>
+                    <div style="color: Red; font-weight: bold;" class="has-error" id="error">
+                        <p align="center">
+                            @if (TempData["notice"] != null)
+                            {
+                                @TempData["notice"]
+                            }
+                        </p>
+                    </div>
+                    <div class="panel-body">
+                        <form class="form-horizontal" action='@Url.Action("VModelList", "Masters")' role="form" id="losstypeform" method="post">
+                        @Html.HiddenFor(m => m.TranId)
+                        @Html.ValidationSummary(true)
+                        <div class="row top-buffer">
+                            <div class="clearfix igr col-md-12">
+                                <div class="col-md-2">
+                                    <label for="inputVehicleModelCode">
+                                        @VModelList.VehicleModelCode
+                                    </label>
+                                </div>
+                                <div class="col-md-3">
+                                    @Html.TextBoxFor(m => m.ModelCode, new { id = "ModelCode", @class = "col-lg-12 form-control" })
+                                    @Html.HiddenFor(m => m.ModelCode)
+                                </div>
+                                <div class="col-md-2">
+                                    <label for="inputDepartment">
+                                        @VModelList.VehicleMakeName&nbsp;<span class="text-danger">*</span></label>
+                                </div>
+                                <div class="col-md-3">
+                                    @Html.DropDownListFor(m => m.MakeCode, new SelectList(Model.vehicleMakelist, "MakeCode", "MakeName", ""), new { id = "ddlMake", @class = "col-lg-12 form-control" })
+                                    @Html.ValidationMessageFor(m => m.MakeCode)
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row top-buffer">
+                            <div class="clearfix igr col-md-12">
+                                <div class="col-md-2">
+                                    <label for="inputUserId">
+                                        @VModelList.ModelDescription&nbsp;<span class="text-danger">*</span></label>
+                                </div>
+                                <div class="col-md-3">
+                                    @Html.TextBoxFor(m => m.ModelName, new { id = "ModelName", @maxlength = 50, @class = "col-lg-12 form-control" })
+                                    @Html.ValidationMessageFor(m => m.ModelName)
+                                </div>
+                                <div class="col-md-2">
+                                    <label for="inputDepartment">
+                                        @VModelList.VehicleClassDescription</label>
+                                </div>
+                                <div class="col-md-3">
+                                    @Html.DropDownListFor(m => m.VehicleClassCode, new SelectList(Model.VehicleClasslist, "VehicleClassCode", "VehicleClassDesc", "-1"), new { id = "ddlBody", @class = "col-lg-12 form-control" })<br />
+                                    <br />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row top-buffer">
+                            <div class="clearfix igr col-md-12">
+                                <div class="col-md-2">
+                                    <label for="inputUserId">
+                                        @VModelList.CylinderCapacity&nbsp;<span class="text-danger">*</span>
+                                    </label>
+                                </div>
+                                <div class="col-md-3">
+                                    @Html.TextBoxFor(m => m.CC, new { @id = "CC", @maxlength = 50, @class = "col-lg-12 form-control" })
+                                    @Html.ValidationMessageFor(m => m.CC)
+                                </div>
+                                <div class="col-md-2">
+                                    <label for="inputUserId">
+                                        @VModelList.Tonnage&nbsp;<span class="text-danger">*</span>
+                                    </label>
+                                </div>
+                                <div class="col-md-3">
+                                    @Html.TextBoxFor(m => m.LC, new { @id = "LC", @maxlength = 50, @class = "col-lg-12 form-control" })
+                                    @Html.ValidationMessageFor(m => m.LC)
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row top-buffer">
+                            <div class="clearfix igr col-md-12">
+                                <div class="col-md-2">
+                                    <label for="inputUserId">
+                                        @VModelList.NoofPassenger
+                                    </label>
+                                </div>
+                                <div class="col-md-3">
+                                    @Html.TextBoxFor(m => m.NoOfPassenger, new { @id = "NoOfPassenger", @maxlength = 10, @class = "col-lg-12 form-control" })
+                                </div>
+                                <div class="col-md-2">
+                                    <label for="inputGroupCode">
+                                        @Common.Status&nbsp;<span class="text-danger">*</span>
+                                    </label>
+                                </div>
+                                <div class="col-md-3">
+                                    @Html.DropDownListFor(m => m.Status, new SelectList(Model.Statuslist, "Lookup_value", "Lookup_desc", "Active"), new { @class = "col-lg-12 form-control" })
+                                    @Html.ValidationMessageFor(m => m.Status)<br />
+                                    <br />
+                                    <br />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row top-buffer">
+                        </div>
+                        <div class="row top-buffer">
+                        </div>
+                        <div class="row top-buffer">
+                        </div>
+                        <div class="row">
+                            <div class="clearfix igr col-md-12 text-center">
+                                @if (@myPemissions.Write)
+                                {
+                                    <button id="btnSave" style="display:@btndisplay"   class="btn btn-primary btn-info">
+                                        @Common.Save</button>
+                                }
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                @Html.ActionLink(Common.Back, "VModelIndex", null, new { @class = "btn btn-info" })
+                            </div>
+                        </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="panel">
+            @Html.Partial("~/Views/Shared/_TimeStamp.cshtml", Model)
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+
+
+    $(document).ready(function () {
+        //   loadMakecodeList();
+        //   loadVehicleClass();
+    });
+
+
+    function loadMakecodeList() {
+        $.ajax({
+            url: '@(Url.Action("FillMakeCodeList"))',
+            cache: false,
+            success: function (data) {
+                $("#ddlMake").empty();
+                $.each(data, function (index, optiondata) {
+                    $("#ddlMake").append("<option value='" + optiondata.MakeCode + "'>" + optiondata.MakeName + "</option>");
+                });
+            },
+            error: function (reponse) {
+                alert("error : " + reponse);
+            }
+        });
+    }
+
+    function loadVehicleClass() {
+        $.ajax({
+            url: '@(Url.Action("FillVehicleClassList"))',
+            cache: false,
+            success: function (data) {
+                $("#ddlBody").empty();
+                $.each(data, function (index, optiondata) {
+                    $("#ddlBody").append("<option value='" + optiondata.VehicleClassCode + "'>" + optiondata.VehicleClassDesc + "</option>");
+                });
+            },
+            error: function (reponse) {
+                alert("error : " + reponse);
+            }
+        });
+    }
+
+    if ('@pageMode' == 'View') {
+        $('#losstypeform').find('input, textarea, button, select').attr('disabled', 'disabled');
+    }
+
+</script>
+<script type="text/javascript">
+    $(document).ready(function () {
+
+        $(document).on("focus", ":input", function () {
+            $(this).attr("autocomplete", "off")
+        });
+        $("#ModelCode").prop("readonly", !0);
+
+        $("#LC,#CC,#NoOfPassenger").keydown(function (event) {
+            if (event.shiftKey) {
+                event.preventDefault();
+            }
+            if (event.keyCode == 46 || event.keyCode == 8) {
+            }
+            else {
+                if (event.keyCode < 95) {
+                    if (event.keyCode < 48 || event.keyCode > 57) {
+                        event.preventDefault();
+                    }
+                }
+                else {
+                    if (event.keyCode < 96 || event.keyCode > 105) {
+                        event.preventDefault();
+                    }
+                }
+            }
+        });
+
+        //        $("#ModelName").blur(function (event) {
+        //            var vehiclemodel = $.trim($("#ModelName").val());
+        //            $.ajax({
+        //                type: "POST",
+        //                url: '@Url.Action("CheckVehicleModelName", "Masters")',
+        //                data: {
+        //                    VModel: vehiclemodel,
+        //                    Vcode: '@VehicleModelCode'
+        //                },
+        //                success: function (a) {
+        //                    if (a == true && (getQueryVariable("pageMode") != "Edit")) {
+        //                        alert("Duplicate vehicle model name.");
+        //                        $("#btnSave").attr("disabled", "disabled");
+        //                    }
+        //                    else if (($("#inputBusCaptainCode").val() != '@VehicleModelCode') && a == true) {
+        //                        alert("Duplicate vehicle model name.");
+        //                        $("#btnSave").attr("disabled", "disabled");
+        //                    }
+        //                    else {
+        //                        $("#btnSave").removeAttr("disabled");
+        //                    }
+
+        //                }
+        //            });
+        //        });
+
+        function getQueryVariable(a) {
+            for (var e = "@MenuListItem.ClaimTabs.GetQueryStringVal()".replace(/amp;/ig, "").split("&"), d = 0; d < e.length; d++) {
+                var b = e[d].split("=");
+                if (b[0] == a) return b[1]
+            }
+        };
+    });
+</script>

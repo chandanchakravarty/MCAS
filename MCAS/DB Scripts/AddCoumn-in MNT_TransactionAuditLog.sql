@@ -1,0 +1,22 @@
+IF NOT EXISTS(SELECT TOP 1 1 FROM INFORMATION_SCHEMA.COLUMNS WHERE [TABLE_NAME] = 'MNT_TransactionAuditLog' AND [COLUMN_NAME] = 'EntityCode')
+BEGIN
+ALTER TABLE [dbo].[MNT_TransactionAuditLog] ADD EntityCode nvarchar(20)
+END
+
+IF NOT EXISTS(SELECT TOP 1 1 FROM INFORMATION_SCHEMA.COLUMNS WHERE [TABLE_NAME] = 'MNT_TransactionAuditLog' AND [COLUMN_NAME] = 'EntityType')
+BEGIN
+ALTER TABLE [dbo].[MNT_TransactionAuditLog] ADD EntityType nvarchar(20)
+END
+
+
+IF NOT EXISTS(SELECT TOP 1 1 FROM INFORMATION_SCHEMA.COLUMNS WHERE [TABLE_NAME] = 'MNT_TransactionAuditLog' AND [COLUMN_NAME] = 'EntityTypeId')
+BEGIN
+ALTER TABLE [dbo].[MNT_TransactionAuditLog] ADD EntityTypeId nvarchar(20)
+END
+
+
+
+IF NOT EXISTS(SELECT TOP 1 1 FROM INFORMATION_SCHEMA.COLUMNS WHERE [TABLE_NAME] = 'MNT_TransactionAuditLog' AND [COLUMN_NAME] = 'AccidentId')
+BEGIN
+ALTER TABLE [dbo].[MNT_TransactionAuditLog] ADD AccidentId int null
+END

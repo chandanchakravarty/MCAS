@@ -1,0 +1,1 @@
+update MNT_Lookups set Lookupdesc='Insurance Excess',Description='InsuranceExcess' where Category='Trancomponent' and Lookupvalue='IEF' and DisplayOrder=18 

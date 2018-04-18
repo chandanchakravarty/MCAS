@@ -1,0 +1,1 @@
+INSERT [dbo].[MNT_SYS_PARAMS] ([FromUserEmailId], [EmailProfile], [EmailText], [EmailSubject]) VALUES (N'nishantkumar.sharma@ebix.com', N'MCAS', N'You have been reassigned a new task...', N'Test Mail')

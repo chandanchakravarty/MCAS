@@ -1,0 +1,4 @@
+update CLM_TYPE_DETAIL 
+set IS_ACTIVE='N'
+where DETAIL_TYPE_ID in (763,764,707)
+

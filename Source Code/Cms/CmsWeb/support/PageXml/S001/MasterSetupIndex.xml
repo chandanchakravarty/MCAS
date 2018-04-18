@@ -1,0 +1,174 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Root>
+
+  <PageCalledFor TypeID="">
+
+    <HeaderString>
+      <value Culture="en-US">Master Detail</value>
+      <value Culture="zh-SG">Master Detail</value>
+      <value Culture="pt-BR">mestre detalhe</value>
+    </HeaderString>
+
+    <SearchColumnHeadings>
+      <value Culture="en-US">Code^Name^Address^GST Reg No</value>
+      <value Culture="zh-SG">Code^Name^Address^GST Reg No</value>
+      <value Culture="pt-BR">código^nome^endereço^GST Número Reg</value>
+    </SearchColumnHeadings>
+
+    <DisplayColumnHeadings>
+      <value Culture="en-US">Code^Name^Address^GST Reg No</value>
+      <value Culture="zh-SG">Code^Name^Address^GST Reg No</value>
+      <value Culture="pt-BR">código^nome^endereço^GST Número Reg</value>
+    </DisplayColumnHeadings>
+
+    <SearchMessage>
+      <value Culture="en-US">Please select the Search Option, enter Search Criteria, and click on the Search button^Please select the Search Option, enter Search Criteria, and click on the Search button</value>
+      <value Culture="zh-SG">Please select the Search Option, enter Search Criteria, and click on the Search button^Please select the Search Option, enter Search Criteria, and click on the Search button</value>
+      <value Culture="pt-BR">Please select the Search Option, enter Search Criteria, and click on the Search button^Please select the Search Option, enter Search Criteria, and click on the Search button</value>
+    </SearchMessage>
+
+    <FilterLabel>
+      <value Culture="en-US">Include Inactive</value>
+      <value Culture="zh-SG">Include Inactive</value>
+      <value Culture="pt-BR">Include Inactive</value>
+    </FilterLabel>
+
+    <SearchColumnNames>
+      <value>TYPE_CODE^TYPE_NAME^ADDRESS^GST_REG_NO</value>
+    </SearchColumnNames>
+
+    <SearchColumnType>
+      <value>T^T^T^T</value>
+    </SearchColumnType>
+
+    <DisplayColumnNumbers>
+      <value>1^2^3^4</value>
+    </DisplayColumnNumbers>
+
+    <DisplayColumnNames>
+      <value>TYPE_CODE^TYPE_NAME^ADDRESS^GST_REG_NO</value>
+    </DisplayColumnNames>
+
+    <DisplayTextLength>
+      <value>20^20^20^20</value>
+    </DisplayTextLength>
+
+    <DisplayColumnPercent>
+      <value>20^20^20^20</value>
+    </DisplayColumnPercent>
+
+    <FetchColumns>
+      <value>1^2^3^4^5^6</value>
+    </FetchColumns>
+
+    <ColumnTypes>
+      <value>B^B^B^B</value>
+    </ColumnTypes>
+
+    <FilterColumnName>
+      <value>IS_ACTIVE</value>
+    </FilterColumnName>
+
+    <SelectClause>
+      <value>TYPE_UNIQUE_ID,TYPE_ID,TYPE_CODE,TYPE_NAME,ADDRESS,GST_REG_NO</value>
+    </SelectClause>
+
+    <FromClause>
+      <value>MNT_MASTER_DETAIL</value>
+    </FromClause>
+
+    <PrimaryColumns>
+      <value>1</value>
+    </PrimaryColumns>
+
+    <PrimaryColumnsName>
+      <value>TYPE_UNIQUE_ID</value>
+    </PrimaryColumnsName>
+
+    <OrderByClause>
+      <value>TYPE_UNIQUE_ID asc</value>
+    </OrderByClause>
+
+    <AllowDBLClick>
+      <value>true</value>
+    </AllowDBLClick>
+
+    <ExtraButtons>
+      <value>1^Add New^0^addRecord</value>
+    </ExtraButtons>
+
+    <RequireQuery>
+      <value>Y</value>
+    </RequireQuery>
+
+    <QueryStringColumns>
+      <value>TYPE_UNIQUE_ID</value>
+    </QueryStringColumns>
+
+    <DefaultSearch>
+      <value>Y</value>
+    </DefaultSearch>
+
+    <FilterValue>
+      <value>Y</value>
+    </FilterValue>
+
+  </PageCalledFor>
+
+
+  <PageCalledFor TypeID="1">
+
+    <WhereClause>
+      <value>TYPE_ID = '1'</value>
+    </WhereClause>
+
+    <HeaderString>
+      <value Culture="en-US">Consultanat Master</value>
+      <value Culture="zh-SG">Consultanat Master</value>
+      <value Culture="pt-BR">Consultanat Mestre</value>
+    </HeaderString>
+
+  </PageCalledFor>
+
+  <PageCalledFor TypeID="2">
+
+    <WhereClause>
+      <value>TYPE_ID = '2'</value>
+    </WhereClause>
+
+    <HeaderString>
+      <value Culture="en-US">Surveyor Master</value>
+      <value Culture="zh-SG">Surveyor Master</value>
+      <value Culture="pt-BR">Mestre Surveyor</value>
+    </HeaderString>
+
+  </PageCalledFor>
+
+  <PageCalledFor TypeID="3">
+
+    <WhereClause>
+      <value>TYPE_ID = '3'</value>
+    </WhereClause>
+
+    <HeaderString>
+      <value Culture="en-US">WorkShop Master Detail</value>
+      <value Culture="zh-SG">WorkShop Master Detail</value>
+      <value Culture="pt-BR">WorkShop mestre detalhe</value>
+    </HeaderString>
+
+  </PageCalledFor>
+
+  <PageCalledFor TypeID="4">
+
+    <WhereClause>
+      <value>TYPE_ID = '4'</value>
+    </WhereClause>
+
+    <HeaderString>
+      <value Culture="en-US">Solicitor Master Detail</value>
+      <value Culture="zh-SG">Solicitor Master Detail</value>
+      <value Culture="pt-BR">Solicitor mestre detalhe</value>
+    </HeaderString>
+
+  </PageCalledFor>
+</Root>

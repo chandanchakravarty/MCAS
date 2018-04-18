@@ -1,0 +1,151 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Root>
+  <PageTitle>
+    <Culture Code="en-US"></Culture>
+    <Culture Code="zh-SG"></Culture>
+  </PageTitle>
+ 
+  <PageElement name="txtDEPT_NAME" type="TextBox" Desc=""
+			IsMandatory="Yes"
+			IsReadOnly="No"
+			IsDisabled="No"
+			IsDisplay="Yes"
+			MaxLength="200"
+			MaxSize=""
+			IsFormatingRequired="No" JsFunctionToFormat="" OnClickJSFunction=""
+			OnChangeJSFunction="" >
+    <rev Enabled="No" ExpKey="" />
+	<Culture Code="en-US" Desc="set Label and Message for English language">
+      <Caption>Department Name</Caption>
+      <rfvMessage>Please enter the Department Name.</rfvMessage>
+      <DefaultValue></DefaultValue>
+      <revExpMessage></revExpMessage>
+    </Culture>
+    <Culture Code="zh-SG" Desc="set Label and Message for Singapore language">
+      <Caption>Department Name</Caption>
+      <rfvMessage>Please enter the Department Name.</rfvMessage>
+      <DefaultValue></DefaultValue>
+      <revExpMessage></revExpMessage>
+    </Culture>
+  </PageElement>
+
+  <PageElement name="cmbDEPT_STATE" type="DDL" Desc=""
+			IsMandatory="No"
+			IsReadOnly="No"
+			IsDisabled="Yes"
+			IsDisplay="Yes"
+			MaxLength=""
+			MaxSize=""
+			IsFormatingRequired="No" JsFunctionToFormat="" OnClickJSFunction=""
+			OnChangeJSFunction="" >
+    <rev Enabled="No" ExpKey="" />
+	<Culture Code="en-US" Desc="set Label and Message for English language">
+      <Caption>Department State</Caption>
+      <rfvMessage></rfvMessage>
+      <DefaultValue></DefaultValue>
+      <revExpMessage></revExpMessage>
+    </Culture>
+    <Culture Code="zh-SG" Desc="set Label and Message for Singapore language">
+      <Caption>Department State</Caption>
+      <rfvMessage></rfvMessage>
+      <DefaultValue></DefaultValue>
+      <revExpMessage></revExpMessage>
+    </Culture>
+  </PageElement>
+  
+  <PageElement name="txtDEPT_PHONE" type="TextBox" Desc=""
+        IsMandatory="No"
+        IsReadOnly="No"
+        IsDisabled="No"
+        IsDisplay="Yes"
+        MaxLength="12"
+			  MaxSize=""
+			IsFormatingRequired="No" JsFunctionToFormat="" OnClickJSFunction=""
+			OnChangeJSFunction="" >
+  <rev Enabled="Yes" ExpKey="^((65-?)|(65))?((((\d{8}) ?)|(\d{4}-\d{4})))$" />
+  <Culture Code="en-US" Desc="set Label and Message for English language">
+    <Caption>Department Phone</Caption>
+    <rfvMessage></rfvMessage>
+    <DefaultValue></DefaultValue>
+    <revExpMessage>Phone number should be either in '##-########' or '####-####' format. </revExpMessage>
+  </Culture>
+  <Culture Code="zh-SG" Desc="set Label and Message for Singapore language">
+    <Caption>Department Phone</Caption>
+    <rfvMessage></rfvMessage>
+    <DefaultValue></DefaultValue>
+    <revExpMessage>Phone number should be either in '##-########' or '####-####' format. </revExpMessage>
+  </Culture>
+  </PageElement>
+
+  <PageElement name="txtDEPT_FAX" type="TextBox" Desc=""
+        IsMandatory="No"
+        IsReadOnly="No"
+        IsDisabled="No"
+        IsDisplay="Yes"
+        MaxLength="12"
+			  MaxSize=""
+			IsFormatingRequired="No" JsFunctionToFormat="" OnClickJSFunction=""
+			OnChangeJSFunction="" >
+    <rev Enabled="Yes" ExpKey="^((65-?)|(65))?((((\d{8}) ?)|(\d{4}-\d{4})))$" />
+    <Culture Code="en-US" Desc="set Label and Message for English language">
+      <Caption>Department Fax</Caption>
+      <rfvMessage></rfvMessage>
+      <DefaultValue></DefaultValue>
+      <revExpMessage>Fax number should be either in '##-########' or '####-####' format. </revExpMessage>
+    </Culture>
+    <Culture Code="zh-SG" Desc="set Label and Message for Singapore language">
+      <Caption>Department Fax</Caption>
+      <rfvMessage></rfvMessage>
+      <DefaultValue></DefaultValue>
+      <revExpMessage>Fax number should be either in '##-########' or '####-####' format. </revExpMessage>
+    </Culture>
+  </PageElement>
+
+  <PageElement name="txtDEPT_ZIP" type="TextBox" Desc=""
+        IsMandatory="Yes"
+        IsReadOnly="No"
+        IsDisabled="No"
+        IsDisplay="Yes"
+        MaxLength="6"
+       MaxSize=""
+       IsFormatingRequired="No" JsFunctionToFormat="" OnClickJSFunction=""
+       OnChangeJSFunction="" >
+      <rev Enabled="Yes" ExpKey="^[0-9]{6}" />
+    <Culture Code="en-US" Desc="set Label and Message for English language">
+      <Caption>Department Zip</Caption>
+      <rfvMessage>Please enter Zip Code.</rfvMessage>
+      <DefaultValue></DefaultValue>
+      <revExpMessage>Zip code should be either in '######' format. </revExpMessage>
+    </Culture>
+    <Culture Code="zh-SG" Desc="set Label and Message for Singapore language">
+      <Caption>Department Zip</Caption>
+      <rfvMessage>Please enter Zip Code.</rfvMessage>
+      <DefaultValue></DefaultValue>
+      <revExpMessage>Zip code should be either in '######' format. </revExpMessage>
+    </Culture>
+  </PageElement>
+  
+  <PageElement name="cmbDEPT_COUNTRY" type="DDL" Desc=""
+      IsMandatory="No"
+      IsReadOnly="No"
+      IsDisabled="No"
+      IsDisplay="Yes"
+      MaxLength=""
+      MaxSize=""
+      IsFormatingRequired="No" JsFunctionToFormat="" OnClickJSFunction=""
+      OnChangeJSFunction="" >
+    <Culture Code="en-US" Desc="set Label and Message for English language">
+      <Caption>Department Country</Caption>
+      <DefaultValue>7</DefaultValue>
+    </Culture>
+    <Culture Code="zh-SG" Desc="set Label and Message for Singapore language">
+      <Caption>Department Country</Caption>
+      <DefaultValue>7</DefaultValue>
+    </Culture>
+  </PageElement>
+  
+  <PageElement name="hlkZipLookup" type="HyperLink" Desc="" IsMandatory="No" IsReadOnly="No" IsDisabled="Yes"  IsDisplay="No"
+           JsFunctionToFormat="" OnClickJSFunction=""  OnChangeJSFunction="">
+    <rev Enabled="No" ExpKey=""></rev>
+  </PageElement> 
+</Root>

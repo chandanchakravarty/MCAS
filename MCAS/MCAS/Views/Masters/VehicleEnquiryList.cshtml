@@ -1,0 +1,423 @@
+﻿@using MCAS.Web.Objects.MastersHelper;
+@model  IEnumerable<MCAS.Web.Objects.MastersHelper.VehicleUploadModel>
+@using MCAS.Web.Objects.CommonHelper
+@using MCAS.Globalisation
+@{
+    var res = TempData["searchres"];
+    var list = TempData["Display"];
+    var id = Convert.ToString(TempData["ID"]) ?? "";
+    var Bus = Convert.ToString(TempData["Bus"]) ?? "";
+    var VClass = Convert.ToString(TempData["VClass"]) ?? "";
+    var Chasis = Convert.ToString(TempData["Chasis"]) ?? "";
+    var Make = Convert.ToString(TempData["make"]) ?? "";
+    var Models123 = Convert.ToString(TempData["model"]) ?? "";
+    var Type = Convert.ToString(TempData["Type"]) ?? "";
+    ViewBag.Title = "VehicleEnquiryList";
+    System.Resources.ResourceManager PageResource = (new TransactionModel()).GetResourceManager(Convert.ToString(ViewData["PageResource"]));
+    SecurityPermissions myPemissions = (SecurityPermissions)ViewData["UserPermissions"];
+    string isEncryptedParams = System.Configuration.ConfigurationManager.AppSettings["EncryptQueryParams"].ToUpper();
+}
+<style type="text/css">
+    fieldset
+    {
+        padding: 5px;
+        margin: 1px;
+        border: 1px solid;
+        border-color: #DAD7D7;
+    }
+    
+    label
+    {
+        color: #6D644F;
+        font: normal 12px 'Open Sans' , arial, sans-serif;
+        font-weight: bold;
+        display: inline-block;
+        margin-bottom: 5px;
+    }
+    legend
+    {
+        display: block;
+        width: auto;
+        padding: 1px;
+        margin-bottom: 2px;
+        font-size: 14px;
+        line-height: inherit;
+        color: #1e91cf !important;
+        border: 0;
+    }
+    #tableDiarySrc td, #tableDiarySrc th, #Mcastable td, #Mcastable th
+    {
+        word-break: break-all;
+    }
+</style>
+<script src="@Url.Content("~/Scripts/jquery-2.1.0.min.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/Scripts/jquery.validate.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.min.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/Scripts/globalize/globalize.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/Scripts/globalize/cultures/globalize.culture.en-GB.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/Scripts/angular.min.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/Scripts/ViechileListing.js")" type="text/javascript"></script>
+<script type="text/javascript">
+var PageModel = @(Html.Raw(Json.Encode((new VehicleUploadModel()))));
+</script>
+<!-- Row start -->
+<div ng-app="VS" ng-controller="VSController">
+    @using (Html.BeginForm("VehicleEnquiryList", "Masters", FormMethod.Post, new { role = "form", @class = "form-horizontal", id = "vehicleenquiryform", name = "vehicleenquiryform" }))
+    {
+        <div class="row">
+            <div class="VechileListAllDialogue" style="overflow: hidden;">
+            </div>
+            <div ng-show="loading" class="Claimloading">
+                <p>
+                    Please wait...<br>
+                    <img src="@Url.Content("~/Images/ajax-loader.gif")" alt="Loading..">
+                </p>
+            </div>
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <div class="panel panel-info">
+                    <div class="panel-heading clearfix">
+                        <i class="icon-check-sign"></i>
+                        <h3 class="panel-title">
+                            @PageResource.GetString("EnquiryonVehicleListingMaster")</h3>
+                    </div>
+                    <div class="panel-body">
+                        @Html.ValidationSummary(true)
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                    <label class="col-sm-3" for="inputBusNo">@PageResource.GetString("VehicleRegNo")<span class="text-danger">*</span>
+                                    </label>
+                                    <div class="col-sm-6">
+                                        <input type="text" ng-model="model.BusNo" name="inputBusNo" id="inputBusNo" class="form-control" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                    <label class="col-sm-3" for="inputChasisNo">@PageResource.GetString("ModelDescription")</label>
+                                    <div class="col-sm-6">
+                                        <input type="text" ng-model="model.ChasisNo" name="inputChasisNo" id="inputChasisNo" class="form-control" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                    <label class="col-sm-3" for="inputVClass">@PageResource.GetString("VehicleClassCode")</label>
+                                    <div class="col-sm-6">
+                                        <input type="text" ng-model="model.VehicleClassCode" class="form-control " name="inputVClass" id="inputVClass" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                    <label class="col-sm-3" for="inputMake">@PageResource.GetString("VehicleMakeCode")</label>
+                                    <div class="col-sm-6">
+                                        <input type="text" ng-model="model.Make" class="form-control " name="inputMake" id="inputMake" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                    <label class="col-sm-3" for="inputModel">@PageResource.GetString("VehicleModelCode")</label>
+                                    <div class="col-sm-6">
+                                        <input type="text" ng-model="model.Model" class="form-control" name="inputModel" id="inputModel" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                    <label class="col-sm-3" for="inputType">@PageResource.GetString("Type")</label>
+                                    <div class="col-sm-6">
+                                        <input type="text" ng-model="model.Type" class="form-control" name="inputType" id="inputType" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-12 text-center">
+                                <input type="button" class="btn btn-info" ng-click="change()" value="@PageResource.GetString("Search")"/>
+                                @if (@myPemissions.Write)
+                                {
+                                    @Html.ActionLink(PageResource.GetString("AddNew"), "VehicleUploadListAll", null, new { @class = "btn btn-info" })
+                                }
+                                <input type="button" class="btn btn-info" ng-click="Clear()" value="@PageResource.GetString("Clear")"/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Row End -->
+        <!-- Row Start -->
+        <div class="panel-body">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="col-lg-4">
+                        @MCAS.Web.Objects.Resources.ClaimProcessing.ClaimRegistration.Found <b>{{Claims.startlength}}</b> to <b>{{Claims.endlength}}</b>
+                        @MCAS.Web.Objects.Resources.ClaimProcessing.ClaimRegistration.Outof <b>{{Claims.Count}}</b>
+                        @MCAS.Web.Objects.Resources.ClaimProcessing.ClaimRegistration.searchresults_
+                    </div>
+                    <div class="col-lg-4 text-center">
+                        <h4 class="text-info">
+                            @MCAS.Web.Objects.Resources.ClaimProcessing.ClaimRegistration.SearchResults</h4>
+                    </div>
+                    <div class="col-lg-4 text-right">
+                        <b>@MCAS.Web.Objects.Resources.ClaimProcessing.ClaimRegistration.Search: </b>
+                        <input id="Querysearch" ng-model="model.query" ng-change="change()" type="text" placeholder="Search" autofocus="true" />
+                    </div>
+                </div>
+                <div class="col-lg-12">
+                    <div class="table-responsive">
+                        <table cellspacing="0" class="table table-striped table-hover display" style="word-wrap: break-word; table-layout: fixed;" ng-table="tableParams" id="Mcastable">
+                            <thead>
+                                <tr>
+                                    <th style="padding-left: 9px; width: 15% !important" ng-click="orderByField='BusNo'; reverseSort = !reverseSort; order('BusNo',reverseSort)" ng-class="sortOrder(reverseSort,'BusNo')">
+                                        @PageResource.GetString("VehicleRegNo")
+                                    </th>
+                                    <th style="padding-left: 9px; width: 15% !important" ng-click="orderByField='ChasisNo'; reverseSort = !reverseSort; order('ChasisNo',reverseSort)" ng-class="sortOrder(reverseSort,'ChasisNo')">
+                                        @PageResource.GetString("ModelDescription")
+                                    </th>
+                                    <th style="padding-left: 9px; width: 15% !important" ng-click="orderByField='VehicleClassCode'; reverseSort = !reverseSort; order('VehicleClassCode',reverseSort)" ng-class="sortOrder(reverseSort,'VehicleClassCode')">
+                                        @PageResource.GetString("VehicleClassCode")
+                                    </th>
+                                    <th style="padding-left: 9px; width: 10% !important" ng-click="orderByField='make'; reverseSort = !reverseSort; order('make',reverseSort)" ng-class="sortOrder(reverseSort,'make')">
+                                        @PageResource.GetString("VehicleMakeCode")
+                                    </th>
+                                    <th style="padding-left: 9px; width: 10% !important" ng-click="orderByField='model'; reverseSort = !reverseSort; order('model',reverseSort)" ng-class="sortOrder(reverseSort,'model')">
+                                        @PageResource.GetString("VehicleModelCode")
+                                    </th>
+                                    <th style="padding-left: 9px; width: 10% !important" ng-click="orderByField='Type'; reverseSort = !reverseSort; order('Type',reverseSort)" ng-class="sortOrder(reverseSort,'Type')">
+                                        @PageResource.GetString("Type")
+                                    </th>
+                                    <th style="padding-left: 9px; width: 10% !important" ng-click="orderByField='Aircon'; reverseSort = !reverseSort; order('Aircon',reverseSort)" ng-class="sortOrder(reverseSort,'Aircon')">
+                                        @PageResource.GetString("Aircon")
+                                    </th>
+                                    <th style="padding-left: 9px; width: 10% !important" ng-click="orderByField='Axle'; reverseSort = !reverseSort; order('Axle',reverseSort)" ng-class="sortOrder(reverseSort,'Axle')">
+                                        @PageResource.GetString("Axle")
+                                    </th>
+                                    <th style="padding-left: 9px; width: 12% !important">
+                                        @PageResource.GetString("Action")&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="item in Claims">
+                                    <td>
+                                        {{item.BusNo}}
+                                    </td>
+                                    <td>
+                                        {{item.ChasisNo}}
+                                    </td>
+                                    <td>
+                                        {{item.VehicleClassCode}}
+                                    </td>
+                                    <td>
+                                        {{item.Make}}
+                                    </td>
+                                    <td>
+                                        {{item.Model}}
+                                    </td>
+                                    <td>
+                                        {{item.Type}}
+                                    </td>
+                                    <td>
+                                        {{item.Aircon}}
+                                    </td>
+                                    <td>
+                                        {{item.Axle}}
+                                    </td>
+                                    <td>
+                                        @if (@myPemissions.Write)
+                                        {
+                                            <a class="btn btn-xs btn-warning" clk="" url="@Url.Action("VehicleUploadListAll", "Masters")?Id={{item.VehicleMasterId}}&pageMode=Edit">Edit</a>
+                                        }
+                                        <a class="btn btn-xs btn-info" clk="" url="@Url.Action("VehicleUploadListAll", "Masters")?Id={{item.VehicleMasterId}}&pageMode=View">View</a>
+                                    </td>
+                                </tr>
+                            </tbody>
+                            <tfoot>
+                                <td colspan="12">
+                                    <div class="col-lg-12 text-center">
+                                        <ul class="pagination no-margin">
+                                            <li ng-class="prevPageDisabled()"><a href ng-click="prevPage()">« @MCAS.Web.Objects.Resources.ClaimProcessing.ClaimRegistration.Prev</a> </li>
+                                            <li ng-repeat="n in range(Claims.Count)" ng-class="{active: n == currentPage}" ng-click="GetPagList(n)"><a href="#">{{n+1}}</a> </li>
+                                            <li ng-class="nextPageDisabled()"><a href ng-click="nextPage()">@MCAS.Web.Objects.Resources.Common.Common.Next
+                                                »</a> </li>
+                                        </ul>
+                                    </div>
+                                </td>
+                            </tfoot>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+<!-- Row End -->
+<script type="text/javascript">
+    $(document).ready(function () {
+        //$("#tableDiarySrc thead tr th:eq(8)").removeAttr("style");
+        //$("#tableDiarySrc thead tr th:eq(8)").css('width', '');
+        //$("#tableDiarySrc thead tr th:eq(8)").css('width', '80px');
+        $("#tableDiarySrc thead tr th:eq(8)").css("width", "80px");
+
+        $("body").delegate('a[clk=""]', "click", function () {
+            var sPageURL = $(this)[0].getAttribute("url");
+            if ('@isEncryptedParams' == "YES") {
+                $.ajax({
+                    type: "POST",
+                    url: '@Url.Action("GetEncryptedUrl", "ClaimProcessing")',
+                    data: {
+                        Url: sPageURL
+                    },
+                    success: function (data) {
+                        window.location.href = data;
+                    }
+                });
+            }
+            else {
+                window.location.href = sPageURL;
+            }
+        });
+    });
+
+    //    $('#vehicleenquiryform').on('submit', function (event) {
+    //        if ($("#inputBusNo").val() == "" && $("#inputChasisNo").val() == "" && $("#inputMake").val() == "" && $("#inputModel").val() == "" && $("#inputType").val() == "") {
+    //            alert("Please Enter Any Parameter For Search");
+    //            hideLoading();
+    //            $("#inputBusNo").focus();
+    //            $("#divLoading").remove();
+    //            $('#error1,#error').hide();
+    //            event.preventDefault();
+    //            return false;
+    //        } else {
+    //            $("BODY").append('<div id="divLoading" class="loading"><p>Please wait...<br>&nbsp&nbsp&nbsp<img src="../Images/ajax-loader.gif" alt="Loading.."> </p></div>');
+    //            showLoading();
+    //            return true;
+    //        }
+    //    });
+    $(function () {
+        $.culture = Globalize.culture("en-GB");
+        $.validator.methods.date = function (value, element) {
+            return this.optional(element)
+                    || Globalize.parseDate(value, "dd/MM/yyyy", "en-GB")
+                    || Globalize.parseDate(value, "yyyy-mm-dd");
+        }
+        $(document).on("focus", ":input", function () {
+            $(this).attr("autocomplete", "off")
+        });
+
+        $("#inputUploadDate").change(function (event) {
+            if ($("#inputDateofLoss").val() != "") {
+                var errMessage = "";
+                var dob = $("#inputDateofLoss").val();
+                var pattern = /^(?:(?:31(\/|-|\.)(?:0?[13578]|1[02]))\1|(?:(?:29|30)(\/|-|\.)(?:0?[1,3-9]|1[0-2])\2))(?:(?:1[6-9]|[2-9]\d)?\d{2})$|^(?:29(\/|-|\.)0?2\3(?:(?:(?:1[6-9]|[2-9]\d)?(?:0[48]|[2468][048]|[13579][26])|(?:(?:16|[2468][048]|[3579][26])00))))$|^(?:0?[1-9]|1\d|2[0-8])(\/|-|\.)(?:(?:0?[1-9])|(?:1[0-2]))\4(?:(?:1[6-9]|[2-9]\d)?\d{2})$/;
+                if (!pattern.test(dob)) {
+                    errMessage += "Upload Date must be in 'dd/mm/yyyy' format.\n";
+                    alert(errMessage);
+                    $("#inputUploadDate").val("");
+                    event.preventDefault();
+                    return false;
+                }
+            }
+        });
+
+        $("#Clear").click(function () {
+            $("input[type=text]").val("");
+            $("input[type=file]").val("");
+            $('#error1,#error').hide();
+        });
+        $("#inputStatus").keypress(function () {
+            var a = $("#inputStatus").val().length;
+            if (10 > parseInt(a)) {
+                $(this);
+                var b = b || event,
+                a = 32 == b.keyCode ? !0 : /[a-z]+$/i.test(String.fromCharCode(b.keyCode || b.which));
+                return !1 == a ? !1 : a
+            }
+            return !1
+        });
+        $('#inputUploadDate').datepicker(
+            {
+                dateFormat: "dd/mm/yy",
+                showStatus: true,
+                showWeeks: true,
+                currentText: 'Now',
+                autoSize: true,
+                gotoCurrent: true,
+                showAnim: 'blind',
+                highlightWeek: true,
+                changeMonth: !0,
+                changeYear: !0,
+                onSelect: function (date) {
+                    $(this).valid();
+                }
+            }
+            );
+    });
+    $("#NewVehicleListInsert").click(function (event) {
+        var retDairies = null;
+        var uuid = guid();
+        if (retDairies == null) {
+            var str = '<div id="' + uuid + '" title="Insert new Vehicle Detail" style="overflow: hidden;"></div>'
+            $(str).appendTo(".VechileListAllDialogue")
+            var nuuid = "#" + uuid;
+            InitializeDialog($(nuuid), retDairies, $(this).text().replace(/\s/g, ''));
+            event.preventDefault();
+            $(nuuid).dialog("open");
+            return false;
+        }
+    });
+
+    function InitializeDialog($element, id, ViewMode) {
+        $element.dialog({
+            width: "900",
+            resizable: false,
+            draggable: true,
+            show: { effect: 'drop', direction: "up" },
+            title: "Vehicle Upload List All",
+            model: true,
+            show: 'slide',
+            dialogClass: 'alert',
+            closeOnEscape: true,
+            open: function (event, ui) {
+                var path = '@Url.Content("~/Masters/VehicleUploadListAll")';
+                var path1 = "?Id=" + id + "&VMode=" + ViewMode + "&uid=" + guid();
+                var cid = path + path1;
+                $element.load(cid);
+            },
+            position: {
+                my: "center",
+                at: "center",
+                of: window
+            },
+            close: function (ev, ui) {
+
+                window.location.reload();
+                //                    window.location.href = window.parent.location.href;
+                $element.dialog('destroy').remove();
+
+            }
+
+        });
+    };
+    String.prototype.contains = function (a) {
+        return -1 != this.indexOf(a)
+    };
+    var guid = (function () {
+        function s4() {
+            return Math.floor((1 + Math.random()) * 0x10000)
+               .toString(16)
+               .substring(1);
+        }
+        return function () {
+            return s4() + s4() + '-' + s4() + '-' + s4() + '-' +
+           s4() + '-' + s4() + s4() + s4();
+        };
+    })();
+</script>

@@ -1,0 +1,14 @@
+
+
+CREATE TRIGGER [dbo].[trgAfterUpdate]
+ON [dbo].[MNT_EMAIL]
+AFTER UPDATE 
+AS BEGIN
+   UPDATE dbo.MNT_EMAIL
+   SET ModifiedDate = GETDATE()
+   FROM INSERTED i
+   WHERE i.IDEN_ROW_ID = MNT_EMAIL.IDEN_ROW_ID
+END
+GO
+
+

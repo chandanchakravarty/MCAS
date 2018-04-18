@@ -1,0 +1,11 @@
+IF NOT EXISTS (SELECT * FROM INFORMATION_SCHEMA.COLUMNS where table_name = 'MNT_TEMPLATE_MASTER' and column_name = 'Id') 
+BEGIN
+Alter table MNT_TEMPLATE_MASTER Add  Id int NULL
+END
+
+
+IF EXISTS (SELECT * FROM INFORMATION_SCHEMA.COLUMNS where table_name = 'MNT_TEMPLATE_MASTER' and column_name = 'Id') 
+BEGIN
+ Alter Table MNT_TEMPLATE_MASTER 
+ Alter Column Id int NULL
+END

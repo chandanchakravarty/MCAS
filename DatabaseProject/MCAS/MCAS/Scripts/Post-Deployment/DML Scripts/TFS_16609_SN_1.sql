@@ -1,0 +1,1 @@
+update MNT_Lookups set Lookupdesc='Diary' where Category='Taskselection' and Lookupvalue=2

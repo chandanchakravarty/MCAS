@@ -1,0 +1,92 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Root>
+  <Master>
+    <Query Code="SELECT" Level="CLAIM"></Query>
+    <Column Code="EFFECTIVE_DATE" MapColumnn="ACCIDENT_DATE" TableAssociated=""	ColumnAssociated="ACCIDENT_DATE"></Column>
+  </Master>
+  <!-- Application Rule  -->
+  <Group Code="AppDependent">
+    <SubGroup Code="All">
+      <SubSubGroup Code="Mandatory">
+        <Rule Action="Database" StartDate="1950-01-01" EndDate="3000-12-30" STATE_ID="0" LOB_ID="0">
+          <Screen ID="ACCIDENTS" IsRequired ="Y">
+            <Conditions>
+              <ToCompare Key="$ClaimNo" Value="" Type="String"></ToCompare>
+              <ToCompare Key="$Facts" Value="" Type="String"></ToCompare>
+              <ToCompare Key="$AccidentDate" Value="" Type="Datetime"></ToCompare>
+              <ToCompare Key="$IPNo" Value="" Type="Decimal"></ToCompare>
+              <ToCompare Key="$BusServiceNo" Value="" Type="String"></ToCompare>
+              <ToCompare Key="$VehicleNo" Value="" Type="String"></ToCompare>
+              <ToCompare Key="$ReportedDate" Value="" Type="Datetime"></ToCompare>
+              <ToCompare Key="$TPClaimentStatus" Value="" Type="String"></ToCompare>
+              <ToCompare Key="$DutyIO" Value="" Type="String"></ToCompare>  
+              <ToCompare Key="$Make" Value="" Type="String"></ToCompare>
+              <ToCompare Key="$ModelNo" Value="" Type="String"></ToCompare>
+              <ToCompare Key="$DriverEmployeeNo" Value="" Type="String"></ToCompare>
+              <ToCompare Key="$DriverName" Value="" Type="String"></ToCompare>
+              <ToCompare Key="$DriverNRICNo" Value="" Type="String"></ToCompare>
+              <ToCompare Key="$DriverMobileNo" Value="" Type="Decimal"></ToCompare>
+            </Conditions>
+          </Screen>
+          <Screen ID="CLAIMS" IsRequired ="Y">
+            <Conditions>
+              <ToCompare Key="$ClaimType" Value="" Type="String"></ToCompare>
+              <ToCompare Key="$ClaimDate" Value="" Type="Datetime"></ToCompare>
+              <ToCompare Key="$ClaimOfficer" Value="" Type="String"></ToCompare>
+              <ToCompare Key="$ClaimStatus" Value="" Type="String"></ToCompare>
+              <ToCompare Key="$CaseCategory" Value="" Type="String"></ToCompare>
+              <ToCompare Key="$CaseStatus" Value="" Type="String"></ToCompare>
+              <ToCompare Key="$InformInsurer" Value="" Type="String"></ToCompare>
+            </Conditions>
+          </Screen>
+          <!--<Screen ID="THIRDPARTIES" IsRequired ="Y">
+            <Conditions>
+              <ToCompare Key="$OtherPartyType" Value="" Type="String"></ToCompare>
+              <ToCompare Key="$CompanyName" Value="" Type="String"></ToCompare>
+              <ToCompare Key="$TPClaimant" Value="" Type="String"></ToCompare>
+            </Conditions>
+          </Screen>
+          <Screen ID="CLAIMNOTES" IsRequired ="Y">
+            <Conditions>
+              <ToCompare Key="$NoteCode" Value="" Type="String"></ToCompare>
+              <ToCompare Key="$NoteDate" Value="" Type="Datetime"></ToCompare>
+              <ToCompare Key="$NoteTime" Value="" Type="String"></ToCompare>
+              <ToCompare Key="$ImageCode" Value="" Type="String"></ToCompare>
+              <ToCompare Key="$ImageId" Value="" Type="String"></ToCompare>
+            </Conditions>
+          </Screen>
+          <Screen ID="CLAIMTRANSACTIONS" IsRequired ="Y">
+            <Conditions>
+              <ToCompare Key="$TransactionDate" Value="" Type="Datetime"></ToCompare>
+              <ToCompare Key="$TransactionType" Value="" Type="String"></ToCompare>
+              <ToCompare Key="$CreditorName" Value="" Type="String"></ToCompare>
+              <ToCompare Key="$Authorizedby" Value="" Type="String"></ToCompare>
+              <ToCompare Key="$ExpenseCode" Value="" Type="String"></ToCompare>
+            </Conditions>
+          </Screen>
+          <Screen ID="CLAIMDIARY" IsRequired ="Y">
+            <Conditions>
+              <ToCompare Key="$LISTTYPEID" Value="" Type="Integer"></ToCompare>
+              <ToCompare Key="$TOUSERID" Value="" Type="Decimal"></ToCompare>
+              <ToCompare Key="$FROMUSERID" Value="" Type="Decimal"></ToCompare>
+              <ToCompare Key="$STARTTIME" Value="" Type="Datetime"></ToCompare>
+              <ToCompare Key="$ReminderBeforeCompletion" Value="" Type="Integer"></ToCompare>
+              <ToCompare Key="$Escalation" Value="" Type="String"></ToCompare>
+              <ToCompare Key="$SUBJECTLINE" Value="" Type="String"></ToCompare>
+            </Conditions>
+          </Screen>-->
+        </Rule>
+      </SubSubGroup>
+      <SubSubGroup Code="Reject">
+      </SubSubGroup>
+      <SubSubGroup Code="Refered">
+      </SubSubGroup>
+    </SubGroup>
+  </Group>
+  <!--Policy Rule-->
+  <Group Code="ClaimDependent">
+  </Group>
+  <!--Process Rule-->
+  <Group Code="ProcessDependent">
+  </Group>
+</Root>

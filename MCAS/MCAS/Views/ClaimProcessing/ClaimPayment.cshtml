@@ -1,0 +1,145 @@
+﻿    @using MCAS.Globalisation
+    @using MCAS.Web.Objects.Resources.ClaimProcessing;
+    @using MCAS.Web.Objects.Resources.Common;
+    @using MCAS.Web.Objects.CommonHelper;
+@model IEnumerable<MCAS.Web.Objects.ClaimObjectHelper.ClaimPaymentModelCollection>
+@{
+    ViewBag.Title = "ClaimPaymentList";
+    Layout = null;
+    var mMCASQueryString = Html.MCASQueryString(Request.QueryString);
+    var claimMode = mMCASQueryString["claimMode"] == null ? "" : Convert.ToString(mMCASQueryString["claimMode"]);
+    var mode = MenuListItem.ClaimTabs.GetMode(Convert.ToString(Session["ScreenNameDash"]), mMCASQueryString["mode"] == null ? "" : Convert.ToString(mMCASQueryString["mode"]));
+}
+ <style type="text/css">
+.m_title {
+    text-transform: capitalize;
+}
+</style>
+<link href="@Url.Content("~/Content/EbixGrid.css")" rel="Stylesheet" media="screen" />
+<link href="@Url.Content("~/Content/jquery-ui.css")" rel="Stylesheet" media="screen" />
+<div class="table-responsive">
+    <div class="ui-ebixgrid">
+        @Html.RenderGrid((from m in Model select new { m.ClaimType, m.ClaimTypeCode, m.ClaimTypeDesc }).Distinct().OrderBy(x => x.ClaimType),
+            new EbixGrid.EbixGrid
+                {
+                    Columns = new List<EbixGrid.EGColumn> 
+                                 {
+                                     new EbixGrid.EGColumn { DataField = "ClaimType",HeaderText = ClaimInfoPayment.ClaimType,PrimaryKey = true ,Hidden = true,Width = "0%" },
+                                     new EbixGrid.EGColumn { DataField = "ClaimTypeDesc" ,HeaderText = ClaimInfoPayment.ClaimType,PrimaryKey = false ,Width = "100%" }
+                                 },
+                    Width = "650",
+                    Height = "350",
+                    ID = "Grid",
+                    IsChildRequired = true,
+                    childGrid = new EbixGrid.EbixGrid
+                    {
+                        Columns = new List<EbixGrid.EGColumn> 
+                                 { new EbixGrid.EGColumn { DataField = "ClaimType",HeaderText = ClaimInfoPayment.ClaimType,  PrimaryKey = false ,ForeinKey=true,Hidden = true,Width = "0%" },
+                                   new EbixGrid.EGColumn { DataField = "ClaimRecordNo",  HeaderText = ClaimInfoPayment.RecordNumber, PrimaryKey = true,  Width = "100%"},
+                                 },
+                        Width = "650",
+                        Height = "350",
+
+                        ID = "SubGrid",
+                        DataSource = (from m in Model where m.ClaimRecordNo != null select new { m.ClaimRecordNo, m.ClaimType}).Distinct().OrderBy(x =>x.ClaimRecordNo),
+                        IsChildRequired = true,
+                        childGrid = new EbixGrid.EbixGrid
+                        {
+                            Columns = new List<EbixGrid.EGColumn> 
+                                 {
+                                     new EbixGrid.EGColumn { DataField = "ClaimRecordNo",HeaderText = ClaimInfoPayment.ClaimRecordNo,PrimaryKey = false,ForeinKey = true,Hidden = true,Width = "0%" },
+                                     new EbixGrid.EGColumn { DataField = "UniqueId",  HeaderText = ClaimInfoPayment.UniqueId,PrimaryKey = true,  Width = "0%"},
+                                     new EbixGrid.EGColumn { DataField = "MandateRecordNo",  HeaderText = ClaimInfoPayment.MandateRecordNumber,  Width = "70%"},
+                                     new EbixGrid.EGColumn { DataField = "",  HeaderText = Common.Add, Width = "30%",
+                                         Columntype = new EbixGrid.EGColumnType
+                                                             { Columntype = EbixGrid.ColumnType.LinkButton,
+                                                                 ColumnCell = new EbixGrid.EGCell{ Caption =ClaimInfoPayment.AddPayment, Href = @Url.Content("~/ClaimProcessing/PaymentEditorNew"), CssClass ="btn btn-xs btn-info changeHref"}  
+                                                                 
+                                                             } 
+                                       , QueryStringFields =  new List<string> {"PolicyId","MandateRecordNo", "ClaimID", "AccidentClaimId","ClaimType","HClaimantStatus","PaymentId=0", "claimMode=" + @claimMode,"mode="+@mode,"Viewmode=AddPayment","ClaimTypeCode"}
+                                      }
+                                 },
+                            Width = "650",
+                            Height = "350",
+
+                            ID = "SubGrid1",
+                            DataSource = (from m in Model where m.MandateRecordNo != null select new { 
+                                m.SNO,
+                                m.MandateRecordNo, 
+                                m.PolicyId, 
+                                m.ClaimID,
+                                m.AccidentClaimId,
+                                m.UniqueId,
+                                m.ApproveRecommedations,
+                                m.ClaimType,
+                                m.ClaimTypeCode,
+                                m.ClaimRecordNo,
+                                m.HClaimantStatus
+                            }).Where(x => x.ApproveRecommedations == "Y").OrderBy(x => x.SNO).Distinct(),
+                            IsChildRequired = true,
+                            childGrid = new EbixGrid.EbixGrid
+                            {
+                                Columns = new List<EbixGrid.EGColumn> 
+                                 {
+                                     new EbixGrid.EGColumn { DataField = "UniqueId", HeaderText = "UniqueId",ForeinKey=true,PrimaryKey=false, Hidden=true,Width = "0%" }, 
+                                     new EbixGrid.EGColumn { DataField = "PaymentRecordNo",  HeaderText = ClaimInfoPayment.PaymentRecordNo,  Width = "12%"},
+                                     new EbixGrid.EGColumn { DataField = "ClaimantName",  HeaderText = ClaimInfoPayment.ClaimantName, Width = "14%" },
+                                     new EbixGrid.EGColumn { DataField = "TotalPaymentDue",  HeaderText = ClaimInfoPayment.AmountPaid,  Width = "12%"},
+                                     new EbixGrid.EGColumn { DataField = "PayeeName",  HeaderText = ClaimInfoPayment.Payee,  Width = "17%"},
+                                     new EbixGrid.EGColumn { DataField = "ApprovedDate",  HeaderText = ClaimInfoPayment.ApprovedDate,  Width = "12%"},
+                                     new EbixGrid.EGColumn { DataField = "ApprovePayment",  HeaderText = ClaimInfoPayment.Status,  Width = "10%"},
+                                     new EbixGrid.EGColumn { DataField = "",  HeaderText = Common.Select, Width = "7%",Columntype = new EbixGrid.EGColumnType{ Columntype = EbixGrid.ColumnType.LinkButton, ColumnCell = new EbixGrid.EGCell{ Caption =Common.Select, Href = @Url.Content("~/ClaimProcessing/PaymentEditorNew"), CssClass ="btn btn-xs btn-info changeHref"}}, QueryStringFields =  new List<string> {"RecordNumber=0","PolicyId", "ClaimID", "AccidentClaimId","PaymentId","ClaimType","MandateRecordNo","mode="+@mode, "claimMode=" + @claimMode, "Viewmode=Select"}},
+                                     new EbixGrid.EGColumn 
+                                      { 
+                                         DataField = "",  HeaderText = Common.Print, Width = "5%",
+                                         Columntype = new EbixGrid.EGColumnType
+                                                             { 
+                                                                 Columntype = EbixGrid.ColumnType.LinkButton,
+                                                                 ColumnCell = new EbixGrid.EGCell{ Caption =Common.Print, Href = @Url.Content("~/ClaimProcessing/PreviewDocumentIndex"), CssClass ="Print btn btn-xs btn-info"}  
+                                                             } 
+                                       , QueryStringFields =  new List<string> {"PolicyId", "ClaimID", "PaymentId"}
+                                      },
+                                     new EbixGrid.EGColumn { DataField = "",  HeaderText = ClaimInfoPayment.ApprovePayment, Width = "16%",Columntype = new EbixGrid.EGColumnType{ Columntype = EbixGrid.ColumnType.LinkButton, ColumnCell = new EbixGrid.EGCell{ Caption ="Approve Payment", Href = @Url.Content("~/ClaimProcessing/PaymentEditorNew"), CssClass ="btn btn-xs btn-info changeHref"}}, QueryStringFields =  new List<string> {"RecordNumber=0","PolicyId", "ClaimID", "AccidentClaimId","PaymentId","MandateId","MandateRecordNo","ApprovePayment","HClaimantStatus","HAssignedTo","ClaimType","mode="+@mode, "claimMode=" + @claimMode, "Viewmode=ApprovePayment"}}
+                                 }
+
+                                 ,
+                                Width = "650",
+                                Height = "350",
+
+                                ID = "SubGrid2",
+                                DataSource = (from y in Model select new {
+                                    y.UniqueId,
+                                    y.MandateRecordNo, 
+                                    y.ClaimRecordNo,
+                                    y.ClaimantName,
+                                    y.AccidentClaimId, 
+                                    y.PayeeName, 
+                                    y.ApprovedDate,
+                                    y.ApprovePayment,
+                                    y.PolicyId, 
+                                    y.ClaimID,
+                                    y.ClaimTypeCode,
+                                    y.ClaimType,
+                                    y.TotalPaymentDue,
+                                    y.PaymentId,
+                                    y.MandateId,
+                                    y.PaymentRecordNo,
+                                    y.HClaimantStatus,
+                                    y.HAssignedTo
+                                }).Where(x => x.PaymentId != null).OrderBy(x =>x.PaymentId).Distinct()
+                            }
+                        }
+                    }
+                }
+  )
+    </div>
+</div>
+<script type="text/javascript">
+    function showChildGrid(id, spanid) {
+        $('#' + id).slideToggle();
+        if ($('#span_' + id).hasClass('ui-icon-plus'))
+            $('#span_' + id).removeClass('ui-icon-plus').addClass('ui-icon-minus');
+        else
+            $('#span_' + id).removeClass('ui-icon-minus').addClass('ui-icon-plus');
+    }
+</script>

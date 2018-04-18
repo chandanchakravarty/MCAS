@@ -1,0 +1,89 @@
+﻿@using MCAS.Globalisation
+@using MCAS.Web.Objects.Resources.ClaimProcessing;
+@using MCAS.Web.Objects.Resources.Common;
+@model IEnumerable<MCAS.Web.Objects.ClaimObjectHelper.ServiceProviderCollection>
+@{
+    ViewBag.Title = "ServiceProviderList";
+    Layout = null;
+    var mMCASQueryString = Html.MCASQueryString(Request.QueryString);
+    var claimMode = mMCASQueryString["claimMode"] == null ? "" : Convert.ToString(mMCASQueryString["claimMode"]);
+    var lebmode = mMCASQueryString["mode"] != null ? Convert.ToString(mMCASQueryString["mode"]) : "";
+}
+<link href="@Url.Content("~/Content/EbixGrid.css")" rel="Stylesheet" media="screen" />
+<link href="@Url.Content("~/Content/jquery-ui.css")" rel="Stylesheet" media="screen" />
+<script type="text/javascript">
+    String.prototype.getstringinbetween = function (a) {
+        for (var e = this.split("&"), d = 0; d < e.length; d++) {
+            var b = e[d].split("=");
+            if (b[0] == a) return b[1]
+        };
+    };
+    </script>
+<div class="table-responsive">
+    <div class="ui-ebixgrid">
+@*     @Html.RenderGrid((from m in Model where m.Is_Header == "Y" select new { m.parentId, m.Description }).Distinct().OrderBy(x => x.parentId),*@
+        @Html.RenderGrid((from m in Model   select new { m.ClaimTypeId, m.ClaimTypeCode, m.ClaimTypeDesc, m.PolicyId, m.AccidentClaimId }).Distinct(),
+            new EbixGrid.EbixGrid
+                {
+                    Columns = new List<EbixGrid.EGColumn> 
+                                 {
+                                     new EbixGrid.EGColumn { DataField = "ClaimTypeId"   ,
+                                                        HeaderText = ServiceProvider.ClaimTypeId,
+                                                        PrimaryKey = true ,
+                                                        Hidden = true,
+                                                        Width = "0%" },
+                                     new EbixGrid.EGColumn { DataField = "ClaimTypeDesc"   ,
+                                                        HeaderText = ServiceProvider.ClaimTypeId,
+                                                        PrimaryKey = false ,
+                                                        Width = "90%" },                                                        
+                                     new EbixGrid.EGColumn { DataField = "",  HeaderText = Common.Add, Width = "10%", 
+                                         Columntype = new EbixGrid.EGColumnType{
+                                             Columntype = EbixGrid.ColumnType.LinkButton,ColumnCell = new EbixGrid.EGCell{ Caption =Common.Add, Href = @Url.Content("~/ClaimRegistrationProcessing/ClmSPDltPCNTX"), CssClass ="btn btn-xs btn-info Add"}} , QueryStringFields =  new List<string> {"PolicyId", "ClaimID=0","ClaimTypeId","ServiceProviderId=0","claimMode=" + @claimMode, "mode=" +@lebmode,"Viewmode=Add","AccidentClaimId"}
+                                      }
+                                 },
+                    Width = "650",
+                    Height = "350",
+
+                    ID = "ClaimGrid",
+                    IsChildRequired = true,
+                    childGrid = new EbixGrid.EbixGrid
+                    {
+                        Columns = new List<EbixGrid.EGColumn> 
+                                 {
+                                     new EbixGrid.EGColumn { DataField = "ClaimTypeId",HeaderText = ServiceProvider.ClaimTypeId,PrimaryKey = false,ForeinKey = true,Hidden = true,Width = "0%" },
+                                     new EbixGrid.EGColumn { DataField = "RecordNumber",  HeaderText = ServiceProvider.RecordNumber,  Width = "15%"},
+                                     new EbixGrid.EGColumn { DataField = "ClaimantName",  HeaderText = ServiceProvider.TPVehicleNo, Width = "25%" },
+                                     new EbixGrid.EGColumn { DataField = "CompanyName",  HeaderText = ServiceProvider.ServiceProviderName, Width = "25%" },
+                                     new EbixGrid.EGColumn { DataField = "PartyName",  HeaderText = ServiceProvider.ProviderType, Width = "20%" },
+                                     new EbixGrid.EGColumn { DataField = "",  HeaderText = Common.Select, Width = "15%", 
+                                         Columntype = new EbixGrid.EGColumnType{
+                                             Columntype = EbixGrid.ColumnType.LinkButton,
+                                             ColumnCell = new EbixGrid.EGCell{ Caption =Common.Select, Href = @Url.Content("~/ClaimRegistrationProcessing/ClmSPDltPCNTX"), 
+                                             CssClass ="btn btn-xs btn-info Select"}} , 
+                                             QueryStringFields =  new List<string> {"PolicyId","ServiceProviderId","ClaimTypeId","AccidentClaimId","claimMode=" + @claimMode, "mode=" +@lebmode,"ClaimID=0","Viewmode=Select"}
+                                     }
+                                 },
+                        Width = "650",
+                        Height = "350",
+
+                        ID = "ClaimSubGrid",
+                        DataSource = Model
+                    }
+
+                }
+  )
+    </div>
+</div>
+<script type="text/javascript">
+    $("a.Select").each(function () {
+        $(this).attr("href") && $(this).attr("href").getstringinbetween("ServiceProviderId") == 0 && $(this).attr("disabled", "disabled")
+    });
+    function showChildGrid(id, spanid) {
+        $('#' + id).slideToggle();
+        if ($('#' + spanid).hasClass('ui-icon-plus'))
+            $('#' + spanid).removeClass('ui-icon-plus').addClass('ui-icon-minus');
+        else
+            $('#' + spanid).removeClass('ui-icon-minus').addClass('ui-icon-plus');
+    };
+    
+</script>

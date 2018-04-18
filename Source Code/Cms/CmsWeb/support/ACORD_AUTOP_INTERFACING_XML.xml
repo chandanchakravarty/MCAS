@@ -1,0 +1,842 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--<!DOCTYPE ACORD PUBLIC "-//ACORD//ACORD Specification Database Dump Format Version 1.1.3 //EN" "ACORD_PC_XML_V1_7_0.dtd">-->
+<ACORD>
+	<SignonRq>
+		<SignonPswd>
+			<SignonRoleCd />
+			<CustId>
+				<SPName />
+				<CustPermId />
+				<CustLoginId />
+			</CustId>
+			<CustPswd>
+				<EncryptionTypeCd />
+				<Pswd />
+			</CustPswd>
+		</SignonPswd>
+		<ClientDt />
+		<CustLangPref />
+		<ClientApp>
+			<Org />
+			<Name />
+			<Version />
+		</ClientApp>
+	</SignonRq>
+	<InsuranceSvcRq>
+		<RqUID />
+		<PersAutoPolicyQuoteInqRq>
+			<RqUID />
+			<TransactionRequestDt></TransactionRequestDt>
+			<CurCd />
+			<Producer>
+				<GeneralPartyInfo>
+					<NameInfo>
+						<CommlName>
+							<CommercialName>Wolverine</CommercialName>
+							<CommercialId></CommercialId>
+						</CommlName>
+					</NameInfo>
+					<Addr>
+						<AddrTypeCd />
+						<Addr1 />
+						<Addr2 />
+						<City />
+						<StateProvCd />
+						<PostalCode />
+					</Addr>
+					<Communications>
+						<PhoneInfo>
+							<PhoneTypeCd />
+							<CommunicationUseCd />
+							<PhoneNumber />
+						</PhoneInfo>
+					</Communications>
+				</GeneralPartyInfo>
+				<ProducerInfo>
+					<ContractNumber />
+					<ProducerSubCode />
+				</ProducerInfo>
+			</Producer>
+			<InsuredOrPrincipal>
+				<GeneralPartyInfo>
+					<NameInfo>
+						<CommlName>
+							<CommercialName />
+						</CommlName>
+						<PersonName>
+							<Surname></Surname>
+							<GivenName></GivenName>
+						</PersonName>
+					</NameInfo>
+					<Addr>
+						<AddrTypeCd></AddrTypeCd>
+						<Addr1></Addr1>
+						<Addr2></Addr2>
+						<City></City>
+						<StateProvCd></StateProvCd>
+						<StateID></StateID>
+						<PostalCode></PostalCode>
+						<CountryCd></CountryCd>
+					</Addr>
+					<Communications>
+						<PhoneInfo>
+							<PhoneTypeCd>Phone</PhoneTypeCd>
+							<CommunicationUseCd>Home</CommunicationUseCd>
+							<PhoneNumber></PhoneNumber>
+						</PhoneInfo>
+						<PhoneInfo>
+							<PhoneTypeCd>Phone</PhoneTypeCd>
+							<CommunicationUseCd>Business</CommunicationUseCd>
+							<PhoneNumber></PhoneNumber>
+						</PhoneInfo>
+						<EmailInfo>
+							<EmailAddr></EmailAddr>
+						</EmailInfo>
+						<WebsiteInfo>
+							<WebsiteURL></WebsiteURL>
+						</WebsiteInfo>
+					</Communications>
+				</GeneralPartyInfo>
+				<InsuredOrPrincipalInfo id="100"></InsuredOrPrincipalInfo>
+			</InsuredOrPrincipal>
+			<PersPolicy>
+				<LOBCd>AUTOP</LOBCd>
+				<SubLOBCd></SubLOBCd>
+				<LengthTimeInsured></LengthTimeInsured>
+				<LengthTimeInsuredWithWolverine></LengthTimeInsuredWithWolverine>
+				<ControllingStateProvCd></ControllingStateProvCd>
+				<ContractTerm>
+					<EffectiveDt></EffectiveDt>
+					<ExpirationDt></ExpirationDt>
+					<AppTerms></AppTerms>
+					<ContinuousInd></ContinuousInd>
+				</ContractTerm>
+				<OriginalInceptionDt></OriginalInceptionDt>
+				<OtherOrPriorPolicy>
+					<PolicyCd></PolicyCd>
+					<PolicyNumber></PolicyNumber>
+					<LOBCd>AUTOP</LOBCd>
+					<ContractTerm>
+						<EffectiveDt></EffectiveDt>
+						<ExpirationDt></ExpirationDt>
+					</ContractTerm>
+					<OriginalInceptionDt></OriginalInceptionDt>
+					<LengthTimeWithPreviousInsurer>
+						<NumUnits />
+					</LengthTimeWithPreviousInsurer>
+				</OtherOrPriorPolicy>
+				<QuoteInfo>
+					<CompanysQuoteNumber></CompanysQuoteNumber>
+					<InitialQuoteRequestDt></InitialQuoteRequestDt>
+				</QuoteInfo>
+				<CreditScoreInfo>
+					<CreditScore></CreditScore>
+					<CreditScoreDt></CreditScoreDt>
+				</CreditScoreInfo>
+				<PolicyStatusCd></PolicyStatusCd>
+				<MultiPolicy></MultiPolicy>
+				<SeatBeltCredit></SeatBeltCredit>
+				<UnderWritingTier></UnderWritingTier>
+				<UnderWritingTierDate></UnderWritingTierDate>
+				<PersApplicationInfo>
+					<InsuredOrPrincipal>
+						<GeneralPartyInfo>
+							<NameInfo>
+								<PersonName>
+									<Surname />
+									<GivenName />
+								</PersonName>
+							</NameInfo>
+							<Addr>
+								<AddrTypeCd></AddrTypeCd>
+								<Addr1></Addr1>
+								<Addr2></Addr2>
+								<City></City>
+								<StateProvCd></StateProvCd>
+								<PostalCode></PostalCode>
+								<CountryCd></CountryCd>
+							</Addr>
+							<Communications>
+								<PhoneInfo>
+									<PhoneTypeCd>Phone</PhoneTypeCd>
+									<CommunicationUseCd>Home</CommunicationUseCd>
+									<PhoneNumber></PhoneNumber>
+								</PhoneInfo>
+								<PhoneInfo>
+									<PhoneTypeCd>Phone</PhoneTypeCd>
+									<CommunicationUseCd>Business</CommunicationUseCd>
+									<PhoneNumber></PhoneNumber>
+								</PhoneInfo>
+							</Communications>
+						</GeneralPartyInfo>
+					</InsuredOrPrincipal>
+					<ResidenceOwnedRentedCd></ResidenceOwnedRentedCd>
+					<Addr>
+						<Addr1></Addr1>
+						<Addr2></Addr2>
+						<City></City>
+						<StateProvCd></StateProvCd>
+						<PostalCode></PostalCode>
+					</Addr>
+					<LengthTimePreviousAddr>
+						<DurationPeriod>
+							<NumUnits></NumUnits>
+						</DurationPeriod>
+					</LengthTimePreviousAddr>
+				</PersApplicationInfo>
+				<AccidentViolation VehRef="V1" DriverRef="D1">
+					<AccidentViolationCd></AccidentViolationCd>
+					<AccidentViolationDt></AccidentViolationDt>
+					<DamageTotalAmt>
+						<Amt></Amt>
+					</DamageTotalAmt>
+					<BIInd></BIInd>
+					<AccidentViolationDesc></AccidentViolationDesc>
+					<PDInd></PDInd>
+					<PointsAssigned></PointsAssigned>
+					<AccidentViolationId></AccidentViolationId>
+				</AccidentViolation>
+			</PersPolicy>
+			<PersAutoLineBusiness>
+				<LOBCd>AUTOP</LOBCd>
+				<PersDriver id="D1">
+					<GeneralPartyInfo>
+						<NameInfo>
+							<PersonName>
+								<Surname></Surname>
+								<GivenName></GivenName>
+								<OtherGivenName></OtherGivenName>
+							</PersonName>
+						</NameInfo>
+						<Addr>
+							<AddrTypeCd></AddrTypeCd>
+							<Addr1></Addr1>
+							<Addr2></Addr2>
+							<City></City>
+							<StateProvCd></StateProvCd>
+							<PostalCode></PostalCode>
+							<CountryCd></CountryCd>
+						</Addr>
+						<Communications>
+							<PhoneInfo>
+								<PhoneTypeCd>Phone</PhoneTypeCd>
+								<CommunicationUseCd>Home</CommunicationUseCd>
+								<PhoneNumber></PhoneNumber>
+							</PhoneInfo>
+							<PhoneInfo>
+								<PhoneTypeCd>Phone</PhoneTypeCd>
+								<CommunicationUseCd>Business</CommunicationUseCd>
+								<PhoneNumber></PhoneNumber>
+							</PhoneInfo>
+							<PhoneInfo>
+								<PhoneTypeCd>Cell</PhoneTypeCd>
+								<CommunicationUseCd>Business</CommunicationUseCd>
+								<PhoneNumber></PhoneNumber>
+							</PhoneInfo>
+						</Communications>
+					</GeneralPartyInfo>
+					<DriverInfo>
+						<PersonInfo>
+							<GenderCd></GenderCd>
+							<BirthDt></BirthDt>
+							<MaritalStatusCd></MaritalStatusCd>
+							<OccupationDesc></OccupationDesc>
+							<OccupationClassCd></OccupationClassCd>
+							<LengthTimeEmployed>
+								<NumUnits />
+							</LengthTimeEmployed>
+							<Income></Income>
+							<NoOfDependants></NoOfDependants>
+						</PersonInfo>
+						<DriversLicense>
+							<LicensedDt></LicensedDt>
+							<DriversLicenseNumber></DriversLicenseNumber>
+							<StateProv></StateProv>
+						</DriversLicense>
+						<DrivingRecordRatingInfo></DrivingRecordRatingInfo>
+						<CreditScoreInfo>
+							<ReferenceNumber />
+							<CreditScore />
+							<CreditScoreDt />
+							<CSPolicyTypeCd />
+							<CSReasonCd />
+							<CSReasonDesc />
+						</CreditScoreInfo>
+						<QuestionAnswer>
+							<PremierDriverDiscount></PremierDriverDiscount>
+							<GoodStudent></GoodStudent>
+							<CollegeStudent></CollegeStudent>
+							<WaiveWorkLoss></WaiveWorkLoss>
+							<SafeDriverRenewalDiscount></SafeDriverRenewalDiscount>
+						</QuestionAnswer>
+					</DriverInfo>
+					<PersDriverInfo VehPrincipallyDrivenRef="V1">
+						<DefensiveDriverCd></DefensiveDriverCd>
+						<DistantStudentInd></DistantStudentInd>
+						<DriverRelationshipToApplicantCd></DriverRelationshipToApplicantCd>
+						<DriverTrainingInd></DriverTrainingInd>
+						<DriverTypeCd></DriverTypeCd>
+						<FinancialResponsibilityFiling>
+							<FilingRequiredByCd />
+						</FinancialResponsibilityFiling>
+						<GoodDriverInd></GoodDriverInd>
+						<GoodStudentCd></GoodStudentCd>
+						<SuspensionRevocationReasonCd />
+						<YoungDriverSupplement>
+							<CollegeGradeAverage />
+						</YoungDriverSupplement>
+					</PersDriverInfo>
+				</PersDriver>
+				<PersVeh id="V1" LocationRef="L1">
+					<Manufacturer></Manufacturer>
+					<Model></Model>
+					<ModelYear></ModelYear>
+					<VehTypeCd></VehTypeCd>
+					<VehAge></VehAge>
+					<CostNewAmt>
+						<Amt></Amt>
+					</CostNewAmt>
+					<EstimatedAnnualDistance>
+						<NumUnits></NumUnits>
+						<UnitMeasurementCd />
+					</EstimatedAnnualDistance>
+					<FullTermAmt>
+						<Amt></Amt>
+					</FullTermAmt>
+					<LicensePlateNumber></LicensePlateNumber>
+					<PurchaseDt></PurchaseDt>
+					<RegistrationStateProvCd></RegistrationStateProvCd>
+					<TerritoryCd />
+					<GaragingPostalCode />
+					<VehIdentificationNumber></VehIdentificationNumber>
+					<VehSymbolCd></VehSymbolCd>
+					<AntiLockBrakeCd></AntiLockBrakeCd>
+					<AntiTheftDeviceCreditPct />
+					<DaytimeRunningLightInd />
+					<EngineTypeCd />
+					<ExistingUnrepairedDamageInd />
+					<GaragingCd></GaragingCd>
+					<DistanceOneWay>
+						<NumUnits></NumUnits>
+						<UnitMeasurementCd />
+					</DistanceOneWay>
+					<AntiTheftDeviceCd />
+					<PrincipalOperatorInd />
+					<VehPerformanceCd></VehPerformanceCd>
+					<VehUseCd></VehUseCd>
+					<VehicleUse></VehicleUse>
+					<FourWheelDriveInd />
+					<SeatBeltTypeCd></SeatBeltTypeCd>
+					<AirBagTypeCd></AirBagTypeCd>
+					<RateClassCd></RateClassCd>
+					<RateClassId></RateClassId>
+					<RateClassDescCd></RateClassDescCd>
+					<MulticarDisount></MulticarDisount>
+					<AntilockBrakeDiscount></AntilockBrakeDiscount>
+					<CarPool />
+					<RadiusOfUse />
+					<SnowPlowCode />
+					<IsSuspendedComp />
+					<InsuranceAmountMiscEqupt />
+					<InsuranceDescMiscEqupt />
+					<Coverage>
+						<CoverageCd>LLGC</CoverageCd>
+						<CoverageDesc>Loan / Lease Gap Coverage (A-11)</CoverageDesc>
+						<Limit>
+							<FormatCurrencyAmt>
+								<Amt></Amt>
+							</FormatCurrencyAmt>
+							<Text></Text>
+						</Limit>
+						<Deductible>
+							<FormatCurrencyAmt>
+								<Amt></Amt>
+							</FormatCurrencyAmt>
+							<DeductibleBasisCd></DeductibleBasisCd>
+							<DeductibleTypeCd></DeductibleTypeCd>
+							<Text></Text>
+						</Deductible>
+					</Coverage>
+					<Coverage>
+						<CoverageCd>PUMPD</CoverageCd>
+						<CoverageDesc></CoverageDesc>
+						<Limit>
+							<FormatCurrencyAmt>
+								<Amt></Amt>
+							</FormatCurrencyAmt>
+						</Limit>
+						<Deductible>
+							<FormatCurrencyAmt>
+								<Amt></Amt>
+							</FormatCurrencyAmt>
+							<DeductibleBasisCd></DeductibleBasisCd>
+							<DeductibleTypeCd></DeductibleTypeCd>
+						</Deductible>
+						
+					</Coverage>
+					<Coverage>
+						<CoverageCd>BISPL</CoverageCd>
+						<CoverageDesc>Part A - Bodily Injury Liability (Split Limit)</CoverageDesc>
+						<Limit>
+							<FormatCurrencyAmt>
+								<Amt></Amt>
+							</FormatCurrencyAmt>
+						</Limit>
+						<Limit>
+							<FormatCurrencyAmt>
+								<Amt></Amt>
+							</FormatCurrencyAmt>
+						</Limit>
+						<Deductible>
+							<FormatCurrencyAmt>
+								<Amt></Amt>
+							</FormatCurrencyAmt>
+							<DeductibleBasisCd></DeductibleBasisCd>
+							<DeductibleTypeCd></DeductibleTypeCd>
+						</Deductible>
+					</Coverage>
+					<Coverage>
+						<CoverageCd>OTC</CoverageCd>
+						<CoverageDesc>Part D - Other than Collision ( Comprehensive)</CoverageDesc>
+						<Limit>
+							<FormatCurrencyAmt>
+								<Amt></Amt>
+							</FormatCurrencyAmt>
+						</Limit>
+						<Deductible>
+							<FormatCurrencyAmt>
+								<Amt></Amt>
+							</FormatCurrencyAmt>
+							<DeductibleBasisCd></DeductibleBasisCd>
+							<DeductibleTypeCd></DeductibleTypeCd>
+						</Deductible>
+					</Coverage>
+					<Coverage>
+						<CoverageCd>COLL</CoverageCd>
+						<CoverageDesc>Part E - Collision</CoverageDesc>
+						<Limit>
+							<FormatCurrencyAmt>
+								<Amt></Amt>
+							</FormatCurrencyAmt>
+						</Limit>
+						<Deductible>
+							<FormatCurrencyAmt>
+								<Amt></Amt>
+							</FormatCurrencyAmt>
+							<DeductibleBasisCd></DeductibleBasisCd>
+							<DeductibleTypeCd></DeductibleTypeCd>
+							<Text></Text>
+						</Deductible>
+					</Coverage>
+					<Coverage>
+						<CoverageCd>ROAD</CoverageCd>
+						<CoverageDesc>Part D - Road Service</CoverageDesc>
+						<Limit>
+							<FormatCurrencyAmt>
+								<Amt></Amt>
+							</FormatCurrencyAmt>
+						</Limit>
+						<Deductible>
+							<FormatCurrencyAmt>
+								<Amt></Amt>
+							</FormatCurrencyAmt>
+							<DeductibleBasisCd></DeductibleBasisCd>
+							<DeductibleTypeCd></DeductibleTypeCd>
+						</Deductible>
+					</Coverage>
+					<Coverage>
+						<CoverageCd>RREIM</CoverageCd>
+						<CoverageDesc>Part E - Rental Reimbursement (A-89)</CoverageDesc>
+						<Limit>
+							<FormatCurrencyAmt>
+								<Amt></Amt>
+							</FormatCurrencyAmt>
+							<Text></Text>
+						</Limit>
+						<Limit>
+							<FormatCurrencyAmt>
+								<Amt></Amt>
+							</FormatCurrencyAmt>
+							<Text></Text>
+						</Limit>
+						<Deductible>
+							<FormatCurrencyAmt>
+								<Amt></Amt>
+							</FormatCurrencyAmt>
+							<DeductibleBasisCd></DeductibleBasisCd>
+							<DeductibleTypeCd></DeductibleTypeCd>
+						</Deductible>
+					</Coverage>
+					<Coverage>
+						<CoverageCd>SRTE</CoverageCd>
+						<CoverageDesc>Sound Receiving and Transmitting Equipment (A-31)</CoverageDesc>
+						<Limit>
+							<FormatCurrencyAmt>
+								<Amt></Amt>
+							</FormatCurrencyAmt>
+						</Limit>
+						<Deductible>
+							<FormatCurrencyAmt>
+								<Amt></Amt>
+							</FormatCurrencyAmt>
+							<DeductibleBasisCd></DeductibleBasisCd>
+							<DeductibleTypeCd></DeductibleTypeCd>
+						</Deductible>
+					</Coverage>
+					<Coverage>
+						<CoverageCd>LPD</CoverageCd>
+						<CoverageDesc>Part C - Limited Property Damage Liability (Mini-Tort)</CoverageDesc>
+						<Limit>
+							<FormatCurrencyAmt>
+								<Amt></Amt>
+							</FormatCurrencyAmt>
+						</Limit>
+						<Deductible>
+							<FormatCurrencyAmt>
+								<Amt></Amt>
+							</FormatCurrencyAmt>
+							<DeductibleBasisCd></DeductibleBasisCd>
+							<DeductibleTypeCd></DeductibleTypeCd>
+						</Deductible>
+					</Coverage>
+					<Coverage>
+						<CoverageCd>RLCSL</CoverageCd>
+						<CoverageDesc>Part A - Residual Liability (CSL)</CoverageDesc>
+						<Limit>
+							<FormatCurrencyAmt>
+								<Amt></Amt>
+							</FormatCurrencyAmt>
+						</Limit>
+						<Deductible>
+							<FormatCurrencyAmt>
+								<Amt></Amt>
+							</FormatCurrencyAmt>
+							<DeductibleBasisCd></DeductibleBasisCd>
+							<DeductibleTypeCd></DeductibleTypeCd>
+						</Deductible>
+					</Coverage>
+					<Coverage>
+						<CoverageCd>PD</CoverageCd>
+						<CoverageDesc>Part A - Property Damage Liability</CoverageDesc>
+						<Limit>
+							<FormatCurrencyAmt>
+								<Amt></Amt>
+							</FormatCurrencyAmt>
+						</Limit>
+						<Deductible>
+							<FormatCurrencyAmt>
+								<Amt></Amt>
+							</FormatCurrencyAmt>
+							<DeductibleBasisCd></DeductibleBasisCd>
+							<DeductibleTypeCd></DeductibleTypeCd>
+						</Deductible>
+					</Coverage>
+					<Coverage>
+						<CoverageCd>PUMSP</CoverageCd>
+						<CoverageDesc>Part C - Uninsured Motorists (BI Split Limits) </CoverageDesc>
+						<Limit>
+							<FormatCurrencyAmt>
+								<Amt></Amt>
+							</FormatCurrencyAmt>
+							<Text></Text>
+						</Limit>
+						<Limit>
+							<FormatCurrencyAmt>
+								<Amt></Amt>
+							</FormatCurrencyAmt>
+							<Text></Text>
+						</Limit>
+						<Deductible>
+							<FormatCurrencyAmt>
+								<Amt></Amt>
+							</FormatCurrencyAmt>
+							<DeductibleBasisCd></DeductibleBasisCd>
+							<DeductibleTypeCd></DeductibleTypeCd>
+						</Deductible>
+						<IsSigObt></IsSigObt>
+					</Coverage>
+					<Coverage>
+						<CoverageCd>PUNCS</CoverageCd>
+						<CoverageDesc>Part C - Uninsured Motorists (CSL)</CoverageDesc>
+						<Limit>
+							<FormatCurrencyAmt>
+								<Amt></Amt>
+							</FormatCurrencyAmt>
+							<Text></Text>
+						</Limit>
+						<Deductible>
+							<FormatCurrencyAmt>
+								<Amt></Amt>
+							</FormatCurrencyAmt>
+							<DeductibleBasisCd></DeductibleBasisCd>
+							<DeductibleTypeCd></DeductibleTypeCd>
+						</Deductible>
+						<IsSigObt></IsSigObt>
+					</Coverage>
+					<Coverage>
+						<CoverageCd>PUMCS</CoverageCd>
+						<CoverageDesc></CoverageDesc>
+						<Limit>
+							<FormatCurrencyAmt>
+								<Amt></Amt>
+							</FormatCurrencyAmt>
+						</Limit>
+						<Deductible>
+							<FormatCurrencyAmt>
+								<Amt></Amt>
+							</FormatCurrencyAmt>
+							<DeductibleBasisCd></DeductibleBasisCd>
+							<DeductibleTypeCd></DeductibleTypeCd>
+						</Deductible>
+					</Coverage>
+					<Coverage>
+						<CoverageCd>MP</CoverageCd>
+						<CoverageDesc>Part A - Medical Payments</CoverageDesc>
+						<Limit>
+							<FormatCurrencyAmt>
+								<Amt></Amt>
+							</FormatCurrencyAmt>
+						</Limit>
+						<Deductible>
+							<FormatCurrencyAmt>
+								<Amt></Amt>
+							</FormatCurrencyAmt>
+							<DeductibleBasisCd></DeductibleBasisCd>
+							<DeductibleTypeCd></DeductibleTypeCd>
+						</Deductible>
+					</Coverage>
+					<Coverage>
+						<CoverageCd>UMPD</CoverageCd>
+						<CoverageDesc>Part C - Unisured Motorists (PD) (A - 21)</CoverageDesc>
+						<Limit>
+							<FormatCurrencyAmt>
+								<Amt></Amt>
+							</FormatCurrencyAmt>
+							<Text></Text>
+						</Limit>
+						<Deductible>
+							<FormatCurrencyAmt>
+								<Amt></Amt>
+							</FormatCurrencyAmt>
+							<DeductibleBasisCd></DeductibleBasisCd>
+							<DeductibleTypeCd></DeductibleTypeCd>
+						</Deductible>
+						<IsSigObt></IsSigObt>
+					</Coverage>
+					<Coverage>
+						<CoverageCd>SLL</CoverageCd>
+						<CoverageDesc>Part A - Single Limits Liability (CSL)</CoverageDesc>
+						<Limit>
+							<FormatCurrencyAmt>
+								<Amt></Amt>
+							</FormatCurrencyAmt>
+						</Limit>
+						<Deductible>
+							<FormatCurrencyAmt>
+								<Amt></Amt>
+							</FormatCurrencyAmt>
+							<DeductibleBasisCd></DeductibleBasisCd>
+							<DeductibleTypeCd></DeductibleTypeCd>
+						</Deductible>
+					</Coverage>
+					<Coverage>
+						<CoverageCd>PIP</CoverageCd>
+						<CoverageDesc>Part A – Personal Injury Protection</CoverageDesc>
+						<Limit>
+							<FormatCurrencyAmt>
+								<Amt></Amt>
+							</FormatCurrencyAmt>
+							<Text></Text>
+						</Limit>
+						<Deductible>
+							<FormatCurrencyAmt>
+								<Amt></Amt>
+							</FormatCurrencyAmt>
+							<DeductibleBasisCd></DeductibleBasisCd>
+							<DeductibleTypeCd></DeductibleTypeCd>
+						</Deductible>
+					</Coverage>
+					<Coverage>
+						<CoverageCd>UNCSL</CoverageCd>
+						<CoverageDesc>Part D - Underinsured Motorists (CSL)</CoverageDesc>
+						<Limit>
+							<FormatCurrencyAmt>
+								<Amt></Amt>
+							</FormatCurrencyAmt>
+						</Limit>
+						<Deductible>
+							<FormatCurrencyAmt>
+								<Amt></Amt>
+							</FormatCurrencyAmt>
+							<DeductibleBasisCd></DeductibleBasisCd>
+							<DeductibleTypeCd></DeductibleTypeCd>
+						</Deductible>
+					</Coverage>
+					<Coverage>
+						<CoverageCd>UNDSP</CoverageCd>
+						<CoverageDesc>Part D - Underinsured Motorists (BI Split Limits)</CoverageDesc>
+						<Limit>
+							<FormatCurrencyAmt>
+								<Amt></Amt>
+							</FormatCurrencyAmt>
+							<Text></Text>
+						</Limit>
+						<Limit>
+							<FormatCurrencyAmt>
+								<Amt></Amt>
+							</FormatCurrencyAmt>
+							<Text></Text>
+						</Limit>
+						<Deductible>
+							<FormatCurrencyAmt>
+								<Amt></Amt>
+							</FormatCurrencyAmt>
+							<DeductibleBasisCd></DeductibleBasisCd>
+							<DeductibleTypeCd></DeductibleTypeCd>
+						</Deductible>
+					</Coverage>
+					<Coverage>
+						<CoverageCd>SORPE</CoverageCd>
+						<CoverageDesc>Sound Reproducing Equipment (Tapes)(A-29)</CoverageDesc>
+						<Limit>
+							<FormatCurrencyAmt>
+								<Amt></Amt>
+							</FormatCurrencyAmt>
+						</Limit>
+						<Deductible>
+							<FormatCurrencyAmt>
+								<Amt></Amt>
+							</FormatCurrencyAmt>
+							<DeductibleBasisCd></DeductibleBasisCd>
+							<DeductibleTypeCd></DeductibleTypeCd>
+						</Deductible>
+					</Coverage>
+					<Coverage>
+						<CoverageCd>EECOMP</CoverageCd>
+						<CoverageDesc>Extra Equipment-Comprehensive Deductible</CoverageDesc>
+						<Limit>
+							<FormatCurrencyAmt>
+								<Amt></Amt>
+							</FormatCurrencyAmt>
+						</Limit>
+						<Deductible>
+							<FormatCurrencyAmt>
+								<Amt></Amt>
+							</FormatCurrencyAmt>
+							<DeductibleBasisCd></DeductibleBasisCd>
+							<DeductibleTypeCd></DeductibleTypeCd>
+						</Deductible>
+					</Coverage>
+					<Coverage>
+						<CoverageCd>EECOLL</CoverageCd>
+						<CoverageDesc>Extra Equipment-Collision type Deductible</CoverageDesc>
+						<Limit>
+							<FormatCurrencyAmt>
+								<Amt></Amt>
+							</FormatCurrencyAmt>
+						</Limit>
+						<Deductible>
+							<FormatCurrencyAmt>
+								<Amt></Amt>
+							</FormatCurrencyAmt>
+							<DeductibleBasisCd></DeductibleBasisCd>
+							<DeductibleTypeCd></DeductibleTypeCd>
+							<Text></Text>
+						</Deductible>
+					</Coverage>
+					<Coverage>
+						<CoverageCd>COMP</CoverageCd>
+						<CoverageDesc>Part E - Other Than Collision (Comprehensive)</CoverageDesc>
+						<Limit>
+							<FormatCurrencyAmt>
+								<Amt></Amt>
+							</FormatCurrencyAmt>
+						</Limit>
+						<Deductible>
+							<FormatCurrencyAmt>
+								<Amt></Amt>
+							</FormatCurrencyAmt>
+							<DeductibleBasisCd></DeductibleBasisCd>
+							<DeductibleTypeCd></DeductibleTypeCd>
+						</Deductible>
+					</Coverage>
+					<Coverage>
+						<CoverageCd>BIPD</CoverageCd>
+						<CoverageDesc>BI/PD Deductible</CoverageDesc>
+						<Limit>
+							<FormatCurrencyAmt>
+								<Amt></Amt>
+							</FormatCurrencyAmt>
+						</Limit>
+						<Deductible>
+							<FormatCurrencyAmt>
+								<Amt></Amt>
+							</FormatCurrencyAmt>
+							<DeductibleBasisCd></DeductibleBasisCd>
+							<DeductibleTypeCd></DeductibleTypeCd>
+						</Deductible>
+					</Coverage>
+					<Coverage>
+						<CoverageCd>BI</CoverageCd>
+						<CoverageDesc>BI Only</CoverageDesc>
+						<Limit>
+							<FormatCurrencyAmt>
+								<Amt></Amt>
+							</FormatCurrencyAmt>
+						</Limit>
+						<Deductible>
+							<FormatCurrencyAmt>
+								<Amt></Amt>
+							</FormatCurrencyAmt>
+							<DeductibleBasisCd></DeductibleBasisCd>
+							<DeductibleTypeCd></DeductibleTypeCd>
+						</Deductible>
+					</Coverage>
+					<Coverage>
+						<CoverageCd>PIP94</CoverageCd>
+						<CoverageDesc>PIP Waiver/Rejection of Work Loss Benefit A-94</CoverageDesc>
+						<Limit>
+							<FormatCurrencyAmt>
+								<Amt></Amt>
+							</FormatCurrencyAmt>
+						</Limit>
+						<Deductible>
+							<FormatCurrencyAmt>
+								<Amt></Amt>
+							</FormatCurrencyAmt>
+							<DeductibleBasisCd></DeductibleBasisCd>
+							<DeductibleTypeCd></DeductibleTypeCd>
+							<Text></Text>
+						</Deductible>
+					</Coverage>
+					<Coverage>
+						<CoverageCd>RCC68</CoverageCd>
+						<CoverageDesc>Regular Collision Coverage A-68</CoverageDesc>
+						<Limit>
+							<FormatCurrencyAmt>
+								<Amt></Amt>
+							</FormatCurrencyAmt>
+						</Limit>
+						<Deductible>
+							<FormatCurrencyAmt>
+								<Amt></Amt>
+							</FormatCurrencyAmt>
+							<DeductibleBasisCd></DeductibleBasisCd>
+							<DeductibleTypeCd></DeductibleTypeCd>
+							<Text></Text>
+						</Deductible>
+					</Coverage>
+				</PersVeh>
+			</PersAutoLineBusiness>
+			<Location id="L1">
+				<ItemIdInfo />
+				<Addr>
+					<AddrTypeCd>GaragingAddress</AddrTypeCd>
+					<PostalCode></PostalCode>
+					<County></County>
+					<TerritoryCd></TerritoryCd>
+				</Addr>
+			</Location>
+		</PersAutoPolicyQuoteInqRq>
+	</InsuranceSvcRq>
+</ACORD>

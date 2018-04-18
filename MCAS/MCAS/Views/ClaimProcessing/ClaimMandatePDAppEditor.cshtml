@@ -1,0 +1,690 @@
+﻿@model MCAS.Web.Objects.ClaimObjectHelper.ClaimMandateModel
+@{
+    ViewBag.Title = "ClaimMandatePDAppEditor";
+    Layout = null;
+    var co = TempData["Groupuser"].ToString();
+}
+<div>
+    <fieldset>
+        <legend>OD Mandate Approval</legend>
+        <div class="panel-body">
+            <div class="row">
+                <fieldset>
+                    <legend>Mandate Details</legend>
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="form-group">
+                                    <label class="col-sm-3 control-label" for="inputAssignTo">
+                                        Assign To
+                                    </label>
+                                    <div class="col-sm-9">
+                                        <div class="col-sm-3">
+                                        <div class="form-group">
+                                            <select class="col-lg-12 form-control" id="AssignTo" name="AssignTo">
+                                                <option value="">[Select...]</option>
+                                                <option value="1">Abhinav Gupta</option>
+                                                <option value="2">Nishant Gupta</option>
+                                                <option value="3">Sanjay Gaur</option>
+                                                <option value="4">Gaurav Sharma</option>
+                                            </select>
+                                          </div>
+                                        </div>
+                                        <label class="col-sm-2 control-label" for="inputClaimType">
+                                            Type of Claim
+                                        </label>
+                                        <div class="col-sm-3">
+                                        <div class="form-group">
+                                            <select class="col-lg-12 form-control" id="ClaimType" name="ClaimType">
+                                                <option value="">[Select...]</option>
+                                                <option value="PD">OD Claim</option>
+                                                <option value="BI">TPPD Claim</option>
+                                                <option value="OD">TPBI Claim</option>
+                                            </select>
+                                            </div>
+                                        </div>
+                                        <label class="col-sm-2 control-label" for="inputInvestigationResult">
+                                            Investigation Result
+                                        </label>
+                                        <div class="col-sm-2">
+                                        <div class="form-group">
+                                            <select class="col-lg-12 form-control" id="InvestigationResult" name="InvestigationResult">
+                                                <option value="">[Select...]</option>
+                                                <option value="1">Fully At Fault</option>
+                                                <option value="2">Not At Fault</option>
+                                                <option value="3">Partial At Fault</option>
+                                            </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="form-group">
+                                    <label class="col-sm-3 control-label" for="inputAssignTo">
+                                        Scenario
+                                    </label>
+                                    <div class="col-sm-9">
+                                        <input class="form-control" data-val="true" id="inputReportedDate" name="ReportedDate"
+                                            type="text" value="" size="10" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="form-group">
+                                    <label class="col-sm-3 control-label" for="inputAssignTo">
+                                        Evidence
+                                    </label>
+                                    <div class="col-sm-9">
+                                        <input type="checkbox" name="UC001" value="CCTV" id="CCTV" style="text-align: center;" />&nbsp;
+                                        CCTV&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" name="UC001" value="WIT"
+                                            id="WIT" style="text-align: center;" />&nbsp; Witness Statement&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input
+                                                type="checkbox" name="UC001" value="SPIC" id="SPIC" style="text-align: center;" />&nbsp;
+                                        Scene Pics
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="form-group">
+                                    <label class="col-sm-3 control-label" for="inputRelatedFacts">
+                                        Related Facts
+                                    </label>
+                                    <div class="col-sm-9">
+                                        <textarea class="form-control" cols="20" id="inputRelatedFacts" maxlength="250" name="inputRelatedFacts"
+                                            rows="2"></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="form-group">
+                                    <label class="col-sm-3 control-label" for="inputCOAssessment">
+                                        CO's Assessment
+                                    </label>
+                                    <div class="col-sm-9">
+                                        <textarea class="form-control" cols="20" id="inputCOAssessment" maxlength="250" name="inputCOAssessment"
+                                            rows="4"></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </fieldset>
+                <fieldset>
+                    <legend>Supervisor Approval</legend>
+                    <div id="CO" class="panel-body">
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="form-group">
+                                    <label class="col-sm-3 control-label" for="inputSVAssignTo">
+                                        Assigned To
+                                    </label>
+                                    <div class="col-sm-9">
+                                        <select class="col-lg-6 form-control" id="inputSVAssignTo" name="inputSVAssignTo">
+                                            <option value="">[Select...]</option>
+                                            <option value="1">Abhinav Gupta</option>
+                                            <option value="2">Nishant Gupta</option>
+                                            <option value="3">Sanjay Gaur</option>
+                                            <option value="4">Gaurav Sharma</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="form-group">
+                                    <label class="col-sm-3 control-label" for="inputAppRecommendations">
+                                        Approve Recommendations?
+                                    </label>
+                                    <div class="col-sm-9">
+                                        <div class="RadioButton">
+                                            <input id="inputAppRecommendations_Y" name="inputAppRecommendations" type="radio"
+                                                value="Y" />&nbsp;&nbsp;<label for="inputAppRecommendations_Y">Yes</label>&nbsp;</div>
+                                        <div class="RadioButton">
+                                            <input id="inputAppRecommendations_N" name="inputAppRecommendations" type="radio"
+                                                value="N" />&nbsp;&nbsp;<label for="inputAppRecommendations_N">No</label>&nbsp;</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="form-group">
+                                    <label class="col-sm-3 control-label" for="inputSVRemarks">
+                                        Supervisor's Remarks
+                                    </label>
+                                    <div class="col-sm-9">
+                                        <textarea class="form-control" cols="20" id="inputSVRemarks" maxlength="250" name="inputSVRemarks"
+                                            rows="4"></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </fieldset>
+                <fieldset>
+                    <legend>OD Claim Breakdown</legend>
+                    <div id="Togglediv" class="panel-body">
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="form-group" style="margin-bottom: -5px">
+                                    <label class="col-sm-3 control-label" for="inputCostofRepairs">
+                                    </label>
+                                    <label class="col-sm-2 text-centre" for="inputOwnVehicleRepair">
+                                    </label>
+                                    <label class="col-sm-2 text-centre" for="inputOwnVehicleRepair">
+                                        3rd Party's
+                                    </label>
+                                    <label class="col-sm-2 text-centre" for="inputOwnVehicleRepair">
+                                        CO's Recommendations</label>
+                                    <label id="super" class="col-sm-3 text-centre" for="inputOwnVehicleRepair">
+                                        Supervisor's Mandate</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="form-group" style="margin-bottom: -5px">
+                                    <label class="col-sm-3 control-label" for="inputCostofRepairs">
+                                    </label>
+                                    <label class="col-sm-2 text-centre" for="inputOwnVehicleRepair">
+                                        Claim Quantum
+                                    </label>
+                                    <label class="col-sm-2 text-centre" for="inputOwnVehicleRepair">
+                                        Counter Offer
+                                    </label>
+                                    <label class="col-sm-2 text-centre" for="inputOwnVehicleRepair">
+                                        Maximum Offer</label>
+                                    <label id="Maxoffer" class="col-sm-3 text-centre" for="inputOwnVehicleRepair">
+                                        Maximum Offer</label>
+                                </div>
+                            </div>
+                        </div>
+                        <fieldset>
+                            <legend id="l1">
+                                <img alt="" id="l1img" src='@Url.Content("~/Images/icon_minus.png")' />Cost of Repairs</legend>
+                            <div class="row" id="l1div">
+                                <div class="col-lg-12">
+                                    <div class="form-group">
+                                        <label class="col-sm-3 control-label" for="inputCostofRepairs">
+                                            Cost of Repairs
+                                        </label>
+                                        <div class="col-sm-2">
+                                            <input format="" numlen="10" class="form-control" data-val="true" id="inputCoRClaimQuant" name="inputCoRClaimQuant"
+                                                type="text" value="" size="10" />
+                                        </div>
+                                        <div class="col-sm-2">
+                                            <input format="" numlen="10" class="form-control" data-val="true" id="inputCoRMinOffer" name="inputCoRMinOffer"
+                                                type="text" value="" size="10" />
+                                        </div>
+                                        <div class="col-sm-2">
+                                            <input format="" numlen="10" class="form-control" data-val="true" id="inputCoRMaxOffer" name="inputCoRMaxOffer"
+                                                type="text" value="" size="10" />
+                                        </div>
+                                        <div class="col-sm-2">
+                                            <input format="" numlen="10" class="form-control" data-val="true" id="inputCoRMaxOffer" name="inputCoRMaxOffer"
+                                                type="text" value="" size="10" />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </fieldset>
+                        <fieldset>
+                            <legend id="l2">
+                                <img alt="" id="l2img" src='@Url.Content("~/Images/icon_minus.png")' />Uninsured
+                                Losses</legend>
+                            <div class="row" id="l2div">
+                                <div>
+                                    <div class="col-lg-12">
+                                        <div class="form-group">
+                                            <label class="col-sm-3 control-label" for="inputLossofUse">
+                                                Loss of Use
+                                            </label>
+                                            <div class="col-sm-2">
+                                                <input format="" numlen="10" class="form-control" data-val="true" id="inputSLoUClaimQuant" name="inputSLoUClaimQuant"
+                                                    type="text" value="" size="10" />
+                                            </div>
+                                            <div class="col-sm-2">
+                                                <input format="" numlen="10" class="form-control" data-val="true" id="inputLoUMinOffer" name="inputSLoUMinOffer"
+                                                    type="text" value="" size="10" />
+                                            </div>
+                                            <div class="col-sm-2">
+                                                <input format="" numlen="10" class="form-control" data-val="true" id="inputLoUMaxOffer" name="inputSLoUMaxOffer"
+                                                    type="text" value="" size="10" />
+                                            </div>
+                                            <div class="col-sm-2">
+                                                <input format="" numlen="10" class="form-control" data-val="true" id="inputLoUMaxOffer" name="inputSLoUMaxOffer"
+                                                    type="text" value="" size="10" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </fieldset>
+                        <fieldset>
+                            <legend id="l3">
+                                <img alt="" id="l3img" src='@Url.Content("~/Images/icon_minus.png")' />Liability</legend>
+                            <div class="row" id="l3div">
+                                <div>
+                                    <div class="col-lg-12">
+                                        <div class="form-group">
+                                            <label class="col-sm-3 control-label" for="inputLiability">
+                                                Liability (%)
+                                            </label>
+                                            <div class="col-sm-2">
+                                            </div>
+                                            <div class="col-sm-2">
+                                                <input format="" numlen="10" class="form-control" data-val="true" id="inputLibMinOffer" name="inputLibMinOffer"
+                                                    type="text" value="" size="10" />
+                                            </div>
+                                            <div class="col-sm-2">
+                                                <input format="" numlen="10" class="form-control" data-val="true" id="inputLibMaxOffer" name="inputLibMaxOffer"
+                                                    type="text" value="" size="10" />
+                                            </div>
+                                            <div class="col-sm-2">
+                                                <input format="" numlen="10" class="form-control" data-val="true" id="inputLibMaxOffer" name="inputLibMaxOffer"
+                                                    type="text" value="" size="10" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="col-lg-12">
+                                        <div class="form-group">
+                                            <label class="col-sm-3 control-label" for="inputSubTotal">
+                                                Sub-Total
+                                            </label>
+                                            <div class="col-sm-2">
+                                            </div>
+                                            <div class="col-sm-2">
+                                                <input format="" numlen="10" class="form-control" data-val="true" id="inputSubMinOffer" name="inputSubMinOffer"
+                                                    type="text" value="" size="10" />
+                                            </div>
+                                            <div class="col-sm-2">
+                                                <input format="" numlen="10" class="form-control" data-val="true" id="inputSubMaxOffer" name="inputSubMaxOffer"
+                                                    type="text" value="" size="10" />
+                                            </div>
+                                            <div class="col-sm-2">
+                                                <input format="" numlen="10" class="form-control" data-val="true" id="inputSubMaxOffer" name="inputSubMaxOffer"
+                                                    type="text" value="" size="10" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </fieldset>
+                        <fieldset>
+                            <legend id="l4">
+                                <img alt="" id="l4img" src='@Url.Content("~/Images/icon_minus.png")' />Other Expenses</legend>
+                            <div class="row" id="l4div">
+                                <div class="col-lg-12">
+                                    <div class="form-group">
+                                        <label class="col-sm-3 control-label" for="inputOtherExpenses">
+                                            Other Expenses
+                                        </label>
+                                        <div class="col-sm-2">
+                                            <input format="" numlen="10" class="form-control" data-val="true" id="inputOTExClaimQuant" name="inputOTExClaimQuant"
+                                                type="text" value="" size="10" />
+                                        </div>
+                                        <div class="col-sm-2">
+                                            <input format="" numlen="10" class="form-control" data-val="true" id="inputOTExMinOffer" name="inputOTExMinOffer"
+                                                type="text" value="" size="10" />
+                                        </div>
+                                        <div class="col-sm-2">
+                                            <input format="" numlen="10" class="form-control" data-val="true" id="inputOTExMaxOffer" name="inputOTExMaxOffer"
+                                                type="text" value="" size="10" />
+                                        </div>
+                                        <div class="col-sm-2">
+                                            <input format="" numlen="10" class="form-control" data-val="true" id="inputOTExMaxOffer" name="inputOTExMaxOffer"
+                                                type="text" value="" size="10" />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </fieldset>
+                        <fieldset>
+                            <legend id="l5">
+                                <img alt="" id="l5img" src='@Url.Content("~/Images/icon_minus.png")' />Report Fees</legend>
+                            <div class="row" id="l5div">
+                                <div>
+                                    <div class="col-lg-12">
+                                        <div class="form-group">
+                                            <label class="col-sm-3 control-label" for="inputSurveyFee">
+                                                Survey Fee
+                                            </label>
+                                            <div class="col-sm-2">
+                                                <input format="" numlen="10" class="form-control" data-val="true" id="inputSFeeClaimQuant" name="inputSFeeClaimQuant"
+                                                    type="text" value="" size="10" />
+                                            </div>
+                                            <div class="col-sm-2">
+                                                <input format="" numlen="10" class="form-control" data-val="true" id="inputSFeeMinOffer" name="inputSFeeMinOffer"
+                                                    type="text" value="" size="10" />
+                                            </div>
+                                            <div class="col-sm-2">
+                                                <input format="" numlen="10" class="form-control" data-val="true" id="inputSFeeMaxOffer" name="inputSFeeMaxOffer"
+                                                    type="text" value="" size="10" />
+                                            </div>
+                                            <div class="col-sm-2">
+                                                <input format="" numlen="10" class="form-control" data-val="true" id="inputSFeeMaxOffer" name="inputSFeeMaxOffer"
+                                                    type="text" value="" size="10" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="col-lg-12">
+                                        <div class="form-group">
+                                            <label class="col-sm-3 control-label" for="inputReSurveyFee">
+                                                Re-Survey Fee
+                                            </label>
+                                            <div class="col-sm-2">
+                                                <input format="" numlen="10" class="form-control" data-val="true" id="inputRSFeeClaimQuant" name="inputRSFeeClaimQuant"
+                                                    type="text" value="" size="10" />
+                                            </div>
+                                            <div class="col-sm-2">
+                                                <input format="" numlen="10" class="form-control" data-val="true" id="inputRSFeeMinOffer" name="inputRSFeeMinOffer"
+                                                    type="text" value="" size="10" />
+                                            </div>
+                                            <div class="col-sm-2">
+                                                <input format="" numlen="10" class="form-control" data-val="true" id="inputRSFeeMaxOffer" name="inputRSFeeMaxOffer"
+                                                    type="text" value="" size="10" />
+                                            </div>
+                                            <div class="col-sm-2">
+                                                <input format="" numlen="10" class="form-control" data-val="true" id="inputRSFeeMaxOffer" name="inputRSFeeMaxOffer"
+                                                    type="text" value="" size="10" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="col-lg-12">
+                                        <div class="form-group">
+                                            <label class="col-sm-3 control-label" for="inputReportFee">
+                                                LTA/GIA/Police Report Fees
+                                            </label>
+                                            <div class="col-sm-2">
+                                                <input format="" numlen="10" class="form-control" data-val="true" id="inputRptFeeClaimQuant" name="inputRptFeeClaimQuant"
+                                                    type="text" value="" size="10" />
+                                            </div>
+                                            <div class="col-sm-2">
+                                                <input format="" numlen="10" class="form-control" data-val="true" id="inputRptFeeMinOffer" name="inputRptFeeMinOffer"
+                                                    type="text" value="" size="10" />
+                                            </div>
+                                            <div class="col-sm-2">
+                                                <input format="" numlen="10" class="form-control" data-val="true" id="inputRptFeeMaxOffer" name="inputRptFeeMaxOffer"
+                                                    type="text" value="" size="10" />
+                                            </div>
+                                            <div class="col-sm-2">
+                                                <input format="" numlen="10" class="form-control" data-val="true" id="inputRptFeeMaxOffer" name="inputRptFeeMaxOffer"
+                                                    type="text" value="" size="10" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </fieldset>
+                        <fieldset>
+                            <legend id="l6">
+                                <img alt="" id="l6img" src='@Url.Content("~/Images/icon_minus.png")' />3rd Party
+                                Legal Fees</legend>
+                            <div class="row" id="l6div">
+                                <div>
+                                    <div class="col-lg-12">
+                                        <div class="form-group">
+                                            <label class="col-sm-3 control-label" for="inputTPLawyerCost">
+                                                3rd Party Lawyer's Cost
+                                            </label>
+                                            <div class="col-sm-2">
+                                                <input format="" numlen="10" class="form-control" data-val="true" id="inputTPLCostClaimQuant" name="inputTPLCostClaimQuant"
+                                                    type="text" value="" size="10" />
+                                            </div>
+                                            <div class="col-sm-2">
+                                                <input format="" numlen="10" class="form-control" data-val="true" id="inputTPLCostinOffer" name="inputTPLCostinOffer"
+                                                    type="text" value="" size="10" />
+                                            </div>
+                                            <div class="col-sm-2">
+                                                <input format="" numlen="10" class="form-control" data-val="true" id="inputTPLCostMaxOffer" name="inputTPLCostMaxOffer"
+                                                    type="text" value="" size="10" />
+                                            </div>
+                                            <div class="col-sm-2">
+                                                <input format="" numlen="10" class="form-control" data-val="true" id="inputTPLCostMaxOffer" name="inputTPLCostMaxOffer"
+                                                    type="text" value="" size="10" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="col-lg-12">
+                                        <div class="form-group">
+                                            <label class="col-sm-3 control-label" for="inputTPLawyerDis">
+                                                3rd Party Lawyer's Disbursements
+                                            </label>
+                                            <div class="col-sm-2">
+                                                <input format="" numlen="10" class="form-control" data-val="true" id="inputTPLDClaimQuant" name="inputTPLDClaimQuant"
+                                                    type="text" value="" size="10" />
+                                            </div>
+                                            <div class="col-sm-2">
+                                                <input format="" numlen="10" class="form-control" data-val="true" id="inputTPLDMinOffer" name="inputTPLDMinOffer"
+                                                    type="text" value="" size="10" />
+                                            </div>
+                                            <div class="col-sm-2">
+                                                <input format="" numlen="10" class="form-control" data-val="true" id="inputTPLDMaxOffer" name="inputTPLDMaxOffer"
+                                                    type="text" value="" size="10" />
+                                            </div>
+                                            <div class="col-sm-2">
+                                                <input format="" numlen="10" class="form-control" data-val="true" id="inputTPLDMaxOffer" name="inputTPLDMaxOffer"
+                                                    type="text" value="" size="10" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </fieldset>
+                        <fieldset>
+                            <legend id="l7">
+                                <img alt="" id="l7img" src='@Url.Content("~/Images/icon_minus.png")' />Our Legal
+                                Fees</legend>
+                            <div id="l7div" class="row">
+                                <div>
+                                    <div class="col-lg-12">
+                                        <div class="form-group">
+                                            <label class="col-sm-3 control-label" for="inputOurLawyerCost">
+                                                Our Lawyer's Cost
+                                            </label>
+                                            <div class="col-sm-2">
+                                                <input format="" numlen="10" class="form-control" data-val="true" id="inputOLCClaimQuant" name="inputOLCClaimQuant"
+                                                    type="text" value="" size="10" />
+                                            </div>
+                                            <div class="col-sm-2">
+                                                <input format="" numlen="10" class="form-control" data-val="true" id="inputOLCMinOffer" name="inputOLCMinOffer"
+                                                    type="text" value="" size="10" />
+                                            </div>
+                                            <div class="col-sm-2">
+                                                <input format="" numlen="10" class="form-control" data-val="true" id="inputOLCMaxOffer" name="inputOLCMaxOffer"
+                                                    type="text" value="" size="10" />
+                                            </div>
+                                            <div class="col-sm-2">
+                                                <input format="" numlen="10" class="form-control" data-val="true" id="inputOLCMaxOffer" name="inputOLCMaxOffer"
+                                                    type="text" value="" size="10" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="col-lg-12">
+                                        <div class="form-group">
+                                            <label class="col-sm-3 control-label" for="inputOurLawyerDis">
+                                                Our Lawyer's Disbursements
+                                            </label>
+                                            <div class="col-sm-2">
+                                                <input format="" numlen="10" class="form-control" data-val="true" id="inputOLDClaimQuant" name="inputOLDClaimQuant"
+                                                    type="text" value="" size="10" />
+                                            </div>
+                                            <div class="col-sm-2">
+                                                <input format="" numlen="10" class="form-control" data-val="true" id="inputOLDMinOffer" name="inputOLDMinOffer"
+                                                    type="text" value="" size="10" />
+                                            </div>
+                                            <div class="col-sm-2">
+                                                <input format="" numlen="10" class="form-control" data-val="true" id="inputOLDMaxOffer" name="inputOLDMaxOffer"
+                                                    type="text" value="" size="10" />
+                                            </div>
+                                            <div class="col-sm-2">
+                                                <input format="" numlen="10" class="form-control" data-val="true" id="inputOLDMaxOffer" name="inputOLDMaxOffer"
+                                                    type="text" value="" size="10" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </fieldset>
+                        <div style="padding-top: 10px">
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="form-group">
+                                        <label class="col-sm-3 control-label" for="inputTotal">
+                                            Total
+                                        </label>
+                                        <div class="col-sm-2">
+                                            <input format="" numlen="10" class="form-control" data-val="true" id="inputTotClaimQuant" name="inputTotClaimQuant"
+                                                type="text" value="" size="10" />
+                                        </div>
+                                        <div class="col-sm-2">
+                                            <input format="" numlen="10" class="form-control" data-val="true" id="inputTotMinOffer" name="inputTotMinOffer"
+                                                type="text" value="" size="10" />
+                                        </div>
+                                        <div class="col-sm-2">
+                                            <input format="" numlen="10" class="form-control" data-val="true" id="inputTotMaxOffer" name="inputTotMaxOffer"
+                                                type="text" value="" size="10" />
+                                        </div>
+                                        <div class="col-sm-2">
+                                            <input format="" numlen="10" class="form-control" data-val="true" id="inputTotMaxOffer" name="inputTotMaxOffer"
+                                                type="text" value="" size="10" />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div style="padding-top: 5px">
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="form-group">
+                                        <label class="col-sm-3 control-label" for="inputTotal">
+                                            Remarks
+                                        </label>
+                                        <div class="col-sm-8">
+                                            <textarea class="form-control" cols="20" id="inputSCORemarks" maxlength="250" name="inputSCORemarks"
+                                                rows="4"></textarea>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </fieldset>
+            </div>
+        </div>
+    </fieldset>
+</div>
+<script language="javascript" type="text/javascript">
+    $(function () {
+        $("#Togglediv legend").click(function (a) {
+            $("#" + this.id + "img", this).attr("src", function (a, b) {
+                return '@Url.Content("~/Images/icon_minus.png")' == b ? '@Url.Content("~/Images/icon_plus.png")' : '@Url.Content("~/Images/icon_minus.png")'
+            });
+            $("#" + this.id + "div").toggle()
+        }).css("cursor", "pointer")
+        if ('@co' == "CO") {
+            $("#CO,#Maxoffer,#super").css("background", "grey");
+
+        }
+
+        $('input[type=text]').each(function () {
+            if (void 0 !== $(this).attr("format")) {
+                if ($(this).val() != "") {
+                    $(this).val($(this).val().toString().replace(/,/g, ""));
+                }
+            };
+        });
+
+        $('td').each(function () {
+            if (void 0 !== $(this).attr("format")) {
+                if ($(this).html() != "") {
+                    $(this).html(CurrencyFormat($(this).html()));
+                }
+            };
+        });
+
+        $("input[type=text], textarea").keypress(function () {
+            if (void 0 !== $(this).attr("numlen")) {
+                var b = $(this).val().length,
+            c = parseInt($(this).attr("numlen"));
+                if (c > parseInt(b)) {
+                    var b = "#" + this.id,
+                a = event.type,
+                a = a.which ? a.which : event.keyCode;
+                    return 46 != a && 31 < a && (48 > a || 57 < a) ? ($(b).focus(), !1) : !0
+                }
+                return !1
+            }
+            if (void 0 !== $(this).attr("strlen")) return b = $(this).val().length, c = parseInt($(this).attr("strlen")), c > parseInt(b) ? (a = a || event, a = 32 == a.keyCode ? !0 : /[a-z]+$/i.test(String.fromCharCode(a.keyCode || a.which)), 0 == a ? !1 : a) : !1;
+            if (void 0 !== $(this).attr("len")) return b = $(this).val().length, c = parseInt($(this).attr("len")), c > parseInt(b) ? !0 : !1;
+            $(this).valid();
+        });
+
+        $("input[type=text]").blur(function () {
+            if (void 0 !== $(this).attr("format")) {
+                var a = $(this).val().replace(/,/g, "");
+                if ("" != a && !isNaN(a)) {
+                    $(this).val(CurrencyFormat($(this).val().replace(/,/g, "")));
+
+                }
+                $(this).valid();
+            };
+        });
+
+        $('input[type=text]').each(function () {
+            if (void 0 !== $(this).attr("format")) {
+                if ($(this).val() != "") {
+                    $(this).val(CurrencyFormat($(this).val()));
+                }
+            };
+        });
+    });
+
+    function CurrencyFormat(number) {
+        var decimalplaces = 2;
+        var decimalcharacter = ".";
+        var thousandseparater = ",";
+        number = parseFloat(number);
+        var sign = number < 0 ? "-" : "";
+        var formatted = new String(number.toFixed(decimalplaces));
+        if (decimalcharacter.length && decimalcharacter != ".") { formatted = formatted.replace(/\./, decimalcharacter); }
+        var integer = "";
+        var fraction = "";
+        var strnumber = new String(formatted);
+        var dotpos = decimalcharacter.length ? strnumber.indexOf(decimalcharacter) : -1;
+        if (dotpos > -1) {
+            if (dotpos) { integer = strnumber.substr(0, dotpos); }
+            fraction = strnumber.substr(dotpos + 1);
+        }
+        else { integer = strnumber; }
+        if (integer) { integer = String(Math.abs(integer)); }
+        while (fraction.length < decimalplaces) { fraction += "0"; }
+        temparray = new Array();
+        while (integer.length > 3) {
+            temparray.unshift(integer.substr(-3));
+            integer = integer.substr(0, integer.length - 3);
+        }
+        temparray.unshift(integer);
+        integer = temparray.join(thousandseparater);
+        return integer + decimalcharacter + fraction;
+    }
+</script>

@@ -1,0 +1,2 @@
+﻿UPDATE MNT_SYS_PARAMS SET FromUserEmailId='crisadm@comfortdelgro.com' 
+UPDATE POL_EMAIL_SPOOL SET EMAIL_CC=EMAIL_FROM

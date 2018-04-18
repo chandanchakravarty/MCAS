@@ -1,0 +1,243 @@
+﻿@using MCAS.Globalisation
+@using MCAS.Web.Objects.Resources.ClaimProcessing;
+@using MCAS.Web.Objects.Resources.Common;
+@using MCAS.Web.Objects.CommonHelper;
+@model IEnumerable<MCAS.Web.Objects.MastersHelper.PreViewDocumentModel>
+@{
+    ViewBag.Title = "Print";
+    Layout = null;
+    string LogId = Convert.ToString(Request.QueryString["LogId"]) ?? "";
+}
+<link href="@Url.Content("~/Content/EbixGrid.css")" rel="Stylesheet" media="screen" />
+<link href="@Url.Content("~/Content/jquery-ui.css")" rel="Stylesheet" media="screen" />
+<link href="@Url.Content("~/Content/chosen.css")" rel="Stylesheet" media="screen" />
+<style type="text/css">
+.Drop
+{
+    width:100%;
+}
+Div.chosen-container.chosen-container-single
+{
+    position:inherit !important;
+}
+
+</style>
+<script src='@Url.Content("~/Scripts/chosen.jquery.js")' type="text/javascript"></script>
+<script src='@Url.Content("~/Scripts/chosen.proto.js")' type="text/javascript"></script>
+<div class="table-responsive">
+    <div class="ui-ebixgrid">
+        @Html.RenderGrid((from m in Model where m.Is_Header == "Y" select new { m.parentId, m.Description }).Distinct().OrderBy(x => x.parentId),
+            new EbixGrid.EbixGrid
+                {
+                    Columns = new List<EbixGrid.EGColumn> 
+                                 {
+                                     new EbixGrid.EGColumn { DataField = "parentId",HeaderText = ClaimInfoPayment.ClaimType,PrimaryKey = true ,Hidden = true,Width = "0%" },
+                                     new EbixGrid.EGColumn { DataField = "Description" ,HeaderText = Common.Description,PrimaryKey = false ,Width = "100%" }
+                                 },
+                    Width = "650",
+                    Height = "350",
+                    ID = "PreviewGrid",
+                    IsChildRequired = true,
+                    childGrid = new EbixGrid.EbixGrid
+                    {
+                        Columns = new List<EbixGrid.EGColumn> 
+                                 { 
+                                   new EbixGrid.EGColumn { DataField = "parentId",HeaderText = ClaimInfoPayment.ClaimType,  PrimaryKey = false ,ForeinKey=true,Hidden = true,Width = "0%" },
+                                   new EbixGrid.EGColumn { DataField = "ChildId",  HeaderText = ClaimInfoPayment.RecordNumber, PrimaryKey = true,  Width = "0%"},
+                                   new EbixGrid.EGColumn { DataField = "ChildDescription" ,HeaderText = Common.Description,PrimaryKey = false ,Width = "60%" },
+                                   new EbixGrid.EGColumn 
+                                      { 
+                                         DataField = "",  HeaderText = "View", Width = "20%",
+                                         Columntype = new EbixGrid.EGColumnType
+                                                             { 
+                                                                 Columntype = EbixGrid.ColumnType.LinkButton,
+                                                                 ColumnCell = new EbixGrid.EGCell{ Caption = Common.View, Href = @Url.Content("~/ClaimDocument/GenerateDocument"), CssClass ="View btn btn-xs btn-info"}  
+                                                             } 
+                                       , QueryStringFields =  new List<string> {"PolicyId","LevelHide1","ChildId","ScreenId", "Claimid","AccidentClaimId","SId", "IdType=A","Mode=View" }
+                                      },
+                                      new EbixGrid.EGColumn 
+                                      { 
+                                         DataField = "",  HeaderText = "Generate", Width = "20%",
+                                         Columntype = new EbixGrid.EGColumnType
+                                                             { 
+                                                                 Columntype = EbixGrid.ColumnType.LinkButton,
+                                                                 ColumnCell = new EbixGrid.EGCell{ Caption = Common.Generate, Href = @Url.Content("~/ClaimDocument/GenerateDocument"), CssClass ="Generate Print btn btn-xs btn-info"}  
+                                                             } 
+                                       , QueryStringFields =  new List<string> {"PolicyId","LevelHide1","ChildId","ScreenId", "Claimid","AccidentClaimId","SId","IdType=A","Mode=Generate" }
+                                      }
+                                 },
+                        Width = "650",
+                        Height = "350",
+
+                        ID = "SubPreviewGrid",
+                        DataSource = (from m in Model select new { m.parentId, m.LevelHide1,m.SId, m.ChildId, m.ChildDescription, m.ScreenId, m.Claimid, m.AccidentClaimId }).Distinct().OrderBy(x => x.ChildId),
+                        IsChildRequired = true,
+                        childGrid = new EbixGrid.EbixGrid
+                        {
+                            Columns = new List<EbixGrid.EGColumn> 
+                                 { 
+                                   new EbixGrid.EGColumn { DataField = "ChildId",HeaderText = ClaimInfoPayment.ClaimType,  PrimaryKey = false ,ForeinKey=true,Hidden = true,Width = "0%" },
+                                   new EbixGrid.EGColumn { DataField = "uniquesubchildid",  HeaderText = ClaimInfoPayment.RecordNumber, PrimaryKey = true,  Width = "0%"},
+                                   new EbixGrid.EGColumn { DataField = "uniquesubchilddescription" ,HeaderText = Common.Description,PrimaryKey = false ,Width = "30%" },
+                                   new EbixGrid.EGColumn 
+                                      { 
+                                         DataField = "",  HeaderText = Common.Description, Width = "30%",
+                                         Columntype = new EbixGrid.EGColumnType
+                                                             { 
+                                                                 Columntype = EbixGrid.ColumnType.DropDown,
+                                                                 ColumnCell = new EbixGrid.EGCell
+                                                                 {
+                                                                     DataSource=Model.FirstOrDefault().Hospital ,
+                                                                     TextField="Text",
+                                                                     ValueField="intID", 
+                                                                     CssClass ="Drop"
+                                                                 }  
+                                                             } 
+                                          },
+                                   new EbixGrid.EGColumn 
+                                      { 
+                                         DataField = "",  HeaderText = "View", Width = "20%",
+                                         Columntype = new EbixGrid.EGColumnType
+                                                             { 
+                                                                 Columntype = EbixGrid.ColumnType.LinkButton,
+                                                                 ColumnCell = new EbixGrid.EGCell{ Caption = Common.View, Href = @Url.Content("~/ClaimDocument/GenerateDocument"), CssClass ="View btn btn-xs btn-info"}  
+                                                             } 
+                                       , QueryStringFields =  new List<string> {"PolicyId","SubChildHeader", "Claimid","ScreenId","ChildId","AccidentClaimId", "uniquesubchildid","Id","parentId","SId","IdType=C","Mode=View" }
+                                      },
+                                      new EbixGrid.EGColumn 
+                                      { 
+                                         DataField = "",  HeaderText = "Generate", Width = "20%",
+                                         Columntype = new EbixGrid.EGColumnType
+                                                             { 
+                                                                 Columntype = EbixGrid.ColumnType.LinkButton,
+                                                                 ColumnCell = new EbixGrid.EGCell{ Caption = Common.Generate, Href = @Url.Content("~/ClaimDocument/GenerateDocument"), CssClass ="Generate Print btn btn-xs btn-info"}  
+                                                             } 
+                                       , QueryStringFields =  new List<string> {"PolicyId","SubChildHeader", "Claimid","ScreenId","ChildId","AccidentClaimId", "uniquesubchildid","Id","parentId","SId","IdType=C","Mode=Generate" }
+                                      }
+                                 },
+                            Width = "650",
+                            Height = "350",
+
+                            ID = "SubPreviewGrid",
+                            DataSource = (from m in Model where m.uniquesubchildid != null select new { m.ChildId, m.SId, m.uniquesubchildid, m.SubChildDescription, m.Claimid, m.AccidentClaimId, m.ScreenId, m.Template_Id, m.SubChildHeader, m.Id, m.uniquesubchilddescription, m.parentId }).Distinct().OrderBy(x => x.uniquesubchildid),
+                            IsChildRequired = true,
+                            childGrid = new EbixGrid.EbixGrid
+                        {
+                            Columns = new List<EbixGrid.EGColumn> 
+                                 { 
+                                   new EbixGrid.EGColumn { DataField = "uniquesubchildid",HeaderText = ClaimInfoPayment.ClaimType,  PrimaryKey = false ,ForeinKey=true,Hidden = true,Width = "0%" },
+                                   new EbixGrid.EGColumn { DataField = "SubChildId",  HeaderText = ClaimInfoPayment.RecordNumber, PrimaryKey = true,  Width = "0%"},
+                                   new EbixGrid.EGColumn { DataField = "Text" ,HeaderText = Common.Description,PrimaryKey = false ,Width = "60%" },
+                                   new EbixGrid.EGColumn 
+                                      { 
+                                         DataField = "",  HeaderText = "View", Width = "20%",
+                                         Columntype = new EbixGrid.EGColumnType
+                                                             { 
+                                                                 Columntype = EbixGrid.ColumnType.LinkButton,
+                                                                 ColumnCell = new EbixGrid.EGCell{ Caption = Common.View, Href = @Url.Content("~/ClaimDocument/GenerateDocument"), CssClass ="View btn btn-xs btn-info"}  
+                                                             } 
+                                       , QueryStringFields =  new List<string> {"PolicyId", "Claimid","SubChildId","AccidentClaimId","ScreenId", "unquieid","SId","IdType=S","Mode=View" }
+                                      },
+                                      new EbixGrid.EGColumn 
+                                      { 
+                                         DataField = "",  HeaderText = "Generate", Width = "20%",
+                                         Columntype = new EbixGrid.EGColumnType
+                                                             { 
+                                                                 Columntype = EbixGrid.ColumnType.LinkButton,
+                                                                 ColumnCell = new EbixGrid.EGCell{ Caption = Common.Generate, Href = @Url.Content("~/ClaimDocument/GenerateDocument"), CssClass ="Generate Print btn btn-xs btn-info"}  
+                                                             } 
+                                       , QueryStringFields =  new List<string> {"PolicyId", "Claimid","SubChildId","AccidentClaimId","ScreenId", "unquieid","SId",             "IdType=S","Mode=Generate" }
+                                      }
+                                 },
+                            Width = "650",
+                            Height = "350",
+
+                            ID = "SubPreviewGrid",
+                            DataSource = (from m in Model where m.SubChildId != null select new { m.ChildId, m.SId, m.uniquesubchildid, m.SubChildId, m.SubChildDescription, m.Claimid, m.AccidentClaimId, m.Text, m.ScreenId, m.Template_Id, m.unquieid, m.Id }).Distinct().OrderBy(x => x.SubChildId),
+                            IsChildRequired = true
+                        }
+                        }
+
+                    }
+                }
+  )
+    </div>
+</div>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $(".Drop").chosen({
+            no_results_text: "Oops, nothing found!",
+            width: "95%"
+        });
+        $("div.chosen-drop").css("width", "60%");
+        $("#PreviewGrid_table span.ui-icon").each(function () {
+            var a = $(this).id || $(this).context.id, b;
+            0 == a.indexOf("span_") && (b = a.replace("span_", "") + "SubPreviewGrid_table", 0 == $("#" + b + " >tbody > tr").size() && $("#PreviewGrid_table").find("#" + a + ",#PreviewGrid_table #" + b).hide());
+        });
+        $("#PreviewGrid_table span.ui-icon").click(function () {
+            var b = $(this).context.id;
+            $("#PreviewGrid_table span.ui-icon").each(function () {
+                if (($(this).hasClass("ui-icon-minus") || $(this).hasClass("ui-icon-plus")) && !b.beginsWith($(this).context.id)) {
+                    var a = $(this).context.id,
+                c = a.slice(5, a.length);
+                    $("#PreviewGrid_table").find("#" + c).hide();
+                    $("#PreviewGrid_table").find("#" + a).removeClass("ui-icon-minus").addClass("ui-icon-plus")
+                }
+            })
+        });
+        $("a.View").each(function () {
+            if ($(this).attr("href")) {
+                var a = $(this).closest("table").attr("id"), b = $("#PreviewGrid_table #" + a + " > thead > tr > th").length;
+                $(this).closest("tr").attr("id");
+                "C" != $(this).attr("href").getstringinbetween("IdType") || "31" != $(this).attr("href").getstringinbetween("ChildId") && "32" != $(this).attr("href").getstringinbetween("ChildId") || $("#PreviewGrid_table #" + a + " > thead > tr > th:nth-child(" + (b - 2) + ")").css("width", "60%") && $("#PreviewGrid_table #" + a + " > thead > tr > th:nth-child(" + (b - 3) + ")").css("width", "0%");
+                "C" == $(this).attr("href").getstringinbetween("IdType") && "31" != $(this).attr("href").getstringinbetween("ChildId") && "32" != $(this).attr("href").getstringinbetween("ChildId") && $("#PreviewGrid_table #" + a + " > thead > tr > th:nth-child(" + (b - 2) + ")").css("width", "0%") && $("#PreviewGrid_table #" + a + " > thead > tr > th:nth-child(" + (b - 3) + ")").css("width", "60%");
+                "A" == $(this).attr("href").getstringinbetween("IdType") && "Y" == $(this).attr("href").getstringinbetween("LevelHide1") && $("#PreviewGrid_table #" + a + " > thead > tr > th:nth-child(" + b + ")").css("width", "0%") && $("#PreviewGrid_table #" + a + " > thead > tr > th:nth-child(" + (b - 1) + ")").css("width", "0%") && $("#PreviewGrid_table #" + a + " > thead > tr > th:nth-child(" + (b - 2) + ")").css("width", "100%");
+                ("C" == $(this).attr("href").getstringinbetween("IdType") || "S" == $(this).attr("href").getstringinbetween("IdType")) && $(this).attr("href") && "Y" == getstringinbetweenUrl("Is_Header", $(this).attr("href")) && $("#PreviewGrid_table #" + a + " > thead > tr > th:nth-child(" + b + ")").css("width", "0%") && $("#PreviewGrid_table #" + a + " > thead > tr > th:nth-child(" + (b - 1) + ")").css("width", "0%") && ($("#PreviewGrid_table #" + a + " > thead > tr > th:nth-child(" + (b - 2) + ")").has("select") ? ($("#PreviewGrid_table #" + a + " > thead > tr > th:nth-child(" + (b - 2) + ")").css("width", "0%"), $("#PreviewGrid_table #" + a + " > thead > tr > th:nth-child(" + (b - 3) + ")").css("width", "100%")) : $("#PreviewGrid_table #" + a + " > thead > tr > th:nth-child(" + (b - 2) + ")").css("width", "100%"));
+                $(this).attr("url", $(this).attr("href")).attr("href", "#")
+            }
+        });
+        $("a.Generate").each(function () { $(this).attr("url", $(this).attr("href")).attr("href", "#") });
+
+        $("a.View,a.Generate").on("click", function () {
+            var sid = $(this).attr("url").getstringinbetween("SId") || "", a = "C" == $(this).attr("url").getstringinbetween("IdType") ? ($(this).attr("url").getstringinbetween("uniquesubchildid").split($(this).attr("url").getstringinbetween("ChildId"))[1] != "" ? $(this).attr("url").getstringinbetween("uniquesubchildid").split($(this).attr("url").getstringinbetween("ChildId"))[1] : $(this).attr("url").getstringinbetween("ChildId")) : "S" == $(this).attr("url").getstringinbetween("IdType") ? $(this).attr("url").getstringinbetween("SubChildId") : $(this).attr("url").getstringinbetween("ChildId"),
+        b = "C" == $(this).attr("url").getstringinbetween("IdType") ? ("31" == $(this).attr("url").getstringinbetween("ChildId") || "32" == $(this).attr("url").getstringinbetween("ChildId")) ? $("#" + $(this).closest('tr').attr("id") + " td select#ddl_0.Drop").val() : $(this).attr("url").getstringinbetween("Id") : "S" == $(this).attr("url").getstringinbetween("IdType") ? $(this).attr("url").getstringinbetween("unquieid") : $(this).attr("url").getstringinbetween("Claimid");
+            var path = '@Url.Content("~/ClaimDocument/GenerateDocument")' + "?ClaimID=" + $(this).attr("url").getstringinbetween("Claimid") + "&AccidentClaimId=" + $(this).attr("url").getstringinbetween("AccidentClaimId") + "&ScreenId=" + $(this).attr("url").getstringinbetween("ScreenId") + "&Mode=" + $(this).attr("url").getstringinbetween("Mode") + "&SId=" + sid + "&TemplateId=" + a + "&PartyTypeId=" + b + "&uid=" + guid();
+            window.open(path, '_blank');
+            return !1
+        });
+
+    });
+
+    function showChildGrid(id, spanid) {
+        $('#' + id).slideToggle();
+        if ($('#span_' + id).hasClass('ui-icon-plus'))
+            $('#span_' + id).removeClass('ui-icon-plus').addClass('ui-icon-minus');
+        else
+            $('#span_' + id).removeClass('ui-icon-minus').addClass('ui-icon-plus');
+    }
+
+    function getstringinbetweenUrl(a, b) {
+        b = b.replace("ChildIHeader", "Is_Header").replace("SubChildHeader", "Is_Header");
+        for (var c = b.split("&"), d = 0; d < c.length; d++) {
+            var e = c[d].split("=");
+            if (e[0] == a) return e[1]
+        }
+    }
+    var guid = function () {
+        function a() {
+            return Math.floor(65536 * (1 + Math.random())).toString(16).substring(1)
+        }
+        return function () {
+            return a() + a() + "-" + a() + "-" + a() + "-" + a() + "-" + a() + a() + a()
+        }
+    } ();
+    String.prototype.beginsWith = function (a) {
+        return 0 === this.indexOf(a)
+    };
+    String.prototype.getstringinbetween = function (a) {
+        for (var e = this.split("&"), d = 0; d < e.length; d++) {
+            var b = e[d].split("=");
+            if (b[0] == a) return b[1]
+        };
+    };
+</script>

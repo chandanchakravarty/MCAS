@@ -1,0 +1,753 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Group Code taken from RuleType  Enumeration defined in ClsCoverages  -->
+<Root>
+	<Master>
+		<Query Code="SELECT" Level="APP">Proc_GetKeysForMotor_APP</Query>
+		<Query Code="SELECT" Level="POLICY">Proc_GetKeysForMotor_Policy</Query>
+		<Column Code="APP_EFFECTIVE_DATE" MapColumnn="APP_EFFECTIVE_DATE" TableAssociated="APP_LIST"
+			ColumnAssociated="APP_EFFECTIVE_DATE"></Column>
+		<Column Code="APP_YEAR" MapColumnn="APP_YEAR" TableAssociated="APP_LIST" ColumnAssociated="APP_EFFECTIVE_DATE"></Column>
+		<Column Code="STATE_ID" MapColumnn="STATE_ID" TableAssociated="APP_LIST" ColumnAssociated="STATE_ID"></Column>
+		<Column Code="LOB_ID" MapColumnn="LOB_ID" TableAssociated="APP_LIST" ColumnAssociated="STATE_ID"></Column>
+		<Column Code="UMB_POLICY" MapColumnn="UMB_POLICY" TableAssociated="APP_AUTO_GEN_INFO"></Column>
+		<Column Code="LIMIT_BISPL" MapColumnn="LIMIT_BISPL" TableAssociated="APP_AUTO_GEN_INFO"></Column>
+		<Column Code="LIMIT_PUNCS" MapColumnn="LIMIT_PUNCS" TableAssociated="APP_AUTO_GEN_INFO"></Column>
+		<Column Code="LIMIT_RLCSL" MapColumnn="LIMIT_RLCSL" TableAssociated="APP_AUTO_GEN_INFO"></Column>
+		<Column Code="LIMIT_PUMSP" MapColumnn="LIMIT_PUMSP" TableAssociated="APP_AUTO_GEN_INFO"></Column>
+		<Column Code="COMP_TAKEN" MapColumnn="COMP_TAKEN" TableAssociated="APP_AUTO_GEN_INFO"></Column>
+		<Column Code="VEHICLE_YEAR" MapColumnn="VEHICLE_YEAR" TableAssociated="APP_AUTO_GEN_INFO"></Column>
+		<Column Code="DEDUCTIBLE_COMP" MapColumnn="DEDUCTIBLE_COMP" TableAssociated="APP_AUTO_GEN_INFO"></Column>
+		<Column Code="DEDUCTIBLE_COLL" MapColumnn="DEDUCTIBLE_COLL" TableAssociated="APP_AUTO_GEN_INFO"></Column>
+		<Column Code="SYMBOL" MapColumnn="SYMBOL" TableAssociated="APP_AUTO_GEN_INFO"></Column>
+		<Column Code="MOTORCYCLE_TYPE" MapColumnn="MOTORCYCLE_TYPE" TableAssociated="APP_AUTO_GEN_INFO"></Column>
+		<Column Code="VEHICLE_CC" MapColumnn="VEHICLE_CC" TableAssociated="APP_AUTO_GEN_INFO"></Column>
+		<Column Code="CSL_OPTED" MapColumnn="CSL_OPTED" TableAssociated="APP_VEHICLE_COVERAGE"></Column>
+		<Column Code="MEDPM1_OPTED" MapColumnn="MEDPM1_OPTED" TableAssociated="APP_VEHICLE_COVERAGE"></Column>
+		<Column Code="UNDER_25_AGE" MapColumnn="UNDER_25_AGE" TableAssociated="APP_DRIVER_DETAILS"></Column>
+		<Column Code="COLL_OPTED" MapColumnn="COLL_OPTED" TableAssociated="APP_VEHICLE_COVERAGE"></Column>
+		<Column Code="TEMP_DCOMP" MapColumnn=""></Column>
+		<Column Code="TEMP_DCOLL" MapColumnn=""></Column>
+	</Master>
+	<!-- Coverages to be defaulted when new boat is added  -->
+	<Group Code="Default">
+		<Rule Action="Database" StartDate="1950-01-01" EndDate="3000-12-30" STATE_ID="22">
+			<Conditions>
+				<Condition Operand1="1" Operator="==" Operand2="1" OperandType="Double">
+					<!--ToGrant CoverageCode="MEDPM1"> commented as per Itrack Issue 1617 not to give ths coverage by Default
+						<Limit Value="5000 1st Party Medical-Excess" Operand1="" Operator="" Operand2="" DeducID=""></Limit>
+						<Deductible Value="" Operand1="" Operator="" Operand2="" DeducID=""></Deductible>
+					/ToGrant -->
+					
+						<!--Added by Lalit for add state fees component-->
+					  <ToGrant CoverageCode="MCCACYF">
+						<Limit Value="" Operand1="" Operator="" Operand2="" DeducID=""></Limit>
+						<Deductible Value="" Operand1="" Operator="" Operand2="" DeducID=""></Deductible>
+					  </ToGrant>
+						<!--End-->
+					<ToGrant CoverageCode="PD">
+						<Limit Value="25000" Operand1="" Operator="" Operand2="" DeducID=""></Limit>
+						<Deductible Value="" Operand1="" Operator="" Operand2="" DeducID=""></Deductible>
+					</ToGrant>
+					<ToGrant CoverageCode="MPEMC">
+						<Limit Value="" Operand1="" Operator="" Operand2="" DeducID=""></Limit>
+						<Deductible Value="" Operand1="" Operator="" Operand2="" DeducID=""></Deductible>
+					</ToGrant>
+				</Condition>
+			</Conditions>
+			<Conditions>
+				<Condition Operand1="$UMB_POLICY" Operator="==" Operand2="1" OperandType="Double">
+					<ToGrant CoverageCode="BISPL">
+						<Limit Value="250/500000" Operand1="" Operator="" Operand2="" DeducID=""></Limit>
+						<Deductible Value="" Operand1="" Operator="" Operand2="" DeducID=""></Deductible>
+					</ToGrant>
+					<SubCondition Operand1="$LIMIT_BISPL" Operator="&lt;" Operand2="250" OperandType="Double">
+						<ToSet CoverageCode="BISPL">
+							<Limit Value="250/500000" Operand1="" Operator="" Operand2="" DeducID=""></Limit>
+							<Deductible Value="" Operand1="" Operator="" Operand2="" DeducID=""></Deductible>
+						</ToSet>
+					</SubCondition>
+				</Condition>
+				<Condition Operand1="$UMB_POLICY" Operator="!=" Operand2="1" OperandType="Double">
+					<ToGrant CoverageCode="BISPL">
+						<Limit Value="25/50000" Operand1="" Operator="" Operand2="" DeducID=""></Limit>
+						<Deductible Value="" Operand1="" Operator="" Operand2="" DeducID=""></Deductible>
+					</ToGrant>
+					<!-- Commented by Pravesh as we offer all limits for Michigan State -->
+					<!-- SubCondition Operand1="$LIMIT_BISPL" Operator="&gt;" Operand2="100" OperandType="Double">
+						<ToSet CoverageCode="BISPL">
+							<Limit Value="25/50000" Operand1="" Operator="" Operand2="" DeducID=""></Limit>
+							<Deductible Value="" Operand1="" Operator="" Operand2="" DeducID=""></Deductible>
+						</ToSet>
+					</SubCondition>
+					-->
+				</Condition>
+			</Conditions>
+			<Conditions>
+				<Condition Operand1="$UMB_POLICY" Operator="==" Operand2="1" OperandType="Double">
+					<SubCondition Operand1="$UNDER_25_AGE" Operator="==" Operand2="1" OperandType="Double">
+						<ToGrant CoverageCode="RLCSL">
+							<Limit Value="500000" Operand1="" Operator="" Operand2="" DeducID=""></Limit>
+							<Deductible Value="" Operand1="" Operator="" Operand2="" DeducID=""></Deductible>
+						</ToGrant>
+						<ToRevoke CoverageCode="BISPL"></ToRevoke>
+						<ToRevoke CoverageCode="PD"></ToRevoke>
+						<ToRevoke CoverageCode="PUMSP"></ToRevoke>
+					</SubCondition>
+				</Condition>
+			</Conditions>
+			<Conditions>
+				<Condition Operand1="$CSL_OPTED" Operator="!=" Operand2="0" OperandType="Double">
+					<ToRevoke CoverageCode="BISPL"></ToRevoke>
+					<ToRevoke CoverageCode="PD"></ToRevoke>
+				</Condition>
+			</Conditions>
+		</Rule>
+		<Rule Action="Database" StartDate="1950-01-01" EndDate="3000-12-30" STATE_ID="14">
+			<Conditions>
+				<Condition Operand1="1" Operator="==" Operand2="1" OperandType="Double">
+					<ToGrant CoverageCode="MPEMC">
+						<Limit Value="" Operand1="" Operator="" Operand2="" DeducID=""></Limit>
+						<Deductible Value="" Operand1="" Operator="" Operand2="" DeducID=""></Deductible>
+					</ToGrant>
+				</Condition>
+			</Conditions>
+			<Conditions>
+				<Condition Operand1="$UMB_POLICY" Operator="==" Operand2="1" OperandType="Double">
+					<ToGrant CoverageCode="BISPL">
+						<Limit Value="250/500000" Operand1="" Operator="" Operand2="" DeducID=""></Limit>
+						<Deductible Value="" Operand1="" Operator="" Operand2="" DeducID=""></Deductible>
+					</ToGrant>
+					<SubCondition Operand1="$LIMIT_BISPL" Operator="&lt;" Operand2="250" OperandType="Double">
+						<ToSet CoverageCode="BISPL">
+							<Limit Value="250/500000" Operand1="" Operator="" Operand2="" DeducID=""></Limit>
+							<Deductible Value="" Operand1="" Operator="" Operand2="" DeducID=""></Deductible>
+						</ToSet>
+					</SubCondition>
+				</Condition>
+				<Condition Operand1="$UMB_POLICY" Operator="!=" Operand2="1" OperandType="Double">
+					<ToGrant CoverageCode="BISPL">
+						<Limit Value="25/50000" Operand1="" Operator="" Operand2="" DeducID=""></Limit>
+						<Deductible Value="" Operand1="" Operator="" Operand2="" DeducID=""></Deductible>
+					</ToGrant>
+					<SubCondition Operand1="$LIMIT_BISPL" Operator="&gt;" Operand2="100" OperandType="Double">
+						<ToSet CoverageCode="BISPL">
+							<Limit Value="25/50000" Operand1="" Operator="" Operand2="" DeducID=""></Limit>
+							<Deductible Value="" Operand1="" Operator="" Operand2="" DeducID=""></Deductible>
+						</ToSet>
+					</SubCondition>
+				</Condition>
+			</Conditions>
+			<Conditions>
+				<Condition Operand1="$CSL_OPTED" Operator="!=" Operand2="0" OperandType="Double">
+					<ToRevoke CoverageCode="BISPL"></ToRevoke>
+					<ToRevoke CoverageCode="PD"></ToRevoke>
+				</Condition>
+			</Conditions>
+		</Rule>
+	</Group>
+	<Group Code="MakeAppDependent">
+		<Rule Action="Database" StartDate="1950-01-01" EndDate="3000-12-30">
+			<Conditions>
+				<Condition Operand1="1" Operator="==" Operand2="1" OperandType="Double">
+					<ToRevoke CoverageCode="BISPL"></ToRevoke>
+					<ToRevoke CoverageCode="PD"></ToRevoke>
+				</Condition>
+			</Conditions>
+		</Rule>
+	</Group>
+	<!-- Risk Dependent Rules -->
+	<Group Code="RiskDependent">
+		<!-- Rules for setting Master Keys -->
+		<!-- Indiana -->
+		<Rule Action="Master" StartDate="1950-01-01" EndDate="3000-12-12" STATE_ID="14">
+			<Conditions>
+				<!--Symbol-->
+				<Condition Operand1="1" Operator="==" Operand2="1" OperandType="Double">
+					<ToSet Key="$TEMP_DCOLL" Value="0"></ToSet>
+					<ToSet Key="$TEMP_DCOMP" Value="0"></ToSet>
+				</Condition>
+			</Conditions>
+			<Conditions>
+				<!--Symbol-->
+				<ToSet Key="$TEMP_DCOLL" Value="0"></ToSet>
+				<Condition Operand1="$SYMBOL" Operator="&gt;=" Operand2="1" OperandType="Double">
+					<SubConditions>
+						<SubCondition Operand1="$SYMBOL" Operator="&lt;" Operand2="3" OperandType="Double">
+							<ToSet Key="$TEMP_DCOMP" Value="100"></ToSet>
+							<ToSet Key="$TEMP_DCOLL" Value="100"></ToSet>
+						</SubCondition>
+						<SubCondition Operand1="$SYMBOL" Operator="&lt;" Operand2="6" OperandType="Double">
+							<ToSet Key="$TEMP_DCOMP" Value="250"></ToSet>
+							<ToSet Key="$TEMP_DCOLL" Value="250"></ToSet>
+						</SubCondition>
+						<SubCondition Operand1="$SYMBOL" Operator="&lt;" Operand2="9" OperandType="Double">
+							<ToSet Key="$TEMP_DCOMP" Value="250"></ToSet>
+							<ToSet Key="$TEMP_DCOLL" Value="500"></ToSet>
+						</SubCondition>
+						<SubCondition Operand1="$SYMBOL" Operator="&gt;=" Operand2="9" OperandType="Double">
+							<ToSet Key="$TEMP_DCOMP" Value="1000"></ToSet>
+							<ToSet Key="$TEMP_DCOLL" Value="1000"></ToSet>
+						</SubCondition>
+					</SubConditions>
+				</Condition>
+			</Conditions>
+			<Conditions>
+				<!--MOTORCYCLE TYPE 11424-->
+				<Condition Operand1="$MOTORCYCLE_TYPE" Operator="==" Operand2="11424" OperandType="Double">
+					<SubConditions>
+						<SubCondition Operand1="$SYMBOL" Operator="&lt;" Operand2="9" OperandType="Double">
+							<ToSet Key="$TEMP_DCOMP" Value="500"></ToSet>
+							<ToSet Key="$TEMP_DCOLL" Value="500"></ToSet>
+						</SubCondition>
+						<SubCondition Operand1="$SYMBOL" Operator="&gt;=" Operand2="9" OperandType="Double">
+							<ToSet Key="$TEMP_DCOLL" Value="1000"></ToSet>
+						</SubCondition>
+					</SubConditions>
+				</Condition>
+			</Conditions>
+			<Conditions>
+				<!--Set Value Of Comprehensive-->
+				<Condition Operand1="$TEMP_DCOMP" Operator="&gt;" Operand2="$DEDUCTIBLE_COMP" OperandType="Double">
+					<ToSet Key="$DEDUCTIBLE_COMP" Value="$TEMP_DCOMP"></ToSet>
+				</Condition>
+			</Conditions>
+			<Conditions>
+				<!--Set Value Of Collosion-->
+				<Condition Operand1="$TEMP_DCOLL" Operator="&gt;" Operand2="$DEDUCTIBLE_COLL" OperandType="Double">
+					<ToSet Key="$DEDUCTIBLE_COLL" Value="$TEMP_DCOLL"></ToSet>
+				</Condition>
+			</Conditions>
+		</Rule>
+		<!--Michigan -->
+		<Rule Action="Master" StartDate="1950-01-01" EndDate="3000-12-12" STATE_ID="22">
+			<Conditions>
+				<!--Symbol-->
+				<Condition Operand1="1" Operator="==" Operand2="1" OperandType="Double">
+					<ToSet Key="$TEMP_DCOLL" Value="0"></ToSet>
+					<ToSet Key="$TEMP_DCOMP" Value="0"></ToSet>
+				</Condition>
+			</Conditions>
+			<Conditions>
+				<!--Symbol-->
+				<ToSet Key="$TEMP_DCOLL" Value="0"></ToSet>
+				<Condition Operand1="$SYMBOL" Operator="&gt;=" Operand2="1" OperandType="Double">
+					<SubConditions>
+						<SubCondition Operand1="$SYMBOL" Operator="&lt;" Operand2="3" OperandType="Double">
+							<ToSet Key="$TEMP_DCOMP" Value="100"></ToSet>
+							<ToSet Key="$TEMP_DCOLL" Value="100"></ToSet>
+						</SubCondition>
+						<SubCondition Operand1="$SYMBOL" Operator="&lt;" Operand2="6" OperandType="Double">
+							<ToSet Key="$TEMP_DCOMP" Value="250"></ToSet>
+							<ToSet Key="$TEMP_DCOLL" Value="250"></ToSet>
+						</SubCondition>
+						<SubCondition Operand1="$SYMBOL" Operator="&lt;" Operand2="9" OperandType="Double">
+							<ToSet Key="$TEMP_DCOMP" Value="250"></ToSet>
+							<ToSet Key="$TEMP_DCOLL" Value="500"></ToSet>
+						</SubCondition>
+						<SubCondition Operand1="$SYMBOL" Operator="&gt;=" Operand2="9" OperandType="Double">
+							<ToSet Key="$TEMP_DCOMP" Value="1000"></ToSet>
+							<ToSet Key="$TEMP_DCOLL" Value="1000"></ToSet>
+						</SubCondition>
+					</SubConditions>
+				</Condition>
+			</Conditions>
+			<Conditions>
+				<!--Set Value Of Comprehensive-->
+				<Condition Operand1="$TEMP_DCOMP" Operator="&gt;" Operand2="$DEDUCTIBLE_COMP" OperandType="Double">
+					<ToSet Key="$DEDUCTIBLE_COMP" Value="$TEMP_DCOMP"></ToSet>
+				</Condition>
+			</Conditions>
+			<Conditions>
+				<!--MOTORCYCLE TYPE 11424-->
+				<Condition Operand1="$MOTORCYCLE_TYPE" Operator="==" Operand2="11424" OperandType="Double">
+					<SubConditions>
+						<SubCondition Operand1="$SYMBOL" Operator="&lt;" Operand2="9" OperandType="Double">
+							<ToSet Key="$TEMP_DCOMP" Value="500"></ToSet>
+							<ToSet Key="$TEMP_DCOLL" Value="500"></ToSet>
+						</SubCondition>
+						<SubCondition Operand1="$SYMBOL" Operator="&gt;=" Operand2="9" OperandType="Double">
+							<ToSet Key="$TEMP_DCOLL" Value="1000"></ToSet>
+						</SubCondition>
+					</SubConditions>
+				</Condition>
+			</Conditions>
+			<Conditions>
+				<!--Set Value Of Comprehensive-->
+				<Condition Operand1="$TEMP_DCOMP" Operator="&gt;" Operand2="$DEDUCTIBLE_COMP" OperandType="Double">
+					<ToSet Key="$DEDUCTIBLE_COMP" Value="$TEMP_DCOMP"></ToSet>
+				</Condition>
+			</Conditions>
+			<Conditions>
+				<!--Set Value Of Collosion-->
+				<Condition Operand1="$TEMP_DCOLL" Operator="&gt;" Operand2="$DEDUCTIBLE_COLL" OperandType="Double">
+					<ToSet Key="$DEDUCTIBLE_COLL" Value="$TEMP_DCOLL"></ToSet>
+				</Condition>
+			</Conditions>
+		</Rule>
+		<Rule Action="Database" StartDate="1950-01-01" EndDate="3000-12-12" STATE_ID="14">
+			<Conditions>
+				<Condition Operand1="1" Operator="==" Operand2="1" OperandType="Double">
+					<ToGrant CoverageCode="PD">
+						<Limit Value="25000" Operand1="" Operator="" Operand2="" DeducID=""></Limit>
+						<Deductible Value="" Operand1="" Operator="" Operand2="" DeducID=""></Deductible>
+					</ToGrant>
+					<ToSet CoverageCode="COLL">
+						<Limit Value="" Operand1="" Operator="" Operand2="" DeducID=""></Limit>
+						<Deductible Value="$DEDUCTIBLE_COLL" Operand1="" Operator="" Operand2="" DeducID=""></Deductible>
+					</ToSet>
+					<ToSet CoverageCode="OTC">
+						<Limit Value="" Operand1="" Operator="" Operand2="" DeducID=""></Limit>
+						<Deductible Value="$DEDUCTIBLE_COMP" Operand1="" Operator="" Operand2="" DeducID=""></Deductible>
+					</ToSet>
+				</Condition>
+			</Conditions>
+			<Conditions>
+				<Condition Operand1="$UMB_POLICY" Operator="==" Operand2="1" OperandType="Double">
+					<ToGrant CoverageCode="BISPL">
+						<Limit Value="250/500000" Operand1="" Operator="" Operand2="" DeducID=""></Limit>
+						<Deductible Value="" Operand1="" Operator="" Operand2="" DeducID=""></Deductible>
+					</ToGrant>
+					<SubCondition Operand1="$LIMIT_BISPL" Operator="&lt;" Operand2="250" OperandType="Double">
+						<ToSet CoverageCode="BISPL">
+							<Limit Value="250/500000" Operand1="" Operator="" Operand2="" DeducID=""></Limit>
+							<Deductible Value="" Operand1="" Operator="" Operand2="" DeducID=""></Deductible>
+						</ToSet>
+					</SubCondition>
+				</Condition>
+				<Condition Operand1="$UMB_POLICY" Operator="!=" Operand2="1" OperandType="Double">
+					<ToGrant CoverageCode="BISPL">
+						<Limit Value="25/50000" Operand1="" Operator="" Operand2="" DeducID=""></Limit>
+						<Deductible Value="" Operand1="" Operator="" Operand2="" DeducID=""></Deductible>
+					</ToGrant>
+					<SubCondition Operand1="$LIMIT_BISPL" Operator="&gt;" Operand2="100" OperandType="Double">
+						<ToSet CoverageCode="BISPL">
+							<Limit Value="25/50000" Operand1="" Operator="" Operand2="" DeducID=""></Limit>
+							<Deductible Value="" Operand1="" Operator="" Operand2="" DeducID=""></Deductible>
+						</ToSet>
+					</SubCondition>
+				</Condition>
+			</Conditions>
+			<Conditions>
+				<Condition Operand1="$COMP_TAKEN" Operator="==" Operand2="10963" OperandType="Double">
+					<ToGrant CoverageCode="OTC">
+						<Limit Value="" Operand1="" Operator="" Operand2="" DeducID=""></Limit>
+						<Deductible Value="$DEDUCTIBLE_COMP" Operand1="" Operator="" Operand2="" DeducID=""></Deductible>
+					</ToGrant>
+					<ToGrant CoverageCode="EBM15">
+						<Limit Value="1500" Operand1="" Operator="" Operand2="" DeducID=""></Limit>
+						<Deductible Value="" Operand1="" Operator="" Operand2="" DeducID=""></Deductible>
+					</ToGrant>
+					<ToGrant CoverageCode="MPEMC"> <!-- iTRACK 5276 -->
+						<Limit Value="" Operand1="" Operator="" Operand2="" DeducID=""></Limit>
+						<Deductible Value="" Operand1="" Operator="" Operand2="" DeducID=""></Deductible>
+					</ToGrant>
+					<ToSet CoverageCode="OTC">
+						<Limit Value="" Operand1="" Operator="" Operand2="" DeducID=""></Limit>
+						<Deductible Value="$DEDUCTIBLE_COMP" Operand1="" Operator="" Operand2="" DeducID=""></Deductible>
+					</ToSet>
+					<ToRevoke CoverageCode="PUNCS"></ToRevoke>
+					<ToRevoke CoverageCode="PD"></ToRevoke>
+					<ToRevoke CoverageCode="RLCSL"></ToRevoke>
+					<ToRevoke CoverageCode="PUMSP"></ToRevoke>
+					<ToRevoke CoverageCode="UNCSL"></ToRevoke>
+					<ToRevoke CoverageCode="UMPD"></ToRevoke>
+					<ToRevoke CoverageCode="COLL"></ToRevoke>
+					<ToRevoke CoverageCode="ROAD"></ToRevoke>
+					<ToRevoke CoverageCode="UNDSP"></ToRevoke>
+					<ToRevoke CoverageCode="MEDPM"></ToRevoke>
+					<!-- Commented by Asfa(13-June-2008) - iTrack #4312
+					<ToRevoke CoverageCode="EEM48"></ToRevoke>
+					-->
+					<!-- ToRevoke CoverageCode="E17"></ToRevoke  this Coverage Delete as per Itrack 5635-->
+					<ToRevoke CoverageCode="RRUMM"></ToRevoke>
+					<ToRevoke CoverageCode="BISPL"></ToRevoke>
+					<!-- ToRevoke CoverageCode="MPEMC"></ToRevoke   iTRACK 5276 -->
+					<ToRevoke CoverageCode="CEBM49"></ToRevoke>
+				</Condition>
+				<Condition Operand1="$COMP_TAKEN" Operator="!=" Operand2="10963" OperandType="Double">
+					<ToGrant CoverageCode="MPEMC">
+						<Limit Value="" Operand1="" Operator="" Operand2="" DeducID=""></Limit>
+						<Deductible Value="" Operand1="" Operator="" Operand2="" DeducID=""></Deductible>
+					</ToGrant>
+				</Condition>
+			</Conditions>
+			<!-- If Motorcycle type is Gold Wing or Tour Bike, make Road Service mandatory -->
+			<Conditions>
+				<Condition Operand1="$MOTORCYCLE_TYPE" Operator="==" Operand2="11423" OperandType="String">
+					<SubCondition Operand1="$COMP_TAKEN" Operator="==" Operand2="10963" OperandType="Double">
+						<ToRevoke CoverageCode="ROAD"></ToRevoke>
+					</SubCondition>
+					<SubCondition Operand1="$COLL_OPTED" Operator="!=" Operand2="0" OperandType="Double">
+						<ToGrant CoverageCode="ROAD">
+							<Limit Value="75" Operand1="" Operator="" Operand2="" DeducID=""></Limit>
+							<Deductible Value="" Operand1="" Operator="" Operand2="" DeducID=""></Deductible>
+						</ToGrant>
+					</SubCondition>
+				</Condition>
+				<Condition Operand1="$MOTORCYCLE_TYPE" Operator="==" Operand2="11425" OperandType="String">
+					<SubCondition Operand1="$COMP_TAKEN" Operator="==" Operand2="10963" OperandType="Double">
+						<ToRevoke CoverageCode="ROAD"></ToRevoke>
+					</SubCondition>
+					<SubCondition Operand1="$COLL_OPTED" Operator="!=" Operand2="0" OperandType="Double">
+						<ToGrant CoverageCode="ROAD">
+							<Limit Value="75" Operand1="" Operator="" Operand2="" DeducID=""></Limit>
+							<Deductible Value="" Operand1="" Operator="" Operand2="" DeducID=""></Deductible>
+						</ToGrant>
+					</SubCondition>
+				</Condition>
+				<!--Rule added by Praveen kasana : if Coll is not opted than Revoke RAOD Service Coverage : Extra Hazard (Scooter & Dual Purpose)-->
+				<Condition Operand1="$MOTORCYCLE_TYPE" Operator="==" Operand2="11422" OperandType="String">
+					<SubCondition Operand1="$COLL_OPTED" Operator="==" Operand2="0" OperandType="Double">
+						<ToRevoke CoverageCode="ROAD"></ToRevoke>
+					</SubCondition>
+				</Condition>
+			</Conditions>
+			<Conditions>
+				<Condition Operand1="$VEHICLE_YEAR" Operator="&gt;" Operand2="25" OperandType="Double">
+					<!--ToRevoke CoverageCode="OTC"></ToRevoke> commented by Pravesh on 32 July 09 as per Itrack 5912
+					<ToRevoke CoverageCode="COLL"></ToRevoke>
+					<ToRevoke CoverageCode="ROAD"></ToRevoke>
+					<ToRevoke CoverageCode="EBM15"></ToRevoke>
+					<ToRevoke CoverageCode="EBM49"></ToRevoke>
+					<ToRevoke CoverageCode="EBM14"></ToRevoke>
+					<ToRevoke CoverageCode="PDC14"></ToRevoke>
+					--></Condition>
+			</Conditions>
+			<Conditions>
+				<Condition Operand1="$CSL_OPTED" Operator="!=" Operand2="0" OperandType="Double">
+					<ToRevoke CoverageCode="BISPL"></ToRevoke>
+					<ToRevoke CoverageCode="PD"></ToRevoke>
+				</Condition>
+			</Conditions>
+		</Rule>
+		<Rule Action="Database" StartDate="1950-01-01" EndDate="3000-12-30" STATE_ID="22">
+			<Conditions>
+				<Condition Operand1="$VEHICLE_CC" Operator="&lt;" Operand2="51" OperandType="Double">
+					<ToRevoke CoverageCode="MEDPM1"></ToRevoke>
+				</Condition>
+				<Condition Operand1="$VEHICLE_CC" Operator=">=" Operand2="51" OperandType="Double">
+					<SubCondition Operand1="$MEDPM1_OPTED" Operator="==" Operand2="0" OperandType="String">
+						<ToRevoke CoverageCode="MEDPM2"></ToRevoke>
+					</SubCondition>
+				</Condition>
+			</Conditions>
+			<Conditions>
+				<Condition Operand1="1" Operator="==" Operand2="1" OperandType="Double">
+					<ToGrant CoverageCode="PD">
+						<Limit Value="25000" Operand1="" Operator="" Operand2="" DeducID=""></Limit>
+						<Deductible Value="" Operand1="" Operator="" Operand2="" DeducID=""></Deductible>
+					</ToGrant>
+					<ToSet CoverageCode="OTC">
+						<Limit Value="" Operand1="" Operator="" Operand2="" DeducID=""></Limit>
+						<Deductible Value="$DEDUCTIBLE_COMP" Operand1="" Operator="" Operand2="" DeducID=""></Deductible>
+					</ToSet>
+					<ToSet CoverageCode="COLL">
+						<Limit Value="" Operand1="" Operator="" Operand2="" DeducID=""></Limit>
+						<Deductible Value="$DEDUCTIBLE_COLL" Operand1="" Operator="" Operand2="" DeducID=""></Deductible>
+					</ToSet>
+				</Condition>
+			</Conditions>
+			<Conditions>
+				<Condition Operand1="$UMB_POLICY" Operator="==" Operand2="1" OperandType="Double">
+					<ToGrant CoverageCode="BISPL">
+						<Limit Value="250/500000" Operand1="" Operator="" Operand2="" DeducID=""></Limit>
+						<Deductible Value="" Operand1="" Operator="" Operand2="" DeducID=""></Deductible>
+					</ToGrant>
+					<SubCondition Operand1="$LIMIT_BISPL" Operator="&lt;" Operand2="250" OperandType="Double">
+						<ToSet CoverageCode="BISPL">
+							<Limit Value="250/500000" Operand1="" Operator="" Operand2="" DeducID=""></Limit>
+							<Deductible Value="" Operand1="" Operator="" Operand2="" DeducID=""></Deductible>
+						</ToSet>
+					</SubCondition>
+				</Condition>
+				<Condition Operand1="$UMB_POLICY" Operator="!=" Operand2="1" OperandType="Double">
+					<ToGrant CoverageCode="BISPL">
+						<Limit Value="25/50000" Operand1="" Operator="" Operand2="" DeducID=""></Limit>
+						<Deductible Value="" Operand1="" Operator="" Operand2="" DeducID=""></Deductible>
+					</ToGrant>
+				</Condition>
+			</Conditions>
+			<Conditions>
+				<Condition Operand1="$UMB_POLICY" Operator="==" Operand2="1" OperandType="Double">
+					<SubCondition Operand1="$UNDER_25_AGE" Operator="==" Operand2="1" OperandType="Double">
+						<ToGrant CoverageCode="RLCSL">
+							<Limit Value="500000" Operand1="" Operator="" Operand2="" DeducID=""></Limit>
+							<Deductible Value="" Operand1="" Operator="" Operand2="" DeducID=""></Deductible>
+						</ToGrant>
+						<ToRevoke CoverageCode="BISPL"></ToRevoke>
+						<ToRevoke CoverageCode="PD"></ToRevoke>
+						<ToRevoke CoverageCode="PUMSP"></ToRevoke>
+					</SubCondition>
+				</Condition>
+			</Conditions>
+			<Conditions>
+				<Condition Operand1="$CSL_OPTED" Operator="!=" Operand2="0" OperandType="Double">
+					<ToRevoke CoverageCode="BISPL"></ToRevoke>
+					<ToRevoke CoverageCode="PD"></ToRevoke>
+				</Condition>
+			</Conditions>
+			<!-- Added by Charles on 20-Aug-09 for Itrack 6151 -->
+			<Conditions>
+				<Condition Operand1="$COMP_TAKEN" Operator="==" Operand2="10963" OperandType="Double">
+					<ToGrant CoverageCode="OTC">
+						<Limit Value="" Operand1="" Operator="" Operand2="" DeducID=""></Limit>
+						<Deductible Value="$DEDUCTIBLE_COMP" Operand1="" Operator="" Operand2="" DeducID=""></Deductible>
+					</ToGrant>
+					<ToGrant CoverageCode="EBM15">
+						<Limit Value="1500" Operand1="" Operator="" Operand2="" DeducID=""></Limit>
+						<Deductible Value="" Operand1="" Operator="" Operand2="" DeducID=""></Deductible>
+					</ToGrant>
+					<ToGrant CoverageCode="MPEMC">
+						<Limit Value="" Operand1="" Operator="" Operand2="" DeducID=""></Limit>
+						<Deductible Value="" Operand1="" Operator="" Operand2="" DeducID=""></Deductible>
+					</ToGrant>
+					<ToRevoke CoverageCode="PUNCS"></ToRevoke>
+					<ToRevoke CoverageCode="PD"></ToRevoke>
+					<ToRevoke CoverageCode="RLCSL"></ToRevoke>
+					<ToRevoke CoverageCode="PUMSP"></ToRevoke>
+					<ToRevoke CoverageCode="UNCSL"></ToRevoke>
+					<ToRevoke CoverageCode="UMPD"></ToRevoke>
+					<ToRevoke CoverageCode="COLL"></ToRevoke>
+					<ToRevoke CoverageCode="ROAD"></ToRevoke>
+					<ToRevoke CoverageCode="UNDSP"></ToRevoke>
+					<!--MEDPM1 and MEDPM2 added by Charles on 26-Aug-09 for Itrack 6151 -->
+					<ToRevoke CoverageCode="MEDPM1"></ToRevoke>
+					<ToRevoke CoverageCode="MEDPM2"></ToRevoke>
+					<ToRevoke CoverageCode="RRUMM"></ToRevoke>
+					<ToRevoke CoverageCode="BISPL"></ToRevoke>
+					<ToRevoke CoverageCode="CEBM49"></ToRevoke>
+					<ToRevoke CoverageCode="M10"></ToRevoke>
+				</Condition>
+				<Condition Operand1="$COMP_TAKEN" Operator="!=" Operand2="10963" OperandType="Double">
+					<ToGrant CoverageCode="MPEMC">
+						<Limit Value="" Operand1="" Operator="" Operand2="" DeducID=""></Limit>
+						<Deductible Value="" Operand1="" Operator="" Operand2="" DeducID=""></Deductible>
+					</ToGrant>
+					<!--M10 added by Charles on 26-Aug-09 for Itrack 6151 -->
+					<ToGrant CoverageCode="M10">
+						<Limit Value="" Operand1="" Operator="" Operand2="" DeducID=""></Limit>
+						<Deductible Value="" Operand1="" Operator="" Operand2="" DeducID=""></Deductible>
+					</ToGrant>
+				</Condition>
+			</Conditions>
+			<!-- Added till here -->
+			<!-- If Motorcycle type is Gold Wing or Tour Bike, make Road Service mandatory -->
+			<Conditions>
+				<Condition Operand1="$MOTORCYCLE_TYPE" Operator="==" Operand2="11423" OperandType="String">
+					<!--COMP_TAKEN SubCondition added by Charles on 20-Aug-09 for Itrack 6151 -->
+					<SubCondition Operand1="$COMP_TAKEN" Operator="==" Operand2="10963" OperandType="Double">
+						<ToRevoke CoverageCode="ROAD"></ToRevoke>
+					</SubCondition>
+					<SubCondition Operand1="$COLL_OPTED" Operator="!=" Operand2="0" OperandType="Double">
+						<ToGrant CoverageCode="ROAD">
+							<Limit Value="75" Operand1="" Operator="" Operand2="" DeducID=""></Limit>
+							<Deductible Value="" Operand1="" Operator="" Operand2="" DeducID=""></Deductible>
+						</ToGrant>
+					</SubCondition>
+				</Condition>
+				<Condition Operand1="$MOTORCYCLE_TYPE" Operator="==" Operand2="11425" OperandType="String">
+					<!--COMP_TAKEN SubCondition added by Charles on 20-Aug-09 for Itrack 6151 -->
+					<SubCondition Operand1="$COMP_TAKEN" Operator="==" Operand2="10963" OperandType="Double">
+						<ToRevoke CoverageCode="ROAD"></ToRevoke>
+					</SubCondition>
+					<SubCondition Operand1="$COLL_OPTED" Operator="!=" Operand2="0" OperandType="Double">
+						<ToGrant CoverageCode="ROAD">
+							<Limit Value="75" Operand1="" Operator="" Operand2="" DeducID=""></Limit>
+							<Deductible Value="" Operand1="" Operator="" Operand2="" DeducID=""></Deductible>
+						</ToGrant>
+					</SubCondition>
+				</Condition>
+				<!--Rule added by Praveen kasana : if Coll is not opted than Revoke RAOD Service Coverage : Extra Hazard (Scooter & Dual Purpose)-->
+				<Condition Operand1="$MOTORCYCLE_TYPE" Operator="==" Operand2="11422" OperandType="String">
+					<SubCondition Operand1="$COLL_OPTED" Operator="==" Operand2="0" OperandType="Double">
+						<ToRevoke CoverageCode="ROAD"></ToRevoke>
+					</SubCondition>
+				</Condition>
+			</Conditions>
+			<Conditions>
+				<Condition Operand1="$VEHICLE_YEAR" Operator="&gt;" Operand2="25" OperandType="Double">
+					<!-- ToRevoke CoverageCode="OTC"></ToRevoke> commented by Pravesh on 32 July 09 as per Itrack 5912
+					<ToRevoke CoverageCode="COLL"></ToRevoke>
+					<ToRevoke CoverageCode="ROAD"></ToRevoke>
+					<ToRevoke CoverageCode="EBM15"></ToRevoke>
+					<ToRevoke CoverageCode="EBM49"></ToRevoke>
+					<ToRevoke CoverageCode="EBM14"></ToRevoke>
+					<ToRevoke CoverageCode="PDC14"></ToRevoke>
+					--></Condition>
+			</Conditions>
+		</Rule>
+	</Group>
+	<!-- Underwriting Question Dependency -->
+	<Group Code="UnderWriting">
+		<Rule Action="Database" StartDate="1950-01-01" EndDate="3000-12-30" STATE_ID="14">
+			<!-- BISPL -->
+			<Conditions>
+				<Condition Operand1="$UMB_POLICY" Operator="==" Operand2="1" OperandType="Double">
+					<SubCondition Operand1="$LIMIT_BISPL" Operator="&lt;" Operand2="250" OperandType="Double">
+						<ToSet CoverageCode="BISPL">
+							<Limit Value="250/500000" Operand1="" Operator="" Operand2="" DeducID=""></Limit>
+							<Deductible Value="" Operand1="" Operator="" Operand2="" DeducID=""></Deductible>
+						</ToSet>
+					</SubCondition>
+				</Condition>
+				<Condition Operand1="$UMB_POLICY" Operator="!=" Operand2="1" OperandType="Double">
+					<SubCondition Operand1="$LIMIT_BISPL" Operator="&gt;" Operand2="100" OperandType="Double">
+						<ToSet CoverageCode="BISPL">
+							<Limit Value="25/50000" Operand1="" Operator="" Operand2="" DeducID=""></Limit>
+							<Deductible Value="" Operand1="" Operator="" Operand2="" DeducID=""></Deductible>
+						</ToSet>
+					</SubCondition>
+				</Condition>
+			</Conditions>
+			<!-- PUMSP -->
+			<Conditions>
+				<Condition Operand1="$UMB_POLICY" Operator="==" Operand2="1" OperandType="Double">
+					<SubCondition Operand1="$LIMIT_PUMSP" Operator="&lt;" Operand2="250" OperandType="Double">
+						<ToSet CoverageCode="PUMSP">
+							<Limit Value="250/500000" Operand1="" Operator="" Operand2="" DeducID=""></Limit>
+							<Deductible Value="" Operand1="" Operator="" Operand2="" DeducID=""></Deductible>
+						</ToSet>
+						<ToSet CoverageCode="UNDSP">
+							<Limit Value="250/500000" Operand1="" Operator="" Operand2="" DeducID=""></Limit>
+							<Deductible Value="" Operand1="" Operator="" Operand2="" DeducID=""></Deductible>
+						</ToSet>
+					</SubCondition>
+				</Condition>
+				<Condition Operand1="$UMB_POLICY" Operator="!=" Operand2="1" OperandType="Double">
+					<SubCondition Operand1="$LIMIT_PUMSP" Operator="&gt;" Operand2="100" OperandType="Double">
+						<ToSet CoverageCode="PUMSP">
+							<Limit Value="25/50000" Operand1="" Operator="" Operand2="" DeducID=""></Limit>
+							<Deductible Value="" Operand1="" Operator="" Operand2="" DeducID=""></Deductible>
+						</ToSet>
+						<ToSet CoverageCode="UNDSP">
+							<Limit Value="25/500000" Operand1="" Operator="" Operand2="" DeducID=""></Limit>
+							<Deductible Value="" Operand1="" Operator="" Operand2="" DeducID=""></Deductible>
+						</ToSet>
+					</SubCondition>
+				</Condition>
+			</Conditions>
+			<!-- RLCSL -->
+			<Conditions>
+				<Condition Operand1="$UMB_POLICY" Operator="==" Operand2="1" OperandType="Double">
+					<SubCondition Operand1="$LIMIT_RLCSL" Operator="&lt;" Operand2="250000" OperandType="Double">
+						<ToSet CoverageCode="RLCSL">
+							<Limit Value="250000" Operand1="" Operator="" Operand2="" DeducID=""></Limit>
+							<Deductible Value="" Operand1="" Operator="" Operand2="" DeducID=""></Deductible>
+						</ToSet>
+					</SubCondition>
+				</Condition>
+				<Condition Operand1="$UMB_POLICY" Operator="!=" Operand2="1" OperandType="Double">
+					<SubCondition Operand1="$LIMIT_RLCSL" Operator="&gt;" Operand2="100000" OperandType="Double">
+						<ToSet CoverageCode="RLCSL">
+							<Limit Value="50000" Operand1="" Operator="" Operand2="" DeducID=""></Limit>
+							<Deductible Value="" Operand1="" Operator="" Operand2="" DeducID=""></Deductible>
+						</ToSet>
+					</SubCondition>
+				</Condition>
+			</Conditions>
+			<!-- PUNCS -->
+			<Conditions>
+				<Condition Operand1="$UMB_POLICY" Operator="==" Operand2="1" OperandType="Double">
+					<SubCondition Operand1="$LIMIT_PUNCS" Operator="&lt;" Operand2="250000" OperandType="Double">
+						<ToSet CoverageCode="PUNCS">
+							<Limit Value="250000" Operand1="" Operator="" Operand2="" DeducID=""></Limit>
+							<Deductible Value="" Operand1="" Operator="" Operand2="" DeducID=""></Deductible>
+						</ToSet>
+						<ToSet CoverageCode="UNCSL">
+							<Limit Value="250000" Operand1="" Operator="" Operand2="" DeducID=""></Limit>
+							<Deductible Value="" Operand1="" Operator="" Operand2="" DeducID=""></Deductible>
+						</ToSet>
+					</SubCondition>
+				</Condition>
+				<Condition Operand1="$UMB_POLICY" Operator="!=" Operand2="1" OperandType="Double">
+					<SubCondition Operand1="$LIMIT_PUNCS" Operator="&gt;" Operand2="100000" OperandType="Double">
+						<ToSet CoverageCode="PUNCS">
+							<Limit Value="50000" Operand1="" Operator="" Operand2="" DeducID=""></Limit>
+							<Deductible Value="" Operand1="" Operator="" Operand2="" DeducID=""></Deductible>
+						</ToSet>
+						<ToSet CoverageCode="UNCSL">
+							<Limit Value="50000" Operand1="" Operator="" Operand2="" DeducID=""></Limit>
+							<Deductible Value="" Operand1="" Operator="" Operand2="" DeducID=""></Deductible>
+						</ToSet>
+					</SubCondition>
+				</Condition>
+			</Conditions>
+		</Rule>
+		<Rule Action="Database" StartDate="1950-01-01" EndDate="3000-12-30" STATE_ID="22">
+			<!-- BISPL -->
+			<Conditions>
+				<Condition Operand1="$UMB_POLICY" Operator="==" Operand2="1" OperandType="Double">
+					<SubCondition Operand1="$LIMIT_BISPL" Operator="&lt;" Operand2="250" OperandType="Double">
+						<ToSet CoverageCode="BISPL">
+							<Limit Value="250/500000" Operand1="" Operator="" Operand2="" DeducID=""></Limit>
+							<Deductible Value="" Operand1="" Operator="" Operand2="" DeducID=""></Deductible>
+						</ToSet>
+					</SubCondition>
+				</Condition>
+				<!-- Commented by Pravesh as we offer all limits for Michigan State -->
+				<!-- Condition Operand1="$UMB_POLICY" Operator="!=" Operand2="1" OperandType="Double">
+					<SubCondition Operand1="$LIMIT_BISPL" Operator="&gt;" Operand2="100" OperandType="Double">
+						<ToSet CoverageCode="BISPL">
+							<Limit Value="25/50000" Operand1="" Operator="" Operand2="" DeducID=""></Limit>
+							<Deductible Value="" Operand1="" Operator="" Operand2="" DeducID=""></Deductible>
+						</ToSet>
+					</SubCondition>
+				</Condition -->
+			</Conditions>
+			<Conditions>
+				<Condition Operand1="$UMB_POLICY" Operator="==" Operand2="1" OperandType="Double">
+					<SubCondition Operand1="$UNDER_25_AGE" Operator="==" Operand2="1" OperandType="Double">
+						<ToGrant CoverageCode="RLCSL">
+							<Limit Value="500000" Operand1="" Operator="" Operand2="" DeducID=""></Limit>
+							<Deductible Value="" Operand1="" Operator="" Operand2="" DeducID=""></Deductible>
+						</ToGrant>
+						<ToSet CoverageCode="RLCSL">
+							<Limit Value="500000" Operand1="" Operator="" Operand2="" DeducID=""></Limit>
+							<Deductible Value="" Operand1="" Operator="" Operand2="" DeducID=""></Deductible>
+						</ToSet>
+						<ToRevoke CoverageCode="BISPL"></ToRevoke>
+						<ToRevoke CoverageCode="PD"></ToRevoke>
+						<ToRevoke CoverageCode="PUMSP"></ToRevoke>
+					</SubCondition>
+				</Condition>
+			</Conditions>
+		</Rule>
+	</Group>
+	<Group Code="AutoDriverDep">
+		<Rule Action="Database" StartDate="1950-01-01" EndDate="3000-12-30" STATE_ID="22">
+			<!-- BISPL -->
+			<Conditions>
+				<Condition Operand1="$UMB_POLICY" Operator="==" Operand2="1" OperandType="Double">
+					<SubCondition Operand1="$UNDER_25_AGE" Operator="==" Operand2="1" OperandType="Double">
+						<ToGrant CoverageCode="RLCSL">
+							<Limit Value="500000" Operand1="" Operator="" Operand2="" DeducID=""></Limit>
+							<Deductible Value="" Operand1="" Operator="" Operand2="" DeducID=""></Deductible>
+						</ToGrant>
+						<ToSet CoverageCode="RLCSL">
+							<Limit Value="500000" Operand1="" Operator="" Operand2="" DeducID=""></Limit>
+							<Deductible Value="" Operand1="" Operator="" Operand2="" DeducID=""></Deductible>
+						</ToSet>
+						<ToRevoke CoverageCode="BISPL"></ToRevoke>
+						<ToRevoke CoverageCode="PD"></ToRevoke>
+						<ToRevoke CoverageCode="PUMSP"></ToRevoke>
+					</SubCondition>
+				</Condition>
+			</Conditions>
+		</Rule>
+	</Group>
+	<Group Code="LobDependent">
+		<Rule Action="Database" StartDate="1950-01-01" EndDate="2002-02-28">
+			<Conditions></Conditions>
+		</Rule>
+	</Group>
+	<Group Code="AppDependent">
+		<Rule Action="Database" StartDate="1950-01-01" EndDate="2002-02-28">
+			<Conditions></Conditions>
+		</Rule>
+	</Group>
+	<Group Code="MiscEquipment">
+		<Rule Action="Database" StartDate="1950-01-01" EndDate="2050-01-01">
+			<Conditions></Conditions>
+		</Rule>
+	</Group>
+</Root>

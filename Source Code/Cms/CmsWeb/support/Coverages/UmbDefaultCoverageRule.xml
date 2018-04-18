@@ -1,0 +1,340 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Group Code taken from RuleType  Enumeration defined in ClsCoverages  -->
+<Root>
+	<Master>
+		<Query Code="SELECT" Level="APP">Proc_GetKeysForUmbrella_APP</Query>
+		<Query Code="SELECT" Level="POLICY">Proc_GetKeysForUmbrella_Policy</Query>
+		<Column Code="APP_EFFECTIVE_DATE" MapColumnn="APP_EFFECTIVE_DATE" TableAssociated="APP_LIST"
+			ColumnAssociated="APP_EFFECTIVE_DATE"></Column>
+		<Column Code="APP_YEAR" MapColumnn="APP_YEAR" TableAssociated="APP_LIST" ColumnAssociated="APP_EFFECTIVE_DATE"></Column>
+		<Column Code="STATE_ID" MapColumnn="STATE_ID" TableAssociated="APP_LIST" ColumnAssociated="STATE_ID"></Column>
+		<Column Code="LOB_ID" MapColumnn="LOB_ID" TableAssociated="APP_LIST"></Column>
+		<Column Code="HAVE_NON_OWNED" MapColumnn="HAVE_NON_OWNED" TableAssociated="APP_UMBRELLA_GEN_INFO"></Column>
+		<Column Code="ALE" MapColumnn="ALE" TableAssociated="APP_UMBRELLA_UNDERLYING_POLICIES"></Column>
+		<Column Code="AUTO_CYCL_TRUCKS" MapColumnn="AUTO_CYCL_TRUCKS" TableAssociated="APP_UMBRELLA_GEN_INFO"></Column>
+		<Column Code="RECR_VEH" MapColumnn="RECR_VEH" TableAssociated="APP_UMBRELLA_GEN_INFO"></Column>
+		<Column Code="WAT_DWELL" MapColumnn="WAT_DWELL" TableAssociated="APP_UMBRELLA_GEN_INFO"></Column>
+		<Column Code="LOC_EXCLUDED" MapColumnn="LOC_EXCLUDED" TableAssociated="APP_UMBRELLA_REAL_ESTATE_LOCATION"></Column>
+		<Column Code="DRIV_TYPE" MapColumnn="DRIV_TYPE" TableAssociated="APP_DRIVER_DETAILS"></Column>
+		<Column Code="HAS_MOTORIST_PROTECTION" MapColumnn="HAS_MOTORIST_PROTECTION" TableAssociated="APP_UMBRELLA_UNDERLYING_POLICIES"></Column>
+		<Column Code="LOWER_LIMITS" MapColumnn="LOWER_LIMITS" TableAssociated="APP_UMBRELLA_UNDERLYING_POLICIES"></Column>
+		<Column Code="IS_BOAT_EXCLUDED" MapColumnn="IS_BOAT_EXCLUDED" TableAssociated="APP_UMBRELLA_WATERCRAFT_INFO"></Column>
+		<Column Code="IS_VEHICLE_EXCLUDED" MapColumnn="IS_VEHICLE_EXCLUDED" TableAssociated="APP_UMBRELLA_VEHICLE_INFO"></Column>
+		<Column Code="IS_RV_EXCLUDED" MapColumnn="IS_RV_EXCLUDED" TableAssociated="APP_UMBRELLA_RECREATIONAL_VEHICLES"></Column>
+	</Master>
+	<!-- Coverages to be defaulted when new UMBRELLA is added  -->
+	<Group Code="Default">
+		<Rule Action="Database" StartDate="1950-01-01" EndDate="3000-12-30" STATE_ID="22">
+			<Conditions>
+				<Condition Operand1="1" Operator="==" Operand2="1" OperandType="Double">
+					<ToGrant CoverageCode="UBPULP">
+						<Limit Value="" Operand1="" Operator="" Operand2="" DeducID=""></Limit>
+						<Deductible Value="" Operand1="" Operator="" Operand2="" DeducID=""></Deductible>
+					</ToGrant>
+					<ToGrant CoverageCode="UBPLJAC">
+						<Limit Value="" Operand1="" Operator="" Operand2="" DeducID=""></Limit>
+						<Deductible Value="" Operand1="" Operator="" Operand2="" DeducID=""></Deductible>
+					</ToGrant>
+					<ToGrant CoverageCode="UBEXFUNG">
+						<Limit Value="" Operand1="" Operator="" Operand2="" DeducID=""></Limit>
+						<Deductible Value="" Operand1="" Operator="" Operand2="" DeducID=""></Deductible>
+					</ToGrant>
+					<ToGrant CoverageCode="UBAMPP">
+						<Limit Value="" Operand1="" Operator="" Operand2="" DeducID=""></Limit>
+						<Deductible Value="" Operand1="" Operator="" Operand2="" DeducID=""></Deductible>
+					</ToGrant>
+				</Condition>
+			</Conditions>
+		</Rule>
+		<Rule Action="Database" StartDate="1950-01-01" EndDate="3000-12-30" STATE_ID="14">
+			<Conditions>
+				<Condition Operand1="1" Operator="==" Operand2="1" OperandType="Double">
+					<ToGrant CoverageCode="UBPULP">
+						<Limit Value="" Operand1="" Operator="" Operand2="" DeducID=""></Limit>
+						<Deductible Value="" Operand1="" Operator="" Operand2="" DeducID=""></Deductible>
+					</ToGrant>
+					<ToGrant CoverageCode="UBPLJAC">
+						<Limit Value="" Operand1="" Operator="" Operand2="" DeducID=""></Limit>
+						<Deductible Value="" Operand1="" Operator="" Operand2="" DeducID=""></Deductible>
+					</ToGrant>
+					<ToGrant CoverageCode="UBEXFUNG">
+						<Limit Value="" Operand1="" Operator="" Operand2="" DeducID=""></Limit>
+						<Deductible Value="" Operand1="" Operator="" Operand2="" DeducID=""></Deductible>
+					</ToGrant>
+				</Condition>
+			</Conditions>
+		</Rule>
+	</Group>
+	<Group Code="RiskDependent">
+		<Rule Action="Database" StartDate="1950-01-01" EndDate="3000-12-12" STATE_ID="22">
+			 <Conditions>
+				<Condition Operand1="$HAVE_NON_OWNED" Operator="==" Operand2="0" OperandType="String">
+					<SubCondition Operand1="$ALE" Operator="==" Operand2="0" OperandType="Double">
+						<ToGrant CoverageCode="UBAUTLIB">
+							<Limit Value="" Operand1="" Operator="" Operand2="" DeducID=""></Limit>
+							<Deductible Value="" Operand1="" Operator="" Operand2="" DeducID=""></Deductible>
+						</ToGrant>
+					</SubCondition>
+					<SubCondition Operand1="$ALE" Operator="!=" Operand2="0" OperandType="Double">
+					    <ToRevoke CoverageCode="UBAUTLIB"></ToRevoke>
+					</SubCondition>
+				</Condition>
+			<Condition Operand1="$HAVE_NON_OWNED" Operator="!=" Operand2="0" OperandType="String">
+				<ToRevoke CoverageCode="UBAUTLIB"></ToRevoke>
+			</Condition>
+			</Conditions>	
+			<Conditions>
+				<Condition Operand1="$AUTO_CYCL_TRUCKS" Operator="==" Operand2="1" OperandType="String">
+					<ToGrant CoverageCode="UBEXDAE">
+						<Limit Value="" Operand1="" Operator="" Operand2="" DeducID=""></Limit>
+						<Deductible Value="" Operand1="" Operator="" Operand2="" DeducID=""></Deductible>
+					</ToGrant>
+				</Condition>
+				<Condition Operand1="$AUTO_CYCL_TRUCKS" Operator="!=" Operand2="1" OperandType="String">
+						<ToRevoke CoverageCode="UBEXDAE"></ToRevoke>
+				</Condition>
+			</Conditions>		
+			<Conditions>
+				<Condition Operand1="$RECR_VEH" Operator="==" Operand2="1" OperandType="String">
+					<ToGrant CoverageCode="UBDRMV">
+						<Limit Value="" Operand1="" Operator="" Operand2="" DeducID=""></Limit>
+						<Deductible Value="" Operand1="" Operator="" Operand2="" DeducID=""></Deductible>
+						</ToGrant>
+				</Condition>
+				<Condition Operand1="$RECR_VEH" Operator="!=" Operand2="1" OperandType="String">
+						<ToRevoke CoverageCode="UBDRMV"></ToRevoke>
+				</Condition>
+			</Conditions>	
+			<Conditions>
+				<Condition Operand1="$WAT_DWELL" Operator="==" Operand2="1" OperandType="String">
+					<ToGrant CoverageCode="UBDW">
+						<Limit Value="" Operand1="" Operator="" Operand2="" DeducID=""></Limit>
+						<Deductible Value="" Operand1="" Operator="" Operand2="" DeducID=""></Deductible>
+					</ToGrant>
+				</Condition>
+				<Condition Operand1="$WAT_DWELL" Operator="!=" Operand2="1" OperandType="String">
+				<ToRevoke CoverageCode="UBDW"></ToRevoke>
+				</Condition>
+			</Conditions>
+			<Conditions>
+				<Condition Operand1="$LOC_EXCLUDED" Operator="==" Operand2="1" OperandType="Double">
+					<ToGrant CoverageCode="UBAHAZ">
+						<Limit Value="" Operand1="" Operator="" Operand2="" DeducID=""></Limit>
+						<Deductible Value="" Operand1="" Operator="" Operand2="" DeducID=""></Deductible>
+					</ToGrant>
+				</Condition>
+				<Condition Operand1="$LOC_EXCLUDED" Operator="==" Operand2="0" OperandType="Double">
+					<ToRevoke CoverageCode="UBAHAZ"></ToRevoke>
+				</Condition>
+			</Conditions>
+			<Conditions>
+				<Condition Operand1="$DRIV_TYPE" Operator="!=" Operand2="0" OperandType="Double">
+					<ToGrant CoverageCode="UBEXIND">
+						<Limit Value="" Operand1="" Operator="" Operand2="" DeducID=""></Limit>
+						<Deductible Value="" Operand1="" Operator="" Operand2="" DeducID=""></Deductible>
+					</ToGrant>
+				</Condition>
+				<Condition Operand1="$DRIV_TYPE" Operator="==" Operand2="0" OperandType="Double">
+						<ToRevoke CoverageCode="UBEXIND"></ToRevoke>
+				</Condition>
+			</Conditions>
+			<!-- Various condition on pages -->
+			<Conditions>
+				<Condition Operand1="$HAS_MOTORIST_PROTECTION" Operator="==" Operand2="1" OperandType="String">
+					<ToGrant CoverageCode="UBEXUMCOV">
+						<Limit Value="" Operand1="" Operator="" Operand2="" DeducID=""></Limit>
+						<Deductible Value="" Operand1="" Operator="" Operand2="" DeducID=""></Deductible>
+					</ToGrant>
+				</Condition>
+				<Condition Operand1="$HAS_MOTORIST_PROTECTION" Operator="!=" Operand2="1" OperandType="String">
+				<ToRevoke CoverageCode="UBEXUMCOV"></ToRevoke>
+				</Condition>
+			</Conditions>
+			<Conditions>
+				<Condition Operand1="$LOWER_LIMITS" Operator="==" Operand2="1" OperandType="String">
+					<ToGrant CoverageCode="UBEXUMOT">
+						<Limit Value="" Operand1="" Operator="" Operand2="" DeducID=""></Limit>
+						<Deductible Value="" Operand1="" Operator="" Operand2="" DeducID=""></Deductible>
+					</ToGrant>
+				</Condition>
+				<Condition Operand1="$LOWER_LIMITS" Operator="!=" Operand2="1" OperandType="String">
+				<ToRevoke CoverageCode="UBEXUMOT"></ToRevoke>
+				</Condition>
+			</Conditions>
+			<Conditions>
+				<Condition Operand1="$IS_BOAT_EXCLUDED" Operator="==" Operand2="1" OperandType="String">
+					<ToGrant CoverageCode="UBDW">
+						<Limit Value="" Operand1="" Operator="" Operand2="" DeducID=""></Limit>
+						<Deductible Value="" Operand1="" Operator="" Operand2="" DeducID=""></Deductible>
+					</ToGrant>
+				</Condition>
+				<Condition Operand1="$IS_BOAT_EXCLUDED" Operator="!=" Operand2="1" OperandType="String">
+				<ToRevoke CoverageCode="UBDW"></ToRevoke>
+				</Condition>
+			</Conditions>
+			<Conditions>
+				<Condition Operand1="$IS_VEHICLE_EXCLUDED" Operator="==" Operand2="1" OperandType="String">
+					<ToGrant CoverageCode="UBEXDAE">
+						<Limit Value="" Operand1="" Operator="" Operand2="" DeducID=""></Limit>
+						<Deductible Value="" Operand1="" Operator="" Operand2="" DeducID=""></Deductible>
+					</ToGrant>
+				</Condition>
+				<Condition Operand1="$IS_VEHICLE_EXCLUDED" Operator="!=" Operand2="1" OperandType="String">
+				<ToRevoke CoverageCode="UBEXDAE"></ToRevoke>
+				</Condition>
+			</Conditions>
+			<Conditions>
+				<Condition Operand1="$IS_RV_EXCLUDED" Operator="==" Operand2="1" OperandType="String">
+					<ToGrant CoverageCode="UBDRMV">
+						<Limit Value="" Operand1="" Operator="" Operand2="" DeducID=""></Limit>
+						<Deductible Value="" Operand1="" Operator="" Operand2="" DeducID=""></Deductible>
+					</ToGrant>
+				</Condition>
+				<Condition Operand1="$IS_RV_EXCLUDED" Operator="!=" Operand2="1" OperandType="String">
+				<ToRevoke CoverageCode="UBDRMV"></ToRevoke>
+				</Condition>
+			</Conditions>
+			<!--  end here -->
+		</Rule>
+		<Rule Action="Database" StartDate="1950-01-01" EndDate="3000-12-12" STATE_ID="14">
+			<Conditions>
+				<Condition Operand1="$HAVE_NON_OWNED" Operator="==" Operand2="0" OperandType="String">
+					<SubCondition Operand1="$ALE" Operator="==" Operand2="0" OperandType="Double">
+						<ToGrant CoverageCode="UBAUTLIB">
+							<Limit Value="" Operand1="" Operator="" Operand2="" DeducID=""></Limit>
+							<Deductible Value="" Operand1="" Operator="" Operand2="" DeducID=""></Deductible>
+						</ToGrant>
+					</SubCondition>
+					<SubCondition Operand1="$ALE" Operator="!=" Operand2="0" OperandType="Double">
+					    <ToRevoke CoverageCode="UBAUTLIB"></ToRevoke>
+					</SubCondition>
+				</Condition>
+				<Condition Operand1="$HAVE_NON_OWNED" Operator="!=" Operand2="0" OperandType="String">
+						<ToRevoke CoverageCode="UBAUTLIB"></ToRevoke>
+				</Condition>
+			</Conditions>	
+			<Conditions>
+				<Condition Operand1="$AUTO_CYCL_TRUCKS" Operator="==" Operand2="1" OperandType="String">
+					<ToGrant CoverageCode="UBEXDAE">
+						<Limit Value="" Operand1="" Operator="" Operand2="" DeducID=""></Limit>
+						<Deductible Value="" Operand1="" Operator="" Operand2="" DeducID=""></Deductible>
+					</ToGrant>
+				</Condition>
+				<Condition Operand1="$AUTO_CYCL_TRUCKS" Operator="==" Operand2="0" OperandType="String">
+						<ToRevoke CoverageCode="UBEXDAE"></ToRevoke>
+				</Condition>
+			</Conditions>		
+			<Conditions>
+				<Condition Operand1="$RECR_VEH" Operator="==" Operand2="1" OperandType="String">
+					<ToGrant CoverageCode="UBDRMV">
+						<Limit Value="" Operand1="" Operator="" Operand2="" DeducID=""></Limit>
+						<Deductible Value="" Operand1="" Operator="" Operand2="" DeducID=""></Deductible>
+						</ToGrant>
+				</Condition>
+				<Condition Operand1="$RECR_VEH" Operator="!=" Operand2="1" OperandType="String">
+						<ToRevoke CoverageCode="UBDRMV"></ToRevoke>
+				</Condition>
+			</Conditions>	
+			<Conditions>
+				<Condition Operand1="$WAT_DWELL" Operator="==" Operand2="1" OperandType="String">
+					<ToGrant CoverageCode="UBDW">
+						<Limit Value="" Operand1="" Operator="" Operand2="" DeducID=""></Limit>
+						<Deductible Value="" Operand1="" Operator="" Operand2="" DeducID=""></Deductible>
+					</ToGrant>
+				</Condition>
+				<Condition Operand1="$WAT_DWELL" Operator="!=" Operand2="1" OperandType="String">
+						<ToRevoke CoverageCode="UBDW"></ToRevoke>
+				</Condition>
+			</Conditions>
+			<Conditions>
+				<Condition Operand1="$LOC_EXCLUDED" Operator="==" Operand2="1" OperandType="Double">
+					<ToGrant CoverageCode="UBAHAZ">
+						<Limit Value="" Operand1="" Operator="" Operand2="" DeducID=""></Limit>
+						<Deductible Value="" Operand1="" Operator="" Operand2="" DeducID=""></Deductible>
+					</ToGrant>
+				</Condition>
+				<Condition Operand1="$LOC_EXCLUDED" Operator="==" Operand2="0">
+					<ToRevoke CoverageCode="UBAHAZ"></ToRevoke>
+				</Condition>
+			</Conditions>
+			<Conditions>
+				<Condition Operand1="$DRIV_TYPE" Operator="!=" Operand2="0" OperandType="Double">
+					<ToGrant CoverageCode="UBEXIND">
+						<Limit Value="" Operand1="" Operator="" Operand2="" DeducID=""></Limit>
+						<Deductible Value="" Operand1="" Operator="" Operand2="" DeducID=""></Deductible>
+					</ToGrant>
+				</Condition>
+				<Condition Operand1="$DRIV_TYPE" Operator="==" Operand2="0" OperandType="Double">
+						<ToRevoke CoverageCode="UBEXIND"></ToRevoke>
+				</Condition>
+			</Conditions>
+			<!-- Various condition on pages -->
+			<Conditions>
+				<Condition Operand1="$HAS_MOTORIST_PROTECTION" Operator="==" Operand2="1" OperandType="String">
+					<ToGrant CoverageCode="UBEXUMCOV">
+						<Limit Value="" Operand1="" Operator="" Operand2="" DeducID=""></Limit>
+						<Deductible Value="" Operand1="" Operator="" Operand2="" DeducID=""></Deductible>
+					</ToGrant>
+				</Condition>
+				<Condition Operand1="$HAS_MOTORIST_PROTECTION" Operator="!=" Operand2="1" OperandType="String">
+				<ToRevoke CoverageCode="UBEXUMCOV"></ToRevoke>
+				</Condition>
+			</Conditions>
+			<Conditions>
+				<Condition Operand1="$LOWER_LIMITS" Operator="==" Operand2="1" OperandType="String">
+					<ToGrant CoverageCode="UBEXUMOT">
+						<Limit Value="" Operand1="" Operator="" Operand2="" DeducID=""></Limit>
+						<Deductible Value="" Operand1="" Operator="" Operand2="" DeducID=""></Deductible>
+					</ToGrant>
+				</Condition>
+				<Condition Operand1="$LOWER_LIMITS" Operator="!=" Operand2="1" OperandType="String">
+				<ToRevoke CoverageCode="UBEXUMOT"></ToRevoke>
+				</Condition>
+			</Conditions>
+			<Conditions>
+				<Condition Operand1="$IS_BOAT_EXCLUDED" Operator="==" Operand2="1" OperandType="String">
+					<ToGrant CoverageCode="UBDW">
+						<Limit Value="" Operand1="" Operator="" Operand2="" DeducID=""></Limit>
+						<Deductible Value="" Operand1="" Operator="" Operand2="" DeducID=""></Deductible>
+					</ToGrant>
+				</Condition>
+				<Condition Operand1="$IS_BOAT_EXCLUDED" Operator="!=" Operand2="1" OperandType="String">
+				<ToRevoke CoverageCode="UBDW"></ToRevoke>
+				</Condition>
+			</Conditions>
+			<Conditions>
+				<Condition Operand1="$IS_VEHICLE_EXCLUDED" Operator="==" Operand2="1" OperandType="String">
+					<ToGrant CoverageCode="UBEXDAE">
+						<Limit Value="" Operand1="" Operator="" Operand2="" DeducID=""></Limit>
+						<Deductible Value="" Operand1="" Operator="" Operand2="" DeducID=""></Deductible>
+					</ToGrant>
+				</Condition>
+				<Condition Operand1="$IS_VEHICLE_EXCLUDED" Operator="!=" Operand2="1" OperandType="String">
+				<ToRevoke CoverageCode="UBEXDAE"></ToRevoke>
+				</Condition>
+			</Conditions>
+			<Conditions>
+				<Condition Operand1="$IS_RV_EXCLUDED" Operator="==" Operand2="1" OperandType="String">
+					<ToGrant CoverageCode="UBDRMV">
+						<Limit Value="" Operand1="" Operator="" Operand2="" DeducID=""></Limit>
+						<Deductible Value="" Operand1="" Operator="" Operand2="" DeducID=""></Deductible>
+					</ToGrant>
+				</Condition>
+				<Condition Operand1="$IS_RV_EXCLUDED" Operator="!=" Operand2="1" OperandType="String">
+				<ToRevoke CoverageCode="UBDRMV"></ToRevoke>
+				</Condition>
+			</Conditions>
+			<!--  end here -->
+		</Rule>
+	</Group>
+	<Group Code="LobDependent">
+		<Rule Action="Database" StartDate="1950-01-01" EndDate="2002-02-28">
+			<Conditions></Conditions>
+		</Rule>
+	</Group>
+	<Group Code="AppDependent">
+		<Rule Action="Database" StartDate="1950-01-01" EndDate="2002-02-28">
+			<Conditions></Conditions>
+		</Rule>
+	</Group>
+</Root>

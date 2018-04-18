@@ -1,0 +1,23 @@
+INSERT INTO [dbo].[MNT_VEHICLE_MODEL_LIST]
+           ([ID]
+           ,[MAKER_LOOKUP_ID]
+           ,[MODEL]
+           ,[MODEL_TYPE]
+           ,[MODEL_YEAR]
+           ,[EFFECTIVE_FROM_DATE]
+           ,[EFFECTIVE_TO_DATE]
+           ,[IS_ACTIVE]
+           ,[LAST_UPDATED_DATETIME])
+
+SELECT * FROM [EBIX-ADVANTAGE-DEV-NEW].dbo.[MNT_VEHICLE_MODEL_LIST]
+
+
+INSERT INTO [dbo].[MNT_VEHICLE_MODEL_TYPE_LIST]
+           ([MODEL_TYPE]
+           ,[IS_ACTIVE]
+           ,[LAST_UPDATED_DATETIME])
+
+SELECT [MODEL_TYPE]
+      ,[IS_ACTIVE]
+      ,[LAST_UPDATED_DATETIME] 
+      FROM [EBIX-ADVANTAGE-DEV-NEW].dbo.[MNT_VEHICLE_MODEL_TYPE_LIST]

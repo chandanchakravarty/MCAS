@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8" ?> 
+<!--XML File for making relation of Cancellation Effective Date, LOB, state and Days difference-->
+<CancellationEffectiveDateMatrix>
+	<CancellationType Id="11990" Desc="Company Request">
+		<LOB Id="1" Desc="Homeowner" Code="HOME">
+			<STATE Id="14" Desc="INDIANA" Code="IN">
+				<DayDiff Diff="60">
+					<Operator Value="LessThanEqual" Desc="60 days or less" AddDays="13"/>
+					<Operator Value="GreaterThan" Desc="More than 60 days" AddDays="23"/>
+				</DayDiff>
+			</STATE>
+			<STATE Id="22" Desc="MICHIGAN" Code="MI">
+				<DayDiff Diff="60">
+					<Operator Value="LessThanEqual" Desc="60 days or less" AddDays="13"/>
+					<Operator Value="GreaterThan" Desc="More than 60 days" AddDays="33"/>
+				</DayDiff>
+			</STATE>
+		</LOB>
+		<LOB Id="2" Desc="Automobile" Code="PPA">
+			<STATE Id="14" Desc="INDIANA" Code="IN">
+				<DayDiff Diff="0">				
+					<Operator Value="NotApplicable" Desc="Regardless of days" AddDays="23"/>
+				</DayDiff>
+			</STATE>
+			<STATE Id="22" Desc="MICHIGAN" Code="MI">
+				<DayDiff Diff="55">				
+					<Operator Value="LessThanEqual" Desc="55 days or less" AddDays="23"/>
+					<Operator Value="GreaterThan" Desc="More than 55 days" AddDays="33"/>					
+				</DayDiff>
+			</STATE>
+		</LOB>
+		<LOB Id="3" Desc="Motorcyle" Code="CYCL">
+			<STATE Id="14" Desc="INDIANA" Code="IN">
+				<DayDiff Diff="0">
+					<Operator Value="NotApplicable" Desc="Regardless of days" AddDays="23"/>
+				</DayDiff>
+			</STATE>
+			<STATE Id="22" Desc="MICHIGAN" Code="MI">
+				<DayDiff Diff="0">
+					<Operator Value="NotApplicable" Desc="Regardless of days" AddDays="23"/>
+				</DayDiff>
+			</STATE>
+		</LOB>
+		<LOB Id="4" Desc="Watercraft" Code="BOAT">
+			<STATE Id="14" Desc="INDIANA" Code="IN">
+				<DayDiff Diff="0">
+					<Operator Value="NotApplicable" Desc="Regardless of days" AddDays="13"/>
+				</DayDiff>
+			</STATE>
+			<STATE Id="22" Desc="MICHIGAN" Code="MI">
+				<DayDiff Diff="0">
+					<Operator Value="NotApplicable" Desc="Regardless of days" AddDays="13"/>
+				</DayDiff>
+			</STATE>
+			<STATE Id="49" Desc="WISCONSIN" Code="WI">
+				<DayDiff Diff="0">
+					<Operator Value="NotApplicable" Desc="Regardless of days" AddDays="13"/>
+				</DayDiff>
+			</STATE>
+		</LOB>
+		<LOB Id="5" Desc="Umbrella" Code="UMB">
+			<STATE Id="14" Desc="INDIANA" Code="IN">
+				<DayDiff Diff="60">
+					<Operator Value="LessThanEqual" Desc="60 days or less" AddDays="13"/>
+					<Operator Value="GreaterThan" Desc="More than 60 days" AddDays="33"/>
+				</DayDiff>
+			</STATE>
+			<STATE Id="22" Desc="MICHIGAN" Code="MI">
+				<DayDiff Diff="60">
+					<Operator Value="LessThanEqual" Desc="60 days or less" AddDays="13"/>
+					<Operator Value="GreaterThan" Desc="More than 60 days" AddDays="33"/>
+				</DayDiff>
+			</STATE>
+		</LOB>
+		<LOB Id="6" Desc="Rental Dwelling" Code="REDW">
+			<STATE Id="14" Desc="INDIANA" Code="IN">
+				<DayDiff Diff="60">
+					<Operator Value="LessThanEqual" Desc="60 days or less" AddDays="13"/>
+					<Operator Value="GreaterThan" Desc="More than 60 days" AddDays="33"/>
+				</DayDiff>
+			</STATE>
+			<STATE Id="22" Desc="MICHIGAN" Code="MI">
+				<DayDiff Diff="60">
+					<Operator Value="LessThanEqual" Desc="60 days or less" AddDays="13"/>
+					<Operator Value="GreaterThan" Desc="More than 60 days" AddDays="33"/>
+				</DayDiff>
+			</STATE>
+		</LOB>
+		<!--Temporary values being provided as no default data is given-->
+		<LOB Id="7" Desc="General Liability" Code="GENL">
+			<STATE Id="14" Desc="INDIANA" Code="IN">
+				<DayDiff Diff="0">
+					<Operator Value="NotApplicable" Desc="Regardless of days" AddDays="23"/>
+				</DayDiff>
+			</STATE>
+			<STATE Id="22" Desc="MICHIGAN" Code="MI">
+				<DayDiff Diff="0">
+					<Operator Value="NotApplicable" Desc="Regardless of days" AddDays="23"/>
+				</DayDiff>
+			</STATE>
+		</LOB>		
+	</CancellationType>
+</CancellationEffectiveDateMatrix>

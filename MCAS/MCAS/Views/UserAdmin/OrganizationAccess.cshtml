@@ -1,0 +1,230 @@
+﻿@model MCAS.Web.Objects.CommonHelper.OrganizationAccessModel
+@using MCAS.Web.Objects.CommonHelper
+@using MCAS.Globalisation
+@{
+    ViewBag.Title = "OrganizationAccess";
+    Layout = "~/Views/Shared/_SystemAdminLayout.cshtml";
+    var mMCASQueryString = Html.MCASQueryString(Request.QueryString);
+    var SNo = mMCASQueryString["SNo"] == null ? "0" : mMCASQueryString["SNo"] == "" ? "0" : Convert.ToString(mMCASQueryString["SNo"]);
+    var pageMode = mMCASQueryString["pageMode"] == null ? "" : mMCASQueryString["pageMode"];
+    var btndisplay = SNo == "0" ? "none;" : "inline;";
+    var url1 = Url.ActionEncoded("UserAdminMastersEditor", "UserAdmin", new { @pageMode = pageMode, @SNo = SNo });
+    var url2 = Url.ActionEncoded("OrganizationAccess", "UserAdmin", new { @pageMode = pageMode, @SNo = SNo });
+    var url3 = Url.ActionEncoded("OrganizationAccess", "UserAdmin", new { @pageMode = pageMode, @SNo = SNo });
+    var user = TempData["user"];
+    var sy = ViewData["SelectedCategory"];
+    var ParentCheckBoxChecked = ViewData["ParentCheckBoxChecked"];
+    var user1 = TempData["user"];
+    Model.hiddentab = "OrgAccessTab";
+    var hid = Model.hiddentab;
+    var orgAccess = TempData["orgAccessVisiable"] == null ? "Y" : TempData["orgAccessVisiable"];
+    SecurityPermissions myPemissions = (SecurityPermissions)ViewData["UserPermissions"];
+    System.Resources.ResourceManager PageResource = (new MCAS.Web.Objects.MastersHelper.TransactionModel()).GetResourceManager(Model.Resource);
+}
+<link href="@Url.Content("~/Content/multiple-select.css")" rel="stylesheet" type="text/css" />
+<script src="@Url.Content("~/Scripts/jquery-2.1.0.min.js")" type="text/javascript"></script>
+<style type="text/css">
+    div.scrollable
+    {
+        width: 100%;
+        height: 100%;
+        margin: 0;
+        padding: 0;
+        overflow: auto;
+    }
+</style>
+<div class="dashboard-wrapper">
+    <div class="container">
+        <div class="row page-title">
+            <div class="col-lg-12">
+                <h2>@MCAS.Web.Objects.Resources.Common.Common.SystemAdmin</h2>
+                <ul class="breadcrumb">
+                    <li>@PageResource.GetString("UserAdmin")</li>
+                    <li>@PageResource.GetString("OrganizationAccessVal")</li>
+                </ul>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-12 text-left">
+                <div class="btn-group less-bottom-margin">
+                    @*<a class="btn btn-default" href='@Url.Action("UserEntityIndex", "UserAdmin")'>Entity Details</a>*@
+                    <a class="btn btn-default" href='@Url.Action("UserGroupsIndex", "UserAdmin")'>@PageResource.GetString("UserGroups")</a> 
+                    <a class="btn btn-info" href='@Url.Action("UserAdminMastersList", "UserAdmin")'>@PageResource.GetString("User")</a>
+                    <a class="btn btn-default" href='@Url.Action("UserDeptIndex", "UserAdmin")'>@PageResource.GetString("DepartmentMaster")</a>
+                    <a class="btn btn-default" href='@Url.Action("PasswordSetUpEditor", "UserAdmin")'>@PageResource.GetString("PasswordSetup")</a>
+                    @*<a class="btn btn-default" href='@Url.Action("UserCountryIndex", "UserAdmin")'> Country for User Access</a>*@
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-12 text-left">
+                <div class="btn-group less-bottom-margin">
+                    <ul class="nav nav-tabs" id="myTab1">
+
+                        <li  id="UserDetailsTab"><a  id="UserDetailsANC" href='@url1'>@PageResource.GetString("UserDetails")</a></li>
+                        <li class="active" id="OrgAccessTab"><a  id="OrgAccessANC" href='@url2'>@PageResource.GetString("OrganizationAccessVal")</a></li>
+
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="row" id="toprow">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <div class="panel panel-info">
+                    <div class="panel-heading clearfix">
+                        <i class="icon-check-sign"></i>
+                        <h3 class="panel-title">
+                            @PageResource.GetString("OrganizationAccessVal")
+                        </h3>
+                    </div>
+                    <div style="color: Red; font-weight: bold;" class="has-error" id="error">
+                        <p align="center">
+                            @if (TempData["notice"] != null)
+                            {
+                                @TempData["notice"]
+                            }
+                        </p>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-6 text-left">
+                            @* <a class="btn btn-info" id="NewTask" href="#">New Organization Access to User</a>*@
+                            @* @if (@myPemissions.Write)
+                            {
+                                <a class="btn btn-info" id="NewTask" href="#">New Organization Access to User</a>
+                            }*@
+                        </div>
+                    </div>
+                    <div class="panel-body" id="NewOrgAccessEditor">
+                        @* @using (Html.BeginForm("OrganizationAccess", "UserAdmin", new { }, FormMethod.Post, new { role = "form", @class = "form-horizontal", id = "NewOrgAccessEditor1", name = "NewOrgAccessEditor1" }))*@
+                        <form class="form-horizontal" action='@url3' role="form" name="useradminform" id="useradminform" method="post">
+                        @*{*@ @* @Html.HiddenFor(m => m.Hgetval)
+                            @Html.HiddenFor(m => m.UserId)*@
+                        <div class="panel-body">
+                            <div class="table-responsive">
+                                @Html.HiddenFor(m => m.hiddentab)
+                                <div>
+                                    <table class="table" id="MultiTable" style="width: 100%;">
+                                        <thead>
+                                            <tr>
+                                                <th style="width: 30%">
+                                                    @PageResource.GetString("OrganizationCategory")
+                                                </th>
+                                                <th style="width: 70%">
+                                                    @PageResource.GetString("OrganizationAccessVal")
+                                                </th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @foreach (var prod in Model.usercategorylist.Where(c => c.category == "ORGCategory"))
+                                            {
+
+                                                var uniqId = @prod.LookupValue;
+                                                var selectedId = @prod.LookupValue + '~' + @prod.LookupDesc;
+                                                string[] selectedCategory = Convert.ToString(@ViewData["ParentCheckBoxChecked"]).Split('~');
+                                                var pos = selectedCategory != null ? Array.IndexOf(selectedCategory, uniqId) : -1;
+                                                var isProdSelected = pos == -1 ? false : true;
+                                                <tr>
+                                                    <td style="width: 30%">
+                                                        <input type="checkbox" pid="@uniqId" checked="@isProdSelected" value='@selectedId' id="@uniqId" style="text-align:center; vertical-align: middle; margin-left:10px;" name="query_categoryBox"  />
+                                                        @Html.DisplayName(@prod.LookupDesc)
+                                                    </td>
+                                                    <td style="width: 70%">
+                                                        <div style="height: 100px; overflow: auto">
+                                                            <table cellpadding="0" cellspacing="0" style="width: 100%;">
+                                                                @foreach (var prod1 in Model.OrgCatList.Where(c => c.orgCode == uniqId))
+                                                                {
+                                                                    var uid1 = @prod1.Description;
+                                                                    var selectedId1 = @prod1.Description + '~' + @prod1.orgName;
+                                                                    string[] selectedCategory1 = Convert.ToString(@ViewData["SelectedCategoryName"]).Split('~');
+                                                                    var scrollcount = selectedCategory1.Length;
+                                                                    var pos1 = selectedCategory1 != null ? Array.IndexOf(selectedCategory1, uid1) : -1;
+                                                                    var isProdSelected1 = pos1 == -1 ? false : true;
+                                                                
+                                                                    <tr>
+                                                                        <td>
+                                                                            <input name="query_categoryBox" cid="@uniqId"  checked="@isProdSelected1" type="checkbox" value='@selectedId1' id="@uid1" style="text-align:center;"/>&nbsp;@prod1.orgName-@prod1.CountryName
+                                                                        </td>
+                                                                    </tr>
+                                                                }
+                                                            </table>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                   
+                                            }
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <hr />
+                            <hr />
+                        </div>
+                        <div id="maindiv">
+                        </div>
+                        <div class="row">
+                            <div style="display:@btndisplay" class="clearfix igr col-md-12 text-center">
+                            @if (myPemissions.Write)
+                            {
+                                <button class="btn btn-info" id="btnSave" name="submit" type="submit">@PageResource.GetString("Save")</button>
+                            } &nbsp; &nbsp;
+                                @Html.EncodedActionLink(@PageResource.GetString("Back"), "UserAdminMastersEditor", new { SNo = @SNo, pageMode = @pageMode }, new { @class = "btn btn-info" })
+                            </div>
+                        </div>
+                        @*}*@
+                        </form>
+                    </div>
+                </div>
+                <div class="panel">
+                    @Html.Partial("~/Views/Shared/_TimeStamp.cshtml", Model)
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    var do_on_load = function () {
+
+        $("#btnSave").click(function (a) {
+            if ($('input[type=checkbox]:checked').length == 0) {
+                alert('Please select organization category.');
+                a.preventDefault()
+                return false;
+            }
+        });
+
+        $("input[type=checkbox]").each(function () {
+            if (void 0 !== $(this).attr("pid") && !$(this).is(":checked")) {
+                var a = $("#" + this.id).attr("pid");
+                $("input[type=checkbox]").each(function () {
+                    void 0 !== $(this).attr("cid") && $(this).attr("cid") == a && ($(this).removeAttr("checked"), $(this).prop("disabled", !0))
+                })
+            }
+        });
+        $("#MultiTable").on('change', 'input:checkbox', function () {
+            if (void 0 !== $(this).attr("pid")) {
+                var val = $(this).attr("pid");
+                $(this).is(":checked") ? $("input[type=checkbox]").each(function () {
+                    void 0 !== $(this).attr("cid") && $(this).attr("cid") == val && ($(this).removeAttr("disabled"), $(this).prop("checked", !0))
+                }) : $("input[type=checkbox]").each(function () {
+                    void 0 !== $(this).attr("cid") && $(this).attr("cid") == val && ($(this).removeAttr("checked"), $(this).prop("disabled", !0))
+                })
+            }
+            if (void 0 !== $(this).attr("cid") && $(this).is(":checked")) {
+                if (!$("#" + $(this).attr("cid")).is(":checked")) {
+                    alert("Please select organization category.");
+                    $(this).prop('checked', false);
+
+                }
+            }
+
+        });
+    };
+
+    $(document).ready(do_on_load);
+    $(window).bind('page:change', do_on_load);
+
+    if ('@orgAccess' == 'N') {
+        $('#NewOrgAccessEditor').attr('style', 'Display:none');
+    }
+
+</script>

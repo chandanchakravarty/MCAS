@@ -1,0 +1,9 @@
+IF not EXISTS (SELECT * FROM INFORMATION_SCHEMA.COLUMNS where table_name = 'TODODIARYLIST' and  column_name = 'UserId')
+
+BEGIN
+
+ ALTER TABLE TODODIARYLIST
+
+add UserId int
+
+END

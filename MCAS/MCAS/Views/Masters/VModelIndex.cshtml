@@ -1,0 +1,231 @@
+﻿@model  IEnumerable<MCAS.Web.Objects.MastersHelper.VehicleModel>
+@using MCAS.Web.Objects.CommonHelper
+@using MCAS.Web.Objects.Resources.Masters;
+@using MCAS.Web.Objects.Resources.Common;
+@using MCAS.Globalisation
+@{
+    ViewBag.Title = VModelIndex.Title;
+    Layout = "~/Views/Shared/_SystemAdminLayout.cshtml";
+    @Html.Hidden("oldgroup", 1)
+    SecurityPermissions myPemissions = (MCAS.Web.Objects.CommonHelper.SecurityPermissions)ViewData["UserPermissions"];
+}
+<script src='@Url.Content("~/Scripts/jquery-2.1.0.min.js")' type="text/javascript"></script>
+<div class="dashboard-wrapper">
+    <div class="container">
+        <div class="row page-title">
+            <div class="col-lg-12">
+                <h2>
+                    @Common.SystemAdmin</h2>
+                <ul class="breadcrumb">
+                    <li>@VModelIndex.VehicleModel</li>
+                </ul>
+            </div>
+        </div>
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+            <div class="panel panel-info">
+                <div class="panel-heading clearfix">
+                    <i class="icon-check-sign"></i>
+                    <h3 class="panel-title">
+                        @VModelIndex.VehicleModel
+                    </h3>
+                </div>
+                <div class="row">
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                        <div class="panel panel-info">
+                            <div class="panel-sub-heading">
+                                <span class="text-danger">*</span><strong>@Common.SearchScreen</strong>
+                            </div>
+                            <div class="panel-body">
+                                @using (Html.BeginForm("VModelIndex", "Masters", FormMethod.Post, new { role = "form", @class = "form-horizontal" }))
+                                {
+                                    <div class="row">
+                                        <div class="col-lg-6">
+                                            <div class="form-group">
+                                                <label class="col-sm-4" for="ddlMake">
+                                                    @VModelIndex.VehicleMakeName</label>
+                                                <div class="col-sm-6">
+                                                    <select name="ddlMake" id="ddlMake" class="col-lg-12 form-control">
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row top-buffer">
+                                    </div>
+                                    <div class="row top-buffer">
+                                    </div>                          
+                
+                                    <div class="row">
+                                        <div class="col-lg-12 text-center">
+                                            <button type="submit" class="btn btn-info">
+                                                @Common.Search</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                            @if (@myPemissions.Write)
+                                            {
+                                                @Html.ActionLink(Common.AddNew, "VModelList", "Masters",new{}, new { @class = "btn btn-info" })
+                                            }
+                                        </div>
+                                    </div>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-lg-12 text-center">
+                            <h4 class="text-info">
+                                @Common.SearchResults</h4>
+                            <hr />
+                        </div>
+                        <div class="col-lg-12">
+                            <div class="table-responsive">
+                                <div class="row-fluid">
+                                    <div class="dataTables_wrapper" id="Diary_wrapper" role="grid">
+                                        <table cellspacing="0" width="100%" id="tableDiarySrc" class="table table-striped table-hover display">
+                                            <thead>
+                                                <tr>
+                                                    <th style="width: 15%; padding-left: 9px">
+                                                        @VModelIndex.VehicleMakeName
+                                                    </th>
+                                                    <th style="width: 25%; padding-left: 9px">
+                                                        @VModelIndex.VehicleModelDescription
+                                                    </th>
+                                                    <th style="width: 15%; padding-left: 9px">
+                                                        @VModelIndex.VehicleModelCode
+                                                    </th>
+                                                    <th style="width: 25%; padding-left: 9px">
+                                                        @VModelIndex.VehicleClassDescription
+                                                    </th>
+                                                    <th style="width: 10%; padding-left: 9px">
+                                                        @Common.Status
+                                                    </th>
+                                                    <th style="width: 10%;">
+                                                        <span class="block text-right">@Common.Select</span>
+                                                    </th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @{
+                                                    int trid = 1;
+                                                    int rowmatch = 0;
+                                                    var display = "";
+                                                    var strNote = "";
+                                                    var strNote1 = "";
+                                                    foreach (var item in Model)
+                                                    {
+                                                        rowmatch += 1;
+                                                                         
+                                                    <tr group='@(trid)' style="display:@display;">
+                                                        <td>
+                                                            @Html.DisplayFor(modelitem => item.ModelName)
+                                                        </td>
+                                                        <td>
+                                                            @Html.DisplayFor(modelitem => item.ModelDescription)
+                                                        </td>
+                                                        <td>
+                                                            @Html.DisplayFor(modelItem => item.ModelCode)
+                                                        </td>
+                                                        <td>
+                                                            @Html.DisplayFor(modelItem => item.VehicleClassDescription)
+                                                        </td>
+                                                        <td>
+                                                            @Html.DisplayFor(modelItem => item.Status)
+                                                        </td>
+                                                        <td>
+                                                            @if (@myPemissions.Write)
+                                                            {
+                                                                @Html.EncodedActionLink(Common.Edit, "VModelList", "Masters", new { TranId = item.TranId, pageMode = "Edit" }, new { @class = "btn btn-xs btn-warning" })
+                                                            }
+                                                            @if (@myPemissions.Read)
+                                                            {
+                                                                @Html.EncodedActionLink(Common.View, "VModelList", "Masters", new { TranId = item.TranId, pageMode = "View" }, new { @class = "btn btn-xs btn-info" })   
+                                                            }
+                                                        </td>
+                                                    </tr>
+                                   
+                                                    }}
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    $(document).ready(function () {
+        loadMakecodeList();
+    });
+
+    function loadMakecodeList() {
+        $.ajax({
+            url: '@(Url.Action("FillMakeCodeList"))',
+            cache: false,
+            success: function (data) {
+                $("#ddlMake").empty();
+                $.each(data, function (index, optiondata) {
+                    if (optiondata.MakeCode == '@ViewBag.make') $("#ddlMake").append("<option value='" + optiondata.MakeCode + "' selected=selected >" + optiondata.MakeName + "</option>");
+                    else $("#ddlMake").append("<option value='" + optiondata.MakeCode + "'>" + optiondata.MakeName + "</option>");
+                });
+            },
+            error: function (reponse) {
+                alert("error : " + reponse);
+            }
+        });
+    }
+
+    function Pagination(id) {
+        var totalcount = Math.ceil(parseFloat(parseInt("@Model.Count()") / 10));
+        if (id == "linext") {
+            id = "li" + (parseInt($("#oldgroup").val()) == totalcount ? totalcount : (parseInt($("#oldgroup").val()) + 1));
+        }
+        if (id == "liprevious") {
+            id = "li" + (parseInt($("#oldgroup").val()) == 1 ? 1 : (parseInt($("#oldgroup").val()) - 1));
+        }
+        var oldgroup_id = $("#oldgroup").val();
+        var tabid_id = id.replace("li", "");
+        $("#oldgroup").val(tabid_id);
+        $("table tr[group=" + oldgroup_id + "]").css("display", "none");
+        $("table tr[group=" + tabid_id + "]").css("display", "");
+        $('.active').removeClass();
+        $('#' + id).addClass("active");
+
+        if (totalcount > 0) {
+            for (i = 1; i <= totalcount; i++) {
+                $("#li" + i).css("display", "none");
+            }
+            if (tabid_id > 1) {
+
+                if (parseFloat(tabid_id) + 2 <= parseFloat(totalcount)) {
+                    for (i = parseFloat(tabid_id == 2 ? 3 : tabid_id) - 2; i <= parseFloat(tabid_id == 2 ? 3 : tabid_id) + 2; i++) {
+                        if (i <= totalcount) {
+                            $("#li" + i).css("display", "");
+                        }
+                    }
+                }
+                else {
+                    for (i = parseFloat(totalcount) - 4; i <= parseFloat(totalcount); i++) {
+
+                        $("#li" + i).css("display", "");
+                    }
+                }
+            }
+            else {
+                for (i = parseFloat(1); i <= parseFloat(5); i++) {
+                    $("#li" + i).css("display", "");
+                }
+            }
+        }
+
+    };
+
+    function getval(sel) {
+        alert(sel.value);
+        var mk = sel.value;
+        $("#ddlMake").val("mk");
+    };
+</script>

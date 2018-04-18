@@ -1,0 +1,209 @@
+﻿@model MCAS.Web.Objects.MastersHelper.CurrencyExchangeModel
+@using MCAS.Web.Objects.CommonHelper
+@using MCAS.Web.Objects.Resources.ClaimMasters;
+@using MCAS.Web.Objects.Resources.Common
+@using MCAS.Globalisation 
+@{
+    //ViewBag.Title = "ExchangeEditor";
+    ViewBag.Title = ExchangeEditor.Title;
+    var mMCASQueryString = Html.MCASQueryString(Request.QueryString);
+    Layout = "~/Views/Shared/_SystemAdminLayout.cshtml";
+    var pageMode = mMCASQueryString["pageMode"];
+    var btndisplay = "yes";
+    if (pageMode == "View")
+    {
+        btndisplay = "none";
+    }
+
+    var Date = "";
+    if (Model.EffectiveDate.ToString() != "")
+    {
+        Date = Model.EffectiveDate.ToString().Substring(0, 10);
+    }
+    else
+    {
+        Date = DateTime.Now.ToString("dd/MM/yyyy");
+    }
+
+    SecurityPermissions myPemissions = (SecurityPermissions)ViewData["UserPermissions"];
+}
+<link href="@Url.Content("~/Content/themes/base/jquery.ui.all.css")" rel="stylesheet" type="text/css" />
+<script src='@Url.Content("~/Scripts/jquery-2.1.0.min.js")' type="text/javascript"></script>
+<script src="@Url.Content("~/Scripts/jquery.validate.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.min.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/Scripts/globalize/globalize.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/Scripts/globalize/cultures/globalize.culture.en-GB.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/Scripts/jquery-ui-v1.10.3.js")" type="text/javascript"></script>
+<div class="dashboard-wrapper">
+    <div class="container">
+        <div class="row page-title">
+            <div class="col-lg-12">
+                <h2>
+                    @Common.SystemAdmin</h2>
+                <ul class="breadcrumb">
+                    <li>@ExchangeEditor.ExchangeRateMasterDetails</li></ul>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <div class="panel panel-info">
+                    <div class="panel-heading clearfix">
+                        <i class="icon-check-sign"></i>
+                        <h3 class="panel-title">
+                            @ExchangeEditor.ExchangeRateMasterDetails
+                        </h3>
+                    </div>
+                    <div style="color: Red; font-weight: bold;" class="has-error" id="error">
+                        <p align="center">
+                            @if (TempData["notice"] != null)
+                            {
+                                @TempData["notice"]
+                            }
+                        </p>
+                    </div>
+                    <div class="panel-body">
+                        @using (Html.BeginForm("ExchangeEditor", "ClaimMasters", FormMethod.Post, new { role = "form", @class = "form-horizontal", id = "ExchangeEditorForm", name = "ExchangeEditorForm" }))
+                        {
+                            @Html.ValidationSummary(true)
+                            @Html.HiddenFor(m => m.Id)
+                            <div id="t2">
+                                <div class="row top-buffer">
+                                    <div class="clearfix igr col-md-12">
+                                        <div class="col-md-3">
+                                            <label for="inputDepartment">
+                                                @ExchangeEditor.CurrencyCode&nbsp;<span class="text-danger">*</span></label>
+                                        </div>
+                                        <div class="col-md-3">
+                                            @Html.DropDownListFor(m => m.CurrencyCode, new SelectList(Model.currencylist, "CurrencyCode", "Description", "SGD"), new { id = "CurrencyCode", @class = "form-control" })
+                                            @Html.ValidationMessageFor(m => m.CurrencyCode)
+                                        </div>
+                                        <div class="col-md-3">
+                                            <label for="inputGropuName">
+                                                @ExchangeEditor.CurrencyEffectiveDate&nbsp;<span class="text-danger">*</span></label>
+                                        </div>
+                                        <div class="col-md-3">
+                                            @Html.TextBoxFor(m => m.EffectiveDate, "{0:d}", new { id = "Currencydatepicker", @class = "form-control datepicker", @Value = @Date })
+                                            @Html.ValidationMessageFor(m => m.EffectiveDate)
+                                        </div>
+                                    </div>
+                                </div>
+                                @*<div class="row top-buffer">
+                                <div class="clearfix igr col-md-12">
+                                    <div class="col-md-3">
+                                        <label for="inputGropuName">
+                                            Currency Effective Date &nbsp;<span class="text-danger">*</span></label>
+                                    </div>
+                                    <div class="col-md-3">
+                                         @Html.TextBoxFor(m => m.EffectiveDate, "{0:d}", new { id = "Currencydatepicker", @class = "form-control datepicker", @Value = @Date })
+                                         @Html.ValidationMessageFor(m => m.EffectiveDate)
+                                    </div>
+                                </div>
+                            </div>*@
+                                <div class="row top-buffer">
+                                    <div class="clearfix igr col-md-12">
+                                        <div class="col-md-3">
+                                            <label for="inputGropuName">
+                                                @ExchangeEditor.ExchangeRate&nbsp;<span class="text-danger">*</span></label>
+                                        </div>
+                                        <div class="col-md-3">
+                                            @Html.TextBoxFor(m => m.Exchangerate, new { @id = "txtExchange", @maxlength = "14", @class = "form-control format Number" })
+                                            @Html.ValidationMessageFor(m => m.Exchangerate)
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row top-buffer">
+                            </div>
+                            <div class="row top-buffer">
+                            </div> 
+
+                        
+                            <div class="row top-buffer">
+                                <div class="clearfix igr col-md-12 text-center">
+                                    @if (@myPemissions.Write)
+                                    {
+                                        <button id="btnSave" style="display:@btndisplay" class="btn btn-info">@Common.Save</button>
+                                    }
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                    @Html.ActionLink(Common.Back, "ExchangeIndex", null, new { @class = "btn btn-info" })&nbsp;&nbsp;&nbsp;
+                                </div>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="panel">
+            @Html.Partial("~/Views/Shared/_TimeStamp.cshtml", Model)
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    $(function () {
+        $("#Currencydatepicker").datepicker({
+            dateFormat: "dd/mm/yy",
+            showStatus: !0,
+            showWeeks: !0,
+            currentText: "Now",
+            autoSize: !0,
+            gotoCurrent: !0,
+            showAnim: "blind",
+            highlightWeek: !0,
+            changeMonth: !0,
+            changeYear: !0,
+            yearRange: "1951:2050",
+            onSelect: function (b) {
+                $(this).valid();
+            }
+        });
+
+
+    })
+</script>
+<script type="text/javascript">
+    $(document).on("focus", ":input", function () {
+        $(this).attr("autocomplete", "off")
+    });
+   
+</script>
+<script type="text/javascript">
+    $(function () {
+        $.culture = Globalize.culture("en-GB");
+        $.validator.methods.date = function (value, element) {
+            return this.optional(element)
+                    || Globalize.parseDate(value, "dd/MM/yyyy", "en-GB")
+                    || Globalize.parseDate(value, "yyyy-mm-dd");
+        }
+
+        if ('@pageMode' == 'View') {
+            $('#t2').find('input, textarea, button, select').attr('disabled', 'disabled');
+
+        }
+
+        $("input[type=text]").each(function () {
+            if (void 0 !== $(this).attr("data-val-date") && "The field " == $(this).attr("data-val-date").substring(0, 10)) {
+                var a = $(this).attr("data-val-date").substring(10, $(this).attr("data-val-date").length).replace("Currency Effective Date must be a date.", "@Html.Raw(ExchangeEditor.EVCurrencyEffectiveDate)");
+                $(this).removeAttr("data-val-date");
+                $(this).attr("data-val-date", a)
+            }
+        });
+
+        $("input[type=text]").each(function () {
+            if (void 0 !== $(this).attr("data-val-number") && "The field " == $(this).attr("data-val-number").substring(0, 10)) {
+                var a = $(this).attr("data-val-number").substring(10, $(this).attr("data-val-number").length);
+                $(this).removeAttr("data-val-number");
+                $(this).attr("data-val-number", a)
+            }
+        });
+
+        $("#btnSave").click(function () {
+          $("input[type=text]").each(function () {
+                    if ($(this).hasClass("format") && "" != $(this).val()) {
+                        var a = $(this).context.id, b = $(this).val().replace(/,/g, "");
+                        $("#" + a).val(b.replace("NaN", "0"))
+                    }
+              });
+        });
+    });
+
+</script>

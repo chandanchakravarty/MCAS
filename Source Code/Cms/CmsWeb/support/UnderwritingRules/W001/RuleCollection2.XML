@@ -1,0 +1,174 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<rule_collection>
+
+  <rule_collection_details>
+    <collection_code>EBX1002</collection_code>
+    <collection_version>12.25</collection_version>
+    <locked>false</locked>
+    <collection_effective_date>07/20/2011</collection_effective_date>
+    <collection_expiration_date>07/20/2011</collection_expiration_date>
+    <collection_country>1</collection_country>
+    <collection_state>
+      <state_cd>75</state_cd>
+      <state_cd>77</state_cd>
+      <state_cd>64</state_cd>
+    </collection_state>
+    <collection_product>1</collection_product>
+    <collection_lob>
+      <lob_id>18</lob_id>
+    </collection_lob>
+    <collection_sublob>
+      <sub_lob_id>7</sub_lob_id>
+      <sub_lob_id>1</sub_lob_id>
+      <sub_lob_id>2</sub_lob_id>
+      <sub_lob_id>6</sub_lob_id>
+    </collection_sublob>
+    <quoteapppolicy>
+      <Application>true</Application>
+      <Policy>true</Policy>
+      <Quote>true</Quote>
+    </quoteapppolicy>
+  </rule_collection_details>
+
+  <rules>
+    <!--Policy Level Rules-->
+    <!--If No renumerations refer-->
+    <rule ruleid="4" ruletype="Defined" rulecategory="Refer" rulepriority="High" rulestatus="Active" effectivefrom="" effectivetill=""
+         basepath="ROOT/REMUNERATIONS" sectionid="224_44">
+      <if>
+        <conditionexpressions>
+          <expression expid="1" datatype ="string">
+            <operand1 qualifier="Count" type="Input">REMUNERATION</operand1>
+            <operator>Equals</operator>
+            <operand2 qualifier="None" type="Constant">0</operand2>
+          </expression>
+        </conditionexpressions>
+        <then>
+          <action type="ShowMessage">
+            <message_id>4</message_id>
+          </action>
+          <action type="SetVariable">
+            <variable></variable>
+            <value></value>
+          </action>
+        </then>
+      </if>
+      <else>
+        <then>
+          <action type="ShowMessage">
+            <message_id></message_id>
+          </action>
+          <action type="SetVariable">
+            <variable></variable>
+            <value></value>
+          </action>
+        </then>
+      </else>
+    </rule>
+
+    <!--If more than two clauses of type 14696 refer-->
+    <rule ruleid="5" ruletype="Defined" rulecategory="Refer" rulepriority="High" rulestatus="Active" effectivefrom="" effectivetill=""
+         basepath="ROOT/CLAUSES" sectionid="224_44">
+      <if>
+        <conditionexpressions>
+          <expression expid="1" datatype ="string">
+            <operand1 qualifier="Count" type="Input">CLAUSE[@CLAUSE_TYPE='14696']</operand1>
+            <operator>GreaterOrEquals</operator>
+            <operand2 qualifier="None" type="Constant">2</operand2>
+          </expression>
+        </conditionexpressions>
+        <then>
+          <action type="ShowMessage">
+            <message_id>5</message_id>
+          </action>
+          <action type="SetVariable">
+            <variable></variable>
+            <value></value>
+          </action>
+        </then>
+      </if>
+      <else>
+        <then>
+          <action type="ShowMessage">
+            <message_id></message_id>
+          </action>
+          <action type="SetVariable">
+            <variable></variable>
+            <value></value>
+          </action>
+        </then>
+      </else>
+    </rule>
+
+    <!-- Risk Level Rules-->
+
+    <!--If more than 4 coverages one risk refer-->
+    <rule ruleid="10" ruletype="Defined" rulecategory="Refer" rulepriority="High" rulestatus="Active" effectivefrom="" effectivetill=""
+           basepath="ROOT/RISKS/RISK" sectionid="400">
+      <if>
+        <conditionexpressions>
+          <expression expid="1" datatype ="double">
+            <operand1 qualifier="Count" type="Input">COVERAGES/COVERAGE/COVERAGE_CODE_ID</operand1>
+            <operator>GreaterThan</operator>
+            <operand2 qualifier="None" type="Constant">4</operand2>
+          </expression>
+        </conditionexpressions>
+        <then>
+          <action type="ShowMessage">
+            <message_id>10</message_id>
+          </action>
+          <action type="SetVariable">
+            <variable></variable>
+            <value></value>
+          </action>
+        </then>
+      </if>
+      <else>
+        <then>
+          <action type="ShowMessage">
+            <message_id></message_id>
+          </action>
+          <action type="SetVariable">
+            <variable></variable>
+            <value></value>
+          </action>
+        </then>
+      </else>
+    </rule>
+
+    <!--If more limit of ant of the coverages exceeds 50000 refer-->
+    <rule ruleid="11" ruletype="Defined" rulecategory="Reject" rulepriority="High" rulestatus="Active" effectivefrom="" effectivetill=""
+          basepath="ROOT/RISKS/RISK" sectionid="224_44">
+      <if>
+        <conditionexpressions>
+          <expression expid="1" datatype ="double">
+            <operand1 qualifier="Any" type="Input">COVERAGES/COVERAGE/LIMIT_1</operand1>
+            <operator>GreaterThan</operator>
+            <operand2 qualifier="None" type="Constant">50000</operand2>
+          </expression>
+        </conditionexpressions>
+        <then>
+          <action type="ShowMessage">
+            <message_id>11</message_id>
+          </action>
+          <action type="SetVariable">
+            <variable></variable>
+            <value></value>
+          </action>
+        </then>
+      </if>
+      <else>
+        <then>
+          <action type="ShowMessage">
+            <message_id></message_id>
+          </action>
+          <action type="SetVariable">
+            <variable></variable>
+            <value></value>
+          </action>
+        </then>
+      </else>
+    </rule>
+  </rules>
+
+</rule_collection>

@@ -1,0 +1,417 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="AccidentCause" xml:space="preserve">
+    <value>De provoquer un accident </value>
+  </data>
+  <data name="BackToListAction" xml:space="preserve">
+    <value>Retour à la liste </value>
+  </data>
+  <data name="CaseCategory" xml:space="preserve">
+    <value>affaire Catégorie </value>
+  </data>
+  <data name="CaseStatus" xml:space="preserve">
+    <value>Case Statut </value>
+  </data>
+  <data name="ClaimantAddress1" xml:space="preserve">
+    <value>du demandeur Adresse1 </value>
+  </data>
+  <data name="ClaimantAddress2" xml:space="preserve">
+    <value>Adresse2 du demandeur </value>
+  </data>
+  <data name="ClaimantAddress3" xml:space="preserve">
+    <value>Address3 du demandeur </value>
+  </data>
+  <data name="ClaimantContactNo" xml:space="preserve">
+    <value>contacter Pas du demandeur </value>
+  </data>
+  <data name="ClaimantDOB" xml:space="preserve">
+    <value>la date de naissance du demandeur </value>
+  </data>
+  <data name="ClaimantEmail" xml:space="preserve">
+    <value>l' e-mail du demandeur </value>
+  </data>
+  <data name="ClaimantGender" xml:space="preserve">
+    <value>du demandeur de la parité</value>
+  </data>
+  <data name="ClaimantName" xml:space="preserve">
+    <value>réclamant Nom </value>
+  </data>
+  <data name="ClaimantNRICPPNO" xml:space="preserve">
+    <value>NRIC / PP Pas du demandeur </value>
+  </data>
+  <data name="ClaimantStatus" xml:space="preserve">
+    <value>la situation de prestataire </value>
+  </data>
+  <data name="ClaimantType" xml:space="preserve">
+    <value>type de demandeur</value>
+  </data>
+  <data name="ClaimDate" xml:space="preserve">
+    <value>date de réclamation </value>
+  </data>
+  <data name="ClaimRecordNo" xml:space="preserve">
+    <value>Montant Enregistrez Non</value>
+  </data>
+  <data name="ClaimsOfficer" xml:space="preserve">
+    <value>officier des réclamations </value>
+  </data>
+  <data name="ClaimType" xml:space="preserve">
+    <value>type de revendication </value>
+  </data>
+  <data name="ConfirmedAmount" xml:space="preserve">
+    <value>a confirmé </value>
+  </data>
+  <data name="Constituency" xml:space="preserve">
+    <value>Circonscription </value>
+  </data>
+  <data name="CreateAction" xml:space="preserve">
+    <value>Créer </value>
+  </data>
+  <data name="CreatedBy" xml:space="preserve">
+    <value>créé par </value>
+  </data>
+  <data name="Createddate" xml:space="preserve">
+    <value>date de création </value>
+  </data>
+  <data name="DateOfMpLetter" xml:space="preserve">
+    <value>date de MP Lettre </value>
+  </data>
+  <data name="DateReferredToInsurersB" xml:space="preserve">
+    <value>date visée à assureurs </value>
+  </data>
+  <data name="DeleteAction" xml:space="preserve">
+    <value>supprimer </value>
+  </data>
+  <data name="DeleteConfirmMessage" xml:space="preserve">
+    <value>êtes- vous sûr de vouloir supprimer la RESPONSABILITE de cette ?</value>
+  </data>
+  <data name="DriverLiablity" xml:space="preserve">
+    <value>pilote </value>
+  </data>
+  <data name="EditAction" xml:space="preserve">
+    <value>Enregistrer </value>
+  </data>
+  <data name="ExcessRecoveredDate" xml:space="preserve">
+    <value>Excès date de la récupération </value>
+  </data>
+  <data name="InfantDOB" xml:space="preserve">
+    <value>la date de naissance du nourrisson </value>
+  </data>
+  <data name="InfantGender" xml:space="preserve">
+    <value>du nourrisson de sexe</value>
+  </data>
+  <data name="InfantName" xml:space="preserve">
+    <value>le nom du nourrisson </value>
+  </data>
+  <data name="InformedInsurerOfSettlement" xml:space="preserve">
+    <value>assureur informé de règlement </value>
+  </data>
+  <data name="Isclaimantaninfant" xml:space="preserve">
+    <value>est demandeur un enfant ?</value>
+  </data>
+  <data name="ListActionCreate" xml:space="preserve">
+    <value>Créer </value>
+  </data>
+  <data name="ListActionDelete" xml:space="preserve">
+    <value>Supprimer </value>
+  </data>
+  <data name="ListActionDetails" xml:space="preserve">
+    <value>Détails</value>
+  </data>
+  <data name="ListActionEdit" xml:space="preserve">
+    <value>Modifier </value>
+  </data>
+  <data name="ModifiedBy" xml:space="preserve">
+    <value>Modifié par </value>
+  </data>
+  <data name="ModifiedDate" xml:space="preserve">
+    <value>date de modification </value>
+  </data>
+  <data name="MP" xml:space="preserve">
+    <value>député </value>
+  </data>
+  <data name="PostalCode" xml:space="preserve">
+    <value>code postal du demandeur </value>
+  </data>
+  <data name="RecordCancellationDate" xml:space="preserve">
+    <value>Record date d'annulation </value>
+  </data>
+  <data name="RecordCancellationReason" xml:space="preserve">
+    <value>Record annulation Raison </value>
+  </data>
+  <data name="RecordReopenedReason" xml:space="preserve">
+    <value>Record Raison Réouverte </value>
+  </data>
+  <data name="ReferredToInsurersB" xml:space="preserve">
+    <value>visées à assureurs </value>
+  </data>
+  <data name="ReopenedDate" xml:space="preserve">
+    <value>Date Réouverte </value>
+  </data>
+  <data name="ReportSentToInsurer" xml:space="preserve">
+    <value>rapport envoyé à l'assureur </value>
+  </data>
+  <data name="SeverityReferenceNo" xml:space="preserve">
+    <value>No de référence </value>
+  </data>
+  <data name="TimeBarDate" xml:space="preserve">
+    <value>date de Timebar</value>
+  </data>
+  <data name="VehicleMake" xml:space="preserve">
+    <value>véhicule</value>
+  </data>
+  <data name="VehicleModel" xml:space="preserve">
+    <value>modèle du véhicule </value>
+  </data>
+  <data name="VehicleRegnNo" xml:space="preserve">
+    <value>Regn véhicule Non</value>
+  </data>
+  <data name="WritIssuedDate" xml:space="preserve">
+    <value>bref délivré </value>
+  </data>
+  <data name="WritNo" xml:space="preserve">
+    <value>bref Non </value>
+  </data>
+  <data name="AddNewClaim" xml:space="preserve">
+    <value>Ajouter une nouvelle revendication</value>
+  </data>
+  <data name="AppointedDate" xml:space="preserve">
+    <value>date de la nomination</value>
+  </data>
+  <data name="CancellationOfRecord" xml:space="preserve">
+    <value>Annulation de la fiche</value>
+  </data>
+  <data name="ClaimEntry" xml:space="preserve">
+    <value>Entrée revendication</value>
+  </data>
+  <data name="FinalSettleDate" xml:space="preserve">
+    <value>Date de finale Settle</value>
+  </data>
+  <data name="InsurerMatters" xml:space="preserve">
+    <value>Questions Assureur</value>
+  </data>
+  <data name="NewClaimEntry" xml:space="preserve">
+    <value>Nouvelle revendication Entrée</value>
+  </data>
+  <data name="NewClaimType" xml:space="preserve">
+    <value>Nouveau Type de revendication</value>
+  </data>
+  <data name="OurAdjustorAppointed" xml:space="preserve">
+    <value>Notre Adjustor Nommé</value>
+  </data>
+  <data name="OurLawyerAppointed" xml:space="preserve">
+    <value>Notre avocat désigné</value>
+  </data>
+  <data name="OurSurveyorAppointed" xml:space="preserve">
+    <value>Notre inspecteur désigné</value>
+  </data>
+  <data name="OurWorkshopDepot" xml:space="preserve">
+    <value>Notre atelier / Depot</value>
+  </data>
+  <data name="OwnDamage" xml:space="preserve">
+    <value>propre dommage</value>
+  </data>
+  <data name="RecordCreation" xml:space="preserve">
+    <value>Création d'enregistrement</value>
+  </data>
+  <data name="SensitiveCase" xml:space="preserve">
+    <value>sensible à la casse</value>
+  </data>
+  <data name="Severity" xml:space="preserve">
+    <value>gravité</value>
+  </data>
+  <data name="ThirdPartyClaimant" xml:space="preserve">
+    <value>3ème Partie requérante</value>
+  </data>
+  <data name="RFVCaseCategory" xml:space="preserve">
+    <value>Catégorie Case est nécessaire .</value>
+  </data>
+  <data name="RFVCaseStatus" xml:space="preserve">
+    <value>Case Statut est nécessaire .</value>
+  </data>
+  <data name="RFVClaimantName" xml:space="preserve">
+    <value>Nom demandeur est tenu .</value>
+  </data>
+  <data name="RFVClaimantStatus" xml:space="preserve">
+    <value>Statut demandeur est tenu .</value>
+  </data>
+  <data name="RFVClaimantType" xml:space="preserve">
+    <value>Demandeur type est exigé.</value>
+  </data>
+  <data name="RFVClaimDate" xml:space="preserve">
+    <value>Date de réclamation est nécessaire .</value>
+  </data>
+  <data name="RFVClaimRecordNo" xml:space="preserve">
+    <value>Enregistrez revendication n est nécessaire .</value>
+  </data>
+  <data name="RFVClaimsOfficer" xml:space="preserve">
+    <value>Agent des réclamations est nécessaire .</value>
+  </data>
+  <data name="RFVTimebarDate" xml:space="preserve">
+    <value>Timebar date est nécessaire .</value>
+  </data>
+  <data name="Claim" xml:space="preserve">
+    <value>Revendication</value>
+  </data>
+  <data name="LODSentDate" xml:space="preserve">
+    <value>LOD Date d'envoi</value>
+  </data>
+  <data name="RVFLODSentDate" xml:space="preserve">
+    <value>LOD Date d'envoi est nécessaire .</value>
+  </data>
+  <data name="InformedInsurer" xml:space="preserve">
+    <value>Assureur informé des nouvelles revendication</value>
+  </data>
+  <data name="RFVInformedInsurer" xml:space="preserve">
+    <value>Assureur éclairé est requis .</value>
+  </data>
+  <data name="ClaimEdit" xml:space="preserve">
+    <value>revendication éditeur</value>
+  </data>
+  <data name="EZLinkCardNo" xml:space="preserve">
+    <value>Vérification de EZLink Aucune carte</value>
+  </data>
+  <data name="RecoveredtoDate" xml:space="preserve">
+    <value>Récupérés à ce jour</value>
+  </data>
+  <data name="NODNOS" xml:space="preserve">
+    <value>NOD / NOS Reçues ?</value>
+  </data>
+  <data name="RFVEZLinkCardNoList" xml:space="preserve">
+    <value>Vérification de EZLink carte Aucune est nécessaire .</value>
+  </data>
+  <data name="RFVFinalSettlementDate" xml:space="preserve">
+    <value>Finale Settle date doit être la date actuelle .</value>
+  </data>
+  <data name="NODNOSValidationMessage" xml:space="preserve">
+    <value>NOD / NOS Reçues ? est requis.</value>
+  </data>
+  <data name="City" xml:space="preserve">
+    <value>Ville</value>
+  </data>
+  <data name="Country" xml:space="preserve">
+    <value>Pays</value>
+  </data>
+  <data name="State" xml:space="preserve">
+    <value>Etat</value>
+  </data>
+  <data name="RFVEZLinkCardNo" xml:space="preserve">
+    <value>Vérification sur la carte EzLink Non est nécessaire.</value>
+  </data>
+</root>

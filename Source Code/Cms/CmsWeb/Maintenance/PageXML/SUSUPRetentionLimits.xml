@@ -1,0 +1,298 @@
+﻿<Root>
+  <Schema>
+    <SchemaID>201</SchemaID>
+    <Cultures>
+      <Culture CultureName ="en">
+        <MessageFile>Maintenance/PageXML//SUSUPRetentionLimitsMessages_en.xml</MessageFile>
+      </Culture>
+      <Culture CultureName ="la">
+        <MessageFile>Maintenance/PageXML//SUSUPRetentionLimitsMessages_la.xml</MessageFile>
+      </Culture>
+    </Cultures>
+  </Schema>
+
+  <DataTable>
+
+    <TableName>MNT_RETENTION_LIMIT</TableName>
+
+    <PrimaryKey>
+      <Columns>
+        <Column>1</Column>
+      </Columns>
+    </PrimaryKey>
+
+    <Columns>
+
+      <Column ColID="1">
+        <ColumnName>RETENTION_LIMIT_ID</ColumnName>
+        <DatType>Int</DatType>
+        <IsIdentity>Y</IsIdentity>
+        <Length></Length>
+        <Nullable>N</Nullable>
+        <HasDefault>N</HasDefault>
+        <DefaultValue></DefaultValue>
+      </Column>
+
+      <Column ColID="2">
+        <ColumnName>REF_SUSEP_LOB_ID</ColumnName>
+        <DatType>Int</DatType>
+        <IsIdentity>N</IsIdentity>
+        <Length></Length>
+        <Nullable>N</Nullable>
+        <HasDefault>N</HasDefault>
+        <DefaultValue></DefaultValue>
+      </Column>
+
+      <Column ColID="3">
+        <ColumnName>RETENTION_LIMIT</ColumnName>
+        <DatType>Decimal</DatType>
+        <IsIdentity>N</IsIdentity>
+        <Length>18</Length>
+        <Nullable>N</Nullable>
+        <HasDefault>N</HasDefault>
+        <DefaultValue></DefaultValue>
+      </Column>
+
+
+    </Columns>
+
+    <AddMethod>
+      <Prodedure>
+        <Name>Proc_Add_MNT_RETENTION_LIMIT</Name>
+        <Parameters>
+
+          <Param>
+            <Name>@REF_SUSEP_LOB_ID</Name>
+            <Direction>In</Direction>
+            <DBColID>2</DBColID>
+          </Param>
+
+          <Param>
+            <Name>@RETENTION_LIMIT</Name>
+            <Direction>In</Direction>
+            <DBColID>3</DBColID>
+          </Param>
+
+          <Param>
+            <Name>@RETENTION_LIMIT_ID</Name>
+            <Direction>Out</Direction>
+            <DBColID>1</DBColID>
+          </Param>
+
+
+        </Parameters>
+      </Prodedure>
+    </AddMethod>
+
+    <UpdateMethod>
+      <Prodedure>
+        <Name>Proc_Update_MNT_RETENTION_LIMIT</Name>
+        <Parameters>
+
+          <Param>
+            <Name>@RETENTION_LIMIT_ID</Name>
+            <Direction>In</Direction>
+            <DBColID>1</DBColID>
+          </Param>
+
+          <Param>
+            <Name>@REF_SUSEP_LOB_ID</Name>
+            <Direction>In</Direction>
+            <DBColID>2</DBColID>
+          </Param>
+
+          <Param>
+            <Name>@RETENTION_LIMIT</Name>
+            <Direction>In</Direction>
+            <DBColID>3</DBColID>
+          </Param>
+
+        </Parameters>
+      </Prodedure>
+    </UpdateMethod>
+
+  </DataTable>
+
+  <Elements>
+
+    <ElementInfo ElementID ="1">
+
+      <DataDefinition>
+        <ElementName>SusupGroupCode</ElementName>
+        <ElementType>EbxInt32</ElementType>
+        <DataColumn>2</DataColumn>
+      </DataDefinition>
+
+      <UIDefinition>
+        <ElementName>ddlSusupGroupCode</ElementName>
+        <ElementType>DropDown</ElementType>
+        <Caption>101</Caption>
+        <DefaultValue>11332</DefaultValue>
+        <DataBinding>
+          <BindingMethod>SPCall</BindingMethod>
+          <Prodedure>
+            <Name>proc_getsuseplobs</Name>
+          </Prodedure>
+          <ValueField>SUSEP_LOB_ID</ValueField>
+          <TextField>SUSEP_LOB_DESC</TextField>
+        </DataBinding>
+      </UIDefinition>
+
+      <Validations>
+        <DataFormat>
+          <IsApplicable>N</IsApplicable>
+          <ErrorMessage></ErrorMessage>
+          <FormatExpression></FormatExpression>
+        </DataFormat>
+        <Mandatory>
+          <IsApplicable>Y</IsApplicable>
+          <ErrorMessage>201</ErrorMessage>
+        </Mandatory>
+        <Range>
+          <IsApplicable>N</IsApplicable>
+          <ErrorMessage></ErrorMessage>
+          <MinValue></MinValue>
+          <MaxValue></MaxValue>
+        </Range>
+      </Validations>
+
+    </ElementInfo>
+
+    <ElementInfo ElementID ="2">
+      <DataDefinition>
+        <ElementName>RetentionLimit</ElementName>
+        <ElementType>EbxString</ElementType>
+        <DataColumn>3</DataColumn>
+      </DataDefinition>
+      <UIDefinition>
+        <ElementName>txtRetentionLimit</ElementName>
+        <ElementType>TextBox</ElementType>
+        <Caption>102</Caption>
+      </UIDefinition>
+      <Validations>
+        <DataFormat>
+          <IsApplicable>Y</IsApplicable>
+          <ErrorMessage>203</ErrorMessage>
+          <FormatExpression>^(\.[0-9]{2})?$|^[0-9]+(\.[0-9]{2})?$|^[0-9]+(,[0-9]{3})*(\.[0-9]{2})$</FormatExpression>
+        </DataFormat>
+        <Mandatory>
+          <IsApplicable>Y</IsApplicable>
+          <ErrorMessage>202</ErrorMessage>
+        </Mandatory>
+        <Range>
+          <IsApplicable>N</IsApplicable>
+          <ErrorMessage></ErrorMessage>
+          <MinValue></MinValue>
+          <MaxValue></MaxValue>
+        </Range>
+      </Validations>
+
+    </ElementInfo>
+
+  </Elements>
+
+  <PageLayoutDefinition>
+    <Rows>
+      <Row RowID ="1">
+        <Column>
+          <CssClass>midcolora</CssClass>
+          <Element>1</Element>
+        </Column>
+        <Column>
+          <CssClass>midcolora</CssClass>
+          <Element>2</Element>
+        </Column>
+      </Row>
+
+    </Rows>
+
+  </PageLayoutDefinition>
+
+  <KeyCollection>
+    <Key>
+      <ElementName>LimitID</ElementName>
+      <ElementType>EbxInt32</ElementType>
+      <DataColumn>1</DataColumn>
+      <Type>Current</Type>
+    </Key>
+
+  </KeyCollection>
+
+  <Lister>
+    <GridQuery>
+      <SelectTables>
+        <Table TableID="1">
+          <Name>MNT_RETENTION_LIMIT</Name>
+        </Table>
+        <Table TableID="2">
+          <Name>MNT_SUSEP_LOB_MASTER</Name>
+        </Table>
+      </SelectTables>
+
+      <FromClause>
+        <From>
+          <TableID>1</TableID>
+        </From>
+        <Joins>
+          <Join>
+            <JoinType>JoinType.InnerJoin</JoinType>
+            <LeftTable>1</LeftTable>
+            <RightTable>2</RightTable>
+            <JoinConditions>
+              <Condition>
+                <Operand1>
+                  <TableID>1</TableID>
+                  <ColumnName>REF_SUSEP_LOB_ID</ColumnName>
+                </Operand1>
+                <Operator>Comparison.Equals</Operator>
+                <Operand2>
+                  <TableID>2</TableID>
+                  <ColumnName>SUSEP_LOB_ID</ColumnName>
+                </Operand2>
+              </Condition>
+            </JoinConditions>
+          </Join>
+        </Joins>
+      </FromClause>
+
+      <SelectColumns>
+
+        <Column ColID ="1">
+          <TableID>1</TableID>
+          <ColumnName>RETENTION_LIMIT_ID</ColumnName>
+          <ColumnHeading>Sr#</ColumnHeading>
+          <Sortable></Sortable>
+          <Searchable></Searchable>
+        </Column>
+
+        <Column ColID ="2">
+          <TableID>2</TableID>
+          <ColumnName>SUSEP_LOB_DESC</ColumnName>
+          <ColumnHeading>SUSEP Code</ColumnHeading>
+          <Sortable></Sortable>
+          <Searchable>Yes</Searchable>
+        </Column>
+
+        <Column ColID ="3">
+          <TableID>1</TableID>
+          <ColumnName>RETENTION_LIMIT</ColumnName>
+          <ColumnHeading>Retention Limit</ColumnHeading>
+          <Sortable></Sortable>
+          <Searchable>Yes</Searchable>
+        </Column>
+
+      </SelectColumns>
+
+
+      <OrderBy>
+        <Column>
+          <TableID>1</TableID>
+          <ColumnName>RETENTION_LIMIT_ID</ColumnName>
+          <SortOrder>ASC</SortOrder>
+        </Column>
+      </OrderBy>
+
+    </GridQuery>
+  </Lister>
+
+</Root>

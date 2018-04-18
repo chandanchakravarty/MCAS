@@ -1,0 +1,223 @@
+﻿@{
+    ViewBag.Title = "DiaryEditor";
+    Layout = "~/Views/Shared/_Layout.cshtml";  
+}
+<!-- define angular app -->
+  <!-- SCROLLS -->
+  <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.0/css/font-awesome.css" />
+
+  <!-- SPELLS -->
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.10/angular.min.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.10/angular-route.js"></script>
+  <script src="../../Scripts/McasWeb.js" type="text/javascript"></script>
+  <script type="text/javascript">
+      var myApp = angular.module('myApp', []);
+
+      myApp.controller('myController', function ($scope) {
+          $scope.employees = [
+       { id: '1', name: 'John', age: 25, gender: 'boy'
+       ,
+           "Salary": [{ id: '1', sal: 1000, dept: 'abc', month: '1' },
+        { id: '1', sal: 1500, dept: 'abc', month: '2'}]
+       },
+       { id: '2', name: 'Jessie', age: 30, gender: 'girl' },
+       { id: '3', name: 'Johanna', age: 28, gender: 'girl',
+           "Salary": [{ id: '3', sal: 1000, dept: 'abc', month: '1' },
+        { id: '1', sal: 1500, dept: 'abc', month: '2'}]
+       },
+       { id: '4', name: 'Joy', age: 15, gender: 'girl' },
+       { id: '5', name: 'Mary', age: 28, gender: 'girl' },
+       { id: '6', name: 'Peter', age: 95, gender: 'boy' },
+       { id: '7', name: 'Sebastian', age: 50, gender: 'boy' },
+       { id: '8', name: 'Erika', age: 27, gender: 'girl' },
+       { id: '9', name: 'Patrick', age: 40, gender: 'boy' },
+       { id: '10', name: 'Samantha', age: 60, gender: 'girl' },
+       Salaries = [
+       { id: '1', sal: 1000, dept: 'abc', month: '1' },
+       { id: '1', sal: 1500, dept: 'abc', month: '2' },
+       { id: '2', sal: 1500, dept: 'abc', month: '1' },
+       { id: '2', sal: 1500, dept: 'abc', month: '2' },
+       { id: '3', sal: 1500, dept: 'abc', month: '1' },
+       { id: '3', sal: 1500, dept: 'abc', month: '2' },
+       { id: '4', sal: 1500, dept: 'abc', month: '2' },
+       { id: '5', sal: 1500, dept: 'abc', month: '2' },
+       { id: '5', sal: 1500, dept: 'abc', month: '3' },
+       { id: '6', sal: 1500, dept: 'abc', month: '3' },
+       { id: '7', sal: 1500, dept: 'abc', month: '4' },
+       { id: '7', sal: 1500, dept: 'abc', month: '2' },
+       { id: '8', sal: 1500, dept: 'abc', month: '2' },
+       { id: '9', sal: 1500, dept: 'abc', month: '2' },
+       ]
+
+       ];
+       
+       $scope.Salaries = [
+       { id: '1', sal: 1000, dept: 'abc', month: '1' },
+       { id: '1', sal: 1500, dept: 'abc', month: '2' },
+       { id: '2', sal: 1500, dept: 'abc', month: '1' },
+       { id: '2', sal: 1500, dept: 'abc', month: '2' },
+       { id: '3', sal: 1500, dept: 'abc', month: '1' },
+       { id: '3', sal: 1500, dept: 'abc', month: '2' },
+       { id: '4', sal: 1500, dept: 'abc', month: '2' },
+       { id: '5', sal: 1500, dept: 'abc', month: '2' },
+       { id: '5', sal: 1500, dept: 'abc', month: '3' },
+       { id: '6', sal: 1500, dept: 'abc', month: '3' },
+       { id: '7', sal: 1500, dept: 'abc', month: '4' },
+       { id: '7', sal: 1500, dept: 'abc', month: '2' },
+       { id: '8', sal: 1500, dept: 'abc', month: '2' },
+       { id: '9', sal: 1500, dept: 'abc', month: '2' },
+       ];
+
+
+          $scope.employeeslist = [
+      {
+          "EmployeeList": [
+       { id: '1', name: 'John', age: 25, gender: 'boy'
+       ,
+           "Salary": [{ id: '1', sal: 1000, dept: 'abc', month: '1' },
+        { id: '1', sal: 1500, dept: 'abc', month: '2'}]
+       },
+       { id: '2', name: 'Jessie', age: 30, gender: 'girl' },
+       { id: '3', name: 'Johanna', age: 28, gender: 'girl' },
+       { id: '4', name: 'Joy', age: 15, gender: 'girl' },
+       { id: '5', name: 'Mary', age: 28, gender: 'girl' },
+       { id: '6', name: 'Peter', age: 95, gender: 'boy' },
+       { id: '7', name: 'Sebastian', age: 50, gender: 'boy' },
+       { id: '8', name: 'Erika', age: 27, gender: 'girl' },
+       { id: '9', name: 'Patrick', age: 40, gender: 'boy' },
+       { id: '10', name: 'Samantha', age: 60, gender: 'girl' }
+       ],
+          "Salaries": [
+       { id: '1', sal: 1000, dept: 'abc', month: '1' },
+       { id: '1', sal: 1500, dept: 'abc', month: '2' },
+       { id: '2', sal: 1500, dept: 'abc', month: '1' },
+       { id: '2', sal: 1500, dept: 'abc', month: '2' },
+       { id: '3', sal: 1500, dept: 'abc', month: '1' },
+       { id: '3', sal: 1500, dept: 'abc', month: '2' },
+       { id: '4', sal: 1500, dept: 'abc', month: '2' },
+       { id: '5', sal: 1500, dept: 'abc', month: '2' },
+       { id: '5', sal: 1500, dept: 'abc', month: '3' },
+       { id: '6', sal: 1500, dept: 'abc', month: '3' },
+       { id: '7', sal: 1500, dept: 'abc', month: '4' },
+       { id: '7', sal: 1500, dept: 'abc', month: '2' },
+       { id: '8', sal: 1500, dept: 'abc', month: '2' },
+       { id: '9', sal: 1500, dept: 'abc', month: '2' },
+       ]
+
+      }];
+
+         // debugger;
+          $scope.selection = [];
+          // toggle selection for a given employee by name
+          $scope.toggleSelection = function toggleSelection(employeeName) {
+              var idx = $scope.selection.indexOf(employeeName);
+
+              // is currently selected
+              if (idx > -1) {
+                  $scope.selection.splice(idx, 1);
+              }
+
+              // is newly selected
+              else {
+                  $scope.selection.push(employeeName);
+              }
+          };
+          $scope.showrow = function (id) {
+              //debugger;
+              
+              //$("#myDiv").toggle();
+              $("#" + id.emp.id).slideToggle("slow", function () {
+              });
+
+
+          };
+      });
+
+  </script>
+<!-- define angular controller -->
+<div class="dashboard-wrapper">
+    <!-- Bootstrap Container Start -->
+    <div class="container">
+<div  ng-app="myApp"> 
+<div ng-controller="myController">
+
+<div class="table-responsive">
+  <table class="table table-striped table-hover" >
+  <div ng-repeat="emp in employeeslist[0].EmployeeList">
+  <tr id="P">
+   <td>{{emp.name}}</td>
+   <td>{{emp.age}}</td>
+   <td>{{emp.gender}}</td>
+   </tr>
+  <tr ng-repeat="sl in emp.Salary">
+   <td>{{sl.sal}}</td>
+   <td>{{sl.dept}}</td>
+   <td>{{sl.month}}</td>
+   </tr>
+  </table>
+  </div>
+  <div class="row" ng-repeat="emp in employees">
+   <button ng-click='showrow(this)' value = "{{emp.id}}" ng-model=emp.id>Click me +</button>{{emp.id}} - {{emp.name}} - {{emp.age}} - {{emp.gender}}
+   <div id="{{emp.id}}">
+   <table  class="table table-striped table-hover" >
+   <tr ng-repeat="s in emp.Salary">
+      <td>{{s.sal}}</td> <td>{{s.month}}</td>
+      <td><b>Jobs:</b><br/> 
+       <ul>
+         <li ng-repeat="job in day.jobs"> 
+           {{job.name}} 
+         </li>
+       </ul>
+       </td>
+   </tr>
+   </table>
+   </div>
+    <div ng-repeat="sl in Salaries | filter:{id:emp.id}" >
+     {{sl.id}} - {{sl.sal}} - {{sl.month}}
+   </div>
+
+</div>
+
+
+
+  <div class="action-checkbox">
+  
+   <input id="{{employee.name}}" type="checkbox" value="{{employee.name}}" ng-checked="selection.indexOf(employee.name) > -1" ng-click="toggleSelection(employee.name)" />
+   <label for="{{employee.name}}"></label>
+   {{employee.name}}
+  </div>
+ </div>
+
+
+
+  <nav class="navbar navbar-default">
+    <div class="container">
+      <div class="navbar-header">
+        <a class="navbar-brand" href="/">Angular Routing Example</a>http://localhost:52797/
+      </div>
+
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="#"><i class="fa fa-home"></i> Home</a></li>
+        <li><a href="#Index"><i class="fa fa-shield"></i> About</a></li>
+        <li><a href="#ClaimR"><i class="fa fa-comment"></i> Contact</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <div id="main">
+  
+    <!-- angular templating -->
+		<!-- this is where content will be injected -->
+    <div ng-view></div>
+    
+  </div>
+  
+  <footer class="text-center">
+    Powered by Ebix
+  </footer>
+</div>
+</div>
+
+</div>
+</div>

@@ -1,0 +1,45 @@
+select * from mnt_lob_master
+
+
+delete from ACT_MINIMUM_PREM_CANCEL where LOB_ID = 40
+delete from CLM_LOSS_CODES where LOB_ID = 40
+delete from MNT_REINSURANCE_COVERAGE_CATEGORY where LOB_ID = 40
+delete from MNT_LOB_MASTER where LOB_ID = 40
+
+
+update MNT_LOB_MASTER set LOB_DESC = 'Marine Cargo' where LOB_ID = 13
+update MNT_LOB_MASTER set IS_ACTIVE = 'Y'  where LOB_ID = 13
+
+update MNT_SUB_LOB_MASTER set SUB_LOB_DESC = 'Marine Cargo' where LOB_ID = 13 and SUB_LOB_ID = 7
+update MNT_SUB_LOB_MASTER set IS_ACTIVE = 'N' where LOB_ID = 13 and SUB_LOB_ID  not in  (7)
+update MNT_SUB_LOB_MASTER set IS_ACTIVE = 'Y' where LOB_ID = 38 and SUB_LOB_ID  in  (49,50,51)
+
+
+select * from MNT_MENU_LIST where PARENT_ID = 454
+
+begin tran
+DECLARE @MENUID INT
+SELECT @MENUID = MAX(MENU_ID) + 1 FROM MNT_MENU_LIST WHERE MENU_ID <5000
+insert into MNT_MENU_LIST (MENU_ID,PARENT_ID,MENU_NAME,MENU_LINK,MENU_TOOLTIP,NESTLEVEL,MENU_ORDER,HASCHILD,MODULE_NAME,AGENCY_LEVEL,LOB_CODE,IS_ACTIVE) values
+(@MENUID,454,'Underwriting questions','/Cms/Policies/Aspx/MariTime/Underwritingquestions.aspx','',2,1,0,'POL',1,'MTIME','Y')
+SELECT @MENUID = MAX(MENU_ID) + 1 FROM MNT_MENU_LIST WHERE MENU_ID <5000
+insert into MNT_MENU_LIST (MENU_ID,PARENT_ID,MENU_NAME,MENU_LINK,MENU_TOOLTIP,NESTLEVEL,MENU_ORDER,HASCHILD,MODULE_NAME,AGENCY_LEVEL,LOB_CODE,IS_ACTIVE) values
+(@MENUID,454,'Vessel Information','/Cms/Policies/Aspx/MariTime/VesselInformation.aspx','',2,2,0,'POL',1,'MTIME','Y')
+SELECT @MENUID = MAX(MENU_ID) + 1 FROM MNT_MENU_LIST WHERE MENU_ID <5000
+insert into MNT_MENU_LIST (MENU_ID,PARENT_ID,MENU_NAME,MENU_LINK,MENU_TOOLTIP,NESTLEVEL,MENU_ORDER,HASCHILD,MODULE_NAME,AGENCY_LEVEL,LOB_CODE,IS_ACTIVE) values
+(@MENUID,454,'Voyage Information','/Cms/Policies/Aspx/MariTime/VoyageInformation.aspx','',2,3,0,'POL',1,'MTIME','Y')
+SELECT @MENUID = MAX(MENU_ID) + 1 FROM MNT_MENU_LIST WHERE MENU_ID <5000
+insert into MNT_MENU_LIST (MENU_ID,PARENT_ID,MENU_NAME,MENU_LINK,MENU_TOOLTIP,NESTLEVEL,MENU_ORDER,HASCHILD,MODULE_NAME,AGENCY_LEVEL,LOB_CODE,IS_ACTIVE) values
+(@MENUID,454,'Good Details','/Cms/Policies/Aspx/MariTime/GoodDetails.aspx','',2,4,0,'POL',1,'MTIME','Y')
+
+update MNT_MENU_LIST set IS_ACTIVE = 'N' where MENU_ID = 455
+update MNT_MENU_LIST set MENU_NAME = 'Marine Cargo' where MENU_ID = 454
+update MNT_MENU_LIST set MENU_LINK = '/Cms/Policies/Aspx/MariTime/MaritimeIndex.aspx' where MENU_ID = 573
+
+rollback tran
+
+
+
+
+
+

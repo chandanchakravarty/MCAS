@@ -1,0 +1,222 @@
+﻿@model  MCAS.Web.Objects.MastersHelper.VehicleUploadViewModel
+@using MCAS.Web.Objects.CommonHelper
+@{
+    ViewBag.Title = "VehicleBusCaptainIndex";
+    Layout = "~/Views/Shared/_SystemAdminLayout.cshtml";
+    @Html.Hidden("oldgroup", 1)
+    SecurityPermissions myPemissions = (MCAS.Web.Objects.CommonHelper.SecurityPermissions)ViewData["UserPermissions"];
+    System.Resources.ResourceManager PageResource = (new MCAS.Web.Objects.MastersHelper.TransactionModel()).GetResourceManager(Model.Resource);
+}
+<style type="text/css">
+    .ui-button-icon-primary.ui-icon.ui-icon-closethick
+    {
+        margin: -7px 0 0 -7px;
+    }
+    div.ui-dialog.ui-widget.ui-widget-content.ui-corner-all.ui-front.alert.ui-draggable, div.ui-dialog.ui-widget.ui-widget-content.ui-corner-all.alert.ui-draggable
+    {
+        top: 130px !important;
+    }
+    
+    fieldset
+    {
+        padding: 5px;
+        margin: 1px;
+        border: 1px solid;
+        border-color: #DAD7D7;
+    }
+    
+    label
+    {
+        color: #6D644F;
+        font: normal 12px 'Open Sans' , arial, sans-serif;
+        font-weight: bold;
+        display: inline-block;
+        margin-bottom: 5px;
+    }
+    legend
+    {
+        display: block;
+        width: auto;
+        padding: 1px;
+        margin-bottom: 2px;
+        font-size: 14px;
+        line-height: inherit;
+        color: #1e91cf !important;
+        border: 0;
+    }
+    subMenu
+    {
+        color: #555;
+    }
+</style>
+<link href="@Url.Content("~/Content/themes/base/jquery.ui.all.css")" rel="stylesheet" type="text/css" />
+<script src="@Url.Content("~/Scripts/jquery-2.1.0.min.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/Scripts/jquery.validate.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/Scripts/jquery.unobtrusive-ajax.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.min.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/Scripts/globalize/globalize.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/Scripts/globalize/cultures/globalize.culture.en-GB.js")" type="text/javascript"></script>
+<!-- Main Container Start -->
+<div class="dashboard-wrapper">
+    <!-- Bootstrap Container Start -->
+    <div class="container">
+        <!-- Page title start -->
+        <div class="row page-title">
+            <div class="col-lg-12">
+                <h2>
+                    @MCAS.Web.Objects.Resources.Common.Common.SystemAdmin</h2>
+                <ul class="breadcrumb">
+                    <li>@PageResource.GetString("UploadMainMenu")</li>
+                     <li> @PageResource.GetString("BusCaptainUpload")</li>
+                </ul>
+            </div>
+        </div>
+        <!-- Page title end -->
+        <!-- Row start for sub navigation -->
+        <hr />
+        <div class="row">
+            <div class="col-lg-12 text-left">
+                <div class="btn-group less-bottom-margin">
+                    <a class="btn btn-default" href='@Url.Action("VehicleListingMaster", "Masters")'>@PageResource.GetString("VehicleListingUpload")</a> 
+                    <a class="btn btn-info" href='@Url.Action("BusCaptainListingMaster", "Masters")'>@PageResource.GetString("BusCaptainListing")</a>
+                </div>
+            </div>
+        </div>
+        <hr />
+        <div class="row">
+            <div class="col-lg-12 text-left">
+                <ul class="nav nav-tabs" id="myTabs">
+                    <li id="BusCaptainListingMasterTab" class="donotHide">
+                    <a class="btn btn-default subMenu" href='@Url.Action("BusCaptainListingMaster", "Masters")'>@PageResource.GetString("BusCaptainListingMaster")</a>
+                    </li>
+                    <li id="VehicleUploadIndexTab" class="donotHide active">
+                    <a class="btn btn-default subMenu" href='@Url.Action("VehicleBusCaptainIndex", "Masters")'>@PageResource.GetString("BusCaptainUpload")</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <!-- Row End -->
+        <!-- Row start -->
+        <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <div class="panel panel-info">
+                    <div class="panel-heading clearfix">
+                        <i class="icon-check-sign"></i>
+                        <h3 class="panel-title">@PageResource.GetString("BusCaptainUpload")
+                            </h3>
+                    </div>
+                    <div style="color: Red; font-weight: bold;" class="has-error" id="error">
+                        <p align="center">
+                            @if (TempData["upload"] != null)
+                            {
+                                @TempData["upload"]
+                            }
+                            @Html.HiddenFor(m => m.UploadType)
+                        </p>
+                    </div>
+                    <div class="panel-body">
+                        @* <div class="panel panel-info" id="divTabVehicleEnquiry">
+                            @{Html.RenderPartial("BusCaptainEnquiryList");}
+                        </div>*@
+                        @using (Html.BeginForm("VehicleBusCaptainIndex", "Masters", FormMethod.Post, new { role = "form", id = "uploadForm", @class = "form-horizontal", enctype = "multipart/form-data" }))
+                        {
+                            <fieldset>
+                                <legend>@PageResource.GetString("UploadFile")</legend>
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        <div class="form-group">
+                                            <label class="col-sm-4" for="inputName">
+                                                @PageResource.GetString("SelectFiletoUpload")</label>
+                                            <div class="col-sm-7 paddtop7">
+                                                <input type="file" name="uploadFile" id="uploadFile" accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel"
+                                                    onchange="checkfile(this);" />
+                                                <div class="has-error" style="display: none; color: Red; font-weight: bold;" id="error1">
+                                                    <p align="left">
+                                                        @PageResource.GetString("Uploadfileisrequired")
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-lg-12 text-center">
+                                        @if (@myPemissions.Write)
+                                        {
+                                            <button type="submit" class="btn btn-info">@PageResource.GetString("UploadFile")</button>
+                                        }
+                                    </div>
+                                </div>
+                            </fieldset>
+                        }
+                        <div class="panel panel-info" id="divTabVehicleEnquiry">
+                            @{Html.RenderPartial("VehicleUploadHistory");}
+                            @*@Html.Action("VehicleUploadHistory", "Masters")*@
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Row End -->
+        <!-- Row Start -->
+        <!-- Row End -->
+    </div>
+    <!-- Bootstrap Container End -->
+</div>
+<!-- Main Container End -->
+<script type="text/javascript">
+
+    $('#uploadForm').on('submit', function (event) {
+        if ($('#uploadFile').val() == "") {
+            $('#error1').show();
+            $('#error').hide();
+            hideLoading();
+            $("#divLoading").remove();
+            event.preventDefault();
+            return false;
+        } else {
+            $('#error1').hide();
+            $("BODY").append('<div id="divLoading" class="loading"><p>Please wait...<br>&nbsp&nbsp&nbsp<img src="../Images/ajax-loader.gif" alt="Loading.."> </p></div>');
+            showLoading();
+            return true;
+        }
+    });
+    $("input[type=text]").change(function () { $('#error1,#error').hide(); });
+    $("input[type=file]").change(function () { $('#error1,#error').hide(); });
+    $("select").change(function () {
+        $('#error1,#error').hide();
+    });
+    function checkfile(sender) {
+        var validExts = new Array(".xlsx", ".XLSX", ".xls", ".XLS");
+        var fileExt = sender.value;
+        fileExt = fileExt.substring(fileExt.lastIndexOf('.'));
+        if (validExts.indexOf(fileExt) < 0) {
+            alert("Please select valid file. File type should be .xls/.xlsx format");
+            $('#uploadForm')[0].reset();
+            return false;
+        }
+        else return true;
+    }
+
+
+</script>
+<script type="text/javascript">
+    $(function () {
+        $('.datepicker').datepicker(
+            {
+                dateFormat: "dd/mm/yy",
+                showStatus: true,
+                showWeeks: true,
+                currentText: 'Now',
+                autoSize: true,
+                gotoCurrent: true,
+                showAnim: 'blind',
+                highlightWeek: true,
+                changeMonth: !0,
+                changeYear: !0
+            });
+
+
+
+    })
+</script>

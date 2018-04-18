@@ -1,0 +1,150 @@
+﻿@model IEnumerable<MCAS.Web.Objects.ClaimObjectHelper.ClaimReserveHistory>
+@{
+    Layout = null;
+}
+
+<style type="text/css">
+.borderTDpartition {
+    border-right: 1px solid black; 
+}
+.borderTDleft
+{
+    border-left: 1px solid black;
+}
+
+.borderTR
+{    
+    outline: black solid 1px;
+}
+</style>
+<!-- Main Container start -->
+<div class="row" >
+    <!-- Bootstrap Container Start -->
+    <div class="container" >
+
+    @if (Model.Count<MCAS.Web.Objects.ClaimObjectHelper.ClaimReserveHistory>() > 0)
+    {
+            <div class="col-lg-12 text-center" align="center">
+                <h4 class="text-info" align="center">
+                    Reserve, Expense and Payment History</h4>
+                    <hr />
+            </div>
+        @:<table class="table-condensed"> 
+        @:<thead class="borderTR" align="center">
+        @:<tr style="text-align: center; border-top: 1px solid black;">        
+            @:<th colspan="4" class="borderTDpartition" style="text-align: center; border-left: 1px solid black;">
+            @Html.Label("Reserve")
+            @:</th>
+            @:<th colspan="4" class="borderTDpartition" style="text-align: center;">
+            @Html.Label("Expense")
+            @:</th>
+            @:<th colspan="4" class="borderTDpartition" style="text-align: center;">
+            @Html.Label("Payment")
+            @:</th>
+        @:</tr>
+        @:<tr class="borderTR">
+            @:<th class="borderTDleft" style="text-align: center;" >                        
+                @Html.DisplayNameFor(model => model.CreatedDate)
+            @:</th>
+            @:<th style="text-align: center;" >                        
+                @Html.DisplayNameFor(model => model.ReserveType)
+            @:</th>
+            @:<th style="text-align: center;" >                        
+                @Html.DisplayNameFor(model => model.ClaimantID)
+            @:</th>
+            @:<th class="borderTDpartition" style="text-align: right;" >                        
+                @Html.DisplayNameFor(model => model.FinalReserveOrgAmt)
+            @:</th>
+            @:<th style="text-align: center;" >                        
+                @Html.DisplayNameFor(model => model.ExpenseDate)
+            @:</th>
+            @:<th style="text-align: center;" >                        
+                @Html.DisplayNameFor(model => model.ExpType)
+            @:</th>
+            @:<th style="text-align: center;" >                        
+                @Html.DisplayNameFor(model => model.E_Claimaint)
+            @:</th>    
+            @:<th class="borderTDpartition" style="text-align: right;"  >                
+                @Html.DisplayNameFor(model => model.ExpenseAmount)
+            @:</th>
+            @:<th style="text-align: center;" >                        
+                @Html.DisplayNameFor(model => model.PayDate)
+            @:</th>
+            @:<th style="text-align: center;" >                        
+                @Html.DisplayNameFor(model => model.PayType)
+            @:</th>
+            @:<th class="borderTDpartition" style="text-align: center;" >                        
+                @Html.DisplayNameFor(model => model.PayCLID)
+            @:</th>             
+            @:<th style="text-align: right;" >
+                @Html.DisplayNameFor(model => model.PayAmount)
+            @:</th>
+       
+        @:</tr>
+        @:</thead>
+        
+        foreach (var item in Model)
+        {        
+        <tbody class="borderTR" align="center">
+        <tr class="borderTR" style="white-space: nowrap;" align="center">
+            <td class="borderTDleft">
+                @Html.DisplayFor(modelItem => item.CreatedDate)
+            </td>
+            <td align="center" >
+                @Html.DisplayFor(modelItem => item.ReserveType)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ClaimantID)
+            </td>
+            <td class="borderTDpartition" align="right" >
+                @Html.DisplayFor(modelItem => item.FinalReserveOrgAmt)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ExpenseDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ExpType)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.E_Claimaint)                
+            </td>
+            <td class="borderTDpartition" align="right" >           
+                @Html.DisplayFor(modelItem => item.ExpenseAmount)
+            </td>
+            <td> 
+                @Html.DisplayFor(modelItem => item.PayDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PayType)
+            </td>
+            <td class="borderTDpartition">            
+                @Html.DisplayFor(modelItem => item.PayCLID)
+            </td>
+            <td align="right" >
+                @Html.DisplayFor(modelItem => item.PayAmount)
+            </td>
+        </tr>
+        </tbody >
+        }
+    
+    @:</table>
+    
+    <div class="row">
+            <div class="col-lg-12">
+                <div class="form-group text-center">
+                    <input type ="submit"  class="btn btn-info" value="Print" id="PrintReserveHistory" onclick="window.print();return false;"/>
+                </div>
+            </div>
+    </div>
+            
+    }
+    else
+    {
+        <div>No Record Found </div>
+    }    
+
+    
+
+</div>
+</div>
+

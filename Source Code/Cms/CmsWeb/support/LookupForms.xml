@@ -1,0 +1,386 @@
+<?xml version="1.0" encoding="utf-8" ?> 
+<LookupForms>
+<TransactionCodes>
+		<Select>
+      SELECT TOP 50 TRAN_CODE,
+      convert(varchar,TRAN_ID) + ',' + TRAN_CODE as TRAN_CODE1,
+      DISPLAY_DESCRIPTION
+      FROM ACT_TRANSACTION_CODES WITH(NOLOCK)
+    </Select>
+		<OrderBy>DISPLAY_DESCRIPTION ASC</OrderBy>
+		<GridColumns>
+		<column>
+				<datafield>TRAN_CODE1</datafield>
+				<heading>Transaction Code</heading>
+				<dataformatstring>None</dataformatstring>
+				<sorting>false</sorting>
+				<visible>false</visible>		
+			</column>
+			<column>
+				<datafield>TRAN_CODE</datafield>
+				<heading>Transaction Code</heading>
+				<dataformatstring>None</dataformatstring>
+				<sorting>false</sorting>
+				<visible>true</visible>		
+			</column>
+			<column>
+				<datafield>DISPLAY_DESCRIPTION</datafield>
+				<heading>Transaction Code Description</heading>
+				<dataformatstring>None</dataformatstring>
+				<sorting>false</sorting>
+				<visible>true</visible>
+			</column>			
+		</GridColumns>
+		<SearchColumns>
+			<column>
+				<name>DISPLAY_DESCRIPTION</name>	
+				<heading>Transaction Code Description</heading>
+				<type>string</type>
+			</column>
+			<column>
+				<name>TRAN_CODE</name>	
+				<heading>Transaction Code</heading>
+				<type>string</type>
+			</column>
+		</SearchColumns>	
+	</TransactionCodes>
+	<CustLookupForm>
+		<Select>
+      SELECT TOP 50 CUSTOMER_ID, CUSTOMER_CODE, CUSTOMER_FIRST_NAME + ' ' + CUSTOMER_LAST_NAME as Name
+      FROM CLT_CUSTOMER_LIST WITH(NOLOCK)
+    </Select>
+		<WhereColumns>
+		</WhereColumns>
+			<OrderBy>CUSTOMER_FIRST_NAME + ' ' + CUSTOMER_LAST_NAME ASC
+		</OrderBy>
+		<SearchColumns>
+			<column>
+				<name>Name</name>	
+				<heading>Name</heading>
+				<type>string</type>
+			</column>
+			<column>
+				<name>Customer_Code</name>	
+				<heading>Customer Code</heading>
+				<type>string</type>
+			</column>
+		</SearchColumns>
+		<GridColumns>
+			<column>
+				<datafield>CUSTOMER_ID</datafield>
+				<heading>Customer ID</heading>
+				<dataformatstring>None</dataformatstring>
+				<sorting>false</sorting>
+				<visible>false</visible>	
+			</column>
+			<column>
+				<datafield>CUSTOMER_CODE</datafield>
+				<heading>Customer Code</heading>
+				<dataformatstring>None</dataformatstring>
+				<sorting>false</sorting>
+				<visible>true</visible>
+			</column>
+			<column>
+				<datafield>NAME</datafield>
+				<heading>Name</heading>
+				<dataformatstring>None</dataformatstring>
+				<sorting>false</sorting>
+				<visible>true</visible>
+			</column>
+		</GridColumns>
+	</CustLookupForm>	
+	<LOOKUPFORM>
+		<Select>
+      SELECT TOP 50 LOOKUP_UNIQUE_ID, LOOKUP_VALUE_DESC FROM MNT_LOOKUP_VALUES MLV WITH(NOLOCK)
+      INNER JOIN MNT_LOOKUP_TABLES MLT WITH(NOLOCK) ON
+      MLV.LOOKUP_ID = MLT.LOOKUP_ID
+    </Select>
+		<WhereColumns>
+			<column>
+				<index>1</index>
+				<name>MLT.LOOKUP_NAME</name>
+				<type>string</type>
+			</column>
+		</WhereColumns>
+		<OrderBy>LOOKUP_VALUE_DESC ASC
+		</OrderBy>
+		<GridColumns>
+			<column>
+				<datafield>LOOKUP_UNIQUE_ID</datafield>
+				<heading>Vendor ID</heading>
+				<dataformatstring>None</dataformatstring>
+				<sorting>false</sorting>
+				<visible>false</visible>		
+			</column>
+			<column>
+				<datafield>LOOKUP_VALUE_DESC</datafield>
+				<heading>Desc</heading>
+				<dataformatstring>None</dataformatstring>
+				<sorting>false</sorting>
+				<visible>true</visible>
+			</column>			
+		</GridColumns>
+		<SearchColumns>
+			<column>
+				<name>LOOKUP_VALUE_DESC</name>	
+				<heading>Desc</heading>
+				<type>string</type>
+			</column>
+		</SearchColumns>		
+	</LOOKUPFORM>	
+	<County>
+		<Select>
+      SELECT DISTINCT COUNTY FROM MNT_TERRITORY_CODES WITH(NOLOCK)
+    </Select>
+		<WhereColumns>
+			<column>
+				<index>1</index>
+				<name>ZIP</name>
+				<type>string</type>
+			</column>
+		</WhereColumns>
+		<OrderBy>COUNTY ASC
+		</OrderBy>
+		<GridColumns>
+			<column>
+				<datafield>COUNTY</datafield>
+				<heading>County</heading>
+				<dataformatstring>None</dataformatstring>
+				<sorting>false</sorting>
+				<visible>true</visible>		
+			</column>		
+		</GridColumns>
+		<SearchColumns>
+			<column>
+				<name>COUNTY</name>	
+				<heading>County</heading>
+				<type>string</type>
+			</column>
+		</SearchColumns>	
+	</County>
+	
+	<AddlInterest>
+		<Select>
+      SELECT	A.HOLDER_ID, A.HOLDER_NAME
+      FROM MNT_HOLDER_INTEREST_LIST A WITH(NOLOCK)
+    </Select>
+		<WhereColumns>
+			<column>
+				<index>1</index>
+				<name>
+          IsNull(A.HOLDER_ID,0)  NOT IN
+          (SELECT ISNULL(HOLDER_ID,0) FROM POL_ADD_OTHER_INT WITH(NOLOCK) WHERE VEHICLE_ID)
+        </name>
+				<type>string</type>
+			</column>
+		</WhereColumns>
+		<OrderBy>HOLDER_NAME ASC
+		</OrderBy>
+		<GridColumns>
+			<column>
+				<datafield>HOLDER_NAME</datafield>
+				<heading>Holder Name</heading>
+				<dataformatstring>None</dataformatstring>
+				<sorting>false</sorting>
+				<visible>true</visible>		
+			</column>		
+		</GridColumns>
+		<SearchColumns>
+			<column>
+				<name>HOLDER_NAME</name>	
+				<heading>Holder Name</heading>
+				<type>string</type>
+			</column>
+		</SearchColumns>	
+	</AddlInterest>
+	<AddlInterestWaterCraft>
+		<Select>
+      SELECT	A.HOLDER_ID, A.HOLDER_NAME
+      FROM MNT_HOLDER_INTEREST_LIST A WITH(NOLOCK)
+    </Select>
+		<WhereColumns>
+			<column>
+				<index>1</index>
+				<name>
+          IsNull(A.HOLDER_ID,0)  NOT IN
+          (SELECT IsNull(HOLDER_ID,0) FROM POL_WATERCRAFT_COV_ADD_INT WITH(NOLOCK) WHERE BOAT_ID)
+        </name>
+				<type>string</type>
+			</column>
+		</WhereColumns>
+		<OrderBy>HOLDER_NAME ASC
+		</OrderBy>
+		<GridColumns>
+			<column>
+				<datafield>HOLDER_NAME</datafield>
+				<heading>Holder Name</heading>
+				<dataformatstring>None</dataformatstring>
+				<sorting>false</sorting>
+				<visible>true</visible>		
+			</column>		
+		</GridColumns>
+		<SearchColumns>
+			<column>
+				<name>HOLDER_NAME</name>	
+				<heading>Holder Name</heading>
+				<type>string</type>
+			</column>
+		</SearchColumns>	
+	</AddlInterestWaterCraft>
+	<AddlInterestTrailer>
+		<Select>
+      SELECT	A.HOLDER_ID, A.HOLDER_NAME
+      FROM MNT_HOLDER_INTEREST_LIST A WITH(NOLOCK)
+    </Select>
+		<WhereColumns>
+			<column>
+				<index>1</index>
+				<name>
+          IsNull(A.HOLDER_ID,0)  NOT IN
+          (SELECT IsNull(HOLDER_ID,0) FROM POL_WATERCRAFT_TRAILER_ADD_INT WITH(NOLOCK) WHERE TRAILER_ID)
+        </name>
+				<type>string</type>
+			</column>
+		</WhereColumns>
+		<OrderBy>HOLDER_NAME ASC
+		</OrderBy>
+		<GridColumns>
+			<column>
+				<datafield>HOLDER_NAME</datafield>
+				<heading>Holder Name</heading>
+				<dataformatstring>None</dataformatstring>
+				<sorting>false</sorting>
+				<visible>true</visible>		
+			</column>		
+		</GridColumns>
+		<SearchColumns>
+			<column>
+				<name>HOLDER_NAME</name>	
+				<heading>Holder Name</heading>
+				<type>string</type>
+			</column>
+		</SearchColumns>	
+	</AddlInterestTrailer>
+	<AddlInterestEngine>
+		<Select>
+      SELECT	A.HOLDER_ID, A.HOLDER_NAME
+      FROM MNT_HOLDER_INTEREST_LIST A WITH(NOLOCK)
+    </Select>
+		<WhereColumns>
+			<column>
+				<index>1</index>
+				<name>
+          IsNull(A.HOLDER_ID,0)  NOT IN
+          (SELECT IsNull(HOLDER_ID,0) FROM APP_WATERCRAFT_ENG_ADD_INT WITH(NOLOCK) WHERE ENGINE_ID)
+        </name>
+				<type>string</type>
+			</column>
+		</WhereColumns>
+		<OrderBy>HOLDER_NAME ASC
+		</OrderBy>
+		<GridColumns>
+			<column>
+				<datafield>HOLDER_NAME</datafield>
+				<heading>Holder Name</heading>
+				<dataformatstring>None</dataformatstring>
+				<sorting>false</sorting>
+				<visible>true</visible>		
+			</column>		
+		</GridColumns>
+		<SearchColumns>
+			<column>
+				<name>HOLDER_NAME</name>	
+				<heading>Holder Name</heading>
+				<type>string</type>
+			</column>
+		</SearchColumns>	
+	</AddlInterestEngine>
+	<AddlInterestHomeowner>
+		<Select>
+      SELECT	A.HOLDER_ID, A.HOLDER_NAME
+      FROM MNT_HOLDER_INTEREST_LIST A WITH(NOLOCK)
+    </Select>
+		<WhereColumns>
+			<column>
+				<index>1</index>
+				<name>
+          isNull(A.HOLDER_ID,0)  NOT IN
+          (SELECT IsNull(HOLDER_ID,0) FROM POL_HOME_OWNER_ADD_INT WITH(NOLOCK) WHERE DWELLING_ID)
+        </name>
+				<type>string</type>
+			</column>
+		</WhereColumns>
+		<OrderBy>HOLDER_NAME ASC
+		</OrderBy>
+		<GridColumns>
+			<column>
+				<datafield>HOLDER_NAME</datafield>
+				<heading>Holder Name</heading>
+				<dataformatstring>None</dataformatstring>
+				<sorting>false</sorting>
+				<visible>true</visible>		
+			</column>		
+		</GridColumns>
+		<SearchColumns>
+			<column>
+				<name>HOLDER_NAME</name>	
+				<heading>Holder Name</heading>
+				<type>string</type>
+			</column>
+		</SearchColumns>	
+	</AddlInterestHomeowner>
+	
+		<CustAndStateLookupForm>
+		<SQL>
+      SELECT cast(CUSTOMER_ID as varchar(20))+'^'+isnull(customer_state,'') as CUSTOMER_ID , CUSTOMER_CODE, CUSTOMER_FIRST_NAME + ' ' + CUSTOMER_LAST_NAME as Name
+      FROM CLT_CUSTOMER_LIST WITH(NOLOCK)
+    </SQL>
+		<OrderBy>ORDER BY CUSTOMER_FIRST_NAME + ' ' + CUSTOMER_LAST_NAME ASC
+		</OrderBy>
+		<SearchColumns>
+			<column>
+				<name>CUSTOMER_FIRST_NAME + ' ' + CUSTOMER_LAST_NAME</name>	
+				<heading>Name</heading>
+				<type>string</type>
+			</column>
+			<column>
+				<name>CUSTOMER_LAST_NAME</name>	
+				<heading>Last Name</heading>
+				<type>string</type>
+			</column>
+			<column>
+				<name>CUSTOMER_CODE</name>	
+				<heading>Code</heading>
+				<type>string</type>
+			</column>
+			<column>
+				<name>CUSTOMER_HOME_PHONE</name>	
+				<heading>Home Phone</heading>
+				<type>string</type>
+			</column>
+		</SearchColumns>
+		<GridColumns>
+			<column>
+				<datafield>CUSTOMER_ID</datafield>
+				<heading>Customer ID</heading>
+				<dataformatstring>None</dataformatstring>
+				<sorting>false</sorting>
+				<visible>false</visible>	
+			</column>
+			<column>
+				<datafield>CUSTOMER_CODE</datafield>
+				<heading>Customer Code</heading>
+				<dataformatstring>None</dataformatstring>
+				<sorting>false</sorting>
+				<visible>true</visible>
+			</column>
+			<column>
+				<datafield>NAME</datafield>
+				<heading>Name</heading>
+				<dataformatstring>None</dataformatstring>
+				<sorting>false</sorting>
+				<visible>true</visible>
+			</column>
+		</GridColumns>
+	</CustAndStateLookupForm>
+</LookupForms>

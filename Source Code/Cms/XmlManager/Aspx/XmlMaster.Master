@@ -1,0 +1,26 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="XmlMaster.master.cs"
+    Inherits="Cms.XmlManager.Aspx.XmlMaster" %>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title>Ebix Advantage - XML Manager </title>
+    <link href="/cms/cmsweb/css/Site.css" rel="stylesheet" type="text/css" />
+    <link href="/cms/cmsweb/css/jquery.treeview.css" rel="stylesheet" type="text/css" />
+    <script src="/cms/cmsweb/Scripts/Jquery/jquery.js" type="text/javascript"></script>
+    <script src="/cms/cmsweb/Scripts/jquery.cookie.js" type="text/javascript"></script>
+    <script src="/cms/cmsweb/Scripts/jquery.treeview.js" type="text/javascript"></script>
+    <script src="/cms/cmsweb/Scripts/demo.js" type="text/javascript"></script>
+    <link href="/cms/cmsweb/css/jquery.treeview.css" rel="stylesheet" type="text/css" />
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+</head>
+<body>
+    <form id="frmMain" runat="server">
+    <div id="tabLayer">
+        <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+        </asp:ContentPlaceHolder>
+    </div>
+    </form>
+</body>
+</html>

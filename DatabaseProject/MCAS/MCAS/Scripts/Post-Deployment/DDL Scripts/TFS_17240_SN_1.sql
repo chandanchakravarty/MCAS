@@ -1,0 +1,4 @@
+﻿IF EXISTS(SELECT * FROM INFORMATION_SCHEMA.COLUMNS where table_name = 'TODODIARYLIST' and column_name = 'LISTTYPEID')
+     BEGIN
+         ALTER TABLE TODODIARYLIST ALTER COLUMN LISTTYPEID varchar(max) not null
+     END

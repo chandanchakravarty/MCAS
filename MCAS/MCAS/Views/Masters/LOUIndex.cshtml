@@ -1,0 +1,250 @@
+﻿@model IEnumerable<MCAS.Web.Objects.MastersHelper.LOUModel>
+@using MCAS.Web.Objects.MastersHelper
+@using MCAS.Web.Objects.CommonHelper
+@using MCAS.Globalisation
+@{
+    var LouRate = TempData["LouRate"] == null ? "" : TempData["LouRate"] == "" ? "" : TempData["LouRate"].ToString();
+    var EffectiveDate = TempData["EffectiveDate"] == null ? "" : TempData["EffectiveDate"] == "" ? "" : TempData["EffectiveDate"].ToString().Substring(0, 10);
+    ViewBag.Title = "LOUIndex";
+    Layout = "~/Views/Shared/_SystemAdminLayout.cshtml";
+    @Html.Hidden("oldgroup", 1)
+    SecurityPermissions myPemissions = (MCAS.Web.Objects.CommonHelper.SecurityPermissions)ViewData["UserPermissions"];
+    System.Resources.ResourceManager PageResource = (new MCAS.Web.Objects.MastersHelper.TransactionModel()).GetResourceManager(Convert.ToString(ViewData["PageResource"]));
+}
+<script src="@Url.Content("~/Scripts/jquery-2.1.0.min.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/Scripts/jquery.validate.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.min.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/Scripts/globalize/globalize.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/Scripts/globalize/cultures/globalize.culture.en-GB.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/Scripts/jquery-ui-v1.10.3.js")" type="text/javascript"></script>
+<div class="dashboard-wrapper">
+    <!-- Bootstrap Container Start -->
+    <div class="container">
+        <!-- Page title start -->
+        <div class="row page-title">
+            <div class="col-lg-12">
+                <h2>
+                    @MCAS.Web.Objects.Resources.Common.Common.SystemAdmin</h2>
+                <ul class="breadcrumb">
+                    <li>@PageResource.GetString("LouRate")</li>
+                </ul>
+            </div>
+        </div>
+        <!-- Page title end -->
+        <!-- Row start for sub navigation -->
+        <hr />
+        <!-- Row End -->
+        <!-- Row start -->
+        <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <div class="panel panel-info">
+                    <div class="panel-heading clearfix">
+                        <i class="icon-check-sign"></i>
+                        <h3 class="panel-title">@PageResource.GetString("LouRate")</h3>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            <div class="panel panel-info">
+                                <div class="panel-sub-heading">
+                                    <span class="text-danger">*</span>@PageResource.GetString("SearchScreen")
+                                </div>
+                                <div class="panel-body">
+                                    @using (Html.BeginForm("LOUIndex", "Masters", FormMethod.Post, new { role = "form", @class = "form-horizontal", id = "LOUIndex", name = "LOUIndex" }))
+                                    {
+                            
+                                        <div class="row">
+                                            <div class="col-lg-6">
+                                                <div class="form-group">
+                                                    <label class="col-sm-4" for="inputName">@PageResource.GetString("LouRate")</label>
+                                                    <div class="col-sm-6">
+                                                        <input type="text" value="@LouRate" name="LouRate" id="LouRate" class="form-control" />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-6">
+                                                <div class="form-group">
+                                                    <label class="col-sm-4" for="inputName">@PageResource.GetString("EffectiveDate")</label>
+                                                    <div class="col-sm-6">
+                                                        <input type="text" value="@EffectiveDate" name="EffectiveDate" id="EffectiveDate" class="form-control" />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                            
+                                                        
+                                        <div class="row">
+                                            <div style="text-align: center" class="col-lg-12 center-block">
+                                                <button type="submit" class="btn btn-info">
+                                                    @PageResource.GetString("Search")</button>
+                                                &nbsp;&nbsp;&nbsp;&nbsp;
+                                                @if (@myPemissions.Write)
+                                                {
+                                                    @Html.ActionLink(@PageResource.GetString("AddNew"), "LOUEditor", "Masters",new{}, new { @class = "btn btn-info" })
+                                
+                                                }
+                                            </div>
+                                        </div>
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class="col-lg-12 text-center">
+                                <h4 class="text-info">
+                                    @PageResource.GetString("SearchResults")</h4>
+                                <hr />
+                            </div>
+                            <div class="col-lg-12">
+                                <div class="table-responsive">
+                                    <div class="row-fluid">
+                                        <div class="dataTables_wrapper" id="Diary_wrapper" role="grid">
+                                            <table id="LoutableDiarySrc" cellspacing="0" width="100%" class="table table-striped table-hover display">
+                                                <thead>
+                                                    <tr>
+                                                        <th>
+                                                            @PageResource.GetString("LouRate")
+                                                        </th>
+                                                        <th>
+                                                            @PageResource.GetString("EffectiveDate")
+                                                        </th>
+                                                        <th>
+                                                            @PageResource.GetString("IsActive")
+                                                        </th>
+                                                        <th>
+                                                            @PageResource.GetString("Select")
+                                                        </th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    @{
+                                                        int trid = 1;
+                                                        int sid = 0;
+                                                        int rowmatch = 0;
+                                                        var display = "";
+                                                        var status = "";
+
+                                                        foreach (var item in Model)
+                                                        {
+                                                            var dd = item.EffectiveDate.ToString().Substring(0, 10);
+                                                            rowmatch += 1;
+                                                            sid += 1;
+                                                            if (item.IsActive == "Y")
+                                                            {
+                                                                status = "Active";
+                                                            }
+                                                            else
+                                                            {
+                                                                status = "Inactive";
+                                                            }
+                                                        <tr group='@(trid)' style="display:@display;">
+                                                            <td class="format">
+                                                                @Html.DisplayFor(modelItem => item.LouRate)
+                                                            </td>
+                                                            <td>
+                                                                @dd
+                                                            </td>
+                                                            <td>
+                                                                @status
+                                                            </td>
+                                                            <td>
+                                                                @if (@myPemissions.Write)
+                                                                {
+                                                                    @Html.EncodedActionLink(@PageResource.GetString("Edit"), "LOUEditor", new { Id = item.Id, pageMode = "Edit" }, new { @class = "btn btn-xs btn-warning" })
+                                                                }
+                                                                @if (@myPemissions.Read)
+                                                                {
+                                                                    @Html.EncodedActionLink(@PageResource.GetString("View"), "LOUEditor", new { Id = item.Id, pageMode = "View" }, new { @class = "btn btn-xs btn-info" })
+                                                                }
+                                                            </td>
+                                                        </tr>
+                                    
+                                                        }}
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Row End -->
+        <!-- Row Start -->
+        <!-- Row End -->
+    </div>
+    <!-- Bootstrap Container End -->
+</div>
+<script type="text/javascript">
+    $(document).on("focus", ":input", function () {
+        $(this).attr("autocomplete", "off")
+    });
+    $(document).ready(function () {
+        $.culture = Globalize.culture("en-GB");
+        $.validator.methods.date = function (value, element) {
+            return this.optional(element)
+                    || Globalize.parseDate(value, "dd/MM/yyyy", "en-GB")
+                    || Globalize.parseDate(value, "yyyy-mm-dd");
+        }
+        var pattern = /^(?:(?:31(\/|-|\.)(?:0?[13578]|1[02]))\1|(?:(?:29|30)(\/|-|\.)(?:0?[1,3-9]|1[0-2])\2))(?:(?:1[6-9]|[2-9]\d)?\d{2})$|^(?:29(\/|-|\.)0?2\3(?:(?:(?:1[6-9]|[2-9]\d)?(?:0[48]|[2468][048]|[13579][26])|(?:(?:16|[2468][048]|[3579][26])00))))$|^(?:0?[1-9]|1\d|2[0-8])(\/|-|\.)(?:(?:0?[1-9])|(?:1[0-2]))\4(?:(?:1[6-9]|[2-9]\d)?\d{2})$/;
+        $("#EffectiveDate").blur(function (a) {
+            if ("" != $("#EffectiveDate").val() && !pattern.test($("#EffectiveDate").val())) return $("#EffectiveDate").val(""), alert("Effective Date must be in 'dd/mm/yyyy' format."), a.preventDefault(), !1
+        });
+
+        var table = $('#LoutableDiarySrc').dataTable({
+            "aoColumns": [
+            { 'sWidth': '25%' },
+            { 'sWidth': '25%' },
+            { 'sWidth': '25%' },
+            { 'bSortable': false, 'sWidth': '25%' }
+
+    ],
+            "pagingType": "full_numbers",
+            "oLanguage": {
+                "sSearch": '@MCAS.Web.Objects.Resources.Common.Common.Search',
+                "sInfo": "@MCAS.Web.Objects.Resources.Common.Common.Showing _START_ @MCAS.Web.Objects.Resources.Common.Common.to _END_ @MCAS.Web.Objects.Resources.Common.Common.of _TOTAL_ @MCAS.Web.Objects.Resources.Common.Common.entries",
+                "sLengthMenu": "@MCAS.Web.Objects.Resources.Common.Common.Show  _MENU_ @MCAS.Web.Objects.Resources.Common.Common.entries",
+                "sEmptyTable": "@MCAS.Web.Objects.Resources.Common.Common.sEmptyTable",
+                "sInfoEmpty": "@MCAS.Web.Objects.Resources.Common.Common.sInfoEmpty",
+                "sProcessing": "@MCAS.Web.Objects.Resources.Common.Common.sProcessing",
+                "oPaginate": {
+                    "sNext": '@MCAS.Web.Objects.Resources.Common.Common.Next',
+                    "sLast": '@MCAS.Web.Objects.Resources.Common.Common.Last',
+                    "sFirst": '@MCAS.Web.Objects.Resources.Common.Common.First',
+                    "sPrevious": '@MCAS.Web.Objects.Resources.Common.Common.Previous'
+                }
+            },
+            "pagingType": "full_numbers",
+            "iDisplayLength": 10,
+            "aLengthMenu": [[10, 20, 25, 50, 100], [10, 20, 25, 50, 100]]
+        });
+
+        $("#LouRate").keypress(function (event) {
+            if ((event.which != 46 || $(this).val().indexOf('.') != -1) && (event.which < 48 || event.which > 57)) {
+                event.preventDefault();
+            }
+            if (($(this).val().indexOf('.') != -1) && ($(this).val().substring($(this).val().indexOf('.'), $(this).val().indexOf('.').length).length > 2)) {
+                event.preventDefault();
+            }
+        });
+        $("#EffectiveDate").datepicker({
+            dateFormat: "dd/mm/yy",
+            showStatus: !0,
+            showWeeks: !0,
+            currentText: "Now",
+            autoSize: !0,
+            gotoCurrent: !0,
+            showAnim: "blind",
+            highlightWeek: !0,
+            yearRange: "1951:2050",
+            changeMonth: !0,
+            changeYear: !0,
+            onSelect: function (date) {
+                $(this).valid();
+            }
+        })
+    });    
+</script>

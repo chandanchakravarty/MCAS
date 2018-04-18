@@ -1,0 +1,246 @@
+  
+  
+ /**************************************************            
+PROC NAME    : PROC_CANCELLATION_RETURN_PREMIUM          
+CREATED BY    : Lalit Chauhan          
+CREATED DATETIME  : Nov 02,2010          
+PURPOSE     : Calculate Cancellation return premium  from short term rate table      
+          
+Review History :-          
+Review By    :          
+REVIEW DATE    :          
+Purpose     :          
+DROP PROC PROC_GET_CANCELLATION_RETURN_PREMIUM          
+PROC_GET_CANCELLATION_RETURN_PREMIUM 28070,134,4,'04/05/2011'          
+***************************************************/            
+          
+ALTER PROC [dbo].[PROC_GET_CANCELLATION_RETURN_PREMIUM] --28718,83,2,''       
+(          
+@CUSTOMER_ID INT ,      
+@POLICY_ID INT ,      
+@POLICY_VERSION_ID INT,      
+@CANCELLATION_EFFECTIVE_DATE DATETIME =NULL       
+)          
+AS           
+BEGIN          
+ DECLARE @POLICY_TERM INT,@POLICY_EFFECTIVE_DATE DATETIME,@POLICY_EXP_DATE DATETIME,@DEVIDENT DECIMAL(25,2),          
+  @PREMIUM_PERCENTAGE_TO_DEDUCT DECIMAL(25,2),@POLICY_EFFECTIVE_DAYS INT,@MIN_PERCENTAGE DECIMAL(25,2),          
+  @TOTAL_POLICY_PREMIUM DECIMAL(25,2),@DEDUCTABLE_PREMIUM  DECIMAL(25,2),@RETURN_PREMIUM DECIMAL(25,2),@CURRENT_TERM INT  ,        
+  @PAID_AMOUNT DECIMAL(25,2),@RETENTION_PREMIUM DECIMAL(25,2)      
+  ,@RETURN_FULL_PREMIUM DECIMAL(25,2),@NEG_ENDPERIOD DECIMAL(25,2)    
+            
+  SELECT @POLICY_TERM = ISNULL(POLICY_TERMS,APP_TERMS),@POLICY_EFFECTIVE_DATE= POLICY_EFFECTIVE_DATE          
+   ,@POLICY_EXP_DATE = POLICY_EXPIRATION_DATE,@CURRENT_TERM = CURRENT_TERM          
+   FROM  POL_CUSTOMER_POLICY_LIST WITH(NOLOCK) WHERE CUSTOMER_ID = @CUSTOMER_ID AND POLICY_ID = @POLICY_ID AND           
+   POLICY_VERSION_ID = @POLICY_VERSION_ID          
+   
+   print @POLICY_TERM
+           
+            
+  SELECT @DEVIDENT = ISNULL(365/@POLICY_TERM,0) FROM MNT_SUSEP_SHORT_TERM_RATE 
+  
+  PRINT @DEVIDENT         
+            
+            
+  CREATE TABLE #tempSHORT_TERM_RATE(SHORT_TERM_ID SMALLINT,NO_OF_DAYS INT,FULL_TERM_DAYS INT,PERCENTAGE DECIMAL(10,2))          
+            
+  --Alter short term rate table according to the policy term          
+  IF(@DEVIDENT <> 0)          
+   INSERT INTO #tempSHORT_TERM_RATE(SHORT_TERM_ID,NO_OF_DAYS,FULL_TERM_DAYS,PERCENTAGE)         
+   SELECT RATE.SHORT_TERM_ID,RATE.NO_OF_DAYS/@DEVIDENT AS         
+   NO_OF_DAYS,RATE.FULL_TERM_DAYS/@DEVIDENT AS FULL_TERM_DAYS,PERCENTAGE         
+   FROM MNT_SUSEP_SHORT_TERM_RATE RATE WITH(NOLOCK)          
+  ELSE          
+   INSERT INTO #tempSHORT_TERM_RATE(SHORT_TERM_ID,NO_OF_DAYS,FULL_TERM_DAYS,PERCENTAGE) SELECT RATE.SHORT_TERM_ID,RATE.NO_OF_DAYS,RATE.FULL_TERM_DAYS,PERCENTAGE FROM MNT_SUSEP_SHORT_TERM_RATE RATE WITH(NOLOCK)          
+            
+       
+   DECLARE @RISK_DETAILS TABLE      
+ (      
+ ROW_NO INT IDENTITY(1,1),      
+ CUSTOMER_ID INT ,      
+ POLICY_ID INT,      
+ POLICY_VERSION_ID INT,      
+ RISK_ID INT ,      
+ WRITTEN_PREMIUM DECIMAL(25,8) ,      
+ EFFECTIVE_DATETIME DATETIME ,      
+ EXPIRY_DATETIME DATETIME     
+ )      
+    
+ INSERT INTO @RISK_DETAILS      
+ EXEC Poc_GetRiskEffectiveDate @CUSTOMER_ID,@POLICY_ID,@POLICY_VERSION_ID      
+   --SELECT * FROM @RISK_DETAILS  
+    DECLARE @PREMUM_EFF TABLE      
+ (      
+  ROW_NO INT ,--IDENTITY(1,1),      
+  RISK_ID INT ,      
+  PREMIUM DECIMAL(25,2),       
+  POL_VERSION_ID INT,      
+  POL_EFF_DAYS INT,      
+  POL_PERIOD INT,      
+  PERCENTAGE DECIMAL(10,2)      
+ )       
+       
+  DECLARE @SHORT_TERM TABLE      
+ (      
+  ROW_NO INT  IDENTITY(1,1),      
+  NO_DAYS INT,      
+  PERCENTAGE DECIMAL(10,2)      
+ )       
+ --DECLARE @DELETE_RECORD TABLE      
+ --(      
+ -- ROW_ID INT,      
+ -- RISK_ID INT ,      
+ -- PREMIUM DECIMAL(25,2),       
+ -- POL_VERSION_ID INT,      
+ -- POL_EFF_DAYS INT,      
+ -- POL_PERIOD INT,      
+ --    WRITTEN_PREMIUM DECIMAL(25,2)      
+ --)       
+       
+       
+      INSERT INTO @PREMUM_EFF SELECT ROW_NUMBER() OVER(ORDER BY RISK_ID)      
+      ,RISK_ID,a.WRITTEN_PREMIUM,POLICY_VERSION_ID, DATEDIFF(day,EFFECTIVE_DATETIME,      
+  @CANCELLATION_EFFECTIVE_DATE),DATEDIFF(day,a.EFFECTIVE_DATETIME,a.EXPIRY_DATETIME),NULL      
+  FROM @RISK_DETAILS a  ORDER BY a.POLICY_VERSION_ID ,a.RISK_ID      
+          
+   
+ --INSERT INTO @DELETE_RECORD      
+ -- SELECT b.* FROM  (      
+ --select  a.ROW_NO,a.RISK_ID,      
+ -- --x=(select b.WRITTEN_PREMIUM from #RISK_DETAILS b where b.CUSTOMER_ID = a.CUSTOMER_ID and b.POLICY_ID = a.POLICY_ID and b.POLICY_VERSION_ID = a.POLICY_VERSION_ID +1),      
+ -- a.WRITTEN_PREMIUM - isnull((select b.WRITTEN_PREMIUM from @RISK_DETAILS b where b.CUSTOMER_ID = a.CUSTOMER_ID       
+ -- and b.POLICY_ID = a.POLICY_ID and b.POLICY_VERSION_ID+1 = a.POLICY_VERSION_ID and a.RISK_ID = b.RISK_ID ),0      
+ -- ) PRM_DIFF,a.POLICY_VERSION_ID,      
+ --DATEDIFF(day,a.EFFECTIVE_DATETIME,@CANCELLATION_EFFECTIVE_DATE) POL_EFF_DAYS -- a.EFFECTIVE_DATETIME      
+ -- ,      
+ -- DATEDIFF(day,a.EFFECTIVE_DATETIME,a.EXPIRY_DATETIME)POL_PERIOD  --a.EXPIRY_DATETIME      
+ -- ,a.WRITTEN_PREMIUM      
+       
+ --from @RISK_DETAILS a      
+ --)b       
+ --WHERE PRM_DIFF <> WRITTEN_PREMIUM       
+    --SELECT * FROM @DELETE_RECORD    
+       
+ --DELETE @PREMUM_EFF FROM  @PREMUM_EFF R1,@DELETE_RECORD R2       
+ --WHERE R1.RISK_ID = R2.RISK_ID AND R1.POL_VERSION_ID = R2.POL_VERSION_ID      
+       
+ --DBCC CHECKIDENT (@PREMUM_EFF, RESEED, 1)      
+      
+ --  SELECT * FROM @DELETE_RECORD    
+ --INSERT INTO @PREMUM_EFF(ROW_NO,RISK_ID,PREMIUM,POL_VERSION_ID,POL_EFF_DAYS,POL_PERIOD)      
+ -- SELECT  ROW_ID,RISK_ID,PREMIUM,POL_VERSION_ID,      
+ --POL_EFF_DAYS,POL_PERIOD      
+ -- FROM @DELETE_RECORD      
+      
+  --SELECT * FROM @PREMUM_EFF    
+      
+    
+   --get risk wise retension premium percentage    
+       
+   SELECT @MIN_PERCENTAGE =  min(PERCENTAGE) FROM  #tempSHORT_TERM_RATE-- ORDER BY NO_OF_DAYS ASC    
+    
+    
+  INSERT INTO @SHORT_TERM      
+    select a.NO_OF_DAYS,c.PERCENTAGE from (      
+    select CASE WHEN min(NO_OF_DAYS) IS NULL    --Changed by Lalit tfs # 465  
+    THEN (SELECT MIN(NO_OF_DAYS) FROM  #tempSHORT_TERM_RATE)    
+    ELSE  min(NO_OF_DAYS) END NO_OF_DAYS,B.RISK_ID,B.POL_VERSION_ID       
+    from #tempSHORT_TERM_RATE A ,@PREMUM_EFF B where A.NO_OF_DAYS >=B.POL_EFF_DAYS      
+    group by B.RISK_ID,B.POL_VERSION_ID      
+          
+    )A  JOIN       
+    #tempSHORT_TERM_RATE c on       
+    c.NO_OF_DAYS = A.NO_OF_DAYS      
+    ORDER BY A.POL_VERSION_ID,A.RISK_ID       
+           
+    UPDATE a SET a.PERCENTAGE = b.PERCENTAGE        
+    FROM @PREMUM_EFF a,@SHORT_TERM b WHERE a.ROW_NO = b.ROW_NO      
+          
+ /*     
+ if policy Effective day is less than policy min effective day percentage defined in     
+ short term rate table then min percentage of table will be consider      
+ */    
+   UPDATE @PREMUM_EFF SET PERCENTAGE = @MIN_PERCENTAGE WHERE PERCENTAGE IS NULL     
+   AND POL_EFF_DAYS <= (SELECT MIN(NO_OF_DAYS) FROM #tempSHORT_TERM_RATE)    
+   AND POL_EFF_DAYS > 0      
+        
+        
+   SELECT @RETENTION_PREMIUM =  CAST(SUM(      
+  CASE WHEN POL_EFF_DAYS > 0        
+    THEN ISNULL(PREMIUM*PERCENTAGE/100,0)      
+   ELSE 0      
+  END ) AS  DECIMAL(25,2))    
+ FROM @PREMUM_EFF      
+  --SELECT @RETENTION_PREMIUM    
+  --SELECT * FROM @PREMUM_EFF    
+    
+ SELECT @RETURN_FULL_PREMIUM  = SUM(ISNULL(PREMIUM,0))      
+ FROM @PREMUM_EFF WHERE POL_EFF_DAYS < 0      
+          
+    SELECT @NEG_ENDPERIOD = ISNULL(SUM(PREMIUM),0) FROM @PREMUM_EFF WHERE PREMIUM < 0 AND POL_EFF_DAYS < 0     
+    
+          
+  --CalCulate Policy Effective days from Cancellation Date - Policy Effective date          
+ SELECT @POLICY_EFFECTIVE_DAYS = DATEDIFF(DAY,@POLICY_EFFECTIVE_DATE,@CANCELLATION_EFFECTIVE_DATE)          
+            
+   --print @POLICY_EFFECTIVE_DAYS    
+       
+   SELECT  @TOTAL_POLICY_PREMIUM = ISNULL(SUM(INSTALLMENT_AMOUNT),0)         
+   FROM ACT_POLICY_INSTALLMENT_DETAILS DT WITH(NOLOCK) JOIN          
+   POL_CUSTOMER_POLICY_LIST POL WITH(NOLOCK) ON          
+   POL.CUSTOMER_ID = DT.CUSTOMER_ID AND           
+   POL.POLICY_ID = DT.POLICY_ID AND           
+   POL.POLICY_VERSION_ID = DT.POLICY_VERSION_ID AND           
+   POL.CURRENT_TERM = @CURRENT_TERM          
+   WHERE POL.CUSTOMER_ID = @CUSTOMER_ID AND POL.POLICY_ID = @POLICY_ID           
+      
+      
+    --ORDER BY DT.POLICY_VERSION_ID DESC          
+       
+          
+  --GEt policy Paid Amount        
+    SELECT @PAID_AMOUNT = ISNULL(SUM(INSTALLMENT_AMOUNT),0)       
+    FROM ACT_POLICY_INSTALLMENT_DETAILS INS WITH(NOLOCK)        
+  WHERE  CUSTOMER_ID =@CUSTOMER_ID AND POLICY_ID = @POLICY_ID AND        
+  RELEASED_STATUS = 'Y' AND POLICY_VERSION_ID  IN(        
+  SELECT POL.POLICY_VERSION_ID FROM POL_CUSTOMER_POLICY_LIST POL       
+  WITH(NOLOCK) WHERE         
+  POL.CUSTOMER_ID = @CUSTOMER_ID         
+  AND POL.POLICY_ID = @POLICY_ID --AND POL.POLICY_VERSION_ID = @POLICY_VERSION_ID         
+  AND CURRENT_TERM = @CURRENT_TERM )       
+      
+  --SELECT  @PAID_AMOUNT - @RETENTION_PREMIUM  
+  --SELECT @PAID_AMOUNT , ISNULL(@NEG_ENDPERIOD,0), @RETENTION_PREMIUM      
+         
+ --IF(@PAID_AMOUNT<>0)      
+  SELECT @RETURN_PREMIUM =  (@PAID_AMOUNT + ISNULL(@NEG_ENDPERIOD,0)) - ISNULL(@RETENTION_PREMIUM ,0)     
+ --ELSE      
+ -- SELECT @RETURN_PREMIUM =  (@PAID_AMOUNT) - @RETENTION_PREMIUM      
+            
+  --Select Top 1 record from short term table           
+  --SELECT TOP 1 @PREMIUM_PERCENTAGE_TO_DEDUCT = PERCENTAGE FROM #tempSHORT_TERM_RATE WITH(NOLOCK)  WHERE NO_OF_DAYS <= @POLICY_EFFECTIVE_DAYS ORDER BY NO_OF_DAYS DESC          
+          
+  --if policy effective date calculation period not in short term rate table then consider min no_days,percentage          
+          
+  --      IF(@PREMIUM_PERCENTAGE_TO_DEDUCT IS NULL)          
+  -- SELECT TOP 1 @PREMIUM_PERCENTAGE_TO_DEDUCT = PERCENTAGE FROM #tempSHORT_TERM_RATE WITH(NOLOCK) ORDER BY NO_OF_DAYS ASC          
+          
+  --      --Calculate Policy Premium to be charged during policy effecive days by (Total policy Premium * percentage /100)            
+  --SELECT @DEDUCTABLE_PREMIUM = ISNULL(@TOTAL_POLICY_PREMIUM*@PREMIUM_PERCENTAGE_TO_DEDUCT/100,0)          
+            
+          
+  ----Calculate return premium by (Total policy Premium - charged premium)          
+  ----SELECT @RETURN_PREMIUM = ROUND (@TOTAL_POLICY_PREMIUM - @DEDUCTABLE_PREMIUM , 2)          
+  --SELECT @DEDUCTABLE_PREMIUM      
+  --SELECT @RETURN_PREMIUM = ROUND (@PAID_AMOUNT - @DEDUCTABLE_PREMIUM , 2)          
+          
+          
+          
+               
+  DROP TABLE #tempSHORT_TERM_RATE          
+  SELECT @RETURN_PREMIUM AS RETURN_PREMIUM          
+          
+END        
+--GO       
+--EXEC PROC_GET_CANCELLATION_RETURN_PREMIUM 28070,235,3,'10/01/2011'          
+  

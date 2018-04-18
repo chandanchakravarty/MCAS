@@ -1,0 +1,1 @@
+Alter table clm_claims Alter column ClaimantType nvarchar(50)

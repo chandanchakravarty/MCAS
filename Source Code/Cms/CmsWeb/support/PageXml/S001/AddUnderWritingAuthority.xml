@@ -1,0 +1,269 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Root>
+  <PageTitle>
+    <Culture Code="en-US">AddUnderWriterAuthority</Culture>
+    <Culture Code="zh-SG">AddUnderWriterAuthority</Culture>
+    <Culture Code="pt-BR">AddUnderWriterAuthority</Culture>
+  </PageTitle>
+  <PageElement name="cmbCOUNTRY_CODE" type="DDL" Desc=""
+               IsMandatory="Yes"
+               IsReadOnly="No"
+               IsDisabled="No"
+               IsDisplay="Yes"
+               IsFormatingRequired="No" JsFunctionToFormat="" OnClickJSFunction=""
+               OnChangeJSFunction="" >
+    <Style Position="relative" Top="0" Left="10" CssClass="midcolora"  ParentTableCell="tdCOUNTRY_CODE" />
+    <rev Enabled="No"/>
+    <div class="midcolora" cap_width="18" ele_width="82" POSITION ="relative" float ="left" padding="0.2" />
+    <Culture Code="en-US" Desc="set Label and Message for English language">
+      <Caption>Country</Caption>
+      <rfvMessage>Please Select Country</rfvMessage>
+      <DefaultValue></DefaultValue>
+    </Culture>
+    <Culture Code="zh-SG" Desc="set Label and Message for Singapore language">
+      <Caption>Country</Caption>
+      <rfvMessage>Please Select Country</rfvMessage>
+      <DefaultValue></DefaultValue>
+    </Culture>
+    <Culture Code="pt-BR" Desc="set Label and Message for Singapore language">
+      <Caption>Country</Caption>
+      <rfvMessage>Please Select Country</rfvMessage>
+      <DefaultValue></DefaultValue>
+    </Culture>
+  </PageElement>
+  <PageElement name="cmbLOB_ID" type="DDL" Desc=""
+               IsMandatory="Yes"
+               IsReadOnly="No"
+               IsDisabled="No"
+               IsDisplay="Yes"
+               IsFormatingRequired="No" JsFunctionToFormat="" OnClickJSFunction=""
+               OnChangeJSFunction="" >
+    <Style Position="relative" Top="0" Left="10" CssClass="midcolora"  ParentTableCell="" />
+    <rev Enabled="No"/>
+    <div class="midcolora" cap_width="18" ele_width="82" POSITION ="relative" float ="left" padding="0.2" />
+    <Culture Code="en-US" Desc="set Label and Message for English language">
+      <Caption>Product</Caption>
+      <rfvMessage>Please Select Product</rfvMessage>
+      <DefaultValue></DefaultValue>
+    </Culture>
+    <Culture Code="zh-SG" Desc="set Label and Message for Singapore language">
+      <Caption>Product</Caption>
+      <rfvMessage>Please Select Product</rfvMessage>
+      <DefaultValue></DefaultValue>
+    </Culture>
+    <Culture Code="pt-BR" Desc="set Label and Message for Singapore language">
+      <Caption>Product</Caption>
+      <rfvMessage>Please Select Product</rfvMessage>
+      <DefaultValue></DefaultValue>
+    </Culture>
+  </PageElement>
+  <PageElement name="txtCLAIM_RESERVE_LIMIT" type="TextBox" Desc=""
+              IsMandatory="No"
+              IsReadOnly="No"
+              IsDisabled="No"
+              IsDisplay="No"
+              IsFormatingRequired="No" JsFunctionToFormat="" OnClickJSFunction=""
+              OnChangeJSFunction="" >
+    <Style Position="relative" Top="0" Left="10" CssClass="midcolora"  ParentTableCell="" />
+    <rev Enabled="No"/>
+    <div class="midcolora" cap_width="18" ele_width="82" POSITION ="relative" float ="left" padding="0.2" />
+    <Culture Code="en-US" Desc="set Label and Message for English language">
+      <Caption></Caption>
+      <rfvMessage></rfvMessage>
+      <DefaultValue></DefaultValue>
+    </Culture>
+    <Culture Code="zh-SG" Desc="set Label and Message for Singapore language">
+      <Caption></Caption>
+      <rfvMessage></rfvMessage>
+      <DefaultValue></DefaultValue>
+    </Culture>
+    <Culture Code="pt-BR" Desc="set Label and Message for Singapore language">
+      <Caption></Caption>
+      <rfvMessage></rfvMessage>
+      <DefaultValue></DefaultValue>
+    </Culture>
+  </PageElement>
+
+  <PageElement name="txtPML_LIMIT" type="TextBox" Desc=""
+             IsMandatory="Yes"
+             IsReadOnly="No"
+             IsDisabled="No"
+             IsDisplay="Yes"
+             MaxLength="15"
+             IsFormatingRequired="No" JsFunctionToFormat="" OnClickJSFunction=""
+             OnChangeJSFunction="" >
+    <Style Position="relative" Top="0" Left="10" CssClass="midcolora"  ParentTableCell="" />
+    <rev Enabled="Yes" ExpKey="^[0-9,.]+$"/>
+    <div class="midcolora" cap_width="18" ele_width="82" POSITION ="relative" float ="left" padding="0.2" />
+    <Culture Code="en-US" Desc="set Label and Message for English language">
+      <Caption></Caption>
+      <rfvMessage></rfvMessage>
+      <DefaultValue></DefaultValue>
+    </Culture>
+    <Culture Code="zh-SG" Desc="set Label and Message for Singapore language">
+      <Caption>Sum Insured(Base Currency)</Caption>
+      <rfvMessage>Please enter Sum Insured</rfvMessage>
+      <revExpMessage>Sum Insured should be in numerics only </revExpMessage>
+      <DefaultValue></DefaultValue>
+    </Culture>
+    <Culture Code="pt-BR" Desc="set Label and Message for Singapore language">
+      <Caption></Caption>
+      <rfvMessage></rfvMessage>
+      <DefaultValue></DefaultValue>
+    </Culture>
+  </PageElement>
+
+  <PageElement name="txtPREMIUM_APPROVAL_LIMIT" type="TextBox" Desc=""
+             IsMandatory="Yes"
+             IsReadOnly="No"
+             IsDisabled="No"
+             IsDisplay="Yes"
+             MaxLength="15"
+             IsFormatingRequired="No" JsFunctionToFormat="" OnClickJSFunction=""
+             OnChangeJSFunction="" >
+    <Style Position="relative" Top="0" Left="10" CssClass="midcolora"  ParentTableCell="" />
+    <rev Enabled="Yes" ExpKey="^[0-9,.]+$"/>
+    <div class="midcolora" cap_width="18" ele_width="82" POSITION ="relative" float ="left" padding="0.2" />
+    <Culture Code="en-US" Desc="set Label and Message for English language">
+      <Caption></Caption>
+      <rfvMessage></rfvMessage>
+      <DefaultValue></DefaultValue>
+    </Culture>
+    <Culture Code="zh-SG" Desc="set Label and Message for Singapore language">
+      <Caption>Premium Approval Limit(Base Currency)</Caption>
+      <rfvMessage>Please enter Premium Approval Limit</rfvMessage>
+      <revExpMessage>Premium Approval Limit should be in numerics only</revExpMessage>
+      <DefaultValue></DefaultValue>
+    </Culture>
+    <Culture Code="pt-BR" Desc="set Label and Message for Singapore language">
+      <Caption></Caption>
+      <rfvMessage></rfvMessage>
+      <DefaultValue></DefaultValue>
+    </Culture>
+  </PageElement>
+
+  <PageElement name="txtEffectiveDate" type="TextBox" Desc=""
+             IsMandatory="Yes"
+             IsReadOnly="No"
+             IsDisabled="No"
+             IsDisplay="Yes"
+             IsFormatingRequired="No" JsFunctionToFormat="" OnClickJSFunction=""
+             OnChangeJSFunction="" >
+    <Style Position="relative" Top="0" Left="10" CssClass="midcolora"  ParentTableCell="" />
+    <rev Enabled="No"/>
+    <div class="midcolora" cap_width="18" ele_width="82" POSITION ="relative" float ="left" padding="0.2" />
+    <Culture Code="en-US" Desc="set Label and Message for English language">
+      <Caption></Caption>
+      <rfvMessage></rfvMessage>
+      <DefaultValue></DefaultValue>
+    </Culture>
+    <Culture Code="zh-SG" Desc="set Label and Message for Singapore language">
+      <Caption></Caption>
+      <rfvMessage>Please select Effective Date</rfvMessage>
+      <DefaultValue></DefaultValue>
+    </Culture>
+    <Culture Code="pt-BR" Desc="set Label and Message for Singapore language">
+      <Caption></Caption>
+      <rfvMessage></rfvMessage>
+      <DefaultValue></DefaultValue>
+    </Culture>
+  </PageElement>
+
+  <PageElement name="txtEndDate" type="TextBox" Desc=""
+             IsMandatory="Yes"
+             IsReadOnly="No"
+             IsDisabled="No"
+             IsDisplay="Yes"
+             IsFormatingRequired="No" JsFunctionToFormat="" OnClickJSFunction=""
+             OnChangeJSFunction="" >
+    <Style Position="relative" Top="0" Left="10" CssClass="midcolora"  ParentTableCell="" />
+    <rev Enabled="No"/>
+    <div class="midcolora" cap_width="18" ele_width="82" POSITION ="relative" float ="left" padding="0.2" />
+    <Culture Code="en-US" Desc="set Label and Message for English language">
+      <Caption></Caption>
+      <rfvMessage></rfvMessage>
+      <DefaultValue></DefaultValue>
+    </Culture>
+    <Culture Code="zh-SG" Desc="set Label and Message for Singapore language">
+      <Caption></Caption>
+      <rfvMessage>Please select End Date</rfvMessage>
+      <DefaultValue></DefaultValue>
+    </Culture>
+    <Culture Code="pt-BR" Desc="set Label and Message for Singapore language">
+      <Caption></Caption>
+      <rfvMessage></rfvMessage>
+      <DefaultValue></DefaultValue>
+    </Culture>
+  </PageElement>
+  <PageElement name="cmbCLAIM_REOPEN" type="DDL" Desc=""
+               IsMandatory="No"
+               IsReadOnly="No"
+               IsDisabled="No"
+               IsDisplay="No"
+               IsFormatingRequired="No" JsFunctionToFormat="" OnClickJSFunction=""
+               OnChangeJSFunction="" >
+    <Style Position="relative" Top="0" Left="10" CssClass="midcolora"  ParentTableCell="" />
+    <rev Enabled="No"/>
+    <div class="midcolora" cap_width="18" ele_width="82" POSITION ="relative" float ="left" padding="0.2" />
+    <Culture Code="en-US" Desc="set Label and Message for English language">
+      <Caption></Caption>
+      <rfvMessage></rfvMessage>
+      <DefaultValue></DefaultValue>
+    </Culture>
+    <Culture Code="zh-SG" Desc="set Label and Message for Singapore language">
+      <Caption></Caption>
+      <rfvMessage></rfvMessage>
+      <DefaultValue></DefaultValue>
+    </Culture>
+    <Culture Code="pt-BR" Desc="set Label and Message for Singapore language">
+      <Caption></Caption>
+      <rfvMessage></rfvMessage>
+      <DefaultValue></DefaultValue>
+    </Culture>
+  </PageElement>
+  <PageElement name="txtCLAIM_SETTLMENT_LIMIT" type="TextBox" Desc=""
+              IsMandatory="No"
+              IsReadOnly="No"
+              IsDisabled="No"
+              IsDisplay="No"
+              IsFormatingRequired="No" JsFunctionToFormat="" OnClickJSFunction=""
+              OnChangeJSFunction="" >
+    <Style Position="relative" Top="0" Left="10" CssClass="midcolora"  ParentTableCell="" />
+    <rev Enabled="No"/>
+    <div class="midcolora" cap_width="18" ele_width="82" POSITION ="relative" float ="left" padding="0.2" />
+    <Culture Code="en-US" Desc="set Label and Message for English language">
+      <Caption></Caption>
+      <rfvMessage></rfvMessage>
+      <DefaultValue></DefaultValue>
+    </Culture>
+    <Culture Code="zh-SG" Desc="set Label and Message for Singapore language">
+      <Caption></Caption>
+      <rfvMessage></rfvMessage>
+      <DefaultValue></DefaultValue>
+    </Culture>
+    <Culture Code="pt-BR" Desc="set Label and Message for Singapore language">
+      <Caption></Caption>
+      <rfvMessage></rfvMessage>
+      <DefaultValue></DefaultValue>
+    </Culture>
+  </PageElement>
+ 
+  
+  <PageElement name="trCLAIM_RESERVE_LIMIT" type="TR" Desc=""
+               IsMandatory="No"
+               IsReadOnly="No"
+               IsDisabled="No"
+               IsDisplay="No"
+               IsFormatingRequired="No" JsFunctionToFormat="" OnClickJSFunction=""
+               OnChangeJSFunction="" >
+  </PageElement>
+  <PageElement name="trCLAIM_SETTLMENT_LIMIT" type="TR" Desc=""
+             IsMandatory="No"
+             IsReadOnly="No"
+             IsDisabled="No"
+             IsDisplay="No"
+             IsFormatingRequired="No" JsFunctionToFormat="" OnClickJSFunction=""
+             OnChangeJSFunction="" >
+  </PageElement>
+ 
+</Root>

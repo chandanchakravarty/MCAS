@@ -1,0 +1,75 @@
+DIV.workflowContainer
+{
+	FONT-WEIGHT: normal;
+    FONT-SIZE: 8pt;
+    COLOR: #000000;
+    FONT-STYLE: normal;
+    FONT-FAMILY: "MS Sans Serif", Arial, sans-serif;
+    PADDING-RIGHT: 0px;
+    PADDING-LEFT: 0px;
+    Z-INDEX: 101;
+    LEFT: 0px;
+    VISIBILITY: hidden;
+    PADDING-BOTTOM: 0px;
+    PADDING-TOP: 0px;
+    POSITION: absolute;
+    TOP: 0px;
+    BACKGROUND-COLOR: #F52D2D;
+    border-bottom:#333333 thin outset;
+    border-right:#333333 thin outset;
+}
+DIV.workflowContainer A.workflowLink:hover
+{
+	COLOR: #000000;
+    background-color:#CBCCCE;
+}
+DIV.workflowContainer A.workflowLink
+{
+	FONT-WEIGHT: normal;
+    FONT-SIZE: 8pt;
+    COLOR: #000000;
+    FONT-STYLE: normal;
+    FONT-FAMILY: "MS Sans Serif", Arial, sans-serif;
+    DISPLAY: block;
+    FONT-WEIGHT: normal;
+    FONT-SIZE: 11px;
+    CURSOR: hand;
+    COLOR: #000000;
+    FONT-STYLE: normal;
+    FONT-FAMILY: Verdana;
+    WHITE-SPACE: nowrap;
+    TEXT-DECORATION: none;
+    PADDING-RIGHT: 2em;
+    PADDING-LEFT: 2em;
+    PADDING-BOTTOM: 4px;
+    PADDING-TOP: 4px;
+    background-color:#F52D2D;/*#CEDFFF;*/
+	border-left:#ffffff 1px solid;
+    border-top:#ffffff 1px solid;
+}
+DIV.workflowContainer A.workflowActiveLink
+{
+	COLOR: #000000;
+    background-color:#CBCCCE;
+}
+DIV.workflowContainer A.workflowDeactiveLink
+{
+	COLOR: #FFFFFF;
+	font-style:italic;
+	cursor:default;
+}
+#workflowFrame
+{
+    DISPLAY: none;
+    Z-INDEX: 101;
+    LEFT: 0px;
+    POSITION: absolute;
+    TOP: 20px;
+    BACKGROUND-COLOR: #000000
+}
+#workflowIFrame
+{
+    Z-INDEX: 1001;
+    FILTER: alpha(opacity=0);
+    BACKGROUND-COLOR: #000000
+}

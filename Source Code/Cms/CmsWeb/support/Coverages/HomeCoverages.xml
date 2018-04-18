@@ -1,0 +1,1998 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Root>
+	<Master>
+		<Query Code="SELECT" Level="APP">Proc_GetKeysForHome_APP</Query>
+		<Query Code="SELECT" Level="POLICY">Proc_GetKeysForHome_POL</Query>
+		<Column Code="APP_EFFECTIVE_DATE" MapColumnn="APP_EFFECTIVE_DATE" TableAssociated="APP_LIST"
+			ColumnAssociated="APP_EFFECTIVE_DATE"></Column>
+		<Column Code="APP_YEAR" MapColumnn="APP_YEAR" TableAssociated="APP_LIST" ColumnAssociated="APP_EFFECTIVE_DATE"></Column>
+		<Column Code="LOB_ID" MapColumnn="LOB_ID" TableAssociated="APP_LIST" ColumnAssociated="APP_LOB"></Column>
+		<Column Code="STATE_ID" MapColumnn="STATE_ID" TableAssociated="APP_LIST" ColumnAssociated="STATE_ID"></Column>
+		<Column Code="REP_COST" MapColumnn="REP_COST" TableAssociated="" ColumnAssociated=""></Column>
+		<Column Code="MKT_VALUE" MapColumnn="MKT_VALUE" TableAssociated="" ColumnAssociated=""></Column>
+		<Column Code="PKG_TYPE" MapColumnn="PKG_TYPE" TableAssociated="" ColumnAssociated=""></Column>
+		<Column Code="HO_34" MapColumnn="HO_34" TableAssociated="" ColumnAssociated=""></Column>
+		<Column Code="LOC_TYPE" MapColumnn="LOC_TYPE" TableAssociated="" ColumnAssociated=""></Column>
+		<Column Code="PER_REP_COST" MapColumnn=""></Column>
+		<Column Code="MIN_VAL" MapColumnn=""></Column>
+		<Column Code="MAX_VAL" MapColumnn=""></Column>
+		<Column Code="MULT_A" MapColumnn=""></Column>
+		<Column Code="MULT_B" MapColumnn=""></Column>
+		<Column Code="MULT_C" MapColumnn=""></Column>
+		<Column Code="MULT_D" MapColumnn=""></Column>
+		<Column Code="TEMP_VAL" MapColumnn=""></Column>
+		<Column Code="ERR_TEMPLATE" MapColumnn=""></Column>
+		<Column Code="VERIFY_RULE" MapColumnn="VERIFY_RULE"></Column>
+	</Master>
+	<State ID="22" Name="Michigan">
+		<Product ID="11406" Desc="HO-6">
+			<Remove>
+				<Coverages>
+					<Coverage COV_ID="0" Code="EBP25"></Coverage>
+					<Coverage COV_ID="0" Code="EBEP11"></Coverage>
+					<Coverage COV_ID="0" Code="SEWER"></Coverage>
+					<Coverage COV_ID="0" Code="MIN##"></Coverage>
+					<Coverage COV_ID="0" Code="IFGHO"></Coverage>
+					<Coverage COV_ID="0" Code="EBP23"></Coverage>
+					<Coverage COV_ID="0" Code="EBBAA"></Coverage>
+					<Coverage COV_ID="0" Code="EBDUC"></Coverage>
+					<Coverage COV_ID="0" Code="EBRDC"></Coverage>
+					<Coverage COV_ID="0" Code="REDUC"></Coverage>
+					<Coverage COV_ID="0" Code="RECST"></Coverage>
+					<Coverage COV_ID="56" Code="EBEP11"></Coverage>
+					<Coverage COV_ID="56" Code="ECOB"></Coverage>
+					<Coverage COV_ID="56" Code="ECOC"></Coverage>
+					<Coverage COV_ID="56" Code="CBF4"></Coverage>
+					<Coverage COV_ID="56" Code="CF5"></Coverage>
+					<Coverage COV_ID="56" Code="HO100"></Coverage>
+					<Coverage COV_ID="56" Code="PFBF2"></Coverage>
+					<Coverage COV_ID="56" Code="PFSF3"></Coverage>
+					<!-- Added by Charles on 2-Dec-09 for Itrack 6647 -->
+					<Coverage COV_ID="0" Code="HO493"></Coverage>
+				</Coverages>
+			</Remove>
+			<Mandatory>
+				<Coverages>
+					<Coverage COV_ID="90" Code="EBAIRP"></Coverage>
+					<Coverage COV_ID="932" Code="CO100"></Coverage>
+					<Coverage COV_ID="62" Code="EBOS40"></Coverage>
+					<Coverage COV_ID="69" Code="EBOS489"></Coverage>
+					<Coverage COV_ID="257" Code="EBSS490"></Coverage>
+					<Coverage COV_ID="908" Code="OSTDISH"></Coverage>
+					<Coverage COV_ID="0" Code="HO48"></Coverage><!-- Added by Charles on 4-Dec-09 for Itrack 6405 -->
+					<Coverage COV_ID="3" Code="DWELL"></Coverage>
+					<Coverage COV_ID="5" Code="OS"></Coverage>
+					<Coverage COV_ID="7" Code="EBUSPP"></Coverage>
+					<Coverage COV_ID="8" Code="LOSUR"></Coverage>
+					<Coverage COV_ID="10" Code="PL"></Coverage>
+					<Coverage COV_ID="13" Code="MEDPM"></Coverage>
+					<Coverage COV_ID="57" Code="EBIF96"></Coverage>
+					<Coverage COV_ID="" Code="EBOS48"></Coverage>
+					<Coverage COV_ID="74" Code="EBCCSL"></Coverage>
+					<Coverage COV_ID="" Code="EBCCSS"></Coverage>
+					<Coverage COV_ID="193" Code="EBCCSI"></Coverage>
+					<Coverage COV_ID="195" Code="EBCCSF"></Coverage>
+					<Coverage COV_ID="58" Code="IBUSP"></Coverage>
+					<Coverage COV_ID="58" Code="IBUSPO"></Coverage>
+					<Coverage COV_ID="73" Code="EBICC53"></Coverage>
+					<Coverage COV_ID="189" Code="EBCCSM"></Coverage>
+					<Coverage COV_ID="191" Code="ESCCSS"></Coverage>
+					<Coverage COV_ID="86" Code="EBDUC"></Coverage>
+					<Coverage COV_ID="89" Code="LAC"></Coverage>
+					<Coverage COV_ID="79" Code="SEWER"></Coverage>
+					<!--Coverage COV_ID="0" Code="HO100"></Coverage--> <!-- Commented by Charles on 22-Dec-09 for Itrack 6655 -->
+				</Coverages>
+			</Mandatory>
+			<Rule Action="Master" StartDate="1950-01-01" EndDate="3000-12-12">
+				<Conditions>
+					<Condition Operand1="1" Operator="==" Operand2="1" OperandType="Double">
+						<ToSet Key="$MIN_VAL" Value="15000"></ToSet>
+						<ToSet Key="$MAX_VAL" Value="$REP_COST"></ToSet>
+						<ToSet Key="$MULT_A" Value="0.1"></ToSet>
+						<ToSet Key="$MULT_D" Value="0.4"></ToSet>
+						<ToSet Key="$MULT_B" Value="0.1"></ToSet>
+						<ToSet Key="$ERR_TEMPLATE" Value="1"></ToSet>
+					</Condition>
+				</Conditions>
+				<Conditions>
+					<Condition Operand1="$VERIFY_RULE" Operator="==" Operand2="N" OperandType="String">
+						<ToSet Key="$MIN_VAL" Value="$REP_COST"></ToSet>
+						<ToSet Key="$MAX_VAL" Value="$REP_COST"></ToSet>
+						<ToSet Key="$ERR_TEMPLATE" Value="2"></ToSet>
+					</Condition>
+					<Condition Operand1="$REP_COST" Operator="==" Operand2="15000" OperandType="Double">
+						<ToSet Key="$ERR_TEMPLATE" Value="2"></ToSet>
+					</Condition>
+				</Conditions>
+				
+			</Rule>
+			<BaseCoverage Code="EBUSPP" MinValue="$MIN_VAL" MaxValue="$MAX_VAL" Desc="Coverage C - Unscheduled Personal Property "></BaseCoverage>
+			<ErrorMessage Template="1">
+				<Text Value="Coverage C - Contents Insurance Amount for HO-6 must be between  "></Text>
+				<Text Value="$MIN_VAL"></Text>
+				<Text Value=" and "></Text>
+				<Text Value="$MAX_VAL"></Text>
+				<Text Value=" . "></Text>
+			</ErrorMessage>
+			<ErrorMessage Template="2">
+				<Text Value="Coverage C - Contents Insurance Amount for HO-6 must be equal to  "></Text>
+				<Text Value="$MIN_VAL"></Text>
+				<Text Value=" . "></Text>
+			</ErrorMessage>
+			<ErrRequired Value="Please enter Coverage C"></ErrRequired>
+			<OnChange Code="DWELL">
+				<Target Code="DWELL" Operator="*" Operand="$MULT_A" IF="Y" ConditionOn="result" ConOpr="&lt;"
+					ConVal="2000" ToSet="result" ToSetVal="2000"></Target>
+				<Target Code="LOSUR" Operator="*" Operand="$MULT_D"></Target>
+				<!-- Ravindra(03-27-07)  Limit of Coverage B not applicable in Ho-4 & HP-6 -->
+				<!--<Target Code="OS" Operator="*" Operand="$MULT_B"></Target> -->
+			</OnChange>
+		</Product>
+		<Product ID="11410" Desc="HO-5 Premier">
+			<Remove>
+				<Coverages>
+					<Coverage COV_ID="0" Code="EBP20"></Coverage>
+					<Coverage COV_ID="0" Code="EBP21"></Coverage>
+					<Coverage COV_ID="0" Code="EBP23"></Coverage>
+					<Coverage COV_ID="0" Code="EBOS48"></Coverage>
+					<Coverage COV_ID="0" Code="EBPPC"></Coverage>
+					<Coverage COV_ID="0" Code="EBALEXP"></Coverage>
+					<Coverage COV_ID="0" Code="EBCASP"></Coverage>
+					<Coverage COV_ID="0" Code="EBUNIT"></Coverage>
+					<Coverage COV_ID="0" Code="LAC"></Coverage>
+					<Coverage COV_ID="0" Code="EBBAA"></Coverage>
+					<Coverage COV_ID="0" Code="EBMC"></Coverage>
+					<Coverage COV_ID="0" Code="RECST"></Coverage>
+					<Coverage COV_ID="0" Code="MIN##"></Coverage>
+					<Coverage COV_ID="0" Code="EBRDC"></Coverage>
+					<Coverage COV_ID="0" Code="EBCDC"></Coverage>
+					<Coverage COV_ID="0" Code="REDUC"></Coverage>
+					<Coverage COV_ID="56" Code="EROK"></Coverage>
+					<Coverage COV_ID="56" Code="CBF4"></Coverage>
+					<Coverage COV_ID="56" Code="CUOF6"></Coverage>
+					<Coverage COV_ID="56" Code="CO100"></Coverage>
+					<Coverage COV_ID="56" Code="PFBF2"></Coverage>
+					<Coverage COV_ID="56" Code="PFSF3"></Coverage>
+				</Coverages>
+			</Remove>
+			<Mandatory>
+				<Coverages>
+					<Coverage COV_ID="90" Code="EBAIRP"></Coverage>
+					<Coverage COV_ID="62" Code="EBOS40"></Coverage>
+					<Coverage COV_ID="69" Code="EBOS489"></Coverage>
+					<Coverage COV_ID="257" Code="EBSS490"></Coverage>
+					<Coverage COV_ID="0" Code="HO48"></Coverage><!-- Added by Charles on 4-Dec-09 for Itrack 6405 -->
+					<Coverage COV_ID="908" Code="OSTDISH"></Coverage>
+					<Coverage COV_ID="3" Code="DWELL"></Coverage>
+					<Coverage COV_ID="5" Code="OS"></Coverage>
+					<Coverage COV_ID="7" Code="EBUSPP"></Coverage>
+					<Coverage COV_ID="8" Code="LOSUR"></Coverage>
+					<Coverage COV_ID="10" Code="PL"></Coverage>
+					<Coverage COV_ID="13" Code="MEDPM"></Coverage>
+					<Coverage COV_ID="57" Code="EBIF96"></Coverage>
+					<Coverage COV_ID="" Code="EBOS48"></Coverage>
+					<Coverage COV_ID="74" Code="EBCCSL"></Coverage>
+					<Coverage COV_ID="" Code="EBCCSS"></Coverage>
+					<Coverage COV_ID="193" Code="EBCCSI"></Coverage>
+					<Coverage COV_ID="195" Code="EBCCSF"></Coverage>
+					<Coverage COV_ID="58" Code="IBUSP"></Coverage>
+					<Coverage COV_ID="58" Code="IBUSPO"></Coverage>
+					<Coverage COV_ID="73" Code="EBICC53"></Coverage>
+					<Coverage COV_ID="189" Code="EBCCSM"></Coverage>
+					<Coverage COV_ID="86" Code="EBDUC"></Coverage>
+					<Coverage COV_ID="191" Code="ESCCSS"></Coverage>
+					<Coverage COV_ID="33" Code="EBRCPP"></Coverage>
+					<Coverage COV_ID="56" Code="EBEP11"></Coverage>
+					<!--Coverage COV_ID="907" Code="ECOC"></Coverage -->
+					<Coverage COV_ID="196" Code="EBP25"></Coverage>
+					<Coverage COV_ID="0" Code="HO100"></Coverage>
+					<Coverage COV_ID="0" Code="CF5"></Coverage><!-- Added by Charles on 28-Dec-09 for Itrack 6883 -->
+				</Coverages>
+			</Mandatory>
+			<Rule Action="Master" StartDate="1950-01-01" EndDate="3000-12-12">
+				<Conditions>
+					<Condition Operand1="1" Operator="==" Operand2="1" OperandType="Double">
+						<ToSet Key="$MIN_VAL" Value="$REP_COST"></ToSet>
+						<ToSet Key="$MAX_VAL" Value="$REP_COST"></ToSet>
+						<ToSet Key="$MULT_B" Value="0.1"></ToSet>
+						<ToSet Key="$MULT_C" Value="0.7"></ToSet>
+						<ToSet Key="$MULT_D" Value="0.3"></ToSet>
+						<ToSet Key="$ERR_TEMPLATE" Value="1"></ToSet>
+					</Condition>
+				</Conditions>
+			</Rule>
+			<BaseCoverage Code="DWELL" MinValue="$MIN_VAL" MaxValue="$MAX_VAL" Desc="Coverage A – Dwelling "></BaseCoverage>
+			<OnChange Code="DWELL">
+				<Target Code="OS" Operator="*" Operand="$MULT_B"></Target>
+				<Target Code="EBUSPP" Operator="*" Operand="$MULT_C"></Target>
+				<Target Code="LOSUR" Operator="*" Operand="$MULT_D"></Target>
+			</OnChange>
+			<ErrorMessage Template="1">
+				<Text Value="Coverage A - Dwelling for HO-5 Premier must be equal to "></Text>
+				<Text Value="$REP_COST"></Text>
+				<Text Value=" . "></Text>
+			</ErrorMessage>
+			<ErrRequired Value="Please enter Coverage A"></ErrRequired>
+		</Product>
+		<Product ID="11401" Desc="HO-5 Replacement">
+			<Remove>
+				<Coverages>
+					<Coverage COV_ID="0" Code="EBP20"></Coverage>
+					<Coverage COV_ID="0" Code="EBP21"></Coverage>
+					<Coverage COV_ID="0" Code="MIN##"></Coverage>
+					<Coverage COV_ID="0" Code="EBCASP"></Coverage>
+					<Coverage COV_ID="0" Code="EBUNIT"></Coverage>
+					<Coverage COV_ID="0" Code="EBBAA"></Coverage>
+					<Coverage COV_ID="0" Code="LAC"></Coverage>
+					<Coverage COV_ID="0" Code="EBP25"></Coverage>
+					<Coverage COV_ID="0" Code="EBRDC"></Coverage>
+					<Coverage COV_ID="0" Code="EBCDC"></Coverage>
+					<Coverage COV_ID="0" Code="REDUC"></Coverage>
+					<Coverage COV_ID="0" Code="RECST"></Coverage>
+					<Coverage COV_ID="56" Code="EROK"></Coverage>
+					<Coverage COV_ID="56" Code="CBF4"></Coverage>
+					<Coverage COV_ID="56" Code="CUOF6"></Coverage>
+					<Coverage COV_ID="56" Code="CO100"></Coverage>
+					<Coverage COV_ID="56" Code="PFBF2"></Coverage>
+					<Coverage COV_ID="56" Code="PFSF3"></Coverage>
+				</Coverages>
+			</Remove>
+			<Mandatory>
+				<Coverages>
+					<Coverage COV_ID="90" Code="EBAIRP"></Coverage>
+					<Coverage COV_ID="62" Code="EBOS40"></Coverage>
+					<Coverage COV_ID="69" Code="EBOS489"></Coverage>
+					<Coverage COV_ID="257" Code="EBSS490"></Coverage>
+					<Coverage COV_ID="0" Code="HO48"></Coverage><!-- Added by Charles on 4-Dec-09 for Itrack 6405 -->
+					<Coverage COV_ID="908" Code="OSTDISH"></Coverage>
+					<Coverage COV_ID="3" Code="DWELL"></Coverage>
+					<Coverage COV_ID="5" Code="OS"></Coverage>
+					<Coverage COV_ID="7" Code="EBUSPP"></Coverage>
+					<Coverage COV_ID="8" Code="LOSUR"></Coverage>
+					<Coverage COV_ID="10" Code="PL"></Coverage>
+					<Coverage COV_ID="13" Code="MEDPM"></Coverage>
+					<Coverage COV_ID="57" Code="EBIF96"></Coverage>
+					<Coverage COV_ID="" Code="EBOS48"></Coverage>
+					<Coverage COV_ID="74" Code="EBCCSL"></Coverage>
+					<Coverage COV_ID="" Code="EBCCSS"></Coverage>
+					<Coverage COV_ID="193" Code="EBCCSI"></Coverage>
+					<Coverage COV_ID="195" Code="EBCCSF"></Coverage>
+					<Coverage COV_ID="58" Code="IBUSP"></Coverage>
+					<Coverage COV_ID="58" Code="IBUSPO"></Coverage>
+					<Coverage COV_ID="73" Code="EBICC53"></Coverage>
+					<Coverage COV_ID="189" Code="EBCCSM"></Coverage>
+					<Coverage COV_ID="86" Code="EBDUC"></Coverage>
+					<Coverage COV_ID="191" Code="ESCCSS"></Coverage>
+					<Coverage COV_ID="33" Code="EBRCPP"></Coverage>
+					<Coverage COV_ID="56" Code="EBEP11"></Coverage>
+					<!--Coverage COV_ID="907" Code="ECOC"></Coverage -->
+					<Coverage COV_ID="55" Code="EBP23"></Coverage>
+					<Coverage COV_ID="0" Code="HO100"></Coverage>
+					<Coverage COV_ID="0" Code="CF5"></Coverage><!-- Added by Charles on 28-Dec-09 for Itrack 6883 -->
+				</Coverages>
+			</Mandatory>
+			<Rule Action="Master" StartDate="1950-01-01" EndDate="3000-12-12">
+				<Conditions>
+					<Condition Operand1="1" Operator="==" Operand2="1" OperandType="Double">
+						<ToSet Key="$MIN_VAL" Value="$REP_COST"></ToSet>
+						<ToSet Key="$MAX_VAL" Value="$REP_COST"></ToSet>
+						<ToSet Key="$MULT_B" Value="0.1"></ToSet>
+						<ToSet Key="$MULT_C" Value="0.7"></ToSet>
+						<ToSet Key="$MULT_D" Value="0.3"></ToSet>
+						<ToSet Key="$ERR_TEMPLATE" Value="1"></ToSet>
+					</Condition>
+				</Conditions>
+			</Rule>
+			<BaseCoverage Code="DWELL" MinValue="$MIN_VAL" MaxValue="$MAX_VAL" Desc="Coverage A – Dwelling "></BaseCoverage>
+			<OnChange Code="DWELL">
+				<Target Code="OS" Operator="*" Operand="$MULT_B"></Target>
+				<Target Code="EBUSPP" Operator="*" Operand="$MULT_C"></Target>
+				<Target Code="LOSUR" Operator="*" Operand="$MULT_D"></Target>
+			</OnChange>
+			<ErrorMessage Template="1">
+				<Text Value="Coverage A - Dwelling for HO-5 Replacement must be equal to "></Text>
+				<Text Value="$REP_COST"></Text>
+				<Text Value=" . "></Text>
+			</ErrorMessage>
+			<ErrRequired Value="Please enter Coverage A"></ErrRequired>
+		</Product>
+		<Product ID="11405" Desc="HO-4 Tenant">
+			<Remove>
+				<Coverages>
+					<Coverage COV_ID="0" Code="EBEP11"></Coverage>
+					<Coverage COV_ID="0" Code="EBP25"></Coverage>
+					<Coverage COV_ID="0" Code="SEWER"></Coverage>
+					<Coverage COV_ID="0" Code="MIN##"></Coverage>
+					<Coverage COV_ID="0" Code="EBP23"></Coverage>
+					<Coverage COV_ID="0" Code="DWELL"></Coverage>
+					<Coverage COV_ID="0" Code="IFGHO"></Coverage>
+					<Coverage COV_ID="0" Code="EBCASP"></Coverage>
+					<Coverage COV_ID="0" Code="EBUNIT"></Coverage>
+					<Coverage COV_ID="0" Code="LAC"></Coverage>
+					<Coverage COV_ID="0" Code="EBDUC"></Coverage>
+					<Coverage COV_ID="0" Code="EBCDC"></Coverage>
+					<Coverage COV_ID="0" Code="REDUC"></Coverage>
+					<Coverage COV_ID="0" Code="RECST"></Coverage>
+					<Coverage COV_ID="56" Code="EBEP11"></Coverage>
+					<Coverage COV_ID="56" Code="ECOB"></Coverage>
+					<Coverage COV_ID="56" Code="ECOC"></Coverage>
+					<Coverage COV_ID="56" Code="CF5"></Coverage>
+					<Coverage COV_ID="56" Code="CUOF6"></Coverage>
+					<Coverage COV_ID="56" Code="CO100"></Coverage>
+					<Coverage COV_ID="56" Code="PFBF2"></Coverage>
+					<Coverage COV_ID="56" Code="PFSF3"></Coverage>
+					<!-- Added by Charles on 2-Dec-09 for Itrack 6647 -->
+					<Coverage COV_ID="0" Code="HO493"></Coverage>
+				</Coverages>
+			</Remove>
+			<Mandatory>
+				<Coverages>
+					<Coverage COV_ID="90" Code="EBAIRP"></Coverage>
+					<Coverage COV_ID="62" Code="EBOS40"></Coverage>
+					<Coverage COV_ID="69" Code="EBOS489"></Coverage>
+					<Coverage COV_ID="257" Code="EBSS490"></Coverage>
+					<Coverage COV_ID="0" Code="HO48"></Coverage><!-- Added by Charles on 4-Dec-09 for Itrack 6405 -->
+					<Coverage COV_ID="908" Code="OSTDISH"></Coverage>
+					<Coverage COV_ID="921" Code="CBF4"></Coverage>
+					<Coverage COV_ID="3" Code="DWELL"></Coverage>
+					<Coverage COV_ID="5" Code="OS"></Coverage>
+					<Coverage COV_ID="7" Code="EBUSPP"></Coverage>
+					<Coverage COV_ID="8" Code="LOSUR"></Coverage>
+					<Coverage COV_ID="10" Code="PL"></Coverage>
+					<Coverage COV_ID="13" Code="MEDPM"></Coverage>
+					<Coverage COV_ID="57" Code="EBIF96"></Coverage>
+					<Coverage COV_ID="" Code="EBOS48"></Coverage>
+					<Coverage COV_ID="74" Code="EBCCSL"></Coverage>
+					<Coverage COV_ID="" Code="EBCCSS"></Coverage>
+					<Coverage COV_ID="193" Code="EBCCSI"></Coverage>
+					<Coverage COV_ID="195" Code="EBCCSF"></Coverage>
+					<Coverage COV_ID="58" Code="IBUSP"></Coverage>
+					<Coverage COV_ID="58" Code="IBUSPO"></Coverage>
+					<Coverage COV_ID="73" Code="EBICC53"></Coverage>
+					<Coverage COV_ID="189" Code="EBCCSM"></Coverage>
+					<Coverage COV_ID="86" Code="EBDUC"></Coverage>
+					<Coverage COV_ID="191" Code="ESCCSS"></Coverage>
+					<Coverage COV_ID="79" Code="SEWER"></Coverage>
+					<Coverage COV_ID="0" Code="HO100"></Coverage>
+				</Coverages>
+			</Mandatory>
+			<Rule Action="Master" StartDate="1950-01-01" EndDate="3000-12-12">
+				<Conditions>					
+					<Condition Operand1="1" Operator="==" Operand2="1" OperandType="Double">
+						<ToSet Key="$MIN_VAL" Value="10000"></ToSet>
+						<ToSet Key="$MAX_VAL" Value="$REP_COST"></ToSet>
+						<ToSet Key="$MULT_D" Value="0.4"></ToSet>
+						<ToSet Key="$MULT_B" Value="0.1"></ToSet>
+						<ToSet Key="$ERR_TEMPLATE" Value="1"></ToSet>
+					</Condition>
+				</Conditions>
+				<Conditions>					
+					<Condition Operand1="$VERIFY_RULE" Operator="==" Operand2="N" OperandType="String">
+						<ToSet Key="$MIN_VAL" Value="$REP_COST"></ToSet>
+						<ToSet Key="$MAX_VAL" Value="$REP_COST"></ToSet>
+						<ToSet Key="$ERR_TEMPLATE" Value="2"></ToSet>
+					</Condition>
+				</Conditions>
+				<Conditions>
+					<Condition Operand1="$REP_COST" Operator="==" Operand2="10000" OperandType="Double">
+						<ToSet Key="$ERR_TEMPLATE" Value="2"></ToSet>
+					</Condition>
+				</Conditions>
+				
+			</Rule>
+			<BaseCoverage Code="EBUSPP" MinValue="$MIN_VAL" MaxValue="$MAX_VAL" Desc="Coverage C - Unscheduled Personal Property "></BaseCoverage>
+			<OnChange Code="EBUSPP">
+				<Target Code="LOSUR" Operator="*" Operand="$MULT_D"></Target>
+				<!-- Ravindra(03-27-07)  Limit of Coverage B not applicable in Ho-4 & HP-6 -->
+				<!--<Target Code="OS" Operator="*" Operand="$MULT_B"></Target> -->
+			</OnChange>
+			<BaseCoverage Code="EBUSPP"></BaseCoverage>
+			<ErrorMessage Template="1">
+				<Text Value="Coverage C - Contents Insurance Amount for HO-4 must be between "></Text>
+				<Text Value="$MIN_VAL"></Text>
+				<Text Value=" and "></Text>
+				<Text Value="$MAX_VAL"></Text>
+				<Text Value=" . "></Text>
+			</ErrorMessage>
+			<ErrorMessage Template="2">
+				<Text Value="Coverage C - Contents Insurance Amount for HO-4 must be equal to "></Text>
+				<Text Value="$MIN_VAL"></Text>
+				<Text Value=" . "></Text>
+			</ErrorMessage>
+			<ErrRequired Value="Please enter Coverage C"></ErrRequired>
+		</Product>
+		<Product ID="11400" Desc="HO-3 Replacement">
+			<Remove>
+				<Coverages>
+					<Coverage COV_ID="0" Code="EBNBPL"></Coverage>
+					<Coverage COV_ID="0" Code="Woods"></Coverage>
+					<Coverage COV_ID="0" Code="EBP25"></Coverage>
+					<Coverage COV_ID="0" Code="EBOS48"></Coverage>
+					<Coverage COV_ID="0" Code="EBPPC"></Coverage>
+					<Coverage COV_ID="0" Code="EBALEXP"></Coverage>
+					<Coverage COV_ID="0" Code="EBCASP"></Coverage>
+					<Coverage COV_ID="0" Code="EBUNIT"></Coverage>
+					<Coverage COV_ID="0" Code="LAC"></Coverage>
+					<Coverage COV_ID="0" Code="EBBAA"></Coverage>
+					<Coverage COV_ID="0" Code="EBMC"></Coverage>
+					<Coverage COV_ID="0" Code="RECST"></Coverage>
+					<Coverage COV_ID="0" Code="MIN##"></Coverage>
+					<Coverage COV_ID="0" Code="EBRDC"></Coverage>
+					<Coverage COV_ID="0" Code="EBCDC"></Coverage>
+					<Coverage COV_ID="56" Code="ECOB"></Coverage>
+					<Coverage COV_ID="56" Code="ECOC"></Coverage>
+					<Coverage COV_ID="56" Code="CBF4"></Coverage>
+					<Coverage COV_ID="56" Code="CF5"></Coverage>
+					<Coverage COV_ID="56" Code="CUOF6"></Coverage>
+					<Coverage COV_ID="56" Code="CO100"></Coverage>
+					<Coverage COV_ID="56" Code="PFBF2"></Coverage>
+				</Coverages>
+			</Remove>
+			<Mandatory>
+				<Coverages>
+					<Coverage COV_ID="90" Code="EBAIRP"></Coverage>
+					<Coverage COV_ID="62" Code="EBOS40"></Coverage>
+					<Coverage COV_ID="69" Code="EBOS489"></Coverage>
+					<Coverage COV_ID="257" Code="EBSS490"></Coverage>
+					<Coverage COV_ID="0" Code="HO48"></Coverage><!-- Added by Charles on 4-Dec-09 for Itrack 6405 -->
+					<Coverage COV_ID="908" Code="OSTDISH"></Coverage>
+					<Coverage COV_ID="3" Code="DWELL"></Coverage>
+					<Coverage COV_ID="5" Code="OS"></Coverage>
+					<Coverage COV_ID="7" Code="EBUSPP"></Coverage>
+					<Coverage COV_ID="8" Code="LOSUR"></Coverage>
+					<Coverage COV_ID="10" Code="PL"></Coverage>
+					<Coverage COV_ID="13" Code="MEDPM"></Coverage>
+					<Coverage COV_ID="57" Code="EBIF96"></Coverage>
+					<Coverage COV_ID="" Code="EBOS48"></Coverage>
+					<Coverage COV_ID="74" Code="EBCCSL"></Coverage>
+					<Coverage COV_ID="" Code="EBCCSS"></Coverage>
+					<Coverage COV_ID="193" Code="EBCCSI"></Coverage>
+					<Coverage COV_ID="195" Code="EBCCSF"></Coverage>
+					<Coverage COV_ID="58" Code="IBUSP"></Coverage>
+					<Coverage COV_ID="58" Code="IBUSPO"></Coverage>
+					<Coverage COV_ID="73" Code="EBICC53"></Coverage>
+					<Coverage COV_ID="189" Code="EBCCSM"></Coverage>
+					<Coverage COV_ID="86" Code="EBDUC"></Coverage>
+					<Coverage COV_ID="191" Code="ESCCSS"></Coverage>
+					<Coverage COV_ID="0" Code="HO100"></Coverage>
+				</Coverages>
+			</Mandatory>
+			<Rule Action="Master" StartDate="1950-01-01" EndDate="3000-12-12">
+				<Conditions>
+					<Condition Operand1="1" Operator="==" Operand2="1" OperandType="Double">
+						<ToSet Key="$PER_REP_COST" Value="" Operand1="$REP_COST" Operator="*" Operand2="0.8"></ToSet>
+						<ToSet Key="$MIN_VAL" Value="$PER_REP_COST"></ToSet>
+						<ToSet Key="$MAX_VAL" Value="$REP_COST"></ToSet>
+						<ToSet Key="$MULT_B" Value="0.1"></ToSet>
+						<ToSet Key="$MULT_D" Value="0.3"></ToSet>
+						<ToSet Key="$ERR_TEMPLATE" Value="1"></ToSet>
+					</Condition>
+				</Conditions>
+				<Conditions>
+					<Condition Operand1="$MIN_VAL" Operator="&lt;" Operand2="50000" OperandType="Double">
+						<ToSet Key="$MIN_VAL" Value="50000"></ToSet>
+						<ToSet Key="$ERR_TEMPLATE" Value="2"></ToSet>
+					</Condition>
+				</Conditions>
+				<Conditions>
+				<Condition Operand1="$VERIFY_RULE" Operator="==" Operand2="N" OperandType="String">
+						<ToSet Key="$MIN_VAL" Value="$PER_REP_COST"></ToSet>
+						<ToSet Key="$MAX_VAL" Value="$REP_COST"></ToSet>
+						<ToSet Key="$ERR_TEMPLATE" Value="1"></ToSet>
+				</Condition>
+				</Conditions>				
+				<Conditions>
+					<Condition Operand1="$HO_34" Operator="!=" Operand2="0" OperandType="Double">
+						<ToSet Key="$MULT_C" Value="0.7"></ToSet>
+					</Condition>
+					<Condition Operand1="$HO_34" Operator="==" Operand2="0" OperandType="Double">
+						<ToSet Key="$MULT_C" Value="0.5"></ToSet>
+					</Condition>
+				</Conditions>
+			</Rule>
+			<BaseCoverage Code="DWELL" MinValue="$MIN_VAL" MaxValue="$MAX_VAL" Desc="Coverage A – Dwelling "></BaseCoverage>
+			<OnChange Code="DWELL">
+				<Target Code="OS" Operator="*" Operand="$MULT_B"></Target>
+				<Target Code="EBUSPP" Operator="*" Operand="$MULT_C" ExternalDependency="True"></Target>
+				<Target Code="LOSUR" Operator="*" Operand="$MULT_D"></Target>
+			</OnChange>
+			<OnClick Code="EBRCPP">
+				<Checked>
+					<VarSet Varialbe="globalMultiplier" Value="0.7"></VarSet>
+					<ToCall Function="OnCoverageChange();"></ToCall>
+				</Checked>
+				<Unchecked>
+					<VarSet Varialbe="globalMultiplier" Value="0.5"></VarSet>
+					<ToCall Function="OnCoverageChange();"></ToCall>
+				</Unchecked>
+			</OnClick>
+			<ErrorMessage Template="1">
+				<Text Value="Coverage A - Dwelling for HO-3 Replacement must be between "></Text>
+				<Text Value="$MIN_VAL"></Text>
+				<Text Value=" and "></Text>
+				<Text Value="$MAX_VAL"></Text>
+				<Text Value=" . "></Text>
+			</ErrorMessage>
+			<ErrorMessage Template="2">
+				<Text Value="Coverage A - Dwelling for HO-3 Replacement must be equal to "></Text>
+				<Text Value="$MIN_VAL"></Text>
+				<Text Value=" . "></Text>
+			</ErrorMessage>
+			<ErrRequired Value="Please enter Coverage A"></ErrRequired>
+		</Product>
+		<Product ID="11409" Desc="HO-3 Premier">
+			<Remove>
+				<Coverages>
+					<Coverage COV_ID="0" Code="LAC"></Coverage>
+					<Coverage COV_ID="0" Code="MIN##"></Coverage>
+					<Coverage COV_ID="0" Code="EBMC"></Coverage>
+					<Coverage COV_ID="0" Code="EBNBPL"></Coverage>
+					<Coverage COV_ID="0" Code="RECST"></Coverage>
+					<Coverage COV_ID="0" Code="EBUNIT"></Coverage>
+					<Coverage COV_ID="0" Code="woods"></Coverage>
+					<Coverage COV_ID="0" Code="EBP21"></Coverage>
+					<Coverage COV_ID="0" Code="EBP23"></Coverage>
+					<Coverage COV_ID="0" Code="EBCASP"></Coverage>
+					<Coverage COV_ID="0" Code="EBBAA"></Coverage>
+					<Coverage COV_ID="0" Code="LAC"></Coverage>
+					<Coverage COV_ID="0" Code="EBRDC"></Coverage>
+					<Coverage COV_ID="0" Code="EBCDC"></Coverage>
+					<Coverage COV_ID="56" Code="ECOB"></Coverage>
+					<Coverage COV_ID="56" Code="ECOC"></Coverage>
+					<Coverage COV_ID="56" Code="CBF4"></Coverage>
+					<Coverage COV_ID="56" Code="CF5"></Coverage>
+					<Coverage COV_ID="56" Code="CUOF6"></Coverage>
+					<Coverage COV_ID="56" Code="CO100"></Coverage>
+					<Coverage COV_ID="56" Code="PFBF2"></Coverage>
+				</Coverages>
+			</Remove>
+			<Mandatory>
+				<Coverages>
+					<Coverage COV_ID="90" Code="EBAIRP"></Coverage>
+					<Coverage COV_ID="62" Code="EBOS40"></Coverage>
+					<Coverage COV_ID="69" Code="EBOS489"></Coverage>
+					<Coverage COV_ID="257" Code="EBSS490"></Coverage>
+					<Coverage COV_ID="0" Code="HO48"></Coverage><!-- Added by Charles on 4-Dec-09 for Itrack 6405 -->
+					<Coverage COV_ID="908" Code="OSTDISH"></Coverage>
+					<Coverage COV_ID="3" Code="DWELL"></Coverage>
+					<Coverage COV_ID="5" Code="OS"></Coverage>
+					<Coverage COV_ID="7" Code="EBUSPP"></Coverage>
+					<Coverage COV_ID="8" Code="LOSUR"></Coverage>
+					<Coverage COV_ID="10" Code="PL"></Coverage>
+					<Coverage COV_ID="13" Code="MEDPM"></Coverage>
+					<Coverage COV_ID="57" Code="EBIF96"></Coverage>
+					<Coverage COV_ID="" Code="EBOS48"></Coverage>
+					<Coverage COV_ID="74" Code="EBCCSL"></Coverage>
+					<Coverage COV_ID="" Code="EBCCSS"></Coverage>
+					<Coverage COV_ID="193" Code="EBCCSI"></Coverage>
+					<Coverage COV_ID="195" Code="EBCCSF"></Coverage>
+					<Coverage COV_ID="58" Code="IBUSP"></Coverage>
+					<Coverage COV_ID="58" Code="IBUSPO"></Coverage>
+					<Coverage COV_ID="73" Code="EBICC53"></Coverage>
+					<Coverage COV_ID="189" Code="EBCCSM"></Coverage>
+					<Coverage COV_ID="86" Code="EBDUC"></Coverage>
+					<Coverage COV_ID="191" Code="ESCCSS"></Coverage>
+					<Coverage COV_ID="0" Code="HO100"></Coverage>
+				</Coverages>
+			</Mandatory>
+			<Rule Action="Master" StartDate="1950-01-01" EndDate="3000-12-12">
+				<Conditions>
+					<Condition Operand1="1" Operator="==" Operand2="1" OperandType="Double">
+						<ToSet Key="$MIN_VAL" Value="$REP_COST"></ToSet>
+						<ToSet Key="$MAX_VAL" Value="$REP_COST"></ToSet>
+						<ToSet Key="$MULT_B" Value="0.1"></ToSet>
+						<ToSet Key="$MULT_D" Value="0.3"></ToSet>
+						<ToSet Key="$ERR_TEMPLATE" Value="1"></ToSet>
+					</Condition>
+				</Conditions>
+				<Conditions>
+					<Condition Operand1="$HO_34" Operator="!=" Operand2="0" OperandType="Double">
+						<ToSet Key="$MULT_C" Value="0.7"></ToSet>
+					</Condition>
+					<Condition Operand1="$HO_34" Operator="==" Operand2="0" OperandType="Double">
+						<ToSet Key="$MULT_C" Value="0.5"></ToSet>
+					</Condition>
+				</Conditions>
+			</Rule>
+			<BaseCoverage Code="DWELL" MinValue="$MIN_VAL" MaxValue="$MAX_VAL" Desc="Coverage A – Dwelling "></BaseCoverage>
+			<OnChange Code="DWELL">
+				<Target Code="OS" Operator="*" Operand="$MULT_B"></Target>
+				<Target Code="EBUSPP" Operator="*" Operand="$MULT_C" ExternalDependency="True"></Target>
+				<Target Code="LOSUR" Operator="*" Operand="$MULT_D"></Target>
+			</OnChange>
+			<OnClick Code="EBRCPP">
+				<Checked>
+					<VarSet Varialbe="globalMultiplier" Value="0.7"></VarSet>
+					<ToCall Function="OnCoverageChange();"></ToCall>
+				</Checked>
+				<Unchecked>
+					<VarSet Varialbe="globalMultiplier" Value="0.5"></VarSet>
+					<ToCall Function="OnCoverageChange();"></ToCall>
+				</Unchecked>
+			</OnClick>
+			<ErrorMessage Template="1">
+				<Text Value="Coverage A - Dwelling for HO-3 Premier must be equal to "></Text>
+				<Text Value="$REP_COST"></Text>
+				<Text Value=" . "></Text>
+			</ErrorMessage>
+			<ErrRequired Value="Please enter Coverage A"></ErrRequired>
+		</Product>
+		<Product ID="11404" Desc="HO-3 Repair Cost">
+			<Remove>
+				<Coverages>
+					<Coverage COV_ID="0" Code="EBP23"></Coverage>
+					<Coverage COV_ID="0" Code="EBEP11"></Coverage>
+					<Coverage COV_ID="0" Code="EBCASP"></Coverage>
+					<Coverage COV_ID="0" Code="EBUNIT"></Coverage>
+					<Coverage COV_ID="0" Code="EBBAA"></Coverage>
+					<Coverage COV_ID="0" Code="EBP25"></Coverage>
+					<Coverage COV_ID="0" Code="LAC"></Coverage>
+					<Coverage COV_ID="0" Code="EBRDC"></Coverage>
+					<Coverage COV_ID="0" Code="EBCDC"></Coverage>
+					<Coverage COV_ID="56" Code="EBEP11"></Coverage>
+					<Coverage COV_ID="56" Code="ECOB"></Coverage>
+					<Coverage COV_ID="56" Code="ECOC"></Coverage>
+					<Coverage COV_ID="56" Code="CBF4"></Coverage>
+					<Coverage COV_ID="56" Code="CF5"></Coverage>
+					<Coverage COV_ID="56" Code="CUOF6"></Coverage>
+					<Coverage COV_ID="56" Code="CO100"></Coverage>
+					<Coverage COV_ID="56" Code="PFBF2"></Coverage>
+				</Coverages>
+			</Remove>
+			<Mandatory>
+				<Coverages>
+					<Coverage COV_ID="90" Code="EBAIRP"></Coverage>
+					<Coverage COV_ID="62" Code="EBOS40"></Coverage>
+					<Coverage COV_ID="69" Code="EBOS489"></Coverage>
+					<Coverage COV_ID="257" Code="EBSS490"></Coverage>
+					<Coverage COV_ID="0" Code="HO48"></Coverage><!-- Added by Charles on 4-Dec-09 for Itrack 6405 -->
+					<Coverage COV_ID="908" Code="OSTDISH"></Coverage>
+					<Coverage COV_ID="3" Code="DWELL"></Coverage>
+					<Coverage COV_ID="5" Code="OS"></Coverage>
+					<Coverage COV_ID="7" Code="EBUSPP"></Coverage>
+					<Coverage COV_ID="8" Code="LOSUR"></Coverage>
+					<Coverage COV_ID="10" Code="PL"></Coverage>
+					<Coverage COV_ID="13" Code="MEDPM"></Coverage>
+					<Coverage COV_ID="57" Code="EBIF96"></Coverage>
+					<Coverage COV_ID="" Code="EBOS48"></Coverage>
+					<Coverage COV_ID="74" Code="EBCCSL"></Coverage>
+					<Coverage COV_ID="" Code="EBCCSS"></Coverage>
+					<Coverage COV_ID="193" Code="EBCCSI"></Coverage>
+					<Coverage COV_ID="195" Code="EBCCSF"></Coverage>
+					<Coverage COV_ID="58" Code="IBUSP"></Coverage>
+					<Coverage COV_ID="58" Code="IBUSPO"></Coverage>
+					<Coverage COV_ID="73" Code="EBICC53"></Coverage>
+					<Coverage COV_ID="189" Code="EBCCSM"></Coverage>
+					<Coverage COV_ID="86" Code="EBDUC"></Coverage>
+					<Coverage COV_ID="95" Code="RECST"></Coverage>
+					<Coverage COV_ID="191" Code="ESCCSS"></Coverage>
+					<Coverage COV_ID="0" Code="HO100"></Coverage>
+				</Coverages>
+			</Mandatory>
+			<Rule Action="Master" StartDate="1950-01-01" EndDate="3000-12-12">
+				<Conditions>
+					<Condition Operand1="$MKT_VALUE" Operator="&lt;" Operand2="50000" OperandType="Double">
+						<ToSet Key="$MIN_VAL" Value="50000"></ToSet>
+						<ToSet Key="$MAX_VAL" Value="50000"></ToSet>
+						<ToSet Key="$MULT_B" Value="0.1"></ToSet>
+						<ToSet Key="$MULT_D" Value="0.3"></ToSet>
+						<ToSet Key="$ERR_TEMPLATE" Value="1"></ToSet>
+					</Condition>
+					<Condition Operand1="$MKT_VALUE" Operator=">=" Operand2="50000" OperandType="Double">
+						<ToSet Key="$MIN_VAL" Value="$MKT_VALUE"></ToSet>
+						<ToSet Key="$MAX_VAL" Value="$MKT_VALUE"></ToSet>
+						<ToSet Key="$MULT_B" Value="0.1"></ToSet>
+						<ToSet Key="$MULT_D" Value="0.3"></ToSet>
+						<ToSet Key="$ERR_TEMPLATE" Value="1"></ToSet>
+					</Condition>
+				</Conditions>
+				<Conditions>
+					<Condition Operand1="$HO_34" Operator="!=" Operand2="0" OperandType="Double">
+						<ToSet Key="$MULT_C" Value="0.7"></ToSet>
+					</Condition>
+					<Condition Operand1="$HO_34" Operator="==" Operand2="0" OperandType="Double">
+						<ToSet Key="$MULT_C" Value="0.5"></ToSet>
+					</Condition>
+				</Conditions>
+			</Rule>
+			<BaseCoverage Code="DWELL" MinValue="$MIN_VAL" MaxValue="$MAX_VAL" Desc="Coverage A – Dwelling "></BaseCoverage>
+			<OnChange Code="DWELL">
+				<Target Code="OS" Operator="*" Operand="$MULT_B"></Target>
+				<Target Code="EBUSPP" Operator="*" Operand="$MULT_C" ExternalDependency="True"></Target>
+				<Target Code="LOSUR" Operator="*" Operand="$MULT_D"></Target>
+			</OnChange>
+			<OnClick Code="EBRCPP">
+				<Checked>
+					<VarSet Varialbe="globalMultiplier" Value="0.7"></VarSet>
+					<ToCall Function="OnCoverageChange();"></ToCall>
+				</Checked>
+				<Unchecked>
+					<VarSet Varialbe="globalMultiplier" Value="0.5"></VarSet>
+					<ToCall Function="OnCoverageChange();"></ToCall>
+				</Unchecked>
+			</OnClick>
+			<ErrorMessage Template="1">
+				<Text Value="Coverage A - Dwelling for HO-3 Repair Cost must be equal to "></Text>
+				<Text Value="$MIN_VAL"></Text>
+				<Text Value=" . "></Text>
+			</ErrorMessage>
+			<ErrRequired Value="Please enter Coverage A"></ErrRequired>
+		</Product>
+		<Product ID="11402" Desc="HO-2 Replacement">
+			<Remove>
+				<Coverages>
+					<Coverage COV_ID="0" Code="EBNBPL"></Coverage>
+					<Coverage COV_ID="0" Code="Woods"></Coverage>
+					<Coverage COV_ID="0" Code="EBP23"></Coverage>
+					<Coverage COV_ID="0" Code="EBOS48"></Coverage>
+					<Coverage COV_ID="0" Code="EBPPC"></Coverage>
+					<Coverage COV_ID="0" Code="EBALEXP"></Coverage>
+					<Coverage COV_ID="0" Code="EBCASP"></Coverage>
+					<Coverage COV_ID="0" Code="EBUNIT"></Coverage>
+					<Coverage COV_ID="0" Code="LAC"></Coverage>
+					<Coverage COV_ID="0" Code="EBBAA"></Coverage>
+					<Coverage COV_ID="0" Code="EBRDC"></Coverage>
+					<Coverage COV_ID="0" Code="EBCDC"></Coverage>
+					<Coverage COV_ID="0" Code="EBMC"></Coverage>
+					<Coverage COV_ID="0" Code="RECST"></Coverage>
+					<Coverage COV_ID="0" Code="EBP25"></Coverage>
+					<Coverage COV_ID="0" Code="MIN##"></Coverage>
+					<Coverage COV_ID="0" Code="EBRDC"></Coverage>
+					<Coverage COV_ID="0" Code="EBCDC"></Coverage>
+					<Coverage COV_ID="56" Code="EBEP11"></Coverage>
+					<Coverage COV_ID="56" Code="ECOB"></Coverage>
+					<Coverage COV_ID="56" Code="ECOC"></Coverage>
+					<Coverage COV_ID="56" Code="CBF4"></Coverage>
+					<Coverage COV_ID="56" Code="CF5"></Coverage>
+					<Coverage COV_ID="56" Code="CUOF6"></Coverage>
+					<Coverage COV_ID="56" Code="CO100"></Coverage>
+					<Coverage COV_ID="56" Code="PFSF3"></Coverage>
+				</Coverages>
+			</Remove>
+			<Mandatory>
+				<Coverages>
+					<Coverage COV_ID="90" Code="EBAIRP"></Coverage>
+					<Coverage COV_ID="62" Code="EBOS40"></Coverage>
+					<Coverage COV_ID="69" Code="EBOS489"></Coverage>
+					<Coverage COV_ID="257" Code="EBSS490"></Coverage>
+					<Coverage COV_ID="0" Code="HO48"></Coverage><!-- Added by Charles on 4-Dec-09 for Itrack 6405 -->
+					<Coverage COV_ID="908" Code="OSTDISH"></Coverage>
+					<Coverage COV_ID="3" Code="DWELL"></Coverage>
+					<Coverage COV_ID="5" Code="OS"></Coverage>
+					<Coverage COV_ID="7" Code="EBUSPP"></Coverage>
+					<Coverage COV_ID="8" Code="LOSUR"></Coverage>
+					<Coverage COV_ID="10" Code="PL"></Coverage>
+					<Coverage COV_ID="13" Code="MEDPM"></Coverage>
+					<Coverage COV_ID="57" Code="EBIF96"></Coverage>
+					<Coverage COV_ID="" Code="EBOS48"></Coverage>
+					<Coverage COV_ID="74" Code="EBCCSL"></Coverage>
+					<Coverage COV_ID="" Code="EBCCSS"></Coverage>
+					<Coverage COV_ID="193" Code="EBCCSI"></Coverage>
+					<Coverage COV_ID="195" Code="EBCCSF"></Coverage>
+					<Coverage COV_ID="58" Code="IBUSP"></Coverage>
+					<Coverage COV_ID="58" Code="IBUSPO"></Coverage>
+					<Coverage COV_ID="73" Code="EBICC53"></Coverage>
+					<Coverage COV_ID="189" Code="EBCCSM"></Coverage>
+					<Coverage COV_ID="86" Code="EBDUC"></Coverage>
+					<Coverage COV_ID="191" Code="ESCCSS"></Coverage>
+					<Coverage COV_ID="0" Code="HO100"></Coverage>
+				</Coverages>
+			</Mandatory>
+			<Rule Action="Master" StartDate="1950-01-01" EndDate="3000-12-12">
+				<Conditions>
+					<Condition Operand1="1" Operator="==" Operand2="1" OperandType="Double">
+						<ToSet Key="$PER_REP_COST" Value="" Operand1="$REP_COST" Operator="*" Operand2="0.8"></ToSet>
+						<ToSet Key="$MIN_VAL" Value="$PER_REP_COST"></ToSet>
+						<ToSet Key="$MAX_VAL" Value="$REP_COST"></ToSet>
+						<ToSet Key="$MULT_B" Value="0.1"></ToSet>
+						<ToSet Key="$MULT_D" Value="0.3"></ToSet>
+						<ToSet Key="$ERR_TEMPLATE" Value="1"></ToSet>
+					</Condition>
+				</Conditions>
+				<Conditions>
+					<Condition Operand1="$VERIFY_RULE" Operator="==" Operand2="N" OperandType="String">
+						<ToSet Key="$ERR_TEMPLATE" Value="1"></ToSet>
+						<ToSet Key="$MIN_VAL" Value="$PER_REP_COST"></ToSet>
+						<ToSet Key="$MAX_VAL" Value="$REP_COST"></ToSet>
+					</Condition>
+					<Condition Operand1="$MIN_VAL" Operator="&lt;" Operand2="35000" OperandType="Double">
+						<ToSet Key="$MIN_VAL" Value="35000"></ToSet>
+						<ToSet Key="$ERR_TEMPLATE" Value="1"></ToSet>
+					</Condition>
+				</Conditions>
+				<Conditions>
+					<Condition Operand1="$HO_34" Operator="!=" Operand2="0" OperandType="Double">
+						<ToSet Key="$MULT_C" Value="0.7"></ToSet>
+					</Condition>
+					<Condition Operand1="$HO_34" Operator="==" Operand2="0" OperandType="Double">
+						<ToSet Key="$MULT_C" Value="0.5"></ToSet>
+					</Condition>
+				</Conditions>
+			</Rule>
+			<BaseCoverage Code="DWELL" MinValue="$MIN_VAL" MaxValue="$MAX_VAL" Desc="Coverage A – Dwelling "></BaseCoverage>
+			<OnChange Code="DWELL">
+				<Target Code="OS" Operator="*" Operand="$MULT_B"></Target>
+				<Target Code="EBUSPP" Operator="*" Operand="$MULT_C" ExternalDependency="True"></Target>
+				<Target Code="LOSUR" Operator="*" Operand="$MULT_D"></Target>
+			</OnChange>
+			<OnClick Code="EBRCPP">
+				<Checked>
+					<VarSet Varialbe="globalMultiplier" Value="0.7"></VarSet>
+					<ToCall Function="OnCoverageChange();"></ToCall>
+				</Checked>
+				<Unchecked>
+					<VarSet Varialbe="globalMultiplier" Value="0.5"></VarSet>
+					<ToCall Function="OnCoverageChange();"></ToCall>
+				</Unchecked>
+			</OnClick>
+			<ErrorMessage Template="1">
+				<Text Value="Coverage A - Dwelling for HO-2 Replacement must be between "></Text>
+				<Text Value="$MIN_VAL"></Text>
+				<Text Value=" and "></Text>
+				<Text Value="$MAX_VAL"></Text>
+				<Text Value=" . "></Text>
+			</ErrorMessage>
+			<ErrorMessage Template="2">
+				<Text Value="Coverage A - Dwelling for HO-2 Replacement must be equal to "></Text>
+				<Text Value="$MIN_VAL"></Text>
+				<Text Value=" . "></Text>
+			</ErrorMessage>
+			<ErrRequired Value="Please enter Coverage A"></ErrRequired>
+		</Product>
+		<Product ID="11403" Desc="HO-2 Repair Cost">
+			<Remove>
+				<Coverages>
+					<Coverage COV_ID="0" Code="EBP23"></Coverage>
+					<Coverage COV_ID="0" Code="EBCASP"></Coverage>
+					<Coverage COV_ID="0" Code="EBUNIT"></Coverage>
+					<Coverage COV_ID="0" Code="EBBAA"></Coverage>
+					<Coverage COV_ID="0" Code="EBP25"></Coverage>
+					<Coverage COV_ID="0" Code="LAC"></Coverage>
+					<Coverage COV_ID="0" Code="EBRDC"></Coverage>
+					<Coverage COV_ID="0" Code="EBCDC"></Coverage>
+					<Coverage COV_ID="56" Code="EBEP11"></Coverage>
+					<Coverage COV_ID="56" Code="ECOB"></Coverage>
+					<Coverage COV_ID="56" Code="ECOC"></Coverage>
+					<Coverage COV_ID="56" Code="CBF4"></Coverage>
+					<Coverage COV_ID="56" Code="CF5"></Coverage>
+					<Coverage COV_ID="56" Code="CUOF6"></Coverage>
+					<Coverage COV_ID="56" Code="CO100"></Coverage>
+					<Coverage COV_ID="56" Code="PFSF3"></Coverage>
+				</Coverages>
+			</Remove>
+			<Mandatory>
+				<Coverages>
+					<Coverage COV_ID="90" Code="EBAIRP"></Coverage>
+					<Coverage COV_ID="62" Code="EBOS40"></Coverage>
+					<Coverage COV_ID="69" Code="EBOS489"></Coverage>
+					<Coverage COV_ID="257" Code="EBSS490"></Coverage>
+					<Coverage COV_ID="0" Code="HO48"></Coverage><!-- Added by Charles on 4-Dec-09 for Itrack 6405 -->
+					<Coverage COV_ID="908" Code="OSTDISH"></Coverage>
+					<Coverage COV_ID="3" Code="DWELL"></Coverage>
+					<Coverage COV_ID="5" Code="OS"></Coverage>
+					<Coverage COV_ID="7" Code="EBUSPP"></Coverage>
+					<Coverage COV_ID="8" Code="LOSUR"></Coverage>
+					<Coverage COV_ID="10" Code="PL"></Coverage>
+					<Coverage COV_ID="13" Code="MEDPM"></Coverage>
+					<Coverage COV_ID="57" Code="EBIF96"></Coverage>
+					<Coverage COV_ID="" Code="EBOS48"></Coverage>
+					<Coverage COV_ID="74" Code="EBCCSL"></Coverage>
+					<Coverage COV_ID="" Code="EBCCSS"></Coverage>
+					<Coverage COV_ID="193" Code="EBCCSI"></Coverage>
+					<Coverage COV_ID="195" Code="EBCCSF"></Coverage>
+					<Coverage COV_ID="58" Code="IBUSP"></Coverage>
+					<Coverage COV_ID="58" Code="IBUSPO"></Coverage>
+					<Coverage COV_ID="73" Code="EBICC53"></Coverage>
+					<Coverage COV_ID="189" Code="EBCCSM"></Coverage>
+					<Coverage COV_ID="86" Code="EBDUC"></Coverage>
+					<Coverage COV_ID="95" Code="RECST"></Coverage>
+					<Coverage COV_ID="910" Code="BUMC"></Coverage>
+					<Coverage COV_ID="191" Code="ESCCSS"></Coverage>
+					<Coverage COV_ID="0" Code="HO100"></Coverage>
+				</Coverages>
+			</Mandatory>
+			<Rule Action="Master" StartDate="1950-01-01" EndDate="3000-12-12">
+				<Conditions>					
+					<Condition Operand1="$MKT_VALUE" Operator="&lt;" Operand2="15000" OperandType="Double">
+						<ToSet Key="$MIN_VAL" Value="15000"></ToSet>
+						<ToSet Key="$MAX_VAL" Value="15000"></ToSet>
+						<ToSet Key="$MULT_B" Value="0.1"></ToSet>
+						<ToSet Key="$MULT_D" Value="0.3"></ToSet>
+						<ToSet Key="$ERR_TEMPLATE" Value="1"></ToSet>
+					</Condition>					
+					<Condition Operand1="$MKT_VALUE" Operator=">=" Operand2="15000" OperandType="Double">
+						<ToSet Key="$MIN_VAL" Value="$MKT_VALUE"></ToSet>
+						<ToSet Key="$MAX_VAL" Value="$MKT_VALUE"></ToSet>
+						<ToSet Key="$MULT_B" Value="0.1"></ToSet>
+						<ToSet Key="$MULT_D" Value="0.3"></ToSet>
+						<ToSet Key="$ERR_TEMPLATE" Value="1"></ToSet>
+					</Condition>
+				</Conditions>
+				<Conditions>
+					<Condition Operand1="$HO_34" Operator="!=" Operand2="0" OperandType="Double">
+						<ToSet Key="$MULT_C" Value="0.7"></ToSet>
+					</Condition>
+					<Condition Operand1="$HO_34" Operator="==" Operand2="0" OperandType="Double">
+						<ToSet Key="$MULT_C" Value="0.5"></ToSet>
+					</Condition>
+				</Conditions>
+			</Rule>
+			<BaseCoverage Code="DWELL" MinValue="$MIN_VAL" MaxValue="$MAX_VAL" Desc="Coverage A – Dwelling "></BaseCoverage>
+			<OnChange Code="DWELL">
+				<Target Code="OS" Operator="*" Operand="$MULT_B"></Target>
+				<Target Code="EBUSPP" Operator="*" Operand="$MULT_C" ExternalDependency="True"></Target>
+				<Target Code="LOSUR" Operator="*" Operand="$MULT_D"></Target>
+			</OnChange>
+			<OnClick Code="EBRCPP">
+				<Checked>
+					<VarSet Varialbe="globalMultiplier" Value="0.7"></VarSet>
+					<ToCall Function="OnCoverageChange();"></ToCall>
+				</Checked>
+				<Unchecked>
+					<VarSet Varialbe="globalMultiplier" Value="0.5"></VarSet>
+					<ToCall Function="OnCoverageChange();"></ToCall>
+				</Unchecked>
+			</OnClick>
+			<ErrorMessage Template="1">
+				<Text Value="Coverage A - Dwelling for HO-2 Repair Cost must be equal to "></Text>
+				<Text Value="$MIN_VAL"></Text>
+				<Text Value=" . "></Text>
+			</ErrorMessage>
+			<ErrRequired Value="Please enter Coverage A"></ErrRequired>
+		</Product>
+		<Product ID="11407" Desc="HO-4 Deluxe">
+			<Remove>
+				<Coverages>
+					<Coverage COV_ID="0" Code="EBP25"></Coverage>
+					<Coverage COV_ID="0" Code="EBEP11"></Coverage>
+					<Coverage COV_ID="0" Code="SEWER"></Coverage>
+					<Coverage COV_ID="0" Code="MIN##"></Coverage>
+					<Coverage COV_ID="0" Code="EBCASP"></Coverage>
+					<Coverage COV_ID="0" Code="EBUNIT"></Coverage>
+					<Coverage COV_ID="0" Code="DWELL"></Coverage>
+					<Coverage COV_ID="0" Code="IFGHO"></Coverage>
+					<Coverage COV_ID="0" Code="EBP23"></Coverage>
+					<Coverage COV_ID="0" Code="LAC"></Coverage>
+					<Coverage COV_ID="0" Code="EBDUC"></Coverage>
+					<Coverage COV_ID="0" Code="EBCDC"></Coverage>
+					<Coverage COV_ID="0" Code="REDUC"></Coverage>
+					<Coverage COV_ID="0" Code="RECST"></Coverage>
+					<!-- Added by Charles on 2-Dec-09 for Itrack 6647 -->
+					<Coverage COV_ID="0" Code="HO493"></Coverage>
+				</Coverages>
+			</Remove>
+			<Mandatory>
+				<Coverages>
+					<Coverage COV_ID="90" Code="EBAIRP"></Coverage>
+					<Coverage COV_ID="62" Code="EBOS40"></Coverage>
+					<Coverage COV_ID="69" Code="EBOS489"></Coverage>
+					<Coverage COV_ID="257" Code="EBSS490"></Coverage>
+					<Coverage COV_ID="0" Code="HO48"></Coverage><!-- Added by Charles on 4-Dec-09 for Itrack 6405 -->
+					<Coverage COV_ID="908" Code="OSTDISH"></Coverage>
+					<Coverage COV_ID="3" Code="DWELL"></Coverage>
+					<Coverage COV_ID="5" Code="OS"></Coverage>
+					<Coverage COV_ID="7" Code="EBUSPP"></Coverage>
+					<Coverage COV_ID="8" Code="LOSUR"></Coverage>
+					<Coverage COV_ID="10" Code="PL"></Coverage>
+					<Coverage COV_ID="13" Code="MEDPM"></Coverage>
+					<Coverage COV_ID="57" Code="EBIF96"></Coverage>
+					<Coverage COV_ID="" Code="EBOS48"></Coverage>
+					<Coverage COV_ID="74" Code="EBCCSL"></Coverage>
+					<Coverage COV_ID="" Code="EBCCSS"></Coverage>
+					<Coverage COV_ID="193" Code="EBCCSI"></Coverage>
+					<Coverage COV_ID="195" Code="EBCCSF"></Coverage>
+					<Coverage COV_ID="58" Code="IBUSP"></Coverage>
+					<Coverage COV_ID="58" Code="IBUSPO"></Coverage>
+					<Coverage COV_ID="73" Code="EBICC53"></Coverage>
+					<Coverage COV_ID="189" Code="EBCCSM"></Coverage>
+					<Coverage COV_ID="86" Code="EBDUC"></Coverage>
+					<Coverage COV_ID="92" Code="EBRDC"></Coverage>
+					<Coverage COV_ID="79" Code="SEWER"></Coverage>
+					<Coverage COV_ID="191" Code="ESCCSS"></Coverage>
+					<Coverage COV_ID="0" Code="HO100"></Coverage>
+				</Coverages>
+			</Mandatory>
+			<BaseCoverage Code="EBUSPP"></BaseCoverage>
+		</Product>
+		<Product ID="11408" Desc="HO-6 Deluxe">
+			<Remove>
+				<Coverages>
+					<Coverage COV_ID="0" Code="EBP25"></Coverage>
+					<Coverage COV_ID="0" Code="EBEP11"></Coverage>
+					<Coverage COV_ID="0" Code="SEWER"></Coverage>
+					<Coverage COV_ID="0" Code="MIN##"></Coverage>
+					<Coverage COV_ID="0" Code="EBBAA"></Coverage>
+					<Coverage COV_ID="0" Code="EBP23"></Coverage>
+					<Coverage COV_ID="0" Code="IFGHO"></Coverage>
+					<Coverage COV_ID="0" Code="EBDUC"></Coverage>
+					<Coverage COV_ID="0" Code="EBRDC"></Coverage>
+					<Coverage COV_ID="0" Code="REDUC"></Coverage>
+					<Coverage COV_ID="0" Code="RECST"></Coverage>
+					<!-- Added by Charles on 2-Dec-09 for Itrack 6647 -->
+					<Coverage COV_ID="0" Code="HO493"></Coverage>
+				</Coverages>
+			</Remove>
+			<Mandatory>
+				<Coverages>
+					<Coverage COV_ID="90" Code="EBAIRP"></Coverage>
+					<Coverage COV_ID="62" Code="EBOS40"></Coverage>
+					<Coverage COV_ID="69" Code="EBOS489"></Coverage>
+					<Coverage COV_ID="257" Code="EBSS490"></Coverage>
+					<Coverage COV_ID="0" Code="HO48"></Coverage><!-- Added by Charles on 4-Dec-09 for Itrack 6405 -->
+					<Coverage COV_ID="908" Code="OSTDISH"></Coverage>
+					<Coverage COV_ID="3" Code="DWELL"></Coverage>
+					<Coverage COV_ID="5" Code="OS"></Coverage>
+					<Coverage COV_ID="7" Code="EBUSPP"></Coverage>
+					<Coverage COV_ID="8" Code="LOSUR"></Coverage>
+					<Coverage COV_ID="10" Code="PL"></Coverage>
+					<Coverage COV_ID="13" Code="MEDPM"></Coverage>
+					<Coverage COV_ID="57" Code="EBIF96"></Coverage>
+					<Coverage COV_ID="" Code="EBOS48"></Coverage>
+					<Coverage COV_ID="74" Code="EBCCSL"></Coverage>
+					<Coverage COV_ID="" Code="EBCCSS"></Coverage>
+					<Coverage COV_ID="193" Code="EBCCSI"></Coverage>
+					<Coverage COV_ID="195" Code="EBCCSF"></Coverage>
+					<Coverage COV_ID="58" Code="IBUSP"></Coverage>
+					<Coverage COV_ID="58" Code="IBUSPO"></Coverage>
+					<Coverage COV_ID="73" Code="EBICC53"></Coverage>
+					<Coverage COV_ID="189" Code="EBCCSM"></Coverage>
+					<Coverage COV_ID="86" Code="EBDUC"></Coverage>
+					<Coverage COV_ID="191" Code="ESCCSS"></Coverage>
+					<Coverage COV_ID="87" Code="EBCASP"></Coverage>
+					<Coverage COV_ID="89" Code="LAC"></Coverage>
+					<Coverage COV_ID="93" Code="EBCDC"></Coverage>
+					<Coverage COV_ID="79" Code="SEWER"></Coverage>
+					<Coverage COV_ID="0" Code="HO100"></Coverage>
+				</Coverages>
+			</Mandatory>
+			<BaseCoverage Code="EBUSPP"></BaseCoverage>
+		</Product>
+	</State>
+	<State ID="14" Name="Indiana">
+		<Product ID="11196" Desc="HO-6 Unit Owners">
+			<Remove>
+				<Coverages>
+					<Coverage COV_ID="0" Code="EBP25"></Coverage>
+					<Coverage COV_ID="0" Code="EBP24"></Coverage>
+					<Coverage COV_ID="0" Code="EBEP11"></Coverage>
+					<Coverage COV_ID="0" Code="SEWER"></Coverage>
+					<Coverage COV_ID="0" Code="IFGHO"></Coverage>
+					<Coverage COV_ID="0" Code="EBP23"></Coverage>
+					<Coverage COV_ID="0" Code="EBBAA"></Coverage>
+					<Coverage COV_ID="0" Code="EBDUC"></Coverage>
+					<Coverage COV_ID="0" Code="EBRDC"></Coverage>
+					<Coverage COV_ID="0" Code="REDUC"></Coverage>
+					<Coverage COV_ID="0" Code="RECST"></Coverage>
+					<Coverage COV_ID="114" Code="EBEP11"></Coverage>
+					<Coverage COV_ID="56" Code="ECOB"></Coverage>
+					<Coverage COV_ID="56" Code="ECOC"></Coverage>
+					<Coverage COV_ID="56" Code="CBF4"></Coverage>
+					<Coverage COV_ID="56" Code="CF5"></Coverage>
+					<Coverage COV_ID="56" Code="HO100"></Coverage>
+					<Coverage COV_ID="56" Code="PFBF2"></Coverage>
+					<Coverage COV_ID="56" Code="PFSF3"></Coverage>
+					<!-- Added by Charles on 2-Dec-09 for Itrack 6647 -->
+					<Coverage COV_ID="0" Code="HO493"></Coverage>
+				</Coverages>
+			</Remove>
+			<Mandatory>
+				<Coverages>
+					<Coverage COV_ID="163" Code="EBAIRP"></Coverage>
+					<Coverage COV_ID="148" Code="EBOS40"></Coverage>
+					<Coverage COV_ID="152" Code="EBOS489"></Coverage>
+					<Coverage COV_ID="172" Code="EBSS490"></Coverage>
+					<Coverage COV_ID="0" Code="HO48"></Coverage><!-- Added by Charles on 4-Dec-09 for Itrack 6405 -->
+					<Coverage COV_ID="742" Code="OSTDISH"></Coverage>
+					<Coverage COV_ID="931" Code="CO100"></Coverage>
+					<Coverage COV_ID="134" Code="DWELL"></Coverage>
+					<Coverage COV_ID="135" Code="OS"></Coverage>
+					<Coverage COV_ID="136" Code="EBUSPP"></Coverage>
+					<Coverage COV_ID="137" Code="LOSUR"></Coverage>
+					<Coverage COV_ID="170" Code="PL"></Coverage>
+					<Coverage COV_ID="171" Code="MEDPM"></Coverage>
+					<Coverage COV_ID="145" Code="EBIF96"></Coverage>
+					<Coverage COV_ID="" Code="EBOS48"></Coverage>
+					<Coverage COV_ID="154" Code="EBCCSL"></Coverage>
+					<Coverage COV_ID="" Code="EBCCSS"></Coverage>
+					<Coverage COV_ID="192" Code="EBCCSI"></Coverage>
+					<Coverage COV_ID="194" Code="EBCCSF"></Coverage>
+					<Coverage COV_ID="146" Code="IBUSP"></Coverage>
+					<Coverage COV_ID="58" Code="IBUSPO"></Coverage>
+					<Coverage COV_ID="153" Code="EBICC53"></Coverage>
+					<Coverage COV_ID="188" Code="EBCCSM"></Coverage>
+					<Coverage COV_ID="159" Code="EBDUC"></Coverage>
+					<Coverage COV_ID="191" Code="ESCCSS"></Coverage>
+					<Coverage COV_ID="162" Code="LAC"></Coverage>
+					<Coverage COV_ID="156" Code="SEWER"></Coverage>
+				</Coverages>
+			</Mandatory>
+			<Rule Action="Master" StartDate="1950-01-01" EndDate="3000-12-12">
+				<Conditions>
+					<Condition Operand1="1" Operator="==" Operand2="1" OperandType="Double">
+						<ToSet Key="$MIN_VAL" Value="15000"></ToSet>
+						<ToSet Key="$MAX_VAL" Value="$REP_COST"></ToSet>
+						<ToSet Key="$MULT_A" Value="0.1"></ToSet>
+						<ToSet Key="$MULT_D" Value="0.4"></ToSet>
+						<ToSet Key="$MULT_B" Value="0.1"></ToSet>
+						<ToSet Key="$ERR_TEMPLATE" Value="1"></ToSet>
+					</Condition>
+				</Conditions>
+				<Conditions>
+					<Condition Operand1="$VERIFY_RULE" Operator="==" Operand2="N" OperandType="String">
+						<ToSet Key="$MIN_VAL" Value="$REP_COST"></ToSet>
+						<ToSet Key="$MAX_VAL" Value="$REP_COST"></ToSet>
+						<ToSet Key="$ERR_TEMPLATE" Value="2"></ToSet>
+					</Condition>
+					<Condition Operand1="$REP_COST" Operator="==" Operand2="15000" OperandType="Double">
+						<ToSet Key="$ERR_TEMPLATE" Value="2"></ToSet>
+					</Condition>
+				</Conditions>
+			</Rule>
+			<BaseCoverage Code="EBUSPP" MinValue="$MIN_VAL" MaxValue="$MAX_VAL" Desc="Coverage C - Unscheduled Personal Property "></BaseCoverage>
+			<ErrorMessage Template="1">
+				<Text Value="Coverage C - Contents Insurance Amount for HO-6 must be between  "></Text>
+				<Text Value="$MIN_VAL"></Text>
+				<Text Value=" and "></Text>
+				<Text Value="$MAX_VAL"></Text>
+				<Text Value=" . "></Text>
+			</ErrorMessage>
+			<ErrorMessage Template="2">
+				<Text Value="Coverage C - Contents Insurance Amount for HO-6 must be equal to  "></Text>
+				<Text Value="$MIN_VAL"></Text>
+				<Text Value=" . "></Text>
+			</ErrorMessage>
+			<ErrRequired Value="Please enter Coverage C"></ErrRequired>
+			<OnChange Code="DWELL">
+				<Target Code="DWELL" Operator="*" Operand="$MULT_A" IF="Y" ConditionOn="result" ConOpr="&lt;"
+					ConVal="2000" ToSet="result" ToSetVal="2000"></Target>
+				<Target Code="LOSUR" Operator="*" Operand="$MULT_D"></Target>
+				<!-- Ravindra(03-27-07)  Limit of Coverage B not applicable in Ho-4 & HP-6 -->
+				<!--<Target Code="OS" Operator="*" Operand="$MULT_B"></Target> -->
+			</OnChange>
+		</Product>
+		<Product ID="11149" Desc="HO-5 Replacement">
+			<Remove>
+				<Coverages> 
+					<Coverage COV_ID="0" Code="EBP20"></Coverage>
+					<Coverage COV_ID="0" Code="EBP21"></Coverage>
+					<Coverage COV_ID="0" Code="EBCASP"></Coverage>
+					<Coverage COV_ID="0" Code="EBUNIT"></Coverage>
+					<Coverage COV_ID="0" Code="EBBAA"></Coverage>
+					<Coverage COV_ID="0" Code="LAC"></Coverage>
+					<Coverage COV_ID="0" Code="EBRDC"></Coverage>
+					<Coverage COV_ID="0" Code="EBCDC"></Coverage>
+					<Coverage COV_ID="0" Code="REDUC"></Coverage>
+					<Coverage COV_ID="0" Code="RECST"></Coverage>
+					<Coverage COV_ID="56" Code="EROK"></Coverage>
+					<Coverage COV_ID="56" Code="CBF4"></Coverage>
+					<Coverage COV_ID="56" Code="EBP22"></Coverage>
+					<Coverage COV_ID="56" Code="CUOF6"></Coverage>
+					<Coverage COV_ID="56" Code="CO100"></Coverage>
+					<Coverage COV_ID="56" Code="PFBF2"></Coverage>
+					<Coverage COV_ID="56" Code="PFSF3"></Coverage>
+				</Coverages>
+			</Remove>
+			<Mandatory>
+				<Coverages>
+					<Coverage COV_ID="163" Code="EBAIRP"></Coverage>
+					<Coverage COV_ID="148" Code="EBOS40"></Coverage>
+					<Coverage COV_ID="152" Code="EBOS489"></Coverage>
+					<Coverage COV_ID="172" Code="EBSS490"></Coverage>
+					<Coverage COV_ID="0" Code="HO48"></Coverage><!-- Added by Charles on 4-Dec-09 for Itrack 6405 -->
+					<Coverage COV_ID="742" Code="OSTDISH"></Coverage>
+					<Coverage COV_ID="134" Code="DWELL"></Coverage>
+					<Coverage COV_ID="135" Code="OS"></Coverage>
+					<Coverage COV_ID="136" Code="EBUSPP"></Coverage>
+					<Coverage COV_ID="137" Code="LOSUR"></Coverage>
+					<Coverage COV_ID="170" Code="PL"></Coverage>
+					<Coverage COV_ID="171" Code="MEDPM"></Coverage>
+					<Coverage COV_ID="145" Code="EBIF96"></Coverage>
+					<Coverage COV_ID="" Code="EBOS48"></Coverage>
+					<Coverage COV_ID="154" Code="EBCCSL"></Coverage>
+					<Coverage COV_ID="" Code="EBCCSS"></Coverage>
+					<Coverage COV_ID="192" Code="EBCCSI"></Coverage>
+					<Coverage COV_ID="194" Code="EBCCSF"></Coverage>
+					<Coverage COV_ID="146" Code="IBUSP"></Coverage>
+					<Coverage COV_ID="58" Code="IBUSPO"></Coverage>
+					<Coverage COV_ID="153" Code="EBICC53"></Coverage>
+					<Coverage COV_ID="188" Code="EBCCSM"></Coverage>
+					<Coverage COV_ID="159" Code="EBDUC"></Coverage>
+					<Coverage COV_ID="191" Code="ESCCSS"></Coverage>
+					<Coverage COV_ID="144" Code="EBEP11"></Coverage>
+					<Coverage COV_ID="140" Code="EBRCPP"></Coverage>
+					<Coverage COV_ID="" Code="EBOC"></Coverage>
+					<!--Coverage COV_ID="906" Code="ECOC"></Coverage -->
+					<Coverage COV_ID="143" Code="EBP24"></Coverage>
+					<Coverage COV_ID="0" Code="HO100"></Coverage>
+					<Coverage COV_ID="0" Code="CF5"></Coverage><!-- Added by Charles on 28-Dec-09 for Itrack 6883 -->
+				</Coverages>
+			</Mandatory>
+			<Rule Action="Master" StartDate="1950-01-01" EndDate="3000-12-12">
+				<Conditions>
+					<Condition Operand1="1" Operator="==" Operand2="1" OperandType="Double">
+						<ToSet Key="$MIN_VAL" Value="$REP_COST"></ToSet>
+						<ToSet Key="$MAX_VAL" Value="$REP_COST"></ToSet>
+						<ToSet Key="$MULT_B" Value="0.1"></ToSet>
+						<ToSet Key="$MULT_C" Value="0.7"></ToSet>
+						<ToSet Key="$MULT_D" Value="0.3"></ToSet>
+						<ToSet Key="$ERR_TEMPLATE" Value="1"></ToSet>
+					</Condition>
+				</Conditions>
+			</Rule>
+			<BaseCoverage Code="DWELL" MinValue="$MIN_VAL" MaxValue="$MAX_VAL" Desc="Coverage A – Dwelling "></BaseCoverage>
+			<OnChange Code="DWELL">
+				<Target Code="OS" Operator="*" Operand="$MULT_B"></Target>
+				<Target Code="EBUSPP" Operator="*" Operand="$MULT_C"></Target>
+				<Target Code="LOSUR" Operator="*" Operand="$MULT_D"></Target>
+			</OnChange>
+			<ErrorMessage Template="1">
+				<Text Value="Coverage A - Dwelling for HO-5 Replacement must be equal to "></Text>
+				<Text Value="$REP_COST"></Text>
+				<Text Value=" . "></Text>
+			</ErrorMessage>
+			<ErrRequired Value="Please enter Coverage A"></ErrRequired>
+		</Product>
+		<Product ID="11195" Desc="HO-4 Tenant">
+			<Remove>
+				<Coverages>
+					<Coverage COV_ID="0" Code="EBEP11"></Coverage>
+					<Coverage COV_ID="0" Code="EBP25"></Coverage>
+					<Coverage COV_ID="0" Code="SEWER"></Coverage>
+					<Coverage COV_ID="0" Code="EBP23"></Coverage>
+					<Coverage COV_ID="0" Code="DWELL"></Coverage>
+					<Coverage COV_ID="0" Code="IFGHO"></Coverage>
+					<Coverage COV_ID="0" Code="EBCASP"></Coverage>
+					<Coverage COV_ID="0" Code="EBUNIT"></Coverage>
+					<Coverage COV_ID="0" Code="EBP24"></Coverage>
+					<Coverage COV_ID="0" Code="LAC"></Coverage>
+					<Coverage COV_ID="0" Code="EBDUC"></Coverage>
+					<Coverage COV_ID="0" Code="EBCDC"></Coverage>
+					<Coverage COV_ID="0" Code="REDUC"></Coverage>
+					<Coverage COV_ID="0" Code="RECST"></Coverage>
+					<Coverage COV_ID="114" Code="EBEP11"></Coverage>
+					<Coverage COV_ID="56" Code="ECOB"></Coverage>
+					<Coverage COV_ID="56" Code="ECOC"></Coverage>
+					<Coverage COV_ID="56" Code="CF5"></Coverage>
+					<Coverage COV_ID="56" Code="CUOF6"></Coverage>
+					<Coverage COV_ID="56" Code="CO100"></Coverage>
+					<Coverage COV_ID="56" Code="PFBF2"></Coverage>
+					<Coverage COV_ID="56" Code="PFSF3"></Coverage>
+					<!-- Added by Charles on 2-Dec-09 for Itrack 6647 -->
+					<Coverage COV_ID="0" Code="HO493"></Coverage>
+				</Coverages>
+			</Remove>
+			<Mandatory>
+				<Coverages>
+					<Coverage COV_ID="163" Code="EBAIRP"></Coverage>
+					<Coverage COV_ID="148" Code="EBOS40"></Coverage>
+					<Coverage COV_ID="152" Code="EBOS489"></Coverage>
+					<Coverage COV_ID="172" Code="EBSS490"></Coverage>
+					<Coverage COV_ID="0" Code="HO48"></Coverage><!-- Added by Charles on 4-Dec-09 for Itrack 6405 -->
+					<Coverage COV_ID="742" Code="OSTDISH"></Coverage>
+					<Coverage COV_ID="920" Code="CBF4"></Coverage>
+					<Coverage COV_ID="134" Code="DWELL"></Coverage>
+					<Coverage COV_ID="135" Code="OS"></Coverage>
+					<Coverage COV_ID="136" Code="EBUSPP"></Coverage>
+					<Coverage COV_ID="137" Code="LOSUR"></Coverage>
+					<Coverage COV_ID="170" Code="PL"></Coverage>
+					<Coverage COV_ID="171" Code="MEDPM"></Coverage>
+					<Coverage COV_ID="145" Code="EBIF96"></Coverage>
+					<Coverage COV_ID="" Code="EBOS48"></Coverage>
+					<Coverage COV_ID="154" Code="EBCCSL"></Coverage>
+					<Coverage COV_ID="" Code="EBCCSS"></Coverage>
+					<Coverage COV_ID="192" Code="EBCCSI"></Coverage>
+					<Coverage COV_ID="194" Code="EBCCSF"></Coverage>
+					<Coverage COV_ID="146" Code="IBUSP"></Coverage>
+					<Coverage COV_ID="58" Code="IBUSPO"></Coverage>
+					<Coverage COV_ID="153" Code="EBICC53"></Coverage>
+					<Coverage COV_ID="188" Code="EBCCSM"></Coverage>
+					<Coverage COV_ID="159" Code="EBDUC"></Coverage>
+					<Coverage COV_ID="191" Code="ESCCSS"></Coverage>
+					<!--Coverage COV_ID="165" Code="EBRDC"></Coverage  -->
+					<Coverage COV_ID="156" Code="SEWER"></Coverage>
+					<Coverage COV_ID="0" Code="HO100"></Coverage>
+				</Coverages>
+			</Mandatory>
+			<Rule Action="Master" StartDate="1950-01-01" EndDate="3000-12-12">
+				<Conditions>
+					<Condition Operand1="1" Operator="==" Operand2="1" OperandType="Double">
+						<ToSet Key="$MIN_VAL" Value="10000"></ToSet>
+						<ToSet Key="$MAX_VAL" Value="$REP_COST"></ToSet>
+						<ToSet Key="$MULT_D" Value="0.4"></ToSet>
+						<ToSet Key="$MULT_B" Value="0.1"></ToSet>
+						<ToSet Key="$ERR_TEMPLATE" Value="1"></ToSet>
+					</Condition>
+				</Conditions>
+				<Conditions>
+					<Condition Operand1="$VERIFY_RULE" Operator="==" Operand2="N" OperandType="String">
+						<ToSet Key="$MIN_VAL" Value="$REP_COST"></ToSet>
+						<ToSet Key="$MAX_VAL" Value="$REP_COST"></ToSet>
+						<ToSet Key="$ERR_TEMPLATE" Value="2"></ToSet>
+					</Condition>
+					<Condition Operand1="$REP_COST" Operator="==" Operand2="10000" OperandType="Double">
+						<ToSet Key="$ERR_TEMPLATE" Value="2"></ToSet>
+					</Condition>
+				</Conditions>
+			</Rule>
+			<BaseCoverage Code="EBUSPP" MinValue="$MIN_VAL" MaxValue="$MAX_VAL" Desc="Coverage C - Unscheduled Personal Property "></BaseCoverage>
+			<OnChange Code="EBUSPP">
+				<Target Code="LOSUR" Operator="*" Operand="$MULT_D"></Target>
+				<!-- Ravindra(03-27-07)  Limit of Coverage B not applicable in Ho-4 & HP-6 -->
+				<!--<Target Code="OS" Operator="*" Operand="$MULT_B"></Target> -->
+			</OnChange>
+			<BaseCoverage Code="EBUSPP"></BaseCoverage>
+			<ErrorMessage Template="1">
+				<Text Value="Coverage C - Contents Insurance Amount for HO-4 must be between "></Text>
+				<Text Value="$MIN_VAL"></Text>
+				<Text Value=" and "></Text>
+				<Text Value="$MAX_VAL"></Text>
+				<Text Value=" . "></Text>
+			</ErrorMessage>
+			<ErrorMessage Template="2">
+				<Text Value="Coverage C - Contents Insurance Amount for HO-4 must be equal "></Text>
+				<Text Value="$MIN_VAL"></Text>
+				<Text Value=" . "></Text>
+			</ErrorMessage>
+			<ErrRequired Value="Please enter Coverage C"></ErrRequired>
+		</Product>
+		<Product ID="11148" Desc="HO-3 Replacement">
+			<Remove>
+				<Coverages>
+					<Coverage COV_ID="0" Code="EBNBPL"></Coverage>
+					<Coverage COV_ID="0" Code="Woods"></Coverage>
+					<Coverage COV_ID="0" Code="EBP23"></Coverage>
+					<Coverage COV_ID="0" Code="EBOS48"></Coverage>
+					<Coverage COV_ID="0" Code="EBPPC"></Coverage>
+					<Coverage COV_ID="0" Code="EBALEXP"></Coverage>
+					<Coverage COV_ID="0" Code="EBCASP"></Coverage>
+					<Coverage COV_ID="0" Code="EBUNIT"></Coverage>
+					<Coverage COV_ID="0" Code="LAC"></Coverage>
+					<Coverage COV_ID="0" Code="EBBAA"></Coverage>
+					<Coverage COV_ID="0" Code="EBMC"></Coverage>
+					<Coverage COV_ID="0" Code="RECST"></Coverage>
+					<Coverage COV_ID="0" Code="EBP25"></Coverage>
+					<Coverage COV_ID="0" Code="EBRDC"></Coverage>
+					<Coverage COV_ID="0" Code="EBCDC"></Coverage>
+					<Coverage COV_ID="56" Code="ECOB"></Coverage>
+					<Coverage COV_ID="56" Code="ECOC"></Coverage>
+					<Coverage COV_ID="56" Code="CBF4"></Coverage>
+					<Coverage COV_ID="56" Code="CF5"></Coverage>
+					<Coverage COV_ID="56" Code="CUOF6"></Coverage>
+					<Coverage COV_ID="56" Code="CO100"></Coverage>
+					<Coverage COV_ID="56" Code="PFBF2"></Coverage>
+				</Coverages>
+			</Remove>
+			<Mandatory>
+				<Coverages>
+					<Coverage COV_ID="163" Code="EBAIRP"></Coverage>
+					<Coverage COV_ID="148" Code="EBOS40"></Coverage>
+					<Coverage COV_ID="152" Code="EBOS489"></Coverage>
+					<Coverage COV_ID="172" Code="EBSS490"></Coverage>
+					<Coverage COV_ID="0" Code="HO48"></Coverage><!-- Added by Charles on 4-Dec-09 for Itrack 6405 -->
+					<Coverage COV_ID="742" Code="OSTDISH"></Coverage>
+					<Coverage COV_ID="134" Code="DWELL"></Coverage>
+					<Coverage COV_ID="135" Code="OS"></Coverage>
+					<Coverage COV_ID="136" Code="EBUSPP"></Coverage>
+					<Coverage COV_ID="137" Code="LOSUR"></Coverage>
+					<Coverage COV_ID="170" Code="PL"></Coverage>
+					<Coverage COV_ID="171" Code="MEDPM"></Coverage>
+					<Coverage COV_ID="145" Code="EBIF96"></Coverage>
+					<Coverage COV_ID="" Code="EBOS48"></Coverage>
+					<Coverage COV_ID="154" Code="EBCCSL"></Coverage>
+					<Coverage COV_ID="" Code="EBCCSS"></Coverage>
+					<Coverage COV_ID="192" Code="EBCCSI"></Coverage>
+					<Coverage COV_ID="194" Code="EBCCSF"></Coverage>
+					<Coverage COV_ID="146" Code="IBUSP"></Coverage>
+					<Coverage COV_ID="58" Code="IBUSPO"></Coverage>
+					<Coverage COV_ID="153" Code="EBICC53"></Coverage>
+					<Coverage COV_ID="188" Code="EBCCSM"></Coverage>
+					<Coverage COV_ID="159" Code="EBDUC"></Coverage>
+					<Coverage COV_ID="191" Code="ESCCSS"></Coverage>
+					<Coverage COV_ID="0" Code="HO100"></Coverage>
+				</Coverages>
+			</Mandatory>
+			<Rule Action="Master" StartDate="1950-01-01" EndDate="3000-12-12">
+				<Conditions>
+					<Condition Operand1="1" Operator="==" Operand2="1" OperandType="Double">
+						<ToSet Key="$PER_REP_COST" Value="" Operand1="$REP_COST" Operator="*" Operand2="0.8"></ToSet>
+						<ToSet Key="$MIN_VAL" Value="$PER_REP_COST"></ToSet>
+						<ToSet Key="$MAX_VAL" Value="$REP_COST"></ToSet>
+						<ToSet Key="$MULT_B" Value="0.1"></ToSet>
+						<ToSet Key="$MULT_D" Value="0.3"></ToSet>
+						<ToSet Key="$ERR_TEMPLATE" Value="1"></ToSet>
+					</Condition>
+				</Conditions>
+				<Conditions>
+					<Condition Operand1="$VERIFY_RULE" Operator="==" Operand2="N" OperandType="String">
+								<ToSet Key="$MIN_VAL" Value="$PER_REP_COST"></ToSet>
+								<ToSet Key="$MAX_VAL" Value="$REP_COST"></ToSet>
+								<ToSet Key="$ERR_TEMPLATE" Value="1"></ToSet>
+					</Condition>					
+					<!-- Location Type Primary -->
+					<Condition Operand1="$LOC_TYPE" Operator="==" Operand2="11812" OperandType="Double">
+						<SubConditions>
+							<SubCondition Operand1="$MIN_VAL" Operator="&lt;" Operand2="50000" OperandType="Double">
+								<ToSet Key="$MIN_VAL" Value="50000"></ToSet>
+								<ToSet Key="$ERR_TEMPLATE" Value="2"></ToSet>
+							</SubCondition>							
+						</SubConditions>
+					</Condition>					
+					<!-- Location Type Secondary-->
+					<Condition Operand1="$LOC_TYPE" Operator="==" Operand2="11813" OperandType="Double">
+						<SubConditions>
+							<SubCondition Operand1="$MIN_VAL" Operator="&lt;" Operand2="40000" OperandType="Double">
+								<ToSet Key="$MIN_VAL" Value="40000"></ToSet>
+								<ToSet Key="$ERR_TEMPLATE" Value="2"></ToSet>
+							</SubCondition>
+						</SubConditions>
+					</Condition>
+					<!-- Location Type Seasonal-->
+					<Condition Operand1="$LOC_TYPE" Operator="==" Operand2="11814" OperandType="Double">
+						<SubConditions>
+							<SubCondition Operand1="$MIN_VAL" Operator="&lt;" Operand2="40000" OperandType="Double">
+								<ToSet Key="$MIN_VAL" Value="40000"></ToSet>
+								<ToSet Key="$ERR_TEMPLATE" Value="2"></ToSet>
+							</SubCondition>
+						</SubConditions>
+					</Condition>
+					<!-- Location Type Undefined -->
+					<Condition Operand1="$LOC_TYPE" Operator="==" Operand2="0" OperandType="Double">
+						<SubConditions>
+							<SubCondition Operand1="$MIN_VAL" Operator="&lt;" Operand2="40000" OperandType="Double">
+								<ToSet Key="$MIN_VAL" Value="40000"></ToSet>
+								<ToSet Key="$ERR_TEMPLATE" Value="2"></ToSet>
+							</SubCondition>
+						</SubConditions>
+					</Condition>
+				</Conditions>				
+				<Conditions>
+					<Condition Operand1="$HO_34" Operator="!=" Operand2="0" OperandType="Double">
+						<ToSet Key="$MULT_C" Value="0.7"></ToSet>
+					</Condition>
+					<Condition Operand1="$HO_34" Operator="==" Operand2="0" OperandType="Double">
+						<ToSet Key="$MULT_C" Value="0.5"></ToSet>
+					</Condition>
+				</Conditions>
+			</Rule>
+			<BaseCoverage Code="DWELL" MinValue="$MIN_VAL" MaxValue="$MAX_VAL" Desc="Coverage A – Dwelling "></BaseCoverage>
+			<OnChange Code="DWELL">
+				<Target Code="OS" Operator="*" Operand="$MULT_B"></Target>
+				<Target Code="EBUSPP" Operator="*" Operand="$MULT_C" ExternalDependency="True"></Target>
+				<Target Code="LOSUR" Operator="*" Operand="$MULT_D"></Target>
+			</OnChange>
+			<OnClick Code="EBRCPP">
+				<Checked>
+					<VarSet Varialbe="globalMultiplier" Value="0.7"></VarSet>
+					<ToCall Function="OnCoverageChange();"></ToCall>
+				</Checked>
+				<Unchecked>
+					<VarSet Varialbe="globalMultiplier" Value="0.5"></VarSet>
+					<ToCall Function="OnCoverageChange();"></ToCall>
+				</Unchecked>
+			</OnClick>
+			<ErrorMessage Template="1">
+				<Text Value="Coverage A - Dwelling for HO-3 Replacement must be between "></Text>
+				<Text Value="$MIN_VAL"></Text>
+				<Text Value=" and "></Text>
+				<Text Value="$MAX_VAL"></Text>
+				<Text Value=" . "></Text>
+			</ErrorMessage>
+			<ErrorMessage Template="2">
+				<Text Value="Coverage A - Dwelling for HO-3 Replacement must be equal to "></Text>
+				<Text Value="$MIN_VAL"></Text>
+				<Text Value=" . "></Text>
+			</ErrorMessage>
+			<ErrRequired Value="Please enter Coverage A"></ErrRequired>
+		</Product>
+		<Product ID="11194" Desc="HO-3 Repair Cost">
+			<Remove>
+				<Coverages>
+					<Coverage COV_ID="0" Code="EBP23"></Coverage>
+					<Coverage COV_ID="0" Code="EBP24"></Coverage>
+					<Coverage COV_ID="0" Code="EBEP11"></Coverage>
+					<Coverage COV_ID="0" Code="EBCASP"></Coverage>
+					<Coverage COV_ID="0" Code="EBUNIT"></Coverage>
+					<Coverage COV_ID="0" Code="EBBAA"></Coverage>
+					<Coverage COV_ID="0" Code="EBP25"></Coverage>
+					<Coverage COV_ID="0" Code="LAC"></Coverage>
+					<Coverage COV_ID="0" Code="EBRDC"></Coverage>
+					<Coverage COV_ID="0" Code="EBCDC"></Coverage>
+					<Coverage COV_ID="114" Code="EBEP11"></Coverage>
+					<Coverage COV_ID="56" Code="ECOB"></Coverage>
+					<Coverage COV_ID="56" Code="ECOC"></Coverage>
+					<Coverage COV_ID="56" Code="CBF4"></Coverage>
+					<Coverage COV_ID="56" Code="CF5"></Coverage>
+					<Coverage COV_ID="56" Code="CUOF6"></Coverage>
+					<Coverage COV_ID="56" Code="CO100"></Coverage>
+					<Coverage COV_ID="56" Code="PFBF2"></Coverage>
+				</Coverages>
+			</Remove>
+			<Mandatory>
+				<Coverages>
+					<Coverage COV_ID="163" Code="EBAIRP"></Coverage>
+					<Coverage COV_ID="148" Code="EBOS40"></Coverage>
+					<Coverage COV_ID="152" Code="EBOS489"></Coverage>
+					<Coverage COV_ID="172" Code="EBSS490"></Coverage>
+					<Coverage COV_ID="0" Code="HO48"></Coverage><!-- Added by Charles on 4-Dec-09 for Itrack 6405 -->+
+					<Coverage COV_ID="742" Code="OSTDISH"></Coverage>
+					<Coverage COV_ID="134" Code="DWELL"></Coverage>
+					<Coverage COV_ID="135" Code="OS"></Coverage>
+					<Coverage COV_ID="136" Code="EBUSPP"></Coverage>
+					<Coverage COV_ID="137" Code="LOSUR"></Coverage>
+					<Coverage COV_ID="170" Code="PL"></Coverage>
+					<Coverage COV_ID="171" Code="MEDPM"></Coverage>
+					<Coverage COV_ID="145" Code="EBIF96"></Coverage>
+					<Coverage COV_ID="" Code="EBOS48"></Coverage>
+					<Coverage COV_ID="154" Code="EBCCSL"></Coverage>
+					<Coverage COV_ID="" Code="EBCCSS"></Coverage>
+					<Coverage COV_ID="192" Code="EBCCSI"></Coverage>
+					<Coverage COV_ID="194" Code="EBCCSF"></Coverage>
+					<Coverage COV_ID="146" Code="IBUSP"></Coverage>
+					<Coverage COV_ID="58" Code="IBUSPO"></Coverage>
+					<Coverage COV_ID="153" Code="EBICC53"></Coverage>
+					<Coverage COV_ID="188" Code="EBCCSM"></Coverage>
+					<Coverage COV_ID="159" Code="EBDUC"></Coverage>
+					<Coverage COV_ID="191" Code="ESCCSS"></Coverage>
+					<Coverage COV_ID="168" Code="RECST"></Coverage>
+					<Coverage COV_ID="0" Code="HO100"></Coverage>
+				</Coverages>
+			</Mandatory>
+			<Rule Action="Master" StartDate="1950-01-01" EndDate="3000-12-12">
+				<Conditions>
+					<Condition Operand1="$MKT_VALUE" Operator="&lt;" Operand2="50000" OperandType="Double">
+						<ToSet Key="$MIN_VAL" Value="50000"></ToSet>
+						<ToSet Key="$MAX_VAL" Value="50000"></ToSet>
+						<ToSet Key="$MULT_B" Value="0.1"></ToSet>
+						<ToSet Key="$MULT_D" Value="0.3"></ToSet>
+						<ToSet Key="$ERR_TEMPLATE" Value="1"></ToSet>
+					</Condition>
+					<Condition Operand1="$MKT_VALUE" Operator=">=" Operand2="50000" OperandType="Double">
+						<ToSet Key="$MIN_VAL" Value="$MKT_VALUE"></ToSet>
+						<ToSet Key="$MAX_VAL" Value="$MKT_VALUE"></ToSet>
+						<ToSet Key="$MULT_B" Value="0.1"></ToSet>
+						<ToSet Key="$MULT_D" Value="0.3"></ToSet>
+						<ToSet Key="$ERR_TEMPLATE" Value="1"></ToSet>
+					</Condition>
+				</Conditions>
+				<Conditions>
+					<Condition Operand1="$VERIFY_RULE" Operator="==" Operand2="N" OperandType="String">
+						<ToSet Key="$MIN_VAL" Value="$MKT_VALUE"></ToSet>
+						<ToSet Key="$MAX_VAL" Value="$MKT_VALUE"></ToSet>
+						<ToSet Key="$MULT_B" Value="0.1"></ToSet>
+						<ToSet Key="$MULT_D" Value="0.3"></ToSet>
+						<ToSet Key="$ERR_TEMPLATE" Value="1"></ToSet>
+					</Condition>
+				</Conditions>
+				<Conditions>
+					<Condition Operand1="$HO_34" Operator="!=" Operand2="0" OperandType="Double">
+						<ToSet Key="$MULT_C" Value="0.7"></ToSet>
+					</Condition>
+					<Condition Operand1="$HO_34" Operator="==" Operand2="0" OperandType="Double">
+						<ToSet Key="$MULT_C" Value="0.5"></ToSet>
+					</Condition>
+				</Conditions>
+			</Rule>
+			<BaseCoverage Code="DWELL" MinValue="$MIN_VAL" MaxValue="$MAX_VAL" Desc="Coverage A – Dwelling "></BaseCoverage>
+			<OnChange Code="DWELL">
+				<Target Code="OS" Operator="*" Operand="$MULT_B"></Target>
+				<Target Code="EBUSPP" Operator="*" Operand="$MULT_C" ExternalDependency="True"></Target>
+				<Target Code="LOSUR" Operator="*" Operand="$MULT_D"></Target>
+			</OnChange>
+			<OnClick Code="EBRCPP">
+				<Checked>
+					<VarSet Varialbe="globalMultiplier" Value="0.7"></VarSet>
+					<ToCall Function="OnCoverageChange();"></ToCall>
+				</Checked>
+				<Unchecked>
+					<VarSet Varialbe="globalMultiplier" Value="0.5"></VarSet>
+					<ToCall Function="OnCoverageChange();"></ToCall>
+				</Unchecked>
+			</OnClick>
+			<ErrorMessage Template="1">
+				<Text Value="Coverage A - Dwelling for HO-3 Repair Cost must be equal to "></Text>
+				<Text Value="$MIN_VAL"></Text>
+				<Text Value=" . "></Text>
+			</ErrorMessage>
+			<ErrRequired Value="Please enter Coverage A"></ErrRequired>
+		</Product>
+		<Product ID="11192" Desc="HO-2 Replacement">
+			<Remove>
+				<Coverages>
+					<Coverage COV_ID="0" Code="EBNBPL"></Coverage>
+					<Coverage COV_ID="0" Code="Woods"></Coverage>
+					<Coverage COV_ID="0" Code="EBP23"></Coverage>
+					<Coverage COV_ID="0" Code="EBEP11"></Coverage>
+					<Coverage COV_ID="0" Code="EBOS48"></Coverage>
+					<Coverage COV_ID="0" Code="EBPPC"></Coverage>
+					<Coverage COV_ID="0" Code="EBALEXP"></Coverage>
+					<Coverage COV_ID="0" Code="EBCASP"></Coverage>
+					<Coverage COV_ID="0" Code="EBUNIT"></Coverage>
+					<Coverage COV_ID="0" Code="LAC"></Coverage>
+					<Coverage COV_ID="0" Code="EBBAA"></Coverage>
+					<Coverage COV_ID="0" Code="EBMC"></Coverage>
+					<Coverage COV_ID="0" Code="RECST"></Coverage>
+					<Coverage COV_ID="0" Code="EBP25"></Coverage>
+					<Coverage COV_ID="0" Code="EBP24"></Coverage>
+					<Coverage COV_ID="0" Code="LAC"></Coverage>
+					<Coverage COV_ID="0" Code="EBRDC"></Coverage>
+					<Coverage COV_ID="0" Code="EBCDC"></Coverage>
+					<Coverage COV_ID="114" Code="EBEP11"></Coverage>
+					<Coverage COV_ID="56" Code="ECOB"></Coverage>
+					<Coverage COV_ID="56" Code="ECOC"></Coverage>
+					<Coverage COV_ID="56" Code="CBF4"></Coverage>
+					<Coverage COV_ID="56" Code="CF5"></Coverage>
+					<Coverage COV_ID="56" Code="CUOF6"></Coverage>
+					<Coverage COV_ID="56" Code="CO100"></Coverage>
+					<Coverage COV_ID="56" Code="PFSF3"></Coverage>
+				</Coverages>
+			</Remove>
+			<Mandatory>
+				<Coverages>
+					<Coverage COV_ID="163" Code="EBAIRP"></Coverage>
+					<Coverage COV_ID="148" Code="EBOS40"></Coverage>
+					<Coverage COV_ID="152" Code="EBOS489"></Coverage>
+					<Coverage COV_ID="172" Code="EBSS490"></Coverage>
+					<Coverage COV_ID="0" Code="HO48"></Coverage><!-- Added by Charles on 4-Dec-09 for Itrack 6405 -->
+					<Coverage COV_ID="742" Code="OSTDISH"></Coverage>
+					<Coverage COV_ID="134" Code="DWELL"></Coverage>
+					<Coverage COV_ID="135" Code="OS"></Coverage>
+					<Coverage COV_ID="136" Code="EBUSPP"></Coverage>
+					<Coverage COV_ID="137" Code="LOSUR"></Coverage>
+					<Coverage COV_ID="170" Code="PL"></Coverage>
+					<Coverage COV_ID="171" Code="MEDPM"></Coverage>
+					<Coverage COV_ID="145" Code="EBIF96"></Coverage>
+					<Coverage COV_ID="" Code="EBOS48"></Coverage>
+					<Coverage COV_ID="154" Code="EBCCSL"></Coverage>
+					<Coverage COV_ID="" Code="EBCCSS"></Coverage>
+					<Coverage COV_ID="192" Code="EBCCSI"></Coverage>
+					<Coverage COV_ID="194" Code="EBCCSF"></Coverage>
+					<Coverage COV_ID="146" Code="IBUSP"></Coverage>
+					<Coverage COV_ID="58" Code="IBUSPO"></Coverage>
+					<Coverage COV_ID="153" Code="EBICC53"></Coverage>
+					<Coverage COV_ID="188" Code="EBCCSM"></Coverage>
+					<Coverage COV_ID="159" Code="EBDUC"></Coverage>
+					<Coverage COV_ID="191" Code="ESCCSS"></Coverage>
+					<Coverage COV_ID="0" Code="HO100"></Coverage>
+				</Coverages>
+			</Mandatory>
+			<Rule Action="Master" StartDate="1950-01-01" EndDate="3000-12-12">
+				<Conditions>
+					<Condition Operand1="1" Operator="==" Operand2="1" OperandType="Double">
+						<ToSet Key="$PER_REP_COST" Value="" Operand1="$REP_COST" Operator="*" Operand2="0.8"></ToSet>
+						<ToSet Key="$MIN_VAL" Value="$PER_REP_COST"></ToSet>
+						<ToSet Key="$MAX_VAL" Value="$REP_COST"></ToSet>
+						<ToSet Key="$MULT_B" Value="0.1"></ToSet>
+						<ToSet Key="$MULT_D" Value="0.3"></ToSet>
+						<ToSet Key="$ERR_TEMPLATE" Value="1"></ToSet>
+					</Condition>
+				</Conditions>
+				<Conditions>
+					<Condition Operand1="$VERIFY_RULE" Operator="==" Operand2="N" OperandType="String">
+						<ToSet Key="$ERR_TEMPLATE" Value="1"></ToSet>
+						<ToSet Key="$MIN_VAL" Value="$PER_REP_COST"></ToSet>
+						<ToSet Key="$MAX_VAL" Value="$REP_COST"></ToSet>						
+					</Condition>
+					<!-- Location Type Primary -->
+					<Condition Operand1="$LOC_TYPE" Operator="==" Operand2="11812" OperandType="Double">
+						<SubConditions>
+							<SubCondition Operand1="$MIN_VAL" Operator="&lt;" Operand2="50000" OperandType="Double">
+								<ToSet Key="$MIN_VAL" Value="50000"></ToSet>
+								<ToSet Key="$ERR_TEMPLATE" Value="2"></ToSet>
+							</SubCondition>
+						</SubConditions>
+					</Condition>
+					<!-- Location Type Secondary-->
+					<Condition Operand1="$LOC_TYPE" Operator="==" Operand2="11813" OperandType="Double">
+						<SubConditions>
+							<SubCondition Operand1="$MIN_VAL" Operator="&lt;" Operand2="40000" OperandType="Double">
+								<ToSet Key="$MIN_VAL" Value="40000"></ToSet>
+								<ToSet Key="$ERR_TEMPLATE" Value="2"></ToSet>
+							</SubCondition>
+						</SubConditions>
+					</Condition>
+					<!-- Location Type Seasonal-->
+					<Condition Operand1="$LOC_TYPE" Operator="==" Operand2="11814" OperandType="Double">
+						<SubConditions>
+							<SubCondition Operand1="$MIN_VAL" Operator="&lt;" Operand2="40000" OperandType="Double">
+								<ToSet Key="$MIN_VAL" Value="40000"></ToSet>
+								<ToSet Key="$ERR_TEMPLATE" Value="2"></ToSet>
+							</SubCondition>
+						</SubConditions>
+					</Condition>
+					<!-- Location Type Undefined -->
+					<Condition Operand1="$LOC_TYPE" Operator="==" Operand2="11812" OperandType="Double">
+						<SubConditions>
+							<SubCondition Operand1="$MIN_VAL" Operator="&lt;" Operand2="40000" OperandType="Double">
+								<ToSet Key="$MIN_VAL" Value="40000"></ToSet>
+								<ToSet Key="$ERR_TEMPLATE" Value="2"></ToSet>
+							</SubCondition>
+						</SubConditions>
+					</Condition>
+				</Conditions>
+				<Conditions>
+					<Condition Operand1="$HO_34" Operator="!=" Operand2="0" OperandType="Double">
+						<ToSet Key="$MULT_C" Value="0.7"></ToSet>
+					</Condition>
+					<Condition Operand1="$HO_34" Operator="==" Operand2="0" OperandType="Double">
+						<ToSet Key="$MULT_C" Value="0.5"></ToSet>
+					</Condition>
+				</Conditions>
+			</Rule>
+			<BaseCoverage Code="DWELL" MinValue="$MIN_VAL" MaxValue="$MAX_VAL" Desc="Coverage A – Dwelling "></BaseCoverage>
+			<OnChange Code="DWELL">
+				<Target Code="OS" Operator="*" Operand="$MULT_B"></Target>
+				<Target Code="EBUSPP" Operator="*" Operand="$MULT_C" ExternalDependency="True"></Target>
+				<Target Code="LOSUR" Operator="*" Operand="$MULT_D"></Target>
+			</OnChange>
+			<OnClick Code="EBRCPP">
+				<Checked>
+					<VarSet Varialbe="globalMultiplier" Value="0.7"></VarSet>
+					<ToCall Function="OnCoverageChange();"></ToCall>
+				</Checked>
+				<Unchecked>
+					<VarSet Varialbe="globalMultiplier" Value="0.5"></VarSet>
+					<ToCall Function="OnCoverageChange();"></ToCall>
+				</Unchecked>
+			</OnClick>
+			<ErrorMessage Template="1">
+				<Text Value="Coverage A - Dwelling for HO-2 Replacement must be between "></Text>
+				<Text Value="$MIN_VAL"></Text>
+				<Text Value=" and "></Text>
+				<Text Value="$MAX_VAL"></Text>
+				<Text Value=" . "></Text>
+			</ErrorMessage>
+			<ErrorMessage Template="2">
+				<Text Value="Coverage A - Dwelling for HO-2 Replacement must be equal to "></Text>
+				<Text Value="$MIN_VAL"></Text>
+				<Text Value=" . "></Text>
+			</ErrorMessage>
+			<ErrRequired Value="Please enter Coverage A"></ErrRequired>
+		</Product>
+		<Product ID="11193" Desc="HO-2 Repair Cost">
+			<Remove>
+				<Coverages>
+					<Coverage COV_ID="0" Code="EBP23"></Coverage>
+					<Coverage COV_ID="0" Code="EBP24"></Coverage>
+					<Coverage COV_ID="0" Code="EBCASP"></Coverage>
+					<Coverage COV_ID="0" Code="EBUNIT"></Coverage>
+					<Coverage COV_ID="0" Code="EBBAA"></Coverage>
+					<Coverage COV_ID="0" Code="EBP25"></Coverage>
+					<Coverage COV_ID="0" Code="LAC"></Coverage>
+					<Coverage COV_ID="0" Code="EBRDC"></Coverage>
+					<Coverage COV_ID="0" Code="EBCDC"></Coverage>
+					<Coverage COV_ID="114" Code="EBEP11"></Coverage>
+					<Coverage COV_ID="56" Code="ECOB"></Coverage>
+					<Coverage COV_ID="56" Code="ECOC"></Coverage>
+					<Coverage COV_ID="56" Code="CBF4"></Coverage>
+					<Coverage COV_ID="56" Code="CF5"></Coverage>
+					<Coverage COV_ID="56" Code="CUOF6"></Coverage>
+					<Coverage COV_ID="56" Code="CO100"></Coverage>
+					<Coverage COV_ID="56" Code="PFSF3"></Coverage>
+				</Coverages>
+			</Remove>
+			<Mandatory>
+				<Coverages>
+					<Coverage COV_ID="163" Code="EBAIRP"></Coverage>
+					<Coverage COV_ID="148" Code="EBOS40"></Coverage>
+					<Coverage COV_ID="152" Code="EBOS489"></Coverage>
+					<Coverage COV_ID="172" Code="EBSS490"></Coverage>
+					<Coverage COV_ID="0" Code="HO48"></Coverage><!-- Added by Charles on 4-Dec-09 for Itrack 6405 -->
+					<Coverage COV_ID="742" Code="OSTDISH"></Coverage>
+					<Coverage COV_ID="134" Code="DWELL"></Coverage>
+					<Coverage COV_ID="135" Code="OS"></Coverage>
+					<Coverage COV_ID="136" Code="EBUSPP"></Coverage>
+					<Coverage COV_ID="137" Code="LOSUR"></Coverage>
+					<Coverage COV_ID="170" Code="PL"></Coverage>
+					<Coverage COV_ID="171" Code="MEDPM"></Coverage>
+					<Coverage COV_ID="145" Code="EBIF96"></Coverage>
+					<Coverage COV_ID="" Code="EBOS48"></Coverage>
+					<Coverage COV_ID="154" Code="EBCCSL"></Coverage>
+					<Coverage COV_ID="" Code="EBCCSS"></Coverage>
+					<Coverage COV_ID="192" Code="EBCCSI"></Coverage>
+					<Coverage COV_ID="194" Code="EBCCSF"></Coverage>
+					<Coverage COV_ID="146" Code="IBUSP"></Coverage>
+					<Coverage COV_ID="58" Code="IBUSPO"></Coverage>
+					<Coverage COV_ID="153" Code="EBICC53"></Coverage>
+					<Coverage COV_ID="188" Code="EBCCSM"></Coverage>
+					<Coverage COV_ID="159" Code="EBDUC"></Coverage>
+					<Coverage COV_ID="191" Code="ESCCSS"></Coverage>
+					<Coverage COV_ID="168" Code="RECST"></Coverage>
+					<Coverage COV_ID="909" Code="BUMC"></Coverage>
+					<Coverage COV_ID="0" Code="HO100"></Coverage>
+				</Coverages>
+			</Mandatory>
+			<Rule Action="Master" StartDate="1950-01-01" EndDate="3000-12-12">
+				<Conditions>
+					<Condition Operand1="1" Operator="==" Operand2="1" OperandType="Double">
+						<ToSet Key="$MIN_VAL" Value="$MKT_VALUE"></ToSet>
+						<ToSet Key="$MAX_VAL" Value="$MKT_VALUE"></ToSet>
+						<ToSet Key="$MULT_B" Value="0.1"></ToSet>
+						<ToSet Key="$MULT_D" Value="0.3"></ToSet>
+						<ToSet Key="$ERR_TEMPLATE" Value="1"></ToSet>
+					</Condition>
+				</Conditions>				
+				<Conditions>
+					<Condition Operand1="$VERIFY_RULE" Operator="==" Operand2="N" OperandType="String">
+						<ToSet Key="$ERR_TEMPLATE" Value="1"></ToSet>
+						<ToSet Key="$MIN_VAL" Value="$MKT_VALUE"></ToSet>
+					</Condition>
+					<!-- Location Type Primary -->
+					<Condition Operand1="$LOC_TYPE" Operator="==" Operand2="11812" OperandType="Double">
+						<SubConditions>
+							<SubCondition Operand1="$MIN_VAL" Operator="&lt;" Operand2="50000" OperandType="Double">
+								<ToSet Key="$MIN_VAL" Value="50000"></ToSet>
+								<ToSet Key="$MAX_VAL" Value="50000"></ToSet>
+							</SubCondition>
+						</SubConditions>
+					</Condition>
+					<!-- Location Type Secondary-->
+					<Condition Operand1="$LOC_TYPE" Operator="==" Operand2="11813" OperandType="Double">
+						<SubConditions>
+							<SubCondition Operand1="$MIN_VAL" Operator="&lt;" Operand2="40000" OperandType="Double">
+								<ToSet Key="$MIN_VAL" Value="40000"></ToSet>
+								<ToSet Key="$MAX_VAL" Value="40000"></ToSet>
+							</SubCondition>
+						</SubConditions>
+					</Condition>
+					<!-- Location Type Seasonal-->
+					<Condition Operand1="$LOC_TYPE" Operator="==" Operand2="11814" OperandType="Double">
+						<SubConditions>
+							<SubCondition Operand1="$MIN_VAL" Operator="&lt;" Operand2="40000" OperandType="Double">
+								<ToSet Key="$MIN_VAL" Value="40000"></ToSet>
+								<ToSet Key="$MAX_VAL" Value="40000"></ToSet>
+							</SubCondition>
+						</SubConditions>
+					</Condition>
+					<!-- Location Type Undefined-->
+					<Condition Operand1="$LOC_TYPE" Operator="==" Operand2="0" OperandType="Double">
+						<SubConditions>
+							<SubCondition Operand1="$MIN_VAL" Operator="&lt;" Operand2="40000" OperandType="Double">
+								<ToSet Key="$MIN_VAL" Value="40000"></ToSet>
+								<ToSet Key="$MAX_VAL" Value="40000"></ToSet>
+							</SubCondition>
+						</SubConditions>
+					</Condition>
+				</Conditions>
+				<Conditions>
+					<Condition Operand1="$HO_34" Operator="!=" Operand2="0" OperandType="Double">
+						<ToSet Key="$MULT_C" Value="0.7"></ToSet>
+					</Condition>
+					<Condition Operand1="$HO_34" Operator="==" Operand2="0" OperandType="Double">
+						<ToSet Key="$MULT_C" Value="0.5"></ToSet>
+					</Condition>
+				</Conditions>
+			</Rule>
+			<BaseCoverage Code="DWELL" MinValue="$MIN_VAL" MaxValue="$MAX_VAL" Desc="Coverage A – Dwelling "></BaseCoverage>
+			<OnChange Code="DWELL">
+				<Target Code="OS" Operator="*" Operand="$MULT_B"></Target>
+				<Target Code="EBUSPP" Operator="*" Operand="$MULT_C" ExternalDependency="True"></Target>
+				<Target Code="LOSUR" Operator="*" Operand="$MULT_D"></Target>
+			</OnChange>
+			<OnClick Code="EBRCPP">
+				<Checked>
+					<VarSet Varialbe="globalMultiplier" Value="0.7"></VarSet>
+					<ToCall Function="OnCoverageChange();"></ToCall>
+				</Checked>
+				<Unchecked>
+					<VarSet Varialbe="globalMultiplier" Value="0.5"></VarSet>
+					<ToCall Function="OnCoverageChange();"></ToCall>
+				</Unchecked>
+			</OnClick>
+			<ErrorMessage Template="1">
+				<Text Value="Coverage A - Dwelling for HO-2 Repair Cost must be equal to "></Text>
+				<Text Value="$MIN_VAL"></Text>
+				<Text Value=" . "></Text>
+			</ErrorMessage>
+			<ErrRequired Value="Please enter Coverage A"></ErrRequired>
+		</Product>
+		<Product ID="11245" Desc="HO-4 Deluxe">
+			<Remove>
+				<Coverages>
+					<Coverage COV_ID="0" Code="EBP25"></Coverage>
+					<Coverage COV_ID="0" Code="EBP24"></Coverage>
+					<Coverage COV_ID="0" Code="EBEP11"></Coverage>
+					<Coverage COV_ID="0" Code="SEWER"></Coverage>
+					<Coverage COV_ID="0" Code="EBCASP"></Coverage>
+					<Coverage COV_ID="0" Code="EBUNIT"></Coverage>
+					<Coverage COV_ID="0" Code="DWELL"></Coverage>
+					<Coverage COV_ID="0" Code="IFGHO"></Coverage>
+					<Coverage COV_ID="0" Code="EBP23"></Coverage>
+					<Coverage COV_ID="0" Code="HO9"></Coverage>
+					<Coverage COV_ID="0" Code="LAC"></Coverage>
+					<Coverage COV_ID="0" Code="EBDUC"></Coverage>
+					<Coverage COV_ID="0" Code="EBCDC"></Coverage>
+					<Coverage COV_ID="0" Code="REDUC"></Coverage>
+					<Coverage COV_ID="0" Code="RECST"></Coverage>
+					<!-- Added by Charles on 2-Dec-09 for Itrack 6647 -->
+					<Coverage COV_ID="0" Code="HO493"></Coverage>
+				</Coverages>
+			</Remove>
+			<Mandatory>
+				<Coverages>
+					<Coverage COV_ID="163" Code="EBAIRP"></Coverage>
+					<Coverage COV_ID="148" Code="EBOS40"></Coverage>
+					<Coverage COV_ID="152" Code="EBOS489"></Coverage>
+					<Coverage COV_ID="172" Code="EBSS490"></Coverage>
+					<Coverage COV_ID="0" Code="HO48"></Coverage><!-- Added by Charles on 4-Dec-09 for Itrack 6405 -->
+					<Coverage COV_ID="742" Code="OSTDISH"></Coverage>
+					<Coverage COV_ID="134" Code="DWELL"></Coverage>
+					<Coverage COV_ID="135" Code="OS"></Coverage>
+					<Coverage COV_ID="136" Code="EBUSPP"></Coverage>
+					<Coverage COV_ID="137" Code="LOSUR"></Coverage>
+					<Coverage COV_ID="170" Code="PL"></Coverage>
+					<Coverage COV_ID="171" Code="MEDPM"></Coverage>
+					<Coverage COV_ID="145" Code="EBIF96"></Coverage>
+					<Coverage COV_ID="" Code="EBOS48"></Coverage>
+					<Coverage COV_ID="154" Code="EBCCSL"></Coverage>
+					<Coverage COV_ID="" Code="EBCCSS"></Coverage>
+					<Coverage COV_ID="192" Code="EBCCSI"></Coverage>
+					<Coverage COV_ID="194" Code="EBCCSF"></Coverage>
+					<Coverage COV_ID="146" Code="IBUSP"></Coverage>
+					<Coverage COV_ID="58" Code="IBUSPO"></Coverage>
+					<Coverage COV_ID="153" Code="EBICC53"></Coverage>
+					<Coverage COV_ID="188" Code="EBCCSM"></Coverage>
+					<Coverage COV_ID="159" Code="EBDUC"></Coverage>
+					<Coverage COV_ID="191" Code="ESCCSS"></Coverage>
+					<Coverage COV_ID="165" Code="EBRDC"></Coverage>
+					<Coverage COV_ID="156" Code="SEWER"></Coverage>
+					<Coverage COV_ID="0" Code="HO100"></Coverage>
+				</Coverages>
+			</Mandatory>
+			<BaseCoverage Code="DWELL"></BaseCoverage>
+		</Product>
+		<Product ID="11246" Desc="HO-6 Deluxe">
+			<Remove>
+				<Coverages>
+					<Coverage COV_ID="0" Code="EBP25"></Coverage>
+					<Coverage COV_ID="0" Code="EBP24"></Coverage>
+					<Coverage COV_ID="0" Code="EBEP11"></Coverage>
+					<Coverage COV_ID="0" Code="SEWER"></Coverage>
+					<Coverage COV_ID="0" Code="EBBAA"></Coverage>
+					<Coverage COV_ID="0" Code="EBP23"></Coverage>
+					<Coverage COV_ID="0" Code="IFGHO"></Coverage>
+					<Coverage COV_ID="0" Code="HO9"></Coverage>
+					<Coverage COV_ID="0" Code="EBDUC"></Coverage>
+					<Coverage COV_ID="0" Code="EBRDC"></Coverage>
+					<Coverage COV_ID="0" Code="REDUC"></Coverage>
+					<Coverage COV_ID="0" Code="RECST"></Coverage>
+					<!-- Added by Charles on 2-Dec-09 for Itrack 6647 -->
+					<Coverage COV_ID="0" Code="HO493"></Coverage>
+				</Coverages>
+			</Remove>
+			<Mandatory>
+				<Coverages>
+					<Coverage COV_ID="163" Code="EBAIRP"></Coverage>
+					<Coverage COV_ID="148" Code="EBOS40"></Coverage>
+					<Coverage COV_ID="152" Code="EBOS489"></Coverage>
+					<Coverage COV_ID="172" Code="EBSS490"></Coverage>
+					<Coverage COV_ID="0" Code="HO48"></Coverage><!-- Added by Charles on 4-Dec-09 for Itrack 6405 -->+
+					<Coverage COV_ID="742" Code="OSTDISH"></Coverage>
+					<Coverage COV_ID="134" Code="DWELL"></Coverage>
+					<Coverage COV_ID="135" Code="OS"></Coverage>
+					<Coverage COV_ID="136" Code="EBUSPP"></Coverage>
+					<Coverage COV_ID="137" Code="LOSUR"></Coverage>
+					<Coverage COV_ID="170" Code="PL"></Coverage>
+					<Coverage COV_ID="171" Code="MEDPM"></Coverage>
+					<Coverage COV_ID="145" Code="EBIF96"></Coverage>
+					<Coverage COV_ID="" Code="EBOS48"></Coverage>
+					<Coverage COV_ID="154" Code="EBCCSL"></Coverage>
+					<Coverage COV_ID="" Code="EBCCSS"></Coverage>
+					<Coverage COV_ID="192" Code="EBCCSI"></Coverage>
+					<Coverage COV_ID="194" Code="EBCCSF"></Coverage>
+					<Coverage COV_ID="146" Code="IBUSP"></Coverage>
+					<Coverage COV_ID="58" Code="IBUSPO"></Coverage>
+					<Coverage COV_ID="153" Code="EBICC53"></Coverage>
+					<Coverage COV_ID="188" Code="EBCCSM"></Coverage>
+					<Coverage COV_ID="159" Code="EBDUC"></Coverage>
+					<Coverage COV_ID="191" Code="ESCCSS"></Coverage>
+					<Coverage COV_ID="166" Code="EBCDC"></Coverage>
+					<Coverage COV_ID="160" Code="EBCASP"></Coverage>
+					<Coverage COV_ID="162" Code="LAC"></Coverage>
+					<Coverage COV_ID="156" Code="SEWER"></Coverage>
+					<Coverage COV_ID="0" Code="HO100"></Coverage>
+				</Coverages>
+			</Mandatory>
+			<BaseCoverage Code="EBUSPP"></BaseCoverage>
+		</Product>
+	</State>
+</Root>

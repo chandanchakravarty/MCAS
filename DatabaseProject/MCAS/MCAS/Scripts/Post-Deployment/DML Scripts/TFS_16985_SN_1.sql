@@ -1,0 +1,1 @@
+﻿ Update MNT_TransactionAuditLog set ChangedColumns='<ChangeXml></ChangeXml>' where ChangedColumns=''

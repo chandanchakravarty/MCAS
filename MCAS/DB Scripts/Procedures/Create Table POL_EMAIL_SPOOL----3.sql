@@ -1,0 +1,37 @@
+ 
+
+CREATE TABLE [dbo].[POL_EMAIL_SPOOL](
+	[INDEN_ROW_ID] [int] IDENTITY(1,1) NOT NULL,
+	[EMAIL_FROM] [nvarchar](100) NULL,
+	[EMAIL_TO] [nvarchar](1000) NULL,
+	[EMAIL_TEXT] [nvarchar](max) NULL,
+	[SENT_STATUS] [char](1) NULL,
+	[SENT_TIME] [datetime] NULL,
+	[REMARK] [nvarchar](2000) NULL,
+	[ERROR_DESCRIPTION] [text] NULL,
+	[IsActive] [char](1) NULL,
+	[CreatedDate] [datetime] NULL,
+	[CreatedBy] [nvarchar](25) NULL,
+	[ModifiedBy] [nvarchar](25) NULL,
+	[ModifiedDate] [datetime] NULL,
+ CONSTRAINT [PK_POL_EMAIL_SPOOL] PRIMARY KEY CLUSTERED 
+(
+	[INDEN_ROW_ID] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+
+GO
+
+SET ANSI_PADDING OFF
+GO
+
+ALTER TABLE [dbo].[POL_EMAIL_SPOOL] ADD  DEFAULT ('You have been reassigned a new task') FOR [EMAIL_TEXT]
+GO
+
+ALTER TABLE [dbo].[POL_EMAIL_SPOOL] ADD  DEFAULT ('N') FOR [SENT_STATUS]
+GO
+
+ALTER TABLE [dbo].[POL_EMAIL_SPOOL] ADD  DEFAULT ('Y') FOR [IsActive]
+GO
+
+

@@ -1,0 +1,72 @@
+
+
+
+IF not EXISTS (SELECT * FROM INFORMATION_SCHEMA.TABLES where table_name = '[MNT_MODULE_MASTER]')
+
+CREATE TABLE [dbo].[MNT_MODULE_MASTER](
+	[MM_MODULE_ID] [int] IDENTITY(1,1) NOT NULL,
+	[MM_MODULE_NAME] [nvarchar](500) NOT NULL,
+	[MM_IS_ACTIVE] [nchar](2) NULL,
+ CONSTRAINT [PK_MNT_MODULE_MASTER_MM_MODULE_ID] PRIMARY KEY NONCLUSTERED 
+(
+	[MM_MODULE_ID] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+
+
+-------------------------------------------------
+
+INSERT INTO MNT_MODULE_MASTER (mm_module_name,mm_is_active)
+
+VALUES('Policy ','Y')
+
+INSERT INTO MNT_MODULE_MASTER (mm_module_name,mm_is_active)
+
+VALUES('Application ','Y')
+
+INSERT INTO MNT_MODULE_MASTER (mm_module_name,mm_is_active)
+
+VALUES('Customer ','Y')
+
+INSERT INTO MNT_MODULE_MASTER (mm_module_name,mm_is_active)
+
+VALUES('Claim ','Y')
+
+INSERT INTO MNT_MODULE_MASTER (mm_module_name,mm_is_active)
+
+VALUES('Maintenance ','Y')
+
+------------------------------------------------------------------------------
+
+IF not EXISTS (SELECT * FROM INFORMATION_SCHEMA.TABLES where table_name = '[MNT_DIARY_DETAILS]')
+
+CREATE TABLE [dbo].[MNT_DIARY_DETAILS](
+	[ID] [int] IDENTITY(1,1) NOT NULL,
+	[MDD_MODULE_ID] [int] NOT NULL,
+	[MDD_DIARYTYPE_ID] [int] NOT NULL,
+	[MDD_LOB_ID] [int] NOT NULL,
+	[MDD_USERGROUP_ID] [nvarchar](500) NULL,
+	[MDD_USERLIST_ID] [nvarchar](500) NULL,
+	[MDD_FOLLOWUP_DATE] [datetime] NULL,
+	[MDD_SUBJECTLINE] [nvarchar](1000) NULL,
+	[MDD_PRIORITY] [nchar](2) NULL,
+	[MDD_NOTIFICATION_LIST] [numeric](9, 0) NULL,
+	[MDD_START_TIME] [datetime] NULL,
+	[MDD_END_TIME] [datetime] NULL,
+	[MDD_IS_ACTIVE] [nchar](2) NOT NULL,
+	[MDD_CREATED_DATETIME] [datetime] NULL,
+	[MDD_CREATED_BY] [int] NULL,
+	[MDD_LAST_UPDATED_DATETIME] [datetime] NULL,
+	[MDD_MODIFIED_BY] [int] NULL,
+	[MDD_FOLLOWUP] [numeric](3, 0) NULL,
+ CONSTRAINT [PK_MNT_DIARY_DETAILS] PRIMARY KEY CLUSTERED 
+(
+	[ID] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+
+

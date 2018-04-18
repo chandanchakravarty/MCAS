@@ -1,0 +1,281 @@
+﻿@model MCAS.Web.Objects.MastersHelper.HospitalModel
+@using MCAS.Web.Objects.CommonHelper
+@using MCAS.Globalisation
+@{
+    ViewBag.Title = "HospitalEditor";
+    Layout = "~/Views/Shared/_SystemAdminLayout.cshtml";
+    var mMCASQueryString = Html.MCASQueryString(Request.QueryString);
+    var pageMode = mMCASQueryString["pageMode"];
+    var btndisplay = "yes";
+    if (pageMode == "View")
+    {
+        btndisplay = "none";
+    }
+    var dis1 = Model.Id == null ? "none;" : "inline;";
+    var cedantid1 = Model.Id == null ? "" : Convert.ToString(Model.Id);
+    SecurityPermissions myPemissions = (SecurityPermissions)ViewData["UserPermissions"];
+    System.Resources.ResourceManager PageResource = (new MCAS.Web.Objects.MastersHelper.TransactionModel()).GetResourceManager(Model.Resource);
+    var screenid = Model.screenId;
+}
+<link href="@Url.Content("~/Content/themes/base/jquery.ui.all.css")" rel="stylesheet" type="text/css" />
+<style type="text/css">
+    .ui-button-icon-primary.ui-icon.ui-icon-closethick
+    {
+        margin: -7px 0 0 -7px;
+    }
+    div.ui-dialog.ui-widget.ui-widget-content.ui-corner-all.ui-front.alert.ui-draggable, div.ui-dialog.ui-widget.ui-widget-content.ui-corner-all.alert.ui-draggable
+    {
+        top: 130px !important;
+    }
+@*    input[type=text]:not('#EmailAddress1'):not('#EmailAdd2'), textarea
+    {
+        text-transform: capitalize;
+    }*@
+</style>
+<script src='@Url.Content("~/Scripts/jquery-2.1.0.min.js")' type="text/javascript"></script>
+<script src="@Url.Content("~/Scripts/jquery.validate.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.min.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/Scripts/jquery-ui-v1.10.3.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/Scripts/globalize/globalize.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/Scripts/globalize/cultures/globalize.culture.en-GB.js")" type="text/javascript"></script>
+<div class="dashboard-wrapper">
+    <div class="PaymentDialogue" style="overflow: hidden;">
+    </div>
+    <div class="container">
+        <div class="row page-title">
+            <div class="col-lg-12">
+                <h2>
+                 @MCAS.Web.Objects.Resources.Common.Common.SystemAdmin</h2>
+                <ul class="breadcrumb">
+                    <li>@PageResource.GetString("HospitalInformationDetails")</li>
+                </ul>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <div class="panel panel-info">
+                    <div class="panel-heading clearfix">
+                        <i class="icon-check-sign"></i>
+                        <h3 class="panel-title">@PageResource.GetString("HospitalInformationDetails")</h3>
+                    </div>
+                    <div style="color: Red; font-weight: bold;" class="has-error" id="error">
+                        <p align="center">
+                            @if (TempData["notice"] != null)
+                            {
+                                @TempData["notice"]
+                            }
+                        </p>
+                    </div>
+                    <div class="panel-body">
+                        @using (Html.BeginForm("HospitalEditor", "ClaimMasters", FormMethod.Post, new { role = "form", @class = "form-horizontal", id = "HospitalForm", name = "HospitalForm" }))
+                        {
+                            @Html.ValidationSummary(true)
+                            @Html.HiddenFor(m => m.Id)
+                            <div class="clearfix igr col-md-12">
+                                @Html.Partial("../Shared/_AddressLayout", ((Model.HospitalAddres)), new ViewDataDictionary { { "id", screenid }, { "TitleName", "Hospital" } })
+                            </div>
+                             <div class="row top-buffer">
+                            </div>
+                            <div class="row top-buffer">
+                                <div class="clearfix igr col-md-12 text-center">
+                                    @if (@Model.UserPermissions.Write)
+                                    {
+                                        <button  style="display:@btndisplay" id="btnSave" class="btn btn-info" visibility = '@Model.UserPermissions.Write' >
+                                            @PageResource.GetString("Save")</button>
+                                    }&nbsp; &nbsp; &nbsp; &nbsp;
+                                    @if (@Model.UserPermissions.Read)
+                                    {
+                                 
+                                        @Html.ActionLink(@PageResource.GetString("Back"), "HospitalIndex", null, new { @class = "btn btn-info" })
+
+                                    }
+                                    &nbsp; &nbsp; &nbsp; &nbsp;
+                                    @if (@Model.UserPermissions.Read)
+                                    {
+                                    <a class="btn btn-info" style="display:@dis1" id="ViewCedantHistory" href="#">@PageResource.GetString("ViewHistory")</a> 
+                                    }
+                                </div>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="panel">
+            @Html.Partial("~/Views/Shared/_TimeStamp.cshtml", Model)
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    $("#InsurerName,#InsurerType").removeAttr("data-val-required");
+    $("#InsurerName").attr("data-val-required", "@PageResource.GetString("HospitalName")"+" is required.");
+    $("#InsurerType").attr("data-val-required", "@PageResource.GetString("HospitalType")"+" is required.");
+    var do_on_load = function () {
+        $(document).on("focus", ":input", function () {
+            $(this).attr("autocomplete", "off")
+        });
+        if ('@pageMode' == 'View') {
+            $('#t2').find('input, textarea, button, select').attr('disabled', 'disabled');
+
+        }  
+        $("#InsurerName").blur(function (a) {
+            a = $.trim($("#InsurerName").val());
+            $.ajax({
+                type: "POST",
+                url: '@Url.Action("CheckHospitalName", "ClaimMasters")',
+                data: {
+                    HospitalName: a,
+                    HosName: "@Model.HospitalAddres.InsurerName"
+                },
+                success: function (a) {
+                    1 == a && "Edit" != getQueryVariable("pageMode") ? (alert("Duplicate"+ "@PageResource.GetString("HospitalName")."), $("#btnsave").attr("disabled", "disabled")) : "@Model.HospitalAddres.InsurerName" != $("#InsurerName").val() && 1 == a ? (alert("Duplicate"+ "@PageResource.GetString("HospitalName")."), $("#btnsave").attr("disabled", "disabled")) : $("#btnsave").removeAttr("disabled")
+                }
+            })
+        });
+        $("#EmailAddress1,#EmailAdd2").blur(function (a) {
+            a = $.trim($(this).val());
+            var b = $(this).context.id;
+            $.ajax({
+                type: "POST",
+                url: '@Url.Action("ValidEmail", "ClaimMasters")',
+                data: {
+                    EmailAdd1: a
+                },
+                success: function (a) {
+                    (1 == a) ? ($("#" + b).val(""), alert("Please enter Email in proper format.")) : $("#btnsave").removeAttr("disabled");
+                }
+            })
+        });
+
+        $("#OfficeNo1").blur(function (a) {
+            a = $.trim($(this).val());
+            if (a == "") { } else
+                MobileNumberLengthCheck("OfficeNo1", "Office No. should be in proper format.");
+        });
+        $("#Mobile1").blur(function (a) {
+            a = $.trim($(this).val());
+            if (a == "") { } else
+                MobileNumberLengthCheck("Mobile1", "Mobile No. should be in proper format.");
+        });
+        $("#Fax1").blur(function (a) {
+            a = $.trim($(this).val());
+            if (a == "") { } else
+                MobileNumberLengthCheck("Fax1", " Fax No. should be in proper format.");
+        });
+        $("#Office2").blur(function (a) {
+            a = $.trim($(this).val());
+            if (a == "") { } else
+                MobileNumberLengthCheck("Office2", "Office No. should be in proper format.");
+        });
+        $("#MobileNo2").blur(function (a) {
+            a = $.trim($(this).val());
+            if (a == "") { } else
+                MobileNumberLengthCheck("MobileNo2", "Mobile No. should be in proper format.");
+        });
+        $("#Fax2").blur(function (a) {
+            a = $.trim($(this).val());
+            if (a == "") { } else
+                MobileNumberLengthCheck("Fax2", " Fax No. should be in proper format.");
+        });
+        $("#Ins").html("@PageResource.GetString("HospitalType")"+"&nbsp;<span class='text-danger'>*</span> ");
+//        $("#Company").html("@PageResource.GetString("HospitalName")"+"&nbsp;<span class='text-danger'>*</span> ");
+        $.culture = Globalize.culture("en-GB");
+        $.validator.methods.date = function (a, b) {
+            return this.optional(b) || Globalize.parseDate(a, "dd/MM/yyyy", "en-GB") || Globalize.parseDate(a, "yyyy-mm-dd")
+        };
+        $("input[type=text]").each(function () {
+            if (void 0 !== $(this).attr("data-val-date") && "The field " == $(this).attr("data-val-date").substring(0, 10)) {
+                var a = $(this).attr("data-val-date").substring(10, $(this).attr("data-val-date").length).replace("must be a date.", "must be in 'dd/mm/yyyy' format.");
+                $(this).removeAttr("data-val-date");
+                $(this).attr("data-val-date", a)
+            }
+        });
+        $("#EffectiveFrom,#EffectiveTo").datepicker({
+            dateFormat: "dd/mm/yy",
+            showStatus: !0,
+            showWeeks: !0,
+            currentText: "Now",
+            autoSize: !0,
+            gotoCurrent: !0,
+            showAnim: "blind",
+            highlightWeek: !0,
+            changeMonth: !0,
+            yearRange: "1951:2050",
+            changeYear: !0,
+            onSelect: function (a) {
+                $(this).valid()
+            }
+        });
+        $("#btnSave").click(function (a) {
+            if ("" != $("#EffectiveFrom").val() && "" != $("#EffectiveTo").val()) var b = $("#EffectiveFrom").datepicker("getDate");
+            var c = $("#EffectiveTo").datepicker("getDate");
+            b > c && (alert("Effective to cannot be less than Effective From date."), a.preventDefault())
+        });
+     $("#ViewCedantHistory").click(function (event) {
+            var id = this.id, uuid = guid(), nuuid = "#" + uuid;
+            var str = '<div id="' + uuid + '" class="uid1" title="Hospital History" style="overflow: hidden;"></div>';
+            $(str).appendTo(".PaymentDialogue")
+            InitializeDialog($(nuuid));
+            event.preventDefault();
+            $(nuuid).dialog("open");
+            $('div.ui-dialog.ui-widget.ui-widget-content.ui-corner-all.ui-front.alert.ui-draggable').css("top", "130px !important");
+            $('div.ui-dialog.ui-widget.ui-widget-content.ui-corner-all.alert.ui-draggable').css("top", "130px !important");
+            return false;
+        });
+    };
+
+    $(document).ready(do_on_load);
+    $(window).bind('page:change', do_on_load);
+
+    function InitializeDialog($element) {
+        $element.dialog({
+            width: "900",
+            resizable: false,
+            draggable: true,
+            show: { effect: 'drop', direction: "up" },
+            title: "Hospital History",
+            model: true,
+            show: 'slide',
+            dialogClass: 'alert',
+            closeOnEscape: true,
+            open: function (event, ui) {
+                var path = '@Url.Content("~/Cedant/ViewCedanthistory")' + "?Cedantid=" + '@cedantid1' + "&Tablename=MNT_Hospital&Displayname=Hospital&uid=" + guid();
+                $element.load(path);
+            },
+            position: {
+                my: "center",
+                at: "center",
+                of: window
+            },
+            close: function () {
+                $element.dialog('destroy').remove();
+            }
+
+        });
+
+    };
+    var guid = (function () {
+        function s4() {
+            return Math.floor((1 + Math.random()) * 0x10000)
+               .toString(16)
+               .substring(1);
+        }
+        return function () {
+            return s4() + s4() + '-' + s4() + '-' + s4() + '-' +
+           s4() + '-' + s4() + s4() + s4();
+        };
+    })();
+    function getQueryVariable(a) {
+        for (var e = "@MenuListItem.ClaimTabs.GetQueryStringVal()".replace(/amp;/ig, "").split("&"), d = 0; d < e.length; d++) {
+            var b = e[d].split("=");
+            if (b[0] == a) return b[1]
+        }
+    };
+
+    function MobileNumberLengthCheck(ControlId, Msg) {
+        if ($.trim($("#" + ControlId).val()).length < 4 || $.trim($("#" + ControlId).val()).length > 15) {
+            alert(Msg, ControlId);
+            return false;
+        }
+    };
+</script>

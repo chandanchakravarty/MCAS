@@ -1,0 +1,96 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Root>
+  <PageTitle>
+    <Culture Code="en-US">Master Value</Culture>
+    <Culture Code="zh-SG">Master Value</Culture>
+    <Culture Code="pt-BR">Master Value</Culture>
+  </PageTitle>
+
+  <ElementsLayout Caption_Width="18" Element_Width="82">TOPBOTTOM</ElementsLayout>
+  <!--Code-->
+  <PageElement name="txtCODE" type="TextBox" Desc=""
+IsMandatory="Yes"
+IsReadOnly="No"
+IsDisabled="No"
+IsDisplay="Yes"
+IsFormatingRequired="No" JsFunctionToFormat="" OnClickJSFunction=""
+OnChangeJSFunction="" >
+    <Style Position="relative" Top="0" Left="10" CssClass="midcolora" ParentTableCell="" />
+    <rev Enabled="No"/>
+    <Culture Code="en-US" Desc="set Label and Message for English language">
+      <Caption>Fee Code</Caption>
+      <rfvMessage>please enter fee code</rfvMessage>
+      <DefaultValue></DefaultValue>
+    </Culture>
+    <Culture Code="zh-SG" Desc="set Label and Message for Singapore language">
+      <Caption>Fee Code</Caption>
+      <rfvMessage>please enter fee code</rfvMessage>
+      <DefaultValue></DefaultValue>
+    </Culture>
+    <Culture Code="pt-BR" Desc="set Label and Message for Singapore language">
+      <Caption>Código taxa</Caption>
+      <rfvMessage>por favor insira o código de taxa</rfvMessage>
+      <DefaultValue></DefaultValue>
+    </Culture>
+  </PageElement>
+
+  <!--Description-->
+  <PageElement name="txtDESCRIPTION" type="TextBox" Desc=""
+IsMandatory="Yes"
+IsReadOnly="No"
+IsDisabled="No"
+IsDisplay="Yes"
+IsFormatingRequired="No" JsFunctionToFormat="" OnClickJSFunction=""
+OnChangeJSFunction="" >
+    <Style Position="relative" Top="0" Left="10" CssClass="midcolora" ParentTableCell="" />
+    <rev Enabled="No"/>
+    <Culture Code="en-US" Desc="set Label and Message for English language">
+      <Caption>Fee Description</Caption>
+      <rfvMessage>please enter description.</rfvMessage>
+      <DefaultValue></DefaultValue>
+    </Culture>
+    <Culture Code="zh-SG" Desc="set Label and Message for Singapore language">
+      <Caption>Fee Description</Caption>
+      <rfvMessage>please enter description.</rfvMessage>
+      <DefaultValue></DefaultValue>
+    </Culture>
+    <Culture Code="pt-BR" Desc="set Label and Message for Singapore language">
+      <Caption>descrição taxa</Caption>
+      <rfvMessage>por favor insira Descrição</rfvMessage>
+      <DefaultValue></DefaultValue>
+    </Culture>
+  </PageElement>
+
+  <!--Special recovery type-->
+  <PageElement name="cmbRECOVERY_TYPE" type="DDL" Desc=""
+IsMandatory="No"
+IsReadOnly="No"
+IsDisabled="No"
+IsDisplay="No"
+IsFormatingRequired="No" JsFunctionToFormat="" OnClickJSFunction=""
+OnChangeJSFunction="" >
+    <Bindings>
+      <DataSource type="Proc" name="Proc_GetLookupValues" TextField="LOOKUP_VALUE_DESC" ValueField="LOOKUP_UNIQUE_ID" WhereClause="">
+        <Params name="@LookupCode" Value="YESNO" />
+        <Params name="@LANG_ID" Value="1" />
+      </DataSource>
+    </Bindings>
+    <Style Position="relative" Top="0" Left="10" CssClass="midcolora" ParentTableCell="" />
+    <rev Enabled="No"/>
+    <Culture Code="en-US" Desc="set Label and Message for English language">
+      <Caption>Special Recovery Type</Caption>
+      <rfvMessage>Please select Special Recovery Type</rfvMessage>
+      <DefaultValue></DefaultValue>
+    </Culture>
+    <Culture Code="zh-SG" Desc="set Label and Message for Singapore language">
+      <Caption>Special Recovery Type</Caption>
+      <rfvMessage>Please select Special Recovery Type</rfvMessage>
+      <DefaultValue></DefaultValue>
+    </Culture>
+    <Culture Code="pt-BR" Desc="set Label and Message for Singapore language">
+      <Caption>Tipo especial de recuperação</Caption>
+      <rfvMessage>Por favor, selecione o tipo de Recuperação Especial</rfvMessage>
+      <DefaultValue></DefaultValue>
+    </Culture>
+  </PageElement>
+</Root>

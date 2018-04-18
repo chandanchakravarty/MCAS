@@ -1,0 +1,56 @@
+IF  EXISTS (SELECT * FROM SYS.OBJECTS WHERE OBJECT_ID = OBJECT_ID(N'[DBO].[PROC_INSERT_POL_MARINECARGO_AIRCRAFT]') AND TYPE IN (N'P', N'PC'))
+DROP PROCEDURE DBO.PROC_INSERT_POL_MARINECARGO_AIRCRAFT
+GO
+SET ANSI_NULLS ON 
+GO
+SET QUOTED_IDENTIFIER ON
+GO       
+-- =============================================    
+-- Author:  Avijit Goswami
+-- Create date: 21-march-2012   
+-- Description: -    
+-- =============================================    
+    
+CREATE PROCEDURE dbo.PROC_INSERT_POL_MARINECARGO_AIRCRAFT
+
+						@AIRCRAFT_ID INT OUTPUT,
+						@AIRCRAFT_NUMBER VARCHAR(10),
+						@AIRLINE VARCHAR(40),
+						@AIRCRAFT_FROM VARCHAR(40),
+						@AIRCRAFT_TO VARCHAR(40),
+						@AIRWAY_BILL VARCHAR(40),						
+						@IS_ACTIVE CHAR,
+						@CREATED_BY VARCHAR(4),
+						@CREATED_DATETIME DATETIME
+				AS    
+				BEGIN
+				SELECT @AIRCRAFT_ID = IsNull(Max(AIRCRAFT_ID),0) + 1 FROM POL_MARINECARGO_AIRCRAFT 
+				INSERT INTO POL_MARINECARGO_AIRCRAFT
+				(    
+				 AIRCRAFT_ID,
+				 AIRCRAFT_NUMBER,
+				 AIRLINE,
+				 AIRCRAFT_FROM,
+				 AIRCRAFT_TO,
+				 AIRWAY_BILL,				 
+				 IS_ACTIVE,
+				 CREATED_BY,
+				 CREATED_DATETIME				 
+				 )    
+    
+				VALUES     
+						(  
+					 @AIRCRAFT_ID,
+					 @AIRCRAFT_NUMBER,
+					 @AIRLINE,
+					 @AIRCRAFT_FROM,
+					 @AIRCRAFT_TO,
+					 @AIRWAY_BILL,					 
+					 @IS_ACTIVE,
+					 @CREATED_BY,
+					 @CREATED_DATETIME					 
+					)    
+  
+END    
+GO
+

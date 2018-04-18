@@ -1,0 +1,1265 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Auto>
+	<!-- TB-6, TB-7, A-90 WILL BE AVAILABLE FOR ALL VEHICLE TYPE ITRACK 5414, 5431-->
+	<State ID="22" Name="Michigan">
+		<!-- START OF COMMERCIAL -->
+		<VehicleUse ID="11333" Desc="Commercial">
+			<Remove>
+				<Coverages>
+					<Coverage ID="124" Code="ROAD" Desc="Road Service" />
+					<Coverage ID="125" Code="RREIM" Desc="Rental Reimbursement (A-89)" />
+					<Coverage ID="121" Code="UNDSP" Desc="Underinsured Motorists (BI Split Limits)" />
+					<Coverage ID="304" Code="UNCSL" Desc="Underinsured Motorists (CSL)" />
+					<Coverage ID="254" Code="ENO" Desc="Extended Non-Owned Coverage for Named Individual (A-34)" />
+					<Coverage ID="1003" Code="MHT22" Desc="Motor Homes, Truck or Van Campers &amp; Travel Trailers A-22" />
+					<!--<Coverage ID="1004" Code="PAP6" Desc="Personal Auto Policy - TB-6" />-->
+					<!--<Coverage ID="1005" Code="TE90" Desc="Transportation Expense A-90" />-->
+					<Coverage ID="1006" Code="PIP94" Desc="Underinsured Motorists (CSL)" />
+					<Coverage ID="251" Code="EBCE" Desc="Customizing Equipment (A-14)" />
+					<Coverage ID="1017" Code="SPA8" Desc="Snow -Plowing A-64" />
+					<Coverage ID="1000" Code="AMC49" Desc="Antique Motor Car Endorsement A-49" />
+					<Coverage ID="1001" Code="CC49" Desc="Classic Car Endorsement  A-46" />
+					<Coverage ID="298" Code="EBHA" Desc="Hired Automobiles – Cost of Hire Basis (A-85)" COMMENT="OBSOLETE" />
+					<Coverage ID="297" Code="EBENO" Desc="Employers Non-Ownership Liability (A-80)" COMMENT="OBSOLETE" />
+					<Coverage ID="1018" Code="SA44" Desc="Stated Amount - A-45" />
+					<Coverage ID="249" Code="LLGC" Desc="Loan / Lease Gap Coverage (A-11)" />
+					<Coverage ID="252" Code="SORPE" Desc="Sound Reproducing - Tapes (A-29)" />
+					<Coverage ID="1030" Code="SRTE" Desc="Sound Receiving and Transmitting Equipment A-31" COMMENT="OBSOLETE" />
+				</Coverages>
+				<CoverageLimit COV_ID="116" Desc="Personal Injury Protection">
+					<LIMIT_DEDUC LIMIT_DEDUC_ID="686" Amount="" />
+					<LIMIT_DEDUC LIMIT_DEDUC_ID="687" Amount="" />
+					<LIMIT_DEDUC LIMIT_DEDUC_ID="688" Amount="" />
+				</CoverageLimit>
+				<CoverageLimit COV_ID="123" Desc="Other Than Collision (Comprehensive)">
+					<LIMIT_DEDUC LIMIT_DEDUC_ID="161" Amount="" />
+					<LIMIT_DEDUC LIMIT_DEDUC_ID="164" Amount="" />
+				</CoverageLimit>
+				<CoverageLimit COV_ID="122" Desc="Collision">
+					<LIMIT_DEDUC LIMIT_DEDUC_ID="604" Amount="" />
+					<LIMIT_DEDUC LIMIT_DEDUC_ID="605" Amount="" />
+				</CoverageLimit>
+			</Remove>
+			<VehicleType ID="11339" Desc="Local Haul">
+				<Remove>
+					<Coverages></Coverages>
+				</Remove>
+				<IsSuspended Type="10963" Desc="is Suspended Comp is Yes">
+					<Remove>
+						<Coverages>
+							<Coverage ID="113" Code="SLL" Desc="Single Limits Liability CSL (BI and PD)" />
+							<Coverage ID="114" Code="BISPL" Desc="Bodily Injury Liability (Split Limit)" />
+							<Coverage ID="115" Code="PD" Desc="Property Damage Liability" />
+							<Coverage ID="116" Code="PIP" Desc="Personal Injury Protection" />
+							<Coverage ID="117" Code="PPI" Desc="Property Protection Insurance" />
+							<Coverage ID="118" Code="LPD" Desc="Limited Property Damage Liability (Mini-Tort)" />
+							<Coverage ID="997" Code="CAB91" Desc="Coordination of Benefits  A-91" />
+							<Coverage ID="119" Code="PUNCS" Desc="Uninsured Motorists (CSL)" />
+							<Coverage ID="120" Code="PUMSP" Desc="Uninsured Motorists (BI Split Limits)" />
+							<Coverage ID="121" Code="UNDSP" Desc="Underinsured Motorists (BI Split Limits)" />
+							<Coverage ID="122" Code="COLL" Desc="Collision" />
+							<Coverage ID="1015" Code="TE92" Desc="Terrorism Endorsement C-92" />
+							<Coverage ID="124" Code="ROAD" Desc="Road Service" />
+							<Coverage ID="125" Code="RREIM" Desc="Rental Reimbursement (A-89)" />
+							<Coverage ID="249" Code="LLGC" Desc="Loan / Lease Gap Coverage (A-11)" />
+							<Coverage ID="251" Code="EBCE" Desc="Customizing Equipment (A-14)" />
+							<Coverage ID="252" Code="SORPE" Desc="Sound Reproducing - Tapes (A-29)" />
+							<Coverage ID="253" Code="SORCV" Desc="Sound Receiving &amp; Transmitting Equipment (A-31)"
+								COMMENT="OBSOLETE" />
+							<Coverage ID="297" Code="EBENO" Desc="Employers Non-Ownership Liability (A-80)" COMMENT="OBSOLETE" />
+							<Coverage ID="298" Code="EBHA" Desc="Hired Automobiles – Cost of Hire Basis (A-85)" COMMENT="OBSOLETE" />
+							<Coverage ID="304" Code="UNCSL" Desc="Underinsured Motorists (CSL)" />
+							<Coverage ID="1000" Code="AMC49" Desc="Antique Motor Car Endorsement A-49" />
+							<Coverage ID="1001" Code="CC49" Desc="Classic Car Endorsement  A-46" />
+							<Coverage ID="1006" Code="PIP94" Desc="PIP Waiver/Rejection of Work Loss Benefit A-94" />
+							<Coverage ID="1003" Code="MHT22" Desc="Motor Homes, Truck or Van Campers &amp; Travel Trailers A-22" />
+							<Coverage ID="1017" Code="SPA8" Desc="Snow -Plowing A-64" />
+							<Coverage ID="1018" Code="SA44" Desc="Stated Amount - A-45" />
+							<Coverage ID="1030" Code="SRTE" Desc="Sound Receiving and Transmitting Equipment A-31" />
+							<Coverage ID="301" Code="EECOMP" Desc="Miscellaneous Extra Equipment - Comprehensive A-15" />
+							<Coverage ID="303" Code="EECOLL" Desc="Miscellaneous Extra Equipment - Collision A-15" />
+							<Coverage ID="998" Code="RCC68" Desc="Regular Collision Coverage A-68" />
+						</Coverages>
+					</Remove>
+				</IsSuspended>
+			</VehicleType>
+			<VehicleType ID="11338" Desc="Local Haul - Intermittent">
+				<Remove>
+					<Coverages></Coverages>
+				</Remove>
+				<IsSuspended Type="10963" Desc="is Suspended Comp is Yes">
+					<Remove>
+						<Coverages>
+							<Coverage ID="113" Code="SLL" Desc="Single Limits Liability CSL (BI and PD)" />
+							<Coverage ID="114" Code="BISPL" Desc="Bodily Injury Liability (Split Limit)" />
+							<Coverage ID="115" Code="PD" Desc="Property Damage Liability" />
+							<Coverage ID="116" Code="PIP" Desc="Personal Injury Protection" />
+							<Coverage ID="117" Code="PPI" Desc="Property Protection Insurance" />
+							<Coverage ID="118" Code="LPD" Desc="Limited Property Damage Liability (Mini-Tort)" />
+							<Coverage ID="997" Code="CAB91" Desc="Coordination of Benefits  A-91" />
+							<Coverage ID="119" Code="PUNCS" Desc="Uninsured Motorists (CSL)" />
+							<Coverage ID="120" Code="PUMSP" Desc="Uninsured Motorists (BI Split Limits)" />
+							<Coverage ID="121" Code="UNDSP" Desc="Underinsured Motorists (BI Split Limits)" />
+							<Coverage ID="122" Code="COLL" Desc="Collision" />
+							<Coverage ID="1015" Code="TE92" Desc="Terrorism Endorsement C-92" />
+							<Coverage ID="124" Code="ROAD" Desc="Road Service" />
+							<Coverage ID="125" Code="RREIM" Desc="Rental Reimbursement (A-89)" />
+							<Coverage ID="249" Code="LLGC" Desc="Loan / Lease Gap Coverage (A-11)" />
+							<Coverage ID="251" Code="EBCE" Desc="Customizing Equipment (A-14)" />
+							<Coverage ID="252" Code="SORPE" Desc="Sound Reproducing - Tapes (A-29)" />
+							<Coverage ID="253" Code="SORCV" Desc="Sound Receiving &amp; Transmitting Equipment (A-31)"
+								COMMENT="OBSOLETE" />
+							<Coverage ID="297" Code="EBENO" Desc="Employers Non-Ownership Liability (A-80)" COMMENT="OBSOLETE" />
+							<Coverage ID="298" Code="EBHA" Desc="Hired Automobiles – Cost of Hire Basis (A-85)" COMMENT="OBSOLETE" />
+							<Coverage ID="304" Code="UNCSL" Desc="Underinsured Motorists (CSL)" />
+							<Coverage ID="1000" Code="AMC49" Desc="Antique Motor Car Endorsement A-49" />
+							<Coverage ID="1001" Code="CC49" Desc="Classic Car Endorsement  A-46" />
+							<Coverage ID="1006" Code="PIP94" Desc="PIP Waiver/Rejection of Work Loss Benefit A-94" />
+							<Coverage ID="1003" Code="MHT22" Desc="Motor Homes, Truck or Van Campers &amp; Travel Trailers A-22" />
+							<Coverage ID="1017" Code="SPA8" Desc="Snow -Plowing A-64" />
+							<Coverage ID="1018" Code="SA44" Desc="Stated Amount - A-45" />
+							<Coverage ID="1030" Code="SRTE" Desc="Sound Receiving and Transmitting Equipment A-31" />
+							<Coverage ID="301" Code="EECOMP" Desc="Miscellaneous Extra Equipment - Comprehensive A-15" />
+							<Coverage ID="303" Code="EECOLL" Desc="Miscellaneous Extra Equipment - Collision A-15" />
+							<Coverage ID="998" Code="RCC68" Desc="Regular Collision Coverage A-68" />
+						</Coverages>
+					</Remove>
+				</IsSuspended>
+			</VehicleType>
+			<VehicleType ID="11341" Desc="Trailer">
+				<Remove>
+					<Coverages>
+						<Coverage ID="113" Code="SLL" Desc="Single Limits Liability CSL (BI and PD)" />
+						<Coverage ID="114" Code="BISPL" Desc="Bodily Injury Liability (Split Limit)" />
+						<Coverage ID="115" Code="PD" Desc="Property Damage Liability" />
+						<Coverage ID="116" Code="PIP" Desc="Personal Injury Protection" />
+						<Coverage ID="117" Code="PPI" Desc="Property Protection Insurance" />
+						<Coverage ID="118" Code="LPD" Desc="Limited Property Damage Liability (Mini-Tort)" />
+						<Coverage ID="997" Code="CAB91" Desc="Coordination of Benefits  A-91" />
+						<Coverage ID="119" Code="PUNCS" Desc="Uninsured Motorists (CSL)" />
+						<Coverage ID="120" Code="PUMSP" Desc="Uninsured Motorists (BI Split Limits)" />
+						<Coverage ID="121" Code="UNDSP" Desc="Underinsured Motorists (BI Split Limits)" />
+						<Coverage ID="124" Code="ROAD" Desc="Road Service" />
+						<Coverage ID="125" Code="RREIM" Desc="Rental Reimbursement (A-89)" />
+						<Coverage ID="249" Code="LLGC" Desc="Loan / Lease Gap Coverage (A-11)" />
+						<Coverage ID="251" Code="EBCE" Desc="Customizing Equipment (A-14)" />
+						<Coverage ID="252" Code="SORPE" Desc="Sound Reproducing - Tapes (A-29)" />
+						<Coverage ID="253" Code="SORCV" Desc="Sound Receiving &amp; Transmitting Equipment (A-31)"
+							COMMENT="OBSOLETE" />
+						<Coverage ID="254" Code="ENO" Desc="Extended Non-Owned Coverage for Named Individual (A-34)" />
+						<Coverage ID="297" Code="EBENO" Desc="Employers Non-Ownership Liability (A-80)" COMMENT="OBSOLETE" />
+						<Coverage ID="298" Code="EBHA" Desc="Hired Automobiles – Cost of Hire Basis (A-85)" COMMENT="OBSOLETE" />
+						<Coverage ID="304" Code="UNCSL" Desc="Underinsured Motorists (CSL)" />
+						<Coverage ID="1000" Code="AMC49" Desc="Antique Motor Car Endorsement A-49" />
+						<Coverage ID="1001" Code="CC49" Desc="Classic Car Endorsement  A-46" />
+						<Coverage ID="1002" Code="EP95" Desc="Excluded Person(s) Endorsement A-95" />
+						<Coverage ID="1006" Code="PIP94" Desc="PIP Waiver/Rejection of Work Loss Benefit A-94" />
+						<Coverage ID="1003" Code="MHT22" Desc="Motor Homes, Truck or Van Campers &amp; Travel Trailers A-22" />
+						<Coverage ID="1017" Code="SPA8" Desc="Snow -Plowing A-64" />
+						<Coverage ID="1018" Code="SA44" Desc="Stated Amount - A-45" />
+						<Coverage ID="1030" Code="SRTE" Desc="Sound Receiving and Transmitting Equipment A-31" />
+						<Coverage ID="301" Code="EECOMP" Desc="Miscellaneous Extra Equipment - Comprehensive A-15" />
+						<Coverage ID="303" Code="EECOLL" Desc="Miscellaneous Extra Equipment - Collision A-15" />
+					</Coverages>
+					<!--Coverage ID="1004" Code="PAP6" Desc="Personal Auto Policy - TB-6" />
+						<Coverage ID="1005" Code="TE90" Desc="Transportation Expense A-90" /-->
+				</Remove>
+			</VehicleType>
+			<VehicleType ID="11340" Desc="Trailer  - Intermittent">
+				<Remove>
+					<Coverages></Coverages>
+				</Remove>
+			</VehicleType>
+			<VehicleType ID="11871" Desc="Long Haul">
+				<Remove>
+					<Coverages></Coverages>
+				</Remove>
+				<IsSuspended Type="10963" Desc="is Suspended Comp is Yes">
+					<Remove>
+						<Coverages>
+							<Coverage ID="113" Code="SLL" Desc="Single Limits Liability CSL (BI and PD)" />
+							<Coverage ID="114" Code="BISPL" Desc="Bodily Injury Liability (Split Limit)" />
+							<Coverage ID="115" Code="PD" Desc="Property Damage Liability" />
+							<Coverage ID="116" Code="PIP" Desc="Personal Injury Protection" />
+							<Coverage ID="117" Code="PPI" Desc="Property Protection Insurance" />
+							<Coverage ID="118" Code="LPD" Desc="Limited Property Damage Liability (Mini-Tort)" />
+							<Coverage ID="997" Code="CAB91" Desc="Coordination of Benefits  A-91" />
+							<Coverage ID="119" Code="PUNCS" Desc="Uninsured Motorists (CSL)" />
+							<Coverage ID="120" Code="PUMSP" Desc="Uninsured Motorists (BI Split Limits)" />
+							<Coverage ID="121" Code="UNDSP" Desc="Underinsured Motorists (BI Split Limits)" />
+							<Coverage ID="122" Code="COLL" Desc="Collision" />
+							<Coverage ID="1015" Code="TE92" Desc="Terrorism Endorsement C-92" />
+							<Coverage ID="124" Code="ROAD" Desc="Road Service" />
+							<Coverage ID="125" Code="RREIM" Desc="Rental Reimbursement (A-89)" />
+							<Coverage ID="249" Code="LLGC" Desc="Loan / Lease Gap Coverage (A-11)" />
+							<Coverage ID="251" Code="EBCE" Desc="Customizing Equipment (A-14)" />
+							<Coverage ID="252" Code="SORPE" Desc="Sound Reproducing - Tapes (A-29)" />
+							<Coverage ID="253" Code="SORCV" Desc="Sound Receiving &amp; Transmitting Equipment (A-31)"
+								COMMENT="OBSOLETE" />
+							<Coverage ID="297" Code="EBENO" Desc="Employers Non-Ownership Liability (A-80)" COMMENT="OBSOLETE" />
+							<Coverage ID="298" Code="EBHA" Desc="Hired Automobiles – Cost of Hire Basis (A-85)" COMMENT="OBSOLETE" />
+							<Coverage ID="304" Code="UNCSL" Desc="Underinsured Motorists (CSL)" />
+							<Coverage ID="1000" Code="AMC49" Desc="Antique Motor Car Endorsement A-49" />
+							<Coverage ID="1001" Code="CC49" Desc="Classic Car Endorsement  A-46" />
+							<Coverage ID="1006" Code="PIP94" Desc="PIP Waiver/Rejection of Work Loss Benefit A-94" />
+							<Coverage ID="1003" Code="MHT22" Desc="Motor Homes, Truck or Van Campers &amp; Travel Trailers A-22" />
+							<Coverage ID="1017" Code="SPA8" Desc="Snow -Plowing A-64" />
+							<Coverage ID="1018" Code="SA44" Desc="Stated Amount - A-45" />
+							<Coverage ID="1030" Code="SRTE" Desc="Sound Receiving and Transmitting Equipment A-31" />
+							<Coverage ID="301" Code="EECOMP" Desc="Miscellaneous Extra Equipment - Comprehensive A-15" />
+							<Coverage ID="303" Code="EECOLL" Desc="Miscellaneous Extra Equipment - Collision A-15" />
+							<Coverage ID="998" Code="RCC68" Desc="Regular Collision Coverage A-68" />
+						</Coverages>
+					</Remove>
+				</IsSuspended>
+			</VehicleType>
+		</VehicleUse>
+		<!-- END OF COMMERCIAL -->
+		<!-- START OF PERSONAL -->
+		<VehicleUse ID="11332" Desc="Personal">
+			<Remove>
+				<Coverages>
+					<Coverage ID="298" Code="EBHA" Desc="Hired Automobiles – Cost of Hire Basis (A-85)" COMMENT="OBSOLETE" />
+					<Coverage ID="297" Code="EBENO" Desc="Employers Non-Ownership Liability (A-80)" COMMENT="OBSOLETE" />
+					<!-- Commented by Asfa(13-June-2008) - iTrack #4283
+					<Coverage ID="1016" Code="TAP7" Desc="Trailblazer Auto Policy - TB-7" />
+					-->
+					<!-- deleted as per  itrack 4229
+					<Coverage ID="1015" Code="TE92" Desc="Terrorism Endorsement C-92" />
+					-->
+				</Coverages>
+				<CoverageLimit COV_ID="116" Desc="Personal Injury Protection">
+					<LIMIT_DEDUC LIMIT_DEDUC_ID="1373" Amount="" />
+					<LIMIT_DEDUC LIMIT_DEDUC_ID="1374" Amount="" />
+					<LIMIT_DEDUC LIMIT_DEDUC_ID="1375" Amount="" />
+				</CoverageLimit>
+			</Remove>
+			<VehicleType ID="11335" Desc="Customized Van or Truck">
+				<Remove>
+					<Coverages>
+						<Coverage ID="1000" Code="AMC49" Desc="Antique Motor Car Endorsement A-49" />
+						<Coverage ID="1001" Code="CC49" Desc="Classic Car Endorsement  A-46" />
+						<Coverage ID="1003" Code="MHT22" Desc="Motor Homes, Truck or Van Campers &amp; Travel Trailers A-22" />
+					</Coverages>
+					<CoverageLimit COV_ID="123" Desc="Other Than Collision (Comprehensive)">
+						<LIMIT_DEDUC LIMIT_DEDUC_ID="161" Amount="" />
+					</CoverageLimit>
+				</Remove>
+				<IsSuspended Type="10963" Desc="is Suspended Comp is Yes">
+					<Remove>
+						<Coverages>
+							<Coverage ID="113" Code="SLL" Desc="Single Limits Liability CSL (BI and PD)" />
+							<Coverage ID="114" Code="BISPL" Desc="Bodily Injury Liability (Split Limit)" />
+							<Coverage ID="115" Code="PD" Desc="Property Damage Liability" />
+							<Coverage ID="116" Code="PIP" Desc="Personal Injury Protection" />
+							<Coverage ID="117" Code="PPI" Desc="Property Protection Insurance" />
+							<Coverage ID="118" Code="LPD" Desc="Limited Property Damage Liability (Mini-Tort)" />
+							<Coverage ID="119" Code="PUNCS" Desc="Uninsured Motorists (CSL)" />
+							<Coverage ID="120" Code="PUMSP" Desc="Uninsured Motorists (BI Split Limits)" />
+							<Coverage ID="121" Code="UNDSP" Desc="Underinsured Motorists (BI Split Limits)" />
+							<Coverage ID="122" Code="COLL" Desc="Collision" />
+							<Coverage ID="124" Code="ROAD" Desc="Road Service" />
+							<Coverage ID="125" Code="RREIM" Desc="Rental Reimbursement (A-89)" />
+							<Coverage ID="249" Code="LLGC" Desc="Loan / Lease Gap Coverage (A-11)" />
+							<Coverage ID="252" Code="SORPE" Desc="Sound Reproducing - Tapes (A-29)" />
+							<Coverage ID="253" Code="SORCV" Desc="Sound Receiving &amp; Transmitting Equipment (A-31)"
+								COMMENT="OBSOLETE" />
+							<Coverage ID="254" Code="ENO" Desc="Extended Non-Owned Coverage for Named Individual (A-34)" />
+							<Coverage ID="297" Code="EBENO" Desc="Employers Non-Ownership Liability (A-80)" COMMENT="OBSOLETE" />
+							<Coverage ID="298" Code="EBHA" Desc="Hired Automobiles – Cost of Hire Basis (A-85)" COMMENT="OBSOLETE" />
+							<Coverage ID="301" Code="EECOMP" Desc="Miscellaneous Extra Equipment - Comprehensive A-15" />
+							<Coverage ID="303" Code="EECOLL" Desc="Miscellaneous Extra Equipment - Collision A-15" />
+							<Coverage ID="304" Code="UNCSL" Desc="Underinsured Motorists (CSL)" />
+							<Coverage ID="1000" Code="AMC49" Desc="Antique Motor Car Endorsement A-49" />
+							<Coverage ID="1001" Code="CC49" Desc="Classic Car Endorsement  A-46" />
+							<Coverage ID="1003" Code="MHT22" Desc="Motor Homes, Truck or Van Campers &amp; Travel Trailers A-22" />
+							<Coverage ID="1017" Code="SPA8" Desc="Snow -Plowing A-64" />
+							<Coverage ID="997" Code="CAB91	" Desc="Coordination of Benefits  A-91" />
+							<Coverage ID="998" Code="RCC68" Desc="Regular Collision Coverage A-68" />
+							<Coverage ID="999" Code="DD25" Desc="Diminishing Deductible A-25" />
+							<Coverage ID="1006" Code="PIP94" Desc="PIP Waiver/Rejection of Work Loss Benefit A-94" />
+							<Coverage ID="1018" Code="SA44" Desc="Stated Amount - A-45" />
+							<Coverage ID="1030" Code="SRTE" Desc="Sound Receiving and Transmitting Equipment A-31" />
+							<Coverage ID="1015" Code="TE92" Desc="Terrorism Endorsement C-92" />
+						</Coverages>
+						<!--Coverage ID="1004" Code="PAP6" Desc="Personal Auto Policy - TB-6" />
+							<Coverage ID="1005" Code="TE90" Desc="Transportation Expense A-90" />
+							<Coverage ID="1002" Code="EP95" Desc="Excluded Person(s) Endorsement A-95" /-->
+					</Remove>
+				</IsSuspended>
+			</VehicleType>
+			<VehicleType ID="11336" Desc="Motor home, Truck or Van Campers">
+				<Remove>
+					<Coverages>
+						<Coverage ID="125" Code="RREIM" Desc="Rental Reimbursement (A-89)" />
+						<Coverage ID="1000" Code="AMC49" Desc="Antique Motor Car Endorsement A-49" />
+						<Coverage ID="1001" Code="CC49" Desc="Classic Car Endorsement  A-46" />
+					</Coverages>
+					<CoverageLimit COV_ID="123" Desc="Other Than Collision (Comprehensive)">
+						<LIMIT_DEDUC LIMIT_DEDUC_ID="161" Amount="" />
+					</CoverageLimit>
+					<CoverageLimit COV_ID="122" Desc=" Collision">
+						<LIMIT_DEDUC LIMIT_DEDUC_ID="604" Amount="" />
+						<LIMIT_DEDUC LIMIT_DEDUC_ID="605" Amount="" />
+						<LIMIT_DEDUC LIMIT_DEDUC_ID="606" Amount="" />
+						<LIMIT_DEDUC LIMIT_DEDUC_ID="607" Amount="" />
+						<!-- LIMIT_DEDUC LIMIT_DEDUC_ID="612" Amount="" /  Itrack 5154 Deductible part-->
+					</CoverageLimit>
+				</Remove>
+				<IsSuspended Type="10963" Desc="is Suspended Comp is Yes">
+					<Remove>
+						<Coverages>
+							<Coverage ID="113" Code="SLL" Desc="Single Limits Liability CSL (BI and PD)" />
+							<Coverage ID="114" Code="BISPL" Desc="Bodily Injury Liability (Split Limit)" />
+							<Coverage ID="115" Code="PD" Desc="Property Damage Liability" />
+							<Coverage ID="116" Code="PIP" Desc="Personal Injury Protection" />
+							<Coverage ID="117" Code="PPI" Desc="Property Protection Insurance" />
+							<Coverage ID="118" Code="LPD" Desc="Limited Property Damage Liability (Mini-Tort)" />
+							<Coverage ID="119" Code="PUNCS" Desc="Uninsured Motorists (CSL)" />
+							<Coverage ID="120" Code="PUMSP" Desc="Uninsured Motorists (BI Split Limits)" />
+							<Coverage ID="121" Code="UNDSP" Desc="Underinsured Motorists (BI Split Limits)" />
+							<Coverage ID="122" Code="COLL" Desc="Collision" />
+							<Coverage ID="124" Code="ROAD" Desc="Road Service" />
+							<Coverage ID="125" Code="RREIM" Desc="Rental Reimbursement (A-89)" />
+							<Coverage ID="249" Code="LLGC" Desc="Loan / Lease Gap Coverage (A-11)" />
+							<Coverage ID="251" Code="EBCE" Desc="Customizing Equipment (A-14)" />
+							<Coverage ID="252" Code="SORPE" Desc="Sound Reproducing - Tapes (A-29)" />
+							<Coverage ID="253" Code="SORCV" Desc="Sound Receiving &amp; Transmitting Equipment (A-31)"
+								COMMENT="OBSOLETE" />
+							<Coverage ID="254" Code="ENO" Desc="Extended Non-Owned Coverage for Named Individual (A-34)" />
+							<Coverage ID="297" Code="EBENO" Desc="Employers Non-Ownership Liability (A-80)" COMMENT="OBSOLETE" />
+							<Coverage ID="298" Code="EBHA" Desc="Hired Automobiles – Cost of Hire Basis (A-85)" COMMENT="OBSOLETE" />
+							<Coverage ID="301" Code="EECOMP" Desc="Miscellaneous Extra Equipment - Comprehensive A-15" />
+							<Coverage ID="303" Code="EECOLL" Desc="Miscellaneous Extra Equipment - Collision A-15" />
+							<Coverage ID="304" Code="UNCSL" Desc="Underinsured Motorists (CSL)" />
+							<Coverage ID="1000" Code="AMC49" Desc="Antique Motor Car Endorsement A-49" />
+							<Coverage ID="1001" Code="CC49" Desc="Classic Car Endorsement  A-46" />
+							<Coverage ID="1017" Code="SPA8" Desc="Snow -Plowing A-64" />
+							<Coverage ID="997" Code="CAB91	" Desc="Coordination of Benefits  A-91" />
+							<Coverage ID="998" Code="RCC68" Desc="Regular Collision Coverage A-68" />
+							<Coverage ID="999" Code="DD25" Desc="Diminishing Deductible A-25" />
+							<Coverage ID="1006" Code="PIP94" Desc="PIP Waiver/Rejection of Work Loss Benefit A-94" />
+							<Coverage ID="1018" Code="SA44" Desc="Stated Amount - A-45" />
+							<Coverage ID="1030" Code="SRTE" Desc="Sound Receiving and Transmitting Equipment A-31" />
+							<Coverage ID="1015" Code="TE92" Desc="Terrorism Endorsement C-92" />
+						</Coverages>
+						<!-- Coverage ID="1004" Code="PAP6" Desc="Personal Auto Policy - TB-6" />
+							<Coverage ID="1005" Code="TE90" Desc="Transportation Expense A-90" />
+							<Coverage ID="1002" Code="EP95" Desc="Excluded Person(s) Endorsement A-95" /-->
+					</Remove>
+				</IsSuspended>
+			</VehicleType>
+			<VehicleType ID="11334" Desc="Private Passenger Auto">
+				<Remove>
+					<Coverages>
+						<Coverage ID="1003" Code="MHT22" Desc="Motor Homes, Truck or Van Campers &amp; Travel Trailers A-22" />
+						<Coverage ID="1000" Code="AMC49" Desc="Antique Motor Car Endorsement A-49" />
+						<Coverage ID="1001" Code="CC49" Desc="Classic Car Endorsement  A-46" />
+					</Coverages>
+					<!-- CoverageLimit COV_ID="123" Desc="Other Than Collision (Comprehensive)" itrack 5526
+						<LIMIT_DEDUC LIMIT_DEDUC_ID="161" Amount="" 
+					CoverageLimit -->
+				</Remove>
+				<IsSuspended Type="10963" Desc="is Suspended Comp is Yes">
+					<Remove>
+						<Coverages>
+							<Coverage ID="113" Code="SLL" Desc="Single Limits Liability CSL (BI and PD)" />
+							<Coverage ID="114" Code="BISPL" Desc="Bodily Injury Liability (Split Limit)" />
+							<Coverage ID="115" Code="PD" Desc="Property Damage Liability" />
+							<Coverage ID="116" Code="PIP" Desc="Personal Injury Protection" />
+							<Coverage ID="117" Code="PPI" Desc="Property Protection Insurance" />
+							<Coverage ID="118" Code="LPD" Desc="Limited Property Damage Liability (Mini-Tort)" />
+							<Coverage ID="119" Code="PUNCS" Desc="Uninsured Motorists (CSL)" />
+							<Coverage ID="120" Code="PUMSP" Desc="Uninsured Motorists (BI Split Limits)" />
+							<Coverage ID="121" Code="UNDSP" Desc="Underinsured Motorists (BI Split Limits)" />
+							<Coverage ID="122" Code="COLL" Desc="Collision" />
+							<Coverage ID="124" Code="ROAD" Desc="Road Service" />
+							<Coverage ID="125" Code="RREIM" Desc="Rental Reimbursement (A-89)" />
+							<Coverage ID="249" Code="LLGC" Desc="Loan / Lease Gap Coverage (A-11)" />
+							<Coverage ID="251" Code="EBCE" Desc="Customizing Equipment (A-14)" />
+							<Coverage ID="252" Code="SORPE" Desc="Sound Reproducing - Tapes (A-29)" />
+							<Coverage ID="253" Code="SORCV" Desc="Sound Receiving &amp; Transmitting Equipment (A-31)"
+								COMMENT="OBSOLETE" />
+							<Coverage ID="254" Code="ENO" Desc="Extended Non-Owned Coverage for Named Individual (A-34)" />
+							<Coverage ID="297" Code="EBENO" Desc="Employers Non-Ownership Liability (A-80)" COMMENT="OBSOLETE" />
+							<Coverage ID="298" Code="EBHA" Desc="Hired Automobiles – Cost of Hire Basis (A-85)" COMMENT="OBSOLETE" />
+							<Coverage ID="301" Code="EECOMP" Desc="Miscellaneous Extra Equipment - Comprehensive A-15" />
+							<Coverage ID="303" Code="EECOLL" Desc="Miscellaneous Extra Equipment - Collision A-15" />
+							<Coverage ID="304" Code="UNCSL" Desc="Underinsured Motorists (CSL)" />
+							<Coverage ID="1000" Code="AMC49" Desc="Antique Motor Car Endorsement A-49" />
+							<Coverage ID="1001" Code="CC49" Desc="Classic Car Endorsement  A-46" />
+							<Coverage ID="1003" Code="MHT22" Desc="Motor Homes, Truck or Van Campers &amp; Travel Trailers A-22" />
+							<Coverage ID="1017" Code="SPA8" Desc="Snow -Plowing A-64" />
+							<Coverage ID="997" Code="CAB91	" Desc="Coordination of Benefits  A-91" />
+							<Coverage ID="998" Code="RCC68" Desc="Regular Collision Coverage A-68" />
+							<Coverage ID="999" Code="DD25" Desc="Diminishing Deductible A-25" />
+							<Coverage ID="1006" Code="PIP94" Desc="PIP Waiver/Rejection of Work Loss Benefit A-94" />
+							<Coverage ID="1018" Code="SA44" Desc="Stated Amount - A-45" />
+							<Coverage ID="1030" Code="SRTE" Desc="Sound Receiving and Transmitting Equipment A-31" />
+							<Coverage ID="1015" Code="TE92" Desc="Terrorism Endorsement C-92" />
+						</Coverages>
+						<!-- Coverage ID="1004" Code="PAP6" Desc="Personal Auto Policy - TB-6" /-->
+						<!--Coverage ID="1005" Code="TE90" Desc="Transportation Expense A-90" /-->
+						<!--Coverage ID="1002" Code="EP95" Desc="Excluded Person(s) Endorsement A-95" /-->
+					</Remove>
+				</IsSuspended>
+			</VehicleType>
+			<VehicleType ID="11618" Desc="Suspended-Comp Only">
+				<Remove>
+					<Coverages>
+						<Coverage ID="113" Code="SLL" Desc="Single Limits Liability CSL (BI and PD)" />
+						<Coverage ID="114" Code="BISPL" Desc="Bodily Injury Liability (Split Limit)" />
+						<Coverage ID="115" Code="PD" Desc="Property Damage Liability" />
+						<Coverage ID="116" Code="PIP" Desc="Personal Injury Protection" />
+						<Coverage ID="117" Code="PPI" Desc="Property Protection Insurance" />
+						<Coverage ID="118" Code="LPD" Desc="Limited Property Damage Liability (Mini-Tort)" />
+						<Coverage ID="119" Code="PUNCS" Desc="Uninsured Motorists (CSL)" />
+						<Coverage ID="120" Code="PUMSP" Desc="Uninsured Motorists (BI Split Limits)" />
+						<Coverage ID="121" Code="UNDSP" Desc="Underinsured Motorists (BI Split Limits)" />
+						<Coverage ID="122" Code="COLL" Desc="Collision" />
+						<Coverage ID="124" Code="ROAD" Desc="Road Service" />
+						<Coverage ID="125" Code="RREIM" Desc="Rental Reimbursement (A-89)" />
+						<Coverage ID="249" Code="LLGC" Desc="Loan / Lease Gap Coverage (A-11)" />
+						<Coverage ID="251" Code="EBCE" Desc="Customizing Equipment (A-14)" />
+						<Coverage ID="252" Code="SORPE" Desc="Sound Reproducing - Tapes (A-29)" />
+						<Coverage ID="253" Code="SORCV" Desc="Sound Receiving &amp; Transmitting Equipment (A-31)"
+							COMMENT="OBSOLETE" />
+						<Coverage ID="254" Code="ENO" Desc="Extended Non-Owned Coverage for Named Individual (A-34)" />
+						<Coverage ID="297" Code="EBENO" Desc="Employers Non-Ownership Liability (A-80)" COMMENT="OBSOLETE" />
+						<Coverage ID="298" Code="EBHA" Desc="Hired Automobiles – Cost of Hire Basis (A-85)" COMMENT="OBSOLETE" />
+						<Coverage ID="301" Code="EECOMP" Desc="Miscellaneous Extra Equipment - Comprehensive A-15" />
+						<Coverage ID="303" Code="EECOLL" Desc="Miscellaneous Extra Equipment - Collision A-15" />
+						<Coverage ID="304" Code="UNCSL" Desc="Underinsured Motorists (CSL)" />
+						<Coverage ID="1000" Code="AMC49" Desc="Antique Motor Car Endorsement A-49" />
+						<Coverage ID="1001" Code="CC49" Desc="Classic Car Endorsement  A-46" />
+						<Coverage ID="1003" Code="MHT22" Desc="Motor Homes, Truck or Van Campers &amp; Travel Trailers A-22" />
+						<Coverage ID="1017" Code="SPA8" Desc="Snow -Plowing A-64" />
+						<Coverage ID="997" Code="CAB91	" Desc="Coordination of Benefits  A-91" />
+						<Coverage ID="998" Code="RCC68" Desc="Regular Collision Coverage A-68" />
+						<Coverage ID="999" Code="DD25" Desc="Diminishing Deductible A-25" />
+						<Coverage ID="1006" Code="PIP94" Desc="PIP Waiver/Rejection of Work Loss Benefit A-94" />
+						<Coverage ID="1018" Code="SA44" Desc="Stated Amount - A-45" />
+						<Coverage ID="1030" Code="SRTE" Desc="Sound Receiving and Transmitting Equipment A-31" />
+					</Coverages>
+					<!--Coverage ID="1004" Code="PAP6" Desc="Personal Auto Policy - TB-6" />
+							<Coverage ID="1005" Code="TE90" Desc="Transportation Expense A-90" />
+							<Coverage ID="1002" Code="EP95" Desc="Excluded Person(s) Endorsement A-95" /-->
+					<CoverageLimit COV_ID="123" Desc="Other Than Collision (Comprehensive)">
+						<LIMIT_DEDUC LIMIT_DEDUC_ID="161" Amount="" />
+					</CoverageLimit>
+				</Remove>
+				<IsSuspended Type="10963" Desc="is Suspended Comp is Yes">
+					<Remove>
+						<Coverages></Coverages>
+					</Remove>
+				</IsSuspended>
+			</VehicleType>
+			<VehicleType ID="11337" Desc="Utility Trailer">
+				<Remove>
+					<Coverages>
+						<Coverage ID="113" Code="SLL" Desc="Single Limits Liability CSL (BI and PD)" />
+						<Coverage ID="114" Code="BISPL" Desc="Bodily Injury Liability (Split Limit)" />
+						<Coverage ID="115" Code="PD" Desc="Property Damage Liability" />
+						<Coverage ID="116" Code="PIP" Desc="Personal Injury Protection" />
+						<Coverage ID="117" Code="PPI" Desc="Property Protection Insurance" />
+						<Coverage ID="118" Code="LPD" Desc="Limited Property Damage Liability (Mini-Tort)" />
+						<Coverage ID="997" Code="CAB91" Desc="Coordination of Benefits  A-91" />
+						<Coverage ID="119" Code="PUNCS" Desc="Uninsured Motorists (CSL)" />
+						<Coverage ID="120" Code="PUMSP" Desc="Uninsured Motorists (BI Split Limits)" />
+						<Coverage ID="121" Code="UNDSP" Desc="Underinsured Motorists (BI Split Limits)" />
+						<Coverage ID="124" Code="ROAD" Desc="Road Service" />
+						<Coverage ID="125" Code="RREIM" Desc="Rental Reimbursement (A-89)" />
+						<Coverage ID="249" Code="LLGC" Desc="Loan / Lease Gap Coverage (A-11)" />
+						<Coverage ID="251" Code="EBCE" Desc="Customizing Equipment (A-14)" />
+						<Coverage ID="252" Code="SORPE" Desc="Sound Reproducing - Tapes (A-29)" />
+						<Coverage ID="253" Code="SORCV" Desc="Sound Receiving &amp; Transmitting Equipment (A-31)"
+							COMMENT="OBSOLETE" />
+						<Coverage ID="254" Code="ENO" Desc="Extended Non-Owned Coverage for Named Individual (A-34)" />
+						<Coverage ID="297" Code="EBENO" Desc="Employers Non-Ownership Liability (A-80)" COMMENT="OBSOLETE" />
+						<Coverage ID="298" Code="EBHA" Desc="Hired Automobiles – Cost of Hire Basis (A-85)" COMMENT="OBSOLETE" />
+						<Coverage ID="304" Code="UNCSL" Desc="Underinsured Motorists (CSL)" />
+						<Coverage ID="1000" Code="AMC49" Desc="Antique Motor Car Endorsement A-49" />
+						<Coverage ID="1001" Code="CC49" Desc="Classic Car Endorsement  A-46" />
+						<Coverage ID="1002" Code="EP95" Desc="Excluded Person(s) Endorsement A-95" />
+						<Coverage ID="1006" Code="PIP94" Desc="PIP Waiver/Rejection of Work Loss Benefit A-94" />
+						<Coverage ID="1003" Code="MHT22" Desc="Motor Homes, Truck or Van Campers &amp; Travel Trailers A-22" />
+						<Coverage ID="1017" Code="SPA8" Desc="Snow -Plowing A-64" />
+						<Coverage ID="1018" Code="SA44" Desc="Stated Amount - A-45" />
+						<Coverage ID="1030" Code="SRTE" Desc="Sound Receiving and Transmitting Equipment A-31" />
+						<Coverage ID="301" Code="EECOMP" Desc="Miscellaneous Extra Equipment - Comprehensive A-15" />
+						<Coverage ID="303" Code="EECOLL" Desc="Miscellaneous Extra Equipment - Collision A-15" />
+					</Coverages>
+					<!--Coverage ID="1004" Code="PAP6" Desc="Personal Auto Policy - TB-6" -->
+					<!--Coverage ID="1005" Code="TE90" Desc="Transportation Expense A-90" -->
+					<CoverageLimit COV_ID="123" Desc="Other Than Collision (Comprehensive)">
+						<LIMIT_DEDUC LIMIT_DEDUC_ID="161" Amount="" />
+					</CoverageLimit>
+				</Remove>
+				<IsSuspended Type="10963" Desc="is Suspended Comp is Yes">
+					<Remove>
+						<Coverages></Coverages>
+					</Remove>
+				</IsSuspended>
+			</VehicleType>
+			<VehicleType ID="11869" Desc="Antique Car">
+				<Remove>
+					<Coverages>
+						<Coverage ID="1003" Code="MHT22" Desc="Motor Homes, Truck or Van Campers &amp; Travel Trailers A-22" />
+					</Coverages>
+					<CoverageLimit COV_ID="123" Desc="Other Than Collision (Comprehensive)">
+						<LIMIT_DEDUC LIMIT_DEDUC_ID="168" Amount="2000" />
+					</CoverageLimit>
+					<CoverageLimit COV_ID="122" Desc="Collision">
+						<LIMIT_DEDUC LIMIT_DEDUC_ID="611" Amount="2000" />
+						<LIMIT_DEDUC LIMIT_DEDUC_ID="603" Amount="50" />
+					</CoverageLimit>
+				</Remove>
+				<IsSuspended Type="10963" Desc="is Suspended Comp is Yes">
+					<Remove>
+						<Coverages>
+							<Coverage ID="113" Code="SLL" Desc="Single Limits Liability CSL (BI and PD)" />
+							<Coverage ID="114" Code="BISPL" Desc="Bodily Injury Liability (Split Limit)" />
+							<Coverage ID="115" Code="PD" Desc="Property Damage Liability" />
+							<Coverage ID="116" Code="PIP" Desc="Personal Injury Protection" />
+							<Coverage ID="117" Code="PPI" Desc="Property Protection Insurance" />
+							<Coverage ID="118" Code="LPD" Desc="Limited Property Damage Liability (Mini-Tort)" />
+							<Coverage ID="119" Code="PUNCS" Desc="Uninsured Motorists (CSL)" />
+							<Coverage ID="120" Code="PUMSP" Desc="Uninsured Motorists (BI Split Limits)" />
+							<Coverage ID="121" Code="UNDSP" Desc="Underinsured Motorists (BI Split Limits)" />
+							<Coverage ID="122" Code="COLL" Desc="Collision" />
+							<Coverage ID="124" Code="ROAD" Desc="Road Service" />
+							<Coverage ID="125" Code="RREIM" Desc="Rental Reimbursement (A-89)" />
+							<Coverage ID="249" Code="LLGC" Desc="Loan / Lease Gap Coverage (A-11)" />
+							<Coverage ID="251" Code="EBCE" Desc="Customizing Equipment (A-14)" />
+							<Coverage ID="252" Code="SORPE" Desc="Sound Reproducing - Tapes (A-29)" />
+							<Coverage ID="253" Code="SORCV" Desc="Sound Receiving &amp; Transmitting Equipment (A-31)"
+								COMMENT="OBSOLETE" />
+							<Coverage ID="254" Code="ENO" Desc="Extended Non-Owned Coverage for Named Individual (A-34)" />
+							<Coverage ID="297" Code="EBENO" Desc="Employers Non-Ownership Liability (A-80)" COMMENT="OBSOLETE" />
+							<Coverage ID="298" Code="EBHA" Desc="Hired Automobiles – Cost of Hire Basis (A-85)" COMMENT="OBSOLETE" />
+							<Coverage ID="301" Code="EECOMP" Desc="Miscellaneous Extra Equipment - Comprehensive A-15" />
+							<Coverage ID="303" Code="EECOLL" Desc="Miscellaneous Extra Equipment - Collision A-15" />
+							<Coverage ID="304" Code="UNCSL" Desc="Underinsured Motorists (CSL)" />
+							<Coverage ID="1001" Code="CC49" Desc="Classic Car Endorsement  A-46" />
+							<Coverage ID="1003" Code="MHT22" Desc="Motor Homes, Truck or Van Campers &amp; Travel Trailers A-22" />
+							<Coverage ID="1017" Code="SPA8" Desc="Snow -Plowing A-64" />
+							<Coverage ID="997" Code="CAB91	" Desc="Coordination of Benefits  A-91" />
+							<Coverage ID="998" Code="RCC68" Desc="Regular Collision Coverage A-68" />
+							<Coverage ID="999" Code="DD25" Desc="Diminishing Deductible A-25" />
+							<Coverage ID="1006" Code="PIP94" Desc="PIP Waiver/Rejection of Work Loss Benefit A-94" />
+							<Coverage ID="1030" Code="SRTE" Desc="Sound Receiving and Transmitting Equipment A-31" />
+							<Coverage ID="1015" Code="TE92" Desc="Terrorism Endorsement C-92" />
+						</Coverages>
+						<!--Coverage ID="1002" Code="EP95" Desc="Excluded Person(s) Endorsement A-95" /-->
+						<!--Coverage ID="1004" Code="PAP6" Desc="Personal Auto Policy - TB-6" />
+							<Coverage ID="1005" Code="TE90" Desc="Transportation Expense A-90" /-->
+					</Remove>
+				</IsSuspended>
+			</VehicleType>
+			<VehicleType ID="11870" Desc="Camper&amp; Travel Trailer">
+				<Remove>
+					<Coverages>
+						<Coverage ID="1000" Code="AMC49" Desc="Antique Motor Car Endorsement A-49" />
+						<Coverage ID="1001" Code="CC49" Desc="Classic Car Endorsement  A-46" />
+						<Coverage ID="113" Code="SLL" Desc="Single Limits Liability CSL (BI and PD)" />
+						<Coverage ID="114" Code="BISPL" Desc="Bodily Injury Liability (Split Limit)" />
+						<Coverage ID="115" Code="PD" Desc="Property Damage Liability" />
+						<Coverage ID="116" Code="PIP" Desc="Personal Injury Protection" />
+						<Coverage ID="117" Code="PPI" Desc="Property Protection Insurance" />
+						<Coverage ID="118" Code="LPD" Desc="Limited Property Damage Liability (Mini-Tort)" />
+						<Coverage ID="997" Code="CAB91" Desc="Coordination of Benefits  A-91" />
+						<Coverage ID="119" Code="PUNCS" Desc="Uninsured Motorists (CSL)" />
+						<Coverage ID="120" Code="PUMSP" Desc="Uninsured Motorists (BI Split Limits)" />
+						<Coverage ID="121" Code="UNDSP" Desc="Underinsured Motorists (BI Split Limits)" />
+						<Coverage ID="124" Code="ROAD" Desc="Road Service" />
+						<Coverage ID="125" Code="RREIM" Desc="Rental Reimbursement (A-89)" />
+						<Coverage ID="249" Code="LLGC" Desc="Loan / Lease Gap Coverage (A-11)" />
+						<Coverage ID="251" Code="EBCE" Desc="Customizing Equipment (A-14)" />
+						<Coverage ID="252" Code="SORPE" Desc="Sound Reproducing - Tapes (A-29)" />
+						<Coverage ID="253" Code="SORCV" Desc="Sound Receiving &amp; Transmitting Equipment (A-31)"
+							COMMENT="OBSOLETE" />
+						<Coverage ID="254" Code="ENO" Desc="Extended Non-Owned Coverage for Named Individual (A-34)" />
+						<Coverage ID="297" Code="EBENO" Desc="Employers Non-Ownership Liability (A-80)" COMMENT="OBSOLETE" />
+						<Coverage ID="298" Code="EBHA" Desc="Hired Automobiles – Cost of Hire Basis (A-85)" COMMENT="OBSOLETE" />
+						<Coverage ID="304" Code="UNCSL" Desc="Underinsured Motorists (CSL)" />
+						<Coverage ID="1002" Code="EP95" Desc="Excluded Person(s) Endorsement A-95" />
+						<Coverage ID="1006" Code="PIP94" Desc="PIP Waiver/Rejection of Work Loss Benefit A-94" />
+						<Coverage ID="1017" Code="SPA8" Desc="Snow -Plowing A-64" />
+						<Coverage ID="1018" Code="SA44" Desc="Stated Amount - A-45" />
+						<Coverage ID="1030" Code="SRTE" Desc="Sound Receiving and Transmitting Equipment A-31" />
+						<Coverage ID="301" Code="EECOMP" Desc="Miscellaneous Extra Equipment - Comprehensive A-15" />
+						<Coverage ID="303" Code="EECOLL" Desc="Miscellaneous Extra Equipment - Collision A-15" />
+						<Coverage ID="1015" Code="TE92" Desc="Terrorism Endorsement C-92" />
+					</Coverages>
+					<!--Coverage ID="1004" Code="PAP6" Desc="Personal Auto Policy - TB-6" />
+						<Coverage ID="1005" Code="TE90" Desc="Transportation Expense A-90" /-->
+				</Remove>
+				<IsSuspended Type="10963" Desc="is Suspended Comp is Yes">
+					<Remove>
+						<Coverages></Coverages>
+					</Remove>
+				</IsSuspended>
+			</VehicleType>
+			<VehicleType ID="11868" Desc="Classic Car">
+				<Remove>
+					<Coverages>
+						<Coverage ID="1003" Code="MHT22" Desc="Motor Homes, Truck or Van Campers &amp; Travel Trailers A-22" />
+					</Coverages>
+					<CoverageLimit COV_ID="123" Desc="Other Than Collision (Comprehensive)">
+						<LIMIT_DEDUC LIMIT_DEDUC_ID="168" Amount="2000" />
+					</CoverageLimit>
+					<CoverageLimit COV_ID="122" Desc="Collision">
+						<LIMIT_DEDUC LIMIT_DEDUC_ID="611" Amount="2000" />
+						<LIMIT_DEDUC LIMIT_DEDUC_ID="603" Amount="50" />
+					</CoverageLimit>
+				</Remove>
+				<IsSuspended Type="10963" Desc="Is Suspended Comp is Yes">
+					<Remove>
+						<Coverages>
+							<Coverage ID="113" Code="SLL" Desc="Single Limits Liability CSL (BI and PD)" />
+							<Coverage ID="114" Code="BISPL" Desc="Bodily Injury Liability (Split Limit)" />
+							<Coverage ID="115" Code="PD" Desc="Property Damage Liability" />
+							<Coverage ID="116" Code="PIP" Desc="Personal Injury Protection" />
+							<Coverage ID="117" Code="PPI" Desc="Property Protection Insurance" />
+							<Coverage ID="118" Code="LPD" Desc="Limited Property Damage Liability (Mini-Tort)" />
+							<Coverage ID="119" Code="PUNCS" Desc="Uninsured Motorists (CSL)" />
+							<Coverage ID="120" Code="PUMSP" Desc="Uninsured Motorists (BI Split Limits)" />
+							<Coverage ID="121" Code="UNDSP" Desc="Underinsured Motorists (BI Split Limits)" />
+							<Coverage ID="122" Code="COLL" Desc="Collision" />
+							<Coverage ID="124" Code="ROAD" Desc="Road Service" />
+							<Coverage ID="125" Code="RREIM" Desc="Rental Reimbursement (A-89)" />
+							<Coverage ID="249" Code="LLGC" Desc="Loan / Lease Gap Coverage (A-11)" />
+							<Coverage ID="251" Code="EBCE" Desc="Customizing Equipment (A-14)" />
+							<Coverage ID="252" Code="SORPE" Desc="Sound Reproducing - Tapes (A-29)" />
+							<Coverage ID="253" Code="SORCV" Desc="Sound Receiving &amp; Transmitting Equipment (A-31)"
+								COMMENT="OBSOLETE" />
+							<Coverage ID="254" Code="ENO" Desc="Extended Non-Owned Coverage for Named Individual (A-34)" />
+							<Coverage ID="297" Code="EBENO" Desc="Employers Non-Ownership Liability (A-80)" COMMENT="OBSOLETE" />
+							<Coverage ID="298" Code="EBHA" Desc="Hired Automobiles – Cost of Hire Basis (A-85)" COMMENT="OBSOLETE" />
+							<Coverage ID="301" Code="EECOMP" Desc="Miscellaneous Extra Equipment - Comprehensive A-15" />
+							<Coverage ID="303" Code="EECOLL" Desc="Miscellaneous Extra Equipment - Collision A-15" />
+							<Coverage ID="304" Code="UNCSL" Desc="Underinsured Motorists (CSL)" />
+							<Coverage ID="1000" Code="AMC49" Desc="Antique Motor Car Endorsement A-49" />
+							<Coverage ID="1003" Code="MHT22" Desc="Motor Homes, Truck or Van Campers &amp; Travel Trailers A-22" />
+							<Coverage ID="1017" Code="SPA8" Desc="Snow -Plowing A-64" />
+							<Coverage ID="997" Code="CAB91	" Desc="Coordination of Benefits  A-91" />
+							<Coverage ID="998" Code="RCC68" Desc="Regular Collision Coverage A-68" />
+							<Coverage ID="999" Code="DD25" Desc="Diminishing Deductible A-25" />
+							<Coverage ID="1006" Code="PIP94" Desc="PIP Waiver/Rejection of Work Loss Benefit A-94" />
+							<Coverage ID="1030" Code="SRTE" Desc="Sound Receiving and Transmitting Equipment A-31" />
+							<Coverage ID="1015" Code="TE92" Desc="Terrorism Endorsement C-92" />
+						</Coverages>
+						<!--Coverage ID="1004" Code="PAP6" Desc="Personal Auto Policy - TB-6" />
+							<Coverage ID="1005" Code="TE90" Desc="Transportation Expense A-90" />
+							<Coverage ID="1002" Code="EP95" Desc="Excluded Person(s) Endorsement A-95" /-->
+					</Remove>
+				</IsSuspended>
+			</VehicleType>
+		</VehicleUse>
+		<!-- END OF PERSONAL -->
+		<VehicleUse ID="0" Desc="">
+			<Remove>
+				<Coverages>
+					<Coverage ID="298" Code="EBHA" Desc="Hired Automobiles – Cost of Hire Basis (A-85)" COMMENT="OBSOLETE" />
+					<Coverage ID="297" Code="EBENO" Desc="Employers Non-Ownership Liability (A-80)" COMMENT="OBSOLETE" />
+				</Coverages>
+			</Remove>
+		</VehicleUse>
+	</State>
+	<!-- END OF MICHIGAN -->
+	<!-- INDIANA -->
+	<State ID="14" Name="Indiana">
+		<!-- START OF COMMERCIAL -->
+		<VehicleUse ID="11333" Desc="Commercial">
+			<Remove>
+				<Coverages>
+					<Coverage ID="44" Code="ROAD" Desc="Road Service" />
+					<Coverage ID="45" Code="RREIM" Desc="Rental Reimbursement (A-89)" />
+					<Coverage ID="997" Code="CAB91" Desc="Coordination of Benefits  A-91" />
+					<Coverage ID="1011" Code="SA44" Desc="Stated Amount - A-44" />
+					<!--<Coverage ID="1013" Code="TE90" Desc="Transportation Expense A-90" />-->
+					<Coverage ID="1014" Code="SPA8" Desc="Snow -Plowing A-8" />
+					<Coverage ID="49" Code="EBCE" Desc="Customizing Equipment ( A - 14)" />
+					<Coverage ID="1008" Code="AMC49" Desc="Antique Motor Car Endorsement A-49" />
+					<Coverage ID="1009" Code="CC49" Desc="Classic Car Endorsement  A-46" />
+					<Coverage ID="52" Code="ENO" Desc="Extended Non-Owned Coverage for Named Individual (A-35)" />
+					<Coverage ID="54" Code="HA" Desc="Hired Automobiles - Cost of hire basis (A-85)" COMMENT="OBSOLETE" />
+					<Coverage ID="248" Code="EBENO" Desc="Employers Non-Ownership Liability (A-80)" COMMENT="OBSOLETE" />
+					<Coverage ID="1020" Code="MHT22" Desc="Motor Homes, Truck or Van Campers &amp; Travel Trailers A-22" />
+					<Coverage ID="46" Code="LLGC" Desc="Loan / Lease Gap Coverage ( A- 11)" />
+					<Coverage ID="50" Code="SORPE" Desc="Sound Reproducing - Tapes (A-29)" />
+					<Coverage ID="1029" Code="SRTE" Desc="Sound Receiving and Transmitting Equipment A-31" />
+				</Coverages>
+				<CoverageLimit COV_ID="116" Desc="Personal Injury Protection">
+					<LIMIT_DEDUC LIMIT_DEDUC_ID="686" Amount="" />
+					<LIMIT_DEDUC LIMIT_DEDUC_ID="687" Amount="" />
+					<LIMIT_DEDUC LIMIT_DEDUC_ID="688" Amount="" />
+				</CoverageLimit>
+				<CoverageLimit COV_ID="42" Desc="Other Than Collision (Comprehensive)">
+					<LIMIT_DEDUC LIMIT_DEDUC_ID="81" Amount="200" />
+					<LIMIT_DEDUC LIMIT_DEDUC_ID="85" Amount="2000" />
+					<LIMIT_DEDUC LIMIT_DEDUC_ID="78" Amount="" />
+				</CoverageLimit>
+				<CoverageLimit COV_ID="38" Desc="Collision ">
+					<LIMIT_DEDUC LIMIT_DEDUC_ID="69" Amount="" />
+					<LIMIT_DEDUC LIMIT_DEDUC_ID="70" Amount="" />
+					<LIMIT_DEDUC LIMIT_DEDUC_ID="76" Amount="" />
+					<LIMIT_DEDUC LIMIT_DEDUC_ID="1376" Amount="" />
+					<!-- LIMIT_DEDUC LIMIT_DEDUC_ID="71" Amount="" /  -->
+				</CoverageLimit>
+			</Remove>
+			<VehicleType ID="11339" Desc="Local Haul">
+				<Remove>
+					<Coverages></Coverages>
+				</Remove>
+				<IsSuspended Type="10963" Desc="is Suspended Comp is Yes">
+					<Remove>
+						<Coverages>
+						<Coverage ID="1" Code="SLL" Desc="Single Limit Liability CSL" />
+						<Coverage ID="2" Code="BISPL" Desc="Bodily Injury Liability ( Split Limit)" />
+						<Coverage ID="4" Code="PD" Desc="Property Damage Liability" />
+						<Coverage ID="6" Code="MP" Desc="Medical Payments" />
+						<Coverage ID="9" Code="PUNCS" Desc="Uninsured Motorists (CSL)" />
+						<Coverage ID="12" Code="PUMSP" Desc="Uninsured Motorists (BI Split Limit)" />
+						<Coverage ID="14" Code="UNCSL" Desc="Underinsured Motorists (CSL)" />
+						<Coverage ID="34" Code="UNDSP" Desc="Underinsured Motorists (BI Split Limit)" />
+						<Coverage ID="38" Code="COLL" Desc="Collision" />
+						<Coverage ID="1019" Code="TE92" Desc="Terrorism Endorsement C-92" />
+						<Coverage ID="50" Code="SORPE" Desc="Sound Reproducing - Tapes (A-29)" />
+						<Coverage ID="44" Code="ROAD" Desc="Road Service" />
+						<Coverage ID="45" Code="RREIM" Desc="Rental Reimbursement (A-89)" />
+						<Coverage ID="46" Code="LLGC" Desc="Loan / Lease Gap Coverage ( A- 11)" />
+						<Coverage ID="49" Code="EBCE" Desc="Customizing Equipment ( A - 14)" />
+						<Coverage ID="1011" Code="SA44" Desc="Stated Amount - A-44" />
+						<Coverage ID="1014" Code="SPA8" Desc="Snow -Plowing A-8" />
+						<Coverage ID="248" Code="EBENO" Desc="Employers Non-Ownership Liability (A-80)" COMMENT="OBSOLETE" />
+						<Coverage ID="1020" Code="MHT22" Desc="Motor Homes, Truck or Van Campers &amp; Travel Trailers A-22" />
+						<Coverage ID="1008" Code="AMC49" Desc="Antique Motor Car Endorsement A-49" />
+						<Coverage ID="1009" Code="CC49" Desc="Classic Car Endorsement  A-46" />
+						<Coverage ID="1029" Code="SRTE" Desc="Sound Receiving and Transmitting Equipment A-31" />
+						<Coverage ID="36" Code="UMPD" Desc="Uninsured Motorists (PD) (A-21)" />
+						<Coverage ID="1007" Code="RRUM" Desc=" Rejection / Reduction of Uninsured &amp; Underinsured Motorist Coverage (A-9)" />
+						<Coverage ID="300" Code="EECOMP" Desc="Miscellaneous Extra Equipment - Comprehensive (A-16)" />
+						<Coverage ID="302" Code="EECOLL" Desc="Miscellaneous Extra Equipment - Collision (A-16)" />
+						</Coverages>
+					</Remove>
+				</IsSuspended>
+			</VehicleType>
+			<VehicleType ID="11338" Desc="Local Haul - Intermittent">
+				<Remove>
+					<Coverages></Coverages>
+				</Remove>
+				<IsSuspended Type="10963" Desc="is Suspended Comp is Yes">
+					<Remove>
+						<Coverages>
+						<Coverage ID="1" Code="SLL" Desc="Single Limit Liability CSL" />
+						<Coverage ID="2" Code="BISPL" Desc="Bodily Injury Liability ( Split Limit)" />
+						<Coverage ID="4" Code="PD" Desc="Property Damage Liability" />
+						<Coverage ID="6" Code="MP" Desc="Medical Payments" />
+						<Coverage ID="9" Code="PUNCS" Desc="Uninsured Motorists (CSL)" />
+						<Coverage ID="12" Code="PUMSP" Desc="Uninsured Motorists (BI Split Limit)" />
+						<Coverage ID="14" Code="UNCSL" Desc="Underinsured Motorists (CSL)" />
+						<Coverage ID="34" Code="UNDSP" Desc="Underinsured Motorists (BI Split Limit)" />
+						<Coverage ID="38" Code="COLL" Desc="Collision" />
+						<Coverage ID="1019" Code="TE92" Desc="Terrorism Endorsement C-92" />
+						<Coverage ID="50" Code="SORPE" Desc="Sound Reproducing - Tapes (A-29)" />
+						<Coverage ID="44" Code="ROAD" Desc="Road Service" />
+						<Coverage ID="45" Code="RREIM" Desc="Rental Reimbursement (A-89)" />
+						<Coverage ID="46" Code="LLGC" Desc="Loan / Lease Gap Coverage ( A- 11)" />
+						<Coverage ID="49" Code="EBCE" Desc="Customizing Equipment ( A - 14)" />
+						<Coverage ID="1011" Code="SA44" Desc="Stated Amount - A-44" />
+						<Coverage ID="1014" Code="SPA8" Desc="Snow -Plowing A-8" />
+						<Coverage ID="248" Code="EBENO" Desc="Employers Non-Ownership Liability (A-80)" COMMENT="OBSOLETE" />
+						<Coverage ID="1020" Code="MHT22" Desc="Motor Homes, Truck or Van Campers &amp; Travel Trailers A-22" />
+						<Coverage ID="1008" Code="AMC49" Desc="Antique Motor Car Endorsement A-49" />
+						<Coverage ID="1009" Code="CC49" Desc="Classic Car Endorsement  A-46" />
+						<Coverage ID="1029" Code="SRTE" Desc="Sound Receiving and Transmitting Equipment A-31" />
+						<Coverage ID="36" Code="UMPD" Desc="Uninsured Motorists (PD) (A-21)" />
+						<Coverage ID="1007" Code="RRUM" Desc=" Rejection / Reduction of Uninsured &amp; Underinsured Motorist Coverage (A-9)" />
+						<Coverage ID="300" Code="EECOMP" Desc="Miscellaneous Extra Equipment - Comprehensive (A-16)" />
+						<Coverage ID="302" Code="EECOLL" Desc="Miscellaneous Extra Equipment - Collision (A-16)" />
+						</Coverages>
+					</Remove>
+				</IsSuspended>
+			</VehicleType>
+			<VehicleType ID="11341" Desc="Trailer">
+				<Remove>
+					<Coverages>
+						<Coverage ID="1" Code="SLL" Desc="Single Limit Liability CSL" />
+						<Coverage ID="2" Code="BISPL" Desc="Bodily Injury Liability ( Split Limit)" />
+						<Coverage ID="4" Code="PD" Desc="Property Damage Liability" />
+						<Coverage ID="6" Code="MP" Desc="Medical Payments" />
+						<Coverage ID="9" Code="PUNCS" Desc="Uninsured Motorists (CSL)" />
+						<Coverage ID="12" Code="PUMSP" Desc="Uninsured Motorists (BI Split Limit)" />
+						<Coverage ID="14" Code="UNCSL" Desc="Underinsured Motorists (CSL)" />
+						<Coverage ID="34" Code="UNDSP" Desc="Underinsured Motorists (BI Split Limit)" />
+						<Coverage ID="50" Code="SORPE" Desc="Sound Reproducing - Tapes (A-29)" />
+						<Coverage ID="44" Code="ROAD" Desc="Road Service" />
+						<Coverage ID="45" Code="RREIM" Desc="Rental Reimbursement (A-89)" />
+						<Coverage ID="46" Code="LLGC" Desc="Loan / Lease Gap Coverage ( A- 11)" />
+						<Coverage ID="49" Code="EBCE" Desc="Customizing Equipment ( A - 14)" />
+						<Coverage ID="52" Code="ENO" Desc="Extended Non-Owned Coverage for Named Individual (A-35)" />
+						<Coverage ID="1011" Code="SA44" Desc="Stated Amount - A-44" />
+						<Coverage ID="1014" Code="SPA8" Desc="Snow -Plowing A-8" />
+						<Coverage ID="248" Code="EBENO" Desc="Employers Non-Ownership Liability (A-80)" COMMENT="OBSOLETE" />
+						<Coverage ID="1020" Code="MHT22" Desc="Motor Homes, Truck or Van Campers &amp; Travel Trailers A-22" />
+						<Coverage ID="1008" Code="AMC49" Desc="Antique Motor Car Endorsement A-49" />
+						<Coverage ID="1009" Code="CC49" Desc="Classic Car Endorsement  A-46" />
+						<Coverage ID="1029" Code="SRTE" Desc="Sound Receiving and Transmitting Equipment A-31" />
+						<Coverage ID="36" Code="UMPD" Desc="Uninsured Motorists (PD) (A-21)" />
+						<Coverage ID="1007" Code="RRUM" Desc=" Rejection / Reduction of Uninsured &amp; Underinsured Motorist Coverage (A-9)" />
+						<Coverage ID="1010" Code="EP95" Desc="Excluded Person(s) Endorsement A-96" />
+						<Coverage ID="300" Code="EECOMP" Desc="Miscellaneous Extra Equipment - Comprehensive (A-16)" />
+						<Coverage ID="302" Code="EECOLL" Desc="Miscellaneous Extra Equipment - Collision (A-16)" />
+					</Coverages>
+					<!--Coverage ID="1012" Code="TAP7" Desc="Trailblazer Auto Policy - TB-7" />
+						<Coverage ID="1013" Code="TE90" Desc="Transportation Expense A-90" /-->
+				</Remove>
+			</VehicleType>
+			<VehicleType ID="11340" Desc="Trailer  - Intermittent">
+				<Remove>
+					<Coverages></Coverages>
+				</Remove>
+			</VehicleType>
+			<VehicleType ID="11871" Desc="Long Haul">
+				<Remove>
+					<Coverages></Coverages>
+				</Remove>
+				<IsSuspended Type="10963" Desc="is Suspended Comp is Yes">
+					<Remove>
+						<Coverages>
+						<Coverage ID="1" Code="SLL" Desc="Single Limit Liability CSL" />
+						<Coverage ID="2" Code="BISPL" Desc="Bodily Injury Liability ( Split Limit)" />
+						<Coverage ID="4" Code="PD" Desc="Property Damage Liability" />
+						<Coverage ID="6" Code="MP" Desc="Medical Payments" />
+						<Coverage ID="9" Code="PUNCS" Desc="Uninsured Motorists (CSL)" />
+						<Coverage ID="12" Code="PUMSP" Desc="Uninsured Motorists (BI Split Limit)" />
+						<Coverage ID="14" Code="UNCSL" Desc="Underinsured Motorists (CSL)" />
+						<Coverage ID="34" Code="UNDSP" Desc="Underinsured Motorists (BI Split Limit)" />
+						<Coverage ID="38" Code="COLL" Desc="Collision" />
+						<Coverage ID="1019" Code="TE92" Desc="Terrorism Endorsement C-92" />
+						<Coverage ID="50" Code="SORPE" Desc="Sound Reproducing - Tapes (A-29)" />
+						<Coverage ID="44" Code="ROAD" Desc="Road Service" />
+						<Coverage ID="45" Code="RREIM" Desc="Rental Reimbursement (A-89)" />
+						<Coverage ID="46" Code="LLGC" Desc="Loan / Lease Gap Coverage ( A- 11)" />
+						<Coverage ID="49" Code="EBCE" Desc="Customizing Equipment ( A - 14)" />
+						<Coverage ID="1011" Code="SA44" Desc="Stated Amount - A-44" />
+						<Coverage ID="1014" Code="SPA8" Desc="Snow -Plowing A-8" />
+						<Coverage ID="248" Code="EBENO" Desc="Employers Non-Ownership Liability (A-80)" COMMENT="OBSOLETE" />
+						<Coverage ID="1020" Code="MHT22" Desc="Motor Homes, Truck or Van Campers &amp; Travel Trailers A-22" />
+						<Coverage ID="1008" Code="AMC49" Desc="Antique Motor Car Endorsement A-49" />
+						<Coverage ID="1009" Code="CC49" Desc="Classic Car Endorsement  A-46" />
+						<Coverage ID="1029" Code="SRTE" Desc="Sound Receiving and Transmitting Equipment A-31" />
+						<Coverage ID="36" Code="UMPD" Desc="Uninsured Motorists (PD) (A-21)" />
+						<Coverage ID="1007" Code="RRUM" Desc=" Rejection / Reduction of Uninsured &amp; Underinsured Motorist Coverage (A-9)" />
+						<Coverage ID="300" Code="EECOMP" Desc="Miscellaneous Extra Equipment - Comprehensive (A-16)" />
+						<Coverage ID="302" Code="EECOLL" Desc="Miscellaneous Extra Equipment - Collision (A-16)" />
+						</Coverages>
+					</Remove>
+				</IsSuspended>
+			</VehicleType>
+		</VehicleUse>
+		<!-- END OF COMMERCIAL -->
+		<!-- START OF PERSONAL -->
+		<VehicleUse ID="11332" Desc="Personal">
+			<Remove>
+				<Coverages>
+					<Coverage ID="54" Code="HA" Desc="Hired Automobiles - Cost of hire basis (A-85)" COMMENT="OBSOLETE" />
+					<Coverage ID="248" Code="EBENO" Desc="Employers Non-Ownership Liability (A-80)" COMMENT="OBSOLETE" />
+					<!-- Commneted as covg deleted as per itrack 4229 
+					<Coverage ID="1019" Code="TE92" Desc="Terrorism Endorsement C-92" />
+					-->
+				</Coverages>
+			</Remove>
+			<VehicleType ID="11335" Desc="Customized Van or Truck">
+				<Remove>
+					<Coverages>
+						<Coverage ID="1008" Code="AMC49" Desc="Antique Motor Car Endorsement A-49" />
+						<Coverage ID="1009" Code="CC49" Desc="Classic Car Endorsement  A-46" />
+						<Coverage ID="1020" Code="MHT22" Desc="Motor Homes, Truck or Van Campers &amp; Travel Trailers A-22" />
+					</Coverages>
+				</Remove>
+				<IsSuspended Type="10963" Desc="is Suspended Comp is Yes">
+					<Remove>
+						<Coverages>
+							<Coverage ID="1" Code="SLL" Desc="Single Limit Liability CSL" />
+							<Coverage ID="2" Code="BISPL" Desc="Bodily Injury Liability ( Split Limit)" />
+							<Coverage ID="4" Code="PD" Desc="Property Damage Liability" />
+							<Coverage ID="6" Code="MP" Desc="Medical Payments" />
+							<Coverage ID="9" Code="PUNCS" Desc="Uninsured Motorists (CSL)" />
+							<Coverage ID="12" Code="PUMSP" Desc="Uninsured Motorists (BI Split Limit)" />
+							<Coverage ID="14" Code="UNCSL" Desc="Underinsured Motorists (CSL)" />
+							<Coverage ID="34" Code="UNDSP" Desc="Underinsured Motorists (BI Split Limit)" />
+							<Coverage ID="36" Code="UMPD" Desc="Uninsured Motorists (PD) (A-21)" />
+							<Coverage ID="38" Code="COLL" Desc="Collision" />
+							<Coverage ID="44" Code="ROAD" Desc="Road Service" />
+							<Coverage ID="45" Code="RREIM" Desc="Rental Reimbursement (A-89)" />
+							<Coverage ID="46" Code="LLGC" Desc="Loan / Lease Gap Coverage ( A- 11)" />
+							<Coverage ID="50" Code="SORPE" Desc="Sound Reproducing - Tapes (A-29)" />
+							<Coverage ID="52" Code="ENO" Desc="Extended Non-Owned Coverage for Named Individual (A-35)" />
+							<Coverage ID="54" Code="HA" Desc="Hired Automobiles - Cost of hire basis (A-85)" COMMENT="OBSOLETE" />
+							<Coverage ID="248" Code="EBENO" Desc="Employers Non-Ownership Liability (A-80)" COMMENT="OBSOLETE" />
+							<Coverage ID="256" Code="SORCV" Desc="Sound Receiving &amp; Transmitting Equipment (A-31)"
+								COMMENT="OBSOLETE" />
+							<Coverage ID="300" Code="EECOMP" Desc="Miscellaneous Extra Equipment - Comprehensive (A-16)" />
+							<Coverage ID="302" Code="EECOLL" Desc="Miscellaneous Extra Equipment - Collision (A-16)" />
+							<Coverage ID="1008" Code="AMC49" Desc="Antique Motor Car Endorsement A-49" />
+							<Coverage ID="1009" Code="CC49" Desc="Classic Car Endorsement  A-46" />
+							<Coverage ID="1014" Code="SPA8" Desc="Snow -Plowing A-8" />
+							<Coverage ID="1007" Code="RRUM" Desc=" Rejection / Reduction of Uninsured &amp; Underinsured Motorist Coverage (A-9)" />
+							<Coverage ID="1011" Code="SA44" Desc="Stated Amount - A-44" />
+							<Coverage ID="1020" Code="MHT22" Desc="Motor Homes, Truck or Van Campers &amp; Travel Trailers A-22" />
+							<Coverage ID="1029" Code="SRTE" Desc="Sound Receiving and Transmitting Equipment A-31" />
+							<Coverage ID="1019" Code="TE92" Desc="Terrorism Endorsement C-92" />
+						</Coverages>
+						<!--Coverage ID="1012" Code="TAP7" Desc="Trailblazer Auto Policy - TB-7" />
+							<Coverage ID="1013" Code="TE90" Desc="Transportation Expense A-90" />
+							<Coverage ID="1010" Code="EP95" Desc="Excluded Person(s) Endorsement A-96" /-->
+					</Remove>
+				</IsSuspended>
+			</VehicleType>
+			<VehicleType ID="11336" Desc="Motorhome">
+				<Remove>
+					<Coverages>
+						<Coverage ID="1008" Code="AMC49" Desc="Antique Motor Car Endorsement A-49" />
+						<Coverage ID="1009" Code="CC49" Desc="Classic Car Endorsement  A-46" />
+						<Coverage ID="45" Code="RREIM" Desc="Rental Reimbursement (A-89)" />
+					</Coverages>
+				</Remove>
+				<IsSuspended Type="10963" Desc="is Suspended Comp is Yes">
+					<Remove>
+						<Coverages>
+							<Coverage ID="1" Code="SLL" Desc="Single Limit Liability CSL" />
+							<Coverage ID="2" Code="BISPL" Desc="Bodily Injury Liability ( Split Limit)" />
+							<Coverage ID="4" Code="PD" Desc="Property Damage Liability" />
+							<Coverage ID="6" Code="MP" Desc="Medical Payments" />
+							<Coverage ID="9" Code="PUNCS" Desc="Uninsured Motorists (CSL)" />
+							<Coverage ID="12" Code="PUMSP" Desc="Uninsured Motorists (BI Split Limit)" />
+							<Coverage ID="14" Code="UNCSL" Desc="Underinsured Motorists (CSL)" />
+							<Coverage ID="34" Code="UNDSP" Desc="Underinsured Motorists (BI Split Limit)" />
+							<Coverage ID="36" Code="UMPD" Desc="Uninsured Motorists (PD) (A-21)" />
+							<Coverage ID="38" Code="COLL" Desc="Collision" />
+							<Coverage ID="44" Code="ROAD" Desc="Road Service" />
+							<Coverage ID="45" Code="RREIM" Desc="Rental Reimbursement (A-89)" />
+							<Coverage ID="46" Code="LLGC" Desc="Loan / Lease Gap Coverage ( A- 11)" />
+							<Coverage ID="49" Code="EBCE" Desc="Customizing Equipment ( A - 14)" />
+							<Coverage ID="50" Code="SORPE" Desc="Sound Reproducing - Tapes (A-29)" />
+							<Coverage ID="52" Code="ENO" Desc="Extended Non-Owned Coverage for Named Individual (A-35)" />
+							<Coverage ID="54" Code="HA" Desc="Hired Automobiles - Cost of hire basis (A-85)" COMMENT="OBSOLETE" />
+							<Coverage ID="248" Code="EBENO" Desc="Employers Non-Ownership Liability (A-80)" COMMENT="OBSOLETE" />
+							<Coverage ID="256" Code="SORCV" Desc="Sound Receiving &amp; Transmitting Equipment (A-31)"
+								COMMENT="OBSOLETE" />
+							<Coverage ID="300" Code="EECOMP" Desc="Miscellaneous Extra Equipment - Comprehensive (A-16)" />
+							<Coverage ID="302" Code="EECOLL" Desc="Miscellaneous Extra Equipment - Collision (A-16)" />
+							<Coverage ID="1008" Code="AMC49" Desc="Antique Motor Car Endorsement A-49" />
+							<Coverage ID="1009" Code="CC49" Desc="Classic Car Endorsement  A-46" />
+							<Coverage ID="1014" Code="SPA8" Desc="Snow -Plowing A-8" />
+							<Coverage ID="1007" Code="RRUM" Desc=" Rejection / Reduction of Uninsured &amp; Underinsured Motorist Coverage (A-9)" />
+							<Coverage ID="1011" Code="SA44" Desc="Stated Amount - A-44" />
+							<Coverage ID="1029" Code="SRTE" Desc="Sound Receiving and Transmitting Equipment A-31" />
+							<Coverage ID="1019" Code="TE92" Desc="Terrorism Endorsement C-92" />
+						</Coverages>
+						<!--Coverage ID="1012" Code="TAP7" Desc="Trailblazer Auto Policy - TB-7" />
+							<Coverage ID="1013" Code="TE90" Desc="Transportation Expense A-90" />
+							<Coverage ID="1010" Code="EP95" Desc="Excluded Person(s) Endorsement A-96" /-->
+					</Remove>
+				</IsSuspended>
+			</VehicleType>
+			<VehicleType ID="11334" Desc="Private Passenger Auto">
+				<Remove>
+					<Coverages>
+						<Coverage ID="1020" Code="MHT22" Desc="Motor Homes, Truck or Van Campers &amp; Travel Trailers A-22" />
+						<Coverage ID="1008" Code="AMC49" Desc="Antique Motor Car Endorsement A-49" />
+						<Coverage ID="1009" Code="CC49" Desc="Rental Reimbursement (A-89)" />
+					</Coverages>
+					<!-- CoverageLimit COV_ID="42" Desc="Other Than Collision (Comprehensive)"> itrack 5526
+						<LIMIT_DEDUC LIMIT_DEDUC_ID="78" Amount="" 
+					</CoverageLimit -->
+				</Remove>
+				<IsSuspended Type="10963" Desc="is Suspended Comp is Yes">
+					<Remove>
+						<Coverages>
+							<Coverage ID="1" Code="SLL" Desc="Single Limit Liability CSL" />
+							<Coverage ID="2" Code="BISPL" Desc="Bodily Injury Liability ( Split Limit)" />
+							<Coverage ID="4" Code="PD" Desc="Property Damage Liability" />
+							<Coverage ID="6" Code="MP" Desc="Medical Payments" />
+							<Coverage ID="9" Code="PUNCS" Desc="Uninsured Motorists (CSL)" />
+							<Coverage ID="12" Code="PUMSP" Desc="Uninsured Motorists (BI Split Limit)" />
+							<Coverage ID="14" Code="UNCSL" Desc="Underinsured Motorists (CSL)" />
+							<Coverage ID="34" Code="UNDSP" Desc="Underinsured Motorists (BI Split Limit)" />
+							<Coverage ID="36" Code="UMPD" Desc="Uninsured Motorists (PD) (A-21)" />
+							<Coverage ID="38" Code="COLL" Desc="Collision" />
+							<Coverage ID="44" Code="ROAD" Desc="Road Service" />
+							<Coverage ID="45" Code="RREIM" Desc="Rental Reimbursement (A-89)" />
+							<Coverage ID="46" Code="LLGC" Desc="Loan / Lease Gap Coverage ( A- 11)" />
+							<Coverage ID="49" Code="EBCE" Desc="Customizing Equipment ( A - 14)" />
+							<Coverage ID="50" Code="SORPE" Desc="Sound Reproducing - Tapes (A-29)" />
+							<Coverage ID="52" Code="ENO" Desc="Extended Non-Owned Coverage for Named Individual (A-35)" />
+							<Coverage ID="54" Code="HA" Desc="Hired Automobiles - Cost of hire basis (A-85)" COMMENT="OBSOLETE" />
+							<Coverage ID="248" Code="EBENO" Desc="Employers Non-Ownership Liability (A-80)" COMMENT="OBSOLETE" />
+							<Coverage ID="256" Code="SORCV" Desc="Sound Receiving &amp; Transmitting Equipment (A-31)"
+								COMMENT="OBSOLETE" />
+							<Coverage ID="300" Code="EECOMP" Desc="Miscellaneous Extra Equipment - Comprehensive (A-16)" />
+							<Coverage ID="302" Code="EECOLL" Desc="Miscellaneous Extra Equipment - Collision (A-16)" />
+							<Coverage ID="1008" Code="AMC49" Desc="Antique Motor Car Endorsement A-49" />
+							<Coverage ID="1009" Code="CC49" Desc="Classic Car Endorsement  A-46" />
+							<Coverage ID="1014" Code="SPA8" Desc="Snow -Plowing A-8" />
+							<Coverage ID="1007" Code="RRUM" Desc=" Rejection / Reduction of Uninsured &amp; Underinsured Motorist Coverage (A-9)" />
+							<Coverage ID="1011" Code="SA44" Desc="Stated Amount - A-44" />
+							<Coverage ID="1020" Code="MHT22" Desc="Motor Homes, Truck or Van Campers &amp; Travel Trailers A-22" />
+							<Coverage ID="1029" Code="SRTE" Desc="Sound Receiving and Transmitting Equipment A-31" />
+							<Coverage ID="1019" Code="TE92" Desc="Terrorism Endorsement C-92" />
+						</Coverages>
+						<!--Coverage ID="1012" Code="TAP7" Desc="Trailblazer Auto Policy - TB-7" />
+							<Coverage ID="1013" Code="TE90" Desc="Transportation Expense A-90" />
+							<Coverage ID="1010" Code="EP95" Desc="Excluded Person(s) Endorsement A-96" /-->
+					</Remove>
+				</IsSuspended>
+			</VehicleType>
+			<VehicleType ID="11618" Desc="Suspended-Comp Only">
+				<Remove>
+					<Coverages>
+						<Coverage ID="1" Code="SLL" Desc="Single Limit Liability CSL" />
+						<Coverage ID="2" Code="BISPL" Desc="Bodily Injury Liability ( Split Limit)" />
+						<Coverage ID="4" Code="PD" Desc="Property Damage Liability" />
+						<Coverage ID="6" Code="MP" Desc="Medical Payments" />
+						<Coverage ID="9" Code="PUNCS" Desc="Uninsured Motorists (CSL)" />
+						<Coverage ID="12" Code="PUMSP" Desc="Uninsured Motorists (BI Split Limit)" />
+						<Coverage ID="14" Code="UNCSL" Desc="Underinsured Motorists (CSL)" />
+						<Coverage ID="34" Code="UNDSP" Desc="Underinsured Motorists (BI Split Limit)" />
+						<Coverage ID="36" Code="UMPD" Desc="Uninsured Motorists (PD) (A-21)" />
+						<Coverage ID="38" Code="COLL" Desc="Collision" />
+						<Coverage ID="44" Code="ROAD" Desc="Road Service" />
+						<Coverage ID="45" Code="RREIM" Desc="Rental Reimbursement (A-89)" />
+						<Coverage ID="46" Code="LLGC" Desc="Loan / Lease Gap Coverage ( A- 11)" />
+						<Coverage ID="49" Code="EBCE" Desc="Customizing Equipment ( A - 14)" />
+						<Coverage ID="50" Code="SORPE" Desc="Sound Reproducing - Tapes (A-29)" />
+						<Coverage ID="52" Code="ENO" Desc="Extended Non-Owned Coverage for Named Individual (A-35)" />
+						<Coverage ID="54" Code="HA" Desc="Hired Automobiles - Cost of hire basis (A-85)" COMMENT="OBSOLETE" />
+						<Coverage ID="248" Code="EBENO" Desc="Employers Non-Ownership Liability (A-80)" COMMENT="OBSOLETE" />
+						<Coverage ID="256" Code="SORCV" Desc="Sound Receiving &amp; Transmitting Equipment (A-31)"
+							COMMENT="OBSOLETE" />
+						<Coverage ID="300" Code="EECOMP" Desc="Miscellaneous Extra Equipment - Comprehensive (A-16)" />
+						<Coverage ID="302" Code="EECOLL" Desc="Miscellaneous Extra Equipment - Collision (A-16)" />
+						<Coverage ID="1008" Code="AMC49" Desc="Antique Motor Car Endorsement A-49" />
+						<Coverage ID="1009" Code="CC49" Desc="Classic Car Endorsement  A-46" />
+						<Coverage ID="1014" Code="SPA8" Desc="Snow -Plowing A-8" />
+						<Coverage ID="1007" Code="RRUM" Desc=" Rejection / Reduction of Uninsured &amp; Underinsured Motorist Coverage (A-9)" />
+						<Coverage ID="1011" Code="SA44" Desc="Stated Amount - A-44" />
+						<Coverage ID="1020" Code="MHT22" Desc="Motor Homes, Truck or Van Campers &amp; Travel Trailers A-22" />
+						<Coverage ID="1029" Code="SRTE" Desc="Sound Receiving and Transmitting Equipment A-31" />
+					</Coverages>
+					<!--Coverage ID="1012" Code="TAP7" Desc="Trailblazer Auto Policy - TB-7" />
+							<Coverage ID="1013" Code="TE90" Desc="Transportation Expense A-90" />
+							<Coverage ID="1010" Code="EP95" Desc="Excluded Person(s) Endorsement A-96" /-->
+				</Remove>
+				<IsSuspended Type="10963" Desc="is Suspended Comp is Yes">
+					<Remove>
+						<Coverages></Coverages>
+					</Remove>
+				</IsSuspended>
+			</VehicleType>
+			<VehicleType ID="11337" Desc="Utility Trailer">
+				<Remove>
+					<Coverages>
+						<Coverage ID="1" Code="SLL" Desc="Single Limit Liability CSL" />
+						<Coverage ID="2" Code="BISPL" Desc="Bodily Injury Liability ( Split Limit)" />
+						<Coverage ID="4" Code="PD" Desc="Property Damage Liability" />
+						<Coverage ID="6" Code="MP" Desc="Medical Payments" />
+						<Coverage ID="9" Code="PUNCS" Desc="Uninsured Motorists (CSL)" />
+						<Coverage ID="12" Code="PUMSP" Desc="Uninsured Motorists (BI Split Limit)" />
+						<Coverage ID="14" Code="UNCSL" Desc="Underinsured Motorists (CSL)" />
+						<Coverage ID="34" Code="UNDSP" Desc="Underinsured Motorists (BI Split Limit)" />
+						<Coverage ID="36" Code="UMPD" Desc="Uninsured Motorists (PD) (A-21)" />
+						<Coverage ID="44" Code="ROAD" Desc="Road Service" />
+						<Coverage ID="45" Code="RREIM" Desc="Rental Reimbursement (A-89)" />
+						<Coverage ID="46" Code="LLGC" Desc="Loan / Lease Gap Coverage ( A- 11)" />
+						<Coverage ID="49" Code="EBCE" Desc="Customizing Equipment ( A - 14)" />
+						<Coverage ID="50" Code="SORPE" Desc="Sound Reproducing - Tapes (A-29)" />
+						<Coverage ID="52" Code="ENO" Desc="Extended Non-Owned Coverage for Named Individual (A-35)" />
+						<Coverage ID="54" Code="HA" Desc="Hired Automobiles - Cost of hire basis (A-85)" COMMENT="OBSOLETE" />
+						<Coverage ID="248" Code="EBENO" Desc="Employers Non-Ownership Liability (A-80)" />
+						<Coverage ID="256" Code="SORCV" Desc="Sound Receiving &amp; Transmitting Equipment (A-31)"
+							COMMENT="OBSOLETE" />
+						<Coverage ID="1008" Code="AMC49" Desc="Antique Motor Car Endorsement A-49" />
+						<Coverage ID="1009" Code="CC49" Desc="Classic Car Endorsement  A-46" />
+						<Coverage ID="1010" Code="EP95" Desc="Excluded Person(s) Endorsement A-96" />
+						<Coverage ID="1011" Code="SA44" Desc="Stated Amount - A-44" />
+						<Coverage ID="1014" Code="SPA8" Desc="Snow -Plowing A-8" />
+						<Coverage ID="1020" Code="MHT22" Desc="Motor Homes, Truck or Van Campers &amp; Travel Trailers A-22" />
+						<Coverage ID="1029" Code="SRTE" Desc="Sound Receiving and Transmitting Equipment A-31" />
+						<Coverage ID="300" Code="EECOMP" Desc="Miscellaneous Extra Equipment - Comprehensive (A-16)" />
+						<Coverage ID="302" Code="EECOLL" Desc="Miscellaneous Extra Equipment - Collision (A-16)" />
+						<Coverage ID="1007" Code="RRUM" Desc=" Rejection / Reduction of Uninsured &amp; Underinsured Motorist Coverage (A-9)" />
+					</Coverages>
+					<!--Coverage ID="1013" Code="TE90" Desc="Transportation Expense A-90" /-->
+					<!--Coverage ID="1012" Code="TAP7" Desc="Trailblazer Auto Policy - TB-7" /-->
+				</Remove>
+				<IsSuspended Type="10963" Desc="is Suspended Comp is Yes">
+					<Remove>
+						<Coverages></Coverages>
+					</Remove>
+				</IsSuspended>
+			</VehicleType>
+			<VehicleType ID="11869" Desc="Antique Car">
+				<Remove>
+					<Coverages>
+						<Coverage ID="1020" Code="MHT22" Desc="Motor Homes, Truck or Van Campers &amp; Travel Trailers A-22" />
+					</Coverages>
+					<CoverageLimit COV_ID="42" Desc="Other Than Collision (Comprehensive)">
+						<LIMIT_DEDUC LIMIT_DEDUC_ID="85" Amount="" />
+					</CoverageLimit>
+					<CoverageLimit COV_ID="38" Desc="Collision">
+						<LIMIT_DEDUC LIMIT_DEDUC_ID="76" Amount="" />
+						<LIMIT_DEDUC LIMIT_DEDUC_ID="1376" Amount="" />
+					</CoverageLimit>
+				</Remove>
+				<IsSuspended Type="10963" Desc="is Suspended Comp is Yes">
+					<Remove>
+						<Coverages>
+							<Coverage ID="1" Code="SLL" Desc="Single Limit Liability CSL" />
+							<Coverage ID="2" Code="BISPL" Desc="Bodily Injury Liability ( Split Limit)" />
+							<Coverage ID="4" Code="PD" Desc="Property Damage Liability" />
+							<Coverage ID="6" Code="MP" Desc="Medical Payments" />
+							<Coverage ID="9" Code="PUNCS" Desc="Uninsured Motorists (CSL)" />
+							<Coverage ID="12" Code="PUMSP" Desc="Uninsured Motorists (BI Split Limit)" />
+							<Coverage ID="14" Code="UNCSL" Desc="Underinsured Motorists (CSL)" />
+							<Coverage ID="34" Code="UNDSP" Desc="Underinsured Motorists (BI Split Limit)" />
+							<Coverage ID="36" Code="UMPD" Desc="Uninsured Motorists (PD) (A-21)" />
+							<Coverage ID="38" Code="COLL" Desc="Collision" />
+							<Coverage ID="44" Code="ROAD" Desc="Road Service" />
+							<Coverage ID="45" Code="RREIM" Desc="Rental Reimbursement (A-89)" />
+							<Coverage ID="46" Code="LLGC" Desc="Loan / Lease Gap Coverage ( A- 11)" />
+							<Coverage ID="49" Code="EBCE" Desc="Customizing Equipment ( A - 14)" />
+							<Coverage ID="50" Code="SORPE" Desc="Sound Reproducing - Tapes (A-29)" />
+							<Coverage ID="52" Code="ENO" Desc="Extended Non-Owned Coverage for Named Individual (A-35)" />
+							<Coverage ID="54" Code="HA" Desc="Hired Automobiles - Cost of hire basis (A-85)" COMMENT="OBSOLETE" />
+							<Coverage ID="248" Code="EBENO" Desc="Employers Non-Ownership Liability (A-80)" COMMENT="OBSOLETE" />
+							<Coverage ID="256" Code="SORCV" Desc="Sound Receiving &amp; Transmitting Equipment (A-31)"
+								COMMENT="OBSOLETE" />
+							<Coverage ID="300" Code="EECOMP" Desc="Miscellaneous Extra Equipment - Comprehensive (A-16)" />
+							<Coverage ID="302" Code="EECOLL" Desc="Miscellaneous Extra Equipment - Collision (A-16)" />
+							<Coverage ID="1009" Code="CC49" Desc="Classic Car Endorsement  A-46" />
+							<Coverage ID="1014" Code="SPA8" Desc="Snow -Plowing A-8" />
+							<Coverage ID="1007" Code="RRUM" Desc=" Rejection / Reduction of Uninsured &amp; Underinsured Motorist Coverage (A-9)" />
+							<Coverage ID="1020" Code="MHT22" Desc="Motor Homes, Truck or Van Campers &amp; Travel Trailers A-22" />
+							<Coverage ID="1029" Code="SRTE" Desc="Sound Receiving and Transmitting Equipment A-31" />
+							<Coverage ID="1019" Code="TE92" Desc="Terrorism Endorsement C-92" />
+						</Coverages>
+						<!--Coverage ID="1012" Code="TAP7" Desc="Trailblazer Auto Policy - TB-7" />
+							<Coverage ID="1013" Code="TE90" Desc="Transportation Expense A-90" />
+							<Coverage ID="1010" Code="EP95" Desc="Excluded Person(s) Endorsement A-96" /-->
+					</Remove>
+				</IsSuspended>
+			</VehicleType>
+			<VehicleType ID="11870" Desc="Camper&amp; Travel Trailer">
+				<Remove>
+					<Coverages>
+						<Coverage ID="1008" Code="AMC49" Desc="Antique Motor Car Endorsement A-49" />
+						<Coverage ID="1009" Code="CC49" Desc="Classic Car Endorsement  A-46" />
+						<Coverage ID="1" Code="SLL" Desc="Single Limit Liability CSL" />
+						<Coverage ID="2" Code="BISPL" Desc="Bodily Injury Liability ( Split Limit)" />
+						<Coverage ID="4" Code="PD" Desc="Property Damage Liability" />
+						<Coverage ID="6" Code="MP" Desc="Medical Payments" />
+						<Coverage ID="9" Code="PUNCS" Desc="Uninsured Motorists (CSL)" />
+						<Coverage ID="12" Code="PUMSP" Desc="Uninsured Motorists (BI Split Limit)" />
+						<Coverage ID="14" Code="UNCSL" Desc="Underinsured Motorists (CSL)" />
+						<Coverage ID="34" Code="UNDSP" Desc="Underinsured Motorists (BI Split Limit)" />
+						<Coverage ID="36" Code="UMPD" Desc="Uninsured Motorists (PD) (A-21)" />
+						<Coverage ID="44" Code="ROAD" Desc="Road Service" />
+						<Coverage ID="45" Code="RREIM" Desc="Rental Reimbursement (A-89)" />
+						<Coverage ID="46" Code="LLGC" Desc="Loan / Lease Gap Coverage ( A- 11)" />
+						<Coverage ID="49" Code="EBCE" Desc="Customizing Equipment ( A - 14)" />
+						<Coverage ID="50" Code="SORPE" Desc="Sound Reproducing - Tapes (A-29)" />
+						<Coverage ID="52" Code="ENO" Desc="Extended Non-Owned Coverage for Named Individual (A-35)" />
+						<Coverage ID="54" Code="HA" Desc="Hired Automobiles - Cost of hire basis (A-85)" COMMENT="OBSOLETE" />
+						<Coverage ID="248" Code="EBENO" Desc="Employers Non-Ownership Liability (A-80)" />
+						<Coverage ID="256" Code="SORCV" Desc="Sound Receiving &amp; Transmitting Equipment (A-31)"
+							COMMENT="OBSOLETE" />
+						<Coverage ID="1008" Code="AMC49" Desc="Antique Motor Car Endorsement A-49" />
+						<Coverage ID="1010" Code="EP95" Desc="Excluded Person(s) Endorsement A-96" />
+						<Coverage ID="1011" Code="SA44" Desc="Stated Amount - A-44" />
+						<Coverage ID="1014" Code="SPA8" Desc="Snow -Plowing A-8" />
+						<Coverage ID="1029" Code="SRTE" Desc="Sound Receiving and Transmitting Equipment A-31" />
+						<Coverage ID="300" Code="EECOMP" Desc="Miscellaneous Extra Equipment - Comprehensive (A-16)" />
+						<Coverage ID="302" Code="EECOLL" Desc="Miscellaneous Extra Equipment - Collision (A-16)" />
+						<Coverage ID="1007" Code="RRUM" Desc=" Rejection / Reduction of Uninsured &amp; Underinsured Motorist Coverage (A-9)" />
+						<Coverage ID="1019" Code="TE92" Desc="Terrorism Endorsement C-92" />
+					</Coverages>
+					<!-- Itrack 5545 -->
+					<!--CoverageLimit COV_ID="38" Desc="Collision ">
+						<LIMIT_DEDUC LIMIT_DEDUC_ID="74" Amount="" />
+					</CoverageLimit-->
+				</Remove>
+				<!--Coverage ID="1013" Code="TE90" Desc="Transportation Expense A-90" /-->
+				<!--Coverage ID="1012" Code="TAP7" Desc="Trailblazer Auto Policy - TB-7" /-->
+				<IsSuspended Type="10963" Desc="is Suspended Comp is Yes">
+					<Remove>
+						<Coverages></Coverages>
+					</Remove>
+				</IsSuspended>
+			</VehicleType>
+			<VehicleType ID="11868" Desc="Classic Car">
+				<Remove>
+					<Coverages>
+						<Coverage ID="1003" Code="MHT22" Desc="Motor Homes, Truck or Van Campers &amp; Travel Trailers A-22" />
+					</Coverages>
+					<CoverageLimit COV_ID="42" Desc="Other Than Collision (Comprehensive)">
+						<LIMIT_DEDUC LIMIT_DEDUC_ID="85" Amount="" />
+					</CoverageLimit>
+					<CoverageLimit COV_ID="38" Desc="Collision">
+						<LIMIT_DEDUC LIMIT_DEDUC_ID="76" Amount="" />
+						<LIMIT_DEDUC LIMIT_DEDUC_ID="1376" Amount="" />
+					</CoverageLimit>
+				</Remove>
+				<IsSuspended Type="10963" Desc="is Suspended Comp is Yes">
+					<Remove>
+						<Coverages>
+							<Coverage ID="1" Code="SLL" Desc="Single Limit Liability CSL" />
+							<Coverage ID="2" Code="BISPL" Desc="Bodily Injury Liability ( Split Limit)" />
+							<Coverage ID="4" Code="PD" Desc="Property Damage Liability" />
+							<Coverage ID="6" Code="MP" Desc="Medical Payments" />
+							<Coverage ID="9" Code="PUNCS" Desc="Uninsured Motorists (CSL)" />
+							<Coverage ID="12" Code="PUMSP" Desc="Uninsured Motorists (BI Split Limit)" />
+							<Coverage ID="14" Code="UNCSL" Desc="Underinsured Motorists (CSL)" />
+							<Coverage ID="34" Code="UNDSP" Desc="Underinsured Motorists (BI Split Limit)" />
+							<Coverage ID="36" Code="UMPD" Desc="Uninsured Motorists (PD) (A-21)" />
+							<Coverage ID="38" Code="COLL" Desc="Collision" />
+							<Coverage ID="44" Code="ROAD" Desc="Road Service" />
+							<Coverage ID="45" Code="RREIM" Desc="Rental Reimbursement (A-89)" />
+							<Coverage ID="46" Code="LLGC" Desc="Loan / Lease Gap Coverage ( A- 11)" />
+							<Coverage ID="49" Code="EBCE" Desc="Customizing Equipment ( A - 14)" />
+							<Coverage ID="50" Code="SORPE" Desc="Sound Reproducing - Tapes (A-29)" />
+							<Coverage ID="52" Code="ENO" Desc="Extended Non-Owned Coverage for Named Individual (A-35)" />
+							<Coverage ID="54" Code="HA" Desc="Hired Automobiles - Cost of hire basis (A-85)" COMMENT="OBSOLETE" />
+							<Coverage ID="248" Code="EBENO" Desc="Employers Non-Ownership Liability (A-80)" COMMENT="OBSOLETE" />
+							<Coverage ID="256" Code="SORCV" Desc="Sound Receiving &amp; Transmitting Equipment (A-31)"
+								COMMENT="OBSOLETE" />
+							<Coverage ID="300" Code="EECOMP" Desc="Miscellaneous Extra Equipment - Comprehensive (A-16)" />
+							<Coverage ID="302" Code="EECOLL" Desc="Miscellaneous Extra Equipment - Collision (A-16)" />
+							<Coverage ID="1008" Code="AMC49" Desc="Antique Motor Car Endorsement A-49" />
+							<Coverage ID="1014" Code="SPA8" Desc="Snow -Plowing A-8" />
+							<Coverage ID="1007" Code="RRUM" Desc=" Rejection / Reduction of Uninsured &amp; Underinsured Motorist Coverage (A-9)" />
+							<Coverage ID="1020" Code="MHT22" Desc="Motor Homes, Truck or Van Campers &amp; Travel Trailers A-22" />
+							<Coverage ID="1029" Code="SRTE" Desc="Sound Receiving and Transmitting Equipment A-31" />
+							<Coverage ID="1019" Code="TE92" Desc="Terrorism Endorsement C-92" />
+						</Coverages>
+						<!--Coverage ID="1012" Code="TAP7" Desc="Trailblazer Auto Policy - TB-7" />
+							<Coverage ID="1013" Code="TE90" Desc="Transportation Expense A-90" />
+							<Coverage ID="1010" Code="EP95" Desc="Excluded Person(s) Endorsement A-96" /-->
+					</Remove>
+				</IsSuspended>
+			</VehicleType>
+		</VehicleUse>
+		<!-- END OF PERSONAL -->
+		<VehicleUse ID="0" Desc="">
+			<Remove>
+				<Coverages>
+					<Coverage ID="54" Code="HA" Desc="Hired Automobiles - Cost of hire basis (A-85)" COMMENT="OBSOLETE" />
+					<Coverage ID="248" Code="EBENO" Desc="Employers Non-Ownership Liability (A-80)" COMMENT="OBSOLETE" />
+				</Coverages>
+			</Remove>
+		</VehicleUse>
+	</State>
+	<!-- END OF INDIANA -->
+</Auto>

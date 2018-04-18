@@ -1,0 +1,302 @@
+﻿@model IEnumerable<MCAS.Web.Objects.ClaimObjectHelper.MandateListAll>
+@using MCAS.Web.Objects.Resources.ClaimProcessing;
+@using MCAS.Web.Objects.Resources.Common;
+@{
+    ViewBag.Title = "MandateList";
+    @Html.Hidden("oldgroup", 1)
+    Layout = null;
+    var name = Model.Count() != 0 ? Model.FirstOrDefault().ClaimantName : "";
+    var rno = Model.Count() != 0 ? Model.FirstOrDefault().ClaimantrecordNumber : "";
+    var mno = Model.Count() != 0 ? Model.FirstOrDefault().MandaterecorNumber : "";
+}
+
+<style type="text/css">
+    #ajaxSpinnerContainer
+    {
+        height: 11px;
+    }
+    #ajaxSpinnerImage
+    {
+        display: none;
+    }
+    .ajax-loader
+    {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        margin-left: -32px;
+        margin-top: -32px;
+        display: block;
+        z-index: 999999999999999;
+    }
+</style>
+<div class="table-responsive">
+    <div id="ajaxSpinnerContainer">
+        <img alt="" src="../../Images/ajax-loader.gif" id="ajaxSpinnerImage" class="ajax-loader" />
+    </div>
+    <table class="table table-striped table-hover" id="ReserveChangeTable" border="1"
+        cellpadding="0" cellspacing="0">
+        <thead>
+             <tr style="text-transform: capitalize;">
+                    <td colspan="6">
+                        <b>@ClaimMandate.ClaimantName:</b> @name
+                    </td>
+                </tr>
+                <tr style="text-transform: capitalize;">
+                    <td colspan="6">
+                        <b>@ClaimMandate.ClaimantRecordNumber:</b> @rno
+                    </td>
+                </tr>
+                <tr style="text-transform: capitalize;">
+                    <td colspan="6">
+                        <b>@ClaimMandate.MandateNumber:</b> @mno
+                    </td>
+            </tr>
+            <tr style="text-align: center; text-transform: capitalize;background-color: #C6C6C6;">
+                <td>
+                    @ClaimMandate.TypeofMovement
+                </td>
+                <td>
+                    @ClaimMandate.MandateMovement
+                </td>
+                <td>
+                    @ClaimMandate.CurrentMandate
+                </td>
+                <td>
+                    @ClaimMandate.DateTime
+                </td>
+                <td>
+                    @ClaimMandate.UserName
+                </td>
+                <td>
+                    @ClaimMandate.Details
+                </td>
+            </tr>
+        </thead>
+        <tbody>
+            @{
+                int trid = 1;
+                int rowmatch = 1;
+                var display = "";
+                var listEnumerator = Model.GetEnumerator();
+
+                for (var i = 1; listEnumerator.MoveNext() == true; i++)
+                {
+                   var item = listEnumerator.Current;
+                   var date = item.CreatDate == null ? "" : item.CreatDate.Value.ToString();
+                   rowmatch += 1;
+                  
+                 <tr group='@(trid)' style="display:@display;">
+                    <td format="">
+                        @Html.DisplayFor(modelItem => item.TypeOfMovement)
+                    </td>
+                    <td format="">
+                        @Html.DisplayFor(modelItem => item.MovementMandate)
+                    </td>
+                    <td format="">
+                        @Html.DisplayFor(modelItem => item.CurrentMandate)
+                    </td>
+                    <td>
+                        @date
+                    </td>
+                    <td style="text-transform: capitalize;">
+                        @Html.DisplayFor(modelItem => item.Username)
+                    </td>
+                    <td>
+                        <button class="btn btn-info" cid="@item.ClaimTypeId" manid="@item.MandateId" mtype="@item.TypeOfMovement">
+                            @Common.Select</button>
+                    </td>
+                </tr>
+                    if (rowmatch > 4)
+                    {
+                        rowmatch = 1;
+                        trid += 1;
+                        display = "`";
+                    }
+                }
+            }
+        </tbody>
+    </table>
+</div>
+@{
+    decimal count = (decimal)Model.Count() / 4;
+    int totalcount = (int)Math.Ceiling(count);
+    <div class="col-lg-12 text-center">
+        <ul class="pagination no-margin">
+            <li id="liprevious" onclick="Pagination('liprevious');"><a href="#">«</a> </li>
+            @for (int j = 0; j < totalcount; j++)
+            {
+                if (j == 0)
+                { 
+                <li id="li@(j + 1)" class="active" onclick="Pagination('li@(j + 1)');"><a href="#">@(j + 1)</a></li>
+                }
+                else
+                {
+                    if (j > 4)
+                    {
+                <li id="li@(j + 1)" style="display: none;" onclick="Pagination('li@(j + 1)');" ><a
+                    href="#">@(j + 1)</a></li>
+                    }
+                    else
+                    { 
+                <li id="li@(j + 1)" onclick="Pagination('li@(j + 1)');" ><a href="#">@(j + 1)</a></li>
+                    }
+                }
+            }
+            <li id="linext" onclick="Pagination('linext');"><a href="#">»</a> </li>
+        </ul>
+    </div>
+    <div class="col-lg-12">
+        <div class="table-responsive">
+            <table id="Result" class="table table-striped table-hover" border="0" cellpadding="0"
+                style="display: none;" cellspacing="0">
+                <thead>
+                    <tr style="text-align: left; text-transform: capitalize; background-color: #C6C6C6;">
+                        <td style="width: 18%; word-break: break-all;">
+                            @ClaimMandate.ComponentName
+                        </td>
+                        <td style="width: 18%; word-break: break-all;">
+                            @ClaimMandate.TypeofMovement
+                        </td>
+                        <td style="width: 17%; word-break: break-all;">
+                            @ClaimMandate.MandateMovement
+                        </td>
+                        <td style="width: 17%; word-break: break-all;">
+                            @ClaimMandate.CurrentMandate
+                        </td>
+                        <td style="width: 16%; word-break: break-all;">
+                            @ClaimMandate.DateTime
+                        </td>
+                        <td style="width: 13%; word-break: break-all;text-transform: capitalize;">
+                            @ClaimMandate.UserName
+                        </td>
+                    </tr>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
+            <div class="col-lg-12 text-center" id="pag">
+                <ul class="pagination no-margin">
+                </ul>
+            </div>
+        </div>
+    </div>
+}
+<script type="text/javascript">
+    var do_on_load = function () {
+        $('td').each(function () {
+            if (void 0 !== $(this).attr("format")) {
+                if ($(this).html() != "") {
+                    var b = "-1" == $(this).html().toString().indexOf("-") ? "$" : "$-", a = $(this).html().toString().replace(/,/g, "");
+                    "" == a || isNaN(a) || $(this).html(b + CurrencyFormat($(this).html().replace(/,/g, "")));
+                }
+            };
+        });
+        var DetailstableRowNo = 5;
+        Pagination("li1")
+        $('#ReserveChangeTable button').click(function () {
+            var claimtype = $(this).attr("cid"), manid = $(this).attr("manid"),mtype=$(this).attr("mtype");
+            $("#ajaxSpinnerImage").show();
+            $('#Result').find("tr:gt(0)").remove();
+            $('#pag').find("li").remove();
+            $.ajax({
+                type: "POST",
+                url: '@Url.Action("Getdetailsfrommandatedetails", "ClaimProcessing")',
+                data: { ClaimType: claimtype,
+                    MandateId: manid,
+                    Typeofmovement: mtype
+                },
+                success: function (data) {
+                    for (var i = 0, k = 0; i < data.length; i++) {
+                        var a = data[i]['CompCode'], b = data[i]['MovementType'], c = data[i]['MovementMandate'], d = data[i]['CurrentMandate'], e = data[i]['Crdate'], f = data[i]['Createby1'];
+                        k = i % DetailstableRowNo == 0 ? (k + 1) : k;
+                        $('#Result > tbody:last').append('<tr style="text-align: left; text-transform: capitalize;"  group="pag' + k + '"> <td style="width:18%;word-break: break-all;"> ' + a + ' </td> <td style="width:18%;word-break: break-all;"> ' + b + ' </td> <td style="width:17%;word-break: break-all;"> ' + c + '</td><td style="width:17%;word-break: break-all;"> ' + d + ' </td> <td style="width:16%;word-break: break-all;"> ' + e + ' </td> <td style="width:13%;text-transform: capitalize;word-break: break-all;"> ' + f + '</td></tr>')
+                    }
+                    $('#Result').show();
+                    $('#Result').addClass("table table-striped table-hover");
+                    if (data.length > DetailstableRowNo) {
+                        PaginationForDetails("pag1");
+                        $('#pag').find("li:gt(0)").remove();
+                        for (var i = 0, j = 0; j < data.length; j = j + DetailstableRowNo, i++) {
+                            var res = parseInt(i) + 1;
+                            i == 0 ? $('#pag > ul:last').append('<li id="pag' + res + '" class="active" "><a href="#">' + res + '</a></li>') : $('#pag > ul:last').append('<li id="pag' + res + '" "><a href="#">' + res + '</a></li>');
+                        }
+                        $('#pag').show();
+                    }
+                    else {
+                        $('#pag').hide();
+                    }
+                    $("#ajaxSpinnerImage").hide();
+                },
+                error: function (data) {
+                    alert("error : " + data);
+                    $('#Result').hide();
+                    $("#ajaxSpinnerImage").hide();
+                }
+            });
+        });
+        $(document).on('click', '#pag > ul > li', function () {
+            PaginationForDetails($(this).context.id);
+        });
+
+    };
+
+    $(document).ready(do_on_load);
+    $(window).bind('page:change', do_on_load);
+
+    function PaginationForDetails(a) {
+        $("#pag > ul > li.active").removeClass();
+        $("#" + a).addClass("active");
+        $('#Result > tbody > tr').each(function () { $(this).attr("group") != a ? $(this).hide() : $(this).show() });
+        setTabActive('MandateTab');
+
+    }
+    function Pagination(c) {
+        var a = Math.ceil(parseFloat('@Model.Count()' / 4));
+        "linext" == c && (c = "li" + (parseInt($("#oldgroup").val()) == a ? a : parseInt($("#oldgroup").val()) + 1));
+        var z = 1 == parseInt($("#oldgroup").val()) ? 1 : (parseInt($("#oldgroup").val()) - 1);
+        "liprevious" == c && (c = "li" + z);
+        var d = $("#oldgroup").val(),
+        b = c.replace("li", "");
+        $(".active").removeClass();
+        $("#" + c).addClass("active");
+        k = c.substring(2, c.length);
+        $('#ReserveChangeTable > tbody > tr').each(function () { $(this).attr("group") != k ? $(this).hide() : $(this).show() });
+        setTabActive('MandateTab');
+        $('#Result,#pag').hide();
+    };
+    function getQueryVariable(c) {
+        for (var a = "@MCAS.Web.Objects.CommonHelper.MenuListItem.ClaimTabs.GetQueryStringVal()".replace(/amp;/ig, "").split("&"), d = 0; d < a.length; d++) {
+            var b = a[d].split("=");
+            if (b[0] == c) return b[1]
+        }
+    };
+    function CurrencyFormat(number) {
+        var decimalplaces = 2;
+        var decimalcharacter = ".";
+        var thousandseparater = ",";
+        number = parseFloat(number);
+        var sign = number < 0 ? "-" : "";
+        var formatted = new String(number.toFixed(decimalplaces));
+        if (decimalcharacter.length && decimalcharacter != ".") { formatted = formatted.replace(/\./, decimalcharacter); }
+        var integer = "";
+        var fraction = "";
+        var strnumber = new String(formatted);
+        var dotpos = decimalcharacter.length ? strnumber.indexOf(decimalcharacter) : -1;
+        if (dotpos > -1) {
+            if (dotpos) { integer = strnumber.substr(0, dotpos); }
+            fraction = strnumber.substr(dotpos + 1);
+        }
+        else { integer = strnumber; }
+        if (integer) { integer = String(Math.abs(integer)); }
+        while (fraction.length < decimalplaces) { fraction += "0"; }
+        temparray = new Array();
+        while (integer.length > 3) {
+            temparray.unshift(integer.substr(-3));
+            integer = integer.substr(0, integer.length - 3);
+        }
+        temparray.unshift(integer);
+        integer = temparray.join(thousandseparater);
+        return integer + decimalcharacter + fraction;
+    };
+</script>

@@ -1,0 +1,1 @@
+update mnt_menus set Displayimg ='icon-rss' where MenuId=277

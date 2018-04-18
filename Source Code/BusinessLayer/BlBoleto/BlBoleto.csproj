@@ -1,0 +1,135 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{A0D395B6-287D-4359-ABB5-D3A3F0075331}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>BlBoleto</RootNamespace>
+    <AssemblyName>BlBoleto</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.VisualBasic" />
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Design" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Bank\AbstractBank.cs" />
+    <Compile Include="Bank\Bank.cs" />
+    <Compile Include="Bank\Bank_Brazil.cs" />
+    <Compile Include="Bank\Bank_HSBC.cs" />
+    <Compile Include="Bank\Bank_Itau.cs" />
+    <Compile Include="Bank\Bank_Santander.cs" />
+    <Compile Include="Bank\Bank_Sudameris.cs" />
+    <Compile Include="Bank\IBank.cs" />
+    <Compile Include="Boleto\Address.cs" />
+    <Compile Include="Boleto\Assignor.cs" />
+    <Compile Include="Boleto\BankAccount.cs" />
+    <Compile Include="Boleto\BarCode.cs" />
+    <Compile Include="Boleto\Boleto.cs" />
+    <Compile Include="Boleto\Boletos.cs" />
+    <Compile Include="Boleto\CodeMotion\AbstractCodeMotion.cs" />
+    <Compile Include="Boleto\CodeMotion\CodeMotion.cs" />
+    <Compile Include="Boleto\CodeMotion\ICodeMotion.cs" />
+    <Compile Include="Boleto\Documentkind\AbstractDocumentkind.cs" />
+    <Compile Include="Boleto\Documentkind\Documentkind.cs" />
+    <Compile Include="Boleto\Documentkind\DocumentKinds.cs" />
+    <Compile Include="Boleto\Documentkind\DocumentKind_Itau.cs" />
+    <Compile Include="Boleto\Documentkind\Documentkind_Santander.cs" />
+    <Compile Include="Boleto\Documentkind\Documentkind_Sudameris.cs" />
+    <Compile Include="Boleto\Documentkind\IDocumentkind.cs" />
+    <Compile Include="Boleto\Drawee\Drawee.cs" />
+    <Compile Include="Boleto\Drawee\DraweeInfo.cs" />
+    <Compile Include="Boleto\Drawee\DraweeInformation.cs" />
+    <Compile Include="Boleto\Instructions\AbstractInstructions.cs" />
+    <Compile Include="Boleto\Instructions\IInstructions.cs" />
+    <Compile Include="Boleto\Instructions\Instructions.cs" />
+    <Compile Include="Boleto\Instructions\Instructions_Itau.cs" />
+    <Compile Include="Boleto\Instructions\Instructions_Santander.cs" />
+    <Compile Include="Boleto\Instructions\Instruction_BankBrazil.cs" />
+    <Compile Include="Boleto\SlipPrinting\BilletBanking.cs" />
+    <Compile Include="Boleto\SlipPrinting\BilletBankingDesigner.cs" />
+    <Compile Include="Boleto\SlipPrinting\ImagesBarCodeHandler.cs" />
+    <Compile Include="Boleto\Wallet\AbstractPortfolio.cs" />
+    <Compile Include="Boleto\Wallet\Carteira_Itau.cs" />
+    <Compile Include="Boleto\Wallet\Carteira_Santander.cs" />
+    <Compile Include="Boleto\Wallet\IPortfolio.cs" />
+    <Compile Include="Boleto\Wallet\Portfolios.cs" />
+    <Compile Include="ClsBoleto.cs" />
+    <Compile Include="Enums\Filetype.cs" />
+    <Compile Include="Html.Designer.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Util\BarCodeBase.cs" />
+    <Compile Include="Util\C2of5i.cs" />
+    <Compile Include="Util\DateInterval.cs" />
+    <Compile Include="Util\Util.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Bank\vssver.scc" />
+    <None Include="Util\vssver.scc" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Boleto\SlipPrinting\BoletoNet.css" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Html.resx">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\DataLayer\DataLayer.csproj">
+      <Project>{A7B69366-3DA6-4CB3-84F3-25C88559EF12}</Project>
+      <Name>DataLayer</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Model\Model.csproj">
+      <Project>{8BED9EF7-4F80-4195-87FC-62CE73BC3672}</Project>
+      <Name>Model</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\BlCommon\BlCommon.csproj">
+      <Project>{9C17273B-F9AA-4DCE-B344-4BFD098134AA}</Project>
+      <Name>BlCommon</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

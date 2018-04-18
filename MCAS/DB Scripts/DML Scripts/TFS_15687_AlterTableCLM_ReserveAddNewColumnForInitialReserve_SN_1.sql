@@ -1,0 +1,224 @@
+IF NOT EXISTS (SELECT TOP 1
+    *
+  FROM INFORMATION_SCHEMA.COLUMNS
+  WHERE [TABLE_NAME] = 'CLM_Reserve'
+  AND [COLUMN_NAME] = 'CostofRepairs_C')
+BEGIN
+  ALTER TABLE [dbo].[CLM_Reserve] ADD CostofRepairs_C decimal NULL
+END
+IF NOT EXISTS (SELECT TOP 1
+    *
+  FROM INFORMATION_SCHEMA.COLUMNS
+  WHERE [TABLE_NAME] = 'CLM_Reserve'
+  AND [COLUMN_NAME] = 'LossofUse_C')
+BEGIN
+  ALTER TABLE [dbo].[CLM_Reserve] ADD LossofUse_C decimal NULL
+END
+IF NOT EXISTS (SELECT TOP 1
+    *
+  FROM INFORMATION_SCHEMA.COLUMNS
+  WHERE [TABLE_NAME] = 'CLM_Reserve'
+  AND [COLUMN_NAME] = 'LossofUseUn_C')
+BEGIN
+  ALTER TABLE [dbo].[CLM_Reserve] ADD LossofUseUn_C decimal NULL
+END
+IF NOT EXISTS (SELECT TOP 1
+    *
+  FROM INFORMATION_SCHEMA.COLUMNS
+  WHERE [TABLE_NAME] = 'CLM_Reserve'
+  AND [COLUMN_NAME] = 'LossofRental_C')
+BEGIN
+  ALTER TABLE [dbo].[CLM_Reserve] ADD LossofRental_C decimal NULL
+END
+IF NOT EXISTS (SELECT TOP 1
+    *
+  FROM INFORMATION_SCHEMA.COLUMNS
+  WHERE [TABLE_NAME] = 'CLM_Reserve'
+  AND [COLUMN_NAME] = 'Excess_C')
+BEGIN
+  ALTER TABLE [dbo].[CLM_Reserve] ADD Excess_C decimal NULL
+END
+IF NOT EXISTS (SELECT TOP 1
+    *
+  FROM INFORMATION_SCHEMA.COLUMNS
+  WHERE [TABLE_NAME] = 'CLM_Reserve'
+  AND [COLUMN_NAME] = 'OtherExpenses_C')
+BEGIN
+  ALTER TABLE [dbo].[CLM_Reserve] ADD OtherExpenses_C decimal NULL
+END
+IF NOT EXISTS (SELECT TOP 1
+    *
+  FROM INFORMATION_SCHEMA.COLUMNS
+  WHERE [TABLE_NAME] = 'CLM_Reserve'
+  AND [COLUMN_NAME] = 'ReportFees_C')
+BEGIN
+  ALTER TABLE [dbo].[CLM_Reserve] ADD ReportFees_C decimal NULL
+END
+IF NOT EXISTS (SELECT TOP 1
+    *
+  FROM INFORMATION_SCHEMA.COLUMNS
+  WHERE [TABLE_NAME] = 'CLM_Reserve'
+  AND [COLUMN_NAME] = 'SurveyFee_C')
+BEGIN
+  ALTER TABLE [dbo].[CLM_Reserve] ADD SurveyFee_C decimal NULL
+END
+IF NOT EXISTS (SELECT TOP 1
+    *
+  FROM INFORMATION_SCHEMA.COLUMNS
+  WHERE [TABLE_NAME] = 'CLM_Reserve'
+  AND [COLUMN_NAME] = 'ReSurveyFee_C')
+BEGIN
+  ALTER TABLE [dbo].[CLM_Reserve] ADD ReSurveyFee_C decimal NULL
+END
+IF NOT EXISTS (SELECT TOP 1
+    *
+  FROM INFORMATION_SCHEMA.COLUMNS
+  WHERE [TABLE_NAME] = 'CLM_Reserve'
+  AND [COLUMN_NAME] = 'LGPolRepFee_C')
+BEGIN
+  ALTER TABLE [dbo].[CLM_Reserve] ADD LGPolRepFee_C decimal NULL
+END
+IF NOT EXISTS (SELECT TOP 1
+    *
+  FROM INFORMATION_SCHEMA.COLUMNS
+  WHERE [TABLE_NAME] = 'CLM_Reserve'
+  AND [COLUMN_NAME] = 'ParLawCost3rd_C')
+BEGIN
+  ALTER TABLE [dbo].[CLM_Reserve] ADD ParLawCost3rd_C decimal NULL
+END
+IF NOT EXISTS (SELECT TOP 1
+    *
+  FROM INFORMATION_SCHEMA.COLUMNS
+  WHERE [TABLE_NAME] = 'CLM_Reserve'
+  AND [COLUMN_NAME] = 'ParLawDisbursements3rd_C')
+BEGIN
+  ALTER TABLE [dbo].[CLM_Reserve] ADD ParLawDisbursements3rd_C decimal NULL
+END
+IF NOT EXISTS (SELECT TOP 1
+    *
+  FROM INFORMATION_SCHEMA.COLUMNS
+  WHERE [TABLE_NAME] = 'CLM_Reserve'
+  AND [COLUMN_NAME] = 'OurLawyerCost_C')
+BEGIN
+  ALTER TABLE [dbo].[CLM_Reserve] ADD OurLawyerCost_C decimal NULL
+END
+IF NOT EXISTS (SELECT TOP 1
+    *
+  FROM INFORMATION_SCHEMA.COLUMNS
+  WHERE [TABLE_NAME] = 'CLM_Reserve'
+  AND [COLUMN_NAME] = 'OurLawDisbursements_C')
+BEGIN
+  ALTER TABLE [dbo].[CLM_Reserve] ADD OurLawDisbursements_C decimal NULL
+END
+IF NOT EXISTS (SELECT TOP 1
+    *
+  FROM INFORMATION_SCHEMA.COLUMNS
+  WHERE [TABLE_NAME] = 'CLM_Reserve'
+  AND [COLUMN_NAME] = 'GeneralDamages_C')
+BEGIN
+  ALTER TABLE [dbo].[CLM_Reserve] ADD GeneralDamages_C decimal NULL
+END
+IF NOT EXISTS (SELECT TOP 1
+    *
+  FROM INFORMATION_SCHEMA.COLUMNS
+  WHERE [TABLE_NAME] = 'CLM_Reserve'
+  AND [COLUMN_NAME] = 'MedicalExpenses_C')
+BEGIN
+  ALTER TABLE [dbo].[CLM_Reserve] ADD MedicalExpenses_C decimal NULL
+END
+IF NOT EXISTS (SELECT TOP 1
+    *
+  FROM INFORMATION_SCHEMA.COLUMNS
+  WHERE [TABLE_NAME] = 'CLM_Reserve'
+  AND [COLUMN_NAME] = 'FutureMedicalExpenses_C')
+BEGIN
+  ALTER TABLE [dbo].[CLM_Reserve] ADD FutureMedicalExpenses_C decimal NULL
+END
+IF NOT EXISTS (SELECT TOP 1
+    *
+  FROM INFORMATION_SCHEMA.COLUMNS
+  WHERE [TABLE_NAME] = 'CLM_Reserve'
+  AND [COLUMN_NAME] = 'LOGMedicalExpenses_C')
+BEGIN
+  ALTER TABLE [dbo].[CLM_Reserve] ADD LOGMedicalExpenses_C decimal NULL
+END
+IF NOT EXISTS (SELECT TOP 1
+    *
+  FROM INFORMATION_SCHEMA.COLUMNS
+  WHERE [TABLE_NAME] = 'CLM_Reserve'
+  AND [COLUMN_NAME] = 'LossofEarningsCapacity_C')
+BEGIN
+  ALTER TABLE [dbo].[CLM_Reserve] ADD LossofEarningsCapacity_C decimal NULL
+END
+IF NOT EXISTS (SELECT TOP 1
+    *
+  FROM INFORMATION_SCHEMA.COLUMNS
+  WHERE [TABLE_NAME] = 'CLM_Reserve'
+  AND [COLUMN_NAME] = 'LossofEarnings_C')
+BEGIN
+  ALTER TABLE [dbo].[CLM_Reserve] ADD LossofEarnings_C decimal NULL
+END
+IF NOT EXISTS (SELECT TOP 1
+    *
+  FROM INFORMATION_SCHEMA.COLUMNS
+  WHERE [TABLE_NAME] = 'CLM_Reserve'
+  AND [COLUMN_NAME] = 'LossofFutureEarnings_C')
+BEGIN
+  ALTER TABLE [dbo].[CLM_Reserve] ADD LossofFutureEarnings_C decimal NULL
+END
+IF NOT EXISTS (SELECT TOP 1
+    *
+  FROM INFORMATION_SCHEMA.COLUMNS
+  WHERE [TABLE_NAME] = 'CLM_Reserve'
+  AND [COLUMN_NAME] = 'Transport_C')
+BEGIN
+  ALTER TABLE [dbo].[CLM_Reserve] ADD Transport_C decimal NULL
+END
+IF NOT EXISTS (SELECT TOP 1
+    *
+  FROM INFORMATION_SCHEMA.COLUMNS
+  WHERE [TABLE_NAME] = 'CLM_Reserve'
+  AND [COLUMN_NAME] = 'MedicalRecord_C')
+BEGIN
+  ALTER TABLE [dbo].[CLM_Reserve] ADD MedicalRecord_C decimal NULL
+END
+IF NOT EXISTS (SELECT TOP 1
+    *
+  FROM INFORMATION_SCHEMA.COLUMNS
+  WHERE [TABLE_NAME] = 'CLM_Reserve'
+  AND [COLUMN_NAME] = 'PublicTrusteeFee_C')
+BEGIN
+  ALTER TABLE [dbo].[CLM_Reserve] ADD PublicTrusteeFee_C decimal NULL
+END
+IF NOT EXISTS (SELECT TOP 1
+    *
+  FROM INFORMATION_SCHEMA.COLUMNS
+  WHERE [TABLE_NAME] = 'CLM_Reserve'
+  AND [COLUMN_NAME] = 'OurProfessionalExpertFee_C')
+BEGIN
+  ALTER TABLE [dbo].[CLM_Reserve] ADD OurProfessionalExpertFee_C decimal NULL
+END
+IF NOT EXISTS (SELECT TOP 1
+    *
+  FROM INFORMATION_SCHEMA.COLUMNS
+  WHERE [TABLE_NAME] = 'CLM_Reserve'
+  AND [COLUMN_NAME] = 'Total_C')
+BEGIN
+  ALTER TABLE [dbo].[CLM_Reserve] ADD Total_C decimal NULL
+END
+IF NOT EXISTS (SELECT TOP 1
+    *
+  FROM INFORMATION_SCHEMA.COLUMNS
+  WHERE [TABLE_NAME] = 'CLM_Reserve'
+  AND [COLUMN_NAME] = 'Noofdays_C')
+BEGIN
+  ALTER TABLE [dbo].[CLM_Reserve] ADD Noofdays_C nvarchar(max) NULL
+END
+IF NOT EXISTS (SELECT TOP 1
+    *
+  FROM INFORMATION_SCHEMA.COLUMNS
+  WHERE [TABLE_NAME] = 'CLM_Reserve'
+  AND [COLUMN_NAME] = 'Rateperday_C')
+BEGIN
+  ALTER TABLE [dbo].[CLM_Reserve] ADD Rateperday_C nvarchar(max) NULL
+END

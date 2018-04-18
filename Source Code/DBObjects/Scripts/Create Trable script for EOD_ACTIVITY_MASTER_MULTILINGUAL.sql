@@ -1,0 +1,19 @@
+
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[EOD_ACTIVITY_MASTER_MULTILINGUAL]') AND type in (N'U'))
+
+BEGIN
+
+CREATE TABLE [dbo].EOD_ACTIVITY_MASTER_MULTILINGUAL
+(
+
+      ACTIVITY_ID int,
+
+      ACTIVITY_DESCRIPTION Nvarchar(2000),
+
+      PARENT_ACTIVITY_ID Nvarchar(12),
+
+      LANG_ID INT 
+
+    )
+End
+ 

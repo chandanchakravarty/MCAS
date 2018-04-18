@@ -1,0 +1,280 @@
+﻿@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>_GraphDashBoard</title>
+    <script src="@Url.Content("~/Scripts/jquery-2.1.0.min.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Scripts/Chart.min.js")" type="text/javascript"></script>
+    <style type="text/css">
+        ul.bar-legend li
+        {
+            display: block;
+            padding-left: 30px;
+            position: relative;
+            margin-bottom: 4px;
+            border-radius: 5px;
+            padding: 2px 8px 2px 28px;
+            font-size: 14px;
+            cursor: default;
+            -webkit-transition: background-color 200ms ease-in-out;
+            -moz-transition: background-color 200ms ease-in-out;
+            -o-transition: background-color 200ms ease-in-out;
+            transition: background-color 200ms ease-in-out;
+        }
+        ul.bar-legend li span
+        {
+            display: block;
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 20px;
+            height: 100%;
+        }
+    </style>
+</head>
+<body>
+    <div class="col-lg-12">
+        <div class="col-lg-6" style="text-align: center; font-size:large;">
+            Finalized and Outstanding Claims
+        </div>
+        <div class="col-lg-6" style="text-align: center; font-size:large;">
+            New Claims
+        </div>
+    </div>
+    <div class="col-lg-12">
+        <div class="col-lg-6">
+            <canvas id="canvas" height="450" width="600"></canvas>
+            <div id="legend" style="font-family: Arial">
+            </div>
+        </div>
+        <div>
+        </div>
+        <div class="col-lg-6">
+            <canvas id="canvasNew" height="450" width="600"></canvas>
+            <div id="legendNew" style="font-family: Arial">
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+<script type="text/javascript">
+    $(document).ready(function () {
+        //var getYear = $("#ddlYear").val();
+        var getYear = "2015";
+        var jsonData = JSON.stringify({
+            year: getYear
+        });
+
+        //start- graph for finalized and outstanding claims
+        $.ajax({
+            type: "POST",
+            url: '@Url.Action("GetGraphDataFinalizedOutstandingClaims", "Home")',
+            data: jsonData,
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            success: OnSuccess_,
+            error: OnErrorCall_
+        });
+        function OnErrorCall_(repo) {
+            alert("Woops something went wrong, pls try later !");
+        }
+        function OnSuccess_(reponse) {
+            var aData = reponse;
+            var aLabels = aData[0];
+            var aDatasets1 = aData[1];
+            var aDatasets2 = aData[2];
+
+            var barChartData = {
+                labels: aLabels,
+                datasets: [{
+                    label: "Finalized Claims",
+                    fillColor: "#F27819",
+                    strokeColor: "#F27819",
+                    pointColor: "#F27819",
+                    pointStrokeColor: "#fff",
+                    pointHighlightFill: "#fff",
+                    pointHighlightStroke: "rgba(220,220,220,1)",
+                    data: aDatasets1
+                },
+		{
+		    label: "Outstanding Claims",
+		    fillColor: "#8ED975",
+		    strokeColor: "#8ED975",
+		    pointColor: "#8ED975",
+		    pointStrokeColor: "#fff",
+		    pointHighlightFill: "#fff",
+		    pointHighlightStroke: "rgba(151,187,205,1)",
+		    data: aDatasets2
+		}]
+            };
+
+            var ctx = document.getElementById("canvas").getContext("2d");
+
+            window.myBar = new Chart(ctx).Bar(barChartData, {
+                // Boolean - Whether to animate the chart
+                animation: true,
+
+                // Number - Number of animation steps
+                animationSteps: 60,
+
+                // String - Animation easing effect
+                // Possible effects are:
+                // [easeInOutQuart, linear, easeOutBounce, easeInBack, easeInOutQuad,
+                //  easeOutQuart, easeOutQuad, easeInOutBounce, easeOutSine, easeInOutCubic,
+                //  easeInExpo, easeInOutBack, easeInCirc, easeInOutElastic, easeOutBack,
+                //  easeInQuad, easeInOutExpo, easeInQuart, easeOutQuint, easeInOutCirc,
+                //  easeInSine, easeOutExpo, easeOutCirc, easeOutCubic, easeInQuint,
+                //  easeInElastic, easeInOutSine, easeInOutQuint, easeInBounce,
+                //  easeOutElastic, easeInCubic]
+                animationEasing: "easeOutSine",
+
+
+                responsive: true,
+
+                // String - Scale label font colour
+                scaleFontColor: "#666",
+
+                //Boolean - Whether the scale should start at zero, or an order of magnitude down from the lowest value
+                scaleBeginAtZero: true,
+
+                //Boolean - Whether grid lines are shown across the chart
+                scaleShowGridLines: true,
+
+                //String - Colour of the grid lines
+                scaleGridLineColor: "rgba(0,0,0,.05)",
+
+                //Number - Width of the grid lines
+                scaleGridLineWidth: 1,
+
+                //Boolean - Whether to show horizontal lines (except X axis)
+                scaleShowHorizontalLines: true,
+
+                //Boolean - Whether to show vertical lines (except Y axis)
+                scaleShowVerticalLines: false,
+
+                //Boolean - If there is a stroke on each bar
+                barShowStroke: true,
+
+                //Number - Pixel width of the bar stroke
+                barStrokeWidth: 2,
+
+                //Number - Spacing between each of the X value sets
+                barValueSpacing: 10,
+
+                //Number - Spacing between data sets within X values
+                barDatasetSpacing: 1,
+
+                //String - A legend template
+                legendTemplate: "<ul class=\"<%=name.toLowerCase()%>-legend\"><% for (var i=0; i<datasets.length; i++){%><li><span style=\"background-color:<%=datasets[i].fillColor%>\"></span><%if(datasets[i].label){%><%=datasets[i].label%><%}%></li><%}%></ul>"
+
+
+            });
+            document.getElementById("legend").innerHTML = window.myBar.generateLegend();
+        }
+        //End- graph for finalized and outstanding claims
+
+
+        //Start- graph for new claims
+        $.ajax({
+            type: "POST",
+            url: '@Url.Action("GetGraphDataNewClaims", "Home")',
+            data: jsonData,
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            success: OnSuccessNew_,
+            error: OnErrorCallNew_
+        });
+        function OnErrorCallNew_(repo) {
+            alert("Woops something went wrong, pls try later !");
+        }
+        function OnSuccessNew_(reponse) {
+            var aData = reponse;
+            var aLabels = aData[0];
+            var aDatasets1 = aData[1];
+            var aDatasets2 = aData[2];
+
+            var barChartData = {
+                labels: aLabels,
+                datasets: [{
+                    label: "New Claims",
+                    fillColor: "#2075AA",
+                    strokeColor: "#2075AA",
+                    pointColor: "#2075AA",
+                    pointStrokeColor: "#fff",
+                    pointHighlightFill: "#fff",
+                    pointHighlightStroke: "rgba(151,187,205,1)",
+                    data: aDatasets1
+                }]
+            };
+
+            var ctx = document.getElementById("canvasNew").getContext("2d");
+
+            window.myBar = new Chart(ctx).Bar(barChartData, {
+                // Boolean - Whether to animate the chart
+                animation: true,
+
+                // Number - Number of animation steps
+                animationSteps: 60,
+
+                // String - Animation easing effect
+                // Possible effects are:
+                // [easeInOutQuart, linear, easeOutBounce, easeInBack, easeInOutQuad,
+                //  easeOutQuart, easeOutQuad, easeInOutBounce, easeOutSine, easeInOutCubic,
+                //  easeInExpo, easeInOutBack, easeInCirc, easeInOutElastic, easeOutBack,
+                //  easeInQuad, easeInOutExpo, easeInQuart, easeOutQuint, easeInOutCirc,
+                //  easeInSine, easeOutExpo, easeOutCirc, easeOutCubic, easeInQuint,
+                //  easeInElastic, easeInOutSine, easeInOutQuint, easeInBounce,
+                //  easeOutElastic, easeInCubic]
+                animationEasing: "easeOutSine",
+
+
+                responsive: true,
+
+                // String - Scale label font colour
+                scaleFontColor: "#666",
+
+                //Boolean - Whether the scale should start at zero, or an order of magnitude down from the lowest value
+                scaleBeginAtZero: true,
+
+                //Boolean - Whether grid lines are shown across the chart
+                scaleShowGridLines: true,
+
+                //String - Colour of the grid lines
+                scaleGridLineColor: "rgba(0,0,0,.05)",
+
+                //Number - Width of the grid lines
+                scaleGridLineWidth: 1,
+
+                //Boolean - Whether to show horizontal lines (except X axis)
+                scaleShowHorizontalLines: true,
+
+                //Boolean - Whether to show vertical lines (except Y axis)
+                scaleShowVerticalLines: false,
+
+                //Boolean - If there is a stroke on each bar
+                barShowStroke: true,
+
+                //Number - Pixel width of the bar stroke
+                barStrokeWidth: 2,
+
+                //Number - Spacing between each of the X value sets
+                barValueSpacing: 10,
+
+                //Number - Spacing between data sets within X values
+                barDatasetSpacing: 5,
+
+                //String - A legend template
+                legendTemplate: "<ul class=\"<%=name.toLowerCase()%>-legend\"><% for (var i=0; i<datasets.length; i++){%><li><span style=\"background-color:<%=datasets[i].fillColor%>\"></span><%if(datasets[i].label){%><%=datasets[i].label%><%}%></li><%}%></ul>"
+
+
+            });
+            document.getElementById("legendNew").innerHTML = window.myBar.generateLegend();
+        }
+
+        //End- graph for new claims
+
+    });
+</script>
