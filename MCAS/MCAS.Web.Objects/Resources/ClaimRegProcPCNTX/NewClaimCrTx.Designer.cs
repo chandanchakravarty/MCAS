@@ -448,7 +448,7 @@ namespace MCAS.Web.Objects.Resources.ClaimRegProcPCNTX {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Lawyer, GIA DRM.
+        ///   Looks up a localized string similar to Lawyer / GIA DRM.
         /// </summary>
         public static string LawyerGIADRM {
             get {
@@ -466,7 +466,7 @@ namespace MCAS.Web.Objects.Resources.ClaimRegProcPCNTX {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to NewClaimEntry.
+        ///   Looks up a localized string similar to New Claim Entry.
         /// </summary>
         public static string NewClaimEntry {
             get {
