@@ -100,8 +100,8 @@ namespace MCAS.Controllers
             claimaccident.PolicyId = 0;
             claimaccident.ViewMode = getPageViewMode("New");
             claimaccident.OwnerNameList = LookUpListItems.Fetch("OwnerName", true);
-            claimaccident.OwnerAddressDlt.GenderList = LookUpListItems.Fetch("GENDER");
-            claimaccident.DriverAddressDlt.GenderList = LookUpListItems.Fetch("GENDER");
+            claimaccident.OwnerAddressDlt.GenderList = LookUpListItems.Fetch("GENDER",true);
+            claimaccident.DriverAddressDlt.GenderList = LookUpListItems.Fetch("GENDER", true);
             ViewData["SuccessMsgPcTx"] = TempData["SuccessMsgPcTx"];
             claimaccident.OrgCategory = Convert.ToString(Session["OrganisationType"]);
             claimaccident.ChckClaimComplete = claimaccident.AccidentClaimId == null ? 1 : (from l in obj.ClaimAccidentDetails where l.AccidentClaimId == claimaccident.AccidentClaimId select l.IsComplete).FirstOrDefault();
