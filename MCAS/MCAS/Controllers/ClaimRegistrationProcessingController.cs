@@ -55,7 +55,9 @@ namespace MCAS.Controllers
             claimDetails.CallerMenu = "New";
             if (PolicyId.HasValue)
                 claimDetails.PolicyId = (int)PolicyId;
-
+            if (Session["AccidentDate"] != null)
+                claimDetails.ClaimDetail.TimeBarDate = (DateTime)Session["AccidentDate"];
+ 
             return PartialView("_ClaimDeatailsPCNTX", claimDetails);
         }
         #region "Accident"
@@ -113,6 +115,10 @@ namespace MCAS.Controllers
             else
             {
                 claimaccident.HClaimId = 0;
+            }
+            if (claimaccident.AccidentDate != null)
+            {
+                Session["AccidentDate"] = claimaccident.AccidentDate.Value.AddYears(6);
             }
             return View("ClmAccDltPCNTXEditor", claimaccident);
         }

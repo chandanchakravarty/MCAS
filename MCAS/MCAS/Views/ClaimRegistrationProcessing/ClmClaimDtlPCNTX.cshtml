@@ -780,6 +780,12 @@
                                                 @NewClaimCrTx.TimeBarDate
                                             </label>
                                             <div class="col-sm-8">
+                                                @{
+                                                        if (Session["AccidentDate"] != null)
+                                                        {
+                                                            Model.TimeBarDate = (DateTime)Session["AccidentDate"];
+                                                        }
+                                                  }
                                                 @Html.TextBoxFor(m => m.TimeBarDate, "{0:d}", new { id = "TimeBarDate", @class = "form-control datepicker validateDateFormare" })
                                                 @Html.ValidationMessageFor(m => m.TimeBarDate)
                                             </div>
@@ -817,11 +823,10 @@
                                     <div class="col-lg-6">
                                         <div class="form-group">
                                             <label class="col-sm-4 control-label">
-                                                @*@NewClaimCrTx.Remarks*@
-                                                Remarks
+                                                @NewClaimCrTx.Remarks
                                             </label>
                                             <div class="col-sm-8">
-                                                @Html.TextArea("Rearks", new { @maxlength = "500", @class = "form-control alphanumeric" ,cols="20",rows="5"})
+                                                @Html.TextAreaFor(m => m.Remarks, new { @maxlength = "500", @class = "form-control alphanumeric", cols = "20", rows = "5" })
                                                 @*<textarea class="form-control empty1" cols="20" id="Remarks" maxlength="500" name="Remarks"
                                                           rows="2" ng-model="createServiceProvider.Remarks"></textarea>*@
                                             </div>

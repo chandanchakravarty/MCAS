@@ -267,9 +267,10 @@
                                             <div class="col-lg-6">
                                                 <div class="form-group">
                                                     <label class="col-sm-4 control-label" for="inputEmailBody">
-                                                        @DiaryTaskEditor.EmailBody</label>
+                                                        @DiaryTaskEditor.EmailBody<span class="text-danger">*</span></label>
                                                     <div class="col-sm-8">
                                                         @Html.TextAreaFor(m => m.EmailBody, new { id = "inputEmailBody", @class = "form-control", @maxlength = "250" })
+                                                        @Html.ValidationMessageFor(m => m.EmailBody)
                                                     </div>
                                                 </div>
                                             </div>

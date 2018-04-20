@@ -574,6 +574,15 @@ namespace MCAS.Web.Objects.Resources.ClaimRegProcPCNTX {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Remarks.
+        /// </summary>
+        public static string Remarks {
+            get {
+                return ResourceManager.GetString("Remarks", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Reopened Date.
         /// </summary>
         public static string ReopenedDate {
