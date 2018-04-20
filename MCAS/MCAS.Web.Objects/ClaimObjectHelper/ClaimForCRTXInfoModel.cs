@@ -231,6 +231,8 @@ namespace MCAS.Web.Objects.ClaimObjectHelper
 
         public string ClaimantStatus { get; set; }
 
+        public string Remarks { get; set; }
+
         public string ResultMessage { get; set; }
 
         public List<ClaimantType> NatureAccList { get; set; }
@@ -503,6 +505,7 @@ namespace MCAS.Web.Objects.ClaimObjectHelper
                     item.FinalSettleDate = Claim.FinalSettleDate;
                     item.TimeBarDate = Claim.TimeBarDate;
                     item.CaseStatus = Claim.CaseStatus;
+                    item.Remarks = Claim.Remarks;
 
                 }
             }

@@ -151,7 +151,8 @@ namespace MCAS.Web.Objects.MastersHelper
         [Required(ErrorMessageResourceType = typeof(MCAS.Web.Objects.Resources.ClaimProcessing.DiaryTaskEditor), ErrorMessageResourceName = "RFVEscalationTo")]
         public string EscalationTo { get; set; }
 
-        public string EmailBody { get; set; }
+         [Required(ErrorMessage = "Email Body Required")]
+         public string EmailBody { get; set; }
         public string ReassignedDiary { get; set; }
 
         public int Prop1 { get; set; }

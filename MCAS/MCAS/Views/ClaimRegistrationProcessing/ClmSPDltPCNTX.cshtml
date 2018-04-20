@@ -38,7 +38,7 @@
     window.ClaimObj = {};
     (function (cr) {
 
-    } (window.ClaimObj));
+    }(window.ClaimObj));
     var BaseURL = '@baseUrl';
     var ServiceProviderId = '@ViewBag.ServiceProviderId';
     var AccidentClaimId = '@ViewBag.AccidentClaimId';
@@ -55,8 +55,11 @@
     var ServiceProviderOptionReq = '@ServiceProviderClienError.ServiceProviderOption';
     var CompanyNameIdReq = '@ServiceProviderClienError.CompanyNameId';
     var Address1Req = '@ServiceProviderClienError.Address1';
+    //var Address1Req = '';
     var CountryIdReq = '@ServiceProviderClienError.CountryId';
+   // var CountryIdReq ='';
     var ReferenceReq = '@ServiceProviderClienError.Reference';
+   // var ReferenceReq = '';
     var StatusIdReq = '@ServiceProviderClienError.StatusId';
 </script>
 <script src="@Url.Content("~/Scripts/jquery-2.1.0.min.js")" type="text/javascript"></script>
@@ -269,7 +272,7 @@
                                         <div class="col-lg-6">
                                             <div class="form-group">
                                                 <label class="col-sm-3 control-label" for="Address1">
-                                                    @ServiceProviderCrTx.Address1&nbsp;<span class="text-danger">*</span>
+                                                    @ServiceProviderCrTx.Address1&nbsp;@*<span class="text-danger">*</span>*@
                                                 </label>
                                                 <div class="col-sm-8">
                                                     <textarea class="form-control empty1" cols="20" data-val="true" data-val-required="Claimant's Address1 is required."
@@ -343,7 +346,7 @@
                                         <div class="col-lg-6">
                                             <div class="form-group">
                                                 <label class="col-sm-3 control-label" for="CountryId">
-                                                    @ServiceProviderCrTx.Country&nbsp;<span class="text-danger">*</span>
+                                                    @ServiceProviderCrTx.Country&nbsp;@*<span class="text-danger">*</span>*@
                                                 </label>
                                                 <div class="col-sm-8">
                                                     <select class="form-control" id="CountryId" name="CountryId" ng-model="createServiceProvider.CountryId"
@@ -441,7 +444,7 @@
                                         <div class="col-lg-6">
                                             <div class="form-group">
                                                 <label class="col-sm-3 control-label" for="Reference">
-                                                    @ServiceProviderCrTx.ReferenceNo&nbsp;<span class="text-danger">*</span>
+                                                    @ServiceProviderCrTx.ReferenceNo&nbsp;@*<span class="text-danger">*</span>*@
                                                 </label>
                                                 <div class="col-sm-8">
                                                     <input class="form-control empty1" id="Reference" maxlength="150" name="Reference"
