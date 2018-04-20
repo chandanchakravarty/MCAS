@@ -14,7 +14,7 @@ using MCAS.Models;
 namespace MCAS.Controllers
 {
     //[Authorize]
-    //[InitializeSimpleMembership] test
+    //[InitializeSimpleMembership]
     public class AccountController : Controller
     {
         //

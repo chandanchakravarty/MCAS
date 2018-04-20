@@ -43,15 +43,23 @@
     <DeployIisAppPath>MCAS/MCAS.Web</DeployIisAppPath>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="ABCpdf, Version=9.1.1.9, Culture=neutral, PublicKeyToken=a7a0b3f5184f2169, processorArchitecture=MSIL">
+    <Reference Include="ABCpdf, Version=7.0.3.5, Culture=neutral, PublicKeyToken=a7a0b3f5184f2169, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\Test\ACI_PdfTemplates\ACI_PdfTemplates\bin\ABCpdf.dll</HintPath>
+      <HintPath>bin\ABCpdf.dll</HintPath>
     </Reference>
     <Reference Include="EAWXmlToPDFParser">
       <HintPath>..\..\..\..\TestProjects\EAWXmlToPdfSample\EAWXmlToPdfSample\bin\Debug\EAWXmlToPDFParser.dll</HintPath>
     </Reference>
+    <Reference Include="EbixGrid, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\EbixGrid.dll</HintPath>
+    </Reference>
     <Reference Include="EbixGrid">
       <HintPath>C:\Users\nishant.sharma\Desktop\Ashishcode\EbixGrid.dll</HintPath>
+    </Reference>
+    <Reference Include="MCAS.ExceptionPublisher, Version=0.0.0.0, Culture=neutral, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\MCAS.ExceptionPublisher.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Microsoft.SQLServer.ManagedDTS, Version=10.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
@@ -112,14 +120,16 @@
     <Reference Include="System.Web.Services" />
     <Reference Include="System.EnterpriseServices" />
     <Reference Include="EntityFramework">
-      <HintPath>..\packages\EntityFramework.5.0.0\lib\net40\EntityFramework.dll</HintPath>
+      <HintPath>bin\EntityFramework.dll</HintPath>
+      <HintPath>C:\EbixAdvantage\Singapore Sources\Singapore-LocalUAT\MCAS\MCAS\bin\EntityFramework.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <Private>True</Private>
       <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
     </Reference>
     <Reference Include="Newtonsoft.Json">
-      <HintPath>..\packages\Newtonsoft.Json.4.5.6\lib\net40\Newtonsoft.Json.dll</HintPath>
+      <HintPath>bin\Newtonsoft.Json.dll</HintPath>
+      <HintPath>C:\EbixAdvantage\Singapore Sources\Singapore-LocalUAT\MCAS\MCAS\bin\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="System.Net.Http">
       <Private>True</Private>
@@ -139,7 +149,7 @@
       <HintPath>..\packages\Microsoft.AspNet.WebApi.WebHost.4.0.20710.0\lib\net40\System.Web.Http.WebHost.dll</HintPath>
     </Reference>
     <Reference Include="System.Web.Optimization">
-      <HintPath>..\packages\Microsoft.AspNet.Web.Optimization.1.0.0\lib\net40\System.Web.Optimization.dll</HintPath>
+      <HintPath>C:\EbixAdvantage\Singapore Sources\Singapore-LocalUAT\MCAS\MCAS\bin\System.Web.Optimization.dll</HintPath>
     </Reference>
     <Reference Include="WebMatrix.Data, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <Private>True</Private>
@@ -155,35 +165,42 @@
     </Reference>
     <Reference Include="DotNetOpenAuth.AspNet, Version=4.0.0.0, Culture=neutral, PublicKeyToken=2780ccd10d57b246, processorArchitecture=MSIL">
       <Private>True</Private>
-      <HintPath>..\packages\DotNetOpenAuth.AspNet.4.0.3.12153\lib\net40-full\DotNetOpenAuth.AspNet.dll</HintPath>
+      <HintPath>bin\DotNetOpenAuth.AspNet.dll</HintPath>
+      <HintPath>C:\EbixAdvantage\Singapore Sources\Singapore-LocalUAT\MCAS\MCAS\bin\DotNetOpenAuth.AspNet.dll</HintPath>
     </Reference>
     <Reference Include="DotNetOpenAuth.Core, Version=4.0.0.0, Culture=neutral, PublicKeyToken=2780ccd10d57b246, processorArchitecture=MSIL">
       <Private>True</Private>
-      <HintPath>..\packages\DotNetOpenAuth.Core.4.0.3.12153\lib\net40-full\DotNetOpenAuth.Core.dll</HintPath>
+      <HintPath>bin\DotNetOpenAuth.Core.dll</HintPath>
+      <HintPath>C:\EbixAdvantage\Singapore Sources\Singapore-LocalUAT\MCAS\MCAS\bin\DotNetOpenAuth.Core.dll</HintPath>
     </Reference>
     <Reference Include="DotNetOpenAuth.OAuth.Consumer, Version=4.0.0.0, Culture=neutral, PublicKeyToken=2780ccd10d57b246, processorArchitecture=MSIL">
       <Private>True</Private>
-      <HintPath>..\packages\DotNetOpenAuth.OAuth.Consumer.4.0.3.12153\lib\net40-full\DotNetOpenAuth.OAuth.Consumer.dll</HintPath>
+      <HintPath>bin\DotNetOpenAuth.OAuth.Consumer.dll</HintPath>
+      <HintPath>C:\EbixAdvantage\Singapore Sources\Singapore-LocalUAT\MCAS\MCAS\bin\DotNetOpenAuth.OAuth.Consumer.dll</HintPath>
     </Reference>
     <Reference Include="DotNetOpenAuth.OAuth, Version=4.0.0.0, Culture=neutral, PublicKeyToken=2780ccd10d57b246, processorArchitecture=MSIL">
       <Private>True</Private>
-      <HintPath>..\packages\DotNetOpenAuth.OAuth.Core.4.0.3.12153\lib\net40-full\DotNetOpenAuth.OAuth.dll</HintPath>
+      <HintPath>bin\DotNetOpenAuth.OAuth.dll</HintPath>
+      <HintPath>C:\EbixAdvantage\Singapore Sources\Singapore-LocalUAT\MCAS\MCAS\bin\DotNetOpenAuth.OAuth.dll</HintPath>
     </Reference>
     <Reference Include="DotNetOpenAuth.OpenId, Version=4.0.0.0, Culture=neutral, PublicKeyToken=2780ccd10d57b246, processorArchitecture=MSIL">
       <Private>True</Private>
-      <HintPath>..\packages\DotNetOpenAuth.OpenId.Core.4.0.3.12153\lib\net40-full\DotNetOpenAuth.OpenId.dll</HintPath>
+      <HintPath>bin\DotNetOpenAuth.OpenId.dll</HintPath>
+      <HintPath>C:\EbixAdvantage\Singapore Sources\Singapore-LocalUAT\MCAS\MCAS\bin\DotNetOpenAuth.OpenId.dll</HintPath>
     </Reference>
     <Reference Include="DotNetOpenAuth.OpenId.RelyingParty, Version=4.0.0.0, Culture=neutral, PublicKeyToken=2780ccd10d57b246, processorArchitecture=MSIL">
       <Private>True</Private>
-      <HintPath>..\packages\DotNetOpenAuth.OpenId.RelyingParty.4.0.3.12153\lib\net40-full\DotNetOpenAuth.OpenId.RelyingParty.dll</HintPath>
+      <HintPath>bin\DotNetOpenAuth.OpenId.RelyingParty.dll</HintPath>
+      <HintPath>C:\EbixAdvantage\Singapore Sources\Singapore-LocalUAT\MCAS\MCAS\bin\DotNetOpenAuth.OpenId.RelyingParty.dll</HintPath>
     </Reference>
     <Reference Include="WebGrease">
       <Private>True</Private>
-      <HintPath>..\packages\WebGrease.1.1.0\lib\WebGrease.dll</HintPath>
+      <HintPath>C:\EbixAdvantage\Singapore Sources\Singapore-LocalUAT\MCAS\MCAS\bin\WebGrease.dll</HintPath>
     </Reference>
     <Reference Include="Antlr3.Runtime">
       <Private>True</Private>
-      <HintPath>..\packages\WebGrease.1.1.0\lib\Antlr3.Runtime.dll</HintPath>
+      <HintPath>bin\Antlr3.Runtime.dll</HintPath>
+      <HintPath>C:\EbixAdvantage\Singapore Sources\Singapore-LocalUAT\MCAS\MCAS\bin\Antlr3.Runtime.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -224,21 +241,13 @@
     <Content Include="bin\ABCpdf9-32.dll" />
     <Content Include="bin\Antlr3.Runtime.dll" />
     <Content Include="bin\DotNetOpenAuth.AspNet.dll" />
-    <Content Include="bin\DotNetOpenAuth.AspNet.xml" />
     <Content Include="bin\DotNetOpenAuth.Core.dll" />
-    <Content Include="bin\DotNetOpenAuth.Core.xml" />
     <Content Include="bin\DotNetOpenAuth.OAuth.Consumer.dll" />
-    <Content Include="bin\DotNetOpenAuth.OAuth.Consumer.xml" />
     <Content Include="bin\DotNetOpenAuth.OAuth.dll" />
-    <Content Include="bin\DotNetOpenAuth.OAuth.xml" />
     <Content Include="bin\DotNetOpenAuth.OpenId.dll" />
     <Content Include="bin\DotNetOpenAuth.OpenId.RelyingParty.dll" />
-    <Content Include="bin\DotNetOpenAuth.OpenId.RelyingParty.xml" />
-    <Content Include="bin\DotNetOpenAuth.OpenId.xml" />
     <Content Include="bin\EAWXmlToPDFParser.dll" />
-    <Content Include="bin\EAWXmlToPDFParserNew.dll" />
     <Content Include="bin\EntityFramework.dll" />
-    <Content Include="bin\EntityFramework.xml" />
     <Content Include="bin\fr\MCAS.resources.dll" />
     <Content Include="bin\MCAS.dll" />
     <Content Include="bin\MCAS.Entity.dll" />
@@ -250,18 +259,11 @@
     <Content Include="bin\MCAS.pdb" />
     <Content Include="bin\MCAS.Web.Objects.dll" />
     <Content Include="bin\MCAS.Web.Objects.pdb" />
-    <Content Include="bin\Microsoft.SqlServer.DTSRuntimeWrap.dll" />
     <Content Include="bin\Microsoft.Web.Helpers.dll" />
     <Content Include="bin\Microsoft.Web.Infrastructure.dll" />
     <Content Include="bin\Microsoft.Web.WebPages.OAuth.dll" />
-    <Content Include="bin\Microsoft.Web.WebPages.OAuth.xml" />
-    <Content Include="bin\Mono.Math.dll" />
-    <Content Include="bin\Mono.Math.xml" />
     <Content Include="bin\MvcCheckBoxList.dll" />
     <Content Include="bin\Newtonsoft.Json.dll" />
-    <Content Include="bin\Newtonsoft.Json.xml" />
-    <Content Include="bin\Org.Mentalis.Security.Cryptography.dll" />
-    <Content Include="bin\Org.Mentalis.Security.Cryptography.xml" />
     <Content Include="bin\PrintHook32.dll" />
     <Content Include="bin\System.Net.Http.dll" />
     <Content Include="bin\System.Net.Http.Formatting.dll" />
@@ -270,25 +272,18 @@
     <Content Include="bin\System.Net.Http.WebRequest.xml" />
     <Content Include="bin\System.Net.Http.xml" />
     <Content Include="bin\System.Web.Helpers.dll" />
-    <Content Include="bin\System.Web.Helpers.xml" />
     <Content Include="bin\System.Web.Http.dll" />
     <Content Include="bin\System.Web.Http.WebHost.dll" />
     <Content Include="bin\System.Web.Http.WebHost.xml" />
     <Content Include="bin\System.Web.Http.xml" />
     <Content Include="bin\System.Web.Mvc.dll" />
-    <Content Include="bin\System.Web.Mvc.xml" />
     <Content Include="bin\System.Web.Optimization.dll" />
     <Content Include="bin\System.Web.Razor.dll" />
-    <Content Include="bin\System.Web.Razor.xml" />
     <Content Include="bin\System.Web.WebPages.Deployment.dll" />
-    <Content Include="bin\System.Web.WebPages.Deployment.xml" />
     <Content Include="bin\System.Web.WebPages.dll" />
     <Content Include="bin\System.Web.WebPages.Razor.dll" />
-    <Content Include="bin\System.Web.WebPages.Razor.xml" />
-    <Content Include="bin\System.Web.WebPages.xml" />
     <Content Include="bin\WebGrease.dll" />
     <Content Include="bin\WebMatrix.Data.dll" />
-    <Content Include="bin\WebMatrix.Data.xml" />
     <Content Include="bin\WebMatrix.WebData.dll" />
     <Content Include="bin\WebMatrix.WebData.xml" />
     <Content Include="Content\bootstrap-multiselect.css" />
@@ -307,6 +302,7 @@
     <Content Include="Scripts\jquery.maskedinput.js" />
     <Content Include="Scripts\knockout-3.1.0.js" />
     <Content Include="Scripts\knockout.mapping-latest.js" />
+    <Content Include="Scripts\knockout.simpleGrid.1.3.js" />
     <Content Include="Scripts\sorttable.js" />
     <Content Include="Scripts\ViechileListing.js" />
     <Content Include="Views\ClaimRecoveryProcessing\LogRequestDocument.cshtml" />
@@ -367,8 +363,14 @@
     <Content Include="Views\Home\LoginAuditLog.cshtml" />
     <Content Include="Views\Masters\ViewDeductibleHistory.cshtml" />
     <Content Include="Views\AdjusterMasters\ServiceProviders.cshtml" />
+    <Content Include="Views\AdjusterMasters\ServiceProviders.cshtml" />
     <Content Include="Views\Home\_GraphDashBoard.cshtml" />
     <Content Include="Views\ClaimMasters\PreviewDocumentIndex.cshtml" />
+    <None Include="Support\Templates\DocumentTemplates\1New Claim Acknowledgement letters\Acknowledgement.rdl" />
+    <None Include="Support\Templates\DocumentTemplates\1New Claim Acknowledgement letters\Acknowledgement_BI.rdl" />
+    <None Include="Support\Templates\DocumentTemplates\1New Claim Acknowledgement letters\Acknowledgement_PD.rdl" />
+    <None Include="Support\Templates\DocumentTemplates\2Letter to  Claimants\1Individual\Cover_Letter_with_DV.rdl" />
+    <None Include="Support\Templates\DocumentTemplates\2Letter to  Claimants\1Individual\Letter_Template-BI-MP.rdl" />
     <Content Include="Views\Shared\_ClaimDeatailsPCNTX.cshtml" />
     <Content Include="Views\ClaimRegistrationProcessing\ClmAccDltPCNTXEditor.cshtml" />
     <Content Include="Views\Shared\_ClaimDriverDetails.cshtml" />
@@ -385,7 +387,11 @@
     <Content Include="Views\ClaimRegistrationProcessing\ServiceProviderPCNTXList.cshtml">
       <SubType>Code</SubType>
     </Content>
-    <Content Include="Views\ClaimRegistrationProcessing\MandateCrTx2.cshtml" />
+    <Content Include="Views\ClaimRegistrationProcessing\ClaimCrTxReserveEditorList.cshtml" />
+    <Content Include="Views\ClaimRegistrationProcessing\ClmClaimQutmPCNTX.cshtml" />
+    <Content Include="Views\ClaimRegistrationProcessing\ClaimCrTxMandateList.cshtml" />
+    <Content Include="Views\ClaimRegistrationProcessing\MandateCrTx.cshtml" />
+    <Content Include="Views\ClaimRegistrationProcessing\ClmClaimQutmPCNTXList.cshtml" />
     <Content Include="Views\ClaimRegistrationProcessing\ClaimRecoveryCrTx.cshtml" />
     <Content Include="Views\ClaimRegistrationProcessing\ClaimCrTxRecoveryList.cshtml" />
     <Content Include="Views\ClaimRegistrationProcessing\ClaimCrTxReserveEditorList.cshtml" />
@@ -1338,8 +1344,29 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="bin\bin\fr\" />
+    <Folder Include="MAPXML\C Stage\Discharge voucher\" />
+    <Folder Include="MAPXML\C Stage\File minutes\" />
+    <Folder Include="MAPXML\C Stage\letter to 3P\Cheque letter\" />
+    <Folder Include="MAPXML\C Stage\letter to 3P\Confirm settlement\" />
+    <Folder Include="MAPXML\C Stage\letter to 3P\letters for Medical report\" />
+    <Folder Include="MAPXML\C Stage\letter to 3P\LOG\" />
+    <Folder Include="MAPXML\C Stage\letter to 3P\Offer letter\" />
+    <Folder Include="MAPXML\C Stage\letter to 3P\Others\" />
+    <Folder Include="MAPXML\C Stage\letter to 3P\Reject claim\" />
+    <Folder Include="MAPXML\C Stage\Letter to our insurers\" />
+    <Folder Include="MAPXML\C Stage\Letter to our lawyer\" />
+    <Folder Include="MAPXML\F Stage\Payment process\" />
+    <Folder Include="MAPXML\I Stage\Acknowledgement\Others\" />
+    <Folder Include="MAPXML\RECOVERY\C Stage\" />
+    <Folder Include="MAPXML\RECOVERY\F Stage\" />
+    <Folder Include="MAPXML\RECOVERY\I Stage\" />
+    <Folder Include="Resources\InsuranceMaster\" />
+    <Folder Include="Resources\ProductBusiness\" />
+    <Folder Include="Resources\Shared\" />
+    <Folder Include="Support\Templates\DocumentTemplates\2Letter to  Claimants\2LawyersWorkshopsInsurersSurveyors\" />
     <Folder Include="Support\Templates\Editable\" />
-    <Folder Include="Support\Templates\PDF\" />
+    <Folder Include="Support\Templates\PDF\Appointment_of_Law_Firm\" />
+    <Folder Include="Support\Templates\PDF\Discharge_Vouchers\" />
     <Folder Include="Uploads\Attachments\" />
     <Folder Include="Uploads\Buslisting\" />
     <Folder Include="Uploads\ClaimUpload\" />
@@ -1569,6 +1596,9 @@
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Support\Templates\C Stage\Letter to our lawyer\Letter_for_lawyer_appointment_BI.rdlc" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
