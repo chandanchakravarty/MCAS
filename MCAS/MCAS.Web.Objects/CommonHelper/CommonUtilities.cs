@@ -78,7 +78,7 @@ namespace MCAS.Web.Objects.CommonHelper
                     accidentClaim_id = additionalInfo.Get("accidentClaim_id") != null ? int.Parse(additionalInfo.Get("accidentClaim_id")) : 0;
                     policy_id = additionalInfo.Get("policy_id") != null ? int.Parse(additionalInfo.Get("policy_id")) : 0;
                     claim_id = additionalInfo.Get("claim_id") != null ? int.Parse(additionalInfo.Get("claim_id")) : 0;
-                    entity_id = additionalInfo.Get("entity_id") != null ? int.Parse(additionalInfo.Get("entity_id")) : 0;
+                    entity_id = additionalInfo.Get("entity_id") != null && !string.IsNullOrEmpty(additionalInfo.Get("entity_id")) ? int.Parse(additionalInfo.Get("entity_id")) : 0;
                     entity_type = additionalInfo.Get("entity_type") != null ? additionalInfo.Get("entity_type").ToString() : "";
                     policy_version_id = additionalInfo.Get("policy_version_id") != null ? int.Parse(additionalInfo.Get("policy_version_id")) : 0;
                 }

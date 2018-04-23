@@ -152,11 +152,14 @@ namespace MCAS.Web.Objects.ClaimObjectHelper
         public string CaseTypeL2 { get; set; }
 
         [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
+        [Required(ErrorMessage = "File Received Date Required")]
         public DateTime? FileReceivedDate { get; set; }
 
+        [Required(ErrorMessage = "Collision Type Required")]
         public string Collisiontype { get; set; }
 
         [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
+        [Required(ErrorMessage = "Claim Date Required")]
         public DateTime? ClaimDate { get; set; }
     
         public int? OurSurveyorApp { get; set; }
@@ -190,7 +193,7 @@ namespace MCAS.Web.Objects.ClaimObjectHelper
         public string Office_InCharge { get; set; }
         public List<ClaimOfficerModel> ClaimOfficerList { get; set; }
 
-        [RequiredIf("hFirstName", "true", ErrorMessageResourceType = typeof(NewClaimClientErrorCrTx), ErrorMessageResourceName = "RFVCaseStatus")]
+     // [RequiredIf("hFirstName", "true", ErrorMessageResourceType = typeof(NewClaimClientErrorCrTx), ErrorMessageResourceName = "RFVCaseStatus")]
         public string CaseStatus { get; set; }
 
         public string SettledBy { get; set; }

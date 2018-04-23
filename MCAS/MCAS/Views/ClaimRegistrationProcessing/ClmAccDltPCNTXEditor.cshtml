@@ -140,7 +140,7 @@
                                             <div class="col-lg-6">
                                                 <div class="form-group">
                                                     <label class="col-sm-4 control-label">
-                                                        @ClaimAccident.AccidentTime &nbsp;<span class="text-danger">*</span>
+                                                        @ClaimAccident.AccidentTime &nbsp;@*<span class="text-danger">*</span>*@
                                                     </label>
                                                     <div class="col-sm-8">
                                                         @Html.TextBoxFor(m => m.AccidentTime, new { id = "inputAccidentTime", @class = "form-control", @maxlength = 5 })
@@ -162,7 +162,8 @@
                                             <div class="col-sm-6 m_b_15">
                                                 <div class="form-group">
                                                     <label class="col-sm-4 control-label">
-                                                        @ClaimAccident.ReportedDate2&nbsp;<span class="text-danger">*</span></label>
+                                                        @ClaimAccident.ReportedDate2&nbsp;@*<span class="text-danger">*</span>*@
+                                                    </label>
                                                     <div class="col-sm-8">
                                                         @Html.TextBoxFor(m => m.ReportedDate, "{0:d}", new { id = "inputReportedDate", @class = "form-control" })
                                                         @Html.ValidationMessageFor(m => m.ReportedDate)
@@ -183,7 +184,8 @@
                                             <div class="col-sm-6 m_b_15">
                                                 <div class="form-group">
                                                     <label class="col-sm-4 control-label">
-                                                        @ClaimAccident.InputDate&nbsp;<span class="text-danger">*</span></label>
+                                                        @ClaimAccident.InputDate&nbsp;@*<span class="text-danger">*</span>*@
+                                                    </label>
                                                     <div class="col-sm-8">
                                                         @Html.TextBoxFor(m => m.InputDate, "{0:d}", new { id = "inputInputDate", @class = "form-control" })
                                                         @Html.ValidationMessageFor(m => m.InputDate)
@@ -392,7 +394,7 @@
             }
         });
 
-         $("#inputAccidentTime").keypress(function (e) {
+         @*$("#inputAccidentTime").keypress(function (e) {
 
                 var evt = e || window.event, a = evt.which ? evt.which : evt.keyCode, keytoallow = [], keytoallow = ["45", "8", "46", "118", "37", "38", "39", "40", "58"], maxlen = parseInt($(this).attr("maxlength"));
                 if ((1 == evt.ctrlKey && ("118" == a || "86" == a)) || (-1 < $.inArray(a.toString(), keytoallow))) return true;
@@ -402,7 +404,7 @@
             }).blur(function () {
                 var a = $("#inputAccidentTime").val();
                 if ("" != a && !a.match(/^([0-9]|0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$/) && "24:00" != a) return alert("@Html.Raw(ClaimAccident.MsgHourFormat)", "inputAccidentTime"), $("#NoteTime").focus(), $("#inputAccidentTime").val(""), !1
-            });
+            });*@
 
              $('#sb-site').removeAttr("style");
             if ("" != $("#inputAccidentDate").val()) {
@@ -412,14 +414,14 @@
             "" != $("#inputReportedDate").val() && (arrDate = $("#inputReportedDate").val().split(" "), $("#inputReportedDate").val(arrDate[0]));
 
                  $(function () {   
-                    $('#inputAccidentDate').datetimepicker(
-                        {
-                            daysOfWeekDisabled: [0],
-                            format: 'MM/DD/YYYY',                    
-                            ignoreReadonly: true,
-                            maxDate: 'now'
-                        }
-                      );
+                    //$('#inputAccidentDate').datetimepicker(
+                    //    {
+                    //        daysOfWeekDisabled: [0],
+                    //        format: 'MM/DD/YYYY',                    
+                    //        ignoreReadonly: true,
+                    //        maxDate: 'now'
+                    //    }
+                    //  );
                 });
 
 
