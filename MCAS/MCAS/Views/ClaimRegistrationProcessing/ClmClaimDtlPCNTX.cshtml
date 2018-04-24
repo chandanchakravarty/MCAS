@@ -426,7 +426,7 @@
                                     <div class="col-lg-6" style="margin-top: 30px;">
                                         <div class="form-group">
                                             <label class="col-sm-4 control-label">
-                                                @NewClaimCrTx.FileReceivedDate
+                                                @NewClaimCrTx.FileReceivedDate&nbsp;<span class="text-danger">*</span>
                                             </label>
                                             <div class="col-sm-8">
                                                 @Html.TextBoxFor(m => m.FileReceivedDate, "{0:d}", new { id = "FileReceivedDate", @class = "form-control datepicker validateDateFormare" })
@@ -440,17 +440,18 @@
                                     <div class="col-lg-6">
                                         <div class="form-group">
                                             <label class="col-sm-4 control-label">
-                                                @NewClaimCrTx.Collisiontype
+                                                @NewClaimCrTx.Collisiontype&nbsp;<span class="text-danger">*</span>
                                             </label>
                                             <div class="col-sm-8">
                                                 @Html.DropDownListFor(m => m.Collisiontype, new SelectList(Model.CollisionTypeList, "Id", "Text", "[Select...]"), new { @class = "form-control DonotDiableControl" })
-                                            </div>
+                                                @Html.ValidationMessageFor(m => m.Collisiontype)
+                                             </div>
                                         </div>
                                     </div>
                                     <div class="col-lg-6">
                                         <div class="form-group">
                                             <label class="col-sm-4 control-label">
-                                                @NewClaimCrTx.ClaimDate
+                                                @NewClaimCrTx.ClaimDate&nbsp;<span class="text-danger">*</span>
                                             </label>
                                             <div class="col-sm-8">
                                                 @Html.TextBoxFor(m => m.ClaimDate, "{0:d}", new { id = "ClaimDate", @class = "form-control datepicker validateDateFormare" })
@@ -586,7 +587,7 @@
                                     <div class="col-lg-6">
                                         <div class="form-group">
                                             <label class="col-sm-4 control-label">
-                                                @NewClaimCrTx.CaseStatus&nbsp;<span id="spanCaseStatus" class="text-danger OnlyCar">*</span>
+                                                @NewClaimCrTx.CaseStatus&nbsp;@*<span id="spanCaseStatus" class="text-danger OnlyCar">*</span>*@
                                             </label>
                                             <div class="col-sm-8">
                                                 @Html.DropDownListFor(m => m.CaseStatus, new SelectList(Model.CaseStatusList, "Id", "Text", "0"), new { @class = "form-control" })
