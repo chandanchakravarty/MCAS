@@ -236,9 +236,13 @@ namespace MCAS.Web.Objects.ClaimObjectHelper
 
         public string Remarks { get; set; }
 
+        public string SettlementType { get; set; }
+
         public string ResultMessage { get; set; }
 
         public List<ClaimantType> NatureAccList { get; set; }
+
+        public List<ClaimantType> SettlementTypeList { get; set; }
 
         public List<ClaimantType> CDGEStatusList { get; set; }
 
@@ -475,6 +479,7 @@ namespace MCAS.Web.Objects.ClaimObjectHelper
                 model.NatureAccList = FetchCommonMasterData("NatureOfAcc", AccidentClaimId);
                 model.CDGEStatusList = FetchCommonMasterData("CDGEStatus", AccidentClaimId);
                 model.CollisionTypeList = FetchCommonMasterData("CollisionType", AccidentClaimId);
+                model.SettlementTypeList = FetchCommonMasterData("SettlementType", AccidentClaimId,true);
                 model.TPInsurerList = ClaimForCRTXInfoModel.FetchTPInsurer();
                 return model;
             }
@@ -754,6 +759,7 @@ namespace MCAS.Web.Objects.ClaimObjectHelper
                 model.NatureAccList = FetchCommonMasterData("NatureOfAcc", AccidentClaimId);
                 model.CDGEStatusList = FetchCommonMasterData("CDGEStatus", AccidentClaimId);
                 model.CollisionTypeList = FetchCommonMasterData("CollisionType", AccidentClaimId);
+                model.SettlementTypeList = FetchCommonMasterData("SettlementType", AccidentClaimId, true);
                 model.TPInsurerList = FetchTPInsurer();
                 
                 

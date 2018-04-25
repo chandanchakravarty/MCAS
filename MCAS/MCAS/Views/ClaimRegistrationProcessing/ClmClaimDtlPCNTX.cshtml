@@ -422,6 +422,19 @@
                                                 </div>
                                             </div>
                                         </div>
+                                   
+                                    
+                                    <div class="col-lg-6" style="margin-top: 30px;">
+                                        <div class="form-group">
+                                            <label class="col-sm-4 control-label">
+                                                @*@NewClaimCrTx.FileReceivedDate&nbsp;<span class="text-danger">*</span>*@
+                                                Settlement Type
+                                            </label>
+                                            <div class="col-sm-8">
+                                                @Html.DropDownListFor(m => m.SettlementType, new SelectList(Model.SettlementTypeList, "Id", "Text", "[Select...]"), new { @class = "form-control DonotDiableControl" })
+                                         </div>
+                                        </div>
+                                    </div>
                                     }
                                     <div class="col-lg-6" style="margin-top: 30px;">
                                         <div class="form-group">
