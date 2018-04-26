@@ -126,7 +126,7 @@ namespace MCAS.Web.Objects.ClaimObjectHelper
         public int? IsComplete { get; set; }
         [Required(ErrorMessageResourceType = typeof(ClaimAccident), ErrorMessageResourceName = "RFVBusServiceNumber")]
         public string BusServiceNo { get; set; }
-        //[Required(ErrorMessage = "Vehicle Number is required.")]
+        [Required(ErrorMessage = "Vehicle Number is required.")]
         public string VehicleNo { get; set; }
         [DisplayName("Accident Date")]
         [Required(ErrorMessageResourceType = typeof(ClaimAccident), ErrorMessageResourceName = "RFVAccidentDate")]
