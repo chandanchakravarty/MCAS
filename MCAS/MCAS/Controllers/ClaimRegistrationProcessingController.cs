@@ -179,6 +179,10 @@ namespace MCAS.Controllers
                     ModelState.Clear();
                     TempData["DisplayTP"] = "DisplayTP";
                     TempData["DisplayOD"] = "DisplayOD";
+                    if (model.AccidentTime == null)
+                    {
+                        model.AccidentTime = "00:00";
+                    }
                     model = model.Save();
                     UpdateClaimObjectHelper(model, "Accident");
                     ViewData["SuccessMsg"] = model.AccidentResult;

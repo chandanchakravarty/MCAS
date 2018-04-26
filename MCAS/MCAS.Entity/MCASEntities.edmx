@@ -557,8 +557,8 @@
           <Property Name="BusServiceNo" Type="nvarchar" MaxLength="8" />
           <Property Name="VehicleNo" Type="nvarchar" MaxLength="10" />
           <Property Name="AccidentDate" Type="datetime" Nullable="false" />
-          <Property Name="AccidentTime" Type="nvarchar" Nullable="false" MaxLength="20" />
-          <Property Name="ReportedDate" Type="datetime" Nullable="false" />
+          <Property Name="AccidentTime" Type="nvarchar" Nullable="true" MaxLength="20" />
+          <Property Name="ReportedDate" Type="datetime" Nullable="true" />
           <Property Name="Facts" Type="nvarchar(max)" />
           <Property Name="Damages" Type="nvarchar" MaxLength="500" />
           <Property Name="DateofFinding" Type="datetime" />
@@ -939,6 +939,7 @@
           <Property Name="CaseTypeL1" Type="nvarchar" MaxLength="10" />
           <Property Name="CaseTypeL2" Type="nvarchar" MaxLength="10" />
            <Property Name="Remarks" Type="nvarchar" MaxLength="500" />
+           <Property Name="SettlementType" Type="nvarchar" MaxLength="200" />
         </EntityType>
         <EntityType Name="CLM_ClaimTask">
           <Key>
@@ -13792,8 +13793,8 @@
           <Property Type="String" Name="BusServiceNo" MaxLength="8" FixedLength="false" Unicode="true" />
           <Property Type="String" Name="VehicleNo" MaxLength="10" FixedLength="false" Unicode="true" />
           <Property Type="DateTime" Name="AccidentDate" Nullable="false" />
-          <Property Type="String" Name="AccidentTime" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
-          <Property Type="DateTime" Name="ReportedDate" Nullable="false" />
+          <Property Type="String" Name="AccidentTime" Nullable="true" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Type="DateTime" Name="ReportedDate" Nullable="true" />
           <Property Type="String" Name="Facts" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Type="String" Name="Damages" MaxLength="500" FixedLength="false" Unicode="true" />
           <Property Type="DateTime" Name="DateofFinding" />
@@ -14249,6 +14250,7 @@
           <Property Type="String" Name="CaseTypeL1" MaxLength="10" FixedLength="false" Unicode="true" />
           <Property Type="String" Name="CaseTypeL2" MaxLength="10" FixedLength="false" Unicode="true" />
           <Property Type="String" Name="Remarks" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="SettlementType" MaxLength="200" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="ClaimAccidentDetail" Relationship="MCASModel.FK_CLM_Claims_ClaimAccidentDetails_AccidentClaimId" FromRole="CLM_Claims" ToRole="ClaimAccidentDetail" />
           <NavigationProperty Name="CLM_LogRequest" Relationship="MCASModel.FK__CLM_LogRe__Claim__3B41988D" FromRole="CLM_Claims" ToRole="CLM_LogRequest" />
           <NavigationProperty Name="MNT_Adjusters" Relationship="MCASModel.FK_CLM_Claims_MNT_Adjusters" FromRole="CLM_Claims" ToRole="MNT_Adjusters" />
@@ -18979,7 +18981,7 @@
                 <ScalarProperty Name="Damages" ColumnName="Damages" />
                 <ScalarProperty Name="Facts" ColumnName="Facts" />
                 <ScalarProperty Name="ReportedDate" ColumnName="ReportedDate" />
-                <ScalarProperty Name="AccidentTime" ColumnName="AccidentTime" />
+                <ScalarProperty Name="AccidentTime" ColumnName="AccidentTime"  />
                 <ScalarProperty Name="AccidentDate" ColumnName="AccidentDate" />
                 <ScalarProperty Name="VehicleNo" ColumnName="VehicleNo" />
                 <ScalarProperty Name="BusServiceNo" ColumnName="BusServiceNo" />
@@ -19185,6 +19187,7 @@
                 <ScalarProperty Name="RecordCancellationDate" ColumnName="RecordCancellationDate" />
                 <ScalarProperty Name="RecordReopenedReason" ColumnName="RecordReopenedReason" />
                 <ScalarProperty Name="Remarks" ColumnName="Remarks" />
+                <ScalarProperty Name="SettlementType" ColumnName="SettlementType" />
                 <ScalarProperty Name="ReopenedDate" ColumnName="ReopenedDate" />
                 <ScalarProperty Name="SensitiveCase" ColumnName="SensitiveCase" />
                 <ScalarProperty Name="ClaimantStatus" ColumnName="ClaimantStatus" />
