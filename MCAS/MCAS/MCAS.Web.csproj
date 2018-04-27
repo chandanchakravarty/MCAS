@@ -20,6 +20,10 @@
     <SccLocalPath>SAK</SccLocalPath>
     <SccAuxPath>SAK</SccAuxPath>
     <SccProvider>SAK</SccProvider>
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -237,55 +241,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Content Include="Bindings\Model\ServiceProviderModel.js" />
     <Content Include="Bindings\ViewModel\ServiceProviderViewModel.js" />
-    <Content Include="bin\ABCpdf.dll" />
-    <Content Include="bin\ABCpdf9-32.dll" />
-    <Content Include="bin\Antlr3.Runtime.dll" />
-    <Content Include="bin\DotNetOpenAuth.AspNet.dll" />
-    <Content Include="bin\DotNetOpenAuth.Core.dll" />
-    <Content Include="bin\DotNetOpenAuth.OAuth.Consumer.dll" />
-    <Content Include="bin\DotNetOpenAuth.OAuth.dll" />
-    <Content Include="bin\DotNetOpenAuth.OpenId.dll" />
-    <Content Include="bin\DotNetOpenAuth.OpenId.RelyingParty.dll" />
-    <Content Include="bin\EAWXmlToPDFParser.dll" />
-    <Content Include="bin\EntityFramework.dll" />
-    <Content Include="bin\fr\MCAS.resources.dll" />
-    <Content Include="bin\MCAS.dll" />
-    <Content Include="bin\MCAS.Entity.dll" />
-    <Content Include="bin\MCAS.Entity.pdb" />
-    <Content Include="bin\MCAS.ExceptionPublisher.dll" />
-    <Content Include="bin\MCAS.ExceptionPublisher.pdb" />
-    <Content Include="bin\MCAS.Globalisation.dll" />
-    <Content Include="bin\MCAS.Globalisation.pdb" />
-    <Content Include="bin\MCAS.pdb" />
-    <Content Include="bin\MCAS.Web.Objects.dll" />
-    <Content Include="bin\MCAS.Web.Objects.pdb" />
-    <Content Include="bin\Microsoft.Web.Helpers.dll" />
-    <Content Include="bin\Microsoft.Web.Infrastructure.dll" />
-    <Content Include="bin\Microsoft.Web.WebPages.OAuth.dll" />
-    <Content Include="bin\MvcCheckBoxList.dll" />
-    <Content Include="bin\Newtonsoft.Json.dll" />
-    <Content Include="bin\PrintHook32.dll" />
-    <Content Include="bin\System.Net.Http.dll" />
-    <Content Include="bin\System.Net.Http.Formatting.dll" />
-    <Content Include="bin\System.Net.Http.Formatting.xml" />
-    <Content Include="bin\System.Net.Http.WebRequest.dll" />
-    <Content Include="bin\System.Net.Http.WebRequest.xml" />
-    <Content Include="bin\System.Net.Http.xml" />
-    <Content Include="bin\System.Web.Helpers.dll" />
-    <Content Include="bin\System.Web.Http.dll" />
-    <Content Include="bin\System.Web.Http.WebHost.dll" />
-    <Content Include="bin\System.Web.Http.WebHost.xml" />
-    <Content Include="bin\System.Web.Http.xml" />
-    <Content Include="bin\System.Web.Mvc.dll" />
-    <Content Include="bin\System.Web.Optimization.dll" />
-    <Content Include="bin\System.Web.Razor.dll" />
-    <Content Include="bin\System.Web.WebPages.Deployment.dll" />
-    <Content Include="bin\System.Web.WebPages.dll" />
-    <Content Include="bin\System.Web.WebPages.Razor.dll" />
-    <Content Include="bin\WebGrease.dll" />
-    <Content Include="bin\WebMatrix.Data.dll" />
-    <Content Include="bin\WebMatrix.WebData.dll" />
-    <Content Include="bin\WebMatrix.WebData.xml" />
     <Content Include="Content\bootstrap-multiselect.css" />
     <Content Include="Content\font-awesome-4.6.3\css\font-awesome.css" />
     <Content Include="Content\font-awesome-4.6.3\css\font-awesome.min.css" />
@@ -1343,7 +1298,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="bin\bin\fr\" />
     <Folder Include="MAPXML\C Stage\Discharge voucher\" />
     <Folder Include="MAPXML\C Stage\File minutes\" />
     <Folder Include="MAPXML\C Stage\letter to 3P\Cheque letter\" />

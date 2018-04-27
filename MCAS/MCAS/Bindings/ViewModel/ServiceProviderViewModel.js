@@ -131,15 +131,15 @@
         createServiceProviderModelRules.push(new validator.PropertyRule("CompanyNameId", {
             required: { message: CompanyNameIdReq }
         }));
-        createServiceProviderModelRules.push(new validator.PropertyRule("Address1", {
-            required: { message: Address1Req }
-        }));
-        createServiceProviderModelRules.push(new validator.PropertyRule("CountryId", {
-            required: { message: CountryIdReq }
-        }));
-        createServiceProviderModelRules.push(new validator.PropertyRule("Reference", {
-            required: { message: ReferenceReq }
-        }));
+        //createServiceProviderModelRules.push(new validator.PropertyRule("Address1", {
+        //    required: { message: Address1Req }
+        //}));
+        //createServiceProviderModelRules.push(new validator.PropertyRule("CountryId", {
+        //    required: { message: CountryIdReq }
+        //}));
+        //createServiceProviderModelRules.push(new validator.PropertyRule("Reference", {
+        //    required: { message: ReferenceReq }
+        //}));
         createServiceProviderModelRules.push(new validator.PropertyRule("StatusId", {
             required: { message: StatusIdReq }
         }));

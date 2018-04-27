@@ -126,7 +126,7 @@ namespace MCAS.Web.Objects.ClaimObjectHelper
         public int? IsComplete { get; set; }
         [Required(ErrorMessageResourceType = typeof(ClaimAccident), ErrorMessageResourceName = "RFVBusServiceNumber")]
         public string BusServiceNo { get; set; }
-        //[Required(ErrorMessage = "Vehicle Number is required.")]
+        [Required(ErrorMessage = "Vehicle Number is required.")]
         public string VehicleNo { get; set; }
         [DisplayName("Accident Date")]
         [Required(ErrorMessageResourceType = typeof(ClaimAccident), ErrorMessageResourceName = "RFVAccidentDate")]
@@ -141,7 +141,7 @@ namespace MCAS.Web.Objects.ClaimObjectHelper
 
 
         [DisplayName("Accident Time")]
-        [Required(ErrorMessageResourceType = typeof(ClaimAccident), ErrorMessageResourceName = "RFVAccidentTime")]
+        //[Required(ErrorMessageResourceType = typeof(ClaimAccident), ErrorMessageResourceName = "RFVAccidentTime")]
         [IsFutureTime("AccidentDate", ErrorMessage = "Accident Time can not be greater then current time.")]
         public string AccidentTime
         {
@@ -153,7 +153,7 @@ namespace MCAS.Web.Objects.ClaimObjectHelper
         public int? Organization { get; set; }
         public string AccidentImage { get; set; }
         [DisplayName("Reported Date")]
-        [Required(ErrorMessageResourceType = typeof(ClaimAccident), ErrorMessageResourceName = "RFVReportedDate")]
+        //[Required(ErrorMessageResourceType = typeof(ClaimAccident), ErrorMessageResourceName = "RFVReportedDate")]
         [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd/MM/yyyy}")]
         [DataType(DataType.Date)]
         public DateTime? ReportedDate
@@ -162,7 +162,7 @@ namespace MCAS.Web.Objects.ClaimObjectHelper
             set { _reportedDate = value; }
         }
         [DisplayName("Input Date")]
-        [Required(ErrorMessageResourceType = typeof(ClaimAccident), ErrorMessageResourceName = "RFVInputDate")]
+        //[Required(ErrorMessageResourceType = typeof(ClaimAccident), ErrorMessageResourceName = "RFVInputDate")]
         [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd/MM/yyyy}")]
         [DataType(DataType.Date)]
         public DateTime? InputDate

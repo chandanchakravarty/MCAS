@@ -264,6 +264,8 @@
                                             </label>
                                             <div class="col-sm-8">
                                                 @Html.TextBoxFor(m => m.LawyerDate, "{0:d}", new { id = "DateToLawyer", @class = "form-control datepicker validateDateFormare" })
+                                                @*@Html.TextBoxFor(m => m.AccidentDate, "{0:d}", new { id = "inputAccidentDate", @class = "form-control", maxlength = 10 })
+                                                @Html.ValidationMessageFor(m => m.AccidentDate)*@
                                             </div>
                                             <label class="col-sm-4  control-label">
                                             </label>
@@ -420,11 +422,24 @@
                                                 </div>
                                             </div>
                                         </div>
+                                   
+                                    
+                                    <div class="col-lg-6" style="margin-top: 30px;">
+                                        <div class="form-group">
+                                            <label class="col-sm-4 control-label">
+                                                @*@NewClaimCrTx.FileReceivedDate&nbsp;<span class="text-danger">*</span>*@
+                                                Settlement Type
+                                            </label>
+                                            <div class="col-sm-8">
+                                                @Html.DropDownListFor(m => m.SettlementType, new SelectList(Model.SettlementTypeList, "Id", "Text", "[Select...]"), new { @class = "form-control DonotDiableControl" })
+                                         </div>
+                                        </div>
+                                    </div>
                                     }
                                     <div class="col-lg-6" style="margin-top: 30px;">
                                         <div class="form-group">
                                             <label class="col-sm-4 control-label">
-                                                @NewClaimCrTx.FileReceivedDate
+                                                @NewClaimCrTx.FileReceivedDate&nbsp;<span class="text-danger">*</span>
                                             </label>
                                             <div class="col-sm-8">
                                                 @Html.TextBoxFor(m => m.FileReceivedDate, "{0:d}", new { id = "FileReceivedDate", @class = "form-control datepicker validateDateFormare" })
@@ -438,17 +453,18 @@
                                     <div class="col-lg-6">
                                         <div class="form-group">
                                             <label class="col-sm-4 control-label">
-                                                @NewClaimCrTx.Collisiontype
+                                                @NewClaimCrTx.Collisiontype&nbsp;<span class="text-danger">*</span>
                                             </label>
                                             <div class="col-sm-8">
                                                 @Html.DropDownListFor(m => m.Collisiontype, new SelectList(Model.CollisionTypeList, "Id", "Text", "[Select...]"), new { @class = "form-control DonotDiableControl" })
-                                            </div>
+                                                @Html.ValidationMessageFor(m => m.Collisiontype)
+                                             </div>
                                         </div>
                                     </div>
                                     <div class="col-lg-6">
                                         <div class="form-group">
                                             <label class="col-sm-4 control-label">
-                                                @NewClaimCrTx.ClaimDate
+                                                @NewClaimCrTx.ClaimDate&nbsp;<span class="text-danger">*</span>
                                             </label>
                                             <div class="col-sm-8">
                                                 @Html.TextBoxFor(m => m.ClaimDate, "{0:d}", new { id = "ClaimDate", @class = "form-control datepicker validateDateFormare" })
@@ -584,7 +600,7 @@
                                     <div class="col-lg-6">
                                         <div class="form-group">
                                             <label class="col-sm-4 control-label">
-                                                @NewClaimCrTx.CaseStatus&nbsp;<span id="spanCaseStatus" class="text-danger OnlyCar">*</span>
+                                                @NewClaimCrTx.CaseStatus&nbsp;@*<span id="spanCaseStatus" class="text-danger OnlyCar">*</span>*@
                                             </label>
                                             <div class="col-sm-8">
                                                 @Html.DropDownListFor(m => m.CaseStatus, new SelectList(Model.CaseStatusList, "Id", "Text", "0"), new { @class = "form-control" })
@@ -778,6 +794,12 @@
                                                 @NewClaimCrTx.TimeBarDate
                                             </label>
                                             <div class="col-sm-8">
+                                                @{
+                                                        if (Session["AccidentDate"] != null)
+                                                        {
+                                                            Model.TimeBarDate = (DateTime)Session["AccidentDate"];
+                                                        }
+                                                  }
                                                 @Html.TextBoxFor(m => m.TimeBarDate, "{0:d}", new { id = "TimeBarDate", @class = "form-control datepicker validateDateFormare" })
                                                 @Html.ValidationMessageFor(m => m.TimeBarDate)
                                             </div>
@@ -810,23 +832,27 @@
                                                 @Html.TextBoxFor(m => m.FileArchievedRef, new { @maxlength = "100", @class = "form-control alphanumeric" })
                                                 @Html.ValidationMessageFor(m => m.FileArchievedRef)
                                             </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="form-group">
+                                            <label class="col-sm-4 control-label">
+                                                @NewClaimCrTx.Remarks
+                                            </label>
+                                            <div class="col-sm-8">
+                                                @Html.TextAreaFor(m => m.Remarks, new { @maxlength = "500", @class = "form-control alphanumeric", cols = "20", rows = "5" })
+                                                @*<textarea class="form-control empty1" cols="20" id="Remarks" maxlength="500" name="Remarks"
+                                                          rows="2" ng-model="createServiceProvider.Remarks"></textarea>*@
+                                            </div>
                                             <label class="col-sm-4  control-label">
                                             </label>
                                             <div class="col-sm-8">
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-lg-6 OnlyCar">
-                                        <div class="form-group DivHide" id="chkDetail">
-                                            <label class="col-sm-4 control-label">
-                                                @NewClaimCrTx.ChequeDetails
-                                            </label>
-                                            <div class="col-sm-8">
-                                                @Html.TextBoxFor(m => m.ChequeDetails, new { @maxlength = "250", @class = "form-control alphanumeric" })
-                                            </div>
-                                        </div>
-                                    </div>
                                 </div>
+                                <br />
+                                
                             </fieldset>
                             <fieldset>
                                 <legend>@NewClaimCrTx.Severity</legend>
@@ -1108,7 +1134,7 @@
         }, "");
 
 
-        $("#DateToLawyer,#DateToGIADRM,#FileReceivedDate,#ClaimDate,#FollowUpDate,#DateOfSurvey,#InvoiceDate,#ConfirmDate,#FinalSettleDate,#TimeBarDate,#CreatedDate,#ReopenedDate,#RecordCancellationDate,#WriteIssued").datepicker({
+        $("#TimeBarDate,#FollowUpDate,#CreatedDate,#ReopenedDate,#RecordCancellationDate").datepicker({
             dateFormat: "dd/mm/yy",
             showStatus: true,
             showWeeks: true,
@@ -1125,6 +1151,39 @@
             }
         });
 
+        $("#DateToLawyer,#DateToGIADRM,#DateOfSurvey,#InvoiceDate,#ConfirmDate,#FinalSettleDate,#FileReceivedDate,#ClaimDate,#WriteIssued").datepicker({
+            dateFormat: "dd/mm/yy",
+            showStatus: true,
+            showWeeks: true,
+            currentText: 'Now',
+            autoSize: true,
+            gotoCurrent: true,
+            showAnim: 'blind',
+            highlightWeek: true,
+            changeMonth: !0,
+            changeYear: !0,
+            yearRange: "1951:2050",
+            maxDate: 0,
+            onSelect: function (b) {
+                $(this).valid();
+                //("inputAccidentDate" == (this.id || this.context.id)) && $("#inputAccidentTime").valid();
+            }
+        }).change(function () {
+           
+            @*"" == $(this).val() && ("inputAccidentDate" == (this.id || this.context.id)) && $("#inputAccidentTime").val("");
+            if ($(this).val() != "" && isFutureDate($(this).val())) return ($("#" + this.id).val("")), (("inputAccidentDate" == (this.id || this.context.id)) && $("#inputAccidentTime").val("")), alert(DateVal[this.id]() + " @Html.Raw(ClaimAccident.MsgDate)", this.id), !1;*@
+        });
+        $.culture = Globalize.culture("en-GB");
+        $.validator.methods.date = function (a, b) {
+            return this.optional(b) || Globalize.parseDate(a, "@System.Configuration.ConfigurationManager.AppSettings["DateFormat"]", "en-GB") || Globalize.parseDate(a, "yyyy-mm-dd")
+        };
+        $.validator.unobtrusive.adapters.add("notequalto", ["other"], function (a) {
+            a.rules.notEqualTo = "#" + a.params.other;
+            a.message && (a.messages.notEqualTo = a.message)
+        });
+        $.validator.addMethod("notEqualTo", function (a, b, c) {
+            return this.optional(b) || a != $(c).val()
+        }, "");
 
         $("input[type=text]").each(function () {
             $(this).hasClass("datepicker") && 10 < $(this).val().length && $(this).val($(this).val().substring(0, 10));

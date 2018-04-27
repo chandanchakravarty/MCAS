@@ -376,7 +376,7 @@ namespace MCAS.Web.Objects.Resources.ClaimRegProcPCNTX {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Over/Under Claim Recovery.
+        ///   Looks up a localized string similar to Over/(Under) Claim Recovery.
         /// </summary>
         public static string OverClmRecovery {
             get {
@@ -403,7 +403,7 @@ namespace MCAS.Web.Objects.Resources.ClaimRegProcPCNTX {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Profit Sharing For Taxi.
+        ///   Looks up a localized string similar to Profit Sharing.
         /// </summary>
         public static string PrftShrTxSora {
             get {
@@ -457,7 +457,7 @@ namespace MCAS.Web.Objects.Resources.ClaimRegProcPCNTX {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to SORA/SOCRA Serial No.
+        ///   Looks up a localized string similar to SORA Serial No.
         /// </summary>
         public static string Sora_SocraSrlNo {
             get {

@@ -98,7 +98,7 @@ namespace MCAS.Web.Objects.ClaimObjectHelper
         public string AddNewPartyText { get; set; }
         public string h3header { get; set; }
 
-        [Required(ErrorMessageResourceType = typeof(MCAS.Web.Objects.Resources.ClaimProcessing.ServiceProvider), ErrorMessageResourceName = "RFVClaimantAddress1")]
+        //[Required(ErrorMessageResourceType = typeof(MCAS.Web.Objects.Resources.ClaimProcessing.ServiceProvider), ErrorMessageResourceName = "RFVClaimantAddress1")]
         [DisplayName("Claimant's Address1")]
         public string Address1 { get; set; }
 
@@ -107,7 +107,7 @@ namespace MCAS.Web.Objects.ClaimObjectHelper
         public string City { get; set; }
         public string State { get; set; }
         public string ClaimRecordNo { get; set; }
-        [Required(ErrorMessageResourceType = typeof(MCAS.Web.Objects.Resources.ClaimProcessing.ServiceProvider), ErrorMessageResourceName = "RFVCountry")]
+        //[Required(ErrorMessageResourceType = typeof(MCAS.Web.Objects.Resources.ClaimProcessing.ServiceProvider), ErrorMessageResourceName = "RFVCountry")]
         [DisplayName("Country")]
         public string CountryId { get; set; }
 
@@ -116,7 +116,7 @@ namespace MCAS.Web.Objects.ClaimObjectHelper
         public string PostalCode { get; set; }
         public string PostalCode1 { get; set; }
 
-        [Required(ErrorMessageResourceType = typeof(MCAS.Web.Objects.Resources.ClaimProcessing.ServiceProvider), ErrorMessageResourceName = "RFVReference")]
+        //[Required(ErrorMessageResourceType = typeof(MCAS.Web.Objects.Resources.ClaimProcessing.ServiceProvider), ErrorMessageResourceName = "RFVReference")]
         [DisplayName("Reference Address1")]
         public string Reference { get; set; }
 
