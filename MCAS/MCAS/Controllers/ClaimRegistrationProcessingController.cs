@@ -124,6 +124,13 @@ namespace MCAS.Controllers
         }
 
         [HttpPost]
+        public JsonResult GetDriverType(string OrganizationID)
+        {
+            var DriverList = ClaimAccidentDetailsModel.FetchCommonMasterDataForNew("DriverType", Convert.ToInt32(OrganizationID), true);
+            return Json(DriverList);
+        }
+
+        [HttpPost]
         public ActionResult ClmAccDltPCNTXEditor(ClaimAccidentDetailsModel model)
         {
             string callermode = "";
