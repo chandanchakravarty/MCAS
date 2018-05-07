@@ -458,6 +458,27 @@
 
         });
 
+        $("#Organization").change(function () {
+            var orgID = $("#Organization").val();
+            $.ajax({
+                type: "POST",
+                url: '@Url.ActionEncoded("GetDriverType", "ClaimRegistrationProcessing")',
+                data: {
+                    OrganizationID: orgID
+                },
+                success: function (orgID) {
+                     var listItems = "";
+                    //orgID[i].Lookup_value 
+                    for (var i = 0; i < orgID.length; i++) {
+                        listItems += "<option value='" + orgID[i].Lookup_desc + "'>" + orgID[i].Lookup_desc + "</option>";
+                    }
+                    $("#OwnerAddressDlt_DriverType").html(listItems);
+                    $("#DriverAddressDlt_DriverType").html(listItems);
+                }
+            });
+
+        });
+
 
         SetDivPost();
 
