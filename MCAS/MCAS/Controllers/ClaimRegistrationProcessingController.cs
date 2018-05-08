@@ -55,7 +55,9 @@ namespace MCAS.Controllers
             claimDetails.CallerMenu = "New";
             if (PolicyId.HasValue)
                 claimDetails.PolicyId = (int)PolicyId;
-
+            if (Session["AccidentDate"] != null)
+                claimDetails.ClaimDetail.TimeBarDate = (DateTime)Session["AccidentDate"];
+ 
             return PartialView("_ClaimDeatailsPCNTX", claimDetails);
         }
         #region "Accident"
@@ -100,8 +102,8 @@ namespace MCAS.Controllers
             claimaccident.PolicyId = 0;
             claimaccident.ViewMode = getPageViewMode("New");
             claimaccident.OwnerNameList = LookUpListItems.Fetch("OwnerName", true);
-            claimaccident.OwnerAddressDlt.GenderList = LookUpListItems.Fetch("GENDER");
-            claimaccident.DriverAddressDlt.GenderList = LookUpListItems.Fetch("GENDER");
+            claimaccident.OwnerAddressDlt.GenderList = LookUpListItems.Fetch("GENDER",true);
+            claimaccident.DriverAddressDlt.GenderList = LookUpListItems.Fetch("GENDER", true);
             ViewData["SuccessMsgPcTx"] = TempData["SuccessMsgPcTx"];
             claimaccident.OrgCategory = Convert.ToString(Session["OrganisationType"]);
             claimaccident.ChckClaimComplete = claimaccident.AccidentClaimId == null ? 1 : (from l in obj.ClaimAccidentDetails where l.AccidentClaimId == claimaccident.AccidentClaimId select l.IsComplete).FirstOrDefault();
@@ -114,7 +116,18 @@ namespace MCAS.Controllers
             {
                 claimaccident.HClaimId = 0;
             }
+            if (claimaccident.AccidentDate != null)
+            {
+                Session["AccidentDate"] = claimaccident.AccidentDate.Value.AddYears(6);
+            }
             return View("ClmAccDltPCNTXEditor", claimaccident);
+        }
+
+        [HttpPost]
+        public JsonResult GetDriverType(string OrganizationID)
+        {
+            var DriverList = ClaimAccidentDetailsModel.FetchCommonMasterDataForNew("DriverType", Convert.ToInt32(OrganizationID), true);
+            return Json(DriverList);
         }
 
         [HttpPost]
@@ -173,6 +186,10 @@ namespace MCAS.Controllers
                     ModelState.Clear();
                     TempData["DisplayTP"] = "DisplayTP";
                     TempData["DisplayOD"] = "DisplayOD";
+                    if (model.AccidentTime == null)
+                    {
+                        model.AccidentTime = "00:00";
+                    }
                     model = model.Save();
                     UpdateClaimObjectHelper(model, "Accident");
                     ViewData["SuccessMsg"] = model.AccidentResult;

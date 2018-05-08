@@ -88,7 +88,7 @@ namespace MCAS.Web.Objects.Resources.ClaimProcessing {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Car Courtesy.
+        ///   Looks up a localized string similar to Courtesy Car.
         /// </summary>
         public static string CarCourtesy {
             get {
