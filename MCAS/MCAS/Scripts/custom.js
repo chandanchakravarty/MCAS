@@ -478,11 +478,18 @@ function IsPageChanged() {
             }
             else {
                 if ((this.type == "select-one" || this.type == "select-multiple")) {
+                    //console.log($(this).find(":selected").text());
+                    //console.log($(this).find(":selected").value);
+                    if (!($(this).find(":selected").text().contains("Select")) && !this.disabled && $(this).is(":visible") && !($(this).hasClass("ignoreAlert"))) {
+                        IsChanges = true;
+                        return true;
+                    } 
                     for (var x = 0; x < this.length; x++) {
                         if ((this.options[x].selected != this.options[x].defaultSelected) && this.options[x].outerHTML.contains("selected=") && $(this).is(":visible") && !($(this).hasClass("ignoreAlert"))) {
                             IsChanges = true;
                             return true;
                         }
+                       
                     }
                 }
             }

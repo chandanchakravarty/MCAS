@@ -275,6 +275,21 @@
                                     </div>
                                 </div>
                                 <br />
+@{
+                            // LawyerGIADRM
+            var LawyerGIADRM = MCAS.Web.Objects.ClaimObjectHelper.ClaimAccidentDetailsModel.FetchCommonMasterDataForNew("Lawyer/GIADRM", Convert.ToInt32(Session["OrganizationID"]), true);
+            var LawyerGIADRMList = new List<SelectListItem>();
+            foreach (var drty in LawyerGIADRM)
+                            {
+                                LawyerGIADRMList.Add(new SelectListItem
+                                {
+                                    Text = drty.Lookup_desc,
+                                    Value = drty.Lookup_value
+                                });
+                            }
+
+
+}
                                 <div class="form-group">
                                     <div class="col-lg-6">
                                         <div class="form-group">
@@ -282,13 +297,7 @@
                                                 @NewClaimCrTx.LawyerGIADRM
                                             </label>
                                             <div class="col-sm-8">
-                                                @Html.DropDownListFor(m => m.LawyerGIADRM, new List<SelectListItem>
-                                            {
-                                                new SelectListItem{ Text="[Select..]", Value = "" },
-                                                new SelectListItem{ Text="Lawyer", Value = "2" },
-                                                new SelectListItem{ Text="GIA DRM", Value = "3" },
-                                                //new SelectListItem{ Text="Option 4", Value = "4" },
-                                             }, new { @class = "form-control DonotDiableControl" })
+                                                @Html.DropDownListFor(m => m.LawyerGIADRM, LawyerGIADRMList, new { @class = "form-control DonotDiableControl" })
                                             </div>
                                         </div>
                                     </div>
@@ -375,6 +384,32 @@
                                             </div>
                                         </div>
                                     }
+                                    @{
+                                    // CaseTypeL1
+                                    var CaseTypeL1 = MCAS.Web.Objects.ClaimObjectHelper.ClaimAccidentDetailsModel.FetchCommonMasterDataForNew("CaseTypeL1", Convert.ToInt32(Session["OrganizationID"]), true);
+                                    var CaseTypeL1List = new List<SelectListItem>();
+                                    foreach (var drty in CaseTypeL1)
+                                    {
+                                        CaseTypeL1List.Add(new SelectListItem
+                                        {
+                                            Text = drty.Lookup_desc,
+                                            Value = drty.Lookup_value
+                                        });
+                                    }
+                                    // CaseTypeL2
+                                    var CaseTypeL2 = MCAS.Web.Objects.ClaimObjectHelper.ClaimAccidentDetailsModel.FetchCommonMasterDataForNew("CaseTypeL2", Convert.ToInt32(Session["OrganizationID"]), true);
+                                    var CaseTypeL2List = new List<SelectListItem>();
+                                    foreach (var drty in CaseTypeL2)
+                                    {
+                                        CaseTypeL2List.Add(new SelectListItem
+                                        {
+                                            Text = drty.Lookup_desc,
+                                            Value = drty.Lookup_value
+                                        });
+                                    }
+
+
+                                    }
                                     @if ((Convert.ToString(Session["OrganisationType"]).ToLower() == "pc"))
                                     {
                                         @Html.HiddenFor(m => m.NatureOfAcc, new { @Value = "1" })
@@ -387,13 +422,7 @@
                                                     @NewClaimCrTx.CaseTypeL1
                                                 </label>
                                                 <div class="col-sm-8">
-                                                    @Html.DropDownListFor(m => m.CaseTypeL1, new List<SelectListItem>
-                                            {
-                                                new SelectListItem{ Text="[Select..]", Value = "" },
-                                                new SelectListItem{ Text="Option 1", Value = "2" },
-                                                new SelectListItem{ Text="Option 2", Value = "3" },
-                                                  new SelectListItem{ Text="Option 3", Value = "4" },
-                                             }, new { @class = "form-control DonotDiableControl" })
+                                                    @Html.DropDownListFor(m => m.CaseTypeL1, CaseTypeL1List, new { @class = "form-control DonotDiableControl" })
                                                 </div>
                                                 <label class="col-sm-4  control-label">
                                                 </label>
@@ -408,13 +437,7 @@
                                                 </label>
                                                 <div class="col-sm-8">
                                                     <!--mark-->
-                                                    @Html.DropDownListFor(m => m.CaseTypeL2, new List<SelectListItem>
-                                            {
-                                                new SelectListItem{ Text="[Select..]", Value = "" },
-                                                new SelectListItem{ Text="Option 1", Value = "2" },
-                                                new SelectListItem{ Text="Option 2", Value = "3" },
-                                                new SelectListItem{ Text="Option 3", Value = "4" },
-                                             }, new { @class = "form-control DonotDiableControl" })
+                                                    @Html.DropDownListFor(m => m.CaseTypeL2, CaseTypeL2List, new { @class = "form-control DonotDiableControl" })
                                                 </div>
                                                 <label class="col-sm-4  control-label">
                                                 </label>
@@ -899,19 +922,26 @@
                                             </div>
                                         </div>
                                     </div>
+                                    @{
+                                                        // ShareAllocation
+            var ShareAllocation = MCAS.Web.Objects.ClaimObjectHelper.ClaimAccidentDetailsModel.FetchCommonMasterDataForNew("CaseTypeL1", Convert.ToInt32(Session["OrganizationID"]), true);
+            var ShareAllocationList = new List<SelectListItem>();
+            foreach (var drty in ShareAllocation)
+                                    {
+                                        ShareAllocationList.Add(new SelectListItem
+                                        {
+                                            Text = drty.Lookup_desc,
+                                            Value = drty.Lookup_value
+                                        });
+                                    }
+                                    }
                                     <div class="col-lg-6 OnlyCar">
                                         <div class="form-group">
                                             <label class="col-sm-4 control-label">
                                                 @NewClaimCrTx.Sharellocation
                                             </label>
                                             <div class="col-sm-8">
-                                                @Html.DropDownListFor(m => m.Sharellocation, new List<SelectListItem>
-                                            {
-                                                new SelectListItem{ Text="[Select..]", Value = "" },
-                                                new SelectListItem{ Text="Option 1", Value = "2" },
-                                                new SelectListItem{ Text="Option 2", Value = "3" },
-                                                  new SelectListItem{ Text="Option 3", Value = "3" },
-                                             }, new { @class = "col-lg-12 form-control" })
+                                                @Html.DropDownListFor(m => m.Sharellocation, ShareAllocationList, new { @class = "col-lg-12 form-control" })
                                             </div>
                                             <label class="col-sm-4  control-label">
                                             </label>
