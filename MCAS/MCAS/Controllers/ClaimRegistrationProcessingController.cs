@@ -126,6 +126,10 @@ namespace MCAS.Controllers
         [HttpPost]
         public JsonResult GetDriverType(string OrganizationID)
         {
+            if (!string.IsNullOrEmpty(OrganizationID))
+            {
+                Session["OrganizationID"] = OrganizationID;
+            }
             var DriverList = ClaimAccidentDetailsModel.FetchCommonMasterDataForNew("DriverType", Convert.ToInt32(OrganizationID), true);
             return Json(DriverList);
         }
