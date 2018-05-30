@@ -396,6 +396,7 @@
                                             Value = drty.Lookup_value
                                         });
                                     }
+                                   
                                     // CaseTypeL2
                                     var CaseTypeL2 = MCAS.Web.Objects.ClaimObjectHelper.ClaimAccidentDetailsModel.FetchCommonMasterDataForNew("CaseTypeL2", Convert.ToInt32(Session["OrganizationID"]), true);
                                     var CaseTypeL2List = new List<SelectListItem>();
@@ -407,8 +408,6 @@
                                             Value = drty.Lookup_value
                                         });
                                     }
-
-
                                     }
                                     @if ((Convert.ToString(Session["OrganisationType"]).ToLower() == "pc"))
                                     {
@@ -430,6 +429,7 @@
                                                 </div>
                                             </div>
                                         </div>
+                                       
                                         <div class="col-lg-6" style="margin-top: 30px;">
                                             <div class="form-group">
                                                 <label class="col-sm-4 control-label">
@@ -924,16 +924,16 @@
                                     </div>
                                     @{
                                                         // ShareAllocation
-            var ShareAllocation = MCAS.Web.Objects.ClaimObjectHelper.ClaimAccidentDetailsModel.FetchCommonMasterDataForNew("CaseTypeL1", Convert.ToInt32(Session["OrganizationID"]), true);
-            var ShareAllocationList = new List<SelectListItem>();
-            foreach (var drty in ShareAllocation)
-                                    {
-                                        ShareAllocationList.Add(new SelectListItem
-                                        {
-                                            Text = drty.Lookup_desc,
-                                            Value = drty.Lookup_value
-                                        });
-                                    }
+                        var ShareAllocation = MCAS.Web.Objects.ClaimObjectHelper.ClaimAccidentDetailsModel.FetchCommonMasterDataForNew("ShareAllocation", Convert.ToInt32(Session["OrganizationID"]), true);
+                        var ShareAllocationList = new List<SelectListItem>();
+                        foreach (var drty in ShareAllocation)
+                                                {
+                                                    ShareAllocationList.Add(new SelectListItem
+                                                    {
+                                                        Text = drty.Lookup_desc,
+                                                        Value = drty.Lookup_value
+                                                    });
+                                                }
                                     }
                                     <div class="col-lg-6 OnlyCar">
                                         <div class="form-group">
