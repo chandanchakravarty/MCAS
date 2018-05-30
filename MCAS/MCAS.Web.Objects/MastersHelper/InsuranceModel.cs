@@ -249,8 +249,9 @@ namespace MCAS.Web.Objects.MastersHelper
                //from ad in _db.MNT_Adjusters.Where(ad => ad.AdjusterId == sp.CompanyNameId && adjtype.Contains(ad.AdjusterTypeCode)).DefaultIfEmpty()
                from org in _db.MNT_OrgCountry.Where(org => org.Id == accident.Organization).DefaultIfEmpty()
                from orgAccess in _db.MNT_UserOrgAccess
-               where accident.IsComplete == (ClaimStatus != "0" ? claimstatus : accident.IsComplete)
-                       && (orgAccess.OrgCode == org.InsurerType && orgAccess.OrgName == org.CountryOrgazinationCode && orgAccess.UserId == userId)
+               where 
+               accident.IsComplete == (ClaimStatus != "0" ? claimstatus : accident.IsComplete) && 
+               (orgAccess.OrgCode == org.InsurerType && orgAccess.OrgName == org.CountryOrgazinationCode && orgAccess.UserId == userId)
                //&& claims.ClaimantStatus != "2"
 
                select new InsuranceModel()
