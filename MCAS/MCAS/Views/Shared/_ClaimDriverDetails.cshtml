@@ -17,22 +17,19 @@
         </div>
         @{
             List<SelectListItem> listItems = new List<SelectListItem>();
-            
+            var DriverList = MCAS.Web.Objects.ClaimObjectHelper.ClaimAccidentDetailsModel.FetchCommonMasterDataForNew("DriverType",Convert.ToInt32(Model.Organization), true);
+            foreach (var drty in DriverList)
+            {
+                listItems.Add(new SelectListItem
+                    {
+                        Text = drty.Lookup_desc,
+                        Value = drty.Lookup_value
+                    });
+            }        
             //listItems.Add(new SelectListItem
             //    {
-            //        Text = "Exemplo1",
-            //        Value = "Exemplo1"
-            //    });
-            //listItems.Add(new SelectListItem
-            //    {
-            //        Text = "Exemplo2",
-            //        Value = "Exemplo2",
-            //        Selected = true
-            //    });
-            //listItems.Add(new SelectListItem
-            //    {
-            //        Text = "Exemplo3",
-            //        Value = "Exemplo3"
+            //        Text = "[Select...]",
+            //        Value = ""
             //    });
         }
         <div class="col-sm-6">

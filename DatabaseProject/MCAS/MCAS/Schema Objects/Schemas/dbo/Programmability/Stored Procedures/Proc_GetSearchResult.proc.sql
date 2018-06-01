@@ -55,7 +55,7 @@ and(@ClaimNo IS NULL OR (g.ClaimNo  like '%'+@ClaimNo+'%'))
 and(@IPNo IS NULL OR (g.IPNo  like '%'+@IPNo+'%'))    
 and(@TPSurname IS NULL OR (clm.ClaimantName  like '%'+@TPSurname+'%'))       
 and(@VehicleRegnNo IS NULL OR (clm.VehicleRegnNo  like '%'+@VehicleRegnNo+'%'))    
-and g.IsComplete = @Status
+--and g.IsComplete = @Status
 end
 END
 
