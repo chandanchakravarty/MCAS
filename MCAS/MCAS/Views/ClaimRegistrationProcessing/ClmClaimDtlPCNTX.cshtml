@@ -1235,10 +1235,20 @@
         $("#ClaimType").val("4");
         $("#ClaimType").attr("disabled", "disabled");
 
-        $("#ClaimantStatus").val("1");
+       // $("#ClaimantStatus").val("1");
         $("#ClaimantStatus option[value='4']").prop('disabled', 'disabled');
 
         $("#btnSave").click(function () {
+            if ($("#ClaimantStatus").val() != "2" && $("#FinalSettleDate").val() != "") {
+                alert("Claim Status Must be Finalized.");
+                return false;
+            }
+            if ($("#ClaimantStatus").val() == "2" && $("#FinalSettleDate").val()=="")
+            {
+                alert("Final Settle Date Required.");
+                return false;
+            }
+      
             if (IsPageChanged()) {
                 var c = $("#claimentryform").valid();
                 if ("#ClaimType" != "0") {
