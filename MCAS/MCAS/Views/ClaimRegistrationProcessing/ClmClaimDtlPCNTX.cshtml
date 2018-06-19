@@ -1239,14 +1239,24 @@
         $("#ClaimantStatus option[value='4']").prop('disabled', 'disabled');
 
         $("#btnSave").click(function () {
+
+            if ($("#ClaimantStatus").val() == "")
+            {
+                $("#ClaimantStatus").val("1");
+            }
+
             if ($("#ClaimantStatus").val() != "2" && $("#FinalSettleDate").val() != "") {
-                alert("Claim Status Must be Finalized.");
+                alert("Claim Status Must be Finalized. Or Remove Final Settle Date.");
                 return false;
             }
             if ($("#ClaimantStatus").val() == "2" && $("#FinalSettleDate").val()=="")
             {
                 alert("Final Settle Date Required.");
                 return false;
+            }
+            if ($("#ClaimantStatus").val() == "2" && $("#FinalSettleDate").val() != "") {
+                $('#FinalSettleDate').prop('readonly', false);
+                $('#FinalSettleDate').prop('disabled', false);
             }
       
             if (IsPageChanged()) {
@@ -1258,7 +1268,20 @@
             }
         });
 
+        $("document").ready(function () {
+            
+            if ($("#ClaimantStatus").val() == "2" && $("#FinalSettleDate").val() != "") {
+                $('#FinalSettleDate').prop('readonly', true);
+                $('#FinalSettleDate').prop('disabled', true);
+            }
+            $("#ClaimantStatus").change(function () {
+                if ($("#ClaimantStatus").val() != "2" && $("#FinalSettleDate").val() != "") {
+                    $('#FinalSettleDate').prop('readonly', false);
+                    $('#FinalSettleDate').prop('disabled', false);
+                }
 
+            });
+        });
 
         $("#ClaimAmt,#SettledAmt").change(function () {
             var input1 = $("#ClaimAmt").val(),

@@ -39,6 +39,7 @@
           <EntitySet Name="MNT_APP_RELEASE_MASTER" EntityType="MCASModel.Store.MNT_APP_RELEASE_MASTER" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="MNT_AttachmentList" EntityType="MCASModel.Store.MNT_AttachmentList" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="MNT_Branch" EntityType="MCASModel.Store.MNT_Branch" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="TM_CodeMaster" EntityType="MCASModel.Store.TM_CodeMaster" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="MNT_BranchLogin" EntityType="MCASModel.Store.MNT_BranchLogin" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="MNT_BranchType" EntityType="MCASModel.Store.MNT_BranchType" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="MNT_BusCaptain" EntityType="MCASModel.Store.MNT_BusCaptain" store:Type="Tables" Schema="dbo" />
@@ -1855,6 +1856,16 @@
           <Property Name="CreatedDate" Type="datetime" />
           <Property Name="ModifiedBy" Type="varchar" MaxLength="50" />
           <Property Name="ModifiedDate" Type="datetime" />
+        </EntityType>
+      <EntityType Name="TM_CodeMaster">
+          <Key>
+            <PropertyRef Name="Code" />
+          </Key>
+          <Property Name="Code" Type="varchar" Nullable="false"  />
+          <Property Name="Description" Type="varchar" MaxLength="500" />
+          <Property Name="CurrentNo" Type="bigint" />
+          <Property Name="CurrentYear" Type="int"  />
+          <Property Name="CurrentMonth" Type="int"  />
         </EntityType>
         <EntityType Name="MNT_BranchLogin">
           <Key>
@@ -4537,6 +4548,7 @@
           <EntitySet Name="MNT_Menus_Multilingual" EntityType="MCASModel.MNT_Menus_Multilingual" />
           <EntitySet Name="MNT_Cedant" EntityType="MCASModel.MNT_Cedant" />
           <EntitySet Name="MNT_Branch" EntityType="MCASModel.MNT_Branch" />
+          <EntitySet Name="TM_CodeMaster" EntityType="MCASModel.TM_CodeMaster" />
           <EntitySet Name="MNT_BranchType" EntityType="MCASModel.MNT_BranchType" />
           <EntitySet Name="MNT_Region" EntityType="MCASModel.MNT_Region" />
           <EntitySet Name="MNT_Department" EntityType="MCASModel.MNT_Department" />
@@ -5888,6 +5900,16 @@
           <Property Type="DateTime" Name="CreatedDate" />
           <Property Type="String" Name="ModifiedBy" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Type="DateTime" Name="ModifiedDate" />
+        </EntityType>
+        <EntityType Name="TM_CodeMaster">
+          <Key>
+            <PropertyRef Name="Code" />
+          </Key>
+          <Property Type="String" Name="Code" Nullable="false" />
+          <Property Type="String" Name="Description" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="Int32" Name="CurrentNo"  />
+          <Property Type="Int32" Name="CurrentYear"  />
+          <Property Type="Int32" Name="CurrentMonth"   />
         </EntityType>
         <EntityType Name="MNT_BranchType">
           <Key>
@@ -15498,6 +15520,17 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="TM_CodeMaster">
+            <EntityTypeMapping TypeName="MCASModel.TM_CodeMaster">
+              <MappingFragment StoreEntitySet="TM_CodeMaster">
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="CurrentNo" ColumnName="CurrentNo" />
+                <ScalarProperty Name="CurrentYear" ColumnName="CurrentYear" />
+                <ScalarProperty Name="CurrentMonth" ColumnName="CurrentMonth" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="MNT_BranchType">
             <EntityTypeMapping TypeName="MCASModel.MNT_BranchType">
               <MappingFragment StoreEntitySet="MNT_BranchType">
@@ -19858,6 +19891,7 @@
         <EntityTypeShape EntityType="MCASModel.MNT_Menus_Multilingual" Width="1.5" PointX="15.625" PointY="6.75" Height="2.5571907552083388" />
         <EntityTypeShape EntityType="MCASModel.MNT_Cedant" Width="1.5" PointX="7.375" PointY="14.75" Height="6.0186165364583246" />
         <EntityTypeShape EntityType="MCASModel.MNT_Branch" Width="1.5" PointX="0.75" PointY="8.75" Height="2.9417936197916674" />
+        <EntityTypeShape EntityType="MCASModel.TM_CodeMaster" Width="1.5" PointX="0.65" PointY="7.75" Height="2.9417936197916674" />
         <EntityTypeShape EntityType="MCASModel.MNT_BranchType" Width="1.5" PointX="14.75" PointY="0.75" Height="1.4033821614583246" />
         <EntityTypeShape EntityType="MCASModel.MNT_Region" Width="1.5" PointX="15.75" PointY="3.75" Height="1.4033821614583246" />
         <EntityTypeShape EntityType="MCASModel.MNT_Department" Width="1.5" PointX="9.375" PointY="15.75" Height="2.3648893229166674" />
