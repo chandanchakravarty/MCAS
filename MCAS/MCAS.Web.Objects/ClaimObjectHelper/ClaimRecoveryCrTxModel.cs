@@ -7,6 +7,7 @@ using MCAS.Entity;
 using MCAS.Web.Objects.CommonHelper;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel;
+using System.Globalization;
 
 namespace MCAS.Web.Objects.ClaimObjectHelper
 {
@@ -257,7 +258,91 @@ namespace MCAS.Web.Objects.ClaimObjectHelper
                 db.Dispose();
             }
         }
-         
+        public static void UpdateSoraNoCodeMaster(String sorano, MCASEntities db)
+        {
+            int mm = 0, yy = 0;
+            try{
+                    if(!string.IsNullOrEmpty(sorano))
+                    {
+                      string[] soraar=sorano.Split('/');
+                      if (soraar.Length > 2)
+                      {
+                          mm = Convert.ToInt32(soraar[1]);
+                          yy =  Convert.ToInt32(soraar[2]);
+                          var sora = (from o in db.TM_CodeMaster
+                                      where o.Code == "SORA" && o.CurrentMonth == mm && o.CurrentYear == yy
+                                      select o).FirstOrDefault();
+                          sora.CurrentNo = sora.CurrentNo + 1;
+                         //db.AcceptAllChanges();
+                          db.SaveChanges();
+                      }
+                    }
+            }catch (Exception e) { }
+        }
+        public static string FetchSoraNo(String RecoveryID, int ClaimId, int AccidentClaimId, MCASEntities db)
+        {
+            string sora = "",  orgini = "", ociini = "", FinalSettleDate = ""
+                , ClaimantStatus = "";
+            int? ClaimsOfficer = 0, sr = 0, orgid=0;
+            //select Organization,CDGIClaimRef,* from ClaimAccidentDetails where AccidentClaimId=1409
+          try
+            {
+                
+
+                //var claim = (from o in db.CLM_Claims
+                //             where o.ClaimID == Convert.ToInt32(ClaimId)
+                //           select o).FirstOrDefault();
+          
+                var claim = db.CLM_Claims.Where(x => x.ClaimID == ClaimId).FirstOrDefault();
+                         
+                if(claim !=null)
+                {
+                    if (!string.IsNullOrEmpty(claim.FinalSettleDate.ToString()))
+                    {
+                        if (claim.FinalSettleDate.ToString().Contains(":"))
+                        {
+                            FinalSettleDate = claim.FinalSettleDate.ToString().Split(' ')[0];
+                        }
+                        else
+                        {
+                            FinalSettleDate = claim.FinalSettleDate.ToString();
+                        }
+                    }
+                    ClaimantStatus = claim.ClaimantStatus;
+                    ClaimsOfficer = claim.ClaimsOfficer;
+                    if (ClaimantStatus != null && ClaimantStatus.Trim() == "2" && !string.IsNullOrEmpty(FinalSettleDate))
+                    {
+                        orgid = (from o in db.ClaimAccidentDetails
+                                 where o.AccidentClaimId == AccidentClaimId
+                                 select o).FirstOrDefault().Organization;
+                        orgini = (from o in db.MNT_OrgCountry
+                                  where o.Id == orgid
+                                  select o).FirstOrDefault().Initial;
+                        ociini = (from o in db.MNT_Users
+                                  where o.SNo == ClaimsOfficer
+                                  select o).FirstOrDefault().Initial;
+                    //    DateTime dt = DateTime.ParseExact(FinalSettleDate, "dd/MM/yyyy", System.Globalization.CultureInfo.InvariantCulture);
+                        if (!string.IsNullOrEmpty(FinalSettleDate))
+                        {
+                            int mm = Convert.ToInt32( FinalSettleDate.Split('/')[1]);
+                            int  yy = Convert.ToInt32(FinalSettleDate.Split('/')[2]);
+                            sr = (from o in db.TM_CodeMaster
+                                  where o.Code == "SORA" && o.CurrentMonth == mm
+                                                  && o.CurrentYear == yy
+                                  select o).FirstOrDefault().CurrentNo;
+                            sora = orgini + "/" + mm + "/" + yy + "/" + ociini + "/" + (sr + 1);
+                        }
+                     
+                    }
+                }
+
+                
+
+            }
+            catch(Exception e) { }
+
+            return sora;
+        }
         public static ClaimRecoveryCrTxModel FetchRecoveryModel(ClaimRecoveryCrTxModel model, string ViewMode, String RecoveryID)
         {
             MCASEntities db = new MCASEntities();
