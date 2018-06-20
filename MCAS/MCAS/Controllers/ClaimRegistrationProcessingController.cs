@@ -120,7 +120,7 @@ namespace MCAS.Controllers
             {
                 Session["AccidentDate"] = claimaccident.AccidentDate.Value.AddYears(6);
             }
-            return View("ClmAccDltPCNTXEditor", claimaccident);
+             return View("ClmAccDltPCNTXEditor", claimaccident);
         }
 
         [HttpPost]
@@ -965,6 +965,10 @@ namespace MCAS.Controllers
                     model.AccidentClaimId = Convert.ToInt32(AccidentId);
                     //model = model.FetchRecovery(RecoveryID, model);
                 }
+                if (RecoveryID != null && RecoveryID=="0")
+                {
+                  model.SORASerialNo=  ClaimRecoveryCrTxModel.FetchSoraNo(Convert.ToString(RecoveryId) ,model.ClaimId,model.AccidentClaimId,obj);
+                }
 
                 return View(model);
             }
@@ -1008,6 +1012,10 @@ namespace MCAS.Controllers
                     ModelState.Clear();
                     model.CreatedBy = LoggedInUserName;
                     model.Save();
+                    if(! string.IsNullOrEmpty(model.SORASerialNo))
+                    {
+                        ClaimRecoveryCrTxModel.UpdateSoraNoCodeMaster(model.SORASerialNo,model.ClaimId,model.RecoveryId, obj);
+                    }
                     ViewData["SuccessMsg"] = model.ResultMessage;
                 }
                 TempData["DisplayDiv"] = "Display";
