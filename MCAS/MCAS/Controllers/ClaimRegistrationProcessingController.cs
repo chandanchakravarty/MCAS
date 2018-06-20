@@ -1014,7 +1014,7 @@ namespace MCAS.Controllers
                     model.Save();
                     if(! string.IsNullOrEmpty(model.SORASerialNo))
                     {
-                        ClaimRecoveryCrTxModel.UpdateSoraNoCodeMaster(model.SORASerialNo, obj);
+                        ClaimRecoveryCrTxModel.UpdateSoraNoCodeMaster(model.SORASerialNo,model.ClaimId,model.RecoveryId, obj);
                     }
                     ViewData["SuccessMsg"] = model.ResultMessage;
                 }

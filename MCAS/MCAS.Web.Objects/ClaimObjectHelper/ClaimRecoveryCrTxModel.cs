@@ -258,25 +258,53 @@ namespace MCAS.Web.Objects.ClaimObjectHelper
                 db.Dispose();
             }
         }
-        public static void UpdateSoraNoCodeMaster(String sorano, MCASEntities db)
+        public static void UpdateSoraNoCodeMaster(String sorano, int ClaimId, int RecoveryId, MCASEntities db)
         {
-            int mm = 0, yy = 0;
+            int mm = 0, yy = 0,sr=0;
+            dynamic ClaRec=null;
             try{
-                    if(!string.IsNullOrEmpty(sorano))
+                   //CLM_ClaimRecovery 
+                //try
+                //{
+                //    ClaRec = db.CLM_ClaimRecovery.Where(x => x.ClaimId == ClaimId && x.RecoveryId == RecoveryId).FirstOrDefault();
+                //}catch(Exception e){}
+
+                //if (ClaRec == null)
+                //{
+                    if (!string.IsNullOrEmpty(sorano))
                     {
-                      string[] soraar=sorano.Split('/');
-                      if (soraar.Length > 2)
-                      {
-                          mm = Convert.ToInt32(soraar[1]);
-                          yy =  Convert.ToInt32(soraar[2]);
-                          var sora = (from o in db.TM_CodeMaster
-                                      where o.Code == "SORA" && o.CurrentMonth == mm && o.CurrentYear == yy
-                                      select o).FirstOrDefault();
-                          sora.CurrentNo = sora.CurrentNo + 1;
-                         //db.AcceptAllChanges();
-                          db.SaveChanges();
-                      }
+                        string[] soraar = sorano.Split('/');
+                        if (soraar.Length > 2)
+                        {
+                            mm = Convert.ToInt32(soraar[1]);
+                            yy = Convert.ToInt32(soraar[2]);
+                            sr = Convert.ToInt32(soraar[4]);
+                            try
+                            {
+                                var sora = (from o in db.TM_CodeMaster
+                                            where o.Code == "SORA" && o.CurrentMonth == mm && o.CurrentYear == yy
+                                            select o).FirstOrDefault();
+                                if (sora!=null && sr > sora.CurrentNo)
+                                {
+                                    sora.CurrentNo = sora.CurrentNo + 1;
+                                    db.SaveChanges();
+                                }
+                                if(sora==null)
+                                {
+                                    sora = new TM_CodeMaster();
+                                    sora.CurrentNo =  sr;
+                                    sora.CurrentMonth = mm;
+                                    sora.CurrentYear = yy;
+                                    sora.Code = "SORA";
+                                    db.TM_CodeMaster.AddObject(sora);
+                                    db.SaveChanges();
+                                }
+                            }
+                            catch (Exception e) { }
+
+                        }
                     }
+               // }
             }catch (Exception e) { }
         }
         public static string FetchSoraNo(String RecoveryID, int ClaimId, int AccidentClaimId, MCASEntities db)
@@ -325,12 +353,35 @@ namespace MCAS.Web.Objects.ClaimObjectHelper
                         if (!string.IsNullOrEmpty(FinalSettleDate))
                         {
                             int mm = Convert.ToInt32( FinalSettleDate.Split('/')[1]);
-                            int  yy = Convert.ToInt32(FinalSettleDate.Split('/')[2]);
-                            sr = (from o in db.TM_CodeMaster
+                            int yy = Convert.ToInt32(FinalSettleDate.Split('/')[2].Substring(2, 2));
+                            var codem = (from o in db.TM_CodeMaster
                                   where o.Code == "SORA" && o.CurrentMonth == mm
                                                   && o.CurrentYear == yy
-                                  select o).FirstOrDefault().CurrentNo;
-                            sora = orgini + "/" + mm + "/" + yy + "/" + ociini + "/" + (sr + 1);
+                                  select o).FirstOrDefault();
+                            if(codem!=null)
+                            {
+                              sr=  codem.CurrentNo;
+                              if (mm > 9)
+                              {
+                                  sora = orgini + "/" + mm + "/" + yy + "/" + ociini + "/" + (sr + 1);
+                              }
+                              else
+                              {
+                                  sora = orgini + "/0" + mm + "/" + yy + "/" + ociini + "/" + (sr + 1);
+                              }
+                            }
+                            else
+                            {
+                                sr =0;
+                                if (mm > 9)
+                                {
+                                    sora = orgini + "/" + mm + "/" + yy + "/" + ociini + "/" + (sr + 1);
+                                }
+                                else
+                                {
+                                    sora = orgini + "/0" + mm + "/" + yy + "/" + ociini + "/" + (sr + 1);
+                                }
+                            }
                         }
                      
                     }
@@ -447,7 +498,8 @@ namespace MCAS.Web.Objects.ClaimObjectHelper
                         model.PrftShrTxTlCases = recoverydtl.PrftShrTxTlCases;
                         model.Taxi2Or3 = recoverydtl.Taxi2Or3;
                         model.GeneralRemarks = recoverydtl.GeneralRemarks;
-                        model.Sora_SocraSrlNo = recoverydtl.SORASerialNo;
+                        model.Sora_SocraSrlNo = recoverydtl.SORASOCRA;
+                        model.SORASerialNo = recoverydtl.SORASerialNo;
                     }
                 }
                 else
@@ -490,7 +542,8 @@ namespace MCAS.Web.Objects.ClaimObjectHelper
                     model.PrftShrTxTlCases = recoverydtl.PrftShrTxTlCases;
                     model.Taxi2Or3 = recoverydtl.Taxi2Or3;
                     model.GeneralRemarks = recoverydtl.GeneralRemarks;
-                    model.Sora_SocraSrlNo = recoverydtl.SORASerialNo;
+                    model.Sora_SocraSrlNo = recoverydtl.SORASOCRA;
+                    model.SORASerialNo = recoverydtl.SORASerialNo;
                 }
 
                 var cnfmamtlist = (from l in db.Clm_ConfirmAmtBreakdown where l.AccidentClaimId == model.AccidentClaimId && l.ClaimId == model.ClaimId select l).FirstOrDefault();
