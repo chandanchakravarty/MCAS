@@ -966,9 +966,11 @@ namespace MCAS.Controllers
                     //model = model.FetchRecovery(RecoveryID, model);
                 }
                // if (RecoveryID != null && RecoveryID == "0" && string.IsNullOrEmpty(model.SORASerialNo))
-                {
-                  model.SORASerialNo=  ClaimRecoveryCrTxModel.FetchSoraNo(Convert.ToString(RecoveryId) ,model.ClaimId,model.AccidentClaimId,obj);
-                }
+              //  {
+                 string sora = model.SORASerialNo;
+                 ClaimRecoveryCrTxModel.FetchSoraNo(Convert.ToString(RecoveryId), model.ClaimId, model.AccidentClaimId, obj, ref  sora);
+                 model.SORASerialNo = sora;
+               // }
 
                 return View(model);
             }
