@@ -307,9 +307,9 @@ namespace MCAS.Web.Objects.ClaimObjectHelper
                // }
             }catch (Exception e) { }
         }
-        public static string FetchSoraNo(String RecoveryID, int ClaimId, int AccidentClaimId, MCASEntities db)
+        public static string FetchSoraNo(String RecoveryID, int ClaimId, int AccidentClaimId, MCASEntities db, ref string  sora)
         {
-            string sora = "",  orgini = "", ociini = "", FinalSettleDate = ""
+            string   orgini = "", ociini = "", FinalSettleDate = ""
                 , ClaimantStatus = "";
             int? ClaimsOfficer = 0, sr = 0, orgid=0;
             //select Organization,CDGIClaimRef,* from ClaimAccidentDetails where AccidentClaimId=1409
