@@ -260,9 +260,9 @@ namespace MCAS.Web.Objects.ClaimObjectHelper
         }
         public static void UpdateSoraNoCodeMaster(String sorano, int ClaimId, int RecoveryId, MCASEntities db)
         {
-            int mm = 0, yy = 0,sr=0;
-            dynamic ClaRec=null;
-            try{
+            //int mm = 0, yy = 0,sr=0;
+            //dynamic ClaRec=null;
+            //try{
                    //CLM_ClaimRecovery 
                 //try
                 //{
@@ -271,41 +271,41 @@ namespace MCAS.Web.Objects.ClaimObjectHelper
 
                 //if (ClaRec == null)
                 //{
-                    if (!string.IsNullOrEmpty(sorano))
-                    {
-                        string[] soraar = sorano.Split('/');
-                        if (soraar.Length > 2)
-                        {
-                            mm = Convert.ToInt32(soraar[1]);
-                            yy = Convert.ToInt32(soraar[2]);
-                            sr = Convert.ToInt32(soraar[4]);
-                            try
-                            {
-                                var sora = (from o in db.TM_CodeMaster
-                                            where o.Code == "SORA" && o.CurrentMonth == mm && o.CurrentYear == yy
-                                            select o).FirstOrDefault();
-                                if (sora!=null && sr > sora.CurrentNo)
-                                {
-                                    sora.CurrentNo = sora.CurrentNo + 1;
-                                    db.SaveChanges();
-                                }
-                                if(sora==null)
-                                {
-                                    sora = new TM_CodeMaster();
-                                    sora.CurrentNo =  sr;
-                                    sora.CurrentMonth = mm;
-                                    sora.CurrentYear = yy;
-                                    sora.Code = "SORA";
-                                    db.TM_CodeMaster.AddObject(sora);
-                                    db.SaveChanges();
-                                }
-                            }
-                            catch (Exception e) { }
+                    //if (!string.IsNullOrEmpty(sorano))
+                    //{
+                    //    string[] soraar = sorano.Split('/');
+                    //    if (soraar.Length > 2)
+                    //    {
+                    //        mm = Convert.ToInt32(soraar[1]);
+                    //        yy = Convert.ToInt32(soraar[2]);
+                    //        sr = Convert.ToInt32(soraar[4]);
+                    //        try
+                    //        {
+                    //            var sora = (from o in db.TM_CodeMaster
+                    //                        where o.Code == "SORA" && o.CurrentMonth == mm && o.CurrentYear == yy
+                    //                        select o).FirstOrDefault();
+                    //            if (sora != null && sr > sora.CurrentNo)
+                    //            {
+                    //                sora.CurrentNo = sora.CurrentNo + 1;
+                    //                db.SaveChanges();
+                    //            }
+                    //            if (sora == null)
+                    //            {
+                    //                sora = new TM_CodeMaster();
+                    //                sora.CurrentNo = sr;
+                    //                sora.CurrentMonth = mm;
+                    //                sora.CurrentYear = yy;
+                    //                sora.Code = "SORA";
+                    //                db.TM_CodeMaster.AddObject(sora);
+                    //                db.SaveChanges();
+                    //            }
+                    //        }
+                    //        catch (Exception e) { }
 
-                        }
-                    }
+                    //    }
+                    //}
                // }
-            }catch (Exception e) { }
+            //}catch (Exception e) { }
         }
         public static string FetchSoraNo(String RecoveryID, int ClaimId, int AccidentClaimId, MCASEntities db, ref string  sora)
         {
@@ -369,6 +369,10 @@ namespace MCAS.Web.Objects.ClaimObjectHelper
                               {
                                   sora = orgini + "/0" + mm + "/" + yy + "/" + ociini + "/" + (sr + 1);
                               }
+                              codem.CurrentNo = (sr + 1);
+                              db.SaveChanges();
+                              System.Web.HttpContext.Current.Session["sorareq"] = sora;
+                              System.Web.HttpContext.Current.Session["ClaimId"] = ClaimId;
                             }
                             else
                             {
@@ -381,6 +385,15 @@ namespace MCAS.Web.Objects.ClaimObjectHelper
                                 {
                                     sora = orgini + "/0" + mm + "/" + yy + "/" + ociini + "/" + (sr + 1);
                                 }
+                                codem = new TM_CodeMaster();
+                                codem.CurrentNo = (sr+1);
+                                codem.CurrentMonth = mm;
+                                codem.CurrentYear = yy;
+                                codem.Code = "SORA";
+                                db.TM_CodeMaster.AddObject(codem);
+                                db.SaveChanges();
+                                System.Web.HttpContext.Current.Session["sorareq"] = sora;
+                                System.Web.HttpContext.Current.Session["ClaimId"] = ClaimId;
                             }
                         }
                      
