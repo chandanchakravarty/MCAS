@@ -965,7 +965,11 @@ namespace MCAS.Controllers
                     model.AccidentClaimId = Convert.ToInt32(AccidentId);
                     //model = model.FetchRecovery(RecoveryID, model);
                 }
-                if (string.IsNullOrEmpty(model.SORASerialNo))
+                if (string.IsNullOrEmpty(model.SORASerialNo) && Session["sorareq"] != null && ((int)Session["ClaimId"]) == model.ClaimId)
+                {
+                    model.SORASerialNo = (string)Session["sorareq"];
+                }
+                if (string.IsNullOrEmpty(model.SORASerialNo) && (Viewmode == "Select" || Viewmode == "Edit"))
                    {
                      string sora = model.SORASerialNo;
                      ClaimRecoveryCrTxModel.FetchSoraNo(Convert.ToString(RecoveryId), model.ClaimId, model.AccidentClaimId, obj, ref  sora);

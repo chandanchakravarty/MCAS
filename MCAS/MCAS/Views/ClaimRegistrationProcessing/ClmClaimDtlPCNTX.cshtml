@@ -1199,7 +1199,7 @@
                 //("inputAccidentDate" == (this.id || this.context.id)) && $("#inputAccidentTime").valid();
             }
         }).change(function () {
-           
+
             @*"" == $(this).val() && ("inputAccidentDate" == (this.id || this.context.id)) && $("#inputAccidentTime").val("");
             if ($(this).val() != "" && isFutureDate($(this).val())) return ($("#" + this.id).val("")), (("inputAccidentDate" == (this.id || this.context.id)) && $("#inputAccidentTime").val("")), alert(DateVal[this.id]() + " @Html.Raw(ClaimAccident.MsgDate)", this.id), !1;*@
         });
@@ -1235,7 +1235,7 @@
         $("#ClaimType").val("4");
         $("#ClaimType").attr("disabled", "disabled");
 
-       // $("#ClaimantStatus").val("1");
+        // $("#ClaimantStatus").val("1");
         $("#ClaimantStatus option[value='4']").prop('disabled', 'disabled');
 
         $("#btnSave").click(function () {
@@ -1258,7 +1258,7 @@
                 $('#FinalSettleDate').prop('readonly', false);
                 $('#FinalSettleDate').prop('disabled', false);
             }
-      
+
             if (IsPageChanged()) {
                 var c = $("#claimentryform").valid();
                 if ("#ClaimType" != "0") {
@@ -1269,7 +1269,7 @@
         });
 
         $("document").ready(function () {
-            
+
             if ($("#ClaimantStatus").val() == "2" && $("#FinalSettleDate").val() != "") {
                 $('#FinalSettleDate').prop('readonly', true);
                 $('#FinalSettleDate').prop('disabled', true);
@@ -1454,5 +1454,30 @@
             if (b[0] == a) return b[1]
         };
     };
+    if(("@Model.ClaimantStatus" == "2"))
+    {
+        $('select').removeClass('DonotDiableControl');
+    }
+    (( ("@Model.ClaimantStatus" == "2") && $ && !$('form').hasClass("DonotDiableControl") && $("form").find(":input:not([id=Next]):not([id=Previous]):not([id=btnDialogeOK]):not([id=btnSave]):not(.DonotDiableControl)").each(function () {
+        switch (this.type) {
+            case "text":
+                $(this).attr('disabled', 'disabled')
+            case "textarea":
+                $(this).attr('disabled', 'disabled')
+            case "checkbox":
+                $(this).attr('disabled', 'disabled')
+            case "radio":
+                $(this).attr('disabled', 'disabled')
+            case "button":
+                $(this).attr('disabled', 'disabled')
+            case "file":
+                $(this).attr('disabled', 'disabled')
+
+        }
+    })
+    && $('select:not(.DonotDiableControl)').attr('disabled', 'disabled')
+    && $('button:not([id=btnDialogeOK]):not(.DonotDiableControl)').attr('disabled', 'disabled') && $('#btnReset').attr('disabled', 'disabled') && $('#btnSave').attr('disabled', 'disabled')
+    //&& $("#DivClaimantStatus").attr('disabled', 'disabled') && $("#ClaimantStatus").css({ "pointer-events": "none", "cursor": "default" }).css('background-color', '#eee') && $("#RequiredVal").val("1")
+    ));
 
 </script>
