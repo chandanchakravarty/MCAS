@@ -264,6 +264,10 @@ namespace MCAS.Web.Objects.ClaimObjectHelper
         public static string fetchClaimRefNo(int AccidentClaimId) { 
             MCASEntities db = new MCASEntities();
             string claimRefNo = db.ClaimAccidentDetails.Where(x => x.AccidentClaimId == AccidentClaimId).Select(y => y.CDGIClaimRef).FirstOrDefault();
+            if (!string.IsNullOrEmpty(claimRefNo))
+            {
+                claimRefNo = claimRefNo.Replace(" ", "");
+            }
             return claimRefNo;
         }
 
@@ -525,7 +529,7 @@ namespace MCAS.Web.Objects.ClaimObjectHelper
         {
             
             var values = _db.Proc_SetCDGIClaimsRefNo(Convert.ToInt32(accidentClaimId), OrganizationType.ToString(), ClaimPrefix).ToList();
-            string claimRefNo = values[0].CDGIClaimRef.ToString();
+            string claimRefNo = values[0].CDGIClaimRef.ToString().Replace(" ","");
             return claimRefNo;
         }
 
