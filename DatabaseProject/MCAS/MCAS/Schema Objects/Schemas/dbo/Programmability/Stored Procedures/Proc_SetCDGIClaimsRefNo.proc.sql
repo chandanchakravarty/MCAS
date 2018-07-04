@@ -44,7 +44,7 @@ BEGIN TRY
           where   
           CLM.AccidentClaimId= @AccidentClaimId  
            
-          SET @Prefix=@ClaimPrefix+'/'+CAST(@Month as VARCHAR)+'/'+CAST(@Year as VARCHAR)+'/'+isnull(@VehicleNo,'')+'/ '+isnull(@OICInitial,'')+'('+isnull(@SPInitial,'')+') '   
+          SET @Prefix=@ClaimPrefix+'/'+CAST(@Month as VARCHAR)+'/'+CAST(@Year as VARCHAR)+'/'+isnull(@VehicleNo,'')+'/'+isnull(@OICInitial,'')+'('+isnull(@SPInitial,'')+') '   
                 
               SELECT @Temp=MAX( cast(replace(CDGIClaimRef,@Prefix,'') as int)) FROM  ClaimAccidentDetails (nolock) WHERE CDGIClaimRef LIKE @Prefix+'%'             
                  IF(@Temp IS NULL OR @Temp='')              
