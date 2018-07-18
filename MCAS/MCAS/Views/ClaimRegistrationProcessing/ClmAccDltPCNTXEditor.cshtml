@@ -143,7 +143,7 @@
                                                         @ClaimAccident.AccidentTime &nbsp;@*<span class="text-danger">*</span>*@
                                                     </label>
                                                     <div class="col-sm-8">
-                                                        @Html.TextBoxFor(m => m.AccidentTime, new { id = "inputAccidentTime", @class = "form-control", @maxlength = 5 })
+                                                        @Html.TextBoxFor(m => m.AccidentTime, new { id = "inputAccidentTime", @class = "form-control", @maxlength = 5, data_val = "false" })
                                                         @Html.ValidationMessageFor(m => m.AccidentTime)
                                                     </div>
                                                 </div>
@@ -165,7 +165,7 @@
                                                         @ClaimAccident.ReportedDate2&nbsp;@*<span class="text-danger">*</span>*@
                                                     </label>
                                                     <div class="col-sm-8">
-                                                        @Html.TextBoxFor(m => m.ReportedDate, "{0:d}", new { id = "inputReportedDate", @class = "form-control" })
+                                                        @Html.TextBoxFor(m => m.ReportedDate, "{0:d}", new { id = "inputReportedDate", @class = "form-control" ,data_val = "false" })
                                                         @Html.ValidationMessageFor(m => m.ReportedDate)
                                                     </div>
                                                 </div>
