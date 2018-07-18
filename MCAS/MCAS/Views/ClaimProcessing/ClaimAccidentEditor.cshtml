@@ -99,7 +99,7 @@
                                                     @Html.HiddenFor(m => m.hidOrgprop)
                                                     @*@Html.HiddenFor(m => m.InputDate, new { @Value = "2010-01-01 00:00:00.000" })*@
                                                     <label class="col-sm-4 control-label" for="inputIPNo">
-                                                        @ClaimAccident.IPNo</label>
+                                                        @ClaimAccident.IPNo  &nbsp;<span class="text-danger">*</span></label>
                                                     <div class="col-sm-8">
                                                         @Html.TextBoxFor(m => m.IPNo, new { id = "inputIPNo", @class = "form-control", @maxlength = "10" })
                                                         @Html.ValidationMessageFor(m => m.IPNo)
@@ -143,11 +143,11 @@
                                             <div class="col-lg-6">
                                                 <div class="form-group">
                                                     <label class="col-sm-4 control-label">
-                                                        @ClaimAccident.VehicleNo @*&nbsp;<span class="text-danger">*</span>*@
+                                                        @ClaimAccident.VehicleNo &nbsp;<span class="text-danger">*</span>
                                                     </label>
                                                     <div class="col-sm-8">
                                                         @Html.TextBoxFor(m => m.VehicleNo, new { id = "inputVehicleNumber", @class = "form-control", @maxlength = 10 })
-                                                        @*@Html.ValidationMessageFor(m => m.VehicleNo)*@
+                                                        @Html.ValidationMessageFor(m => m.VehicleNo)
                                                     </div>
                                                 </div>
                                             </div>

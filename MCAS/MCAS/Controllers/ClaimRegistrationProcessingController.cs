@@ -181,6 +181,9 @@ namespace MCAS.Controllers
                         ModelState["BusServiceNo"].Errors.Clear();
                         ModelState["TPClaimentStatus"].Errors.Clear();
                         ModelState["ODStatus"].Errors.Clear();
+                        ModelState.Remove("IPNo");
+                        ModelState["AccidentTime"].Errors.Clear();
+                        ModelState["ReportedDate"].Errors.Clear();
                     }
                     if (res && allErrors.Count() == 1 && allErrors.FirstOrDefault().ErrorMessage == "Bus Service Number is required.")
                         ModelState["BusServiceNo"].Errors.Clear();
@@ -371,6 +374,7 @@ namespace MCAS.Controllers
             ViewBag.PolicyId = PolicyId;
             ViewBag.ActDone = ActDone;
             ViewBag.Viewmode = Viewmode;
+            ModelState.Remove("Reference");
             return View("ClmSPDltPCNTX", spmodel);
         }
 

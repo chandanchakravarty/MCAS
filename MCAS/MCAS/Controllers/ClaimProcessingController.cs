@@ -743,6 +743,9 @@ namespace MCAS.Controllers
                 }
                 model.ReadOnly = getClaimObjectHelper().ReadOnly == true ? true : false;
                 model.ViewMode = getPageViewMode(caller);
+                ViewData["SuccessMsg"] = TempData["SuccessMsg"];
+ //               TempData["DisplayDiv"] = "Display";
+ 
                 return View(model);
             }
             catch (Exception ex)
@@ -754,6 +757,7 @@ namespace MCAS.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult ClaimEditor(ClaimInfoModel model, dynamic AccidentClaimId, dynamic PolicyId)
         {
             try
@@ -800,7 +804,22 @@ namespace MCAS.Controllers
                         model.Update();
                         ViewData["SuccessMsg"] = model.ResultMessage;
                         TempData["DisplayDiv"] = "Display";
+                        TempData["SuccessMsg"] = model.ResultMessage;
                     }
+                }
+                if (!ModelState.IsValid)
+                {
+                    return View(model);
+                }
+                else
+                {
+                    object routes = new { AccidentClaimId = model.AccidentClaimId, policyId = model.PolicyId, claimMode = "Write",mode="", ClaimID = model.ClaimID, ReadOnly = false, ClaimType=1};
+
+                    string res = RouteEncryptDecrypt.getRouteString(routes);
+                    res = RouteEncryptDecrypt.Encrypt(res);
+                    routes = new { Q = res };
+                    return RedirectToAction("ClaimEditor", routes);
+
                 }
             }
             catch (Exception ex)
@@ -810,7 +829,7 @@ namespace MCAS.Controllers
                 return View(model);
             }
 
-            return View(model);
+           // return View(model);
         }
         public JsonResult ValidEmail(string EmailAdd1)
         {
