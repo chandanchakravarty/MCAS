@@ -116,7 +116,7 @@ namespace MCAS.Web.Objects.ClaimObjectHelper
         public string PostalCode { get; set; }
         public string PostalCode1 { get; set; }
 
-        //[Required(ErrorMessageResourceType = typeof(MCAS.Web.Objects.Resources.ClaimProcessing.ServiceProvider), ErrorMessageResourceName = "RFVReference")]
+        [Required(ErrorMessageResourceType = typeof(MCAS.Web.Objects.Resources.ClaimProcessing.ServiceProvider), ErrorMessageResourceName = "RFVReference")]
         [DisplayName("Reference Address1")]
         public string Reference { get; set; }
 

@@ -50,7 +50,10 @@ namespace MCAS.Controllers.API
         public HttpResponseMessage CreateServiceProvider(ServiceProviderModel model)
         {
             try
-            {                
+            {
+
+                ModelState["model.Reference"].Errors.Clear();
+                ModelState.Remove("model.Reference");
                 if (!ModelState.IsValid)
                 {
                     var modelStateErrors = this.ModelState.Keys.SelectMany(key => this.ModelState[key].Errors);

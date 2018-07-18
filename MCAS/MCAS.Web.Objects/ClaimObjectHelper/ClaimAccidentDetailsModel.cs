@@ -119,6 +119,7 @@ namespace MCAS.Web.Objects.ClaimObjectHelper
         public int? AccidentClaimId { get; set; }
         public int? PolicyId { get; set; }
         [DisplayName("IP No.")]
+        [Required(ErrorMessage = "IP No. is required.")]
         public string IPNo { get; set; }
         [DisplayName("Claim Number")]
         public string ClaimNo { get; set; }
@@ -141,7 +142,7 @@ namespace MCAS.Web.Objects.ClaimObjectHelper
 
 
         [DisplayName("Accident Time")]
-        //[Required(ErrorMessageResourceType = typeof(ClaimAccident), ErrorMessageResourceName = "RFVAccidentTime")]
+        [Required(ErrorMessageResourceType = typeof(ClaimAccident), ErrorMessageResourceName = "RFVAccidentTime")]
         [IsFutureTime("AccidentDate", ErrorMessage = "Accident Time can not be greater then current time.")]
         public string AccidentTime
         {
@@ -153,7 +154,7 @@ namespace MCAS.Web.Objects.ClaimObjectHelper
         public int? Organization { get; set; }
         public string AccidentImage { get; set; }
         [DisplayName("Reported Date")]
-        //[Required(ErrorMessageResourceType = typeof(ClaimAccident), ErrorMessageResourceName = "RFVReportedDate")]
+        [Required(ErrorMessageResourceType = typeof(ClaimAccident), ErrorMessageResourceName = "RFVReportedDate")]
         [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd/MM/yyyy}")]
         [DataType(DataType.Date)]
         public DateTime? ReportedDate
