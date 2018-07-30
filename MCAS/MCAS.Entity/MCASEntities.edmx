@@ -1863,7 +1863,7 @@
           </Key>
           <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="Code" Type="varchar" Nullable="false"  />
-          <Property Name="Description" Type="varchar" MaxLength="500" />
+          <Property Name="OrganizationId" Type="varchar" MaxLength="500" />
           <Property Name="CurrentNo" Type="bigint" />
           <Property Name="CurrentYear" Type="int"  />
           <Property Name="CurrentMonth" Type="int"  />
@@ -5908,7 +5908,7 @@
           </Key>
           <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Type="String" Name="Code" Nullable="false" />
-          <Property Type="String" Name="Description" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="OrganizationId" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Type="Int32" Name="CurrentNo"  />
           <Property Type="Int32" Name="CurrentYear"  />
           <Property Type="Int32" Name="CurrentMonth"   />
@@ -15526,7 +15526,7 @@
             <EntityTypeMapping TypeName="MCASModel.TM_CodeMaster">
               <MappingFragment StoreEntitySet="TM_CodeMaster">
                 <ScalarProperty Name="Code" ColumnName="Code" />
-                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="OrganizationId" ColumnName="OrganizationId" />
                 <ScalarProperty Name="CurrentNo" ColumnName="CurrentNo" />
                 <ScalarProperty Name="CurrentYear" ColumnName="CurrentYear" />
                 <ScalarProperty Name="CurrentMonth" ColumnName="CurrentMonth" />
