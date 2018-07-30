@@ -310,7 +310,7 @@ namespace MCAS.Web.Objects.ClaimObjectHelper
         public static string FetchSoraNo(String RecoveryID, int ClaimId, int AccidentClaimId, MCASEntities db, ref string  sora)
         {
             string   orgini = "", ociini = "", FinalSettleDate = ""
-                , ClaimantStatus = "";
+                , ClaimantStatus = "",orgids="";
             int? ClaimsOfficer = 0, sr = 0, orgid=0;
             //select Organization,CDGIClaimRef,* from ClaimAccidentDetails where AccidentClaimId=1409
           try
@@ -343,6 +343,7 @@ namespace MCAS.Web.Objects.ClaimObjectHelper
                         orgid = (from o in db.ClaimAccidentDetails
                                  where o.AccidentClaimId == AccidentClaimId
                                  select o).FirstOrDefault().Organization;
+                        orgids = orgid.ToString();
                         orgini = (from o in db.MNT_OrgCountry
                                   where o.Id == orgid
                                   select o).FirstOrDefault().Initial;
@@ -356,7 +357,7 @@ namespace MCAS.Web.Objects.ClaimObjectHelper
                             int yy = Convert.ToInt32(FinalSettleDate.Split('/')[2].Substring(2, 2));
                             var codem = (from o in db.TM_CodeMaster
                                   where o.Code == "SORA" && o.CurrentMonth == mm
-                                                  && o.CurrentYear == yy
+                                                  && o.CurrentYear == yy && o.OrganizationId == orgids
                                   select o).FirstOrDefault();
                             if(codem!=null)
                             {
@@ -390,6 +391,7 @@ namespace MCAS.Web.Objects.ClaimObjectHelper
                                 codem.CurrentMonth = mm;
                                 codem.CurrentYear = yy;
                                 codem.Code = "SORA";
+                                codem.OrganizationId = orgid.ToString();
                                 db.TM_CodeMaster.AddObject(codem);
                                 db.SaveChanges();
                                 System.Web.HttpContext.Current.Session["sorareq"] = sora;
