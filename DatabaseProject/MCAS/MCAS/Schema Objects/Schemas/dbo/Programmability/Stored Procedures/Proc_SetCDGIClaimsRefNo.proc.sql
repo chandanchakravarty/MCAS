@@ -1,7 +1,7 @@
 ﻿CREATE PROCEDURE [dbo].[Proc_SetCDGIClaimsRefNo]    
  @AccidentClaimId [int],    
  @OrganizationType [varchar](5),    
- @ClaimPrefix [varchar](4)    
+ @ClaimPrefix [varchar](10)    
 WITH EXECUTE AS CALLER    
 AS    
 SET FMTONLY OFF;            

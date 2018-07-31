@@ -578,15 +578,17 @@ namespace MCAS.Web.Objects.ClaimObjectHelper
                             {
                                 var OwnerName = ClaimForCRTXInfoModel.fetchOwner(AccidentClaimId);
                                 accdetail.OwnerName = OwnerName;
-
-                                if (accdetail.OwnerName == "CTPL")
-                                {
-                                    accdetail.CDGIClaimRef = ClaimForCRTXInfoModel.GetPermanentCDGEClaimRefNo(claimdetail.AccidentClaimId, Convert.ToString(accdetail.Organization), "CTPL", objEntity);
-                                }
-                                else
-                                {
-                                    accdetail.CDGIClaimRef = ClaimForCRTXInfoModel.GetPermanentCDGEClaimRefNo(claimdetail.AccidentClaimId, Convert.ToString(accdetail.Organization), "CCPL", objEntity);
-                                }
+                                accdetail = objEntity.ClaimAccidentDetails.Where(x => x.AccidentClaimId == claimdetail.AccidentClaimId).FirstOrDefault();
+                                var orgint = objEntity.MNT_OrgCountry.Where(x => x.Id == accdetail.Organization).FirstOrDefault();
+                                accdetail.CDGIClaimRef = ClaimForCRTXInfoModel.GetPermanentCDGEClaimRefNo(claimdetail.AccidentClaimId, Convert.ToString(accdetail.Organization), (orgint.Initial == null) ? "" : orgint.Initial, objEntity);
+                                //if (accdetail.OwnerName == "CTPL")
+                                //{
+                                //    accdetail.CDGIClaimRef = ClaimForCRTXInfoModel.GetPermanentCDGEClaimRefNo(claimdetail.AccidentClaimId, Convert.ToString(accdetail.Organization), "CTPL", objEntity);
+                                //}
+                                //else
+                                //{
+                                //    accdetail.CDGIClaimRef = ClaimForCRTXInfoModel.GetPermanentCDGEClaimRefNo(claimdetail.AccidentClaimId, Convert.ToString(accdetail.Organization), "CCPL", objEntity);
+                                //}
                             }
                             else
                             {
@@ -640,15 +642,17 @@ namespace MCAS.Web.Objects.ClaimObjectHelper
                             {
                                 var OwnerName = ClaimForCRTXInfoModel.fetchOwner(AccidentClaimId);
                                 accdetail.OwnerName = OwnerName;
-
-                                if (accdetail.OwnerName == "CTPL")
-                                {
-                                    accdetail.CDGIClaimRef = ClaimForCRTXInfoModel.GetPermanentCDGEClaimRefNo(claimdetail.AccidentClaimId, Convert.ToString(accdetail.Organization), "CTPL", objEntity);
-                                }
-                                else
-                                {
-                                    accdetail.CDGIClaimRef = ClaimForCRTXInfoModel.GetPermanentCDGEClaimRefNo(claimdetail.AccidentClaimId, Convert.ToString(accdetail.Organization), "CCPL", objEntity);
-                                }
+                                accdetail = objEntity.ClaimAccidentDetails.Where(x => x.AccidentClaimId == claimdetail.AccidentClaimId).FirstOrDefault();
+                                var orgint = objEntity.MNT_OrgCountry.Where(x => x.Id == accdetail.Organization).FirstOrDefault();
+                                accdetail.CDGIClaimRef = ClaimForCRTXInfoModel.GetPermanentCDGEClaimRefNo(claimdetail.AccidentClaimId, Convert.ToString(accdetail.Organization), (orgint.Initial == null) ? "" : orgint.Initial, objEntity);
+                            //    if (accdetail.OwnerName == "CTPL")
+                            //    {
+                            //        accdetail.CDGIClaimRef = ClaimForCRTXInfoModel.GetPermanentCDGEClaimRefNo(claimdetail.AccidentClaimId, Convert.ToString(accdetail.Organization), "CTPL", objEntity);
+                            //    }
+                            //    else
+                            //    {
+                            //        accdetail.CDGIClaimRef = ClaimForCRTXInfoModel.GetPermanentCDGEClaimRefNo(claimdetail.AccidentClaimId, Convert.ToString(accdetail.Organization), "CCPL", objEntity);
+                            //    }
                             }
                             else
                             {
