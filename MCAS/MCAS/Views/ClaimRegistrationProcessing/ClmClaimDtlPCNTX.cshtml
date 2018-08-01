@@ -1269,7 +1269,9 @@
         });
 
         $("document").ready(function () {
-
+            if ($("#ClaimantStatus").val() == "") {
+                $("#ClaimantStatus").val("1");
+            }
             if ($("#ClaimantStatus").val() == "2" && $("#FinalSettleDate").val() != "") {
                 $('#FinalSettleDate').prop('readonly', true);
                 $('#FinalSettleDate').prop('disabled', true);
