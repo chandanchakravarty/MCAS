@@ -429,13 +429,19 @@ namespace MCAS.Controllers
                 model.DistrictCodeList = model.AccidentClaimId == null ? ClaimAccidentDetailsModel.FetchCommonMasterDataForNew("DistrictCode", 0) : ClaimAccidentDetailsModel.FetchCommonMasterData("DistrictCode", Convert.ToInt32(model.AccidentClaimId));
                 if (!ModelState.IsValid)
                 {
-                    ModelState["InputDate"].Errors.Clear();
+                    if (ModelState["InputDate"] != null)
+                    {
+                        ModelState["InputDate"].Errors.Clear();
+                    }
                     int[] array = (from l in model.OrgCatList where l.Description.EndsWith("-Train") select l.OrgType).ToArray();
                     bool res = Array.Exists(array, element => element == model.Organization);
                     var allErrors = ModelState.Values.SelectMany(v => v.Errors);
                     if (res && allErrors.Count() == 1 && allErrors.FirstOrDefault().ErrorMessage == "Bus Service Number is required.")
                     {
-                        ModelState["BusServiceNo"].Errors.Clear();
+                        if (ModelState["BusServiceNo"] != null)
+                        {
+                            ModelState["BusServiceNo"].Errors.Clear();
+                        }
                     }
                 }
                 if (ModelState.IsValid)
