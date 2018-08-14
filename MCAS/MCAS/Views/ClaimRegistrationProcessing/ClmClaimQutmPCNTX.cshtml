@@ -785,7 +785,6 @@
             "@Common.Edit" == $(this).text() && ($(this).attr("href").getstringinbetween("HClaimantStatus") == "2" || $(this).attr("href").getstringinbetween("HClaimantStatus") == "3") && $(this).hide();
             "@Common.View" == $(this).text() && $(this).attr("ViewVal", $(this).attr("href")) && $(this).removeAttr("href");
         });
-
         $.culture = Globalize.culture("en-GB");
         $.validator.methods.date = function (value, element) { return this.optional(element) || Globalize.parseDate(value, "dd/MM/yyyy", "en-GB") || Globalize.parseDate(value, "yyyy-mm-dd"); };
         $("tr.ui-subgrid > td > div > div.ui-ebixgrid-view > table > tbody > tr > td:nth-child(3)").addClass("format");
@@ -808,7 +807,7 @@
             SetTotal();
         }).each(function () {
             $(this).context.id.slice(-2) == "_I" && (($(this).is(":visible") && ($(this).val() == "" || $(this).val() == "0" || $(this).val() == "0.00")) ? $("#" + $(this).context.id.replace("_I", "_R")).prop("readonly", !0) : $(this).prop("readonly", !0));
-            ("208" == "@submenuval") && $(this).context.id.slice(-2) == "_R" && $(this).is(":visible") && $(this).prop("readonly", !0);
+            ("207" == "@submenuval") && $(this).context.id.slice(-2) == "_R" && $(this).is(":visible") && $(this).prop("readonly", !0);
             $(this).context.id.slice(-2) == "_R" && $(this).is(":visible") && $(this).hasClass("format") && $(this).val("0.00");
         });
 
@@ -833,88 +832,88 @@
         $("#Rateperday_R").prop('selectedIndex', 0);
 
         $("#Rateperday_I,#Noofdays_I,#Rateperday_R,#Noofdays_R,#LOINoofdays_I,#LOIRateperday_I,#LOINoofdays_R,#LOIRateperday_R,#LOUNoofdays_I,#LOURateperday_I,#LOUNoofdays_R,#LOURateperday_R,#CRNoofdays_I,#CRRateperday_I,#CRNoofdays_R,#CRRateperday_R").change(function () {
-           
+
             if (!$(this).hasClass("DisableDropDown")) {
-                    var id = $(this).closest("div").attr("id");
-                    if (id == "divCELOR" || id == "divCELOR1") {
-                        var d = 0, a = $(this).context.id.slice(-1), c = "" == $("#Noofdays_" + a).val() ? 0 : parseInt(($("#Noofdays_" + a).val() == "" ? "0" : $("#Noofdays_" + a).val())), b = parseFloat(($("#Rateperday_" + a).val() == "" ? "0" : $("#Rateperday_" + a).val())), h = "#Rateperday_" + a, f = $(h + " option:selected").text(), e = parseFloat(($("#LossofRental_" + a).val() == "" ? "0" : $("#LossofRental_" + a).val()));
-                        DropDownVal("Rateperday_O", b, f)
-                        $("#Noofdays_O").val($("#Noofdays_" + a).val());
-                        $("#LossofRental_" + a).val(CurrencyFormat(parseFloat(c) * parseFloat((f == "[Select...]" ? "0" : f))));
-                        $("#LossofRental_O").val(CurrencyFormat(parseFloat(c) * parseFloat((f == "[Select...]" ? "0" : f))));
-                        if ($(this).context.id.slice(-1) == "I") {
-                            DropDownVal("Rateperday_R", b, f);
-                            $("#Noofdays_R").val($("#Noofdays_" + a).val());
-                            $("#LossofRental_R").val(CurrencyFormat(parseFloat(c) * parseFloat((f == "[Select...]" ? "0" : f))));
-                            $("#LossofRental_C").val(parseFloat(c) * parseFloat((f == "[Select...]" ? "0" : f)));
-                        }
-                        if ($(this).context.id.slice(-1) == "R") {
-                            var lossofrental_o = parseFloat(c) * parseFloat((f == "[Select...]" ? "0" : f));
-                            var lossofrental_c = $("#LossofRental_C").val().replace(/,/g, "");
-                            $("#LossofRental_O").val(CurrencyFormat(parseFloat(lossofrental_c) + parseFloat(lossofrental_o)));
-                            $("#LossofRental_C").val(parseFloat(lossofrental_c) + parseFloat(lossofrental_o));
-                        }
+                var id = $(this).closest("div").attr("id");
+                if (id == "divCELOR" || id == "divCELOR1") {
+                    var d = 0, a = $(this).context.id.slice(-1), c = "" == $("#Noofdays_" + a).val() ? 0 : parseInt(($("#Noofdays_" + a).val() == "" ? "0" : $("#Noofdays_" + a).val())), b = parseFloat(($("#Rateperday_" + a).val() == "" ? "0" : $("#Rateperday_" + a).val())), h = "#Rateperday_" + a, f = $(h + " option:selected").text(), e = parseFloat(($("#LossofRental_" + a).val() == "" ? "0" : $("#LossofRental_" + a).val()));
+                    DropDownVal("Rateperday_O", b, f)
+                    $("#Noofdays_O").val($("#Noofdays_" + a).val());
+                    $("#LossofRental_" + a).val(CurrencyFormat(parseFloat(c) * parseFloat((f == "[Select...]" ? "0" : f))));
+                    $("#LossofRental_O").val(CurrencyFormat(parseFloat(c) * parseFloat((f == "[Select...]" ? "0" : f))));
+                    if ($(this).context.id.slice(-1) == "I") {
+                        DropDownVal("Rateperday_R", b, f);
+                        $("#Noofdays_R").val($("#Noofdays_" + a).val());
+                        $("#LossofRental_R").val(CurrencyFormat(parseFloat(c) * parseFloat((f == "[Select...]" ? "0" : f))));
+                        $("#LossofRental_C").val(parseFloat(c) * parseFloat((f == "[Select...]" ? "0" : f)));
                     }
-                    else if (id == "divCELOI" || id == "divCELOI1") {
-                        var d = 0, a = $(this).context.id.slice(-1), c = "" == $("#LOINoofdays_" + a).val() ? 0 : parseInt(($("#LOINoofdays_" + a).val() == "" ? "0" : $("#LOINoofdays_" + a).val())), b = parseFloat(($("#LOIRateperday_" + a).val() == "" ? "0" : $("#LOIRateperday_" + a).val())), h = "#LOIRateperday_" + a, f = $(h + " option:selected").text(), e = parseFloat(($("#LossofIncome_" + a).val() == "" ? "0" : $("#LossofIncome_" + a).val()));
-                        DropDownVal("LOIRateperday_O", b, f)
-                        $("#LOINoofdays_O").val($("#LOINoofdays_" + a).val());
-                        $("#LOINoofdays_O").val($("#LOINoofdays_" + a).val());
-                        $("#LossofIncome_" + a).val(CurrencyFormat(parseFloat(c) * parseFloat((f == "[Select...]" ? "0" : f))));
-                        $("#LossofIncome_O").val(CurrencyFormat(parseFloat(c) * parseFloat((f == "[Select...]" ? "0" : f))));
-                        if ($(this).context.id.slice(-1) == "I") {
-                            DropDownVal("LOIRateperday_R", b, f);
-                            $("#LOINoofdays_R").val($("#LOINoofdays_" + a).val());
-                            $("#LossofIncome_R").val(CurrencyFormat(parseFloat(c) * parseFloat((f == "[Select...]" ? "0" : f))));
-                            $("#LossofIncome_C").val(parseFloat(c) * parseFloat((f == "[Select...]" ? "0" : f)));
-                        }
-                        if ($(this).context.id.slice(-1) == "R") {
-                            var lossofincome_o = parseFloat(c) * parseFloat((f == "[Select...]" ? "0" : f));
-                            var lossofincome_c = $("#LossofIncome_C").val().replace(/,/g, "");
-                            $("#LossofIncome_O").val(CurrencyFormat(parseFloat(lossofincome_c) + parseFloat(lossofincome_o)));
-                            $("#LossofIncome_C").val(parseFloat(lossofincome_c) + parseFloat(lossofincome_o));
-                        }
+                    if ($(this).context.id.slice(-1) == "R") {
+                        var lossofrental_o = parseFloat(c) * parseFloat((f == "[Select...]" ? "0" : f));
+                        var lossofrental_c = $("#LossofRental_C").val().replace(/,/g, "");
+                        $("#LossofRental_O").val(CurrencyFormat(parseFloat(lossofrental_c) + parseFloat(lossofrental_o)));
+                        $("#LossofRental_C").val(parseFloat(lossofrental_c) + parseFloat(lossofrental_o));
                     }
-                    else if (id == "divCELOU" || id == "divCELOU1") {
-                        var d = 0, a = $(this).context.id.slice(-1), c = "" == $("#LOUNoofdays_" + a).val() ? 0 : parseInt(($("#LOUNoofdays_" + a).val() == "" ? "0" : $("#LOUNoofdays_" + a).val())), b = parseFloat(($("#LOURateperday_" + a).val() == "" ? "0" : $("#LOURateperday_" + a).val())), h = "#LOURateperday_" + a, f = $(h + " option:selected").text(), e = parseFloat(($("#CELossofUse_" + a).val() == "" ? "0" : $("#CELossofUse_" + a).val()));
-                        DropDownVal("LOURateperday_O", b, f)
-                        $("#LOUNoofdays_O").val($("#LOUNoofdays_" + a).val());
-                        $("#LOUNoofdays_O").val($("#LOUNoofdays_" + a).val());
-                        $("#CELossofUse_" + a).val(CurrencyFormat(parseFloat(c) * parseFloat((f == "[Select...]" ? "0" : f))));
-                        $("#CELossofUse_O").val(CurrencyFormat(parseFloat(c) * parseFloat((f == "[Select...]" ? "0" : f))));
-                        if ($(this).context.id.slice(-1) == "I") {
-                            DropDownVal("LOURateperday_R", b, f);
-                            $("#LOUNoofdays_R").val($("#LOUNoofdays_" + a).val());
-                            $("#CELossofUse_R").val(CurrencyFormat(parseFloat(c) * parseFloat((f == "[Select...]" ? "0" : f))));
-                            $("#CELossofUse_C").val(parseFloat(c) * parseFloat((f == "[Select...]" ? "0" : f)));
-                        }
-                        if ($(this).context.id.slice(-1) == "R") {
-                            var lossofuse_o = parseFloat(c) * parseFloat((f == "[Select...]" ? "0" : f));
-                            var lossofuse_c = $("#CELossofUse_C").val().replace(/,/g, "");
-                            $("#CELossofUse_O").val(CurrencyFormat(parseFloat(lossofuse_c) + parseFloat(lossofuse_o)));
-                            $("#CELossofUse_C").val(parseFloat(lossofuse_c) + parseFloat(lossofuse_o));
-                        }
+                }
+                else if (id == "divCELOI" || id == "divCELOI1") {
+                    var d = 0, a = $(this).context.id.slice(-1), c = "" == $("#LOINoofdays_" + a).val() ? 0 : parseInt(($("#LOINoofdays_" + a).val() == "" ? "0" : $("#LOINoofdays_" + a).val())), b = parseFloat(($("#LOIRateperday_" + a).val() == "" ? "0" : $("#LOIRateperday_" + a).val())), h = "#LOIRateperday_" + a, f = $(h + " option:selected").text(), e = parseFloat(($("#LossofIncome_" + a).val() == "" ? "0" : $("#LossofIncome_" + a).val()));
+                    DropDownVal("LOIRateperday_O", b, f)
+                    $("#LOINoofdays_O").val($("#LOINoofdays_" + a).val());
+                    $("#LOINoofdays_O").val($("#LOINoofdays_" + a).val());
+                    $("#LossofIncome_" + a).val(CurrencyFormat(parseFloat(c) * parseFloat((f == "[Select...]" ? "0" : f))));
+                    $("#LossofIncome_O").val(CurrencyFormat(parseFloat(c) * parseFloat((f == "[Select...]" ? "0" : f))));
+                    if ($(this).context.id.slice(-1) == "I") {
+                        DropDownVal("LOIRateperday_R", b, f);
+                        $("#LOINoofdays_R").val($("#LOINoofdays_" + a).val());
+                        $("#LossofIncome_R").val(CurrencyFormat(parseFloat(c) * parseFloat((f == "[Select...]" ? "0" : f))));
+                        $("#LossofIncome_C").val(parseFloat(c) * parseFloat((f == "[Select...]" ? "0" : f)));
                     }
-                    else if (id == "divCECR" || id == "divCECR1") {
-                        var d = 0, a = $(this).context.id.slice(-1), c = "" == $("#CRNoofdays_" + a).val() ? 0 : parseInt(($("#CRNoofdays_" + a).val() == "" ? "0" : $("#CRNoofdays_" + a).val())), b = parseFloat(($("#CRRateperday_" + a).val() == "" ? "0" : $("#CRRateperday_" + a).val())), h = "#CRRateperday_" + a, f = $(h + " option:selected").text(), e = parseFloat(($("#CarRental_" + a).val() == "" ? "0" : $("#CarRental_" + a).val()));
-                        DropDownVal("CRRateperday_O", b, f)
-                        $("#CRNoofdays_O").val($("#CRNoofdays_" + a).val());
-                        $("#CRNoofdays_O").val($("#CRNoofdays_" + a).val());
-                        $("#CarRental_" + a).val(CurrencyFormat(parseFloat(c) * parseFloat((f == "[Select...]" ? "0" : f))));
-                        $("#CarRental_O").val(CurrencyFormat(parseFloat(c) * parseFloat((f == "[Select...]" ? "0" : f))));
-                        if ($(this).context.id.slice(-1) == "I") {
-                            DropDownVal("CRRateperday_R", b, f);
-                            $("#CRNoofdays_R").val($("#CRNoofdays_" + a).val());
-                            $("#CarRental_R").val(CurrencyFormat(parseFloat(c) * parseFloat((f == "[Select...]" ? "0" : f))));
-                            $("#CarRental_C").val(parseFloat(c) * parseFloat((f == "[Select...]" ? "0" : f)));
-                        }
-                        if ($(this).context.id.slice(-1) == "R") {
-                            var carrental_o = parseFloat(c) * parseFloat((f == "[Select...]" ? "0" : f));
-                            var carrental_c = $("#CarRental_C").val().replace(/,/g, "");
-                            $("#CarRental_O").val(CurrencyFormat(parseFloat(carrental_c) + parseFloat(carrental_o)));
-                            $("#CarRental_C").val(parseFloat(carrental_c) + parseFloat(carrental_o));
-                        }
+                    if ($(this).context.id.slice(-1) == "R") {
+                        var lossofincome_o = parseFloat(c) * parseFloat((f == "[Select...]" ? "0" : f));
+                        var lossofincome_c = $("#LossofIncome_C").val().replace(/,/g, "");
+                        $("#LossofIncome_O").val(CurrencyFormat(parseFloat(lossofincome_c) + parseFloat(lossofincome_o)));
+                        $("#LossofIncome_C").val(parseFloat(lossofincome_c) + parseFloat(lossofincome_o));
                     }
+                }
+                else if (id == "divCELOU" || id == "divCELOU1") {
+                    var d = 0, a = $(this).context.id.slice(-1), c = "" == $("#LOUNoofdays_" + a).val() ? 0 : parseInt(($("#LOUNoofdays_" + a).val() == "" ? "0" : $("#LOUNoofdays_" + a).val())), b = parseFloat(($("#LOURateperday_" + a).val() == "" ? "0" : $("#LOURateperday_" + a).val())), h = "#LOURateperday_" + a, f = $(h + " option:selected").text(), e = parseFloat(($("#CELossofUse_" + a).val() == "" ? "0" : $("#CELossofUse_" + a).val()));
+                    DropDownVal("LOURateperday_O", b, f)
+                    $("#LOUNoofdays_O").val($("#LOUNoofdays_" + a).val());
+                    $("#LOUNoofdays_O").val($("#LOUNoofdays_" + a).val());
+                    $("#CELossofUse_" + a).val(CurrencyFormat(parseFloat(c) * parseFloat((f == "[Select...]" ? "0" : f))));
+                    $("#CELossofUse_O").val(CurrencyFormat(parseFloat(c) * parseFloat((f == "[Select...]" ? "0" : f))));
+                    if ($(this).context.id.slice(-1) == "I") {
+                        DropDownVal("LOURateperday_R", b, f);
+                        $("#LOUNoofdays_R").val($("#LOUNoofdays_" + a).val());
+                        $("#CELossofUse_R").val(CurrencyFormat(parseFloat(c) * parseFloat((f == "[Select...]" ? "0" : f))));
+                        $("#CELossofUse_C").val(parseFloat(c) * parseFloat((f == "[Select...]" ? "0" : f)));
+                    }
+                    if ($(this).context.id.slice(-1) == "R") {
+                        var lossofuse_o = parseFloat(c) * parseFloat((f == "[Select...]" ? "0" : f));
+                        var lossofuse_c = $("#CELossofUse_C").val().replace(/,/g, "");
+                        $("#CELossofUse_O").val(CurrencyFormat(parseFloat(lossofuse_c) + parseFloat(lossofuse_o)));
+                        $("#CELossofUse_C").val(parseFloat(lossofuse_c) + parseFloat(lossofuse_o));
+                    }
+                }
+                else if (id == "divCECR" || id == "divCECR1") {
+                    var d = 0, a = $(this).context.id.slice(-1), c = "" == $("#CRNoofdays_" + a).val() ? 0 : parseInt(($("#CRNoofdays_" + a).val() == "" ? "0" : $("#CRNoofdays_" + a).val())), b = parseFloat(($("#CRRateperday_" + a).val() == "" ? "0" : $("#CRRateperday_" + a).val())), h = "#CRRateperday_" + a, f = $(h + " option:selected").text(), e = parseFloat(($("#CarRental_" + a).val() == "" ? "0" : $("#CarRental_" + a).val()));
+                    DropDownVal("CRRateperday_O", b, f)
+                    $("#CRNoofdays_O").val($("#CRNoofdays_" + a).val());
+                    $("#CRNoofdays_O").val($("#CRNoofdays_" + a).val());
+                    $("#CarRental_" + a).val(CurrencyFormat(parseFloat(c) * parseFloat((f == "[Select...]" ? "0" : f))));
+                    $("#CarRental_O").val(CurrencyFormat(parseFloat(c) * parseFloat((f == "[Select...]" ? "0" : f))));
+                    if ($(this).context.id.slice(-1) == "I") {
+                        DropDownVal("CRRateperday_R", b, f);
+                        $("#CRNoofdays_R").val($("#CRNoofdays_" + a).val());
+                        $("#CarRental_R").val(CurrencyFormat(parseFloat(c) * parseFloat((f == "[Select...]" ? "0" : f))));
+                        $("#CarRental_C").val(parseFloat(c) * parseFloat((f == "[Select...]" ? "0" : f)));
+                    }
+                    if ($(this).context.id.slice(-1) == "R") {
+                        var carrental_o = parseFloat(c) * parseFloat((f == "[Select...]" ? "0" : f));
+                        var carrental_c = $("#CarRental_C").val().replace(/,/g, "");
+                        $("#CarRental_O").val(CurrencyFormat(parseFloat(carrental_c) + parseFloat(carrental_o)));
+                        $("#CarRental_C").val(parseFloat(carrental_c) + parseFloat(carrental_o));
+                    }
+                }
                 SetTotal();
 
             };
@@ -1009,7 +1008,7 @@
         $("#ClaimRef").prop("readonly", !0);
         $("#TPVehicleNo").prop("readonly", !0);
         $("#TPInsurer").prop("readonly", !0);
-        
+
         SetDivPost();
         SetHiddenSpan();
         ExpandGridAfterPost($("#Hshowgrid").val());
@@ -1017,11 +1016,11 @@
     $(document).ready(do_on_load);
     $(window).bind('page:change', do_on_load);
 
-    var Tmainheader = { 4: function () { return 'Recovery Claim' }};
+    var Tmainheader = { 4: function () { return 'Recovery Claim' } };
 
-//    $("#addClaimQntum").click(function (event) {
-//        $("#NewReserveEditor").show("slow");
-//    });
+    //    $("#addClaimQntum").click(function (event) {
+    //        $("#NewReserveEditor").show("slow");
+    //    });
 
     function SetTotal() {
         for (var c = 0, a = 0, d = [], d = ["_I", "_R", "_O"], b; b = d[c]; c++, a = 0) {
@@ -1055,7 +1054,7 @@
             $("#CRNoofdays_I").prop('readonly') && $("#LOIRateperday_I").addClass("DisableDropDown").css({ "pointer-events": "none", cursor: "default" }).css("background-color", "#eee").children('option:not(:selected)');
             $("#CRNoofdays_R").prop('readonly') && $("#LOIRateperday_R").addClass("DisableDropDown").css({ "pointer-events": "none", cursor: "default" }).css("background-color", "#eee").children('option:not(:selected)').remove();
             $("#CRNoofdays_O").prop('readonly') && $("#LOIRateperday_O").addClass("DisableDropDown").css({ "pointer-events": "none", cursor: "default" }).css("background-color", "#eee").children('option:not(:selected)').remove();
-         }
+        }
     };
 
     function ExpandGridAfterPost(a) {
@@ -1156,7 +1155,7 @@
         $("#" + a).find(":input:not([id=ClaimRef]):not([id=TPVehicleNo]:not([id=TPInsurer]:not([id=ClaimType])").each(function () {
             switch (this.type) {
                 case "text":
--1 < $.inArray($(this).context.id.slice(-2), "_I _O _C".split(" ")) && $(this).val($(this).hasClass("format") ? "0.00" : "");
+                    -1 < $.inArray($(this).context.id.slice(-2), "_I _O _C".split(" ")) && $(this).val($(this).hasClass("format") ? "0.00" : "");
 
                     $("#Rateperday_I").prop("selectedIndex", 0).removeClass("DisableDropDown").removeAttr("style");
                     if ($(this).context.id.slice(-2) == "_I") {
