@@ -41,6 +41,9 @@
 <script src="@Url.Content("~/Scripts/jquery.validate.js")" type="text/javascript"></script>
 <script src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.min.js")" type="text/javascript"></script>
 <script src="@Url.Content("~/Scripts/conditional-validation.js")" type="text/javascript"></script>
+<script>
+    var submenuid = '@submenuid';
+</script>
 <style>
     .error
     {
@@ -785,7 +788,7 @@
                                     <div class="col-lg-6">
                                         <div class="form-group">
                                             <label class="col-sm-4 control-label">
-                                                @NewClaimCrTx.FinalSettleDate
+                                                @NewClaimCrTx.FinalSettleDate&nbsp;<span id="spFinalSettleDate" class="text-danger">*</span>
                                             </label>
                                             <div class="col-sm-8">
                                                 @Html.TextBoxFor(m => m.FinalSettleDate, "{0:d}", new { id = "FinalSettleDate", @class = "form-control datepicker validateDateFormare" })
@@ -1236,12 +1239,13 @@
         $("#ClaimType").attr("disabled", "disabled");
 
         // $("#ClaimantStatus").val("1");
-        $("#ClaimantStatus option[value='4']").prop('disabled', 'disabled');
+        if (submenuid != "208") {
+            $("#ClaimantStatus option[value='4']").prop('disabled', 'disabled');
+        }
 
         $("#btnSave").click(function () {
 
-            if ($("#ClaimantStatus").val() == "")
-            {
+            if ($("#ClaimantStatus").val() == "") {
                 $("#ClaimantStatus").val("1");
             }
 
@@ -1249,8 +1253,7 @@
                 alert("Claim Status Must be Finalized. Or Remove Final Settle Date.");
                 return false;
             }
-            if ($("#ClaimantStatus").val() == "2" && $("#FinalSettleDate").val()=="")
-            {
+            if ($("#ClaimantStatus").val() == "2" && $("#FinalSettleDate").val() == "") {
                 alert("Final Settle Date Required.");
                 return false;
             }
@@ -1258,209 +1261,308 @@
                 $('#FinalSettleDate').prop('readonly', false);
                 $('#FinalSettleDate').prop('disabled', false);
             }
+            if ('@pagemode' == 'Adj') {
+                if ($("#ClaimantStatus").val() == "4" && $("#ReopenedDate").val() == "") {
+                    alert("Reopened Date Required.");
+                    return false;
+                }
+                if ($("#ClaimantStatus").val() == "4" && $("#RecordReopenedReason").val() == "") {
+                    alert("Reopened Reason Required.");
+                    return false;
+                }
+            }
 
             if (IsPageChanged()) {
                 var c = $("#claimentryform").valid();
                 if ("#ClaimType" != "0") {
                     $("#ClaimRecordNo").val("@GetClaimNo");
+                    }
+                    IsPageChanged() && c && $("#claimentryform").submit()
                 }
-                IsPageChanged() && c && $("#claimentryform").submit()
-            }
-        });
-
-        $("document").ready(function () {
-            if ($("#ClaimantStatus").val() == "") {
-                $("#ClaimantStatus").val("1");
-            }
-            if ($("#ClaimantStatus").val() == "2" && $("#FinalSettleDate").val() != "") {
-                $('#FinalSettleDate').prop('readonly', true);
-                $('#FinalSettleDate').prop('disabled', true);
-            }
-            $("#ClaimantStatus").change(function () {
-                if ($("#ClaimantStatus").val() != "2" && $("#FinalSettleDate").val() != "") {
-                    $('#FinalSettleDate').prop('readonly', false);
-                    $('#FinalSettleDate').prop('disabled', false);
-                }
-
             });
-        });
 
-        $("#ClaimAmt,#SettledAmt").change(function () {
-            var input1 = $("#ClaimAmt").val(),
-                   input2 = $("#SettledAmt").val(),
-                   input3 = $("#WsActRcvr");
-            var val1 = (isNaN(parseInt(input1.replace(/\,/g, '')))) ? 0 : parseInt(input1.replace(/\,/g, ''));
-            var val2 = (isNaN(parseInt(input2.replace(/\,/g, '')))) ? 0 : parseInt(input2.replace(/\,/g, ''));
-            if (input1 == 0 || input1 == "" || input2 == 0 || input2 == "") {
-                input3.val(0.00);
-            }
-            else {
-                input3.val((val2 / val1) * 100);
-            }
-        });
+            $("document").ready(function () {
+                $("#spFinalSettleDate").hide();
+                if ($("#ClaimantStatus").val() == "2") {
+                    $("#spFinalSettleDate").show();
+                }
+                if ($("#ClaimantStatus").val() == "") {
+                    $("#ClaimantStatus").val("1");
+                }
+                if ($("#ClaimantStatus").val() == "2" && $("#FinalSettleDate").val() != "") {
+                    $('#FinalSettleDate').prop('readonly', true);
+                    $('#FinalSettleDate').prop('disabled', true);
+                }
+                $("#ClaimantStatus").change(function () {
+                    $("#spFinalSettleDate").hide();
+                    if ($("#ClaimantStatus").val() == "2") {
+                        $("#spFinalSettleDate").show();
+                    }
+                    if ($("#ClaimantStatus").val() != "2" && $("#FinalSettleDate").val() != "") {
+                        $('#FinalSettleDate').prop('readonly', false);
+                        $('#FinalSettleDate').prop('disabled', false);
+                    }
+
+                    var id = this.value;
+                    $("#RecordReopenedReason,#RecordCancellationReason").attr('readonly', 'readonly');
+                    $("#ReopenedDate,#RecordCancellationDate").datepicker("destroy").attr('readonly', 'readonly').attr('disabled', 'disabled');
+                    id == 2 ? $('#divFinalSettleDate').attr('style', 'Display:block') : ($("#FinalSettleDate").val(''), $('#divFinalSettleDate').attr('style', 'Display:none'));
+                    if (id == 3) {
+                        $('#l4div *').each(function () {
+                            $(this).removeAttr("disabled").removeAttr("readonly");
+                        });
+                        $("#l4div,#FieldSetRecordCanCreation").removeAttr("disabled").removeAttr("readonly");
+
+                        0 == $('#spanReCanReason').length && $("#ReCanReason").append('<span id="spanReCanReason" class="text-danger">*</span>');
+                        0 == $('#spanReCanDate').length && $("#ReCanDate").append('<span id="spanReCanDate" class="text-danger">*</span>');
+                        $("#RecordCancellationDate").datepicker({
+                            dateFormat: "dd/mm/yy",
+                            showStatus: true,
+                            showWeeks: true,
+                            currentText: 'Now',
+                            autoSize: true,
+                            gotoCurrent: true,
+                            showAnim: 'blind',
+                            highlightWeek: true,
+                            changeMonth: !0,
+                            changeYear: !0,
+                            yearRange: "1951:2050",
+                            onSelect: function () {
+                                $(this).valid()
+                            }
+                        });
+                    }
+                    if (id == 4) {
+
+                        if ('@pagemode' == 'Adj') {
+                            $("#ReopenedDate").removeAttr("disabled").removeAttr("readonly");
+                            $("#RecordReopenedReason").removeAttr("disabled").removeAttr("readonly");
+                            $("#btnSave").removeAttr("disabled").removeAttr("readonly");
+                            $("#TPVehicleNo").removeAttr("disabled").removeAttr("readonly");
+                            $("#FileReceivedDate").removeAttr("disabled").removeAttr("readonly");
+                            $("#Collisiontype").removeAttr("disabled").removeAttr("readonly");
+                            $("#ClaimDate").removeAttr("disabled").removeAttr("readonly");
+                            $("#AdminSupport").removeAttr("disabled").removeAttr("readonly");
+
+                            
+
+                            //$('#ReopenDiv *').each(function () {
+                            //    $(this).removeAttr("disabled").removeAttr("readonly");
+                            //});
+                            //$("#ReopenDiv,#FieldSetRecordCreation").removeAttr("disabled").removeAttr("readonly");
+                            //$('#DivSave1 *').each(function () {
+                            //    $(this).removeAttr("disabled").removeAttr("readonly");
+                            //});
+                            //$("#DivSave1").removeAttr("disabled").removeAttr("readonly");
+                            //0 == $('#spanReReason').length && $("#ReReason").append('<span id="spanReReason" class="text-danger">*</span>');
+                            //0 == $('#spanReDate').length && $("#ReDate").append('<span id="spanReDate" class="text-danger">*</span>');
+
+                            $("#ReopenedDate").datepicker({
+                                dateFormat: "dd/mm/yy",
+                                showStatus: true,
+                                showWeeks: true,
+                                currentText: 'Now',
+                                autoSize: true,
+                                gotoCurrent: true,
+                                showAnim: 'blind',
+                                highlightWeek: true,
+                                changeMonth: !0,
+                                changeYear: !0,
+                                yearRange: "1951:2050",
+                                onSelect: function () {
+                                    $(this).valid()
+                                }
+                            });
+                        }
+                        else {
+                            $("#RecordReopenedReason").attr('readonly', 'readonly');
+                            $("#ReopenedDate").datepicker("destroy").attr('readonly', 'readonly').attr('disabled', 'disabled');
+                            0 != $('#spanReReason').length && $("#spanReReason").remove();
+                            0 != $('#spanReDate').length && $("#spanReDate").remove();
+                        }
+                    }
 
 
 
-        SetHiddenSpan();
-        ExpandGridAfterPost($("#Hshowgrid").val());
+                });
+            });
 
-        if ('@mhead' != "") {
-            $("#mlegend").text('@mhead');
-            $("h3#header").text("@Html.Raw(NewClaimCrTx.NewClaimEntry)");
-            $("#ctype").hide();
+            $("#ClaimAmt,#SettledAmt").change(function () {
+                var input1 = $("#ClaimAmt").val(),
+                       input2 = $("#SettledAmt").val(),
+                       input3 = $("#WsActRcvr");
+                var val1 = (isNaN(parseInt(input1.replace(/\,/g, '')))) ? 0 : parseInt(input1.replace(/\,/g, ''));
+                var val2 = (isNaN(parseInt(input2.replace(/\,/g, '')))) ? 0 : parseInt(input2.replace(/\,/g, ''));
+                if (input1 == 0 || input1 == "" || input2 == 0 || input2 == "") {
+                    input3.val(0.00);
+                }
+                else {
+                    input3.val((val2 / val1) * 100);
+                }
+            });
+
+
+
+            SetHiddenSpan();
+            ExpandGridAfterPost($("#Hshowgrid").val());
+
+            if ('@mhead' != "") {
+                $("#mlegend").text('@mhead');
+                $("h3#header").text("@Html.Raw(NewClaimCrTx.NewClaimEntry)");
+                $("#ctype").hide();
+            };
+
+
+            if (("@Model.ClaimType" != "0") && '@mMCASQueryString["Viewmode"]' == "AddNewClaim") {
+                $("#mainfieldset").show("slow");
+            };
+
+
+            $("#confirmamtdialog").click(function (event) {
+                var a = guid(), b = "#" + a;
+                $('<div id="' + a + '" title="Reserve History" style="overflow: hidden;"></div>').appendTo(".ConfirmAmtDialogue");
+                InitializeDialog($(b), "4", '@claimId');
+                event.preventDefault();
+                $(b).dialog("open");
+                return !1
+            });
         };
 
+        $(document).ready(do_on_load);
+        $(window).bind('page:change', do_on_load);
 
-        if (("@Model.ClaimType" != "0") && '@mMCASQueryString["Viewmode"]' == "AddNewClaim") {
-            $("#mainfieldset").show("slow");
-        };
-
-
-        $("#confirmamtdialog").click(function (event) {
-            var a = guid(), b = "#" + a;
-            $('<div id="' + a + '" title="Reserve History" style="overflow: hidden;"></div>').appendTo(".ConfirmAmtDialogue");
-            InitializeDialog($(b), "4", '@claimId');
-            event.preventDefault();
-            $(b).dialog("open");
-            return !1
-        });
-    };
-
-    $(document).ready(do_on_load);
-    $(window).bind('page:change', do_on_load);
-
-    function InitializeDialog($element, a, f) {
-        $element.dialog({
-            width: "900",
-            resizable: false,
-            draggable: true,
-            show: { effect: 'drop', direction: "up" },
-            title: "Breakdown of Confirm Amount",
-            model: true,
-            show: 'slide',
-            dialogClass: 'alert',
-            closeOnEscape: true,
-            open: function (event, ui) {
-                var path = '@Url.Content("~/ClaimRegistrationProcessing/ConfirmAmountDtl")' + "?ClaimID=" + f + "&AccidentClaimId=" + '@accidentClaimIdNew' + "&uid=" + guid();
-                $element.load(path);
-            },
-            position: {
-                my: "center",
-                at: "center",
-                of: window
-            },
-            buttons: {
-                "Save": function () {
-                    '@Session["OrganisationType"]'.toString().toLowerCase() == "pc" ? $('#ConfirmAmt').val($('#TotalPC').val()) : $('#ConfirmAmt').val($('#Total').val());
-                    SetConfirmAmt();
-                    $(this).dialog("close");
+        function InitializeDialog($element, a, f) {
+            $element.dialog({
+                width: "900",
+                resizable: false,
+                draggable: true,
+                show: { effect: 'drop', direction: "up" },
+                title: "Breakdown of Confirm Amount",
+                model: true,
+                show: 'slide',
+                dialogClass: 'alert',
+                closeOnEscape: true,
+                open: function (event, ui) {
+                    var path = '@Url.Content("~/ClaimRegistrationProcessing/ConfirmAmountDtl")' + "?ClaimID=" + f + "&AccidentClaimId=" + '@accidentClaimIdNew' + "&uid=" + guid();
+                    $element.load(path);
                 },
-                "Cancel": function () {
+                position: {
+                    my: "center",
+                    at: "center",
+                    of: window
+                },
+                buttons: {
+                    "Save": function () {
+                        '@Session["OrganisationType"]'.toString().toLowerCase() == "pc" ? $('#ConfirmAmt').val($('#TotalPC').val()) : $('#ConfirmAmt').val($('#Total').val());
+                        SetConfirmAmt();
+                        $(this).dialog("close");
+                    },
+                    "Cancel": function () {
+                        '@Session["OrganisationType"]'.toString().toLowerCase() == "pc" ? $('#ConfirmAmt').val($('#TotalPC').val()) : $('#ConfirmAmt').val($('#Total').val());
+                        SetConfirmAmt();
+                        $(this).dialog("close");
+                    }
+                },
+                close: function () {
                     '@Session["OrganisationType"]'.toString().toLowerCase() == "pc" ? $('#ConfirmAmt').val($('#TotalPC').val()) : $('#ConfirmAmt').val($('#Total').val());
                     SetConfirmAmt();
-                    $(this).dialog("close");
+                    $element.dialog('destroy').remove();
                 }
-            },
-            close: function () {
-                '@Session["OrganisationType"]'.toString().toLowerCase() == "pc" ? $('#ConfirmAmt').val($('#TotalPC').val()) : $('#ConfirmAmt').val($('#Total').val());
-                SetConfirmAmt();
-                $element.dialog('destroy').remove();
-            }
 
-        }).css('max-height', '500px').css('overflow-y', 'scroll');
-    };
+            }).css('max-height', '500px').css('overflow-y', 'scroll');
+        };
 
 
-    function SetConfirmAmt() {
-        var data = $('#ConfirmAmtDtlform').serialize();
-        $.ajax({
-            type: "POST",
-            url: '@Url.Action("ConfirmAmtBreakdowndetails", "ClaimRegistrationProcessing")',
-            data: data,
-            dataType: "html",
-            success: function (data) {
+        function SetConfirmAmt() {
+            var data = $('#ConfirmAmtDtlform').serialize();
+            $.ajax({
+                type: "POST",
+                url: '@Url.Action("ConfirmAmtBreakdowndetails", "ClaimRegistrationProcessing")',
+                data: data,
+                dataType: "html",
+                success: function (data) {
 
-            },
-            error: function (data) {
-                alert("error : " + data);
-                $('#Result').hide();
-                $("#ajaxSpinnerImage").hide();
-            }
-        });
-    }
-
-    function ExpandGridAfterPost(a) {
-        $("table.ui-ebixgrid-btable span").each(function () {
-            if ($(this).hasClass("ui-icon-minus") || $(this).hasClass("ui-icon-plus")) {
-                if (a.beginsWith($(this).context.id)) {
-                    var spanid = $(this).context.id, id = spanid.slice(5, spanid.length);
-                    $('#' + id).show();
-                    $('#' + spanid).removeClass('ui-icon-plus').addClass('ui-icon-minus');
+                },
+                error: function (data) {
+                    alert("error : " + data);
+                    $('#Result').hide();
+                    $("#ajaxSpinnerImage").hide();
                 }
-            }
-        });
-    };
-
-    function SetHiddenSpan() {
-        var AccidentClaimId = '@mMCASQueryString["AccidentClaimId"]', ClaimID = (null == '@mMCASQueryString["ClaimID"]') ? "@Model.ClaimID" : '@mMCASQueryString["ClaimID"]', ClaimType = '@mMCASQueryString["ClaimType"]';
-        $(".ui-ebixgrid-view > table > tbody > tr > td > a").each(function () {
-            $(this).attr("href") && $(this).attr("href").getstringinbetween("AccidentClaimId") == AccidentClaimId && $(this).attr("href").getstringinbetween("ClaimID") == ClaimID && $(this).attr("href").getstringinbetween("ClaimType") == ClaimType && $("#Hshowgrid").val("span_" + $(this).closest('tr')[0].id + "_s0");
-        });
-    }
-
-
-    function ClearForm(a) {
-        $("#error").hide();
-        $("#" + a).find(":input:not([id=CreatedBy]):not([id=ClaimType1]):not([id=CreatedDate])").each(function () {
-            switch (this.type) {
-                case "text":
-                    $(this).val($(this).hasClass("format") ? "0.00" : "");
-                    break;
-                case "textarea":
-                    $(this).val("");
-                    break;
-                case "checkbox":
-                case "radio":
-                    this.checked = !1
-            }
-        });
-        $("#" + a).find("select").each(function () {
-            $(this).prop("selectedIndex", 0)
-        });
-        "t2" == a && $("#iftant1,#iftant2").hide();
-        $("span.field-validation-error").removeClass("field-validation-error").addClass("field-validation-valid")
-    };
-
-    function MobileNumberLengthCheck(ControlId, Msg) {
-        if ($.trim($("#" + ControlId).val()).length < 4 || $.trim($("#" + ControlId).val()).length > 15) {
-            alert(Msg, ControlId);
-            return false;
+            });
         }
-    };
-    var guid = (function () {
-        function s4() {
-            return Math.floor((1 + Math.random()) * 0x10000).toString(16).substring(1);
+
+        function ExpandGridAfterPost(a) {
+            $("table.ui-ebixgrid-btable span").each(function () {
+                if ($(this).hasClass("ui-icon-minus") || $(this).hasClass("ui-icon-plus")) {
+                    if (a.beginsWith($(this).context.id)) {
+                        var spanid = $(this).context.id, id = spanid.slice(5, spanid.length);
+                        $('#' + id).show();
+                        $('#' + spanid).removeClass('ui-icon-plus').addClass('ui-icon-minus');
+                    }
+                }
+            });
+        };
+
+        function SetHiddenSpan() {
+            var AccidentClaimId = '@mMCASQueryString["AccidentClaimId"]', ClaimID = (null == '@mMCASQueryString["ClaimID"]') ? "@Model.ClaimID" : '@mMCASQueryString["ClaimID"]', ClaimType = '@mMCASQueryString["ClaimType"]';
+            $(".ui-ebixgrid-view > table > tbody > tr > td > a").each(function () {
+                $(this).attr("href") && $(this).attr("href").getstringinbetween("AccidentClaimId") == AccidentClaimId && $(this).attr("href").getstringinbetween("ClaimID") == ClaimID && $(this).attr("href").getstringinbetween("ClaimType") == ClaimType && $("#Hshowgrid").val("span_" + $(this).closest('tr')[0].id + "_s0");
+            });
         }
-        return function () {
-            return s4() + s4() + '-' + s4() + '-' + s4() + '-' + s4() + '-' + s4() + s4() + s4();
-        };
-    })();
 
 
-    String.prototype.beginsWith = function (string) {
-        return (this.indexOf(string) === 0);
-    };
-    String.prototype.getstringinbetween = function (a) {
-        for (var e = this.split("&"), d = 0; d < e.length; d++) {
-            var b = e[d].split("=");
-            if (b[0] == a) return b[1]
+        function ClearForm(a) {
+            $("#error").hide();
+            $("#" + a).find(":input:not([id=CreatedBy]):not([id=ClaimType1]):not([id=CreatedDate])").each(function () {
+                switch (this.type) {
+                    case "text":
+                        $(this).val($(this).hasClass("format") ? "0.00" : "");
+                        break;
+                    case "textarea":
+                        $(this).val("");
+                        break;
+                    case "checkbox":
+                    case "radio":
+                        this.checked = !1
+                }
+            });
+            $("#" + a).find("select").each(function () {
+                $(this).prop("selectedIndex", 0)
+            });
+            "t2" == a && $("#iftant1,#iftant2").hide();
+            $("span.field-validation-error").removeClass("field-validation-error").addClass("field-validation-valid")
         };
-    };
-    if(("@Model.ClaimantStatus" == "2"))
-    {
-        $('select').removeClass('DonotDiableControl');
-    }
-    (( ("@Model.ClaimantStatus" == "2") && $ && !$('form').hasClass("DonotDiableControl") && $("form").find(":input:not([id=Next]):not([id=Previous]):not([id=btnDialogeOK]):not([id=btnSave]):not(.DonotDiableControl)").each(function () {
+
+        function MobileNumberLengthCheck(ControlId, Msg) {
+            if ($.trim($("#" + ControlId).val()).length < 4 || $.trim($("#" + ControlId).val()).length > 15) {
+                alert(Msg, ControlId);
+                return false;
+            }
+        };
+        var guid = (function () {
+            function s4() {
+                return Math.floor((1 + Math.random()) * 0x10000).toString(16).substring(1);
+            }
+            return function () {
+                return s4() + s4() + '-' + s4() + '-' + s4() + '-' + s4() + '-' + s4() + s4() + s4();
+            };
+        })();
+
+
+        String.prototype.beginsWith = function (string) {
+            return (this.indexOf(string) === 0);
+        };
+        String.prototype.getstringinbetween = function (a) {
+            for (var e = this.split("&"), d = 0; d < e.length; d++) {
+                var b = e[d].split("=");
+                if (b[0] == a) return b[1]
+            };
+        };
+        if (("@Model.ClaimantStatus" == "2")) {
+            $('select').removeClass('DonotDiableControl');
+        }
+
+        @*((submenuid != "208") && ("@Model.ClaimantStatus" == "2" || '@Model.ClaimantStatus' == '3')) && $ && !$('form').hasClass("DonotDiableControl") && $("form").find(":input:not([id=Next]):not([id=Previous]):not([id=btnDialogeOK]):not([id=btnSave]):not(.DonotDiableControl)").each(function () {
         switch (this.type) {
             case "text":
                 $(this).attr('disabled', 'disabled')
@@ -1476,10 +1578,38 @@
                 $(this).attr('disabled', 'disabled')
 
         }
-    })
-    && $('select:not(.DonotDiableControl)').attr('disabled', 'disabled')
-    && $('button:not([id=btnDialogeOK]):not(.DonotDiableControl)').attr('disabled', 'disabled') && $('#btnReset').attr('disabled', 'disabled') && $('#btnSave').attr('disabled', 'disabled')
-    //&& $("#DivClaimantStatus").attr('disabled', 'disabled') && $("#ClaimantStatus").css({ "pointer-events": "none", "cursor": "default" }).css('background-color', '#eee') && $("#RequiredVal").val("1")
-    ));
+    }) && $('select:not(.DonotDiableControl)').attr('disabled', 'disabled') && $('button:not([id=btnDialogeOK]):not(.DonotDiableControl)').attr('disabled', 'disabled') && $('#btnReset').attr('disabled', 'disabled') && $("#DivClaimantStatus").attr('disabled', 'disabled') && $("#ClaimantStatus").css({ "pointer-events": "none", "cursor": "default" }).css('background-color', '#eee') && $("#RequiredVal").val("1");*@
 
+        ((("@Model.ClaimantStatus" == "2") && $ && !$('form').hasClass("DonotDiableControl") && $("form").find(":input:not([id=Next]):not([id=Previous]):not([id=btnDialogeOK]):not([id=btnSave]):not(.DonotDiableControl)").each(function () {
+            switch (this.type) {
+                case "text":
+                    $(this).attr('disabled', 'disabled')
+                case "textarea":
+                    $(this).attr('disabled', 'disabled')
+                case "checkbox":
+                    $(this).attr('disabled', 'disabled')
+                case "radio":
+                    $(this).attr('disabled', 'disabled')
+                case "button":
+                    $(this).attr('disabled', 'disabled')
+                case "file":
+                    $(this).attr('disabled', 'disabled')
+
+            }
+        })
+        && $('select:not(.DonotDiableControl)').attr('disabled', 'disabled')
+        && $('button:not([id=btnDialogeOK]):not(.DonotDiableControl)').attr('disabled', 'disabled') && $('#btnReset').attr('disabled', 'disabled') && $('#btnSave').attr('disabled', 'disabled')
+        //&& $("#DivClaimantStatus").attr('disabled', 'disabled') && $("#ClaimantStatus").css({ "pointer-events": "none", "cursor": "default" }).css('background-color', '#eee') && $("#RequiredVal").val("1")
+        ));
+
+        console.log("submenuid=" + submenuid);
+        if (("@Model.ClaimantStatus" == "2" && submenuid == "208")) {
+            console.log("submenuid=" + submenuid + " ClaimantStatus " + "@Model.ClaimantStatus");
+            $("#ClaimantStatus option[value='1']").prop('disabled', 'disabled');
+            //$("#ClaimantStatus option[value='2']").prop('disabled', 'disabled');
+            $("#ClaimantStatus option[value='4']").prop('disabled', false);
+            $("#ClaimantStatus option[value='3']").prop('disabled', 'disabled');
+            $("#ClaimantStatus").prop('disabled', false);
+            $("#ClaimantStatus option[value='4']").removeAttr('disabled');
+        }
 </script>

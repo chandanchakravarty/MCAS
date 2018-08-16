@@ -497,6 +497,7 @@ namespace MCAS.Controllers
              
             try
             {
+                
                 MCASEntities objEntity = new MCASEntities();
                 string accidentClaimId = Convert.ToString(AccidentClaimId);
                 string AccidentId = Convert.ToString(AccidentClaimId) == "System.Object" ? "0" : accidentClaimId.Contains("System") ? AccidentClaimId[0] : accidentClaimId;
@@ -522,7 +523,10 @@ namespace MCAS.Controllers
                     {
                         if (Session["OrganisationType"].ToString().ToLower() == "tx")
                         {
-                            ModelState["CaseStatus"].Errors.Clear();
+                            if (ModelState["CaseStatus"] != null)
+                            {
+                                ModelState["CaseStatus"].Errors.Clear();
+                            }
                             //Commented and change due to tfs 22091 & 21991
                             //ModelState["CaseTypeL2"].Errors.Clear();
                             //ModelState["Sharellocation"].Errors.Clear();
@@ -541,9 +545,9 @@ namespace MCAS.Controllers
                     }
                     if (ModelState.IsValid)
                     {
+                        
                         ModelState.Clear();
-                        model.Save(confirmamtmodel);
-                       
+                        model.Save(confirmamtmodel, objEntity);
                         var val1 = objEntity.CLM_Claims.Where(x =>x.AccidentClaimId== model.AccidentClaimId ).Select(x => x.ClaimID== model.ClaimID).FirstOrDefault();
                         if (val1 == true)
                         {
@@ -554,7 +558,21 @@ namespace MCAS.Controllers
                         TempData["SuccessMsg"] = model.ResultMessage;
                         TempData["DisplayDiv"] = "Display";
                     }
-                    object routes = new { AccidentClaimId = model.AccidentClaimId, policyId = model.PolicyId, ClaimID = model.ClaimID, claimMode = "Write" };
+                    string smode = "";
+                    try
+                    {
+                        string[] mode = RouteEncryptDecrypt.Decrypt(Request["Q"]).Split('?');
+                        if (mode != null && mode.Length > 0)
+                        {
+                             smode = mode.Single(x => x.Contains("mode"));
+                            if (!string.IsNullOrEmpty(smode) && smode.Split('=').Length>0)
+                            {
+                                smode = smode.Split('=')[1];
+                            }
+                        }
+                    }
+                    catch { smode = Request["mode"]; }
+                    object routes = new { AccidentClaimId = model.AccidentClaimId, policyId = model.PolicyId, ClaimID = model.ClaimID, claimMode = "Write", mode = smode };
 
                     string res = RouteEncryptDecrypt.getRouteString(routes);
                     res = RouteEncryptDecrypt.Encrypt(res);
