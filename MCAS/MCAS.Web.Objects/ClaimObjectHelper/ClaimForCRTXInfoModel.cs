@@ -533,9 +533,9 @@ namespace MCAS.Web.Objects.ClaimObjectHelper
             return claimRefNo;
         }
 
-        public ClaimForCRTXInfoModel Save(ConfirmAmtModel confirmamtmodel)
+        public ClaimForCRTXInfoModel Save(ConfirmAmtModel confirmamtmodel, MCASEntities objEntity)
         {
-            MCASEntities objEntity = new MCASEntities();
+          //  MCASEntities objEntity = new MCASEntities();
             CLM_Claims claimdetail;
             ClaimAccidentDetail accdetail= new ClaimAccidentDetail();
             Clm_ConfirmAmtBreakdown cnfmamt = new Clm_ConfirmAmtBreakdown();
@@ -553,6 +553,18 @@ namespace MCAS.Web.Objects.ClaimObjectHelper
                       {
                         claimdetail = objEntity.CLM_Claims.Where(x => x.ClaimID == this.ClaimID.Value).FirstOrDefault();
                         this.CreatedBy = claimdetail.CreatedBy ?? Convert.ToString(HttpContext.Current.Session["LoggedInUserName"]);
+                        if (this.ClaimantStatus== "4")
+                        {
+                            claimdetail.ReopenedDate = this.ReopenedDate;
+                            claimdetail.RecordReopenedReason = this.RecordReopenedReason;
+                            claimdetail.ClaimantStatus = this.ClaimantStatus == "4" ? "1" : this.ClaimantStatus;
+                            objEntity.SaveChanges();
+                            this.ResultMessage = "Record updated successfully.";
+                            transaction.Commit();
+                            //objEntity.Dispose();
+                            this._claimsCollection = this.FetchClaimList(this.AccidentClaimId);
+                            return this;
+                        }
                         DataMapper.Map(this, claimdetail, true);
                    //     claimdetail.AccidentClaimId = 452;
                         claimdetail.ModifiedBy = Convert.ToString(HttpContext.Current.Session["LoggedInUserName"]);
@@ -670,14 +682,14 @@ namespace MCAS.Web.Objects.ClaimObjectHelper
                     this.PolicyId = 0;
                     objEntity.SaveChanges();
                     transaction.Commit();
-                    objEntity.Dispose();
+                   // objEntity.Dispose();
                     this._claimsCollection = this.FetchClaimList(this.AccidentClaimId);
                     return this;
                 }
                 catch (Exception ex)
                 {
-                    transaction.Rollback();
-                    objEntity.Dispose();
+                   transaction.Rollback();
+                   // objEntity.Dispose();
                     throw (ex);
                 }
             }
