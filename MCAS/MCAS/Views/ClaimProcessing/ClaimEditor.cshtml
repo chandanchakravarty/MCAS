@@ -1554,8 +1554,13 @@ new { @class = "form-control DonotDiableControl" })
             $("#ClaimantStatus,#FinalSettleDate").removeAttr("readonly");
             $("#NODNOS").removeClass("DonotDiableControl");
             $("#NODNOS").prop('disabled', true);
-            }
+        }
         if ('@pagemode' == 'Adj' && ('@Model.ClaimantStatus' == '2' || '@Model.ClaimantStatus' == '3')) {
+            $("#NODNOS").removeClass("DonotDiableControl");
+            $("#NODNOS").prop('disabled', true);
+
+        }
+        if ('@Model.ClaimantStatus' == '2' || '@Model.ClaimantStatus' == '3') {
             $("#NODNOS").removeClass("DonotDiableControl");
             $("#NODNOS").prop('disabled', true);
 
@@ -1599,8 +1604,8 @@ new { @class = "form-control DonotDiableControl" })
     };
     $(document).ready(do_on_load);
     $(document).ready(function () {
-       // alert('@pagemode'+" "+'@claimStatus'+" "+'@Model.ClaimantStatus');
-         $("#ClaimantStatus").change(function () {
+        // alert('@pagemode'+" "+'@claimStatus'+" "+'@Model.ClaimantStatus');
+        $("#ClaimantStatus").change(function () {
             if ($("#ClaimantStatus").val() == "2") {
                 $("#ReopenedDate").val("");
             }
