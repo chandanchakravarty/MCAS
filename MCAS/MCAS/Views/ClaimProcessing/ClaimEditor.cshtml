@@ -1236,14 +1236,14 @@ new { @class = "form-control DonotDiableControl" })
             }
             else {
                 if ('@claimId' == '0') {
-                var myDate = '@accidentDate';
-                var chunks = myDate.split('/');
-                var formattedDate = [chunks[1], chunks[0], chunks[2]].join("/");
-                var dateMin = new Date(formattedDate);
-                var rMax = new Date(dateMin.getFullYear() + parseInt(3), dateMin.getMonth(), dateMin.getDate());
-                $('#TimeBarDate').val($.datepicker.formatDate('dd/mm/yy', new Date(rMax)));
-                setdate = $('#TimeBarDate').val();
-                $('#Htbdate').val(setdate);
+                    var myDate = '@accidentDate';
+                    var chunks = myDate.split('/');
+                    var formattedDate = [chunks[1], chunks[0], chunks[2]].join("/");
+                    var dateMin = new Date(formattedDate);
+                    var rMax = new Date(dateMin.getFullYear() + parseInt(3), dateMin.getMonth(), dateMin.getDate());
+                    $('#TimeBarDate').val($.datepicker.formatDate('dd/mm/yy', new Date(rMax)));
+                    setdate = $('#TimeBarDate').val();
+                    $('#Htbdate').val(setdate);
                 }
                 else {
                     $('#TimeBarDate').val('@tbdate');
@@ -1552,6 +1552,13 @@ new { @class = "form-control DonotDiableControl" })
             $("#ClaimantStatus option[value='3']").prop('disabled', 'disabled');
             $("#ClaimantStatus").prop('disabled', false);
             $("#ClaimantStatus,#FinalSettleDate").removeAttr("readonly");
+            $("#NODNOS").removeClass("DonotDiableControl");
+            $("#NODNOS").prop('disabled', true);
+            }
+        if ('@pagemode' == 'Adj' && ('@Model.ClaimantStatus' == '2' || '@Model.ClaimantStatus' == '3')) {
+            $("#NODNOS").removeClass("DonotDiableControl");
+            $("#NODNOS").prop('disabled', true);
+
         }
 
         // updated by shikha for claimflow
@@ -1591,6 +1598,17 @@ new { @class = "form-control DonotDiableControl" })
 
     };
     $(document).ready(do_on_load);
+    $(document).ready(function () {
+       // alert('@pagemode'+" "+'@claimStatus'+" "+'@Model.ClaimantStatus');
+         $("#ClaimantStatus").change(function () {
+            if ($("#ClaimantStatus").val() == "2") {
+                $("#ReopenedDate").val("");
+            }
+            if ($("#ClaimantStatus").val() == "4") {
+                $("#FinalSettleDate").val("");
+            }
+        });
+    });
     $(window).bind('page:change', do_on_load);
 
     function OnConfirmTrue() {
@@ -1796,5 +1814,5 @@ new { @class = "form-control DonotDiableControl" })
             window.location.href = sPageURL;
         }
     });
-    
+
 </script>

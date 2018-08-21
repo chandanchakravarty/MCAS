@@ -558,21 +558,30 @@ namespace MCAS.Controllers
                         TempData["SuccessMsg"] = model.ResultMessage;
                         TempData["DisplayDiv"] = "Display";
                     }
-                    string smode = "";
+                    string smode = "", claimMode="";
                     try
                     {
-                        string[] mode = RouteEncryptDecrypt.Decrypt(Request["Q"]).Split('?');
-                        if (mode != null && mode.Length > 0)
-                        {
-                             smode = mode.Single(x => x.Contains("mode"));
-                            if (!string.IsNullOrEmpty(smode) && smode.Split('=').Length>0)
+ 
+                        
+                        if (string.IsNullOrEmpty(Request["mode"]))
+                           {
+                               smode = MCASQueryString["mode"].ToString();
+                           }
+                        else
                             {
-                                smode = smode.Split('=')[1];
+                                smode = Request["mode"];
                             }
-                        }
+                        if (string.IsNullOrEmpty(Request["claimMode"]))
+                           {
+                               claimMode = MCASQueryString["claimMode"].ToString();
+                           }
+                        else
+                            {
+                                claimMode = Request["claimMode"];
+                            }
                     }
-                    catch { smode = Request["mode"]; }
-                    object routes = new { AccidentClaimId = model.AccidentClaimId, policyId = model.PolicyId, ClaimID = model.ClaimID, claimMode = "Write", mode = smode };
+                    catch {  }
+                    object routes = new { AccidentClaimId = model.AccidentClaimId, policyId = model.PolicyId, ClaimID = model.ClaimID, claimMode = claimMode, mode = smode };
 
                     string res = RouteEncryptDecrypt.getRouteString(routes);
                     res = RouteEncryptDecrypt.Encrypt(res);

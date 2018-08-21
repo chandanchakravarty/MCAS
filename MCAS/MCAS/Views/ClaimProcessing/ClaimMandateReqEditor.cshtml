@@ -2241,7 +2241,24 @@
         }).css("background-color", "#eee"), $("#DivApproveRecommendations :radio:not(:checked)").attr("disabled", !0)) : "";
 
         ("@viewonly" == "AddMandate" || "@viewonly" == "ApproveMandate") ? $("#divbtnsave").show() : $("#divbtnsave").hide();
+     
+        if ('@ViewBag.ClaimantStatus' == "2" && '@Convert.ToString(HttpContext.Current.Session["ScreenNameDash"])'=="208") {
+            $("form").find(":input:not([id=Next]):not([id=Previous])").each(function () {
+                switch (this.type) {
+                    case "text":
+                        $(this).attr('disabled', 'disabled')
+                    case "textarea":
+                        $(this).attr('disabled', 'disabled')
+                    case "checkbox":
+                        $(this).attr('disabled', 'disabled')
+                    case "radio":
+                        $(this).attr('disabled', 'disabled')
+                    case "button":
+                        $(this).attr('disabled', 'disabled')
 
+                }
+            }) && $('select').attr('disabled', 'disabled') && $('button').attr('disabled', 'disabled') && $("#btnReset,#btnSave").attr('disabled', 'disabled').hide
+        }
         if (("@viewonly" != "AddMandate" && "@viewonly" != "ApproveMandate")) {
             $("#SupervisorRemarks").attr("disabled", !0), $("#AssignedToSup").css({
                 "pointer-events": "none",
