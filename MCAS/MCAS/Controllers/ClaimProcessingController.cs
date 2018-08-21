@@ -819,8 +819,7 @@ namespace MCAS.Controllers
                 }
                 else
                 {
-                    object routes = new { AccidentClaimId = model.AccidentClaimId, policyId = model.PolicyId, claimMode = "Write",mode="", ClaimID = model.ClaimID, ReadOnly = false, ClaimType=1};
-
+                    object routes = new { AccidentClaimId = model.AccidentClaimId, policyId = model.PolicyId, claimMode = MCASQueryString["claimMode"], mode = MCASQueryString["mode"], ClaimID = model.ClaimID, ReadOnly = false, ClaimType = MCASQueryString["ClaimType"] };
                     string res = RouteEncryptDecrypt.getRouteString(routes);
                     res = RouteEncryptDecrypt.Encrypt(res);
                     routes = new { Q = res };
@@ -1825,6 +1824,17 @@ namespace MCAS.Controllers
             if (MCASQueryString["claimMode"] == null) { return LoggedOut(); }
             CallerMenu = Convert.ToString(MCASQueryString["claimMode"]);
             SetCaller(Convert.ToInt32(AccidentId));
+            int accidentClaimIdS = Convert.ToInt32(AccidentId);
+            ViewBag.ClaimantStatus = 0;
+            if(accidentClaimIdS!=0)
+            {
+                try
+                {
+                    var claim = db.CLM_Claims.Where(x => x.AccidentClaimId == accidentClaimIdS).SingleOrDefault();
+                    ViewBag.ClaimantStatus = claim.ClaimantStatus;
+                }
+                catch { }
+            }
             ViewData["ClaimTypeCode"] = Convert.ToString(ClaimTypeCode);
             try
             {
